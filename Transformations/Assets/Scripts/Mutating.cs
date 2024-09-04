@@ -1,16 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Mutating : MonoBehaviour
 {
-    private int _speed = 3;
-    private int _speed2 = 1;
-
+    [SerializeField] private int _movingSpeed = 3;
+    [SerializeField] private int _scalingSpeed = 1;
+    [SerializeField] private int _rotatingSpeed = 15;
+    
     private void Update()
     {
-        transform.position += transform.forward * Time.deltaTime * _speed;
-        transform.localScale += new Vector3(_speed2 * Time.deltaTime, _speed2 * Time.deltaTime, _speed2 * Time.deltaTime);
-        transform.Rotate(0, _speed * Time.deltaTime * 5, 0);
+        float scale = _scalingSpeed * Time.deltaTime;
+
+        transform.position += transform.forward * Time.deltaTime * _movingSpeed;
+        transform.localScale += new Vector3(scale, scale, scale);
+        transform.Rotate(0, _rotatingSpeed * Time.deltaTime, 0);
     }
 }

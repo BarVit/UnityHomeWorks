@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Rotating : MonoBehaviour
 {
-    private int _speed = 100;
+    [SerializeField] private int _speed = 100;
 
     private void Update()
     {
