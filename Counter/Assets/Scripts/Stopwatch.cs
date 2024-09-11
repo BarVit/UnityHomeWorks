@@ -5,27 +5,34 @@ using System.Collections;
 public class Stopwatch : MonoBehaviour
 {
     [SerializeField] private float _delay = 0.5f;
-    [SerializeField] private float _increaser = 1;
+    [SerializeField] private float _step = 1;
+
+    public event Action TimeChanged;
 
     private Coroutine _coroutine;
 
-    public event Action TimeChanged;
+    private int _leftButton = 0;
 
     private bool _isCounting = false;
 
     public float Counter { get; private set; }
 
-    private void Start()
-    {
-        _coroutine = StartCoroutine(Count());
-    }
-
     private void Update()
     {
-        int leftButton = 0;
-
-        if (Input.GetMouseButton(leftButton))
+        if (Input.GetMouseButton(_leftButton))
+        {
             _isCounting = !_isCounting;
+            HandleCoroutine();
+        }
+    }
+
+    private void HandleCoroutine()
+    {
+        if (_isCounting)
+            _coroutine = StartCoroutine(Count());
+        else
+            if (_coroutine != null)
+                StopCoroutine(_coroutine);
     }
 
     private IEnumerator Count()
@@ -34,12 +41,8 @@ public class Stopwatch : MonoBehaviour
 
         while (enabled)
         {
-            if (_isCounting)
-            {
-                Counter += _increaser;
-                TimeChanged?.Invoke();
-            }
-
+            Counter += _step;
+            TimeChanged?.Invoke();
             yield return delay;
         }
     }

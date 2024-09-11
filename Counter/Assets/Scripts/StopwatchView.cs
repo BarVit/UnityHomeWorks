@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class StopwatchView : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _stopwatchView;
+    [SerializeField] private TextMeshProUGUI _UserInterfaceText;
 
     [SerializeField] private Stopwatch _stopwatch;
 
@@ -19,6 +19,6 @@ public class StopwatchView : MonoBehaviour
 
     private void Display()
     {
-        _stopwatchView.text = _stopwatch.Counter.ToString();
+        _UserInterfaceText.text = _stopwatch.Counter.ToString();
     }
 }
