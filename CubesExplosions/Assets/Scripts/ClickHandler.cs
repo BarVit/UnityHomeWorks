@@ -1,8 +1,8 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(Spawner))]
-[RequireComponent(typeof(Exploder))]
+//[RequireComponent(typeof(Spawner))]
+//[RequireComponent(typeof(Exploder))]
 
 public class ClickHandler : MonoBehaviour
 {
