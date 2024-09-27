@@ -1,37 +1,58 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-[RequireComponent(typeof(Spawner))]
-[RequireComponent(typeof(Exploder))]
-
+[RequireComponent(typeof(Rigidbody), typeof(Renderer))]
 public class ClickHandler : MonoBehaviour
 {
+    [SerializeField] private Spawner _spawner;
+
+    [SerializeField] private Exploder _exploder;
+
+    private List<Rigidbody> _spawnedRigidbodies = new();
+
+    private Rigidbody _rigidbody;
+
     private float _splitChance = 1;
 
-    public void SetSplitChance(float splitChance)
+    private void Awake()
     {
-        _splitChance = splitChance;
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     private void OnMouseUpAsButton()
     {
-        Spawner spawner = GetComponent<Spawner>();
-
-        Exploder exploder = GetComponent<Exploder>();
-
         int minNewCubes = 2;
         int maxNewCubes = 6;
         int newCubesAmount = Random.Range(minNewCubes, maxNewCubes + 1);
 
         if (_splitChance >= Random.value)
         {
-            spawner.SpawnCubes(newCubesAmount, _splitChance);
-            exploder.ExplodeSpawnedObjects(spawner.GetExplodibleObjects(), transform.position);
+            _spawnedRigidbodies = _spawner.Spawn(newCubesAmount, gameObject, _splitChance);
+            _exploder.ExplodeSpawnedObjects(_spawnedRigidbodies, transform.position);
         }
         else
         {
-            exploder.ExplodeSelf(transform.position);
+            _exploder.ExplodeSelf(transform);
         }
 
         Destroy(gameObject);
+    }
+
+    public void SetParameters(float splitChance)
+    {
+        int scaleDecreaser = 2;
+        int chanceDecreaser = 2;
+
+        _rigidbody.useGravity = true;
+        _rigidbody.interpolation = RigidbodyInterpolation.Extrapolate;
+        _rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+        _splitChance = splitChance / chanceDecreaser;
+        transform.localScale /= scaleDecreaser;
+        GetComponent<Renderer>().material.color = Random.ColorHSV();
+    }
+
+    public Rigidbody GetRigidbody()
+    {
+        return _rigidbody;
     }
 }

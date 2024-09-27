@@ -1,54 +1,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(ClickHandler))]
-[RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(Renderer))]
-
 public class Spawner : MonoBehaviour
 {
-    private List<Rigidbody> _spawnCubesRigidbodies = new();
-
-    public void SpawnCubes(int amount, float splitChance)
+    public List<Rigidbody> Spawn(int amount, GameObject cube, float splitChance)
     {
+        List<Rigidbody> rigidbodies = new();
+
         for (int i = 0; i < amount; i++)
         {
-            GameObject cube = Instantiate(gameObject, RandomizeSpawnPosition(), Quaternion.identity);
+            GameObject newCube = Instantiate(cube, RandomizePosition(cube.transform.position), Quaternion.identity);
 
-            Rigidbody rigidbody = cube.GetComponent<Rigidbody>();
+            ClickHandler clickHandler = newCube.GetComponent<ClickHandler>();
 
-            int scaleDecreaser = 2;
-            int chanceDecreaser = 2;
-
-            cube.GetComponent<ClickHandler>().SetSplitChance(splitChance / chanceDecreaser);
-            cube.GetComponent<Renderer>().material.color = Random.ColorHSV();
-            cube.transform.localScale = transform.localScale / scaleDecreaser;
-            SetupRigidBody(rigidbody);
-            _spawnCubesRigidbodies.Add(rigidbody);
+            clickHandler.SetParameters(splitChance);
+            rigidbodies.Add(clickHandler.GetRigidbody());
         }
+
+        return rigidbodies;
     }
 
-    public List<Rigidbody> GetExplodibleObjects()
+    private Vector3 RandomizePosition(Vector3 position)
     {
-        List<Rigidbody> spawnedCubesRigidbodies = new();
-
-        foreach (Rigidbody rigidbody in _spawnCubesRigidbodies)
-            spawnedCubesRigidbodies.Add(rigidbody);
-
-        return spawnedCubesRigidbodies;
-    }
-
-    private void SetupRigidBody(Rigidbody rigidbody)
-    {
-        rigidbody.useGravity = true;
-        rigidbody.interpolation = RigidbodyInterpolation.Extrapolate;
-        rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
-    }
-
-    private Vector3 RandomizeSpawnPosition()
-    {
-        return new Vector3(Disperce(transform.position.x), Disperce(transform.position.y),
-            Disperce(transform.position.z));
+        return new Vector3(Disperce(position.x), Disperce(position.y),
+            Disperce(position.z));
     }
 
     private float Disperce(float number)

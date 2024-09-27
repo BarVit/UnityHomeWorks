@@ -3,32 +3,29 @@ using UnityEngine;
 
 public class Exploder : MonoBehaviour
 {
-    [SerializeField] float _explosionForce = 400;
-    [SerializeField] float _explosionRadius = 10;
+    [SerializeField] private float _explosionForce = 200;
+    [SerializeField] private float _explosionRadius = 10;
 
     public void ExplodeSpawnedObjects(List<Rigidbody> rigidbodies, Vector3 position)
     {
         foreach (Rigidbody rigidbody in rigidbodies)
-            rigidbody.AddExplosionForce(_explosionForce, position, _explosionRadius);
-    }
-
-    public void ExplodeSelf(Vector3 position)
-    {
-        SetExplosionParameters();
-
-        foreach (Rigidbody rigidbody in GetExplodableObjects(position))
         {
-            float minDistance = 1;
-            float distance = Mathf.Max(minDistance, Vector3.Distance(rigidbody.transform.position, transform.position));
-
-            rigidbody.AddExplosionForce(_explosionForce * ApplyDistanceFactor(distance), position, _explosionRadius);
+            rigidbody.AddExplosionForce(_explosionForce / rigidbody.transform.localScale.x, position,
+                _explosionRadius / rigidbody.transform.localScale.x);
         }
     }
 
-    private void SetExplosionParameters()
+    public void ExplodeSelf(Transform objectTransform)
     {
-        _explosionForce = _explosionForce / transform.localScale.x;
-        _explosionRadius = _explosionRadius / transform.localScale.x;
+        foreach (Rigidbody rigidbody in GetExplodableObjects(objectTransform.position))
+        {
+            float minDistance = 1;
+            float distance = Mathf.Max(minDistance, Vector3.Distance(rigidbody.transform.position, objectTransform.position));
+            float actualForce = _explosionForce / objectTransform.localScale.x * ApplyDistanceFactor(distance);
+            float actualRadius = _explosionRadius / objectTransform.localScale.x;
+
+            rigidbody.AddExplosionForce(actualForce, objectTransform.position, actualRadius);
+        }
     }
 
     private List<Rigidbody> GetExplodableObjects(Vector3 position)
