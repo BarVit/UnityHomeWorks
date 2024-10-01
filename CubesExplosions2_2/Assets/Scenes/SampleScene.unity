@@ -257,6 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea8def42e4c334431baa171cab1a8fc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _exploder: {fileID: 1476559022}
 --- !u!4 &430742229
 Transform:
   m_ObjectHideFlags: 0
@@ -963,11 +964,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2035506183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e268f13c3315647488a9520ee0399c49, type: 3}
+  m_Script: {fileID: 11500000, guid: 0aac5b57e541545e3907fc889697b745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawner: {fileID: 430742228}
-  _exploder: {fileID: 1476559022}
+  <SplitChance>k__BackingField: 0
 --- !u!1 &2102474098
 GameObject:
   m_ObjectHideFlags: 0
@@ -1111,11 +1111,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2102474098}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e268f13c3315647488a9520ee0399c49, type: 3}
+  m_Script: {fileID: 11500000, guid: 0aac5b57e541545e3907fc889697b745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawner: {fileID: 430742228}
-  _exploder: {fileID: 1476559022}
+  <SplitChance>k__BackingField: 0
 --- !u!65 &2083495921955916806
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1234,7 +1233,7 @@ GameObject:
   - component: {fileID: 2368487578927843465}
   - component: {fileID: 2083495921955916806}
   - component: {fileID: 2569217966743291978}
-  - component: {fileID: 6240188092020139327}
+  - component: {fileID: 6240188092020139328}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1250,7 +1249,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2691250636190258371}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &6240188092020139327
+--- !u!114 &6240188092020139328
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1259,11 +1258,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2691250636190258371}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e268f13c3315647488a9520ee0399c49, type: 3}
+  m_Script: {fileID: 11500000, guid: 0aac5b57e541545e3907fc889697b745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawner: {fileID: 430742228}
-  _exploder: {fileID: 1476559022}
+  <SplitChance>k__BackingField: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

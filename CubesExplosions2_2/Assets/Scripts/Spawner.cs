@@ -3,18 +3,50 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public List<Rigidbody> Spawn(int amount, GameObject cube, float splitChance)
+    [SerializeField] private Exploder _exploder;
+
+    private List<Cube> _cubes = new();
+
+    private void OnEnable()
+    {
+        _cubes.AddRange(FindObjectsOfType<Cube>());
+
+        foreach(Cube cube in _cubes)
+            cube.Clicked += Spawn;
+    }
+
+    private void OnDisable()
+    {
+        _cubes.Clear();
+        _cubes.AddRange(FindObjectsOfType<Cube>());
+
+        foreach (Cube cube in _cubes)
+            cube.Clicked -= Spawn;
+    }
+
+    public void Spawn(Cube cube)
+    {
+        int minAmount = 2;
+        int maxAmount = 6;
+        int newCubesAmount = Random.Range(minAmount, maxAmount + 1);
+
+        if (cube.SplitChance >= Random.value)
+            _exploder.ExplodeSpawnedObjects(Spawn2(newCubesAmount, cube), cube.transform.position);
+        else
+            _exploder.ExplodeSelf(cube.transform);
+    }
+
+    public List<Rigidbody> Spawn2(int amount, Cube cube)
     {
         List<Rigidbody> rigidbodies = new();
 
         for (int i = 0; i < amount; i++)
         {
-            GameObject newCube = Instantiate(cube, RandomizePosition(cube.transform.position), Quaternion.identity);
+            Cube newCube = Instantiate(cube, RandomizePosition(cube.transform.position), Quaternion.identity);
 
-            ClickHandler clickHandler = newCube.GetComponent<ClickHandler>();
-
-            clickHandler.SetParameters(splitChance);
-            rigidbodies.Add(clickHandler.GetRigidbody());
+            newCube.Clicked += Spawn;
+            newCube.SetParameters(cube.SplitChance);
+            rigidbodies.Add(newCube.GetRigidbody());
         }
 
         return rigidbodies;
