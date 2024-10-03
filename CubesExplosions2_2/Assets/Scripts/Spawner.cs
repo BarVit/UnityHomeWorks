@@ -5,23 +5,14 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private Exploder _exploder;
 
-    private List<Cube> _cubes = new();
-
     private void OnEnable()
     {
-        _cubes.AddRange(FindObjectsOfType<Cube>());
-
-        foreach(Cube cube in _cubes)
-            cube.Clicked += Spawn;
+        Cube.Clicked += Spawn;
     }
 
     private void OnDisable()
     {
-        _cubes.Clear();
-        _cubes.AddRange(FindObjectsOfType<Cube>());
-
-        foreach (Cube cube in _cubes)
-            cube.Clicked -= Spawn;
+        Cube.Clicked -= Spawn;
     }
 
     public void Spawn(Cube cube)
@@ -31,12 +22,12 @@ public class Spawner : MonoBehaviour
         int newCubesAmount = Random.Range(minAmount, maxAmount + 1);
 
         if (cube.SplitChance >= Random.value)
-            _exploder.ExplodeSpawnedObjects(Spawn2(newCubesAmount, cube), cube.transform.position);
+            _exploder.ExplodeSpawnedObjects(Generate(newCubesAmount, cube), cube.transform.position);
         else
             _exploder.ExplodeSelf(cube.transform);
     }
 
-    public List<Rigidbody> Spawn2(int amount, Cube cube)
+    public List<Rigidbody> Generate(int amount, Cube cube)
     {
         List<Rigidbody> rigidbodies = new();
 
@@ -44,9 +35,8 @@ public class Spawner : MonoBehaviour
         {
             Cube newCube = Instantiate(cube, RandomizePosition(cube.transform.position), Quaternion.identity);
 
-            newCube.Clicked += Spawn;
-            newCube.SetParameters(cube.SplitChance);
-            rigidbodies.Add(newCube.GetRigidbody());
+            newCube.Init(cube.SplitChance);
+            rigidbodies.Add(newCube.Rigidbody);
         }
 
         return rigidbodies;
