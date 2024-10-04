@@ -6,12 +6,12 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject _prefab;
 
+    private ObjectPool<Cube> _pool;
+
     private int _poolCapacity = 10;
     private int _poolMaxSize = 100;
 
     private float _spawnRate = 0.5f;
-
-    private ObjectPool<Cube> _pool;
 
     private void Awake()
     {
@@ -53,6 +53,17 @@ public class Spawner : MonoBehaviour
         }
     }
 
+    private IEnumerator RealeseCube(Cube cube)
+    {
+        float minDestroyTime = 2f;
+        float maxDestroyTime = 5f;
+
+        WaitForSeconds waitForSeconds = new WaitForSeconds(Random.Range(minDestroyTime, maxDestroyTime));
+
+        yield return waitForSeconds;
+        _pool.Release(cube);
+    }
+
     private void InitCube(Cube cube)
     {
         cube.Init();
@@ -63,17 +74,6 @@ public class Spawner : MonoBehaviour
     private void HandleCollision(Cube cube)
     {
         StartCoroutine(RealeseCube(cube));
-    }
-
-    private IEnumerator RealeseCube(Cube cube)
-    {
-        float minDestroyTime = 2f;
-        float maxDestroyTime = 5f;
-
-        WaitForSeconds waitForSeconds = new WaitForSeconds(Random.Range(minDestroyTime, maxDestroyTime));
-
-        yield return waitForSeconds;
-        _pool.Release(cube);
     }
 
     private Vector3 GetSpawnPosition()
