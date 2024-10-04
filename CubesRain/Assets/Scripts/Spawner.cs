@@ -1,56 +1,91 @@
 using UnityEngine;
 using UnityEngine.Pool;
+using System.Collections;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] GameObject _prefab;
+    [SerializeField] private GameObject _prefab;
 
     private int _poolCapacity = 10;
     private int _poolMaxSize = 100;
 
-    private float _spawnRate = 0.2f;
+    private float _spawnRate = 0.5f;
 
-    private ObjectPool<GameObject> _pool;
+    private ObjectPool<Cube> _pool;
 
     private void Awake()
     {
-        _pool = new ObjectPool<GameObject>(
-            createFunc: () => Instantiate(_prefab),
-            actionOnGet: (obj) => ActionOnGet(obj),
-            actionOnRelease: (obj) => obj.SetActive(false),
+        Cube cube = _prefab.GetComponent<Cube>();
+
+        _pool = new ObjectPool<Cube>(
+            createFunc: () => Instantiate(cube),
+            actionOnGet: (obj) => InitCube(obj),
+            actionOnRelease: (obj) => obj.gameObject.SetActive(false),
             actionOnDestroy: (obj) => Destroy(obj),
             collectionCheck: true,
             defaultCapacity: _poolCapacity,
             maxSize: _poolMaxSize);
     }
 
-    private void ActionOnGet(GameObject obj)
+    private void OnEnable()
     {
-        obj.transform.position = SpawnPosition();
-        obj.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        obj.SetActive(true);
+        Cube.Collided += HandleCollision;
+    }
+
+    private void OnDisable()
+    {
+        Cube.Collided -= HandleCollision;
     }
 
     private void Start()
     {
-        InvokeRepeating(nameof(GetCube), 0, _spawnRate);
+        StartCoroutine(Spawn());
     }
 
-    private void GetCube()
+    private IEnumerator Spawn()
     {
-        _pool.Get();
+        WaitForSeconds waitForSeconds = new WaitForSeconds(_spawnRate);
+
+        while (true)
+        {
+            _pool.Get();
+            yield return waitForSeconds;
+        }
     }
 
-    private Vector3 SpawnPosition()
+    private void InitCube(Cube cube)
     {
-        int topCorner = 10;
-        int bottomCorner = -10;
-        int leftCorner = -10;
-        int rightCorner = 10;
-        int minHegith = 25;
-        int maxHeight = 35;
+        cube.Init();
+        cube.transform.position = GetSpawnPosition();
+        cube.gameObject.SetActive(true);
+    }
+
+    private void HandleCollision(Cube cube)
+    {
+        StartCoroutine(RealeseCube(cube));
+    }
+
+    private IEnumerator RealeseCube(Cube cube)
+    {
+        float minDestroyTime = 2f;
+        float maxDestroyTime = 5f;
+
+        WaitForSeconds waitForSeconds = new WaitForSeconds(Random.Range(minDestroyTime, maxDestroyTime));
+
+        yield return waitForSeconds;
+        _pool.Release(cube);
+    }
+
+    private Vector3 GetSpawnPosition()
+    {
+        int topCorner = 9;
+        int bottomCorner = -9;
+        int leftCorner = -9;
+        int rightCorner = 9;
+        int minHegith = 20;
+        int maxHeight = 25;
 
         return new Vector3(Random.Range(leftCorner, rightCorner),
-            Random.Range(minHegith, maxHeight), Random.Range(bottomCorner,topCorner));
-    }    
+            Random.Range(minHegith, maxHeight), Random.Range(bottomCorner, topCorner));
+    }
 }

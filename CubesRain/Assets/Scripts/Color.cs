@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Renderer))]
-public class Color : MonoBehaviour
+public class CubeColor : MonoBehaviour
 {
     private Material _material;
 
@@ -10,7 +10,7 @@ public class Color : MonoBehaviour
         _material = GetComponent<Renderer>().material;
     }
 
-    public void SetColor(UnityEngine.Color color)
+    public void SetColor(Color color)
     {
         _material.color = color;
     }
