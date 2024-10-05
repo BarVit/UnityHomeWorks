@@ -1,29 +1,29 @@
 using UnityEngine;
 using System;
 
-[RequireComponent(typeof(CubeColor), typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody), typeof(Renderer), typeof(ColorChanger))]
 public class Cube : MonoBehaviour
 {
-    private CubeColor _cubeColor;
     private Rigidbody _rigidbody;
-
-    private Color _originalColor = Color.blue;
+    private Material _material;
+    private ColorChanger _colorChanger;
 
     private bool _isFirstCollision = true;
 
-    public static event Action<Cube> Collided;
+    public event Action<Cube> Collided;
 
     private void Awake()
     {
-        _cubeColor = GetComponent<CubeColor>();
         _rigidbody = GetComponent<Rigidbody>();
+        _material = GetComponent<Renderer>().material;
+        _colorChanger = GetComponent<ColorChanger>();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.GetComponent<Plane>() != null && _isFirstCollision)
         {
-            _cubeColor.SetColor(UnityEngine.Random.ColorHSV());
+            _colorChanger.SetRandomColor(_material);
             _isFirstCollision = false;
             Collided?.Invoke(this);
         }
@@ -32,9 +32,9 @@ public class Cube : MonoBehaviour
     public void Init()
     {
         _isFirstCollision = true;
-        _cubeColor.SetColor(_originalColor);
         _rigidbody.velocity = Vector3.zero;
         _rigidbody.angularVelocity = Vector3.zero;
         transform.rotation = Quaternion.identity;
+        _colorChanger.SetOriginalColor(_material);
     }
 }

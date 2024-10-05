@@ -4,7 +4,7 @@ using System.Collections;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private GameObject _prefab;
+    [SerializeField] private Cube _prefab;
 
     private ObjectPool<Cube> _pool;
 
@@ -15,34 +15,22 @@ public class Spawner : MonoBehaviour
 
     private void Awake()
     {
-        Cube cube = _prefab.GetComponent<Cube>();
-
         _pool = new ObjectPool<Cube>(
-            createFunc: () => Instantiate(cube),
+            createFunc: () => CreateCube(),
             actionOnGet: (obj) => InitCube(obj),
             actionOnRelease: (obj) => obj.gameObject.SetActive(false),
-            actionOnDestroy: (obj) => Destroy(obj),
+            actionOnDestroy: (obj) => DestroyCube(obj),
             collectionCheck: true,
             defaultCapacity: _poolCapacity,
             maxSize: _poolMaxSize);
     }
 
-    private void OnEnable()
-    {
-        Cube.Collided += HandleCollision;
-    }
-
-    private void OnDisable()
-    {
-        Cube.Collided -= HandleCollision;
-    }
-
     private void Start()
     {
-        StartCoroutine(Spawn());
+        StartCoroutine(SpawnCube());
     }
 
-    private IEnumerator Spawn()
+    private IEnumerator SpawnCube()
     {
         WaitForSeconds waitForSeconds = new WaitForSeconds(_spawnRate);
 
@@ -64,11 +52,25 @@ public class Spawner : MonoBehaviour
         _pool.Release(cube);
     }
 
+    private Cube CreateCube()
+    {
+        Cube cube = Instantiate(_prefab);
+
+        cube.Collided += HandleCollision;
+        return cube;
+    }
+
     private void InitCube(Cube cube)
     {
         cube.Init();
         cube.transform.position = GetSpawnPosition();
         cube.gameObject.SetActive(true);
+    }
+
+    private void DestroyCube(Cube cube)
+    {
+        cube.Collided -= HandleCollision;
+        Destroy(cube.gameObject);
     }
 
     private void HandleCollision(Cube cube)
