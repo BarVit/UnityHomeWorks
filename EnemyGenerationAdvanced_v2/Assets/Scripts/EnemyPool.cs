@@ -4,7 +4,6 @@ using UnityEngine.Pool;
 public class EnemyPool : MonoBehaviour
 {
     private ObjectPool<Enemy> _pool;
-
     private Enemy _enemy;
 
     private int _poolCapacity = 10;
@@ -22,13 +21,13 @@ public class EnemyPool : MonoBehaviour
             maxSize: _poolMaxSize);
     }
 
-    public Enemy GetEnemy(Enemy enemy)
+    public Enemy GetEnemy(Enemy prefab)
     {
-        Enemy currentEnemy;
+        Enemy enemy;
 
-        _enemy = enemy;
-        currentEnemy = _pool.Get();
-        currentEnemy.Init();
-        return currentEnemy;
+        _enemy = prefab;
+        enemy = _pool.Get();
+        enemy.Init();
+        return enemy;
     }
 }

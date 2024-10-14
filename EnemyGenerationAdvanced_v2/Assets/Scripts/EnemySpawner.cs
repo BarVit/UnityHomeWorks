@@ -7,7 +7,6 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private List<SpawnPoint> _spawnPoints;
 
     private EnemyPool _enemyPool;
-
     private float _spawnRate = 2f;
 
     public void Awake()

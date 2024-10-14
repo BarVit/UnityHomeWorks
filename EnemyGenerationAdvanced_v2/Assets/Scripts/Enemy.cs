@@ -3,10 +3,9 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     private float _speed = 5;
-
     private Vector3 _targetPosition;
 
-    abstract public void Init();
+    public abstract void Init();
 
     private void Start()
     {

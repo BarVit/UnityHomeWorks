@@ -7,8 +7,9 @@ public class Orc : Enemy
         float scaleX = 2f;
         float scaleY = 2.5f;
         float scaleZ = 2f;
+        float verticalCorrection = 2f;
 
         transform.localScale = new Vector3(scaleX, scaleY, scaleZ);
-        transform.position += new Vector3(0, scaleY / 2, 0);
+        transform.position += new Vector3(0, scaleY / verticalCorrection, 0);
     }
 }

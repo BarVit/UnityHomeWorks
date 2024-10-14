@@ -7,8 +7,9 @@ public class Human : Enemy
         float scaleX = 1.25f;
         float scaleY = 2f;
         float scaleZ = 1.25f;
+        float verticalCorrection = 2f;
 
         transform.localScale = new Vector3(scaleX, scaleY, scaleZ);
-        transform.position += new Vector3(0, scaleY / 2, 0);
+        transform.position += new Vector3(0, scaleY / verticalCorrection, 0);
     }
 }
