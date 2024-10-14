@@ -360,6 +360,11 @@
 "Assets/Scripts/EnemySpawner.cs"
 "Assets/Scripts/SpawnPoint.cs"
 "Assets/Scripts/Target.cs"
+"Assets/Scripts/Targets/Target1.cs"
+"Assets/Scripts/Targets/Target2.cs"
+"Assets/Scripts/Targets/Target3.cs"
+"Assets/Scripts/Targets/Target4.cs"
+"Assets/Scripts/Targets/Target5.cs"
 -langversion:9.0
 
 /deterministic

@@ -26,7 +26,7 @@ public class EnemySpawner : MonoBehaviour
             Enemy enemy = _enemyPool.GetEnemy(spawnPoint.Enemy);
 
             enemy.transform.position = spawnPoint.transform.position;
-            enemy.SetTarget(spawnPoint.Target.transform.position);
+            enemy.SetTarget(spawnPoint.Target.transform);
             yield return waitForSeconds;
         }
     }

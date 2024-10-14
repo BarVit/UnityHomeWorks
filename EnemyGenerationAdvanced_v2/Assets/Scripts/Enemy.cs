@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     private float _speed = 5;
-    private Vector3 _targetPosition;
+    private Transform _target;
 
     public abstract void Init();
 
@@ -14,11 +14,11 @@ public abstract class Enemy : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, _targetPosition, _speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, _target.position, _speed * Time.deltaTime);
     }
 
-    public void SetTarget(Vector3 target)
+    public void SetTarget(Transform target)
     {
-        _targetPosition = target;
+        _target = target;
     }
 }

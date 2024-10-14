@@ -224,7 +224,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 10}
+  m_LocalScale: {x: 15, y: 1, z: 15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Target>k__BackingField: {fileID: 1769937782}
-  <Enemy>k__BackingField: {fileID: 7603345892231202672, guid: 25f048169d1f046cd85eb32f50291362, type: 3}
+  <Enemy>k__BackingField: {fileID: 6539974962255781709, guid: 25f048169d1f046cd85eb32f50291362, type: 3}
 --- !u!1 &398458697
 GameObject:
   m_ObjectHideFlags: 0
@@ -789,7 +789,7 @@ Transform:
   m_GameObject: {fileID: 714350154}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35.2, y: 0.5, z: -40}
+  m_LocalPosition: {x: -35, y: 0.5, z: -40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1015,7 +1015,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.09397108, y: -0.8855087, z: 0.21537721, w: 0.40081984}
-  m_LocalPosition: {x: 50, y: 35, z: 50}
+  m_LocalPosition: {x: 55, y: 35.51, z: 50.655}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1184,7 +1184,7 @@ Transform:
   m_GameObject: {fileID: 1243425203}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 35.9, y: 0.5, z: -32}
+  m_LocalPosition: {x: 45, y: 0.5, z: -35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1199,7 +1199,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1243425203}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31e5fa925348246c3a309af08cdc6737, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b59510bd4b27429181c7e799be6db60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1427550205
@@ -1302,7 +1302,7 @@ Transform:
   m_GameObject: {fileID: 1427550205}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -33.1, y: 0.5, z: 37.7}
+  m_LocalPosition: {x: -35, y: 0.5, z: 35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1317,9 +1317,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1427550205}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31e5fa925348246c3a309af08cdc6737, type: 3}
+  m_Script: {fileID: 11500000, guid: c6b5662b530ff4f1e9890d03565d6d22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _waypoint: {x: 0, y: 0, z: 0}
+  _index: 0
 --- !u!1 &1769937777
 GameObject:
   m_ObjectHideFlags: 0
@@ -1420,7 +1422,7 @@ Transform:
   m_GameObject: {fileID: 1769937777}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.5, y: 0.5, z: 26.29}
+  m_LocalPosition: {x: 20, y: 0.5, z: 35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1435,9 +1437,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1769937777}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31e5fa925348246c3a309af08cdc6737, type: 3}
+  m_Script: {fileID: 11500000, guid: aa26e27347fd344bb9aaa216efcddcec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _waypoint: {x: 0, y: 0, z: 0}
+  _index: 0
 --- !u!1 &2071559080
 GameObject:
   m_ObjectHideFlags: 0
@@ -1660,7 +1664,7 @@ Transform:
   m_GameObject: {fileID: 2125343133}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 33.37, y: 0.5, z: 8.44}
+  m_LocalPosition: {x: 40, y: 0.5, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1675,9 +1679,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2125343133}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31e5fa925348246c3a309af08cdc6737, type: 3}
+  m_Script: {fileID: 11500000, guid: 408917ad2ad884bb79d4c1e14a7affae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _waypoint: {x: 0, y: 0, z: 0}
+  _index: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
