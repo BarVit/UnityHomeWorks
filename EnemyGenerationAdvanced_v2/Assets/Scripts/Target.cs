@@ -11,18 +11,17 @@ public abstract class Target : MonoBehaviour
 
     public virtual void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, NextWaypoint(), Speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, Waypoint, Speed * Time.deltaTime);
+
+        if (transform.position == Waypoint)
+            Waypoint = GetNextWaypoint();
     }
 
-    protected Vector3 NextWaypoint()
+    protected Vector3 GetNextWaypoint()
     {
-        if (transform.position == Waypoint)
-            Index++;
-
-        if (Index > Waypoints.Count - 1)
+        if (++Index > Waypoints.Count - 1)
             Index = 0;
 
-        Waypoint = Waypoints[Index];
-        return Waypoint;
+        return Waypoints[Index];
     }
 }

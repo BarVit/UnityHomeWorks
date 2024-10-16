@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
+[RequireComponent(typeof(EnemyPool))]
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private List<SpawnPoint> _spawnPoints;
@@ -23,10 +24,13 @@ public class EnemySpawner : MonoBehaviour
         {
             SpawnPoint spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
 
-            Enemy enemy = _enemyPool.GetEnemy(spawnPoint.Enemy);
+            Enemy enemy = spawnPoint.Enemy;
 
-            enemy.transform.position = spawnPoint.transform.position;
-            enemy.SetTarget(spawnPoint.Target.transform);
+            GameObject enemyPrefab = _enemyPool.GetEnemy;
+
+            enemyPrefab.AddComponent(enemy);
+            enemyPrefab.transform.position = spawnPoint.transform.position;
+            enemyPrefab.SetTarget(spawnPoint.Target.transform);
             yield return waitForSeconds;
         }
     }
