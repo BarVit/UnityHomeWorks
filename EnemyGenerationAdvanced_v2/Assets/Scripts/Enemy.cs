@@ -2,8 +2,8 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    private float _speed = 5;
     private Transform _target;
+    private float _speed = 5;
 
     public abstract void Init();
 

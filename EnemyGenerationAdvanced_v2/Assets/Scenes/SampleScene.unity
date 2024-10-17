@@ -242,6 +242,7 @@ GameObject:
   - component: {fileID: 332695099}
   - component: {fileID: 332695098}
   - component: {fileID: 332695102}
+  - component: {fileID: 332695103}
   m_Layer: 0
   m_Name: SpawnPoint Humans
   m_TagString: Untagged
@@ -349,8 +350,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d3b61d6f332459c887643c427d5028, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Target>k__BackingField: {fileID: 1769937782}
-  <Enemy>k__BackingField: {fileID: 6539974962255781709, guid: 25f048169d1f046cd85eb32f50291362, type: 3}
+  _target: {fileID: 1769937782}
+--- !u!114 &332695103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332695097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28cc4ca183f5746ca90b36a59a1444be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 6539974962255781709, guid: 25f048169d1f046cd85eb32f50291362, type: 3}
 --- !u!1 &398458697
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,6 +377,7 @@ GameObject:
   - component: {fileID: 398458699}
   - component: {fileID: 398458698}
   - component: {fileID: 398458702}
+  - component: {fileID: 398458703}
   m_Layer: 0
   m_Name: SpawnPoint Goblins
   m_TagString: Untagged
@@ -471,8 +485,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d3b61d6f332459c887643c427d5028, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Target>k__BackingField: {fileID: 1243425208}
-  <Enemy>k__BackingField: {fileID: 2726334143220264712, guid: 50a5394f9def74e0d843492a20992bda, type: 3}
+  _target: {fileID: 1243425208}
+--- !u!114 &398458703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398458697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28cc4ca183f5746ca90b36a59a1444be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 2726334143220264712, guid: 50a5394f9def74e0d843492a20992bda, type: 3}
 --- !u!1 &492033466
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,6 +512,7 @@ GameObject:
   - component: {fileID: 492033468}
   - component: {fileID: 492033467}
   - component: {fileID: 492033471}
+  - component: {fileID: 492033472}
   m_Layer: 0
   m_Name: SpawnPoint Dwarfs
   m_TagString: Untagged
@@ -593,8 +620,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d3b61d6f332459c887643c427d5028, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Target>k__BackingField: {fileID: 1427550210}
-  <Enemy>k__BackingField: {fileID: 6812270877123731245, guid: 5fc2a4436fb834c95b4276d399f90b79, type: 3}
+  _target: {fileID: 1427550210}
+--- !u!114 &492033472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492033466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28cc4ca183f5746ca90b36a59a1444be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 6812270877123731245, guid: 5fc2a4436fb834c95b4276d399f90b79, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,6 +859,7 @@ GameObject:
   - component: {fileID: 791149592}
   - component: {fileID: 791149591}
   - component: {fileID: 791149595}
+  - component: {fileID: 791149596}
   m_Layer: 0
   m_Name: SpawnPoint Elfs
   m_TagString: Untagged
@@ -927,8 +967,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d3b61d6f332459c887643c427d5028, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Target>k__BackingField: {fileID: 714350159}
-  <Enemy>k__BackingField: {fileID: 4291981283945799501, guid: eb5a2385de62644179f2055d644c4c23, type: 3}
+  _target: {fileID: 714350159}
+--- !u!114 &791149596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791149590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28cc4ca183f5746ca90b36a59a1444be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 4291981283945799501, guid: eb5a2385de62644179f2055d644c4c23, type: 3}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1031,7 +1083,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1000418555}
   - component: {fileID: 1000418556}
-  - component: {fileID: 1000418557}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -1072,18 +1123,6 @@ MonoBehaviour:
   - {fileID: 791149595}
   - {fileID: 492033471}
   - {fileID: 398458702}
---- !u!114 &1000418557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000418554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28cc4ca183f5746ca90b36a59a1444be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1243425203
 GameObject:
   m_ObjectHideFlags: 0
@@ -1320,8 +1359,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6b5662b530ff4f1e9890d03565d6d22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waypoint: {x: 0, y: 0, z: 0}
-  _index: 0
 --- !u!1 &1769937777
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,8 +1477,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa26e27347fd344bb9aaa216efcddcec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waypoint: {x: 0, y: 0, z: 0}
-  _index: 0
 --- !u!1 &2071559080
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,6 +1490,7 @@ GameObject:
   - component: {fileID: 2071559082}
   - component: {fileID: 2071559081}
   - component: {fileID: 2071559085}
+  - component: {fileID: 2071559086}
   m_Layer: 0
   m_Name: SpawnPoint Orcs
   m_TagString: Untagged
@@ -1562,8 +1598,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d3b61d6f332459c887643c427d5028, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Target>k__BackingField: {fileID: 2125343138}
-  <Enemy>k__BackingField: {fileID: 4468709114403419068, guid: cded5542671ec493eab74c9a5bb51403, type: 3}
+  _target: {fileID: 2125343138}
+--- !u!114 &2071559086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071559080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28cc4ca183f5746ca90b36a59a1444be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 4468709114403419068, guid: cded5542671ec493eab74c9a5bb51403, type: 3}
 --- !u!1 &2125343133
 GameObject:
   m_ObjectHideFlags: 0
@@ -1682,8 +1730,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408917ad2ad884bb79d4c1e14a7affae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waypoint: {x: 0, y: 0, z: 0}
-  _index: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

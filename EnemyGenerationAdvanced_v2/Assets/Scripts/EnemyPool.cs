@@ -3,17 +3,17 @@ using UnityEngine.Pool;
 
 public class EnemyPool : MonoBehaviour
 {
-    [SerializeField] private GameObject _enemy;
-    private ObjectPool<GameObject> _pool;
+    [SerializeField] private Enemy _enemy;
 
+    private ObjectPool<Enemy> _pool;
     private int _poolCapacity = 10;
     private int _poolMaxSize = 100;
 
-    public GameObject GetEnemy => _pool.Get();
+    public Enemy GetEnemy => _pool.Get();
 
     private void Awake()
     {
-        _pool = new ObjectPool<GameObject>(
+        _pool = new ObjectPool<Enemy>(
             createFunc: () => Instantiate(_enemy),
             actionOnGet: (obj) => obj.gameObject.SetActive(true),
             actionOnRelease: (obj) => obj.gameObject.SetActive(false),
