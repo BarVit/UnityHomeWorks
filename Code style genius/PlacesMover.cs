@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Mover : MonoBehaviour
+public class PlacesMover : MonoBehaviour
 {
     [SerializeField] private Transform _placesArea;
     [SerializeField] private float _speed;
