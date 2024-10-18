@@ -24,10 +24,10 @@ public class Mover : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, _placePosition, _speed * Time.deltaTime);
 
         if (transform.position == _placePosition)
-            _placePosition = GetNextPlace();
+            _placePosition = GetNextPosition();
     }
 
-    private Vector3 GetNextPlace()
+    private Vector3 GetNextPosition()
     {
         Vector3 nextPosition;
 
