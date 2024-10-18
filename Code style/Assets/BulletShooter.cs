@@ -1,10 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class BulletShooter : MonoBehaviour
 {
-    [SerializeField] Rigidbody _prefab;
+    [SerializeField] private Rigidbody _prefab;
     [SerializeField] private Transform _target;
     [SerializeField] private float _speed;
     [SerializeField] private float _timeWaitShooting;
@@ -16,10 +15,10 @@ public class BulletShooter : MonoBehaviour
 
     private IEnumerator Shoot()
     {
-        while (true)
-        {
-            WaitForSeconds waitForSeconds = new WaitForSeconds(_timeWaitShooting);
+        WaitForSeconds waitForSeconds = new WaitForSeconds(_timeWaitShooting);
 
+        while (enabled)
+        {
             Vector3 direction = (_target.position - transform.position).normalized;
 
             Rigidbody bullet = Instantiate(_prefab, transform.position + direction, Quaternion.identity);
@@ -27,6 +26,6 @@ public class BulletShooter : MonoBehaviour
             bullet.transform.up = direction;
             bullet.velocity = direction * _speed;
             yield return waitForSeconds;
-         }
+        }
     }
 }
