@@ -6,6 +6,7 @@ public class GoPlaces : MonoBehaviour
     [SerializeField] private float _speed;
 
     private Transform[] _places;
+    private Transform _place;
     private int _index;
 
     private void Start()
@@ -14,23 +15,23 @@ public class GoPlaces : MonoBehaviour
 
         for (int i = 0; i < _places.Length; i++)
             _places[i] = _placesArea.GetChild(i);
+
+        _place = _places[_index];
     }
 
     private void Update()
     {
-        Transform place = _places[_index];
+        transform.position = Vector3.MoveTowards(transform.position, _place.position, _speed * Time.deltaTime);
 
-        transform.position = Vector3.MoveTowards(transform.position, place.position, _speed * Time.deltaTime);
-
-        if (transform.position == place.position)
-            NextPlace();
+        if (transform.position == _place.position)
+            GetNextPlace();
     }
 
-    private Vector3 NextPlace()
+    private Vector3 GetNextPlace()
     {
         Vector3 nextPosition;
 
-        if (_index++ == _places.Length)
+        if (++_index == _places.Length)
             _index = 0;
 
         nextPosition = _places[_index].transform.position;
