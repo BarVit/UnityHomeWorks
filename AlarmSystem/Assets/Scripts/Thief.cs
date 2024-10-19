@@ -39,9 +39,9 @@ public class Thief : MonoBehaviour
         Vector3 nextPosition;
 
         _index = ++_index % _waypoints.Count;
-
         nextPosition = _waypoints[_index];
         transform.forward = nextPosition - transform.position;
+
         return nextPosition;
     }
 }

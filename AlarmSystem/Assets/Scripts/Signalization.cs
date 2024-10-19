@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System;
 
 [RequireComponent(typeof(AudioSource))]
 public class Signalization : MonoBehaviour
@@ -20,7 +19,7 @@ public class Signalization : MonoBehaviour
     private IEnumerator ChangeVolumeSmoothly(float targetVolume)
     {
         float elapsedTime = 0f;
-        float volumeDiaposone = Math.Abs(targetVolume - _audioSource.volume);
+        float volumeDiaposone = Mathf.Abs(targetVolume - _audioSource.volume);
         float volumeAtStart = _audioSource.volume;
         float intermediateVolume;
         float deltaVolume;
