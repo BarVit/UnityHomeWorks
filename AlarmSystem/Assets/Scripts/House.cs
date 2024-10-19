@@ -1,13 +1,13 @@
 using UnityEngine;
 
-[RequireComponent(typeof(AlarmSystem))]
+[RequireComponent(typeof(Signalization))]
 public class House : MonoBehaviour
 {
-    private AlarmSystem _alarmPlayer;
+    private Signalization _alarmPlayer;
 
     private void Awake()
     {
-        _alarmPlayer = GetComponent<AlarmSystem>();
+        _alarmPlayer = GetComponent<Signalization>();
     }
 
     private void OnTriggerEnter(Collider other)
