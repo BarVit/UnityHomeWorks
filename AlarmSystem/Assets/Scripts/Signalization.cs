@@ -1,46 +1,58 @@
 using UnityEngine;
+using System.Collections;
+using System;
 
 [RequireComponent(typeof(AudioSource))]
 public class Signalization : MonoBehaviour
 {
     private AudioSource _audioSource;
 
+    private float _smoothChangeDuration = 2f;
     private float _minVolume = 0;
     private float _maxVolume = 1;
-    private float _changeRate = 0.3f;
-    private bool _isAlarming = false;
 
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
         _audioSource.volume = _minVolume;
     }
-
-    private void Update()
+    
+    private IEnumerator ChangeVolumeSmoothly(float targetVolume)
     {
-        if (_isAlarming)
-            ChangeVolumeSmoothly(_maxVolume);
-        else
-            ChangeVolumeSmoothly(_minVolume);
+        float elapsedTime = 0f;
+        float volumeDiaposone = Math.Abs(targetVolume - _audioSource.volume);
+        float volumeAtStart = _audioSource.volume;
+        float intermediateVolume;
+        float deltaVolume;
 
-        if (_isAlarming == false && _audioSource.volume == 0)
+        while(elapsedTime < _smoothChangeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            deltaVolume = Time.deltaTime * volumeDiaposone / _smoothChangeDuration;
+
+            if (targetVolume > _audioSource.volume)
+                intermediateVolume = elapsedTime * volumeDiaposone / _smoothChangeDuration;
+            else
+                intermediateVolume = volumeAtStart - elapsedTime * volumeDiaposone / _smoothChangeDuration;
+
+            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, intermediateVolume, deltaVolume);
+
+            yield return null;
+        }
+
+        if (_audioSource.isPlaying == true && _audioSource.volume == 0)
             _audioSource.Stop();
     }
 
     public void PlaySirene()
     {
         _audioSource.volume = _minVolume;
-        _isAlarming = true;
         _audioSource.Play();
+        StartCoroutine(ChangeVolumeSmoothly(_maxVolume));
     }
 
     public void StopSirene()
     {
-        _isAlarming = false;
-    }
-
-    private void ChangeVolumeSmoothly(float volume)
-    {
-        _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, volume, _changeRate * Time.deltaTime);
+        StartCoroutine(ChangeVolumeSmoothly(_minVolume));
     }
 }
