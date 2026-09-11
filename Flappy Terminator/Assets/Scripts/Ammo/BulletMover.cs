@@ -17,7 +17,7 @@ public class BulletMover : MonoBehaviour
         _rigidbody2D.linearVelocity = transform.right * _speed;
     }
 
-    public void Reset()
+    public void Stop()
     {
         _rigidbody2D.linearVelocity = Vector2.zero;
     }

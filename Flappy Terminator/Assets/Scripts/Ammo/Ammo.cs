@@ -1,40 +1,64 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-[RequireComponent(typeof(AudioSource))]
-public class Ammo : MonoBehaviour, IRemoveable
+[RequireComponent(typeof(AudioSource), typeof(BulletMover))]
+public class Ammo : MonoBehaviour, IPoolable, IRemoveable
 {
-    [SerializeField] private ExplosionAnimation _prefab;
+    private const float HitEffectLifetime = 0.5f;
+
+    [FormerlySerializedAs("_prefab")]
+    [SerializeField] private ExplosionAnimation _hitEffectPrefab;
     [SerializeField] private AudioSource _audioShot;
+
+    private BulletMover _bulletMover;
+    private SpawnPool<ExplosionAnimation> _hitEffectPool;
 
     [field: SerializeField] public int Damage { get; private set; }
 
-    public event Action<Ammo> Hitted;
+    public ExplosionAnimation HitEffectPrefab => _hitEffectPrefab;
+
+    public event Action<IPoolable> Released;
+
+    private void Awake()
+    {
+        _bulletMover = GetComponent<BulletMover>();
+    }
+
+    public void Init(SpawnPool<ExplosionAnimation> hitEffectPool)
+    {
+        _hitEffectPool = hitEffectPool;
+    }
+
+    public void OnSpawn()
+    {
+    }
+
+    public void OnDespawn()
+    {
+        _bulletMover.Stop();
+    }
 
     public void Remove()
     {
-        Hitted?.Invoke(this);
+        Released?.Invoke(this);
     }
 
-    public ExplosionAnimation GetExplosionAnimation()
+    public void Fly()
     {
-        return _prefab;
+        _bulletMover.Fly();
     }
 
     public void PlayShotSound()
     {
-        //GameObject sound = new();
-
-        //sound.AddComponent<AudioSource>();
-        //AudioSource a = sound.GetComponent<AudioSource>();
-        //a.clip = _audioSource.clip;
-        //a.Play();
         _audioShot.Play();
     }
 
     public void Hit(Vector2 point)
     {
-        var obj = Instantiate(_prefab, point, Quaternion.identity);
-        obj.End(0.5f);
+        ExplosionAnimation hitEffect = _hitEffectPool.Get();
+
+        hitEffect.transform.position = point;
+        hitEffect.Play(HitEffectLifetime);
     }
 }

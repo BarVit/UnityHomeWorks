@@ -4,12 +4,18 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMover))]
 public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
 {
+    private const float ExplosionLifetime = 10f;
+    private const float DestroyDelay = 1f;
+    private const int PoolCapacity = 1;
+    private const int PoolMaxSize = 1;
+
     [SerializeField] private AmmoHitHandler _ammoHitHandler;
     [SerializeField] private PlayerCollisionHandler _playerCollisionHandler;
     [SerializeField] private ExplosionAnimation _explosionAnimation;
     [SerializeField] private AudioSource _audioBumpAsteroid;
     [SerializeField] private AudioSource _audioBumpEnemy;
 
+    private SpawnPool<ExplosionAnimation> _explosionPool;
     private PlayerShooter _playerShooter;
     private Health _health;
     private PlayerMover _playerMover;
@@ -22,6 +28,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         _playerShooter = GetComponent<PlayerShooter>();
         _health = GetComponent<Health>();
         _playerMover = GetComponent<PlayerMover>();
+        _explosionPool = new SpawnPool<ExplosionAnimation>(_explosionAnimation, PoolCapacity, PoolMaxSize);
         _startPosition = transform.position;
         _startRotation = transform.rotation;
     }
@@ -50,11 +57,11 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         }
     }
 
-    public void Reset()
+    public void ReturnToStart()
     {
         transform.position = _startPosition;
         transform.rotation = _startRotation;
-        _playerMover.Reset();
+        _playerMover.ReturnToStart();
     }
 
     public void TakeDamage(Ammo ammo)
@@ -79,9 +86,12 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
 
     public void Die()
     {
-        var exp = Instantiate(_explosionAnimation, transform.position, Quaternion.identity);
-        exp.End(10f);
-        Destroy(gameObject, 1f);
+        ExplosionAnimation explosion = _explosionPool.Get();
+
+        explosion.transform.position = transform.position;
+        explosion.Play(ExplosionLifetime);
+
+        Destroy(gameObject, DestroyDelay);
     }
 
     public void Remove()

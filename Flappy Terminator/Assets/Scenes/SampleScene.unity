@@ -6405,7 +6405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32a74d87a051e4225b475433052475a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemySpawner: {fileID: 1078558388}
+  _killCounter: {fileID: 1078558389}
   _score: {fileID: 656648044}
 --- !u!4 &947787915
 Transform:
@@ -6432,6 +6432,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1078558387}
   - component: {fileID: 1078558388}
+  - component: {fileID: 1078558389}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -6468,6 +6469,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 748883696485598149, guid: 760552f2b84714314ac77afd244877e5, type: 3}
   _spawnDelay: 3
+--- !u!114 &1078558389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078558386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 461017c7d4564b9cbed5367a3758ed2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1229452742
 GameObject:
   m_ObjectHideFlags: 0

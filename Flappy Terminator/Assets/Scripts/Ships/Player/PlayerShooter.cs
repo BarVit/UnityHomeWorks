@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 public class PlayerShooter : MonoBehaviour
 {
@@ -7,31 +7,31 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private Ammo _prefab;
     [SerializeField] private float _shootRate;
 
-    private ObjectPoolAmmo _pool;
+    private SpawnPool<Ammo> _ammoPool;
+    private SpawnPool<ExplosionAnimation> _hitEffectPool;
     private Coroutine _shootDelayer;
     private bool _isOnCooldown;
 
-    private void Start()
+    private void Awake()
     {
-        _pool = new(_prefab);
+        _ammoPool = new SpawnPool<Ammo>(_prefab);
+        _hitEffectPool = new SpawnPool<ExplosionAnimation>(_prefab.HitEffectPrefab);
     }
 
     public void Shoot()
     {
-        if(_isOnCooldown == false)
-        {
-            Ammo ammo = _pool.Get();
+        if (_isOnCooldown)
+            return;
 
-            ammo.transform.position = _shootPoint.transform.position;
-            ammo.transform.rotation = _shootPoint.transform.rotation;
-            ammo.PlayShotSound();
+        Ammo ammo = _ammoPool.Get();
 
-            if (ammo.TryGetComponent(out BulletMover bulletMover))
-                bulletMover.Fly();
+        ammo.Init(_hitEffectPool);
+        ammo.transform.SetPositionAndRotation(_shootPoint.position, _shootPoint.rotation);
+        ammo.PlayShotSound();
+        ammo.Fly();
 
-            _isOnCooldown = true;
-            _shootDelayer = StartCoroutine(Delay());
-        }
+        _isOnCooldown = true;
+        _shootDelayer = StartCoroutine(Delay());
     }
 
     private IEnumerator Delay()

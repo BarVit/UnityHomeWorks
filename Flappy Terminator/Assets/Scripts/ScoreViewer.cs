@@ -3,20 +3,17 @@ using UnityEngine;
 
 public class ScoreViewer : MonoBehaviour
 {
-    [SerializeField] private EnemySpawner _enemySpawner;
+    [SerializeField] private KillCounter _killCounter;
     [SerializeField] private TMP_Text _score;
 
-    private ObjectPoolEnemy _objectPoolEnemy;
-
-    private void Start()
+    private void OnEnable()
     {
-        _objectPoolEnemy = _enemySpawner.GetPool();
-        _objectPoolEnemy.KillsCountChanged += OnKillsChanged;
+        _killCounter.Changed += OnKillsChanged;
     }
 
-    private void Destroy()
+    private void OnDisable()
     {
-        _objectPoolEnemy.KillsCountChanged -= OnKillsChanged;
+        _killCounter.Changed -= OnKillsChanged;
     }
 
     private void OnKillsChanged(int killsCount)
