@@ -35,7 +35,7 @@ public class Asteroid : MonoBehaviour, IRemoveable
     private void Update()
     {
         _rigidbody2D.rotation += _rotationSpeed * Time.deltaTime;
-        _rigidbody2D.velocity = new Vector2(-_speed, 0);
+        _rigidbody2D.linearVelocity = new Vector2(-_speed, 0);
     }
 
     public void Remove()

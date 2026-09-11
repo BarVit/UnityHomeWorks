@@ -17,11 +17,11 @@ public class EnemyMover : MonoBehaviour
 
     public void Fly()
     {
-        _rigidbody2D.velocity = transform.right * -_speed;
+        _rigidbody2D.linearVelocity = transform.right * -_speed;
     }
 
     public void Reset()
     {
-        _rigidbody2D.velocity = Vector2.zero;
+        _rigidbody2D.linearVelocity = Vector2.zero;
     }
 }

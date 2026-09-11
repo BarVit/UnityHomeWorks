@@ -31,20 +31,20 @@ public class PlayerMover : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            _rigidbody2D.velocity = new Vector2(0, _tapForce);
+            _rigidbody2D.linearVelocity = new Vector2(0, _tapForce);
             transform.rotation = _maxRotation;
         }
 
         transform.rotation = Quaternion.Lerp(transform.rotation, _minRotation, _rotationSpeed * Time.deltaTime);
-        _verticalSpeed = Mathf.Clamp(_rigidbody2D.velocity.y, -_maxVerticalSpeed, _maxVerticalSpeed);
-        _rigidbody2D.velocity = new Vector2(0, _verticalSpeed);
+        _verticalSpeed = Mathf.Clamp(_rigidbody2D.linearVelocity.y, -_maxVerticalSpeed, _maxVerticalSpeed);
+        _rigidbody2D.linearVelocity = new Vector2(0, _verticalSpeed);
     }
 
     public void Reset()
     {
         transform.position = _startPosition;
         transform.rotation = Quaternion.identity;
-        _rigidbody2D.velocity = Vector2.zero;
+        _rigidbody2D.linearVelocity = Vector2.zero;
     }
 
     public void Push()
