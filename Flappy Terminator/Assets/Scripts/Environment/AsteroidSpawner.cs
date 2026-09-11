@@ -45,8 +45,6 @@ public class AsteroidSpawner : MonoBehaviour
 
     private void Spawn(SpawnPool<Asteroid> pool, float positionY)
     {
-        Asteroid asteroid = pool.Get();
-
-        asteroid.transform.position = new Vector3(_spawnPositionX, positionY, 0);
+        pool.Get(new Vector3(_spawnPositionX, positionY, 0));
     }
 }

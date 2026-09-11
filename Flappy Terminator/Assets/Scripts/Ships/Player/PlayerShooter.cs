@@ -23,10 +23,9 @@ public class PlayerShooter : MonoBehaviour
         if (_isOnCooldown)
             return;
 
-        Ammo ammo = _ammoPool.Get();
+        Ammo ammo = _ammoPool.Get(_shootPoint.position, _shootPoint.rotation);
 
         ammo.Init(_hitEffectPool);
-        ammo.transform.SetPositionAndRotation(_shootPoint.position, _shootPoint.rotation);
         ammo.PlayShotSound();
         ammo.Fly();
 

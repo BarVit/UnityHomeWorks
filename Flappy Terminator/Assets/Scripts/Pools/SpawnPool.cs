@@ -23,9 +23,30 @@ public class SpawnPool<T> where T : MonoBehaviour, IPoolable
             maxSize: maxSize);
     }
 
-    public T Get()
+    public T Get(Vector3 position)
     {
-        return _pool.Get();
+        T item = _pool.Get();
+
+        item.transform.position = position;
+
+        return Activate(item);
+    }
+
+    public T Get(Vector3 position, Quaternion rotation)
+    {
+        T item = _pool.Get();
+
+        item.transform.SetPositionAndRotation(position, rotation);
+
+        return Activate(item);
+    }
+
+    private T Activate(T item)
+    {
+        item.gameObject.SetActive(true);
+        item.OnSpawn();
+
+        return item;
     }
 
     private T Create()
@@ -41,8 +62,6 @@ public class SpawnPool<T> where T : MonoBehaviour, IPoolable
     private void PrepareForUse(T item)
     {
         item.Released += Release;
-        item.gameObject.SetActive(true);
-        item.OnSpawn();
     }
 
     private void PrepareForStorage(T item)

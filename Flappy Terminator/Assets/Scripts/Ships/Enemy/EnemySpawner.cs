@@ -45,12 +45,10 @@ public class EnemySpawner : MonoBehaviour
 
         while (enabled)
         {
-            EnemyShip ship = _pool.Get();
-
-            ship.transform.position = new Vector3(
+            _pool.Get(new Vector3(
                 _spawnPositionX,
                 Random.Range(_minSpawnPositionY, _maxSpawnPositionY),
-                0);
+                0));
 
             yield return spawnDelay;
         }

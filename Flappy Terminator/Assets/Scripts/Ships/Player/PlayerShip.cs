@@ -86,9 +86,8 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
 
     public void Die()
     {
-        ExplosionAnimation explosion = _explosionPool.Get();
+        ExplosionAnimation explosion = _explosionPool.Get(transform.position);
 
-        explosion.transform.position = transform.position;
         explosion.Play(ExplosionLifetime);
 
         Destroy(gameObject, DestroyDelay);

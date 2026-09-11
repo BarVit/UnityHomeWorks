@@ -81,11 +81,11 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
         EnemyDeadBody deadBody = Instantiate(_deadBody, transform.position, Quaternion.identity);
         deadBody.End();
 
-        ExplosionAnimation explosion = _explosionPool.Get();
-        explosion.transform.position = transform.position;
+        ExplosionAnimation explosion = _explosionPool.Get(transform.position);
+
         explosion.Play(ExplosionLifetime);
 
-        Died?.Invoke(this);
         Released?.Invoke(this);
+        Died?.Invoke(this);
     }
 }

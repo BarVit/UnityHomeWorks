@@ -56,9 +56,8 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
 
     public void Hit(Vector2 point)
     {
-        ExplosionAnimation hitEffect = _hitEffectPool.Get();
+        ExplosionAnimation hitEffect = _hitEffectPool.Get(point);
 
-        hitEffect.transform.position = point;
         hitEffect.Play(HitEffectLifetime);
     }
 }

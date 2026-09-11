@@ -39,10 +39,9 @@ public class EnemyShooter : MonoBehaviour
 
         while (enabled)
         {
-            Ammo ammo = _ammoPool.Get();
+            Ammo ammo = _ammoPool.Get(_shootPoint.position, _shootPoint.rotation);
 
             ammo.Init(_hitEffectPool);
-            ammo.transform.SetPositionAndRotation(_shootPoint.position, _shootPoint.rotation);
             ammo.PlayShotSound();
             ammo.Fly();
 
