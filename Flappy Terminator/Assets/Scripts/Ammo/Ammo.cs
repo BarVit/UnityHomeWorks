@@ -7,8 +7,6 @@ public class Ammo : MonoBehaviour, IRemoveable
     [SerializeField] private ExplosionAnimation _prefab;
     [SerializeField] private AudioSource _audioShot;
 
-    private SoundPlayer _soundPlayer;
-
     [field: SerializeField] public int Damage { get; private set; }
 
     public event Action<Ammo> Hitted;

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Health))]
-public class EnemyShip : Ship, IRemoveable, IDamageable
+public class EnemyShip : MonoBehaviour, IRemoveable, IDamageable
 {
     [SerializeField] private AmmoHitHandler _ammoHitHandler;
     [SerializeField] private ExplosionAnimation _explosion;

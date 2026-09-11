@@ -2,7 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerShooter), typeof(Health))]
 [RequireComponent(typeof(PlayerMover))]
-public class PlayerShip : Ship, IDamageable, IRemoveable
+public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
 {
     [SerializeField] private AmmoHitHandler _ammoHitHandler;
     [SerializeField] private PlayerCollisionHandler _playerCollisionHandler;
