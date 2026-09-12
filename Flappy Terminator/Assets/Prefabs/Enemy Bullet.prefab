@@ -4965,7 +4965,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 1650114164288651137, guid: 8dca398b28a6e45e78bd7b04a3a726b2, type: 3}
-  _shotSound: {fileID: 8300000, guid: fdc735ea072a9410a98e635510b96568, type: 3}
+  _shotSound:
+    _clip: {fileID: 8300000, guid: fdc735ea072a9410a98e635510b96568, type: 3}
+    _volume: 0.05
   _audioHit: {fileID: 0}
   <Damage>k__BackingField: 10
 --- !u!1 &6295457061521432461

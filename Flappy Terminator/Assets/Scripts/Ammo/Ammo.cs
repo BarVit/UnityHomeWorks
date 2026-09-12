@@ -9,7 +9,7 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
 
     [FormerlySerializedAs("_prefab")]
     [SerializeField] private ExplosionAnimation _hitEffectPrefab;
-    [SerializeField] private AudioClip _shotSound;
+    [SerializeField] private Sound _shotSound;
 
     private BulletMover _bulletMover;
     private SpawnPool<ExplosionAnimation> _hitEffectPool;
@@ -17,7 +17,7 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
     [field: SerializeField] public int Damage { get; private set; }
 
     public ExplosionAnimation HitEffectPrefab => _hitEffectPrefab;
-    public AudioClip ShotSound => _shotSound;
+    public Sound ShotSound => _shotSound;
 
     public event Action<IPoolable> Released;
 

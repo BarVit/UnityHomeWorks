@@ -27,7 +27,7 @@ public class PlayerShooter : MonoBehaviour
         Ammo ammo = _ammoPool.Get(_shootPoint.position, _shootPoint.rotation);
 
         ammo.Init(_hitEffectPool);
-        _shotAudioSource.PlayOneShot(ammo.ShotSound);
+        _shotAudioSource.PlayOneShot(ammo.ShotSound.Clip, ammo.ShotSound.Volume);
         ammo.Fly();
 
         _isOnCooldown = true;
