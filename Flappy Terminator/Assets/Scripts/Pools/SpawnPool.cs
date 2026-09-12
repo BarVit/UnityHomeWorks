@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -7,6 +8,7 @@ public class SpawnPool<T> where T : MonoBehaviour, IPoolable
     private readonly T _prefab;
     private readonly Action<T> _created;
     private readonly ObjectPool<T> _pool;
+    private readonly List<T> _active = new();
 
     public SpawnPool(T prefab, int capacity = 10, int maxSize = 100, Action<T> created = null)
     {
@@ -41,8 +43,15 @@ public class SpawnPool<T> where T : MonoBehaviour, IPoolable
         return Activate(item);
     }
 
+    public void ReleaseAll()
+    {
+        for (int i = _active.Count - 1; i >= 0; i--)
+            Release(_active[i]);
+    }
+
     private T Activate(T item)
     {
+        _active.Add(item);
         item.gameObject.SetActive(true);
         item.OnSpawn();
 
@@ -73,6 +82,7 @@ public class SpawnPool<T> where T : MonoBehaviour, IPoolable
     private void Release(IPoolable item)
     {
         item.Released -= Release;
+        _active.Remove((T)item);
         _pool.Release((T)item);
     }
 

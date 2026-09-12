@@ -19,6 +19,12 @@ public class PlayerShooter : MonoBehaviour
         _hitEffectPool = new SpawnPool<ExplosionAnimation>(_prefab.HitEffectPrefab);
     }
 
+    public void ReleaseAll()
+    {
+        _ammoPool.ReleaseAll();
+        _hitEffectPool.ReleaseAll();
+    }
+
     public void Shoot()
     {
         if (_isOnCooldown)

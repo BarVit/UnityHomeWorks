@@ -37,6 +37,19 @@ public class EnemySpawner : MonoBehaviour
         _spawning = StartCoroutine(Spawn());
     }
 
+    public void Restart()
+    {
+        StopSpawn();
+
+        _pool.ReleaseAll();
+        _ammoPool.ReleaseAll();
+        _hitEffectPool.ReleaseAll();
+        _explosionPool.ReleaseAll();
+        _retiredCount = 0;
+
+        _spawning = StartCoroutine(Spawn());
+    }
+
     public void StopSpawn()
     {
         if (_spawning == null)

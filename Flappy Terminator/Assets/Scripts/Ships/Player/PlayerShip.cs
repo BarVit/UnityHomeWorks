@@ -1,17 +1,18 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerShooter), typeof(Health))]
 [RequireComponent(typeof(PlayerMover))]
 public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
 {
-    private const float ExplosionLifetime = 10f;
-    private const float DestroyDelay = 1f;
+    private const float ExplosionLifetime = 2f;
     private const int PoolCapacity = 1;
     private const int PoolMaxSize = 1;
 
     [SerializeField] private AmmoHitHandler _ammoHitHandler;
     [SerializeField] private PlayerCollisionHandler _playerCollisionHandler;
     [SerializeField] private Collider2D _bodyCollider;
+    [SerializeField] private SpriteRenderer _shipSprite;
     [SerializeField] private ExplosionAnimation _explosionAnimation;
     [SerializeField] private AudioSource _audioBumpAsteroid;
     [SerializeField] private AudioSource _audioBumpEnemy;
@@ -20,7 +21,9 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
     private PlayerShooter _playerShooter;
     private Health _health;
     private PlayerMover _playerMover;
+    private Vector3 _startScale;
     private bool _isControlEnabled = true;
+    private bool _isDead;
     private int _enemyAmmoLayout = 9;
 
     private void Awake()
@@ -29,6 +32,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         _health = GetComponent<Health>();
         _playerMover = GetComponent<PlayerMover>();
         _explosionPool = new SpawnPool<ExplosionAnimation>(_explosionAnimation, PoolCapacity, PoolMaxSize);
+        _startScale = transform.localScale;
     }
 
     private void OnEnable()
@@ -46,6 +50,8 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         _playerCollisionHandler.EnemyBumped -= TakeDamage;
         _health.Died -= Die;
     }
+
+    public event Action Died;
 
     private void Update()
     {
@@ -101,11 +107,30 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
 
     public void Die()
     {
+        if (_isDead)
+            return;
+
+        _isDead = true;
+
         ExplosionAnimation explosion = _explosionPool.Get(transform.position);
 
         explosion.Play(ExplosionLifetime);
 
-        Destroy(gameObject, DestroyDelay);
+        DisableControl();
+        _shipSprite.enabled = false;
+
+        Died?.Invoke();
+    }
+
+    public void Restart()
+    {
+        _isDead = false;
+        _shipSprite.enabled = true;
+        transform.localScale = _startScale;
+        _playerShooter.ReleaseAll();
+        _health.Init();
+        ReturnToStart();
+        EnableControl();
     }
 
     public void Remove()

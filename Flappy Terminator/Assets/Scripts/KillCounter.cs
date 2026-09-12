@@ -25,6 +25,12 @@ public class KillCounter : MonoBehaviour
         _enemySpawner.EnemyDied -= OnEnemyDied;
     }
 
+    public void Restart()
+    {
+        Kills = 0;
+        Changed?.Invoke(Kills);
+    }
+
     private void OnEnemyDied(EnemyShip ship)
     {
         Kills++;
