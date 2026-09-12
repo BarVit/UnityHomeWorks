@@ -17,6 +17,7 @@ public class Health : MonoBehaviour
     public void Init()
     {
         Value = MaxValue;
+        Changed?.Invoke(Value);
     }
 
     public void TakeDamage(int damage)
