@@ -8,6 +8,7 @@ public class Game : MonoBehaviour
     private const float NormalTimeScale = 1f;
     private const float PausedTimeScale = 0f;
 
+    [SerializeField] private InputReader _input;
     [SerializeField] private PlayerShip _playerShip;
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private AsteroidSpawner _asteroidSpawner;
@@ -37,6 +38,7 @@ public class Game : MonoBehaviour
         _pauseScreen.ResumeRequested += Resume;
         _pauseScreen.RestartRequested += RestartFromPause;
         _gameOverScreen.RestartRequested += RestartGame;
+        _input.PauseToggled += TogglePause;
     }
 
     private void Start()
@@ -49,20 +51,6 @@ public class Game : MonoBehaviour
         _startScreen.Show();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape) == false)
-            return;
-
-        if (_isRunning == false || _isLevelOver)
-            return;
-
-        if (_isPaused)
-            Resume();
-        else
-            Pause();
-    }
-
     private void OnDisable()
     {
         _enemySpawner.WaveCleared -= WinLevel;
@@ -72,6 +60,18 @@ public class Game : MonoBehaviour
         _pauseScreen.ResumeRequested -= Resume;
         _pauseScreen.RestartRequested -= RestartFromPause;
         _gameOverScreen.RestartRequested -= RestartGame;
+        _input.PauseToggled -= TogglePause;
+    }
+
+    private void TogglePause()
+    {
+        if (_isRunning == false || _isLevelOver)
+            return;
+
+        if (_isPaused)
+            Resume();
+        else
+            Pause();
     }
 
     private void StartGame()

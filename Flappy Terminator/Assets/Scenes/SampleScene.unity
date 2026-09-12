@@ -249,6 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13fd9fd8f86494d16bbaa7d2c655dcee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _input: {fileID: 661464565}
   _ammoHitHandler: {fileID: 366751405}
   _playerCollisionHandler: {fileID: 366751408}
   _bodyCollider: {fileID: 366751406}
@@ -622,6 +623,7 @@ GameObject:
   - component: {fileID: 158706309}
   - component: {fileID: 830307368}
   - component: {fileID: 940566751}
+  - component: {fileID: 661464565}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -7401,6 +7403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dc3cd80e0fa94167b8567cab24a9802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _input: {fileID: 661464565}
   _playerShip: {fileID: 92249140}
   _enemySpawner: {fileID: 1078558388}
   _asteroidSpawner: {fileID: 2000842824}
@@ -10609,6 +10612,21 @@ MonoBehaviour:
   _panel: {fileID: 818673099}
   _resumeButton: {fileID: 573065731}
   _restartButton: {fileID: 304700879}
+--- !u!114 &661464565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165193575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ad808ffa24644c9b0b4a503b98d98cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpKey: 119
+  _shootKey: 32
+  _pauseKey: 27
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
     private const int PoolCapacity = 1;
     private const int PoolMaxSize = 1;
 
+    [SerializeField] private InputReader _input;
     [SerializeField] private AmmoHitHandler _ammoHitHandler;
     [SerializeField] private PlayerCollisionHandler _playerCollisionHandler;
     [SerializeField] private Collider2D _bodyCollider;
@@ -40,6 +41,8 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         _playerCollisionHandler.AsteroidBumped += TakeDamage;
         _playerCollisionHandler.EnemyBumped += TakeDamage;
         _health.Died += Die;
+        _input.Jumped += OnJumped;
+        _input.Shot += OnShot;
     }
 
     private void OnDisable()
@@ -48,19 +51,26 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         _playerCollisionHandler.AsteroidBumped -= TakeDamage;
         _playerCollisionHandler.EnemyBumped -= TakeDamage;
         _health.Died -= Die;
+        _input.Jumped -= OnJumped;
+        _input.Shot -= OnShot;
     }
 
     public event Action Died;
 
-    private void Update()
+    private void OnJumped()
     {
         if (_isControlEnabled == false)
             return;
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _playerShooter.Shoot();
-        }
+        _playerMover.Jump();
+    }
+
+    private void OnShot()
+    {
+        if (_isControlEnabled == false)
+            return;
+
+        _playerShooter.Shoot();
     }
 
     public void EnableControl()
