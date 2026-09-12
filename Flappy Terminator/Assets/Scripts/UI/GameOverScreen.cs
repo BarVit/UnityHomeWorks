@@ -23,7 +23,7 @@ public class GameOverScreen : MonoBehaviour
 
     public void Show(int score)
     {
-        _score.text = score.ToString();
+        _score.text = $"SCORE  {score}";
         _panel.SetActive(true);
     }
 
