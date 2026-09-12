@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _tapForce;
-    [SerializeField] private float _pushForce;
+    [FormerlySerializedAs("_pushForce")]
+    [SerializeField] private float _pushSpeed;
     [SerializeField] private float _maxVerticalSpeed;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _minRotationZ;
@@ -83,6 +85,6 @@ public class PlayerMover : MonoBehaviour
             transform.rotation = _maxRotation;
         }
 
-        _rigidbody2D.AddForce(direction * _pushForce, ForceMode2D.Impulse);
+        _rigidbody2D.linearVelocity = direction * _pushSpeed;
     }
 }
