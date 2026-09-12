@@ -20,8 +20,6 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
     private PlayerShooter _playerShooter;
     private Health _health;
     private PlayerMover _playerMover;
-    private Vector2 _startPosition;
-    private Quaternion _startRotation;
     private bool _isControlEnabled = true;
     private int _enemyAmmoLayout = 9;
 
@@ -31,8 +29,6 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         _health = GetComponent<Health>();
         _playerMover = GetComponent<PlayerMover>();
         _explosionPool = new SpawnPool<ExplosionAnimation>(_explosionAnimation, PoolCapacity, PoolMaxSize);
-        _startPosition = transform.position;
-        _startRotation = transform.rotation;
     }
 
     private void OnEnable()
@@ -80,8 +76,6 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
 
     public void ReturnToStart()
     {
-        transform.position = _startPosition;
-        transform.rotation = _startRotation;
         _playerMover.ReturnToStart();
     }
 

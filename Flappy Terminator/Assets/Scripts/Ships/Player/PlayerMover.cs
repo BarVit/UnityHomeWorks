@@ -9,8 +9,8 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _minRotationZ;
     [SerializeField] private float _maxRotationZ;
+    [SerializeField] private Vector2 _startPosition;
 
-    private Vector2 _startPosition;
     private Rigidbody2D _rigidbody2D;
     private Quaternion _minRotation;
     private Quaternion _maxRotation;
@@ -23,8 +23,6 @@ public class PlayerMover : MonoBehaviour
 
     private void Start()
     {
-        _startPosition = transform.position;
-
         _maxRotation = Quaternion.Euler(0, 0, _maxRotationZ);
         _minRotation = Quaternion.Euler(0, 0, _minRotationZ);
 
