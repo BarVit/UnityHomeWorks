@@ -17,7 +17,6 @@ public class Game : MonoBehaviour
     [SerializeField] private StartScreen _startScreen;
     [SerializeField] private PauseScreen _pauseScreen;
     [SerializeField] private GameOverScreen _gameOverScreen;
-    [SerializeField] private float _gameOverDelay = 2f;
     [SerializeField] private int _firstWaveSize = 6;
     [SerializeField] private int _waveSizeGrowth = 3;
 
@@ -161,7 +160,7 @@ public class Game : MonoBehaviour
 
     private IEnumerator ShowGameOver()
     {
-        yield return new WaitForSeconds(_gameOverDelay);
+        yield return new WaitForSeconds(_playerShip.DeathDuration);
 
         _gameOverCountdown = null;
         _isRunning = false;

@@ -254,7 +254,6 @@ MonoBehaviour:
   _playerCollisionHandler: {fileID: 366751408}
   _bodyCollider: {fileID: 366751406}
   _shipSprite: {fileID: 366751404}
-  _explosionLifetime: 10
   _explosionAnimation: {fileID: 2815651481402402797, guid: 27bd167ceb3334f9d93a691fc44bf0ed, type: 3}
   _audioBumpAsteroid: {fileID: 92249145}
   _audioBumpEnemy: {fileID: 92249144}
@@ -7412,7 +7411,6 @@ MonoBehaviour:
   _startScreen: {fileID: 900768329}
   _pauseScreen: {fileID: 554024878}
   _gameOverScreen: {fileID: 573500980}
-  _gameOverDelay: 10
   _firstWaveSize: 3
   _waveSizeGrowth: 3
 --- !u!33 &834881705

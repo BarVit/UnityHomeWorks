@@ -21,6 +21,21 @@ public class WarpJump : MonoBehaviour
 
     private Coroutine _jumping;
 
+    public float Duration => _alignDuration + Mathf.Max(EffectDuration, ActionsDuration);
+
+    private float EffectDuration
+    {
+        get
+        {
+            ParticleSystem.MainModule main = _warpEffect.main;
+
+            return main.duration + main.startLifetime.constantMax;
+        }
+    }
+
+    private float ActionsDuration =>
+        _warpEffect.main.duration * _stretchAtWarpProgress + _stretchDuration + _dashDuration;
+
     public event Action Finished;
 
     public void Play()

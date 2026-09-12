@@ -4,14 +4,28 @@ using UnityEngine;
 
 public class ExplosionAnimation : MonoBehaviour, IPoolable
 {
+    private const float NotCalculated = -1f;
+
     [SerializeField] private AudioSource _audioSource;
 
     private Camera _camera;
     private ParticleSystem[] _particleSystems;
     private Animator _animator;
     private Coroutine _lifetimeCountdown;
+    private float _duration = NotCalculated;
 
     public event Action<IPoolable> Released;
+
+    public float Duration
+    {
+        get
+        {
+            if (_duration == NotCalculated)
+                _duration = CalculateDuration();
+
+            return _duration;
+        }
+    }
 
     private void Awake()
     {
@@ -36,7 +50,7 @@ public class ExplosionAnimation : MonoBehaviour, IPoolable
         StopParticles();
     }
 
-    public void Play(float lifetime)
+    public void Play()
     {
         if (_animator != null)
         {
@@ -50,7 +64,28 @@ public class ExplosionAnimation : MonoBehaviour, IPoolable
         if (ScreenArea.Contains(_camera, transform.position))
             _audioSource.Play();
 
-        _lifetimeCountdown = StartCoroutine(CountLifetime(lifetime));
+        _lifetimeCountdown = StartCoroutine(CountLifetime(Duration));
+    }
+
+    private float CalculateDuration()
+    {
+        float longest = 0f;
+
+        foreach (ParticleSystem particleSystem in GetComponentsInChildren<ParticleSystem>(true))
+        {
+            ParticleSystem.MainModule main = particleSystem.main;
+
+            longest = Mathf.Max(longest,
+                main.startDelay.constantMax + main.duration + main.startLifetime.constantMax);
+        }
+
+        Animator animator = GetComponentInChildren<Animator>(true);
+
+        if (animator != null && animator.runtimeAnimatorController != null)
+            foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)
+                longest = Mathf.Max(longest, clip.length);
+
+        return longest;
     }
 
     private void StopParticles()

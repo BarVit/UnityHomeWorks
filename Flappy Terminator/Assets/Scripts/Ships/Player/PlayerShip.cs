@@ -13,7 +13,6 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
     [SerializeField] private PlayerCollisionHandler _playerCollisionHandler;
     [SerializeField] private Collider2D _bodyCollider;
     [SerializeField] private SpriteRenderer _shipSprite;
-    [SerializeField] private float _explosionLifetime = 10f;
     [SerializeField] private ExplosionAnimation _explosionAnimation;
     [SerializeField] private AudioSource _audioBumpAsteroid;
     [SerializeField] private AudioSource _audioBumpEnemy;
@@ -54,6 +53,8 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         _input.Jumped -= OnJumped;
         _input.Shot -= OnShot;
     }
+
+    public float DeathDuration => _explosionAnimation.Duration;
 
     public event Action Died;
 
@@ -140,7 +141,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
 
         ExplosionAnimation explosion = _explosionPool.Get(transform.position);
 
-        explosion.Play(_explosionLifetime);
+        explosion.Play();
 
         DisableControl();
         _shipSprite.enabled = false;

@@ -4,8 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(Health), typeof(EnemyMover), typeof(EnemyShooter))]
 public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 {
-    private const float ExplosionLifetime = 1f;
-
     [SerializeField] private AmmoHitHandler _ammoHitHandler;
     [SerializeField] private ExplosionAnimation _explosion;
     [SerializeField] private EnemyDeadBody _deadBody;
@@ -94,7 +92,7 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
         ExplosionAnimation explosion = _explosionPool.Get(transform.position);
 
-        explosion.Play(ExplosionLifetime);
+        explosion.Play();
 
         Released?.Invoke(this);
         Died?.Invoke(this);

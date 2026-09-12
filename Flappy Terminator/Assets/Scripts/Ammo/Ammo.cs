@@ -5,8 +5,6 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(BulletMover))]
 public class Ammo : MonoBehaviour, IPoolable, IRemoveable
 {
-    private const float HitEffectLifetime = 0.5f;
-
     [FormerlySerializedAs("_prefab")]
     [SerializeField] private ExplosionAnimation _hitEffectPrefab;
     [SerializeField] private Sound _shotSound;
@@ -54,6 +52,6 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
     {
         ExplosionAnimation hitEffect = _hitEffectPool.Get(point);
 
-        hitEffect.Play(HitEffectLifetime);
+        hitEffect.Play();
     }
 }
