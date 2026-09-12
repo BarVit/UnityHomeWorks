@@ -47,7 +47,7 @@ public class WarpJump : MonoBehaviour
 
         yield return Stretch(ship);
 
-        _flash.Play(ship.position + (Vector3)_engineOffset);
+        _flash.PlayAttached(ship, _engineOffset);
 
         yield return Dash(ship);
 

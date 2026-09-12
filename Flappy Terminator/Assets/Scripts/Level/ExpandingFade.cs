@@ -15,6 +15,8 @@ public class ExpandingFade : MonoBehaviour
     private Renderer _renderer;
     private MaterialPropertyBlock _propertyBlock;
     private Coroutine _playing;
+    private Transform _target;
+    private Vector3 _offset;
 
     private void Awake()
     {
@@ -26,11 +28,32 @@ public class ExpandingFade : MonoBehaviour
 
     public void Play(Vector3 position)
     {
+        _target = null;
+        _offset = position;
+
+        Restart();
+    }
+
+    public void PlayAttached(Transform target, Vector3 offset)
+    {
+        _target = target;
+        _offset = offset;
+
+        Restart();
+    }
+
+    private void Restart()
+    {
         if (_playing != null)
             StopCoroutine(_playing);
 
-        transform.position = position;
+        MoveToTarget();
         _playing = StartCoroutine(Expand());
+    }
+
+    private void MoveToTarget()
+    {
+        transform.position = _target == null ? _offset : _target.position + _offset;
     }
 
     private IEnumerator Expand()
@@ -41,6 +64,7 @@ public class ExpandingFade : MonoBehaviour
         {
             float progress = elapsed / _duration;
 
+            MoveToTarget();
             SetScale(Mathf.Lerp(_startScale, _endScale, _scaleCurve.Evaluate(progress)));
             SetStrength(Mathf.Lerp(_startStrength, 0f, progress));
 
