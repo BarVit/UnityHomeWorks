@@ -11,6 +11,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
 
     [SerializeField] private AmmoHitHandler _ammoHitHandler;
     [SerializeField] private PlayerCollisionHandler _playerCollisionHandler;
+    [SerializeField] private Collider2D _bodyCollider;
     [SerializeField] private ExplosionAnimation _explosionAnimation;
     [SerializeField] private AudioSource _audioBumpAsteroid;
     [SerializeField] private AudioSource _audioBumpEnemy;
@@ -66,8 +67,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         _isControlEnabled = true;
         _playerMover.enabled = true;
         _playerMover.Resume();
-        _ammoHitHandler.enabled = true;
-        _playerCollisionHandler.enabled = true;
+        _bodyCollider.enabled = true;
     }
 
     public void DisableControl()
@@ -75,8 +75,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         _isControlEnabled = false;
         _playerMover.Stop();
         _playerMover.enabled = false;
-        _ammoHitHandler.enabled = false;
-        _playerCollisionHandler.enabled = false;
+        _bodyCollider.enabled = false;
     }
 
     public void ReturnToStart()
