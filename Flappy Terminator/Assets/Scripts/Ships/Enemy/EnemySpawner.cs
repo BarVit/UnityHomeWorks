@@ -19,6 +19,7 @@ public class EnemySpawner : MonoBehaviour
     private SpawnPool<ExplosionAnimation> _hitEffectPool;
     private Coroutine _spawning;
     private int _retiredCount;
+    private bool _isRestarting;
 
     public event Action<EnemyShip> EnemyDied;
     public event Action WaveCleared;
@@ -43,11 +44,15 @@ public class EnemySpawner : MonoBehaviour
     {
         StopSpawn();
 
+        _isRestarting = true;
+
         _pool.ReleaseAll();
         _ammoPool.ReleaseAll();
         _hitEffectPool.ReleaseAll();
         _explosionPool.ReleaseAll();
         _deadBodyPool.ReleaseAll();
+
+        _isRestarting = false;
         _retiredCount = 0;
 
         _spawning = StartCoroutine(Spawn());
@@ -76,9 +81,12 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnEnemyRetired(EnemyShip ship)
     {
+        if (_isRestarting)
+            return;
+
         _retiredCount++;
 
-        if (_retiredCount == _waveSize)
+        if (_retiredCount >= _waveSize)
             WaveCleared?.Invoke();
     }
 
