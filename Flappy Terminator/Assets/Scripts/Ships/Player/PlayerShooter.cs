@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ public class PlayerShooter : MonoBehaviour
     private SpawnPool<ExplosionAnimation> _hitEffectPool;
     private Coroutine _shootDelayer;
     private bool _isOnCooldown;
+
+    public event Action<float> ReadinessChanged;
 
     private void Awake()
     {
@@ -37,15 +40,20 @@ public class PlayerShooter : MonoBehaviour
         ammo.Fly();
 
         _isOnCooldown = true;
-        _shootDelayer = StartCoroutine(Delay());
+        _shootDelayer = StartCoroutine(Reload());
     }
 
-    private IEnumerator Delay()
+    private IEnumerator Reload()
     {
-        WaitForSeconds wait = new(_shootRate);
+        for (float elapsed = 0f; elapsed < _shootRate; elapsed += Time.deltaTime)
+        {
+            ReadinessChanged?.Invoke(elapsed / _shootRate);
 
-        yield return wait;
+            yield return null;
+        }
 
         _isOnCooldown = false;
+        _shootDelayer = null;
+        ReadinessChanged?.Invoke(1f);
     }
 }
