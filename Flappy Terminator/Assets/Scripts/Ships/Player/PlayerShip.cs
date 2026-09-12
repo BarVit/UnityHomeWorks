@@ -14,8 +14,6 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
     [SerializeField] private Collider2D _bodyCollider;
     [SerializeField] private SpriteRenderer _shipSprite;
     [SerializeField] private ExplosionAnimation _explosionAnimation;
-    [SerializeField] private AudioSource _audioBumpAsteroid;
-    [SerializeField] private AudioSource _audioBumpEnemy;
 
     private SpawnPool<ExplosionAnimation> _explosionPool;
     private PlayerShooter _playerShooter;
@@ -57,6 +55,8 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
     public float DeathDuration => _explosionAnimation.Duration;
 
     public event Action Died;
+    public event Action AsteroidBumped;
+    public event Action EnemyBumped;
 
     private void OnJumped()
     {
@@ -117,8 +117,8 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         if (_isDead)
             return;
 
-        PushOffAsteroid();
-        _audioBumpAsteroid.Play();
+        PushOff();
+        AsteroidBumped?.Invoke();
     }
 
     public void TakeDamage(EnemyShip enemyShip)
@@ -128,8 +128,8 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         if (_isDead)
             return;
 
-        PushOffAsteroid();
-        _audioBumpEnemy.Play();
+        PushOff();
+        EnemyBumped?.Invoke();
     }
 
     public void Die()
@@ -167,7 +167,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         Die();
     }
 
-    private void PushOffAsteroid()
+    private void PushOff()
     {
         _playerMover.Push();
     }
