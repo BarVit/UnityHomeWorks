@@ -50,6 +50,12 @@ public class PlayerMover : MonoBehaviour
         _rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
     }
 
+    public void Resume()
+    {
+        _rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+        _rigidbody2D.linearVelocity = Vector2.zero;
+    }
+
     public void ReturnToStart()
     {
         transform.position = _startPosition;

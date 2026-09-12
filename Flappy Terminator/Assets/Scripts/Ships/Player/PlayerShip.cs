@@ -61,6 +61,15 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         }
     }
 
+    public void EnableControl()
+    {
+        _isControlEnabled = true;
+        _playerMover.enabled = true;
+        _playerMover.Resume();
+        _ammoHitHandler.enabled = true;
+        _playerCollisionHandler.enabled = true;
+    }
+
     public void DisableControl()
     {
         _isControlEnabled = false;

@@ -1342,7 +1342,7 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 0, y: 0, z: 0}
+    m_Position: {x: 5, y: 0, z: 0}
     m_Rotation: {x: 0, y: -90, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
@@ -5446,7 +5446,7 @@ Transform:
   m_GameObject: {fileID: 262472786}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.4, y: -2.68, z: 0}
+  m_LocalPosition: {x: 2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5464,10 +5464,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d7ffe4b91d4b43b834d4362f3cef6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _duration: 0.5
+  _duration: 0.3
   _startScale: 0.2
-  _endScale: 3.5
-  _startStrength: 3
+  _endScale: 3
+  _startStrength: 5
   _scaleCurve:
     serializedVersion: 2
     m_Curve:
@@ -5711,9 +5711,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d7ffe4b91d4b43b834d4362f3cef6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _duration: 0.85
+  _duration: 0.5
   _startScale: 0.5
-  _endScale: 18
+  _endScale: 10
   _startStrength: 0.16
   _scaleCurve:
     serializedVersion: 2
@@ -6329,6 +6329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dc3cd80e0fa94167b8567cab24a9802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerShip: {fileID: 92249140}
   _enemySpawner: {fileID: 1078558388}
   _asteroidSpawner: {fileID: 2000842824}
   _warpJump: {fileID: 940566751}
@@ -6447,7 +6448,7 @@ MonoBehaviour:
   _stretchDuration: 0.4
   _stretchFactor: 2
   _dashDuration: 0.15
-  _dashDistance: 3
+  _dashDistance: 4
   _tailDuration: 1
 --- !u!1 &947787913
 GameObject:
@@ -6541,7 +6542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 748883696485598149, guid: 760552f2b84714314ac77afd244877e5, type: 3}
-  _waveSize: 3
+  _waveSize: 1
   _spawnDelay: 3
   _spawnPositionX: 9
   _minSpawnPositionY: -3
