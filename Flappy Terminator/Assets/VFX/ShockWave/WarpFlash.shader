@@ -5,7 +5,7 @@ Shader "FlappyTerminator/WarpFlash"
         _Strength ("Strength", Range(0, 4)) = 2
         _CoreColor ("Core Color", Color) = (1, 1, 1, 1)
         _EdgeColor ("Edge Color", Color) = (0.35, 0.65, 1, 1)
-        _CoreSize ("Core Size", Range(0.01, 0.5)) = 0.12
+        _CoreSize ("White Core Radius", Range(0.01, 0.5)) = 0.375
     }
 
     SubShader
@@ -65,7 +65,7 @@ Shader "FlappyTerminator/WarpFlash"
                 float distance = length(input.uv - 0.5);
                 float falloff = saturate(1.0 - distance * 2.0);
                 float glow = falloff * falloff;
-                float core = 1.0 - smoothstep(0.0, _CoreSize, distance);
+                float core = 1.0 - smoothstep(_CoreSize, 0.5, distance);
 
                 half3 color = lerp(_EdgeColor.rgb, _CoreColor.rgb, core);
 

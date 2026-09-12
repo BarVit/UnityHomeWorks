@@ -47,10 +47,8 @@ public class WarpJump : MonoBehaviour
 
         yield return Stretch(ship);
 
-        Vector3 enginePosition = ship.position + (Vector3)_engineOffset;
-
-        _flash.Play(enginePosition);
-        _shockWave.Play(enginePosition);
+        _flash.Play(ship.position + (Vector3)_engineOffset);
+        _shockWave.Play(GetDashTarget(ship));
 
         yield return Dash(ship);
 
@@ -87,10 +85,15 @@ public class WarpJump : MonoBehaviour
         }
     }
 
+    private Vector3 GetDashTarget(Transform ship)
+    {
+        return ship.position + ship.right * _dashDistance;
+    }
+
     private IEnumerator Dash(Transform ship)
     {
         Vector3 startPosition = ship.position;
-        Vector3 targetPosition = startPosition + ship.right * _dashDistance;
+        Vector3 targetPosition = GetDashTarget(ship);
 
         foreach (float progress in Progress(_dashDuration))
         {

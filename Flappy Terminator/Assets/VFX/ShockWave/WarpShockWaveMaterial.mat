@@ -28,7 +28,7 @@ Material:
     - _Strength: 0.16
     - _RingRadius: 0.38
     - _RingWidth: 0.16
-    - _Glow: 0.03
+    - _Glow: 0
     m_Colors:
     - _GlowColor: {r: 0.6, g: 0.85, b: 1, a: 1}
   m_BuildTextureStacks: []

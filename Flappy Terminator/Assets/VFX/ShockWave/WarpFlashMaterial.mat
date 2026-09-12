@@ -26,7 +26,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Strength: 2.2
-    - _CoreSize: 0.12
+    - _CoreSize: 0.375
     m_Colors:
     - _CoreColor: {r: 1, g: 1, b: 1, a: 1}
     - _EdgeColor: {r: 0.35, g: 0.65, b: 1, a: 1}
