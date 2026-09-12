@@ -65,7 +65,7 @@ public class Game : MonoBehaviour
 
     private void TogglePause()
     {
-        if (_isRunning == false || _isLevelOver)
+        if (_isRunning == false)
             return;
 
         if (_isPaused)
@@ -104,6 +104,7 @@ public class Game : MonoBehaviour
     private void StartLevel()
     {
         StopGameOverCountdown();
+        _warpJump.Stop();
 
         _isLevelOver = false;
         _isRunning = true;
@@ -142,7 +143,6 @@ public class Game : MonoBehaviour
             return;
 
         _isLevelOver = true;
-        _isRunning = false;
         _enemySpawner.StopSpawn();
         _asteroidSpawner.StopSpawn();
         _gameOverCountdown = StartCoroutine(ShowGameOver());
@@ -164,6 +164,7 @@ public class Game : MonoBehaviour
         yield return new WaitForSeconds(_gameOverDelay);
 
         _gameOverCountdown = null;
+        _isRunning = false;
         _gameOverScreen.Show(_killCounter.Kills);
     }
 

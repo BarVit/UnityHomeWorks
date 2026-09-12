@@ -32,6 +32,17 @@ public class WarpJump : MonoBehaviour
         _jumping = StartCoroutine(Jump());
     }
 
+    public void Stop()
+    {
+        if (_jumping != null)
+        {
+            StopCoroutine(_jumping);
+            _jumping = null;
+        }
+
+        StopWarpEffect();
+    }
+
     private IEnumerator Jump()
     {
         Transform ship = _playerShip.transform;
