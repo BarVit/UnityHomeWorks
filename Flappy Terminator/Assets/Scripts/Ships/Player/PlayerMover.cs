@@ -44,21 +44,28 @@ public class PlayerMover : MonoBehaviour
 
     public void Stop()
     {
-        _rigidbody2D.linearVelocity = Vector2.zero;
+        StopMotion();
         _rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
     }
 
     public void Resume()
     {
         _rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
-        _rigidbody2D.linearVelocity = Vector2.zero;
+        StopMotion();
     }
 
     public void ReturnToStart()
     {
-        transform.position = _startPosition;
-        transform.rotation = Quaternion.identity;
+        StopMotion();
+        _rigidbody2D.rotation = 0f;
+        _rigidbody2D.position = _startPosition;
+        transform.SetPositionAndRotation(_startPosition, Quaternion.identity);
+    }
+
+    private void StopMotion()
+    {
         _rigidbody2D.linearVelocity = Vector2.zero;
+        _rigidbody2D.angularVelocity = 0f;
     }
 
     public void Push()
