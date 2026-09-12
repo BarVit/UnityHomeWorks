@@ -128,6 +128,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         _shipSprite.enabled = true;
         transform.localScale = _startScale;
         _playerShooter.ReleaseAll();
+        _explosionPool.ReleaseAll();
         _health.Init();
         ReturnToStart();
         EnableControl();

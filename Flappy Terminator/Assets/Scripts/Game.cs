@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Game : MonoBehaviour
@@ -8,7 +9,9 @@ public class Game : MonoBehaviour
     [SerializeField] private KillCounter _killCounter;
     [SerializeField] private WarpJump _warpJump;
     [SerializeField] private GameOverScreen _gameOverScreen;
+    [SerializeField] private float _gameOverDelay = 2f;
 
+    private Coroutine _gameOverCountdown;
     private bool _isLevelOver;
 
     private void OnEnable()
@@ -32,6 +35,7 @@ public class Game : MonoBehaviour
 
     public void StartLevel()
     {
+        StopGameOverCountdown();
         _isLevelOver = false;
         _gameOverScreen.Hide();
         _playerShip.EnableControl();
@@ -39,6 +43,7 @@ public class Game : MonoBehaviour
 
     public void RestartLevel()
     {
+        StopGameOverCountdown();
         _isLevelOver = false;
         _gameOverScreen.Hide();
         _killCounter.Restart();
@@ -55,7 +60,24 @@ public class Game : MonoBehaviour
         _isLevelOver = true;
         _enemySpawner.StopSpawn();
         _asteroidSpawner.StopSpawn();
+        _gameOverCountdown = StartCoroutine(ShowGameOver());
+    }
+
+    private IEnumerator ShowGameOver()
+    {
+        yield return new WaitForSeconds(_gameOverDelay);
+
+        _gameOverCountdown = null;
         _gameOverScreen.Show(_killCounter.Kills);
+    }
+
+    private void StopGameOverCountdown()
+    {
+        if (_gameOverCountdown == null)
+            return;
+
+        StopCoroutine(_gameOverCountdown);
+        _gameOverCountdown = null;
     }
 
     private void WinLevel()
