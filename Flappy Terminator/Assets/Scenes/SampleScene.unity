@@ -6736,6 +6736,7 @@ MonoBehaviour:
   _killCounter: {fileID: 1078558389}
   _warpJump: {fileID: 940566751}
   _gameOverScreen: {fileID: 573500980}
+  _gameOverDelay: 10
 --- !u!33 &834881705
 MeshFilter:
   m_ObjectHideFlags: 0

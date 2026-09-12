@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMover))]
 public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
 {
-    private const float ExplosionLifetime = 2f;
     private const int PoolCapacity = 1;
     private const int PoolMaxSize = 1;
 
@@ -13,6 +12,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
     [SerializeField] private PlayerCollisionHandler _playerCollisionHandler;
     [SerializeField] private Collider2D _bodyCollider;
     [SerializeField] private SpriteRenderer _shipSprite;
+    [SerializeField] private float _explosionLifetime = 10f;
     [SerializeField] private ExplosionAnimation _explosionAnimation;
     [SerializeField] private AudioSource _audioBumpAsteroid;
     [SerializeField] private AudioSource _audioBumpEnemy;
@@ -122,7 +122,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
 
         ExplosionAnimation explosion = _explosionPool.Get(transform.position);
 
-        explosion.Play(ExplosionLifetime);
+        explosion.Play(_explosionLifetime);
 
         DisableControl();
         _shipSprite.enabled = false;
