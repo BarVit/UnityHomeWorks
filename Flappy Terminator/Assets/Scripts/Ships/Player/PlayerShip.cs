@@ -34,9 +34,9 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
 
     private void OnEnable()
     {
-        _ammoHitHandler.HitDetected += TakeDamage;
-        _playerCollisionHandler.AsteroidBumped += TakeDamage;
-        _playerCollisionHandler.EnemyBumped += TakeDamage;
+        _ammoHitHandler.HitDetected += OnAmmoHit;
+        _playerCollisionHandler.AsteroidBumped += OnAsteroidBumped;
+        _playerCollisionHandler.EnemyBumped += OnEnemyBumped;
         _health.Died += Die;
         _input.Jumped += OnJumped;
         _input.Shot += OnShot;
@@ -44,9 +44,9 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
 
     private void OnDisable()
     {
-        _ammoHitHandler.HitDetected -= TakeDamage;
-        _playerCollisionHandler.AsteroidBumped -= TakeDamage;
-        _playerCollisionHandler.EnemyBumped -= TakeDamage;
+        _ammoHitHandler.HitDetected -= OnAmmoHit;
+        _playerCollisionHandler.AsteroidBumped -= OnAsteroidBumped;
+        _playerCollisionHandler.EnemyBumped -= OnEnemyBumped;
         _health.Died -= Die;
         _input.Jumped -= OnJumped;
         _input.Shot -= OnShot;
@@ -105,14 +105,19 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         _playerMover.ReturnToStart();
     }
 
-    public void TakeDamage(Ammo ammo)
+    public void TakeDamage(int damage)
     {
-        _health.TakeDamage(ammo.Damage);
+        _health.TakeDamage(damage);
     }
 
-    public void TakeDamage(Asteroid asteroid)
+    private void OnAmmoHit(Ammo ammo)
     {
-        _health.TakeDamage(asteroid.Damage);
+        TakeDamage(ammo.Damage);
+    }
+
+    private void OnAsteroidBumped(Asteroid asteroid)
+    {
+        TakeDamage(asteroid.Damage);
 
         if (_isDead)
             return;
@@ -121,9 +126,9 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         AsteroidBumped?.Invoke();
     }
 
-    public void TakeDamage(EnemyShip enemyShip)
+    private void OnEnemyBumped(EnemyShip enemyShip)
     {
-        _health.TakeDamage(enemyShip.BodyDamage);
+        TakeDamage(enemyShip.BodyDamage);
 
         if (_isDead)
             return;

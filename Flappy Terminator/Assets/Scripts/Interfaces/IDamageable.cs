@@ -1,5 +1,5 @@
 public interface IDamageable
 {
-    public void TakeDamage(Ammo ammo);
+    public void TakeDamage(int damage);
     public void Die();
 }

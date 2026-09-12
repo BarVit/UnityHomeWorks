@@ -33,13 +33,13 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
     private void OnEnable()
     {
-        _ammoHitHandler.HitDetected += TakeDamage;
+        _ammoHitHandler.HitDetected += OnAmmoHit;
         _health.Died += Die;
     }
 
     private void OnDisable()
     {
-        _ammoHitHandler.HitDetected -= TakeDamage;
+        _ammoHitHandler.HitDetected -= OnAmmoHit;
         _health.Died -= Die;
     }
 
@@ -74,9 +74,14 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
         Released?.Invoke(this);
     }
 
-    public void TakeDamage(Ammo ammo)
+    public void TakeDamage(int damage)
     {
-        _health.TakeDamage(ammo.Damage);
+        _health.TakeDamage(damage);
+    }
+
+    private void OnAmmoHit(Ammo ammo)
+    {
+        TakeDamage(ammo.Damage);
     }
 
     public void Die()
