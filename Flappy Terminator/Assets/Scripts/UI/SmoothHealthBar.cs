@@ -1,12 +1,11 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SmoothHealthBar : MonoBehaviour
 {
     [SerializeField] private Health _health;
-    [SerializeField] private Image _healthFill;
-    [SerializeField] private Image _damageFill;
+    [SerializeField] private RectTransform _healthFill;
+    [SerializeField] private RectTransform _damageFill;
     [SerializeField] private float _healthFallTime = 0.15f;
     [SerializeField] private float _damageHoldTime = 1f;
     [SerializeField] private float _damageFallTime = 0.35f;
@@ -38,9 +37,9 @@ public class SmoothHealthBar : MonoBehaviour
 
         StopFalling(ref _damageFalling);
 
-        if (target >= _damageFill.fillAmount)
+        if (target >= GetPart(_damageFill))
         {
-            _damageFill.fillAmount = target;
+            SetPart(_damageFill, target);
 
             return;
         }
@@ -53,13 +52,26 @@ public class SmoothHealthBar : MonoBehaviour
         return _health.MaxValue > 0 ? (float)value / _health.MaxValue : 0f;
     }
 
+    private float GetPart(RectTransform fill)
+    {
+        return fill.anchorMax.x;
+    }
+
+    private void SetPart(RectTransform fill, float part)
+    {
+        Vector2 anchorMax = fill.anchorMax;
+
+        anchorMax.x = part;
+        fill.anchorMax = anchorMax;
+    }
+
     private void SetInstantly(float part)
     {
         StopFalling(ref _healthFalling);
         StopFalling(ref _damageFalling);
 
-        _healthFill.fillAmount = part;
-        _damageFill.fillAmount = part;
+        SetPart(_healthFill, part);
+        SetPart(_damageFill, part);
     }
 
     private void StopFalling(ref Coroutine falling)
@@ -71,20 +83,20 @@ public class SmoothHealthBar : MonoBehaviour
         falling = null;
     }
 
-    private IEnumerator Fall(Image fill, float target, float time, float delay)
+    private IEnumerator Fall(RectTransform fill, float target, float time, float delay)
     {
         if (delay > 0f)
             yield return new WaitForSeconds(delay);
 
-        float start = fill.fillAmount;
+        float start = GetPart(fill);
 
         for (float elapsed = 0f; elapsed < time; elapsed += Time.deltaTime)
         {
-            fill.fillAmount = Mathf.Lerp(start, target, elapsed / time);
+            SetPart(fill, Mathf.Lerp(start, target, elapsed / time));
 
             yield return null;
         }
 
-        fill.fillAmount = target;
+        SetPart(fill, target);
     }
 }
