@@ -43,6 +43,7 @@ public class Game : MonoBehaviour
     private void Start()
     {
         Time.timeScale = NormalTimeScale;
+        AudioListener.pause = false;
 
         _playerShip.DisableControl();
         _pauseScreen.Hide();
@@ -119,6 +120,7 @@ public class Game : MonoBehaviour
     {
         _isPaused = true;
         Time.timeScale = PausedTimeScale;
+        AudioListener.pause = true;
         _playerShip.LockInput();
         _pauseScreen.Show();
     }
@@ -127,6 +129,7 @@ public class Game : MonoBehaviour
     {
         _isPaused = false;
         Time.timeScale = NormalTimeScale;
+        AudioListener.pause = false;
         _playerShip.UnlockInput();
         _pauseScreen.Hide();
     }
