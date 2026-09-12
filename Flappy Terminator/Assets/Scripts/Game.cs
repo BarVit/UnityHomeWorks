@@ -9,6 +9,8 @@ public class Game : MonoBehaviour
     [SerializeField] private WarpJump _warpJump;
     [SerializeField] private GameOverScreen _gameOverScreen;
 
+    private bool _isLevelOver;
+
     private void OnEnable()
     {
         _enemySpawner.WaveCleared += WinLevel;
@@ -30,12 +32,14 @@ public class Game : MonoBehaviour
 
     public void StartLevel()
     {
+        _isLevelOver = false;
         _gameOverScreen.Hide();
         _playerShip.EnableControl();
     }
 
     public void RestartLevel()
     {
+        _isLevelOver = false;
         _gameOverScreen.Hide();
         _killCounter.Restart();
         _enemySpawner.Restart();
@@ -45,6 +49,10 @@ public class Game : MonoBehaviour
 
     private void LoseLevel()
     {
+        if (_isLevelOver)
+            return;
+
+        _isLevelOver = true;
         _enemySpawner.StopSpawn();
         _asteroidSpawner.StopSpawn();
         _gameOverScreen.Show(_killCounter.Kills);
@@ -52,6 +60,10 @@ public class Game : MonoBehaviour
 
     private void WinLevel()
     {
+        if (_isLevelOver)
+            return;
+
+        _isLevelOver = true;
         _enemySpawner.StopSpawn();
         _asteroidSpawner.StopSpawn();
         _warpJump.Play();
