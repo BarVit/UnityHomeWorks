@@ -8,6 +8,9 @@ public class WarpJump : MonoBehaviour
     [SerializeField] private PlayerShip _playerShip;
     [SerializeField] private SpriteRenderer _shipSprite;
     [SerializeField] private ParticleSystem _warpEffect;
+    [SerializeField] private ExpandingFade _shockWave;
+    [SerializeField] private ExpandingFade _flash;
+    [SerializeField] private Vector2 _engineOffset = new(-0.6f, 0f);
     [SerializeField] private Vector2 _warpOffset = new(3.5f, 0f);
     [SerializeField] private float _alignDuration = 0.6f;
     [SerializeField, Range(0f, 1f)] private float _stretchAtWarpProgress = 0.75f;
@@ -43,6 +46,11 @@ public class WarpJump : MonoBehaviour
         yield return new WaitForSeconds(_warpEffect.main.duration * _stretchAtWarpProgress);
 
         yield return Stretch(ship);
+
+        Vector3 enginePosition = ship.position + (Vector3)_engineOffset;
+
+        _flash.Play(enginePosition);
+        _shockWave.Play(enginePosition);
 
         yield return Dash(ship);
 

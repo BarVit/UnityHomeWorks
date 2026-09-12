@@ -41,3 +41,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Distortion
+    uniqueID: 1857295044
+    locked: 0
