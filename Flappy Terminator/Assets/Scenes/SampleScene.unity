@@ -7024,6 +7024,7 @@ GameObject:
   m_Component:
   - component: {fileID: 747055171}
   - component: {fileID: 747055170}
+  - component: {fileID: 715460635}
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
@@ -10545,6 +10546,18 @@ MonoBehaviour:
   _enemyBump:
     _clip: {fileID: 8300000, guid: cdb9dfaad6af3419b972c131cbc31ba9, type: 3}
     _volume: 1
+--- !u!114 &715460635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747055169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4adedd7671fd4e0fa222d9343a368669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
