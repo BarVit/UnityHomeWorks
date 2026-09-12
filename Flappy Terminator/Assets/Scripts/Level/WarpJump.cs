@@ -18,7 +18,6 @@ public class WarpJump : MonoBehaviour
     [SerializeField] private float _stretchFactor = 2f;
     [SerializeField] private float _dashDuration = 0.15f;
     [SerializeField] private float _dashDistance = 16f;
-    [SerializeField] private float _tailDuration = 1f;
 
     private Coroutine _jumping;
 
@@ -66,7 +65,9 @@ public class WarpJump : MonoBehaviour
         _shipSprite.enabled = false;
         _shockWave.Play(ship.position);
 
-        yield return new WaitForSeconds(_tailDuration);
+        _warpEffect.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+
+        yield return new WaitWhile(() => _warpEffect.IsAlive(true));
 
         StopWarpEffect();
 

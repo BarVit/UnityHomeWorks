@@ -7688,7 +7688,6 @@ MonoBehaviour:
   _stretchFactor: 2
   _dashDuration: 0.15
   _dashDistance: 4
-  _tailDuration: 1
 --- !u!1 &947787913
 GameObject:
   m_ObjectHideFlags: 0
