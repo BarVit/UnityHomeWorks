@@ -16,6 +16,7 @@ public class Game : MonoBehaviour
     [SerializeField] private WarpJump _warpJump;
     [SerializeField] private StartScreen _startScreen;
     [SerializeField] private PauseScreen _pauseScreen;
+    [SerializeField] private SettingsScreen _settingsScreen;
     [SerializeField] private GameOverScreen _gameOverScreen;
     [SerializeField] private int _firstWaveSize = 6;
     [SerializeField] private int _waveSizeGrowth = 3;
@@ -25,6 +26,7 @@ public class Game : MonoBehaviour
     private bool _isLevelOver;
     private bool _isRunning;
     private bool _isPaused;
+    private bool _isSettingsFromPause;
 
     public event Action<int> LevelChanged;
 
@@ -37,6 +39,9 @@ public class Game : MonoBehaviour
         _pauseScreen.ResumeRequested += Resume;
         _pauseScreen.RestartRequested += RestartFromPause;
         _gameOverScreen.RestartRequested += RestartGame;
+        _startScreen.SettingsRequested += OpenSettingsFromStart;
+        _pauseScreen.SettingsRequested += OpenSettingsFromPause;
+        _settingsScreen.CloseRequested += CloseSettings;
         _input.PauseToggled += TogglePause;
     }
 
@@ -48,6 +53,7 @@ public class Game : MonoBehaviour
         _playerShip.DisableControl();
         _pauseScreen.Hide();
         _gameOverScreen.Hide();
+        _settingsScreen.Hide();
         _startScreen.Show();
     }
 
@@ -60,7 +66,34 @@ public class Game : MonoBehaviour
         _pauseScreen.ResumeRequested -= Resume;
         _pauseScreen.RestartRequested -= RestartFromPause;
         _gameOverScreen.RestartRequested -= RestartGame;
+        _startScreen.SettingsRequested -= OpenSettingsFromStart;
+        _pauseScreen.SettingsRequested -= OpenSettingsFromPause;
+        _settingsScreen.CloseRequested -= CloseSettings;
         _input.PauseToggled -= TogglePause;
+    }
+
+    private void OpenSettingsFromStart()
+    {
+        _isSettingsFromPause = false;
+        _startScreen.Hide();
+        _settingsScreen.Show();
+    }
+
+    private void OpenSettingsFromPause()
+    {
+        _isSettingsFromPause = true;
+        _pauseScreen.Hide();
+        _settingsScreen.Show();
+    }
+
+    private void CloseSettings()
+    {
+        _settingsScreen.Hide();
+
+        if (_isSettingsFromPause)
+            _pauseScreen.Show();
+        else
+            _startScreen.Show();
     }
 
     private void TogglePause()

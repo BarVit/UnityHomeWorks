@@ -13,9 +13,9 @@ public class VolumeSettings : MonoBehaviour
     private const int DecibelsPerDecade = 20;
 
     [SerializeField] private AudioMixer _mixer;
-    [SerializeField, Range(MinPercent, MaxPercent)] private float _master = 40f;
-    [SerializeField, Range(MinPercent, MaxPercent)] private float _music = 40f;
-    [SerializeField, Range(MinPercent, MaxPercent)] private float _effects = 40f;
+    [SerializeField, Range(MinPercent, MaxPercent)] private float _master = 100f;
+    [SerializeField, Range(MinPercent, MaxPercent)] private float _music = 100f;
+    [SerializeField, Range(MinPercent, MaxPercent)] private float _effects = 100f;
 
     public float Master => _master;
     public float Music => _music;
