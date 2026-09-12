@@ -6,6 +6,7 @@ public class ExplosionAnimation : MonoBehaviour, IPoolable
 {
     [SerializeField] private AudioSource _audioSource;
 
+    private Camera _camera;
     private ParticleSystem[] _particleSystems;
     private Animator _animator;
     private Coroutine _lifetimeCountdown;
@@ -14,6 +15,7 @@ public class ExplosionAnimation : MonoBehaviour, IPoolable
 
     private void Awake()
     {
+        _camera = Camera.main;
         _particleSystems = GetComponentsInChildren<ParticleSystem>(true);
         _animator = GetComponentInChildren<Animator>(true);
     }
@@ -45,7 +47,8 @@ public class ExplosionAnimation : MonoBehaviour, IPoolable
         foreach (ParticleSystem particleSystem in _particleSystems)
             particleSystem.Play(true);
 
-        _audioSource.Play();
+        if (ScreenArea.Contains(_camera, transform.position))
+            _audioSource.Play();
 
         _lifetimeCountdown = StartCoroutine(CountLifetime(lifetime));
     }

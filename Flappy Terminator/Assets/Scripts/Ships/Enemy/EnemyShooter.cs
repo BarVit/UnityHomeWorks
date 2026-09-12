@@ -8,11 +8,17 @@ public class EnemyShooter : MonoBehaviour
     [SerializeField] private float _shootDelay;
     [SerializeField] private AudioSource _shotAudioSource;
 
+    private Camera _camera;
     private SpawnPool<Ammo> _ammoPool;
     private SpawnPool<ExplosionAnimation> _hitEffectPool;
     private Coroutine _shooting;
 
     public Ammo AmmoPrefab => _prefab;
+
+    private void Awake()
+    {
+        _camera = Camera.main;
+    }
 
     public void Init(SpawnPool<Ammo> ammoPool, SpawnPool<ExplosionAnimation> hitEffectPool)
     {
@@ -45,7 +51,8 @@ public class EnemyShooter : MonoBehaviour
             Ammo ammo = _ammoPool.Get(_shootPoint.position, _shootPoint.rotation);
 
             ammo.Init(_hitEffectPool);
-            _shotAudioSource.PlayOneShot(ammo.ShotSound.Clip, ammo.ShotSound.Volume);
+            if (ScreenArea.Contains(_camera, _shootPoint.position))
+                _shotAudioSource.PlayOneShot(ammo.ShotSound.Clip, ammo.ShotSound.Volume);
             ammo.Fly();
 
             yield return shootDelay;
