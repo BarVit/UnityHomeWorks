@@ -21,18 +21,13 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (damage >= 0)
-        {
-            Value = Mathf.Clamp(Value - damage, 0, Value);
-            Changed?.Invoke(Value);
-        }
+        if (damage <= 0 || Value == 0)
+            return;
 
-        if (Value <= 0)
-            Die();
-    }
+        Value = Mathf.Clamp(Value - damage, 0, MaxValue);
+        Changed?.Invoke(Value);
 
-    public void Die()
-    {
-        Died?.Invoke();
+        if (Value == 0)
+            Died?.Invoke();
     }
 }

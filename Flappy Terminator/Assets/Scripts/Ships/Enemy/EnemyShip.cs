@@ -42,9 +42,13 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
         _health.Died -= Die;
     }
 
-    public void Init(SpawnPool<ExplosionAnimation> explosionPool)
+    public void Init(
+        SpawnPool<ExplosionAnimation> explosionPool,
+        SpawnPool<Ammo> ammoPool,
+        SpawnPool<ExplosionAnimation> hitEffectPool)
     {
         _explosionPool = explosionPool;
+        _shooter.Init(ammoPool, hitEffectPool);
     }
 
     public void OnSpawn()

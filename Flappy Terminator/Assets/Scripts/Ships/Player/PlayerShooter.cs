@@ -6,6 +6,7 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private Transform _shootPoint;
     [SerializeField] private Ammo _prefab;
     [SerializeField] private float _shootRate;
+    [SerializeField] private AudioSource _shotAudioSource;
 
     private SpawnPool<Ammo> _ammoPool;
     private SpawnPool<ExplosionAnimation> _hitEffectPool;
@@ -26,7 +27,7 @@ public class PlayerShooter : MonoBehaviour
         Ammo ammo = _ammoPool.Get(_shootPoint.position, _shootPoint.rotation);
 
         ammo.Init(_hitEffectPool);
-        ammo.PlayShotSound();
+        _shotAudioSource.PlayOneShot(ammo.ShotSound);
         ammo.Fly();
 
         _isOnCooldown = true;

@@ -2,14 +2,14 @@ using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-[RequireComponent(typeof(AudioSource), typeof(BulletMover))]
+[RequireComponent(typeof(BulletMover))]
 public class Ammo : MonoBehaviour, IPoolable, IRemoveable
 {
     private const float HitEffectLifetime = 0.5f;
 
     [FormerlySerializedAs("_prefab")]
     [SerializeField] private ExplosionAnimation _hitEffectPrefab;
-    [SerializeField] private AudioSource _audioShot;
+    [SerializeField] private AudioClip _shotSound;
 
     private BulletMover _bulletMover;
     private SpawnPool<ExplosionAnimation> _hitEffectPool;
@@ -17,6 +17,7 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
     [field: SerializeField] public int Damage { get; private set; }
 
     public ExplosionAnimation HitEffectPrefab => _hitEffectPrefab;
+    public AudioClip ShotSound => _shotSound;
 
     public event Action<IPoolable> Released;
 
@@ -47,11 +48,6 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
     public void Fly()
     {
         _bulletMover.Fly();
-    }
-
-    public void PlayShotSound()
-    {
-        _audioShot.Play();
     }
 
     public void Hit(Vector2 point)
