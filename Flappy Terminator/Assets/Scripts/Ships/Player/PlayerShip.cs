@@ -94,6 +94,10 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
     public void TakeDamage(Asteroid asteroid)
     {
         _health.TakeDamage(asteroid.Damage);
+
+        if (_isDead)
+            return;
+
         PushOffAsteroid();
         _audioBumpAsteroid.Play();
     }
@@ -101,6 +105,10 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
     public void TakeDamage(EnemyShip enemyShip)
     {
         _health.TakeDamage(enemyShip.BodyDamage);
+
+        if (_isDead)
+            return;
+
         PushOffAsteroid();
         _audioBumpEnemy.Play();
     }
@@ -131,8 +139,8 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         _explosionPool.ReleaseAll();
         _playerCollisionHandler.ReleaseAll();
         _health.Init();
-        ReturnToStart();
         EnableControl();
+        ReturnToStart();
     }
 
     public void Remove()
