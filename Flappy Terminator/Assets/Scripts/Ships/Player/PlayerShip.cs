@@ -73,9 +73,19 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         _playerShooter.Shoot();
     }
 
-    public void EnableControl()
+    public void UnlockInput()
     {
         _isControlEnabled = true;
+    }
+
+    public void LockInput()
+    {
+        _isControlEnabled = false;
+    }
+
+    public void EnableControl()
+    {
+        UnlockInput();
         _playerMover.enabled = true;
         _playerMover.Resume();
         _bodyCollider.enabled = true;
@@ -83,7 +93,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
 
     public void DisableControl()
     {
-        _isControlEnabled = false;
+        LockInput();
         _playerMover.Stop();
         _playerMover.enabled = false;
         _bodyCollider.enabled = false;

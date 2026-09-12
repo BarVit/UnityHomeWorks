@@ -119,6 +119,7 @@ public class Game : MonoBehaviour
     {
         _isPaused = true;
         Time.timeScale = PausedTimeScale;
+        _playerShip.LockInput();
         _pauseScreen.Show();
     }
 
@@ -126,6 +127,7 @@ public class Game : MonoBehaviour
     {
         _isPaused = false;
         Time.timeScale = NormalTimeScale;
+        _playerShip.UnlockInput();
         _pauseScreen.Hide();
     }
 
