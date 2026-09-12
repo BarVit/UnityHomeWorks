@@ -1,23 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class AmmoHitHandler : MonoBehaviour
 {
-    [SerializeField] private List<int> _possibleAmmoLayers;
+    [SerializeField] private LayerMask _ammoLayers;
 
     public event Action<Ammo> HitDetected;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out Ammo ammo))
-        {
-            if (_possibleAmmoLayers.Contains(ammo.gameObject.layer))
-            {
-                HitDetected?.Invoke(ammo);
-                ammo.Hit(other.ClosestPoint(transform.position));
-                ammo.Remove();
-            }
-        }
+        if (other.TryGetComponent(out Ammo ammo) == false)
+            return;
+
+        if (Contains(ammo.gameObject.layer) == false)
+            return;
+
+        HitDetected?.Invoke(ammo);
+        ammo.Hit(other.ClosestPoint(transform.position));
+        ammo.Remove();
+    }
+
+    private bool Contains(int layer)
+    {
+        return (_ammoLayers.value & (1 << layer)) != 0;
     }
 }

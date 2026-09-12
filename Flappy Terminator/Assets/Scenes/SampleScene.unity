@@ -5912,7 +5912,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa614011e7f740be990b8fb2c10dfc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _possibleAmmoLayers: 09000000
+  _ammoLayers:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!60 &366751406
 PolygonCollider2D:
   m_ObjectHideFlags: 0

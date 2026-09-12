@@ -24,7 +24,6 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
     private Vector3 _startScale;
     private bool _isControlEnabled = true;
     private bool _isDead;
-    private int _enemyAmmoLayout = 9;
 
     private void Awake()
     {
@@ -87,8 +86,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
 
     public void TakeDamage(Ammo ammo)
     {
-        if(ammo.gameObject.layer == _enemyAmmoLayout)
-            _health.TakeDamage(ammo.Damage);
+        _health.TakeDamage(ammo.Damage);
     }
 
     public void TakeDamage(Asteroid asteroid)
