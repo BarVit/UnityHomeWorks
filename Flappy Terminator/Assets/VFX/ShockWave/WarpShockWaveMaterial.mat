@@ -25,10 +25,10 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Strength: 0.05
+    - _Strength: 0.16
     - _RingRadius: 0.38
-    - _RingWidth: 0.12
-    - _Glow: 0.15
+    - _RingWidth: 0.16
+    - _Glow: 0.03
     m_Colors:
     - _GlowColor: {r: 0.6, g: 0.85, b: 1, a: 1}
   m_BuildTextureStacks: []

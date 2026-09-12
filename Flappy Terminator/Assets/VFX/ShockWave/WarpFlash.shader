@@ -2,7 +2,7 @@ Shader "FlappyTerminator/WarpFlash"
 {
     Properties
     {
-        _Strength ("Strength", Range(0, 1)) = 1
+        _Strength ("Strength", Range(0, 4)) = 2
         _CoreColor ("Core Color", Color) = (1, 1, 1, 1)
         _EdgeColor ("Edge Color", Color) = (0.35, 0.65, 1, 1)
         _CoreSize ("Core Size", Range(0.01, 0.5)) = 0.12
