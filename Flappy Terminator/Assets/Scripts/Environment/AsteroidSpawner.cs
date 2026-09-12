@@ -23,12 +23,7 @@ public class AsteroidSpawner : MonoBehaviour
             _pools.Add(new SpawnPool<Asteroid>(prefab));
     }
 
-    private void Start()
-    {
-        _spawning = StartCoroutine(Spawn());
-    }
-
-    public void Restart()
+    public void StartSpawn()
     {
         StopSpawn();
 

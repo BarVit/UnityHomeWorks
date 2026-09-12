@@ -6,7 +6,6 @@ using Random = UnityEngine.Random;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private EnemyShip _prefab;
-    [SerializeField] private int _waveSize = 10;
     [SerializeField] private float _spawnDelay;
     [SerializeField] private float _spawnPositionX = 9f;
     [SerializeField] private float _minSpawnPositionY = -3f;
@@ -18,6 +17,7 @@ public class EnemySpawner : MonoBehaviour
     private SpawnPool<Ammo> _ammoPool;
     private SpawnPool<ExplosionAnimation> _hitEffectPool;
     private Coroutine _spawning;
+    private int _waveSize;
     private int _retiredCount;
     private bool _isRestarting;
 
@@ -35,12 +35,7 @@ public class EnemySpawner : MonoBehaviour
         _pool = new SpawnPool<EnemyShip>(_prefab, created: OnEnemyCreated);
     }
 
-    private void Start()
-    {
-        _spawning = StartCoroutine(Spawn());
-    }
-
-    public void Restart()
+    public void StartWave(int waveSize)
     {
         StopSpawn();
 
@@ -53,6 +48,7 @@ public class EnemySpawner : MonoBehaviour
         _deadBodyPool.ReleaseAll();
 
         _isRestarting = false;
+        _waveSize = waveSize;
         _retiredCount = 0;
 
         _spawning = StartCoroutine(Spawn());
