@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Health), typeof(EnemyMover), typeof(EnemyShooter))]
 public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 {
-    private const float ExplosionLifetime = 0.5f;
+    private const float ExplosionLifetime = 1f;
 
     [SerializeField] private AmmoHitHandler _ammoHitHandler;
     [SerializeField] private ExplosionAnimation _explosion;
