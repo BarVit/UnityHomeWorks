@@ -129,6 +129,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         transform.localScale = _startScale;
         _playerShooter.ReleaseAll();
         _explosionPool.ReleaseAll();
+        _playerCollisionHandler.ReleaseAll();
         _health.Init();
         ReturnToStart();
         EnableControl();

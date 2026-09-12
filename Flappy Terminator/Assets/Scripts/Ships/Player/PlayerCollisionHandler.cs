@@ -3,14 +3,30 @@ using UnityEngine;
 
 public class PlayerCollisionHandler : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem _bumpParticleSystem;
+    private const float AsteroidBumpGravityFromAbove = -2f;
+    private const float AsteroidBumpGravityFromBelow = 4f;
+    private const float EnemyBumpGravity = 1f;
+
+    [SerializeField] private BumpEffect _bumpPrefab;
+
+    private SpawnPool<BumpEffect> _bumpPool;
 
     public event Action<Asteroid> AsteroidBumped;
     public event Action<EnemyShip> EnemyBumped;
 
+    private void Awake()
+    {
+        _bumpPool = new SpawnPool<BumpEffect>(_bumpPrefab);
+    }
+
     private void OnValidate()
     {
         GetComponent<Collider2D>().isTrigger = true;
+    }
+
+    public void ReleaseAll()
+    {
+        _bumpPool.ReleaseAll();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -18,25 +34,22 @@ public class PlayerCollisionHandler : MonoBehaviour
         if (other.TryGetComponent(out Asteroid asteroid))
         {
             AsteroidBumped?.Invoke(asteroid);
-            var bump = Instantiate(_bumpParticleSystem, other.ClosestPoint(transform.position), Quaternion.identity);
-            var main = bump.main;
 
-            if (transform.position.y > 0)
-                main.gravityModifier = -2;
-            else
-                main.gravityModifier = 4;
-            //проиграть звук удара об астероид
-
+            PlayBump(other, transform.position.y > 0
+                ? AsteroidBumpGravityFromAbove
+                : AsteroidBumpGravityFromBelow);
         }
 
         if (other.TryGetComponent(out EnemyCollision enemyCollision))
         {
             EnemyBumped?.Invoke(enemyCollision.GetShip());
-            var bump = Instantiate(_bumpParticleSystem, other.ClosestPoint(transform.position), Quaternion.identity);
-            var main = bump.main;
-            main.gravityModifier = 1;
+            PlayBump(other, EnemyBumpGravity);
             enemyCollision.Bump();
-            //проиграть звук удара о врага
         }
+    }
+
+    private void PlayBump(Collider2D other, float gravityModifier)
+    {
+        _bumpPool.Get(other.ClosestPoint(transform.position)).Play(gravityModifier);
     }
 }

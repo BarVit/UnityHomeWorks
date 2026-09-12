@@ -2,38 +2,45 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class EnemyDeadBody : MonoBehaviour, IPoolable
+[RequireComponent(typeof(ParticleSystem))]
+public class BumpEffect : MonoBehaviour, IPoolable
 {
-    [SerializeField] private float _lifetime = 0.4f;
+    [SerializeField] private float _lifetime = 1.5f;
 
-    private Animator _animator;
+    private ParticleSystem _particleSystem;
     private Coroutine _lifetimeCountdown;
 
     public event Action<IPoolable> Released;
 
     private void Awake()
     {
-        _animator = GetComponentInChildren<Animator>(true);
+        _particleSystem = GetComponent<ParticleSystem>();
     }
 
     public void OnSpawn()
     {
+        StopParticles();
     }
 
     public void OnDespawn()
     {
         StopCountdown();
+        StopParticles();
     }
 
-    public void End()
+    public void Play(float gravityModifier)
     {
-        if (_animator != null)
-        {
-            _animator.Rebind();
-            _animator.Update(0f);
-        }
+        ParticleSystem.MainModule main = _particleSystem.main;
 
+        main.gravityModifier = gravityModifier;
+
+        _particleSystem.Play(true);
         _lifetimeCountdown = StartCoroutine(CountLifetime());
+    }
+
+    private void StopParticles()
+    {
+        _particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
     }
 
     private void StopCountdown()

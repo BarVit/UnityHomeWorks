@@ -14,6 +14,7 @@ public class EnemySpawner : MonoBehaviour
 
     private SpawnPool<EnemyShip> _pool;
     private SpawnPool<ExplosionAnimation> _explosionPool;
+    private SpawnPool<EnemyDeadBody> _deadBodyPool;
     private SpawnPool<Ammo> _ammoPool;
     private SpawnPool<ExplosionAnimation> _hitEffectPool;
     private Coroutine _spawning;
@@ -27,6 +28,7 @@ public class EnemySpawner : MonoBehaviour
         Ammo ammoPrefab = _prefab.GetComponent<EnemyShooter>().AmmoPrefab;
 
         _explosionPool = new SpawnPool<ExplosionAnimation>(_prefab.ExplosionPrefab);
+        _deadBodyPool = new SpawnPool<EnemyDeadBody>(_prefab.DeadBodyPrefab);
         _ammoPool = new SpawnPool<Ammo>(ammoPrefab);
         _hitEffectPool = new SpawnPool<ExplosionAnimation>(ammoPrefab.HitEffectPrefab);
         _pool = new SpawnPool<EnemyShip>(_prefab, created: OnEnemyCreated);
@@ -45,6 +47,7 @@ public class EnemySpawner : MonoBehaviour
         _ammoPool.ReleaseAll();
         _hitEffectPool.ReleaseAll();
         _explosionPool.ReleaseAll();
+        _deadBodyPool.ReleaseAll();
         _retiredCount = 0;
 
         _spawning = StartCoroutine(Spawn());
@@ -61,7 +64,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnEnemyCreated(EnemyShip ship)
     {
-        ship.Init(_explosionPool, _ammoPool, _hitEffectPool);
+        ship.Init(_explosionPool, _deadBodyPool, _ammoPool, _hitEffectPool);
         ship.Died += OnEnemyDied;
         ship.Retired += OnEnemyRetired;
     }

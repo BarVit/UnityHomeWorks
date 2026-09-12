@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4316839822185376087}
   - component: {fileID: 7440191685052868192}
   - component: {fileID: 577526660719123766}
+  - component: {fileID: 480933757713}
   m_Layer: 0
   m_Name: vfx_Sparks_01
   m_TagString: Untagged
@@ -43,7 +44,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 0.1
   simulationSpeed: 1
-  stopAction: 2
+  stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -4888,3 +4889,16 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &480933757713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4503612902121041701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 325049351e504d12b794f4d98fa8058d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lifetime: 1.5

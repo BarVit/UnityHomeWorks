@@ -5839,7 +5839,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 329c8450bf36f4ccca3c1282c69e403a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bumpParticleSystem: {fileID: 7440191685052868192, guid: 5a936c83b1746f14f9100db745e94f04, type: 3}
+  _bumpPrefab: {fileID: 480933757713, guid: 5a936c83b1746f14f9100db745e94f04, type: 3}
 --- !u!222 &396664509
 CanvasRenderer:
   m_ObjectHideFlags: 0

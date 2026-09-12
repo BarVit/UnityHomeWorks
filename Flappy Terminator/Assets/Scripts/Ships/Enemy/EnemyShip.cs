@@ -14,11 +14,13 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
     private EnemyMover _mover;
     private EnemyShooter _shooter;
     private SpawnPool<ExplosionAnimation> _explosionPool;
+    private SpawnPool<EnemyDeadBody> _deadBodyPool;
     private bool _isDead;
 
     [field: SerializeField] public int BodyDamage { get; private set; }
 
     public ExplosionAnimation ExplosionPrefab => _explosion;
+    public EnemyDeadBody DeadBodyPrefab => _deadBody;
 
     public event Action<IPoolable> Released;
     public event Action<EnemyShip> Died;
@@ -45,10 +47,12 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
     public void Init(
         SpawnPool<ExplosionAnimation> explosionPool,
+        SpawnPool<EnemyDeadBody> deadBodyPool,
         SpawnPool<Ammo> ammoPool,
         SpawnPool<ExplosionAnimation> hitEffectPool)
     {
         _explosionPool = explosionPool;
+        _deadBodyPool = deadBodyPool;
         _shooter.Init(ammoPool, hitEffectPool);
     }
 
@@ -84,7 +88,8 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
         _isDead = true;
 
-        EnemyDeadBody deadBody = Instantiate(_deadBody, transform.position, Quaternion.identity);
+        EnemyDeadBody deadBody = _deadBodyPool.Get(transform.position);
+
         deadBody.End();
 
         ExplosionAnimation explosion = _explosionPool.Get(transform.position);
