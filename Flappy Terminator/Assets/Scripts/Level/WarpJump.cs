@@ -41,6 +41,7 @@ public class WarpJump : MonoBehaviour
         yield return Align(ship);
 
         _warpEffect.transform.position = ship.position + (Vector3)_warpOffset;
+        StopWarpEffect();
         _warpEffect.Play();
 
         yield return new WaitForSeconds(_warpEffect.main.duration * _stretchAtWarpProgress);
@@ -56,8 +57,15 @@ public class WarpJump : MonoBehaviour
 
         yield return new WaitForSeconds(_tailDuration);
 
+        StopWarpEffect();
+
         _jumping = null;
         Finished?.Invoke();
+    }
+
+    private void StopWarpEffect()
+    {
+        _warpEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
     }
 
     private IEnumerator Align(Transform ship)
