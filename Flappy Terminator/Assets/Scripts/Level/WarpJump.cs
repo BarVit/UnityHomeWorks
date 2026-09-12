@@ -36,6 +36,8 @@ public class WarpJump : MonoBehaviour
     private float ActionsDuration =>
         _warpEffect.main.duration * _stretchAtWarpProgress + _stretchDuration + _dashDuration;
 
+    private float TailDuration => Mathf.Max(0f, EffectDuration - ActionsDuration);
+
     public event Action Finished;
 
     public void Play()
@@ -80,9 +82,7 @@ public class WarpJump : MonoBehaviour
         _shipSprite.enabled = false;
         _shockWave.Play(ship.position);
 
-        _warpEffect.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-
-        yield return new WaitWhile(() => _warpEffect.IsAlive(true));
+        yield return new WaitForSeconds(TailDuration);
 
         StopWarpEffect();
 
