@@ -16,10 +16,14 @@ public class PlayerMover : MonoBehaviour
     private Quaternion _maxRotation;
     private float _verticalSpeed;
 
+    private void Awake()
+    {
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+    }
+
     private void Start()
     {
         _startPosition = transform.position;
-        _rigidbody2D = GetComponent<Rigidbody2D>();
 
         _maxRotation = Quaternion.Euler(0, 0, _maxRotationZ);
         _minRotation = Quaternion.Euler(0, 0, _minRotationZ);
@@ -38,6 +42,12 @@ public class PlayerMover : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, _minRotation, _rotationSpeed * Time.deltaTime);
         _verticalSpeed = Mathf.Clamp(_rigidbody2D.linearVelocity.y, -_maxVerticalSpeed, _maxVerticalSpeed);
         _rigidbody2D.linearVelocity = new Vector2(0, _verticalSpeed);
+    }
+
+    public void Stop()
+    {
+        _rigidbody2D.linearVelocity = Vector2.zero;
+        _rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
     }
 
     public void ReturnToStart()

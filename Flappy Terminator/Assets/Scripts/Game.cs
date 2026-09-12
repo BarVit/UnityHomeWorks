@@ -1,14 +1,25 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class Game : MonoBehaviour
 {
-    public void WinLevel()
+    [SerializeField] private EnemySpawner _enemySpawner;
+    [SerializeField] private AsteroidSpawner _asteroidSpawner;
+    [SerializeField] private WarpJump _warpJump;
+
+    private void OnEnable()
     {
-        //партикл систем варпа
-        //сжатие и удлинение спрайта
-        //движение вперед
-        //эффект прыжка шоквейв
-        //исчезновение спрайта
-        //восстановление размеров спрайта
+        _enemySpawner.WaveCleared += WinLevel;
+    }
+
+    private void OnDisable()
+    {
+        _enemySpawner.WaveCleared -= WinLevel;
+    }
+
+    private void WinLevel()
+    {
+        _enemySpawner.StopSpawn();
+        _asteroidSpawner.StopSpawn();
+        _warpJump.Play();
     }
 }

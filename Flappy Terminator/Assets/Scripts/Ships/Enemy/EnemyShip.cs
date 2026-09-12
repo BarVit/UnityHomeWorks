@@ -22,6 +22,7 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
     public event Action<IPoolable> Released;
     public event Action<EnemyShip> Died;
+    public event Action<EnemyShip> Retired;
 
     private void Awake()
     {
@@ -63,6 +64,7 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
     {
         _shooter.StopShoot();
         _mover.Stop();
+        Retired?.Invoke(this);
     }
 
     public void Remove()

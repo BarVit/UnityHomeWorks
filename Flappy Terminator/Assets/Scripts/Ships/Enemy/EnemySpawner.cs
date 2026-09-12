@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private EnemyShip _prefab;
+    [SerializeField] private int _waveSize = 10;
     [SerializeField] private float _spawnDelay;
     [SerializeField] private float _spawnPositionX = 9f;
     [SerializeField] private float _minSpawnPositionY = -3f;
@@ -16,8 +17,10 @@ public class EnemySpawner : MonoBehaviour
     private SpawnPool<Ammo> _ammoPool;
     private SpawnPool<ExplosionAnimation> _hitEffectPool;
     private Coroutine _spawning;
+    private int _retiredCount;
 
     public event Action<EnemyShip> EnemyDied;
+    public event Action WaveCleared;
 
     private void Awake()
     {
@@ -34,10 +37,20 @@ public class EnemySpawner : MonoBehaviour
         _spawning = StartCoroutine(Spawn());
     }
 
+    public void StopSpawn()
+    {
+        if (_spawning == null)
+            return;
+
+        StopCoroutine(_spawning);
+        _spawning = null;
+    }
+
     private void OnEnemyCreated(EnemyShip ship)
     {
         ship.Init(_explosionPool, _ammoPool, _hitEffectPool);
         ship.Died += OnEnemyDied;
+        ship.Retired += OnEnemyRetired;
     }
 
     private void OnEnemyDied(EnemyShip ship)
@@ -45,11 +58,19 @@ public class EnemySpawner : MonoBehaviour
         EnemyDied?.Invoke(ship);
     }
 
+    private void OnEnemyRetired(EnemyShip ship)
+    {
+        _retiredCount++;
+
+        if (_retiredCount == _waveSize)
+            WaveCleared?.Invoke();
+    }
+
     private IEnumerator Spawn()
     {
         WaitForSeconds spawnDelay = new(_spawnDelay);
 
-        while (enabled)
+        for (int i = 0; i < _waveSize; i++)
         {
             _pool.Get(new Vector3(
                 _spawnPositionX,
@@ -58,5 +79,7 @@ public class EnemySpawner : MonoBehaviour
 
             yield return spawnDelay;
         }
+
+        _spawning = null;
     }
 }

@@ -21,6 +21,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
     private PlayerMover _playerMover;
     private Vector2 _startPosition;
     private Quaternion _startRotation;
+    private bool _isControlEnabled = true;
     private int _enemyAmmoLayout = 9;
 
     private void Awake()
@@ -51,10 +52,22 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
 
     private void Update()
     {
+        if (_isControlEnabled == false)
+            return;
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _playerShooter.Shoot();
         }
+    }
+
+    public void DisableControl()
+    {
+        _isControlEnabled = false;
+        _playerMover.Stop();
+        _playerMover.enabled = false;
+        _ammoHitHandler.enabled = false;
+        _playerCollisionHandler.enabled = false;
     }
 
     public void ReturnToStart()

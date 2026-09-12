@@ -28,6 +28,15 @@ public class AsteroidSpawner : MonoBehaviour
         _spawning = StartCoroutine(Spawn());
     }
 
+    public void StopSpawn()
+    {
+        if (_spawning == null)
+            return;
+
+        StopCoroutine(_spawning);
+        _spawning = null;
+    }
+
     private IEnumerator Spawn()
     {
         WaitForSeconds spawnDelay = new(_spawnDelay);
