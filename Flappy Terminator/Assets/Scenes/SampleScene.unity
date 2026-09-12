@@ -5723,8 +5723,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 780, y: 470}
+  m_AnchoredPosition: {x: 0, y: -27}
+  m_SizeDelta: {x: 780, y: 524}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &303478100
 MonoBehaviour:
@@ -5856,8 +5856,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 780, y: 470}
+  m_AnchoredPosition: {x: 0, y: -27}
+  m_SizeDelta: {x: 780, y: 524}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &345113249
 RectTransform:
@@ -6955,7 +6955,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -8}
+  m_AnchoredPosition: {x: 0, y: -35}
   m_SizeDelta: {x: 320, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &596181441
@@ -7713,8 +7713,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 780, y: 470}
+  m_AnchoredPosition: {x: 0, y: -27}
+  m_SizeDelta: {x: 780, y: 524}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &723647281
 RectTransform:
@@ -10201,8 +10201,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 780, y: 470}
+  m_AnchoredPosition: {x: 0, y: -27}
+  m_SizeDelta: {x: 780, y: 524}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &864926142
 CanvasRenderer:
@@ -12585,7 +12585,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -118}
+  m_AnchoredPosition: {x: 0, y: -145}
   m_SizeDelta: {x: 320, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &759572247
