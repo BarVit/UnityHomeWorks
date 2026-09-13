@@ -21,9 +21,7 @@ public class EnemySpawner : MonoBehaviour
     private SpawnPool<Ammo> _ammoPool;
     private SpawnPool<ExplosionAnimation> _hitEffectPool;
     private Coroutine _spawning;
-    private int _waveSize;
-    private int _retiredCount;
-    private bool _isRestarting;
+    private Wave _wave;
 
     public event Action<EnemyShip> EnemyDied;
     public event Action WaveCleared;
@@ -47,9 +45,7 @@ public class EnemySpawner : MonoBehaviour
         _explosionPool.ReleaseAll();
         _deadBodyPool.ReleaseAll();
 
-        _waveSize = waveSize;
-        _retiredCount = 0;
-
+        _wave = new Wave(waveSize);
         _spawning = StartCoroutine(Spawn());
     }
 
@@ -57,10 +53,8 @@ public class EnemySpawner : MonoBehaviour
     {
         StopSpawn();
 
-        _isRestarting = true;
+        _wave = null;
         _pool.ReleaseAll();
-        _isRestarting = false;
-
         _ammoPool.ReleaseAll();
     }
 
@@ -87,12 +81,12 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnEnemyRetired(EnemyShip ship)
     {
-        if (_isRestarting)
+        if (_wave == null)
             return;
 
-        _retiredCount++;
+        _wave.CountRetired();
 
-        if (_retiredCount >= _waveSize)
+        if (_wave.IsCleared)
             WaveCleared?.Invoke();
     }
 
@@ -100,7 +94,7 @@ public class EnemySpawner : MonoBehaviour
     {
         WaitForSeconds spawnDelay = new(_spawnDelay);
 
-        for (int i = 0; i < _waveSize; i++)
+        for (int i = 0; i < _wave.Size; i++)
         {
             _pool.Get(new Vector3(
                 ScreenArea.GetRightEdge(_camera) + _spawnMargin,
