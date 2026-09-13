@@ -16,7 +16,7 @@ public class ExplosionAnimation : MonoBehaviour, IPoolable
 
     public event Action<IPoolable> Released;
 
-    public float Duration
+    private float Duration
     {
         get
         {
