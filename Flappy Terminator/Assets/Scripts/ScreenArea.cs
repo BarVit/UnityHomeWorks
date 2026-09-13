@@ -4,14 +4,21 @@ public static class ScreenArea
 {
     public static bool Contains(Camera camera, Vector3 position)
     {
+        return Contains(camera, position, 0f);
+    }
+
+    public static bool Contains(Camera camera, Vector3 position, float margin)
+    {
         if (camera == null)
             return true;
 
         Vector3 viewportPoint = camera.WorldToViewportPoint(position);
+        float horizontalMargin = margin / (GetHalfWidth(camera) * 2f);
+        float verticalMargin = margin / (camera.orthographicSize * 2f);
 
         return viewportPoint.z > 0f
-            && viewportPoint.x >= 0f && viewportPoint.x <= 1f
-            && viewportPoint.y >= 0f && viewportPoint.y <= 1f;
+            && viewportPoint.x >= -horizontalMargin && viewportPoint.x <= 1f + horizontalMargin
+            && viewportPoint.y >= -verticalMargin && viewportPoint.y <= 1f + verticalMargin;
     }
 
     public static float GetLeftEdge(Camera camera)

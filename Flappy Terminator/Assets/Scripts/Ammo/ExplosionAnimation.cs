@@ -5,6 +5,7 @@ using UnityEngine;
 public class ExplosionAnimation : MonoBehaviour, IPoolable
 {
     private const float NotCalculated = -1f;
+    private const float AudibleMargin = 1.5f;
 
     [SerializeField] private AudioSource _audioSource;
 
@@ -61,7 +62,7 @@ public class ExplosionAnimation : MonoBehaviour, IPoolable
         foreach (ParticleSystem particleSystem in _particleSystems)
             particleSystem.Play(true);
 
-        if (ScreenArea.Contains(_camera, transform.position))
+        if (ScreenArea.Contains(_camera, transform.position, AudibleMargin))
             _audioSource.Play();
 
         _lifetimeCountdown = StartCoroutine(CountLifetime(Duration));
