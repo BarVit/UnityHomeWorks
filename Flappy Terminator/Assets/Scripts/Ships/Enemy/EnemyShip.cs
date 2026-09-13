@@ -7,7 +7,9 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
     [SerializeField] private AmmoHitHandler _ammoHitHandler;
     [SerializeField] private ExplosionAnimation _explosion;
     [SerializeField] private EnemyDeadBody _deadBody;
+    [SerializeField] private float _exitMargin = 1f;
 
+    private Camera _camera;
     private Health _health;
     private EnemyMover _mover;
     private EnemyShooter _shooter;
@@ -26,6 +28,7 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
     private void Awake()
     {
+        _camera = Camera.main;
         _health = GetComponent<Health>();
         _mover = GetComponent<EnemyMover>();
         _shooter = GetComponent<EnemyShooter>();
@@ -41,6 +44,12 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
     {
         _ammoHitHandler.HitDetected -= OnAmmoHit;
         _health.Died -= Die;
+    }
+
+    private void Update()
+    {
+        if (transform.position.x + _exitMargin < ScreenArea.GetLeftEdge(_camera))
+            Remove();
     }
 
     public void Init(

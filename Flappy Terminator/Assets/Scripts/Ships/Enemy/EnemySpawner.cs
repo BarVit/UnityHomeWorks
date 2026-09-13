@@ -7,10 +7,11 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private EnemyShip _prefab;
     [SerializeField] private float _spawnDelay;
-    [SerializeField] private float _spawnPositionX = 9f;
+    [SerializeField] private float _spawnMargin = 1f;
     [SerializeField] private float _minSpawnPositionY = -3f;
     [SerializeField] private float _maxSpawnPositionY = 3f;
 
+    private Camera _camera;
     private SpawnPool<EnemyShip> _pool;
     private SpawnPool<ExplosionAnimation> _explosionPool;
     private SpawnPool<EnemyDeadBody> _deadBodyPool;
@@ -26,6 +27,8 @@ public class EnemySpawner : MonoBehaviour
 
     private void Awake()
     {
+        _camera = Camera.main;
+
         Ammo ammoPrefab = _prefab.GetComponent<EnemyShooter>().AmmoPrefab;
 
         _explosionPool = new SpawnPool<ExplosionAnimation>(_prefab.ExplosionPrefab);
@@ -99,7 +102,7 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < _waveSize; i++)
         {
             _pool.Get(new Vector3(
-                _spawnPositionX,
+                ScreenArea.GetRightEdge(_camera) + _spawnMargin,
                 Random.Range(_minSpawnPositionY, _maxSpawnPositionY),
                 0));
 
