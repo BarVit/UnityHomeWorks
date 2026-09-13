@@ -2,26 +2,21 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerShooter), typeof(Health))]
-[RequireComponent(typeof(PlayerMover))]
+[RequireComponent(typeof(PlayerMover), typeof(PlayerInputRouter))]
 public class PlayerShip : MonoBehaviour, IRemoveable
 {
-    private const int PoolCapacity = 1;
-    private const int PoolMaxSize = 1;
-
-    [SerializeField] private InputReader _input;
     [SerializeField] private AmmoHitHandler _ammoHitHandler;
     [SerializeField] private PlayerCollisionHandler _playerCollisionHandler;
     [SerializeField] private Collider2D _bodyCollider;
     [SerializeField] private SpriteRenderer _shipSprite;
-    [SerializeField] private ExplosionAnimation _explosionAnimation;
+    [SerializeField] private ShipExplosion _explosion;
     [SerializeField] private float _deathCutsceneDuration = 7.5f;
 
-    private SpawnPool<ExplosionAnimation> _explosionPool;
+    private PlayerInputRouter _inputRouter;
     private PlayerShooter _playerShooter;
     private Health _health;
     private PlayerMover _playerMover;
     private Vector3 _startScale;
-    private bool _isControlEnabled = true;
     private bool _isDead;
 
     private void Awake()
@@ -29,7 +24,7 @@ public class PlayerShip : MonoBehaviour, IRemoveable
         _playerShooter = GetComponent<PlayerShooter>();
         _health = GetComponent<Health>();
         _playerMover = GetComponent<PlayerMover>();
-        _explosionPool = new SpawnPool<ExplosionAnimation>(_explosionAnimation, PoolCapacity, PoolMaxSize);
+        _inputRouter = GetComponent<PlayerInputRouter>();
         _startScale = transform.localScale;
     }
 
@@ -39,8 +34,6 @@ public class PlayerShip : MonoBehaviour, IRemoveable
         _playerCollisionHandler.AsteroidBumped += OnAsteroidBumped;
         _playerCollisionHandler.EnemyBumped += OnEnemyBumped;
         _health.Died += Die;
-        _input.Jumped += OnJumped;
-        _input.Shot += OnShot;
     }
 
     private void OnDisable()
@@ -49,42 +42,24 @@ public class PlayerShip : MonoBehaviour, IRemoveable
         _playerCollisionHandler.AsteroidBumped -= OnAsteroidBumped;
         _playerCollisionHandler.EnemyBumped -= OnEnemyBumped;
         _health.Died -= Die;
-        _input.Jumped -= OnJumped;
-        _input.Shot -= OnShot;
     }
 
     public float DeathDuration => _deathCutsceneDuration;
 
-    public bool IsControlEnabled => _isControlEnabled;
+    public bool IsControlEnabled => _inputRouter.IsEnabled;
 
     public event Action Died;
     public event Action AsteroidBumped;
     public event Action EnemyBumped;
 
-    private void OnJumped()
-    {
-        if (_isControlEnabled == false)
-            return;
-
-        _playerMover.Jump();
-    }
-
-    private void OnShot()
-    {
-        if (_isControlEnabled == false)
-            return;
-
-        _playerShooter.Shoot();
-    }
-
     public void UnlockInput()
     {
-        _isControlEnabled = true;
+        _inputRouter.Unlock();
     }
 
     public void LockInput()
     {
-        _isControlEnabled = false;
+        _inputRouter.Lock();
     }
 
     private void EnableControl()
@@ -153,9 +128,7 @@ public class PlayerShip : MonoBehaviour, IRemoveable
         _isDead = true;
         _health.TakeDamage(_health.Value);
 
-        ExplosionAnimation explosion = _explosionPool.Get(transform.position);
-
-        explosion.Play();
+        _explosion.Play(transform.position);
 
         DisableControl();
         Hide();
@@ -169,7 +142,7 @@ public class PlayerShip : MonoBehaviour, IRemoveable
         _shipSprite.enabled = true;
         transform.localScale = _startScale;
         _playerShooter.ReleaseAll();
-        _explosionPool.ReleaseAll();
+        _explosion.ReleaseAll();
         _playerCollisionHandler.ReleaseAll();
         _health.Init();
         EnableControl();

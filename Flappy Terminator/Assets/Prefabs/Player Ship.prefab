@@ -48,6 +48,8 @@ GameObject:
   - component: {fileID: 3369771758799880655}
   - component: {fileID: 966307815104933198}
   - component: {fileID: 4601762431635728321}
+  - component: {fileID: 7711000000000000101}
+  - component: {fileID: 7711000000000000102}
   m_Layer: 6
   m_Name: Player Ship
   m_TagString: Untagged
@@ -242,12 +244,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13fd9fd8f86494d16bbaa7d2c655dcee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _input: {fileID: 0}
   _ammoHitHandler: {fileID: 307056008311267323}
   _playerCollisionHandler: {fileID: 3094829726805730626}
   _bodyCollider: {fileID: 3170934345470343946}
   _shipSprite: {fileID: 796812979710454581}
-  _explosionAnimation: {fileID: 2815651481402402797, guid: 27bd167ceb3334f9d93a691fc44bf0ed, type: 3}
+  _explosion: {fileID: 7711000000000000102}
   _deathCutsceneDuration: 7.5
 --- !u!114 &3369771758799880655
 MonoBehaviour:
@@ -588,3 +589,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bumpPrefab: {fileID: 480933757713, guid: 5a936c83b1746f14f9100db745e94f04, type: 3}
+--- !u!114 &7711000000000000101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4173006622923370558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a1c4f0b39e84d2ca6f5b81d7c04e311, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _input: {fileID: 0}
+--- !u!114 &7711000000000000102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4173006622923370558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e93b27ad4f04c188b31e6f2a7d95c40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 2815651481402402797, guid: 27bd167ceb3334f9d93a691fc44bf0ed, type: 3}
