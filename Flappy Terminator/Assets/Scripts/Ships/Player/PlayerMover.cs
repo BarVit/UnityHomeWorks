@@ -1,11 +1,9 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _tapForce;
-    [FormerlySerializedAs("_pushForce")]
     [SerializeField] private float _pushSpeed;
     [SerializeField] private float _maxVerticalSpeed;
     [SerializeField] private float _rotationSpeed;
