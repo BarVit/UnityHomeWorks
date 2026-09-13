@@ -14,6 +14,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
     [SerializeField] private Collider2D _bodyCollider;
     [SerializeField] private SpriteRenderer _shipSprite;
     [SerializeField] private ExplosionAnimation _explosionAnimation;
+    [SerializeField] private float _deathCutsceneDuration = 5.5f;
 
     private SpawnPool<ExplosionAnimation> _explosionPool;
     private PlayerShooter _playerShooter;
@@ -52,7 +53,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         _input.Shot -= OnShot;
     }
 
-    public float DeathDuration => _explosionAnimation.Duration;
+    public float DeathDuration => _deathCutsceneDuration;
 
     public bool IsControlEnabled => _isControlEnabled;
 

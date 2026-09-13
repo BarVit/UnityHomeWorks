@@ -85,6 +85,9 @@ public class ExplosionAnimation : MonoBehaviour, IPoolable
             foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)
                 longest = Mathf.Max(longest, clip.length);
 
+        if (_audioSource != null && _audioSource.clip != null)
+            longest = Mathf.Max(longest, _audioSource.clip.length);
+
         return longest;
     }
 
