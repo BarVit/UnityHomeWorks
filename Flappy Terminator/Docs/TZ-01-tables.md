@@ -65,6 +65,9 @@ Assets/Editor/TableImport/        парсер и валидация
 - `locations.tsv` — для ТЗ-03;
 - `progression.tsv` — для ТЗ-04.
 
+Кривая размера волны после код-ревью живёт в `LevelProgression` (`_firstWaveSize`,
+`_waveSizeGrowth`); её и заменяет строка локации из `locations.tsv`.
+
 ## Не входит
 
 - Чтение таблиц в рантайме из `StreamingAssets` — возможное расширение, но не сейчас.
