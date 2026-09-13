@@ -27,6 +27,8 @@ public class Game : MonoBehaviour
     private bool _isRunning;
     private bool _isPaused;
     private bool _isSettingsFromPause;
+    private bool _isSettingsOpen;
+    private bool _wasControlEnabled;
 
     public event Action<int> LevelChanged;
 
@@ -75,6 +77,7 @@ public class Game : MonoBehaviour
     private void OpenSettingsFromStart()
     {
         _isSettingsFromPause = false;
+        _isSettingsOpen = true;
         _startScreen.Hide();
         _settingsScreen.Show();
     }
@@ -82,12 +85,14 @@ public class Game : MonoBehaviour
     private void OpenSettingsFromPause()
     {
         _isSettingsFromPause = true;
+        _isSettingsOpen = true;
         _pauseScreen.Hide();
         _settingsScreen.Show();
     }
 
     private void CloseSettings()
     {
+        _isSettingsOpen = false;
         _settingsScreen.Hide();
 
         if (_isSettingsFromPause)
@@ -98,6 +103,13 @@ public class Game : MonoBehaviour
 
     private void TogglePause()
     {
+        if (_isSettingsOpen)
+        {
+            CloseSettings();
+
+            return;
+        }
+
         if (_isRunning == false)
             return;
 
@@ -152,6 +164,7 @@ public class Game : MonoBehaviour
     private void Pause()
     {
         _isPaused = true;
+        _wasControlEnabled = _playerShip.IsControlEnabled;
         Time.timeScale = PausedTimeScale;
         AudioListener.pause = true;
         _playerShip.LockInput();
@@ -163,7 +176,10 @@ public class Game : MonoBehaviour
         _isPaused = false;
         Time.timeScale = NormalTimeScale;
         AudioListener.pause = false;
-        _playerShip.UnlockInput();
+
+        if (_wasControlEnabled)
+            _playerShip.UnlockInput();
+
         _pauseScreen.Hide();
     }
 

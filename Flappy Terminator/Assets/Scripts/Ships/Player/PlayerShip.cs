@@ -54,6 +54,8 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
 
     public float DeathDuration => _explosionAnimation.Duration;
 
+    public bool IsControlEnabled => _isControlEnabled;
+
     public event Action Died;
     public event Action AsteroidBumped;
     public event Action EnemyBumped;
