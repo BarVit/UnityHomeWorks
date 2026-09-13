@@ -45,6 +45,7 @@ public class Game : MonoBehaviour
         _pauseScreen.SettingsRequested += OpenSettingsFromPause;
         _settingsScreen.CloseRequested += CloseSettings;
         _input.PauseToggled += TogglePause;
+        _input.Shot += SkipCutscene;
     }
 
     private void Start()
@@ -73,6 +74,7 @@ public class Game : MonoBehaviour
         _pauseScreen.SettingsRequested -= OpenSettingsFromPause;
         _settingsScreen.CloseRequested -= CloseSettings;
         _input.PauseToggled -= TogglePause;
+        _input.Shot -= SkipCutscene;
     }
 
     private void OpenSettingsFromStart()
@@ -100,6 +102,14 @@ public class Game : MonoBehaviour
             _pauseScreen.Show();
         else
             _startScreen.Show();
+    }
+
+    private void SkipCutscene()
+    {
+        if (_isPaused)
+            return;
+
+        _warpJump.Skip();
     }
 
     private void TogglePause()

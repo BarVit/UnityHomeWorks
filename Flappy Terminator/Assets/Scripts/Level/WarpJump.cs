@@ -7,6 +7,7 @@ public class WarpJump : MonoBehaviour
 {
     [SerializeField] private PlayerShip _playerShip;
     [SerializeField] private ParticleSystem _warpEffect;
+    [SerializeField] private GameObject _skipHint;
     [SerializeField] private ExpandingFade _shockWave;
     [SerializeField] private ExpandingFade _flash;
     [SerializeField] private Vector2 _engineOffset = new(-0.6f, 0f);
@@ -45,6 +46,15 @@ public class WarpJump : MonoBehaviour
         _jumping = StartCoroutine(Jump());
     }
 
+    public void Skip()
+    {
+        if (_jumping == null)
+            return;
+
+        Stop();
+        Finished?.Invoke();
+    }
+
     public void Stop()
     {
         if (_jumping != null)
@@ -56,6 +66,7 @@ public class WarpJump : MonoBehaviour
         StopWarpEffect();
         _flash.Stop();
         _shockWave.Stop();
+        _skipHint.SetActive(false);
     }
 
     private IEnumerator Jump()
@@ -63,6 +74,7 @@ public class WarpJump : MonoBehaviour
         Transform ship = _playerShip.transform;
 
         _playerShip.DisableControl();
+        _skipHint.SetActive(true);
 
         yield return Align(ship);
 
@@ -84,6 +96,7 @@ public class WarpJump : MonoBehaviour
         yield return new WaitForSeconds(TailDuration);
 
         StopWarpEffect();
+        _skipHint.SetActive(false);
 
         _jumping = null;
         Finished?.Invoke();
