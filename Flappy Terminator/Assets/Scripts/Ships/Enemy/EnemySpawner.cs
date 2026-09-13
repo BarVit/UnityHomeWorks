@@ -6,6 +6,9 @@ using Random = UnityEngine.Random;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private EnemyShip _prefab;
+    [SerializeField] private ExplosionAnimation _explosionPrefab;
+    [SerializeField] private EnemyDeadBody _deadBodyPrefab;
+    [SerializeField] private Ammo _ammoPrefab;
     [SerializeField] private float _spawnDelay;
     [SerializeField] private float _spawnMargin = 1f;
     [SerializeField] private float _minSpawnPositionY = -3f;
@@ -29,12 +32,10 @@ public class EnemySpawner : MonoBehaviour
     {
         _camera = Camera.main;
 
-        Ammo ammoPrefab = _prefab.GetComponent<EnemyShooter>().AmmoPrefab;
-
-        _explosionPool = new SpawnPool<ExplosionAnimation>(_prefab.ExplosionPrefab);
-        _deadBodyPool = new SpawnPool<EnemyDeadBody>(_prefab.DeadBodyPrefab);
-        _ammoPool = new SpawnPool<Ammo>(ammoPrefab);
-        _hitEffectPool = new SpawnPool<ExplosionAnimation>(ammoPrefab.HitEffectPrefab);
+        _explosionPool = new SpawnPool<ExplosionAnimation>(_explosionPrefab);
+        _deadBodyPool = new SpawnPool<EnemyDeadBody>(_deadBodyPrefab);
+        _ammoPool = new SpawnPool<Ammo>(_ammoPrefab);
+        _hitEffectPool = new SpawnPool<ExplosionAnimation>(_ammoPrefab.HitEffectPrefab);
         _pool = new SpawnPool<EnemyShip>(_prefab, created: OnEnemyCreated);
     }
 

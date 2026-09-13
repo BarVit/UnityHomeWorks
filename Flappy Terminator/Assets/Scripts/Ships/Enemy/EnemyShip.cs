@@ -5,8 +5,6 @@ using UnityEngine;
 public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable
 {
     [SerializeField] private AmmoHitHandler _ammoHitHandler;
-    [SerializeField] private ExplosionAnimation _explosion;
-    [SerializeField] private EnemyDeadBody _deadBody;
     [SerializeField] private float _exitMargin = 1f;
 
     private Camera _camera;
@@ -18,9 +16,6 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable
     private bool _isDead;
 
     [field: SerializeField] public int BodyDamage { get; private set; }
-
-    public ExplosionAnimation ExplosionPrefab => _explosion;
-    public EnemyDeadBody DeadBodyPrefab => _deadBody;
 
     public event Action<IPoolable> Released;
     public event Action<EnemyShip> Died;

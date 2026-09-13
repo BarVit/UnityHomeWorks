@@ -4,7 +4,6 @@ using UnityEngine;
 public class EnemyShooter : MonoBehaviour
 {
     [SerializeField] private Transform _shootPoint;
-    [SerializeField] private Ammo _prefab;
     [SerializeField] private float _shootDelay;
     [SerializeField] private AudioSource _shotAudioSource;
 
@@ -12,8 +11,6 @@ public class EnemyShooter : MonoBehaviour
     private SpawnPool<Ammo> _ammoPool;
     private SpawnPool<ExplosionAnimation> _hitEffectPool;
     private Coroutine _shooting;
-
-    public Ammo AmmoPrefab => _prefab;
 
     private void Awake()
     {

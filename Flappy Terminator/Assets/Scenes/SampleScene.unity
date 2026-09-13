@@ -9374,6 +9374,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 748883696485598149, guid: 760552f2b84714314ac77afd244877e5, type: 3}
+  _explosionPrefab: {fileID: -350056195610788462, guid: c71dd8c77ccf64446a437e4437b230ec, type: 3}
+  _deadBodyPrefab: {fileID: -5653055867325360339, guid: 1e18f70f829624b578777c7e8348c52f, type: 3}
+  _ammoPrefab: {fileID: 4581286917286831887, guid: 3f4a22ebd9cac4a5c8b10f728b3b8686, type: 3}
   _spawnDelay: 3
   _spawnMargin: 1
   _minSpawnPositionY: -3

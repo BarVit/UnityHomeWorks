@@ -318,7 +318,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shootPoint: {fileID: 1120524342127822062}
-  _prefab: {fileID: 4581286917286831887, guid: 3f4a22ebd9cac4a5c8b10f728b3b8686, type: 3}
   _shootDelay: 2
   _shotAudioSource: {fileID: 292637438989}
 --- !u!82 &292637438989
@@ -430,8 +429,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ammoHitHandler: {fileID: 2081596022269912197}
-  _explosion: {fileID: -350056195610788462, guid: c71dd8c77ccf64446a437e4437b230ec, type: 3}
-  _deadBody: {fileID: -5653055867325360339, guid: 1e18f70f829624b578777c7e8348c52f, type: 3}
   _exitMargin: 1
   <BodyDamage>k__BackingField: 30
 --- !u!114 &5174797962491506407
