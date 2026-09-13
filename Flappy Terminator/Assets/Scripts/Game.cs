@@ -53,6 +53,7 @@ public class Game : MonoBehaviour
         AudioListener.pause = false;
 
         _playerShip.DisableControl();
+        _playerShip.ReturnToStart();
         _pauseScreen.Hide();
         _gameOverScreen.Hide();
         _settingsScreen.Hide();

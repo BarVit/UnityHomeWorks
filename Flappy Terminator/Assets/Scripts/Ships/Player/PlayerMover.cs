@@ -4,7 +4,6 @@ using UnityEngine;
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _tapForce;
-    [SerializeField] private float _pushSpeed;
     [SerializeField] private float _maxVerticalSpeed;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _minRotationZ;
@@ -19,14 +18,8 @@ public class PlayerMover : MonoBehaviour
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-    }
-
-    private void Start()
-    {
         _maxRotation = Quaternion.Euler(0, 0, _maxRotationZ);
         _minRotation = Quaternion.Euler(0, 0, _minRotationZ);
-
-        ReturnToStart();
     }
 
     private void Update()
@@ -70,19 +63,14 @@ public class PlayerMover : MonoBehaviour
 
     public void Push()
     {
-        Vector2 direction;
+        Vector2 direction = Vector2.down;
 
-        if(transform.position.y > 0)
-        {
-            direction = Vector2.down;
-            
-        }
-        else
+        if (transform.position.y <= 0)
         {
             direction = Vector2.up;
             transform.rotation = _maxRotation;
         }
 
-        _rigidbody2D.linearVelocity = direction * _pushSpeed;
+        _rigidbody2D.linearVelocity = direction * _maxVerticalSpeed;
     }
 }
