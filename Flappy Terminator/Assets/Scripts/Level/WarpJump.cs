@@ -6,7 +6,6 @@ using UnityEngine;
 public class WarpJump : MonoBehaviour
 {
     [SerializeField] private PlayerShip _playerShip;
-    [SerializeField] private SpriteRenderer _shipSprite;
     [SerializeField] private ParticleSystem _warpEffect;
     [SerializeField] private ExpandingFade _shockWave;
     [SerializeField] private ExpandingFade _flash;
@@ -20,8 +19,6 @@ public class WarpJump : MonoBehaviour
     [SerializeField] private float _dashDistance = 16f;
 
     private Coroutine _jumping;
-
-    public float Duration => _alignDuration + Mathf.Max(EffectDuration, ActionsDuration);
 
     private float EffectDuration
     {
@@ -57,6 +54,8 @@ public class WarpJump : MonoBehaviour
         }
 
         StopWarpEffect();
+        _flash.Stop();
+        _shockWave.Stop();
     }
 
     private IEnumerator Jump()
@@ -79,7 +78,7 @@ public class WarpJump : MonoBehaviour
 
         yield return Dash(ship);
 
-        _shipSprite.enabled = false;
+        _playerShip.Hide();
         _shockWave.Play(ship.position);
 
         yield return new WaitForSeconds(TailDuration);

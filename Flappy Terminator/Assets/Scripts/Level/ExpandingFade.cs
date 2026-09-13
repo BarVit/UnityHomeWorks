@@ -42,10 +42,20 @@ public class ExpandingFade : MonoBehaviour
         Restart();
     }
 
-    private void Restart()
+    public void Stop()
     {
         if (_playing != null)
+        {
             StopCoroutine(_playing);
+            _playing = null;
+        }
+
+        Hide();
+    }
+
+    private void Restart()
+    {
+        Stop();
 
         MoveToTarget();
         _playing = StartCoroutine(Expand());

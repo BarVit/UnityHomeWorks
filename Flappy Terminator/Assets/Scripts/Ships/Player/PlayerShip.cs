@@ -95,6 +95,11 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         _bodyCollider.enabled = true;
     }
 
+    public void Hide()
+    {
+        _shipSprite.enabled = false;
+    }
+
     public void DisableControl()
     {
         LockInput();
@@ -153,7 +158,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         explosion.Play();
 
         DisableControl();
-        _shipSprite.enabled = false;
+        Hide();
 
         Died?.Invoke();
     }

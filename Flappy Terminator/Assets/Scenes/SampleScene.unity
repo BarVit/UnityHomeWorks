@@ -8763,7 +8763,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerShip: {fileID: 92249140}
-  _shipSprite: {fileID: 366751404}
   _warpEffect: {fileID: 262472788}
   _shockWave: {fileID: 518721903}
   _flash: {fileID: 333709892}
