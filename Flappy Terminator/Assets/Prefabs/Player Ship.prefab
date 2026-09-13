@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tapForce: 2
-  _pushForce: 4
+  _pushSpeed: 4
   _maxVerticalSpeed: 3
   _rotationSpeed: 1
   _minRotationZ: -45
@@ -249,6 +249,7 @@ MonoBehaviour:
   _bodyCollider: {fileID: 3170934345470343946}
   _shipSprite: {fileID: 796812979710454581}
   _explosionAnimation: {fileID: 2815651481402402797, guid: 27bd167ceb3334f9d93a691fc44bf0ed, type: 3}
+  _deathCutsceneDuration: 7.5
 --- !u!114 &3369771758799880655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,8 +262,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af363375fb3b04b468a812ee08dc503a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Value>k__BackingField: 200
-  <MaxValue>k__BackingField: 200
+  <Value>k__BackingField: 100
+  <MaxValue>k__BackingField: 100
 --- !u!82 &966307815104933198
 AudioSource:
   m_ObjectHideFlags: 0

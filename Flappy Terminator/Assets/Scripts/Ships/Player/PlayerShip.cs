@@ -14,7 +14,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
     [SerializeField] private Collider2D _bodyCollider;
     [SerializeField] private SpriteRenderer _shipSprite;
     [SerializeField] private ExplosionAnimation _explosionAnimation;
-    [SerializeField] private float _deathCutsceneDuration = 5.5f;
+    [SerializeField] private float _deathCutsceneDuration = 7.5f;
 
     private SpawnPool<ExplosionAnimation> _explosionPool;
     private PlayerShooter _playerShooter;
@@ -146,6 +146,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
             return;
 
         _isDead = true;
+        _health.TakeDamage(_health.Value);
 
         ExplosionAnimation explosion = _explosionPool.Get(transform.position);
 
