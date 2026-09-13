@@ -11,7 +11,6 @@ public class PlayerShooter : MonoBehaviour
 
     private SpawnPool<Ammo> _ammoPool;
     private SpawnPool<ExplosionAnimation> _hitEffectPool;
-    private Coroutine _shootDelayer;
     private bool _isOnCooldown;
 
     public event Action<float> ReadinessChanged;
@@ -40,7 +39,7 @@ public class PlayerShooter : MonoBehaviour
         ammo.Fly();
 
         _isOnCooldown = true;
-        _shootDelayer = StartCoroutine(Reload());
+        StartCoroutine(Reload());
     }
 
     private IEnumerator Reload()
@@ -53,7 +52,6 @@ public class PlayerShooter : MonoBehaviour
         }
 
         _isOnCooldown = false;
-        _shootDelayer = null;
         ReadinessChanged?.Invoke(1f);
     }
 }

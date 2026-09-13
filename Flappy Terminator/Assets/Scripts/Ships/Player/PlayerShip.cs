@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerShooter), typeof(Health))]
 [RequireComponent(typeof(PlayerMover))]
-public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
+public class PlayerShip : MonoBehaviour, IRemoveable
 {
     private const int PoolCapacity = 1;
     private const int PoolMaxSize = 1;
@@ -87,7 +87,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         _isControlEnabled = false;
     }
 
-    public void EnableControl()
+    private void EnableControl()
     {
         UnlockInput();
         _playerMover.enabled = true;
@@ -113,7 +113,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         _playerMover.ReturnToStart();
     }
 
-    public void TakeDamage(int damage)
+    private void TakeDamage(int damage)
     {
         _health.TakeDamage(damage);
     }
@@ -145,7 +145,7 @@ public class PlayerShip : MonoBehaviour, IDamageable, IRemoveable
         EnemyBumped?.Invoke();
     }
 
-    public void Die()
+    private void Die()
     {
         if (_isDead)
             return;

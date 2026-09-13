@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Health), typeof(EnemyMover), typeof(EnemyShooter))]
-public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
+public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable
 {
     [SerializeField] private AmmoHitHandler _ammoHitHandler;
     [SerializeField] private ExplosionAnimation _explosion;
@@ -83,7 +83,7 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
         Released?.Invoke(this);
     }
 
-    public void TakeDamage(int damage)
+    private void TakeDamage(int damage)
     {
         _health.TakeDamage(damage);
     }
