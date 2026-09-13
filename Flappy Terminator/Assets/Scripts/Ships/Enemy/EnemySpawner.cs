@@ -37,21 +37,27 @@ public class EnemySpawner : MonoBehaviour
 
     public void StartWave(int waveSize)
     {
-        StopSpawn();
+        StopLevel();
 
-        _isRestarting = true;
-
-        _pool.ReleaseAll();
-        _ammoPool.ReleaseAll();
         _hitEffectPool.ReleaseAll();
         _explosionPool.ReleaseAll();
         _deadBodyPool.ReleaseAll();
 
-        _isRestarting = false;
         _waveSize = waveSize;
         _retiredCount = 0;
 
         _spawning = StartCoroutine(Spawn());
+    }
+
+    public void StopLevel()
+    {
+        StopSpawn();
+
+        _isRestarting = true;
+        _pool.ReleaseAll();
+        _isRestarting = false;
+
+        _ammoPool.ReleaseAll();
     }
 
     public void StopSpawn()

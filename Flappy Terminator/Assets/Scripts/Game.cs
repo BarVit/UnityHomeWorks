@@ -196,7 +196,7 @@ public class Game : MonoBehaviour
             return;
 
         _isLevelOver = true;
-        _enemySpawner.StopSpawn();
+        _enemySpawner.StopLevel();
         _asteroidSpawner.StopSpawn();
         _gameOverCountdown = StartCoroutine(ShowGameOver());
     }
@@ -207,7 +207,7 @@ public class Game : MonoBehaviour
             return;
 
         _isLevelOver = true;
-        _enemySpawner.StopSpawn();
+        _enemySpawner.StopLevel();
         _asteroidSpawner.StopSpawn();
         _warpJump.Play();
     }
