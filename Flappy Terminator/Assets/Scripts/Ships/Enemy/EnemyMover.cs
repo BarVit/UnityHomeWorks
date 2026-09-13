@@ -7,17 +7,17 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] private float _maxSpeed = 3f;
 
     private Rigidbody2D _rigidbody2D;
-    private float _speed;
 
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _speed = Random.Range(_minSpeed, _maxSpeed);
     }
 
     public void Fly()
     {
-        _rigidbody2D.linearVelocity = transform.right * -_speed;
+        float speed = Random.Range(_minSpeed, _maxSpeed);
+
+        _rigidbody2D.linearVelocity = transform.right * -speed;
     }
 
     public void Stop()

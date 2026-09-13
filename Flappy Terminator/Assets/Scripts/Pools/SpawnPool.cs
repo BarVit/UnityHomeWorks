@@ -7,6 +7,7 @@ public class SpawnPool<T> where T : MonoBehaviour, IPoolable
 {
     private readonly T _prefab;
     private readonly Action<T> _created;
+    private readonly Action<IPoolable> _release;
     private readonly ObjectPool<T> _pool;
     private readonly List<T> _active = new();
 
@@ -14,6 +15,7 @@ public class SpawnPool<T> where T : MonoBehaviour, IPoolable
     {
         _prefab = prefab;
         _created = created;
+        _release = Release;
 
         _pool = new ObjectPool<T>(
             createFunc: Create,
@@ -70,7 +72,7 @@ public class SpawnPool<T> where T : MonoBehaviour, IPoolable
 
     private void PrepareForUse(T item)
     {
-        item.Released += Release;
+        item.Released += _release;
     }
 
     private void PrepareForStorage(T item)
@@ -81,7 +83,7 @@ public class SpawnPool<T> where T : MonoBehaviour, IPoolable
 
     private void Release(IPoolable item)
     {
-        item.Released -= Release;
+        item.Released -= _release;
         _active.Remove((T)item);
         _pool.Release((T)item);
     }
