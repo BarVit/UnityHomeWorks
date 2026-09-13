@@ -153,7 +153,9 @@ public class Game : MonoBehaviour
 
         _isLevelOver = false;
         _isRunning = true;
+        _isSettingsOpen = false;
         _gameOverScreen.Hide();
+        _settingsScreen.Hide();
         _playerShip.Restart();
         _enemySpawner.StartWave(GetWaveSize());
         _asteroidSpawner.StartSpawn();
