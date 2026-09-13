@@ -1,64 +1,41 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
 public class Game : MonoBehaviour
 {
-    private const int FirstLevel = 1;
-    private const float NormalTimeScale = 1f;
-    private const float PausedTimeScale = 0f;
-
     [SerializeField] private InputReader _input;
     [SerializeField] private PlayerShip _playerShip;
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private AsteroidSpawner _asteroidSpawner;
     [SerializeField] private KillCounter _killCounter;
     [SerializeField] private WarpJump _warpJump;
-    [SerializeField] private StartScreen _startScreen;
-    [SerializeField] private PauseScreen _pauseScreen;
-    [SerializeField] private SettingsScreen _settingsScreen;
-    [SerializeField] private GameOverScreen _gameOverScreen;
-    [SerializeField] private int _firstWaveSize = 6;
-    [SerializeField] private int _waveSizeGrowth = 3;
+    [SerializeField] private ScreenNavigator _screens;
+    [SerializeField] private PauseController _pause;
+    [SerializeField] private LevelProgression _levels;
 
     private Coroutine _gameOverCountdown;
-    private int _level = FirstLevel;
     private bool _isLevelOver;
     private bool _isRunning;
-    private bool _isPaused;
-    private bool _isSettingsFromPause;
-    private bool _isSettingsOpen;
-    private bool _wasControlEnabled;
-
-    public event Action<int> LevelChanged;
 
     private void OnEnable()
     {
         _enemySpawner.WaveCleared += WinLevel;
         _playerShip.Died += LoseLevel;
         _warpJump.Finished += StartNextLevel;
-        _startScreen.StartRequested += StartGame;
-        _pauseScreen.ResumeRequested += Resume;
-        _pauseScreen.RestartRequested += RestartFromPause;
-        _gameOverScreen.RestartRequested += RestartGame;
-        _startScreen.SettingsRequested += OpenSettingsFromStart;
-        _pauseScreen.SettingsRequested += OpenSettingsFromPause;
-        _settingsScreen.CloseRequested += CloseSettings;
+        _screens.StartRequested += RestartGame;
+        _screens.ResumeRequested += Resume;
+        _screens.RestartFromPauseRequested += RestartFromPause;
+        _screens.RestartRequested += RestartGame;
         _input.PauseToggled += TogglePause;
         _input.Shot += SkipCutscene;
     }
 
     private void Start()
     {
-        Time.timeScale = NormalTimeScale;
-        AudioListener.pause = false;
-
+        _pause.Resume();
         _playerShip.DisableControl();
         _playerShip.ReturnToStart();
-        _pauseScreen.Hide();
-        _gameOverScreen.Hide();
-        _settingsScreen.Hide();
-        _startScreen.Show();
+        _screens.ShowStart();
     }
 
     private void OnDisable()
@@ -66,47 +43,17 @@ public class Game : MonoBehaviour
         _enemySpawner.WaveCleared -= WinLevel;
         _playerShip.Died -= LoseLevel;
         _warpJump.Finished -= StartNextLevel;
-        _startScreen.StartRequested -= StartGame;
-        _pauseScreen.ResumeRequested -= Resume;
-        _pauseScreen.RestartRequested -= RestartFromPause;
-        _gameOverScreen.RestartRequested -= RestartGame;
-        _startScreen.SettingsRequested -= OpenSettingsFromStart;
-        _pauseScreen.SettingsRequested -= OpenSettingsFromPause;
-        _settingsScreen.CloseRequested -= CloseSettings;
+        _screens.StartRequested -= RestartGame;
+        _screens.ResumeRequested -= Resume;
+        _screens.RestartFromPauseRequested -= RestartFromPause;
+        _screens.RestartRequested -= RestartGame;
         _input.PauseToggled -= TogglePause;
         _input.Shot -= SkipCutscene;
     }
 
-    private void OpenSettingsFromStart()
-    {
-        _isSettingsFromPause = false;
-        _isSettingsOpen = true;
-        _startScreen.Hide();
-        _settingsScreen.Show();
-    }
-
-    private void OpenSettingsFromPause()
-    {
-        _isSettingsFromPause = true;
-        _isSettingsOpen = true;
-        _pauseScreen.Hide();
-        _settingsScreen.Show();
-    }
-
-    private void CloseSettings()
-    {
-        _isSettingsOpen = false;
-        _settingsScreen.Hide();
-
-        if (_isSettingsFromPause)
-            _pauseScreen.Show();
-        else
-            _startScreen.Show();
-    }
-
     private void SkipCutscene()
     {
-        if (_isPaused)
+        if (_pause.IsPaused)
             return;
 
         _warpJump.Skip();
@@ -114,31 +61,33 @@ public class Game : MonoBehaviour
 
     private void TogglePause()
     {
-        if (_isSettingsOpen)
-        {
-            CloseSettings();
-
+        if (_screens.TryGoBack())
             return;
-        }
 
         if (_isRunning == false)
             return;
 
-        if (_isPaused)
+        if (_pause.IsPaused)
             Resume();
         else
             Pause();
     }
 
-    private void StartGame()
+    private void Pause()
     {
-        _startScreen.Hide();
-        RestartGame();
+        _pause.Pause();
+        _screens.ShowPause();
+    }
+
+    private void Resume()
+    {
+        _pause.Resume();
+        _screens.HidePause();
     }
 
     private void RestartGame()
     {
-        _level = FirstLevel;
+        _levels.Restart();
         _killCounter.Restart();
 
         StartLevel();
@@ -152,7 +101,7 @@ public class Game : MonoBehaviour
 
     private void StartNextLevel()
     {
-        _level++;
+        _levels.Advance();
 
         StartLevel();
     }
@@ -164,41 +113,10 @@ public class Game : MonoBehaviour
 
         _isLevelOver = false;
         _isRunning = true;
-        _isSettingsOpen = false;
-        _gameOverScreen.Hide();
-        _settingsScreen.Hide();
+        _screens.HideOverlays();
         _playerShip.Restart();
-        _enemySpawner.StartWave(GetWaveSize());
+        _enemySpawner.StartWave(_levels.WaveSize);
         _asteroidSpawner.StartSpawn();
-
-        LevelChanged?.Invoke(_level);
-    }
-
-    private void Pause()
-    {
-        _isPaused = true;
-        _wasControlEnabled = _playerShip.IsControlEnabled;
-        Time.timeScale = PausedTimeScale;
-        AudioListener.pause = true;
-        _playerShip.LockInput();
-        _pauseScreen.Show();
-    }
-
-    private void Resume()
-    {
-        _isPaused = false;
-        Time.timeScale = NormalTimeScale;
-        AudioListener.pause = false;
-
-        if (_wasControlEnabled)
-            _playerShip.UnlockInput();
-
-        _pauseScreen.Hide();
-    }
-
-    private int GetWaveSize()
-    {
-        return _firstWaveSize + (_level - FirstLevel) * _waveSizeGrowth;
     }
 
     private void LoseLevel()
@@ -229,7 +147,7 @@ public class Game : MonoBehaviour
 
         _gameOverCountdown = null;
         _isRunning = false;
-        _gameOverScreen.Show(_killCounter.Kills);
+        _screens.ShowGameOver(_killCounter.Kills);
     }
 
     private void StopGameOverCountdown()

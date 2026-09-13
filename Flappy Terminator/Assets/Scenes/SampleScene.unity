@@ -299,6 +299,9 @@ GameObject:
   - component: {fileID: 940566751}
   - component: {fileID: 661464565}
   - component: {fileID: 910561239}
+  - component: {fileID: 771200001}
+  - component: {fileID: 771200002}
+  - component: {fileID: 771200003}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -5738,7 +5741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eedb6a04d4c747848e8cbf6331d4cf06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _game: {fileID: 830307368}
+  _levels: {fileID: 771200003}
   _label: {fileID: 659904333}
 --- !u!114 &304700879
 MonoBehaviour:
@@ -8410,12 +8413,9 @@ MonoBehaviour:
   _asteroidSpawner: {fileID: 2000842824}
   _killCounter: {fileID: 1078558389}
   _warpJump: {fileID: 940566751}
-  _startScreen: {fileID: 900768329}
-  _pauseScreen: {fileID: 554024878}
-  _settingsScreen: {fileID: 279842321}
-  _gameOverScreen: {fileID: 573500980}
-  _firstWaveSize: 3
-  _waveSizeGrowth: 3
+  _screens: {fileID: 771200001}
+  _pause: {fileID: 771200002}
+  _levels: {fileID: 771200003}
 --- !u!224 &832871356
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13025,3 +13025,46 @@ SceneRoots:
   - {fileID: 1960120049}
   - {fileID: 262472789}
   - {fileID: 2090309296}
+--- !u!114 &771200001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165193575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3f71b6e0d954c82b9e4718f2c6d03a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startScreen: {fileID: 900768329}
+  _pauseScreen: {fileID: 554024878}
+  _settingsScreen: {fileID: 279842321}
+  _gameOverScreen: {fileID: 573500980}
+--- !u!114 &771200002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165193575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c81e4d2f75b64a09ae3f60d1b8927e34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerShip: {fileID: 92249140}
+--- !u!114 &771200003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165193575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d29a6c03be8f4b17a85e3f1c49d70b26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _firstWaveSize: 3
+  _waveSizeGrowth: 3

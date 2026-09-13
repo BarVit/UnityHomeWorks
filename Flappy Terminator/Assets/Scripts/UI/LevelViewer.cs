@@ -3,17 +3,17 @@ using UnityEngine;
 
 public class LevelViewer : MonoBehaviour
 {
-    [SerializeField] private Game _game;
+    [SerializeField] private LevelProgression _levels;
     [SerializeField] private TMP_Text _label;
 
     private void OnEnable()
     {
-        _game.LevelChanged += Show;
+        _levels.Changed += Show;
     }
 
     private void OnDisable()
     {
-        _game.LevelChanged -= Show;
+        _levels.Changed -= Show;
     }
 
     private void Show(int level)
