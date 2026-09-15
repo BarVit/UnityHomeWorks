@@ -39,7 +39,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void StartWave(int waveSize)
     {
-        StopLevel();
+        ClearField();
 
         _hitEffectPool.ReleaseAll();
         _explosionPool.ReleaseAll();
@@ -49,24 +49,10 @@ public class EnemySpawner : MonoBehaviour
         _spawning = StartCoroutine(Spawn());
     }
 
-    public void StopLevel()
-    {
-        EndWave();
-        _ammoPool.ReleaseAll();
-    }
-
     public void FinishWave()
     {
         EndWave();
         _ammoPool.ForEachActive(ammo => ammo.Disarm());
-    }
-
-    private void EndWave()
-    {
-        StopSpawn();
-
-        _wave = null;
-        _pool.ReleaseAll();
     }
 
     public void StopSpawn()
@@ -76,6 +62,20 @@ public class EnemySpawner : MonoBehaviour
 
         StopCoroutine(_spawning);
         _spawning = null;
+    }
+
+    private void ClearField()
+    {
+        EndWave();
+        _ammoPool.ReleaseAll();
+    }
+
+    private void EndWave()
+    {
+        StopSpawn();
+
+        _wave = null;
+        _pool.ReleaseAll();
     }
 
     private void OnEnemyCreated(EnemyShip ship)

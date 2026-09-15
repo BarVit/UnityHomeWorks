@@ -125,7 +125,7 @@ public class Game : MonoBehaviour
             return;
 
         _isLevelOver = true;
-        _enemySpawner.StopLevel();
+        _enemySpawner.StopSpawn();
         _asteroidSpawner.StopSpawn();
         _gameOverCountdown = StartCoroutine(ShowGameOver());
     }
