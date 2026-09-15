@@ -48,7 +48,7 @@ public class EnemyShooter : MonoBehaviour
             Ammo ammo = _ammoPool.Get(_shootPoint.position, _shootPoint.rotation);
 
             ammo.Init(_hitEffectPool);
-            if (ScreenArea.Contains(_camera, _shootPoint.position))
+            if (ScreenArea.IsAudible(_camera, _shootPoint.position))
                 _shotAudioSource.PlayOneShot(ammo.ShotSound.Clip, ammo.ShotSound.Volume);
             ammo.Fly();
 

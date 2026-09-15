@@ -2,6 +2,13 @@ using UnityEngine;
 
 public static class ScreenArea
 {
+    private const float AudibleMargin = 1.5f;
+
+    public static bool IsAudible(Camera camera, Vector3 position)
+    {
+        return Contains(camera, position, AudibleMargin);
+    }
+
     public static bool Contains(Camera camera, Vector3 position)
     {
         return Contains(camera, position, 0f);
