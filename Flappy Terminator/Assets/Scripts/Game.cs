@@ -136,7 +136,7 @@ public class Game : MonoBehaviour
             return;
 
         _isLevelOver = true;
-        _enemySpawner.StopLevel();
+        _enemySpawner.FinishWave();
         _asteroidSpawner.StopSpawn();
         _warpJump.Play();
     }

@@ -51,11 +51,22 @@ public class EnemySpawner : MonoBehaviour
 
     public void StopLevel()
     {
+        EndWave();
+        _ammoPool.ReleaseAll();
+    }
+
+    public void FinishWave()
+    {
+        EndWave();
+        _ammoPool.ForEachActive(ammo => ammo.Disarm());
+    }
+
+    private void EndWave()
+    {
         StopSpawn();
 
         _wave = null;
         _pool.ReleaseAll();
-        _ammoPool.ReleaseAll();
     }
 
     public void StopSpawn()

@@ -45,6 +45,12 @@ public class SpawnPool<T> where T : MonoBehaviour, IPoolable
         return Activate(item);
     }
 
+    public void ForEachActive(Action<T> action)
+    {
+        for (int i = _active.Count - 1; i >= 0; i--)
+            action(_active[i]);
+    }
+
     public void ReleaseAll()
     {
         for (int i = _active.Count - 1; i >= 0; i--)

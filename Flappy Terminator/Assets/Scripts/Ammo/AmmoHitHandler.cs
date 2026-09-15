@@ -12,6 +12,9 @@ public class AmmoHitHandler : MonoBehaviour
         if (other.TryGetComponent(out Ammo ammo) == false)
             return;
 
+        if (ammo.IsArmed == false)
+            return;
+
         if (Contains(ammo.gameObject.layer) == false)
             return;
 

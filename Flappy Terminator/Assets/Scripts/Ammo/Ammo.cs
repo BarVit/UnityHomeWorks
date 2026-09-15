@@ -17,6 +17,8 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
     public ExplosionAnimation HitEffectPrefab => _hitEffectPrefab;
     public Sound ShotSound => _shotSound;
 
+    public bool IsArmed { get; private set; }
+
     public event Action<IPoolable> Released;
 
     private void Awake()
@@ -31,6 +33,12 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
 
     public void OnSpawn()
     {
+        IsArmed = true;
+    }
+
+    public void Disarm()
+    {
+        IsArmed = false;
     }
 
     public void OnDespawn()
