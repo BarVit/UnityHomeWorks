@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputReader : MonoBehaviour
 {
-    [SerializeField] private KeyCode _jumpKey = KeyCode.W;
-    [SerializeField] private KeyCode _shootKey = KeyCode.Space;
-    [SerializeField] private KeyCode _pauseKey = KeyCode.Escape;
+    [SerializeField] private Key _jumpKey = Key.W;
+    [SerializeField] private Key _shootKey = Key.Space;
+    [SerializeField] private Key _pauseKey = Key.Escape;
 
     public event Action Jumped;
     public event Action Shot;
@@ -13,13 +14,18 @@ public class InputReader : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(_jumpKey))
+        Keyboard keyboard = Keyboard.current;
+
+        if (keyboard == null)
+            return;
+
+        if (keyboard[_jumpKey].wasPressedThisFrame)
             Jumped?.Invoke();
 
-        if (Input.GetKeyDown(_shootKey))
+        if (keyboard[_shootKey].wasPressedThisFrame)
             Shot?.Invoke();
 
-        if (Input.GetKeyDown(_pauseKey))
+        if (keyboard[_pauseKey].wasPressedThisFrame)
             PauseToggled?.Invoke();
     }
 }
