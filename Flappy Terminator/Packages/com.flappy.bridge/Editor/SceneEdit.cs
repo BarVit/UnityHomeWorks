@@ -59,6 +59,38 @@ namespace FlappyBridge
                 Json.Field("after", after));
         }
 
+        public static string CreateObject(string parentPath, string name, bool asInterface)
+        {
+            if (name.Length == 0)
+                return Json.Error("pass a name for the new object");
+
+            GameObject created = asInterface
+                ? new GameObject(name, typeof(RectTransform))
+                : new GameObject(name);
+
+            if (parentPath.Length > 0)
+            {
+                Transform parent = SceneQuery.Find(parentPath);
+
+                if (parent == null)
+                {
+                    Object.DestroyImmediate(created);
+
+                    return Json.Error("no object at " + parentPath);
+                }
+
+                created.transform.SetParent(parent, false);
+            }
+
+            Undo.RegisterCreatedObjectUndo(created, "Bridge create " + name);
+            MarkDirty(created);
+
+            return Json.Object(
+                "\"ok\":true",
+                Json.Field("created", name),
+                Json.Field("parent", parentPath));
+        }
+
         public static string AddComponent(string path, string typeName)
         {
             Transform found = SceneQuery.Find(path);
@@ -244,12 +276,61 @@ namespace FlappyBridge
                 return null;
             }
 
-            Object asset = AssetDatabase.LoadAssetAtPath<Object>(value);
+            if (value.StartsWith("builtin:"))
+            {
+                string builtinPath = value.Substring("builtin:".Length);
+                Sprite sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>(builtinPath);
 
-            if (asset == null)
-                return "no asset at " + value + "; pass a project path such as Assets/Data/Generated/Locations.asset";
+                if (sprite == null)
+                    return "no builtin sprite at " + builtinPath
+                        + "; try UI/Skin/Knob.psd or UI/Skin/UISprite.psd";
 
-            property.objectReferenceValue = asset;
+                property.objectReferenceValue = sprite;
+
+                return null;
+            }
+
+            if (value.StartsWith("Assets/"))
+            {
+                Object asset = AssetDatabase.LoadAssetAtPath<Object>(value);
+
+                if (asset == null)
+                    return "no asset at " + value;
+
+                property.objectReferenceValue = asset;
+
+                return null;
+            }
+
+            string objectPath = value;
+            string componentName = string.Empty;
+            int separator = value.IndexOf('#');
+
+            if (separator >= 0)
+            {
+                objectPath = value.Substring(0, separator);
+                componentName = value.Substring(separator + 1);
+            }
+
+            Transform target = SceneQuery.Find(objectPath);
+
+            if (target == null)
+                return "no object at " + objectPath
+                    + "; pass a hierarchy path, a hierarchy path with #ComponentType, or a path under Assets/";
+
+            if (componentName.Length == 0)
+            {
+                property.objectReferenceValue = target.gameObject;
+
+                return null;
+            }
+
+            Component component = FindComponent(target.gameObject, componentName);
+
+            if (component == null)
+                return "no component " + componentName + " on " + objectPath;
+
+            property.objectReferenceValue = component;
 
             return null;
         }

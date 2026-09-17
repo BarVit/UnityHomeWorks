@@ -51,6 +51,11 @@ namespace FlappyBridge
                         ReadString(query, "property", string.Empty),
                         ReadString(query, "value", string.Empty));
 
+                case "/create":
+                    return SceneEdit.CreateObject(ReadString(query, "parent", string.Empty),
+                        ReadString(query, "name", string.Empty),
+                        ReadString(query, "ui", "false") == "true");
+
                 case "/add":
                     return SceneEdit.AddComponent(ReadString(query, "path", string.Empty),
                         ReadString(query, "type", string.Empty));
@@ -87,7 +92,7 @@ namespace FlappyBridge
 
                 default:
                     return Json.Error("unknown route " + url.AbsolutePath + "; available: /ping /status /log "
-                        + "/compile /resolve /shot /scene /object /set /add /remove /save /menu /click /play /stop /pause /step /clear");
+                        + "/compile /resolve /shot /scene /object /set /create /add /remove /save /menu /click /play /stop /pause /step /clear");
             }
         }
 
