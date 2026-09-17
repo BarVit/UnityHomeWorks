@@ -123,6 +123,17 @@ namespace FlappyBridge
             if (found == null)
                 return Json.Error("no object at path " + path);
 
+            if (typeName == "missing")
+            {
+                int removed = GameObjectUtility.RemoveMonoBehavioursWithMissingScript(found.gameObject);
+                MarkDirty(found.gameObject);
+
+                return Json.Object(
+                    "\"ok\":true",
+                    Json.Field("path", path),
+                    Json.Field("removed", removed + " missing scripts"));
+            }
+
             Component component = FindComponent(found.gameObject, typeName);
 
             if (component == null)

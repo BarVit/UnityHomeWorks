@@ -73,6 +73,35 @@ namespace FlappyBridge
                 Json.Raw("components", Json.Array(components)));
         }
 
+        public static string ReadProperty(string path, string componentName, string propertyName)
+        {
+            Transform found = Find(path);
+
+            if (found == null)
+                return Json.Error("no object at path " + path);
+
+            foreach (Component component in found.GetComponents<Component>())
+            {
+                if (component == null || component.GetType().Name != componentName)
+                    continue;
+
+                System.Reflection.PropertyInfo property = component.GetType().GetProperty(propertyName);
+
+                if (property == null || property.CanRead == false)
+                    return Json.Error("no readable property " + propertyName + " on " + componentName);
+
+                object value = property.GetValue(component);
+
+                return Json.Object(
+                    "\"ok\":true",
+                    Json.Field("component", componentName),
+                    Json.Field("property", propertyName),
+                    Json.Field("value", value == null ? "null" : value.ToString()));
+            }
+
+            return Json.Error("no component " + componentName + " on " + path);
+        }
+
         public static Transform Find(string path)
         {
             string[] parts = path.Split('/');
