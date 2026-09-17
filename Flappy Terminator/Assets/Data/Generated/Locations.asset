@@ -16,7 +16,7 @@ MonoBehaviour:
   - _id: loc_01_01
     _system: sys_01
     _order: 1
-    _levels: 2
+    _levels: 3
     _borderTheme: 
     _flightMode: 0
     _firstWaveSize: 3
@@ -24,7 +24,7 @@ MonoBehaviour:
   - _id: loc_01_02
     _system: sys_01
     _order: 2
-    _levels: 2
+    _levels: 3
     _borderTheme: 
     _flightMode: 0
     _firstWaveSize: 3
@@ -32,7 +32,7 @@ MonoBehaviour:
   - _id: loc_01_03
     _system: sys_01
     _order: 3
-    _levels: 2
+    _levels: 3
     _borderTheme: 
     _flightMode: 0
     _firstWaveSize: 3
@@ -40,7 +40,7 @@ MonoBehaviour:
   - _id: loc_01_04
     _system: sys_01
     _order: 4
-    _levels: 2
+    _levels: 3
     _borderTheme: 
     _flightMode: 0
     _firstWaveSize: 3
@@ -48,7 +48,7 @@ MonoBehaviour:
   - _id: loc_01_05
     _system: sys_01
     _order: 5
-    _levels: 2
+    _levels: 3
     _borderTheme: 
     _flightMode: 0
     _firstWaveSize: 3

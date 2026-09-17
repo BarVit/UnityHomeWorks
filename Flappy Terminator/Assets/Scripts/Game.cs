@@ -11,7 +11,7 @@ public class Game : MonoBehaviour
     [SerializeField] private WarpJump _warpJump;
     [SerializeField] private ScreenNavigator _screens;
     [SerializeField] private PauseController _pause;
-    [SerializeField] private LevelProgression _levels;
+    [SerializeField] private LocationRunner _runner;
 
     private Coroutine _gameOverCountdown;
     private bool _isLevelOver;
@@ -21,11 +21,11 @@ public class Game : MonoBehaviour
     {
         _enemySpawner.WaveCleared += WinLevel;
         _playerShip.Died += LoseLevel;
-        _warpJump.Finished += StartNextLevel;
-        _screens.StartRequested += RestartGame;
+        _warpJump.Finished += FinishWarp;
+        _screens.StartRequested += StartLocation;
         _screens.ResumeRequested += Resume;
         _screens.RestartFromPauseRequested += RestartFromPause;
-        _screens.RestartRequested += RestartGame;
+        _screens.RestartRequested += RestartRun;
         _input.PauseToggled += TogglePause;
         _input.Shot += SkipCutscene;
     }
@@ -42,11 +42,11 @@ public class Game : MonoBehaviour
     {
         _enemySpawner.WaveCleared -= WinLevel;
         _playerShip.Died -= LoseLevel;
-        _warpJump.Finished -= StartNextLevel;
-        _screens.StartRequested -= RestartGame;
+        _warpJump.Finished -= FinishWarp;
+        _screens.StartRequested -= StartLocation;
         _screens.ResumeRequested -= Resume;
         _screens.RestartFromPauseRequested -= RestartFromPause;
-        _screens.RestartRequested -= RestartGame;
+        _screens.RestartRequested -= RestartRun;
         _input.PauseToggled -= TogglePause;
         _input.Shot -= SkipCutscene;
     }
@@ -85,9 +85,17 @@ public class Game : MonoBehaviour
         _screens.HidePause();
     }
 
-    private void RestartGame()
+    private void StartLocation()
     {
-        _levels.Restart();
+        _runner.StartLocation();
+        _killCounter.Restart();
+
+        StartLevel();
+    }
+
+    private void RestartRun()
+    {
+        _runner.RestartRun();
         _killCounter.Restart();
 
         StartLevel();
@@ -96,14 +104,36 @@ public class Game : MonoBehaviour
     private void RestartFromPause()
     {
         Resume();
-        RestartGame();
+        RestartRun();
+    }
+
+    private void FinishWarp()
+    {
+        bool wasLastLevel = _runner.IsLastLevel;
+
+        _runner.BankLevel();
+
+        if (wasLastLevel)
+            CompleteLocation();
+        else
+            StartNextLevel();
     }
 
     private void StartNextLevel()
     {
-        _levels.Advance();
+        _runner.Advance();
 
         StartLevel();
+    }
+
+    private void CompleteLocation()
+    {
+        _isRunning = false;
+        _warpJump.Stop();
+        _asteroidSpawner.StopSpawn();
+        _playerShip.DisableControl();
+        _playerShip.ReturnToStart();
+        _screens.ShowStart();
     }
 
     private void StartLevel()
@@ -115,7 +145,7 @@ public class Game : MonoBehaviour
         _isRunning = true;
         _screens.HideOverlays();
         _playerShip.Restart();
-        _enemySpawner.StartWave(_levels.WaveSize);
+        _enemySpawner.StartWave(_runner.WaveSize);
         _asteroidSpawner.StartSpawn();
     }
 
@@ -125,6 +155,7 @@ public class Game : MonoBehaviour
             return;
 
         _isLevelOver = true;
+        _runner.DropPendingReward();
         _enemySpawner.StopSpawn();
         _asteroidSpawner.StopSpawn();
         _gameOverCountdown = StartCoroutine(ShowGameOver());

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class TouchControls : MonoBehaviour
 {
     [SerializeField] private InputReader _input;
-    [SerializeField] private LevelProgression _levels;
+    [SerializeField] private LocationRunner _levels;
     [SerializeField] private GameObject _panel;
     [SerializeField] private Button _upButton;
     [SerializeField] private Button _downButton;

@@ -413,8 +413,8 @@ GameObject:
   - component: {fileID: 910561239}
   - component: {fileID: 771200001}
   - component: {fileID: 771200002}
-  - component: {fileID: 771200003}
   - component: {fileID: 940566752}
+  - component: {fileID: 940566753}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -6202,7 +6202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eedb6a04d4c747848e8cbf6331d4cf06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levels: {fileID: 771200003}
+  _levels: {fileID: 940566753}
   _label: {fileID: 659904333}
 --- !u!1 &303588335
 GameObject:
@@ -10582,20 +10582,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerShip: {fileID: 92249140}
---- !u!114 &771200003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 165193575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d29a6c03be8f4b17a85e3f1c49d70b26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _locations: {fileID: 11400000, guid: 246bc4d3c22f04566aa6c50ff882939a, type: 2}
-  _locationId: loc_01_01
 --- !u!224 &774978995
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10977,7 +10963,7 @@ MonoBehaviour:
   _warpJump: {fileID: 940566751}
   _screens: {fileID: 771200001}
   _pause: {fileID: 771200002}
-  _levels: {fileID: 771200003}
+  _runner: {fileID: 940566753}
 --- !u!114 &832177130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12142,13 +12128,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TouchControls
   _input: {fileID: 661464565}
-  _levels: {fileID: 771200003}
+  _levels: {fileID: 940566753}
   _panel: {fileID: 1657286272}
   _upButton: {fileID: 889182810}
   _downButton: {fileID: 1834425288}
   _fireButton: {fileID: 1312285597}
   _pauseButton: {fileID: 584725132}
   _showOnDesktop: 1
+--- !u!114 &940566753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165193575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e10fdb89a12d40b594d39c870f3152f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocationRunner
+  _locations: {fileID: 11400000, guid: 246bc4d3c22f04566aa6c50ff882939a, type: 2}
+  _locationId: loc_01_01
+  _enemySpawner: {fileID: 1078558388}
 --- !u!222 &943413463
 CanvasRenderer:
   m_ObjectHideFlags: 0
