@@ -27,6 +27,13 @@ namespace FlappyBridge
                 case "/compile":
                     return Compile();
 
+                case "/resolve":
+                    UnityEditor.PackageManager.Client.Resolve();
+
+                    return Json.Object(
+                        "\"ok\":true",
+                        Json.Field("note", "package resolution requested; poll /status once it settles"));
+
                 case "/shot":
                     return Shot(query);
 
@@ -43,6 +50,20 @@ namespace FlappyBridge
                         ReadString(query, "component", string.Empty),
                         ReadString(query, "property", string.Empty),
                         ReadString(query, "value", string.Empty));
+
+                case "/add":
+                    return SceneEdit.AddComponent(ReadString(query, "path", string.Empty),
+                        ReadString(query, "type", string.Empty));
+
+                case "/remove":
+                    return SceneEdit.RemoveComponent(ReadString(query, "path", string.Empty),
+                        ReadString(query, "type", string.Empty));
+
+                case "/save":
+                    return Save();
+
+                case "/click":
+                    return UiControl.Click(ReadString(query, "path", string.Empty));
 
                 case "/play":
                     return PlayModeControl.Play();
@@ -63,7 +84,7 @@ namespace FlappyBridge
 
                 default:
                     return Json.Error("unknown route " + url.AbsolutePath + "; available: /ping /status /log "
-                        + "/compile /shot /scene /object /set /play /stop /pause /step /clear");
+                        + "/compile /resolve /shot /scene /object /set /add /remove /save /click /play /stop /pause /step /clear");
             }
         }
 
@@ -115,6 +136,19 @@ namespace FlappyBridge
                 "\"ok\":true",
                 Json.Field("requested", true),
                 Json.Field("note", "a domain reload follows; poll /status until compileState is finished"));
+        }
+
+        private static string Save()
+        {
+            if (Application.isPlaying)
+                return Json.Error("scenes cannot be saved while playing");
+
+            bool saved = EditorSceneManager.SaveOpenScenes();
+
+            return Json.Object(
+                saved ? "\"ok\":true" : "\"ok\":false",
+                Json.Field("scene", EditorSceneManager.GetActiveScene().name),
+                Json.Field("dirty", EditorSceneManager.GetActiveScene().isDirty));
         }
 
         private static string Shot(Dictionary<string, string> query)

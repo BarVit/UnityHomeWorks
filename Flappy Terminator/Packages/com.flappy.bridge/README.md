@@ -16,7 +16,10 @@
 | `GET /status` | то же плюс режим входа в Play, состояние компиляции, ошибки и предупреждения |
 | `GET /log?count=50&level=error` | последние записи консоли; `level=error` оставляет только ошибки |
 | `GET /compile` | просит редактор пересобрать скрипты и сразу возвращает управление |
+| `GET /resolve` | просит Package Manager разобрать `manifest.json` |
 | `GET /clear` | чистит накопленный буфер консоли |
+
+`/compile` изменения манифеста не подхватывает, для них нужен `/resolve`.
 
 ### Сцена
 
@@ -25,6 +28,9 @@
 | `GET /scene?path=&depth=3` | дерево иерархии: имена, активность, списки компонентов |
 | `GET /object?path=Player Ship` | все сериализованные поля всех компонентов объекта |
 | `GET /set?path=&component=&property=&value=` | пишет одно поле через `SerializedObject`, отвечает `before` и `after` |
+| `GET /add?path=&type=` | добавляет компонент по имени типа |
+| `GET /remove?path=&type=` | снимает компонент |
+| `GET /save` | сохраняет открытые сцены |
 
 `/set` без `component` умеет `active`, `name`, `tag` и `layer`. Ссылки на объекты
 пока не пишутся. Дробные значения принимаются и с точкой, и с запятой.
@@ -36,6 +42,28 @@
 | `GET /play`, `GET /stop` | вход и выход; переключение не мгновенное, состояние проверяется по `/status` |
 | `GET /pause?value=true` | пауза и снятие паузы |
 | `GET /step` | один кадр вперёд |
+| `GET /click?path=Canvas/Start Menu/Start Button` | вызывает обработчик кнопки |
+
+`/click` зовёт `onClick` напрямую, а не доставляет событие указателя.
+
+### Чего здесь нет: подача нажатий клавиш
+
+Попытка подавать ввод в живую сессию Play mode снаружи не удалась и убрана.
+Перебраны `InputSystem.QueueStateEvent` с ручным `InputSystem.Update()` и без,
+`InputState.Change` в том числе с явным `InputUpdateType.Dynamic`, удержание
+состояния на каждом апдейте, переключение `editorInputBehaviorInPlayMode` и
+`backgroundBehavior`, а также снятие `InputUpdateType.Editor` с маски апдейтов.
+Запись выполняется, игра не реагирует.
+
+Причина видна в самом пакете: `Tests/TestFixture/InputTestFixture.cs` вычёркивает
+`InputUpdateType.Editor` из маски и дальше гоняет `InputSystem.Update(updateType)`
+сам, а эта перегрузка `internal`. То есть поддерживаемый способ подать ввод —
+забрать себе весь цикл обновления ввода, что возможно в PlayMode-тестах и
+невозможно рядом с живой сессией.
+
+Ловушка на будущее: `InputState.currentUpdateType` возвращает тип **последнего
+завершённого** апдейта, поэтому внутри `InputSystem.onBeforeUpdate` он никогда не
+равен `Dynamic`, и фильтр по нему молча отбрасывает всё.
 
 ### Кадр
 

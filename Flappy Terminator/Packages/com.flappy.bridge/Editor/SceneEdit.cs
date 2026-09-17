@@ -58,6 +58,81 @@ namespace FlappyBridge
                 Json.Field("after", after));
         }
 
+        public static string AddComponent(string path, string typeName)
+        {
+            Transform found = SceneQuery.Find(path);
+
+            if (found == null)
+                return Json.Error("no object at path " + path);
+
+            System.Type type = ResolveComponentType(typeName);
+
+            if (type == null)
+                return Json.Error("no component type named " + typeName + " in the loaded assemblies");
+
+            Component added = Undo.AddComponent(found.gameObject, type);
+
+            if (added == null)
+                return Json.Error(typeName + " could not be added to " + path);
+
+            MarkDirty(found.gameObject);
+
+            return Json.Object(
+                "\"ok\":true",
+                Json.Field("path", path),
+                Json.Field("added", added.GetType().Name));
+        }
+
+        public static string RemoveComponent(string path, string typeName)
+        {
+            Transform found = SceneQuery.Find(path);
+
+            if (found == null)
+                return Json.Error("no object at path " + path);
+
+            Component component = FindComponent(found.gameObject, typeName);
+
+            if (component == null)
+                return Json.Error("no component " + typeName + " on " + path);
+
+            GameObject owner = found.gameObject;
+            Undo.DestroyObjectImmediate(component);
+            MarkDirty(owner);
+
+            return Json.Object(
+                "\"ok\":true",
+                Json.Field("path", path),
+                Json.Field("removed", typeName));
+        }
+
+        private static System.Type ResolveComponentType(string typeName)
+        {
+            foreach (System.Reflection.Assembly assembly in System.AppDomain.CurrentDomain.GetAssemblies())
+            {
+                System.Type[] types;
+
+                try
+                {
+                    types = assembly.GetTypes();
+                }
+                catch (System.Reflection.ReflectionTypeLoadException exception)
+                {
+                    types = exception.Types;
+                }
+
+                foreach (System.Type type in types)
+                {
+                    if (type == null)
+                        continue;
+
+                    if (type.Name == typeName && typeof(Component).IsAssignableFrom(type) && type.IsAbstract == false)
+                        return type;
+                }
+            }
+
+            return null;
+        }
+
         private static string SetObjectField(GameObject target, string propertyName, string value)
         {
             Undo.RecordObject(target, "Bridge set " + propertyName);

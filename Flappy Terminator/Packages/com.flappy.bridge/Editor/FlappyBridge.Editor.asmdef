@@ -1,7 +1,9 @@
 {
     "name": "FlappyBridge.Editor",
     "rootNamespace": "FlappyBridge",
-    "references": [],
+    "references": [
+        "UnityEngine.UI"
+    ],
     "includePlatforms": [
         "Editor"
     ],
