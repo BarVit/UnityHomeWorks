@@ -30,14 +30,40 @@ namespace FlappyBridge
                 case "/shot":
                     return Shot(query);
 
+                case "/scene":
+                    return SceneQuery.GetHierarchy(ReadString(query, "path", string.Empty),
+                        ReadInt(query, "depth", 3));
+
+                case "/object":
+                    return SceneQuery.GetObject(ReadString(query, "path", string.Empty));
+
+                case "/set":
+                    return SceneEdit.SetProperty(
+                        ReadString(query, "path", string.Empty),
+                        ReadString(query, "component", string.Empty),
+                        ReadString(query, "property", string.Empty),
+                        ReadString(query, "value", string.Empty));
+
+                case "/play":
+                    return PlayModeControl.Play();
+
+                case "/stop":
+                    return PlayModeControl.Stop();
+
+                case "/pause":
+                    return PlayModeControl.Pause(ReadString(query, "value", "true") != "false");
+
+                case "/step":
+                    return PlayModeControl.Step();
+
                 case "/clear":
                     ConsoleLog.Clear();
 
                     return "{\"ok\":true}";
 
                 default:
-                    return Json.Error("unknown route " + url.AbsolutePath
-                        + "; available: /ping /status /log /compile /shot /clear");
+                    return Json.Error("unknown route " + url.AbsolutePath + "; available: /ping /status /log "
+                        + "/compile /shot /scene /object /set /play /stop /pause /step /clear");
             }
         }
 
@@ -62,6 +88,8 @@ namespace FlappyBridge
                 Json.Field("updating", EditorApplication.isUpdating),
                 Json.Field("scene", EditorSceneManager.GetActiveScene().name),
                 Json.Field("sceneDirty", EditorSceneManager.GetActiveScene().isDirty),
+                Json.Field("fastPlayMode", EditorSettings.enterPlayModeOptionsEnabled),
+                Json.Field("playModeOptions", EditorSettings.enterPlayModeOptions.ToString()),
                 Json.Field("compileState", CompileWatcher.GetState()),
                 Json.Field("errors", CompileWatcher.GetErrorCount()),
                 Json.Field("warnings", CompileWatcher.GetWarningCount()),
@@ -92,10 +120,15 @@ namespace FlappyBridge
         private static string Shot(Dictionary<string, string> query)
         {
             string path = ReadString(query, "path", ViewCapture.GetDefaultPath());
+            string mode = ReadString(query, "mode", "full");
+
+            if (mode == "view")
+                return ViewCapture.CaptureGameView(path);
+
             int width = ReadInt(query, "width", 960);
             int height = ReadInt(query, "height", 540);
 
-            return ViewCapture.Capture(path, width, height);
+            return ViewCapture.Capture(path, width, height, mode != "world");
         }
 
         private static Dictionary<string, string> ParseQuery(string query)

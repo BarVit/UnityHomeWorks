@@ -1,0 +1,271 @@
+using System.Globalization;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+
+namespace FlappyBridge
+{
+    public static class SceneEdit
+    {
+        public static string SetProperty(string path, string componentName, string propertyName, string value)
+        {
+            Transform found = SceneQuery.Find(path);
+
+            if (found == null)
+                return Json.Error("no object at path " + path);
+
+            if (componentName.Length == 0)
+                return SetObjectField(found.gameObject, propertyName, value);
+
+            Component component = FindComponent(found.gameObject, componentName);
+
+            if (component == null)
+                return Json.Error("no component " + componentName + " on " + path);
+
+            SerializedObject serialized = new SerializedObject(component);
+            SerializedProperty property = serialized.FindProperty(propertyName);
+
+            if (property == null)
+            {
+                serialized.Dispose();
+
+                return Json.Error("no serialized property " + propertyName + " on " + componentName
+                    + "; read /object?path=" + path + " for the available names");
+            }
+
+            string before = SceneQuery.Format(property);
+            string failure = Apply(property, value);
+
+            if (failure != null)
+            {
+                serialized.Dispose();
+
+                return Json.Error(failure);
+            }
+
+            serialized.ApplyModifiedProperties();
+            string after = SceneQuery.Format(property);
+            serialized.Dispose();
+
+            MarkDirty(found.gameObject);
+
+            return Json.Object(
+                "\"ok\":true",
+                Json.Field("path", path),
+                Json.Field("component", componentName),
+                Json.Field("property", propertyName),
+                Json.Field("before", before),
+                Json.Field("after", after));
+        }
+
+        private static string SetObjectField(GameObject target, string propertyName, string value)
+        {
+            Undo.RecordObject(target, "Bridge set " + propertyName);
+
+            string before;
+
+            if (propertyName == "active")
+            {
+                before = target.activeSelf ? "true" : "false";
+                target.SetActive(value == "true" || value == "1");
+            }
+            else if (propertyName == "name")
+            {
+                before = target.name;
+                target.name = value;
+            }
+            else if (propertyName == "tag")
+            {
+                before = target.tag;
+                target.tag = value;
+            }
+            else if (propertyName == "layer")
+            {
+                before = LayerMask.LayerToName(target.layer);
+                target.layer = LayerMask.NameToLayer(value);
+            }
+            else
+            {
+                return Json.Error("without a component only active, name, tag and layer can be set");
+            }
+
+            MarkDirty(target);
+
+            return Json.Object(
+                "\"ok\":true",
+                Json.Field("path", target.name),
+                Json.Field("property", propertyName),
+                Json.Field("before", before),
+                Json.Field("after", value));
+        }
+
+        private static void MarkDirty(GameObject target)
+        {
+            if (Application.isPlaying)
+                return;
+
+            EditorUtility.SetDirty(target);
+            EditorSceneManager.MarkSceneDirty(target.scene);
+        }
+
+        private static Component FindComponent(GameObject target, string componentName)
+        {
+            foreach (Component component in target.GetComponents<Component>())
+            {
+                if (component != null && component.GetType().Name == componentName)
+                    return component;
+            }
+
+            return null;
+        }
+
+        private static string Apply(SerializedProperty property, string value)
+        {
+            switch (property.propertyType)
+            {
+                case SerializedPropertyType.Integer:
+                    return ApplyInteger(property, value);
+
+                case SerializedPropertyType.Boolean:
+                    property.boolValue = value == "true" || value == "1";
+
+                    return null;
+
+                case SerializedPropertyType.Float:
+                    return ApplyFloat(property, value);
+
+                case SerializedPropertyType.String:
+                    property.stringValue = value;
+
+                    return null;
+
+                case SerializedPropertyType.Enum:
+                    return ApplyEnum(property, value);
+
+                case SerializedPropertyType.Vector2:
+                    return ApplyVector2(property, value);
+
+                case SerializedPropertyType.Vector3:
+                    return ApplyVector3(property, value);
+
+                case SerializedPropertyType.Color:
+                    return ApplyColor(property, value);
+
+                case SerializedPropertyType.ObjectReference:
+                    return "object references cannot be set through the bridge yet";
+
+                default:
+                    return property.propertyType + " cannot be set through the bridge yet";
+            }
+        }
+
+        private static string ApplyInteger(SerializedProperty property, string value)
+        {
+            int parsed;
+
+            if (int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out parsed) == false)
+                return value + " is not a whole number";
+
+            property.intValue = parsed;
+
+            return null;
+        }
+
+        private static string ApplyFloat(SerializedProperty property, string value)
+        {
+            float parsed;
+
+            if (TryParseFloat(value, out parsed) == false)
+                return value + " is not a number";
+
+            property.floatValue = parsed;
+
+            return null;
+        }
+
+        private static string ApplyEnum(SerializedProperty property, string value)
+        {
+            string[] names = property.enumNames;
+
+            for (int i = 0; i < names.Length; i++)
+            {
+                if (names[i] == value)
+                {
+                    property.enumValueIndex = i;
+
+                    return null;
+                }
+            }
+
+            int index;
+
+            if (int.TryParse(value, out index) && index >= 0 && index < names.Length)
+            {
+                property.enumValueIndex = index;
+
+                return null;
+            }
+
+            return value + " is not one of " + string.Join(", ", names);
+        }
+
+        private static string ApplyVector2(SerializedProperty property, string value)
+        {
+            float[] parts;
+
+            if (TryParseNumbers(value, 2, out parts) == false)
+                return "expected two numbers separated by commas, got " + value;
+
+            property.vector2Value = new Vector2(parts[0], parts[1]);
+
+            return null;
+        }
+
+        private static string ApplyVector3(SerializedProperty property, string value)
+        {
+            float[] parts;
+
+            if (TryParseNumbers(value, 3, out parts) == false)
+                return "expected three numbers separated by commas, got " + value;
+
+            property.vector3Value = new Vector3(parts[0], parts[1], parts[2]);
+
+            return null;
+        }
+
+        private static string ApplyColor(SerializedProperty property, string value)
+        {
+            float[] parts;
+
+            if (TryParseNumbers(value, 4, out parts) == false)
+                return "expected four numbers separated by commas, got " + value;
+
+            property.colorValue = new Color(parts[0], parts[1], parts[2], parts[3]);
+
+            return null;
+        }
+
+        private static bool TryParseNumbers(string value, int count, out float[] parsed)
+        {
+            parsed = new float[count];
+            string[] parts = value.Split(',');
+
+            if (parts.Length != count)
+                return false;
+
+            for (int i = 0; i < count; i++)
+            {
+                if (TryParseFloat(parts[i], out parsed[i]) == false)
+                    return false;
+            }
+
+            return true;
+        }
+
+        private static bool TryParseFloat(string value, out float parsed)
+        {
+            return float.TryParse(value.Trim().Replace(',', '.'), NumberStyles.Float,
+                CultureInfo.InvariantCulture, out parsed);
+        }
+    }
+}
