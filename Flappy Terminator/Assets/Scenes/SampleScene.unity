@@ -10199,8 +10199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d29a6c03be8f4b17a85e3f1c49d70b26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstWaveSize: 1
-  _waveSizeGrowth: 1
+  _locations: {fileID: 11400000, guid: 246bc4d3c22f04566aa6c50ff882939a, type: 2}
+  _locationId: loc_01_01
 --- !u!224 &774978995
 RectTransform:
   m_ObjectHideFlags: 0

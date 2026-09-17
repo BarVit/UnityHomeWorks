@@ -5,14 +5,24 @@ public class LevelProgression : MonoBehaviour
 {
     private const int FirstLevel = 1;
 
-    [SerializeField] private int _firstWaveSize = 6;
-    [SerializeField] private int _waveSizeGrowth = 3;
+    [SerializeField] private LocationTable _locations;
+    [SerializeField] private string _locationId;
 
+    private LocationRow _location;
     private int _level = FirstLevel;
 
-    public int WaveSize => _firstWaveSize + (_level - FirstLevel) * _waveSizeGrowth;
+    public int WaveSize => _location.FirstWaveSize + (_level - FirstLevel) * _location.WaveSizeGrowth;
 
     public event Action<int> Changed;
+
+    private void Awake()
+    {
+        _location = _locations.GetRow(_locationId);
+
+        if (_location == null)
+            throw new InvalidOperationException(
+                "LevelProgression: в таблице локаций нет строки с id " + _locationId);
+    }
 
     public void Restart()
     {

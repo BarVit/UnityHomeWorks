@@ -1,0 +1,6 @@
+id	system	order	levels	border_theme	flight_mode	first_wave_size	wave_size_growth
+loc_01_01	sys_01	1	2		Normal	3	3
+loc_01_02	sys_01	2	2		Normal	3	3
+loc_01_03	sys_01	3	2		Normal	3	3
+loc_01_04	sys_01	4	2		Normal	3	3
+loc_01_05	sys_01	5	2		Normal	3	3

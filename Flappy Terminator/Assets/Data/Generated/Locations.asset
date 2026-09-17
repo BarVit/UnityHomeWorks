@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff2df29250ac247e1b386b0b2499a523, type: 3}
+  m_Name: Locations
+  m_EditorClassIdentifier: Assembly-CSharp::LocationTable
+  _rows:
+  - _id: loc_01_01
+    _system: sys_01
+    _order: 1
+    _levels: 2
+    _borderTheme: 
+    _flightMode: 0
+    _firstWaveSize: 3
+    _waveSizeGrowth: 3
+  - _id: loc_01_02
+    _system: sys_01
+    _order: 2
+    _levels: 2
+    _borderTheme: 
+    _flightMode: 0
+    _firstWaveSize: 3
+    _waveSizeGrowth: 3
+  - _id: loc_01_03
+    _system: sys_01
+    _order: 3
+    _levels: 2
+    _borderTheme: 
+    _flightMode: 0
+    _firstWaveSize: 3
+    _waveSizeGrowth: 3
+  - _id: loc_01_04
+    _system: sys_01
+    _order: 4
+    _levels: 2
+    _borderTheme: 
+    _flightMode: 0
+    _firstWaveSize: 3
+    _waveSizeGrowth: 3
+  - _id: loc_01_05
+    _system: sys_01
+    _order: 5
+    _levels: 2
+    _borderTheme: 
+    _flightMode: 0
+    _firstWaveSize: 3
+    _waveSizeGrowth: 3
