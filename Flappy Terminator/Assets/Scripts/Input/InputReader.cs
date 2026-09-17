@@ -10,6 +10,7 @@ public class InputReader : MonoBehaviour
 
     public event Action Jumped;
     public event Action Shot;
+    public event Action Descended;
     public event Action PauseToggled;
 
     private void Update()
@@ -20,12 +21,32 @@ public class InputReader : MonoBehaviour
             return;
 
         if (keyboard[_jumpKey].wasPressedThisFrame)
-            Jumped?.Invoke();
+            Jump();
 
         if (keyboard[_shootKey].wasPressedThisFrame)
-            Shot?.Invoke();
+            Shoot();
 
         if (keyboard[_pauseKey].wasPressedThisFrame)
-            PauseToggled?.Invoke();
+            TogglePause();
+    }
+
+    public void Jump()
+    {
+        Jumped?.Invoke();
+    }
+
+    public void Descend()
+    {
+        Descended?.Invoke();
+    }
+
+    public void Shoot()
+    {
+        Shot?.Invoke();
+    }
+
+    public void TogglePause()
+    {
+        PauseToggled?.Invoke();
     }
 }

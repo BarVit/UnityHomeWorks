@@ -11,6 +11,8 @@ public class LevelProgression : MonoBehaviour
     private LocationRow _location;
     private int _level = FirstLevel;
 
+    public FlightMode FlightMode => _location.FlightMode;
+
     public int WaveSize => _location.FirstWaveSize + (_level - FirstLevel) * _location.WaveSizeGrowth;
 
     public event Action<int> Changed;
