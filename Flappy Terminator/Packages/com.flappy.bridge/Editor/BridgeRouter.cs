@@ -62,6 +62,9 @@ namespace FlappyBridge
                 case "/save":
                     return Save();
 
+                case "/menu":
+                    return Menu(ReadString(query, "path", string.Empty));
+
                 case "/click":
                     return UiControl.Click(ReadString(query, "path", string.Empty));
 
@@ -84,7 +87,7 @@ namespace FlappyBridge
 
                 default:
                     return Json.Error("unknown route " + url.AbsolutePath + "; available: /ping /status /log "
-                        + "/compile /resolve /shot /scene /object /set /add /remove /save /click /play /stop /pause /step /clear");
+                        + "/compile /resolve /shot /scene /object /set /add /remove /save /menu /click /play /stop /pause /step /clear");
             }
         }
 
@@ -136,6 +139,19 @@ namespace FlappyBridge
                 "\"ok\":true",
                 Json.Field("requested", true),
                 Json.Field("note", "a domain reload follows; poll /status until compileState is finished"));
+        }
+
+        private static string Menu(string path)
+        {
+            if (path.Length == 0)
+                return Json.Error("pass the menu item as path, for example Tools/Tables/Reimport All");
+
+            bool executed = EditorApplication.ExecuteMenuItem(path);
+
+            return Json.Object(
+                executed ? "\"ok\":true" : "\"ok\":false",
+                Json.Field("path", path),
+                Json.Field("note", executed ? "" : "no such menu item, or it refused to run"));
         }
 
         private static string Save()

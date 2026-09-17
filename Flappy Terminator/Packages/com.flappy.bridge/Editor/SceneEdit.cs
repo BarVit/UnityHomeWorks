@@ -2,6 +2,7 @@ using System.Globalization;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace FlappyBridge
 {
@@ -227,11 +228,30 @@ namespace FlappyBridge
                     return ApplyColor(property, value);
 
                 case SerializedPropertyType.ObjectReference:
-                    return "object references cannot be set through the bridge yet";
+                    return ApplyObjectReference(property, value);
 
                 default:
                     return property.propertyType + " cannot be set through the bridge yet";
             }
+        }
+
+        private static string ApplyObjectReference(SerializedProperty property, string value)
+        {
+            if (value.Length == 0 || value == "null")
+            {
+                property.objectReferenceValue = null;
+
+                return null;
+            }
+
+            Object asset = AssetDatabase.LoadAssetAtPath<Object>(value);
+
+            if (asset == null)
+                return "no asset at " + value + "; pass a project path such as Assets/Data/Generated/Locations.asset";
+
+            property.objectReferenceValue = asset;
+
+            return null;
         }
 
         private static string ApplyInteger(SerializedProperty property, string value)
