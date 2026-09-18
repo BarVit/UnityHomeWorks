@@ -15,6 +15,9 @@ public class AmmoHitHandler : MonoBehaviour
         if (ammo.IsArmed == false)
             return;
 
+        if (ammo.IsPersistent)
+            return;
+
         if (Contains(ammo.gameObject.layer) == false)
             return;
 

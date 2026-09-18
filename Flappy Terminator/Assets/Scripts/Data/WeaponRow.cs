@@ -13,11 +13,16 @@ public class WeaponRow
     [SerializeField] private FirePattern _firePattern;
     [SerializeField] private float _heatPerShot;
     [SerializeField] private float _cooldownRate;
+    [SerializeField] private float _tickInterval;
+    [SerializeField] private float _turnRate;
+    [SerializeField] private float _area;
     [SerializeField] private int _price;
     [SerializeField] private Ammo _projectile;
+    [SerializeField] private ExplosionAnimation _hitEffect;
 
     public WeaponRow(string id, DeliveryKind delivery, int damage, float rate, float projectileSpeed,
-        int barrelsMax, FirePattern firePattern, float heatPerShot, float cooldownRate, int price, Ammo projectile)
+        int barrelsMax, FirePattern firePattern, float heatPerShot, float cooldownRate, float tickInterval,
+        float turnRate, float area, int price, Ammo projectile, ExplosionAnimation hitEffect)
     {
         _id = id;
         _delivery = delivery;
@@ -28,8 +33,12 @@ public class WeaponRow
         _firePattern = firePattern;
         _heatPerShot = heatPerShot;
         _cooldownRate = cooldownRate;
+        _tickInterval = tickInterval;
+        _turnRate = turnRate;
+        _area = area;
         _price = price;
         _projectile = projectile;
+        _hitEffect = hitEffect;
     }
 
     public string Id => _id;
@@ -50,7 +59,16 @@ public class WeaponRow
 
     public float CooldownRate => _cooldownRate;
 
+    public float TickInterval => _tickInterval;
+
+    public float TurnRate => _turnRate;
+
+    public float Area => _area;
+
     public int Price => _price;
 
     public Ammo Projectile => _projectile;
+
+    public ExplosionAnimation HitEffect =>
+        _hitEffect != null ? _hitEffect : (_projectile == null ? null : _projectile.HitEffectPrefab);
 }

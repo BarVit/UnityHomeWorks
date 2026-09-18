@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerShooter), typeof(Health))]
 [RequireComponent(typeof(PlayerMover), typeof(PlayerInputRouter))]
-public class PlayerShip : MonoBehaviour, IRemoveable
+public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
 {
     [SerializeField] private AmmoHitHandler _ammoHitHandler;
     [SerializeField] private PlayerCollisionHandler _playerCollisionHandler;
@@ -88,7 +88,7 @@ public class PlayerShip : MonoBehaviour, IRemoveable
         _playerMover.ReturnToStart();
     }
 
-    private void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         _health.TakeDamage(damage);
     }

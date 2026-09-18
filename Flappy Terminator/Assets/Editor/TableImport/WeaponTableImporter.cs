@@ -11,7 +11,8 @@ namespace TableImport
         private static readonly string[] Columns =
         {
             "id", "delivery", "damage", "rate", "projectile_speed", "barrels_max",
-            "fire_pattern", "heat_per_shot", "cooldown_rate", "price", "projectile"
+            "fire_pattern", "heat_per_shot", "cooldown_rate", "tick_interval", "turn_rate",
+            "area", "price", "projectile", "hit_effect"
         };
 
         public static WeaponTable Import(TableLog log)
@@ -48,8 +49,12 @@ namespace TableImport
                     reader.ReadEnum<FirePattern>("fire_pattern"),
                     reader.ReadFloat("heat_per_shot", 0f, 100f),
                     reader.ReadFloat("cooldown_rate", 0f, 1000f),
+                    reader.ReadFloat("tick_interval", 0f, 10f),
+                    reader.ReadFloat("turn_rate", 0f, 1000f),
+                    reader.ReadFloat("area", 0f, 20f),
                     reader.ReadInt("price", 0, 1000000),
-                    reader.ReadPrefab<Ammo>("projectile", needsProjectile)));
+                    reader.ReadPrefab<Ammo>("projectile", needsProjectile),
+                    reader.ReadPrefab<ExplosionAnimation>("hit_effect", needsProjectile == false)));
             }
 
             WeaponTable table = GeneratedAsset.LoadOrCreate<WeaponTable>(AssetPath);

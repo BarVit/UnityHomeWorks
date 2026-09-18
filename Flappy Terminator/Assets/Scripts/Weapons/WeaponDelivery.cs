@@ -3,18 +3,16 @@ using UnityEngine;
 public abstract class WeaponDelivery
 {
     private readonly WeaponRow _row;
-    private readonly Transform[] _mounts;
+    private readonly WeaponContext _context;
     private readonly int _barrels;
-    private readonly PoolRegistry _pools;
 
     private float _cooldownLeft;
 
-    protected WeaponDelivery(WeaponRow row, Transform[] mounts, int barrels, PoolRegistry pools)
+    protected WeaponDelivery(WeaponRow row, WeaponContext context)
     {
         _row = row;
-        _mounts = mounts;
-        _pools = pools;
-        _barrels = Mathf.Clamp(barrels, 1, Mathf.Min(row.BarrelsMax, mounts.Length));
+        _context = context;
+        _barrels = Mathf.Clamp(context.Barrels, 1, Mathf.Min(row.BarrelsMax, context.Mounts.Length));
     }
 
     public virtual bool IsReady => _cooldownLeft <= 0f;
@@ -23,7 +21,7 @@ public abstract class WeaponDelivery
 
     protected WeaponRow Row => _row;
 
-    protected PoolRegistry Pools => _pools;
+    protected WeaponContext Context => _context;
 
     protected int Barrels => _barrels;
 
@@ -46,7 +44,7 @@ public abstract class WeaponDelivery
 
     protected Transform GetMount(int barrel)
     {
-        return _mounts[barrel % _mounts.Length];
+        return _context.Mounts[barrel % _context.Mounts.Length];
     }
 
     protected Quaternion GetRotation(int barrel)

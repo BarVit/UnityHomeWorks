@@ -1,18 +1,28 @@
 using System;
-using UnityEngine;
 
 public static class WeaponFactory
 {
-    public static WeaponDelivery Create(WeaponRow row, Transform[] mounts, int barrels,
-        PoolRegistry pools, ShotAudio audio)
+    public static WeaponDelivery Create(WeaponRow row, WeaponContext context)
     {
         switch (row.Delivery)
         {
             case DeliveryKind.Projectile:
-                return new ProjectileDelivery(row, mounts, barrels, pools, audio);
+                return new ProjectileDelivery(row, context);
+
+            case DeliveryKind.Homing:
+                return new HomingDelivery(row, context);
+
+            case DeliveryKind.Beam:
+                return new BeamDelivery(row, context);
+
+            case DeliveryKind.ContinuousBeam:
+                return new ContinuousBeamDelivery(row, context);
+
+            case DeliveryKind.Orb:
+                return new OrbDelivery(row, context);
 
             default:
-                throw new NotSupportedException("Механика доставки " + row.Delivery + " ещё не реализована");
+                throw new NotSupportedException("Неизвестная механика доставки " + row.Delivery);
         }
     }
 }

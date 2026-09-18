@@ -8,6 +8,7 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private int _barrels = 1;
     [SerializeField] private Transform _mountRoot;
     [SerializeField] private AudioSource _shotAudioSource;
+    [SerializeField] private LayerMask _targetLayers;
 
     private readonly PoolRegistry _pools = new PoolRegistry();
 
@@ -21,6 +22,10 @@ public class PlayerShooter : MonoBehaviour
 
     public int Barrels => _barrels;
 
+    public float Readiness => _delivery == null ? 0f : _delivery.Readiness;
+
+    public bool IsReady => _delivery != null && _delivery.IsReady;
+
     private void Awake()
     {
         _mounts = CollectMounts();
@@ -31,8 +36,11 @@ public class PlayerShooter : MonoBehaviour
             throw new InvalidOperationException(
                 "PlayerShooter: в таблице оружия нет строки с id " + _weaponId);
 
-        _delivery = WeaponFactory.Create(row, _mounts, _barrels, _pools,
-            new ShotAudio(_shotAudioSource, Camera.main));
+        Camera camera = Camera.main;
+        WeaponContext context = new WeaponContext(_mounts, _barrels, _pools,
+            new ShotAudio(_shotAudioSource, camera), _targetLayers, camera);
+
+        _delivery = WeaponFactory.Create(row, context);
     }
 
     private void Update()

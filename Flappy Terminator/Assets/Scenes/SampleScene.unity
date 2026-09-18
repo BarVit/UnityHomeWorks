@@ -14169,6 +14169,10 @@ PrefabInstance:
       propertyPath: _mountRoot
       value: 
       objectReference: {fileID: 139758762}
+    - target: {fileID: 8330222878791513292, guid: 09ba11221984c417dbda5f0b88456507, type: 3}
+      propertyPath: _targetLayers.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

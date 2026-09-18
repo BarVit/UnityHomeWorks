@@ -19,6 +19,8 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
 
     public bool IsArmed { get; private set; }
 
+    public bool IsPersistent { get; private set; }
+
     public event Action<IPoolable> Released;
 
     private void Awake()
@@ -34,6 +36,12 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
     public void OnSpawn()
     {
         IsArmed = true;
+        IsPersistent = false;
+    }
+
+    public void MakePersistent()
+    {
+        IsPersistent = true;
     }
 
     public void Disarm()
