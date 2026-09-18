@@ -243,6 +243,7 @@ namespace FlappyBridge
             switch (property.propertyType)
             {
                 case SerializedPropertyType.Integer:
+                case SerializedPropertyType.LayerMask:
                     return ApplyInteger(property, value);
 
                 case SerializedPropertyType.Boolean:
