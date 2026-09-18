@@ -286,13 +286,17 @@ namespace FlappyBridge
                 int split = pair.IndexOf('=');
 
                 if (split < 0)
-                    result[Uri.UnescapeDataString(pair)] = string.Empty;
+                    result[Decode(pair)] = string.Empty;
                 else
-                    result[Uri.UnescapeDataString(pair.Substring(0, split))] =
-                        Uri.UnescapeDataString(pair.Substring(split + 1));
+                    result[Decode(pair.Substring(0, split))] = Decode(pair.Substring(split + 1));
             }
 
             return result;
+        }
+
+        private static string Decode(string text)
+        {
+            return Uri.UnescapeDataString(text.Replace("+", " "));
         }
 
         private static string ReadString(Dictionary<string, string> query, string key, string fallback)

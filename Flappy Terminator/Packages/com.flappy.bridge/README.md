@@ -28,6 +28,9 @@
 | `GET /scene?path=&depth=3` | дерево иерархии: имена, активность, списки компонентов |
 | `GET /object?path=Player Ship` | все сериализованные поля всех компонентов объекта |
 | `/find?type=EnemyShip&props=ShipId,Tier` | все экземпляры компонента: имя, id, позиция и запрошенные публичные свойства |
+
+Пробел в значении можно слать и как `%20`, и как `+` — разбор запроса следует
+`x-www-form-urlencoded`, поэтому `curl --data-urlencode` работает. Настоящий плюс шлите как `%2B`.
 | `GET /set?path=&component=&property=&value=` | пишет одно поле через `SerializedObject`, отвечает `before` и `after` |
 | `GET /add?path=&type=` | добавляет компонент по имени типа |
 | `GET /remove?path=&type=` | снимает компонент |
