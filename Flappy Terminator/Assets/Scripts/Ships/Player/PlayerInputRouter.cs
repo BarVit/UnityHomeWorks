@@ -20,13 +20,11 @@ public class PlayerInputRouter : MonoBehaviour
     private void OnEnable()
     {
         _input.Jumped += OnJumped;
-        _input.Shot += OnShot;
     }
 
     private void OnDisable()
     {
         _input.Jumped -= OnJumped;
-        _input.Shot -= OnShot;
     }
 
     public void Unlock()
@@ -47,11 +45,12 @@ public class PlayerInputRouter : MonoBehaviour
         _mover.Jump();
     }
 
-    private void OnShot()
+    private void Update()
     {
         if (_isEnabled == false)
             return;
 
-        _shooter.Shoot();
+        if (_input.IsShooting)
+            _shooter.Shoot();
     }
 }

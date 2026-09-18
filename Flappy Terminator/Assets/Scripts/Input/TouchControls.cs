@@ -8,7 +8,7 @@ public class TouchControls : MonoBehaviour
     [SerializeField] private GameObject _panel;
     [SerializeField] private Button _upButton;
     [SerializeField] private Button _downButton;
-    [SerializeField] private Button _fireButton;
+    [SerializeField] private HoldButton _fireButton;
     [SerializeField] private Button _pauseButton;
     [SerializeField] private bool _showOnDesktop = true;
 
@@ -16,7 +16,9 @@ public class TouchControls : MonoBehaviour
     {
         _upButton.onClick.AddListener(_input.Jump);
         _downButton.onClick.AddListener(_input.Descend);
-        _fireButton.onClick.AddListener(_input.Shoot);
+        _fireButton.Pressed += _input.HoldFire;
+        _fireButton.Pressed += _input.Shoot;
+        _fireButton.Released += _input.ReleaseFire;
         _pauseButton.onClick.AddListener(_input.TogglePause);
     }
 
@@ -30,7 +32,9 @@ public class TouchControls : MonoBehaviour
     {
         _upButton.onClick.RemoveListener(_input.Jump);
         _downButton.onClick.RemoveListener(_input.Descend);
-        _fireButton.onClick.RemoveListener(_input.Shoot);
+        _fireButton.Pressed -= _input.HoldFire;
+        _fireButton.Pressed -= _input.Shoot;
+        _fireButton.Released -= _input.ReleaseFire;
         _pauseButton.onClick.RemoveListener(_input.TogglePause);
     }
 
