@@ -44,6 +44,11 @@ namespace FlappyBridge
                 case "/object":
                     return SceneQuery.GetObject(ReadString(query, "path", string.Empty));
 
+                case "/invoke":
+                    return SceneQuery.CallMethod(ReadString(query, "path", string.Empty),
+                        ReadString(query, "component", string.Empty),
+                        ReadString(query, "method", string.Empty));
+
                 case "/prop":
                     return SceneQuery.ReadProperty(ReadString(query, "path", string.Empty),
                         ReadString(query, "component", string.Empty),
@@ -97,7 +102,7 @@ namespace FlappyBridge
 
                 default:
                     return Json.Error("unknown route " + url.AbsolutePath + "; available: /ping /status /log "
-                        + "/compile /resolve /shot /scene /object /prop /set /create /add /remove /save /menu /click /play /stop /pause /step /clear");
+                        + "/compile /resolve /shot /scene /object /prop /invoke /set /create /add /remove /save /menu /click /play /stop /pause /step /clear");
             }
         }
 

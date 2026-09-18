@@ -102,6 +102,35 @@ namespace FlappyBridge
             return Json.Error("no component " + componentName + " on " + path);
         }
 
+        public static string CallMethod(string path, string componentName, string methodName)
+        {
+            Transform found = Find(path);
+
+            if (found == null)
+                return Json.Error("no object at path " + path);
+
+            foreach (Component component in found.GetComponents<Component>())
+            {
+                if (component == null || component.GetType().Name != componentName)
+                    continue;
+
+                System.Reflection.MethodInfo method = component.GetType()
+                    .GetMethod(methodName, System.Type.EmptyTypes);
+
+                if (method == null)
+                    return Json.Error("no public method " + methodName + "() without arguments on " + componentName);
+
+                method.Invoke(component, null);
+
+                return Json.Object(
+                    "\"ok\":true",
+                    Json.Field("component", componentName),
+                    Json.Field("method", methodName));
+            }
+
+            return Json.Error("no component " + componentName + " on " + path);
+        }
+
         public static Transform Find(string path)
         {
             string[] parts = path.Split('/');
