@@ -1,5 +1,7 @@
 using System;
 using System.Globalization;
+using UnityEditor;
+using UnityEngine;
 
 namespace TableImport
 {
@@ -92,6 +94,45 @@ namespace TableImport
             }
 
             return value;
+        }
+
+        public TComponent ReadPrefab<TComponent>(string column, bool required) where TComponent : Component
+        {
+            string name = ReadCell(column);
+
+            if (name.Length == 0)
+            {
+                if (required)
+                    Fail("пустая ссылка на префаб в столбце " + column);
+
+                return null;
+            }
+
+            foreach (string guid in AssetDatabase.FindAssets(name + " t:Prefab"))
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+
+                if (System.IO.Path.GetFileNameWithoutExtension(path) != name)
+                    continue;
+
+                GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+
+                if (prefab == null)
+                    continue;
+
+                TComponent found = prefab.GetComponent<TComponent>();
+
+                if (found != null)
+                    return found;
+
+                Fail(column + ": на префабе " + name + " нет компонента " + typeof(TComponent).Name);
+
+                return null;
+            }
+
+            Fail(column + ": не найден префаб с именем " + name);
+
+            return null;
         }
 
         public void Fail(string message)

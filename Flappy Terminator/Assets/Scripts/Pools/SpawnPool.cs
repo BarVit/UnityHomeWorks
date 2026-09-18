@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class SpawnPool<T> where T : MonoBehaviour, IPoolable
+public class SpawnPool<T> : ISpawnPool where T : MonoBehaviour, IPoolable
 {
     private readonly T _prefab;
     private readonly Action<T> _created;

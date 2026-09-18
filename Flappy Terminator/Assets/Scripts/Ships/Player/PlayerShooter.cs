@@ -1,57 +1,72 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 public class PlayerShooter : MonoBehaviour
 {
-    [SerializeField] private Transform _shootPoint;
-    [SerializeField] private Ammo _prefab;
-    [SerializeField] private float _shootRate;
+    [SerializeField] private WeaponTable _weapons;
+    [SerializeField] private string _weaponId;
+    [SerializeField] private int _barrels = 1;
+    [SerializeField] private Transform _mountRoot;
     [SerializeField] private AudioSource _shotAudioSource;
 
-    private SpawnPool<Ammo> _ammoPool;
-    private SpawnPool<ExplosionAnimation> _hitEffectPool;
-    private bool _isOnCooldown;
+    private readonly PoolRegistry _pools = new PoolRegistry();
+
+    private Transform[] _mounts;
+    private WeaponDelivery _delivery;
+    private float _shownReadiness = -1f;
 
     public event Action<float> ReadinessChanged;
 
+    public string WeaponId => _weaponId;
+
+    public int Barrels => _barrels;
+
     private void Awake()
     {
-        _ammoPool = new SpawnPool<Ammo>(_prefab);
-        _hitEffectPool = new SpawnPool<ExplosionAnimation>(_prefab.HitEffectPrefab);
+        _mounts = CollectMounts();
+
+        WeaponRow row = _weapons.GetRow(_weaponId);
+
+        if (row == null)
+            throw new InvalidOperationException(
+                "PlayerShooter: в таблице оружия нет строки с id " + _weaponId);
+
+        _delivery = WeaponFactory.Create(row, _mounts, _barrels, _pools,
+            new ShotAudio(_shotAudioSource, Camera.main));
     }
 
-    public void ReleaseAll()
+    private void Update()
     {
-        _ammoPool.ReleaseAll();
-        _hitEffectPool.ReleaseAll();
+        _delivery.Tick(Time.deltaTime);
+        Show(_delivery.Readiness);
     }
 
     public void Shoot()
     {
-        if (_isOnCooldown)
-            return;
-
-        Ammo ammo = _ammoPool.Get(_shootPoint.position, _shootPoint.rotation);
-
-        ammo.Init(_hitEffectPool);
-        _shotAudioSource.PlayOneShot(ammo.ShotSound.Clip, ammo.ShotSound.Volume);
-        ammo.Fly();
-
-        _isOnCooldown = true;
-        StartCoroutine(Reload());
+        _delivery.Fire();
     }
 
-    private IEnumerator Reload()
+    public void ReleaseAll()
     {
-        for (float elapsed = 0f; elapsed < _shootRate; elapsed += Time.deltaTime)
-        {
-            ReadinessChanged?.Invoke(elapsed / _shootRate);
+        _pools.ReleaseAll();
+    }
 
-            yield return null;
-        }
+    private Transform[] CollectMounts()
+    {
+        Transform[] mounts = new Transform[_mountRoot.childCount];
 
-        _isOnCooldown = false;
-        ReadinessChanged?.Invoke(1f);
+        for (int i = 0; i < mounts.Length; i++)
+            mounts[i] = _mountRoot.GetChild(i);
+
+        return mounts;
+    }
+
+    private void Show(float readiness)
+    {
+        if (Mathf.Approximately(readiness, _shownReadiness))
+            return;
+
+        _shownReadiness = readiness;
+        ReadinessChanged?.Invoke(readiness);
     }
 }

@@ -51,9 +51,19 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
         Released?.Invoke(this);
     }
 
+    public void SetDamage(int damage)
+    {
+        Damage = damage;
+    }
+
     public void Fly()
     {
         _bulletMover.Fly();
+    }
+
+    public void Fly(float speed)
+    {
+        _bulletMover.Fly(speed);
     }
 
     public void Hit(Vector2 point)

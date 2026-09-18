@@ -29,6 +29,7 @@ namespace TableImport
                 SystemTable systems = SystemTableImporter.Import(log);
                 LocationTableImporter.Import(systems, log);
                 ProgressionTableImporter.Import(log);
+                WeaponTableImporter.Import(log);
 
                 if (log.HasProblems)
                 {
