@@ -14168,7 +14168,7 @@ PrefabInstance:
       objectReference: {fileID: 661464565}
     - target: {fileID: 8330222878791513292, guid: 09ba11221984c417dbda5f0b88456507, type: 3}
       propertyPath: _barrels
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8330222878791513292, guid: 09ba11221984c417dbda5f0b88456507, type: 3}
       propertyPath: _weapons
