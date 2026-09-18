@@ -415,6 +415,7 @@ GameObject:
   - component: {fileID: 771200002}
   - component: {fileID: 940566752}
   - component: {fileID: 940566753}
+  - component: {fileID: 940566754}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -12150,6 +12151,20 @@ MonoBehaviour:
   _locations: {fileID: 11400000, guid: 246bc4d3c22f04566aa6c50ff882939a, type: 2}
   _locationId: loc_01_01
   _enemySpawner: {fileID: 1078558388}
+--- !u!114 &940566754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165193575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70961c7fc648c47eaa22aba9d3d44655, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Economy
+  _progression: {fileID: 11400000, guid: 4286ac19973fe425584f6f41ef7f9c05, type: 2}
+  _runner: {fileID: 940566753}
 --- !u!222 &943413463
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -13,6 +13,8 @@ public class LocationRunner : MonoBehaviour
 
     private LocationRow _location;
 
+    public string LocationId => _locationId;
+
     public FlightMode FlightMode => _location.FlightMode;
 
     public int Level => _run.Level;
@@ -28,6 +30,8 @@ public class LocationRunner : MonoBehaviour
     public int WaveSize => _location.FirstWaveSize + (_run.Level - 1) * _location.WaveSizeGrowth;
 
     public event Action<int> LevelChanged;
+    public event Action<int> LevelBanked;
+    public event Action<string> LocationCompleted;
 
     private void Awake()
     {
@@ -67,7 +71,15 @@ public class LocationRunner : MonoBehaviour
 
     public void BankLevel()
     {
+        int earned = _run.PendingReward;
+
         _run.BankReward();
+        LevelBanked?.Invoke(earned);
+    }
+
+    public void CompleteLocation()
+    {
+        LocationCompleted?.Invoke(_locationId);
     }
 
     public void Advance()

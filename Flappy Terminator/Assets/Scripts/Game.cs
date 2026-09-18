@@ -128,6 +128,7 @@ public class Game : MonoBehaviour
 
     private void CompleteLocation()
     {
+        _runner.CompleteLocation();
         _isRunning = false;
         _warpJump.Stop();
         _asteroidSpawner.StopSpawn();
