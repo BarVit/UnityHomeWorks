@@ -9,8 +9,9 @@ public class InputReader : MonoBehaviour
     [SerializeField] private Key _pauseKey = Key.Escape;
 
     private bool _isFireHeld;
+    private bool _isFireConsumed;
 
-    public bool IsShooting => _isFireHeld || IsKeyHeld(_shootKey);
+    public bool IsShooting => IsFireDown && _isFireConsumed == false;
 
     public event Action Jumped;
     public event Action Shot;
@@ -19,6 +20,9 @@ public class InputReader : MonoBehaviour
 
     private void Update()
     {
+        if (_isFireConsumed && IsFireDown == false)
+            _isFireConsumed = false;
+
         Keyboard keyboard = Keyboard.current;
 
         if (keyboard == null)
@@ -32,6 +36,11 @@ public class InputReader : MonoBehaviour
 
         if (keyboard[_pauseKey].wasPressedThisFrame)
             TogglePause();
+    }
+
+    public void ConsumeFire()
+    {
+        _isFireConsumed = true;
     }
 
     public void HoldFire()
@@ -63,6 +72,8 @@ public class InputReader : MonoBehaviour
     {
         PauseToggled?.Invoke();
     }
+
+    private bool IsFireDown => _isFireHeld || IsKeyHeld(_shootKey);
 
     private bool IsKeyHeld(Key key)
     {

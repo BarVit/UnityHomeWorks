@@ -36,6 +36,8 @@ public class WarpJump : MonoBehaviour
 
     private float TailDuration => Mathf.Max(0f, EffectDuration - ActionsDuration);
 
+    public bool IsPlaying => _jumping != null;
+
     public event Action Finished;
 
     public void Play()
