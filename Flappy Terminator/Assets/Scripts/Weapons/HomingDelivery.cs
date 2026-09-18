@@ -37,7 +37,7 @@ public class HomingDelivery : ProjectileDelivery
 
     private Transform FindTarget(Vector3 from)
     {
-        int count = Physics2D.OverlapCircleNonAlloc(from, SearchRadius, _candidates, Context.TargetLayers);
+        int count = Physics2D.OverlapCircle(from, SearchRadius, Context.TargetFilter, _candidates);
         Transform nearest = null;
         float nearestDistance = float.MaxValue;
 

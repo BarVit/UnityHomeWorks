@@ -33,7 +33,7 @@ public class OrbDelivery : ProjectileDelivery
 
     private void Burn(Ammo orb)
     {
-        int count = Physics2D.OverlapCircleNonAlloc(orb.transform.position, Row.Area, _touched, Context.TargetLayers);
+        int count = Physics2D.OverlapCircle(orb.transform.position, Row.Area, Context.TargetFilter, _touched);
 
         for (int i = 0; i < count; i++)
         {

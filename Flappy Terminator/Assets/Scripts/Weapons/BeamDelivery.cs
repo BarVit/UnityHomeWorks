@@ -22,7 +22,7 @@ public class BeamDelivery : WeaponDelivery
         Vector2 direction = GetRotation(barrel) * Vector2.right;
         float reach = GetReach();
 
-        int count = Physics2D.RaycastNonAlloc(mount.position, direction, _hits, reach, Context.TargetLayers);
+        int count = Physics2D.Raycast(mount.position, direction, Context.TargetFilter, _hits, reach);
 
         if (count == 0)
             return;
