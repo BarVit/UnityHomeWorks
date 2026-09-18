@@ -1,58 +1,56 @@
-using System.Collections;
 using UnityEngine;
 
 public class EnemyShooter : MonoBehaviour
 {
-    [SerializeField] private Transform _shootPoint;
-    [SerializeField] private float _shootDelay;
+    [SerializeField] private Transform _mountRoot;
     [SerializeField] private AudioSource _shotAudioSource;
 
-    private Camera _camera;
-    private SpawnPool<Ammo> _ammoPool;
-    private SpawnPool<ExplosionAnimation> _hitEffectPool;
-    private Coroutine _shooting;
+    private Transform[] _mounts;
+    private WeaponDelivery _delivery;
+    private bool _isShooting;
 
     private void Awake()
     {
-        _camera = Camera.main;
+        _mounts = CollectMounts();
     }
 
-    public void Init(SpawnPool<Ammo> ammoPool, SpawnPool<ExplosionAnimation> hitEffectPool)
+    private void Update()
     {
-        _ammoPool = ammoPool;
-        _hitEffectPool = hitEffectPool;
+        if (_delivery == null)
+            return;
+
+        _delivery.Tick(Time.deltaTime);
+
+        if (_isShooting)
+            _delivery.Fire();
+    }
+
+    public void Arm(EnemySetup setup, EnemyContext context)
+    {
+        WeaponContext weapon = new WeaponContext(_mounts, setup.Barrels, context.Pools,
+            new ShotAudio(_shotAudioSource, context.Camera), context.TargetLayers, context.Camera,
+            setup.ProjectileSpeedScale);
+
+        _delivery = WeaponFactory.Create(setup.Weapon, weapon);
     }
 
     public void StartShoot()
     {
-        StopShoot();
-
-        _shooting = StartCoroutine(Shoot());
+        _isShooting = true;
     }
 
     public void StopShoot()
     {
-        if (_shooting == null)
-            return;
-
-        StopCoroutine(_shooting);
-        _shooting = null;
+        _isShooting = false;
     }
 
-    private IEnumerator Shoot()
+    private Transform[] CollectMounts()
     {
-        WaitForSeconds shootDelay = new(_shootDelay);
+        Transform[] mounts = new Transform[_mountRoot.childCount];
 
-        while (enabled)
-        {
-            Ammo ammo = _ammoPool.Get(_shootPoint.position, _shootPoint.rotation);
+        for (int i = 0; i < mounts.Length; i++)
+            mounts[i] = _mountRoot.GetChild(i);
 
-            ammo.Init(_hitEffectPool);
-            if (ScreenArea.IsAudible(_camera, _shootPoint.position))
-                _shotAudioSource.PlayOneShot(ammo.ShotSound.Clip, ammo.ShotSound.Volume);
-            ammo.Fly();
-
-            yield return shootDelay;
-        }
+        return mounts;
     }
 }

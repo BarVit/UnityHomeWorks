@@ -26,7 +26,7 @@ public class ProjectileDelivery : WeaponDelivery
 
         ammo.Init(_hitEffectPool);
         ammo.SetDamage(Row.Damage);
-        ammo.Fly(Row.ProjectileSpeed);
+        ammo.Fly(ProjectileSpeed);
 
         if (barrel == 0)
             Context.Audio.Play(ammo.ShotSound, mount.position);

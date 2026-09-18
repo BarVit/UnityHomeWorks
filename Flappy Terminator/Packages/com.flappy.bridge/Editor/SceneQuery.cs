@@ -102,6 +102,67 @@ namespace FlappyBridge
             return Json.Error("no component " + componentName + " on " + path);
         }
 
+        public static string FindAll(string typeName, string propertyNames)
+        {
+            System.Type type = FindType(typeName);
+
+            if (type == null)
+                return Json.Error("unknown component type " + typeName);
+
+            Object[] found = Object.FindObjectsByType(type, FindObjectsInactive.Include,
+                FindObjectsSortMode.None);
+            string[] names = propertyNames.Length == 0
+                ? new string[0]
+                : propertyNames.Split(',');
+            List<string> items = new List<string>();
+
+            foreach (Object item in found)
+            {
+                Component component = item as Component;
+
+                if (component == null)
+                    continue;
+
+                List<string> fields = new List<string>();
+
+                fields.Add(Json.Field("name", component.gameObject.name));
+                fields.Add(Json.Field("id", component.GetInstanceID()));
+                fields.Add(Json.Field("active", component.gameObject.activeInHierarchy));
+                fields.Add(Json.Field("position",
+                    Pack(component.transform.position.x, component.transform.position.y)));
+
+                foreach (string name in names)
+                {
+                    string trimmed = name.Trim();
+                    System.Reflection.PropertyInfo property = type.GetProperty(trimmed);
+                    object value = property == null ? null : property.GetValue(component);
+
+                    fields.Add(Json.Field(trimmed, value == null ? "null" : value.ToString()));
+                }
+
+                items.Add(Json.Object(fields.ToArray()));
+            }
+
+            return Json.Object(
+                "\"ok\":true",
+                Json.Field("type", typeName),
+                Json.Field("count", items.Count),
+                Json.Raw("items", Json.Array(items)));
+        }
+
+        private static System.Type FindType(string name)
+        {
+            foreach (System.Reflection.Assembly assembly in System.AppDomain.CurrentDomain.GetAssemblies())
+            {
+                System.Type found = assembly.GetType(name);
+
+                if (found != null)
+                    return found;
+            }
+
+            return null;
+        }
+
         public static string CallMethod(string path, string componentName, string methodName)
         {
             return CallMethod(path, componentName, methodName, string.Empty);

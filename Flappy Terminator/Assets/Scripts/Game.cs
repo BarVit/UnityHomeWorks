@@ -146,7 +146,7 @@ public class Game : MonoBehaviour
         _isRunning = true;
         _screens.HideOverlays();
         _playerShip.Restart();
-        _enemySpawner.StartWave(_runner.WaveSize);
+        _enemySpawner.StartWave(_runner.WaveSize, _runner.LocationId);
         _asteroidSpawner.StartSpawn();
     }
 

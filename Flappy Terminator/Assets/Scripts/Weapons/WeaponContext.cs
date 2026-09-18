@@ -3,7 +3,7 @@ using UnityEngine;
 public class WeaponContext
 {
     public WeaponContext(Transform[] mounts, int barrels, PoolRegistry pools, ShotAudio audio,
-        LayerMask targetLayers, Camera camera)
+        LayerMask targetLayers, Camera camera, float projectileSpeedScale = 1f)
     {
         Mounts = mounts;
         Barrels = barrels;
@@ -11,6 +11,7 @@ public class WeaponContext
         Audio = audio;
         TargetLayers = targetLayers;
         Camera = camera;
+        ProjectileSpeedScale = projectileSpeedScale;
 
         ContactFilter2D filter = new ContactFilter2D();
 
@@ -33,4 +34,6 @@ public class WeaponContext
     public ContactFilter2D TargetFilter { get; private set; }
 
     public Camera Camera { get; private set; }
+
+    public float ProjectileSpeedScale { get; private set; }
 }

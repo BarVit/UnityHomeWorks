@@ -8,14 +8,18 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
     [SerializeField] private float _exitMargin = 1f;
 
     private Camera _camera;
+    private Animator _animator;
     private Health _health;
     private EnemyMover _mover;
     private EnemyShooter _shooter;
-    private SpawnPool<ExplosionAnimation> _explosionPool;
-    private SpawnPool<EnemyDeadBody> _deadBodyPool;
+    private EnemyContext _context;
     private bool _isDead;
 
-    [field: SerializeField] public int BodyDamage { get; private set; }
+    public int BodyDamage { get; private set; }
+
+    public string ShipId { get; private set; }
+
+    public int Tier { get; private set; }
 
     public event Action<IPoolable> Released;
     public event Action<EnemyShip> Died;
@@ -24,6 +28,7 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
     private void Awake()
     {
         _camera = Camera.main;
+        _animator = GetComponentInChildren<Animator>(true);
         _health = GetComponent<Health>();
         _mover = GetComponent<EnemyMover>();
         _shooter = GetComponent<EnemyShooter>();
@@ -47,23 +52,26 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
             Remove();
     }
 
-    public void Init(
-        SpawnPool<ExplosionAnimation> explosionPool,
-        SpawnPool<EnemyDeadBody> deadBodyPool,
-        SpawnPool<Ammo> ammoPool,
-        SpawnPool<ExplosionAnimation> hitEffectPool)
+    public void Init(EnemyContext context)
     {
-        _explosionPool = explosionPool;
-        _deadBodyPool = deadBodyPool;
-        _shooter.Init(ammoPool, hitEffectPool);
+        _context = context;
+    }
+
+    public void Launch(EnemySetup setup)
+    {
+        ShipId = setup.ShipId;
+        Tier = setup.Tier;
+        BodyDamage = setup.BodyDamage;
+
+        _health.Init(setup.Health);
+        _shooter.Arm(setup, _context);
+        _mover.Fly(setup.Movement);
+        _shooter.StartShoot();
     }
 
     public void OnSpawn()
     {
         _isDead = false;
-        _health.Init();
-        _mover.Fly();
-        _shooter.StartShoot();
     }
 
     public void OnDespawn()
@@ -83,11 +91,6 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
         _health.TakeDamage(damage);
     }
 
-    private void OnAmmoHit(Ammo ammo)
-    {
-        TakeDamage(ammo.Damage);
-    }
-
     public void Die()
     {
         if (_isDead)
@@ -95,15 +98,20 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
         _isDead = true;
 
-        EnemyDeadBody deadBody = _deadBodyPool.Get(transform.position);
+        EnemyDeadBody deadBody = _context.DeadBodies.Get(transform.position);
 
-        deadBody.End();
+        deadBody.End(_animator == null ? null : _animator.runtimeAnimatorController);
 
-        ExplosionAnimation explosion = _explosionPool.Get(transform.position);
+        ExplosionAnimation explosion = _context.Explosions.Get(transform.position);
 
         explosion.Play();
 
         Released?.Invoke(this);
         Died?.Invoke(this);
+    }
+
+    private void OnAmmoHit(Ammo ammo)
+    {
+        TakeDamage(ammo.Damage);
     }
 }

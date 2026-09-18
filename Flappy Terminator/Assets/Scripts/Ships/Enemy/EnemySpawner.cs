@@ -1,25 +1,32 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private EnemyShip _prefab;
+    [SerializeField] private EnemyShipTable _enemyShips;
+    [SerializeField] private EnemyTierTable _enemyTiers;
+    [SerializeField] private WeaponTable _weapons;
+    [SerializeField] private LocationTable _locations;
+    [SerializeField] private SystemTable _systems;
     [SerializeField] private ExplosionAnimation _explosionPrefab;
     [SerializeField] private EnemyDeadBody _deadBodyPrefab;
-    [SerializeField] private Ammo _ammoPrefab;
+    [SerializeField] private LayerMask _targetLayers;
     [SerializeField] private float _spawnDelay;
     [SerializeField] private float _spawnMargin = 1f;
     [SerializeField] private float _minSpawnPositionY = -3f;
     [SerializeField] private float _maxSpawnPositionY = 3f;
 
+    private readonly PoolRegistry _pools = new PoolRegistry();
+    private readonly List<SpawnPool<EnemyShip>> _shipPools = new List<SpawnPool<EnemyShip>>();
+    private readonly List<SpawnPool<Ammo>> _ammoPools = new List<SpawnPool<Ammo>>();
+
     private Camera _camera;
-    private SpawnPool<EnemyShip> _pool;
-    private SpawnPool<ExplosionAnimation> _explosionPool;
-    private SpawnPool<EnemyDeadBody> _deadBodyPool;
-    private SpawnPool<Ammo> _ammoPool;
-    private SpawnPool<ExplosionAnimation> _hitEffectPool;
+    private EnemyContext _context;
+    private EnemyRoster _roster;
+    private Action<EnemyShip> _created;
     private Coroutine _spawning;
     private Wave _wave;
 
@@ -29,21 +36,15 @@ public class EnemySpawner : MonoBehaviour
     private void Awake()
     {
         _camera = Camera.main;
-
-        _explosionPool = new SpawnPool<ExplosionAnimation>(_explosionPrefab);
-        _deadBodyPool = new SpawnPool<EnemyDeadBody>(_deadBodyPrefab);
-        _ammoPool = new SpawnPool<Ammo>(_ammoPrefab);
-        _hitEffectPool = new SpawnPool<ExplosionAnimation>(_ammoPrefab.HitEffectPrefab);
-        _pool = new SpawnPool<EnemyShip>(_prefab, created: OnEnemyCreated);
+        _created = OnEnemyCreated;
+        _context = new EnemyContext(_pools, _explosionPrefab, _deadBodyPrefab, _targetLayers, _camera);
+        _roster = new EnemyRoster(_enemyShips, _enemyTiers, _weapons, _locations, _systems);
     }
 
-    public void StartWave(int waveSize)
+    public void StartWave(int waveSize, string locationId)
     {
+        Open(locationId);
         ClearField();
-
-        _hitEffectPool.ReleaseAll();
-        _explosionPool.ReleaseAll();
-        _deadBodyPool.ReleaseAll();
 
         _wave = new Wave(waveSize);
         _spawning = StartCoroutine(Spawn());
@@ -52,7 +53,9 @@ public class EnemySpawner : MonoBehaviour
     public void FinishWave()
     {
         EndWave();
-        _ammoPool.ForEachActive(ammo => ammo.Disarm());
+
+        foreach (SpawnPool<Ammo> pool in _ammoPools)
+            pool.ForEachActive(ammo => ammo.Disarm());
     }
 
     public void StopSpawn()
@@ -64,10 +67,37 @@ public class EnemySpawner : MonoBehaviour
         _spawning = null;
     }
 
+    private void Open(string locationId)
+    {
+        _roster.Open(locationId);
+
+        if (_roster.Available.Count == 0)
+            throw new InvalidOperationException(
+                "EnemySpawner: для локации " + locationId + " в таблицах нет ни одного врага");
+
+        _shipPools.Clear();
+        _ammoPools.Clear();
+
+        foreach (EnemySetup setup in _roster.Available)
+        {
+            Collect(_shipPools, _pools.GetPool(setup.Prefab, _created));
+
+            if (setup.Weapon != null && setup.Weapon.Projectile != null)
+                Collect(_ammoPools, _pools.GetPool(setup.Weapon.Projectile));
+        }
+    }
+
+    private void Collect<T>(List<SpawnPool<T>> pools, SpawnPool<T> pool)
+        where T : MonoBehaviour, IPoolable
+    {
+        if (pools.Contains(pool) == false)
+            pools.Add(pool);
+    }
+
     private void ClearField()
     {
         EndWave();
-        _ammoPool.ReleaseAll();
+        _pools.ReleaseAll();
     }
 
     private void EndWave()
@@ -75,12 +105,14 @@ public class EnemySpawner : MonoBehaviour
         StopSpawn();
 
         _wave = null;
-        _pool.ReleaseAll();
+
+        foreach (SpawnPool<EnemyShip> pool in _shipPools)
+            pool.ReleaseAll();
     }
 
     private void OnEnemyCreated(EnemyShip ship)
     {
-        ship.Init(_explosionPool, _deadBodyPool, _ammoPool, _hitEffectPool);
+        ship.Init(_context);
         ship.Died += OnEnemyDied;
         ship.Retired += OnEnemyRetired;
     }
@@ -107,14 +139,22 @@ public class EnemySpawner : MonoBehaviour
 
         for (int i = 0; i < _wave.Size; i++)
         {
-            _pool.Get(new Vector3(
-                ScreenArea.GetRightEdge(_camera) + _spawnMargin,
-                Random.Range(_minSpawnPositionY, _maxSpawnPositionY),
-                0));
+            Release(_roster.GetRandom());
 
             yield return spawnDelay;
         }
 
         _spawning = null;
+    }
+
+    private void Release(EnemySetup setup)
+    {
+        SpawnPool<EnemyShip> pool = _pools.GetPool(setup.Prefab, _created);
+        EnemyShip ship = pool.Get(new Vector3(
+            ScreenArea.GetRightEdge(_camera) + _spawnMargin,
+            Random.Range(_minSpawnPositionY, _maxSpawnPositionY),
+            0));
+
+        ship.Launch(setup);
     }
 }

@@ -12755,10 +12755,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfdef16c9e9ff4ae5bce13b403dec0cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 748883696485598149, guid: 760552f2b84714314ac77afd244877e5, type: 3}
+  _enemyShips: {fileID: 11400000, guid: bacb1018bf9f0418eb966a2ae48a6e98, type: 2}
+  _enemyTiers: {fileID: 11400000, guid: 9d06dab4078b142298f26f917f16c63e, type: 2}
+  _weapons: {fileID: 11400000, guid: 05ad97f9a8c8d4ad79ac3a7dc03292af, type: 2}
+  _locations: {fileID: 11400000, guid: 246bc4d3c22f04566aa6c50ff882939a, type: 2}
+  _systems: {fileID: 11400000, guid: 9db94dcb590bd4dac8102f0527fd6d64, type: 2}
   _explosionPrefab: {fileID: -350056195610788462, guid: c71dd8c77ccf64446a437e4437b230ec, type: 3}
   _deadBodyPrefab: {fileID: -5653055867325360339, guid: 1e18f70f829624b578777c7e8348c52f, type: 3}
-  _ammoPrefab: {fileID: 4581286917286831887, guid: 3f4a22ebd9cac4a5c8b10f728b3b8686, type: 3}
+  _targetLayers:
+    serializedVersion: 2
+    m_Bits: 64
   _spawnDelay: 3
   _spawnMargin: 1
   _minSpawnPositionY: -3

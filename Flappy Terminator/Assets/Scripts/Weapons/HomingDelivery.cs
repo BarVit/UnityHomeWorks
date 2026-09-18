@@ -32,7 +32,7 @@ public class HomingDelivery : ProjectileDelivery
         float turned = Mathf.MoveTowardsAngle(current, wanted, Row.TurnRate * deltaTime);
 
         ammo.transform.rotation = Quaternion.Euler(0f, 0f, turned);
-        ammo.Fly(Row.ProjectileSpeed);
+        ammo.Fly(ProjectileSpeed);
     }
 
     private Transform FindTarget(Vector3 from)

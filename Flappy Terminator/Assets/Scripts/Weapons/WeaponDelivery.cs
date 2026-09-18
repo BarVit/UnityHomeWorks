@@ -25,6 +25,8 @@ public abstract class WeaponDelivery
 
     protected int Barrels => _barrels;
 
+    protected float ProjectileSpeed => _row.ProjectileSpeed * _context.ProjectileSpeedScale;
+
     public void Fire()
     {
         if (IsReady == false)

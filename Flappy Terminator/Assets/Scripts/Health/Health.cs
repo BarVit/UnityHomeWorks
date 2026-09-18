@@ -20,6 +20,12 @@ public class Health : MonoBehaviour
         Changed?.Invoke(Value);
     }
 
+    public void Init(int maxValue)
+    {
+        MaxValue = Mathf.Max(1, maxValue);
+        Init();
+    }
+
     public void TakeDamage(int damage)
     {
         if (damage <= 0 || Value == 0)

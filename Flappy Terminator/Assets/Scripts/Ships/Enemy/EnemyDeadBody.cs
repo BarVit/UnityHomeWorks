@@ -25,10 +25,13 @@ public class EnemyDeadBody : MonoBehaviour, IPoolable
         StopCountdown();
     }
 
-    public void End()
+    public void End(RuntimeAnimatorController controller)
     {
         if (_animator != null)
         {
+            if (controller != null)
+                _animator.runtimeAnimatorController = controller;
+
             _animator.Rebind();
             _animator.Update(0f);
         }
