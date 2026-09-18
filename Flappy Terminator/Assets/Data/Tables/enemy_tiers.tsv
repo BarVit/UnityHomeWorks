@@ -1,0 +1,16 @@
+id	ship	tier	health_scale	projectile_speed_scale	barrels	movement
+scout_1	enemy_scout	1	1	1	1	Forward
+scout_2	enemy_scout	2	1.5	1.2	1	Drift
+scout_3	enemy_scout	3	2	1.4	2	Hover
+warden_1	enemy_warden	1	1	1	1	Forward
+warden_2	enemy_warden	2	1.5	1.2	1	Drift
+warden_3	enemy_warden	3	2	1.4	2	Hover
+lancer_1	enemy_lancer	1	1	1	1	Forward
+lancer_2	enemy_lancer	2	1.5	1.2	1	Drift
+lancer_3	enemy_lancer	3	2	1.4	2	Hover
+reaper_1	enemy_reaper	1	1	1	1	Forward
+reaper_2	enemy_reaper	2	1.5	1.2	1	Drift
+reaper_3	enemy_reaper	3	2	1.4	2	Hover
+sentinel_1	enemy_sentinel	1	1	1	1	Forward
+sentinel_2	enemy_sentinel	2	1.5	1.2	1	Drift
+sentinel_3	enemy_sentinel	3	2	1.4	2	Hover

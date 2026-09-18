@@ -4,3 +4,6 @@ loc_01_02	sys_01	2	3		Normal	3	3
 loc_01_03	sys_01	3	3		Normal	3	3
 loc_01_04	sys_01	4	3		Normal	3	3
 loc_01_05	sys_01	5	3		Normal	3	3
+loc_02_01	sys_02	1	3		Normal	4	3
+loc_03_01	sys_03	1	3		Normal	4	3
+loc_04_01	sys_04	1	3		Normal	5	3

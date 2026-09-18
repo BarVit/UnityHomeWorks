@@ -53,3 +53,27 @@ MonoBehaviour:
     _flightMode: 0
     _firstWaveSize: 3
     _waveSizeGrowth: 3
+  - _id: loc_02_01
+    _system: sys_02
+    _order: 1
+    _levels: 3
+    _borderTheme: 
+    _flightMode: 0
+    _firstWaveSize: 4
+    _waveSizeGrowth: 3
+  - _id: loc_03_01
+    _system: sys_03
+    _order: 1
+    _levels: 3
+    _borderTheme: 
+    _flightMode: 0
+    _firstWaveSize: 4
+    _waveSizeGrowth: 3
+  - _id: loc_04_01
+    _system: sys_04
+    _order: 1
+    _levels: 3
+    _borderTheme: 
+    _flightMode: 0
+    _firstWaveSize: 5
+    _waveSizeGrowth: 3

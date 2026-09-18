@@ -27,9 +27,11 @@ namespace TableImport
             {
                 TableLog log = new TableLog();
                 SystemTable systems = SystemTableImporter.Import(log);
-                LocationTableImporter.Import(systems, log);
+                LocationTable locations = LocationTableImporter.Import(systems, log);
                 ProgressionTableImporter.Import(log);
-                WeaponTableImporter.Import(log);
+                WeaponTable weapons = WeaponTableImporter.Import(log);
+                EnemyShipTable ships = EnemyShipTableImporter.Import(weapons, locations, log);
+                EnemyTierTableImporter.Import(ships, weapons, log);
 
                 if (log.HasProblems)
                 {

@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da44d779fb1004c1e971f41aba1d7167, type: 3}
+  m_Name: EnemyTiers
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyTierTable
+  _rows:
+  - _id: scout_1
+    _ship: enemy_scout
+    _tier: 1
+    _healthScale: 1
+    _projectileSpeedScale: 1
+    _barrels: 1
+    _movement: 0
+  - _id: scout_2
+    _ship: enemy_scout
+    _tier: 2
+    _healthScale: 1.5
+    _projectileSpeedScale: 1.2
+    _barrels: 1
+    _movement: 1
+  - _id: scout_3
+    _ship: enemy_scout
+    _tier: 3
+    _healthScale: 2
+    _projectileSpeedScale: 1.4
+    _barrels: 2
+    _movement: 2
+  - _id: warden_1
+    _ship: enemy_warden
+    _tier: 1
+    _healthScale: 1
+    _projectileSpeedScale: 1
+    _barrels: 1
+    _movement: 0
+  - _id: warden_2
+    _ship: enemy_warden
+    _tier: 2
+    _healthScale: 1.5
+    _projectileSpeedScale: 1.2
+    _barrels: 1
+    _movement: 1
+  - _id: warden_3
+    _ship: enemy_warden
+    _tier: 3
+    _healthScale: 2
+    _projectileSpeedScale: 1.4
+    _barrels: 2
+    _movement: 2
+  - _id: lancer_1
+    _ship: enemy_lancer
+    _tier: 1
+    _healthScale: 1
+    _projectileSpeedScale: 1
+    _barrels: 1
+    _movement: 0
+  - _id: lancer_2
+    _ship: enemy_lancer
+    _tier: 2
+    _healthScale: 1.5
+    _projectileSpeedScale: 1.2
+    _barrels: 1
+    _movement: 1
+  - _id: lancer_3
+    _ship: enemy_lancer
+    _tier: 3
+    _healthScale: 2
+    _projectileSpeedScale: 1.4
+    _barrels: 2
+    _movement: 2
+  - _id: reaper_1
+    _ship: enemy_reaper
+    _tier: 1
+    _healthScale: 1
+    _projectileSpeedScale: 1
+    _barrels: 1
+    _movement: 0
+  - _id: reaper_2
+    _ship: enemy_reaper
+    _tier: 2
+    _healthScale: 1.5
+    _projectileSpeedScale: 1.2
+    _barrels: 1
+    _movement: 1
+  - _id: reaper_3
+    _ship: enemy_reaper
+    _tier: 3
+    _healthScale: 2
+    _projectileSpeedScale: 1.4
+    _barrels: 2
+    _movement: 2
+  - _id: sentinel_1
+    _ship: enemy_sentinel
+    _tier: 1
+    _healthScale: 1
+    _projectileSpeedScale: 1
+    _barrels: 1
+    _movement: 0
+  - _id: sentinel_2
+    _ship: enemy_sentinel
+    _tier: 2
+    _healthScale: 1.5
+    _projectileSpeedScale: 1.2
+    _barrels: 1
+    _movement: 1
+  - _id: sentinel_3
+    _ship: enemy_sentinel
+    _tier: 3
+    _healthScale: 2
+    _projectileSpeedScale: 1.4
+    _barrels: 2
+    _movement: 2

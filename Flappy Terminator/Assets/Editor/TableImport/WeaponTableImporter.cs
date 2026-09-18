@@ -10,7 +10,7 @@ namespace TableImport
 
         private static readonly string[] Columns =
         {
-            "id", "delivery", "damage", "rate", "projectile_speed", "barrels_max",
+            "id", "owner", "delivery", "damage", "rate", "projectile_speed", "barrels_max",
             "fire_pattern", "heat_per_shot", "cooldown_rate", "tick_interval", "turn_rate",
             "area", "price", "projectile", "hit_effect"
         };
@@ -41,6 +41,7 @@ namespace TableImport
 
                 rows.Add(new WeaponRow(
                     id,
+                    reader.ReadEnum<WeaponOwner>("owner"),
                     delivery,
                     reader.ReadInt("damage", 1, 10000),
                     reader.ReadFloat("rate", 0.01f, 60f),

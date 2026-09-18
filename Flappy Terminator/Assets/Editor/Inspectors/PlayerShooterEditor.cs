@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -29,15 +30,16 @@ public class PlayerShooterEditor : Editor
 
     private bool HasRows(WeaponTable table)
     {
-        return table != null && table.Rows != null && table.Rows.Count > 0;
+        return table != null && GetPlayerRows(table).Count > 0;
     }
 
     private void DrawChoice(WeaponTable table, SerializedProperty weaponId, SerializedProperty barrels)
     {
-        string[] ids = new string[table.Rows.Count];
+        List<WeaponRow> rows = GetPlayerRows(table);
+        string[] ids = new string[rows.Count];
 
         for (int i = 0; i < ids.Length; i++)
-            ids[i] = table.Rows[i].Id;
+            ids[i] = rows[i].Id;
 
         int index = Array.IndexOf(ids, weaponId.stringValue);
 
@@ -47,7 +49,7 @@ public class PlayerShooterEditor : Editor
         index = EditorGUILayout.Popup("Weapon", index, ids);
         weaponId.stringValue = ids[index];
 
-        WeaponRow row = table.Rows[index];
+        WeaponRow row = rows[index];
         int maxBarrels = Mathf.Max(1, row.BarrelsMax);
 
         barrels.intValue = EditorGUILayout.IntSlider("Barrels", Mathf.Clamp(barrels.intValue, 1, maxBarrels),
@@ -62,6 +64,22 @@ public class PlayerShooterEditor : Editor
             MessageType.Info);
         EditorGUILayout.PropertyField(weaponId);
         EditorGUILayout.PropertyField(barrels);
+    }
+
+    private List<WeaponRow> GetPlayerRows(WeaponTable table)
+    {
+        List<WeaponRow> rows = new List<WeaponRow>();
+
+        if (table == null || table.Rows == null)
+            return rows;
+
+        foreach (WeaponRow row in table.Rows)
+        {
+            if (row.Owner == WeaponOwner.Player)
+                rows.Add(row);
+        }
+
+        return rows;
     }
 
     private string Describe(WeaponRow row)

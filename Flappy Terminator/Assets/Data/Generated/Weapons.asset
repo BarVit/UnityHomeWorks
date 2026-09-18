@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponTable
   _rows:
   - _id: plasma
+    _owner: 0
     _delivery: 0
     _damage: 10
     _rate: 0.25
@@ -29,6 +30,7 @@ MonoBehaviour:
     _projectile: {fileID: 8728678904558988455, guid: 79b82508bda244037beb9d377f23f950, type: 3}
     _hitEffect: {fileID: 0}
   - _id: rocket
+    _owner: 0
     _delivery: 0
     _damage: 25
     _rate: 0.8
@@ -44,6 +46,7 @@ MonoBehaviour:
     _projectile: {fileID: 8728678904558988455, guid: 79b82508bda244037beb9d377f23f950, type: 3}
     _hitEffect: {fileID: 0}
   - _id: homing
+    _owner: 0
     _delivery: 1
     _damage: 20
     _rate: 0.9
@@ -59,6 +62,7 @@ MonoBehaviour:
     _projectile: {fileID: 8728678904558988455, guid: 79b82508bda244037beb9d377f23f950, type: 3}
     _hitEffect: {fileID: 0}
   - _id: railgun
+    _owner: 0
     _delivery: 2
     _damage: 35
     _rate: 1.2
@@ -74,6 +78,7 @@ MonoBehaviour:
     _projectile: {fileID: 0}
     _hitEffect: {fileID: -3751870904600509761, guid: 3a3ad20ac661444fca78e2501d44c8b8, type: 3}
   - _id: laser
+    _owner: 0
     _delivery: 3
     _damage: 3
     _rate: 0.05
@@ -89,6 +94,7 @@ MonoBehaviour:
     _projectile: {fileID: 0}
     _hitEffect: {fileID: -3751870904600509761, guid: 3a3ad20ac661444fca78e2501d44c8b8, type: 3}
   - _id: plasma_orb
+    _owner: 0
     _delivery: 4
     _damage: 4
     _rate: 3
@@ -102,4 +108,52 @@ MonoBehaviour:
     _area: 1.2
     _price: 2000
     _projectile: {fileID: 8728678904558988455, guid: 79b82508bda244037beb9d377f23f950, type: 3}
+    _hitEffect: {fileID: 0}
+  - _id: enemy_blaster
+    _owner: 1
+    _delivery: 0
+    _damage: 10
+    _rate: 1.5
+    _projectileSpeed: 5
+    _barrelsMax: 4
+    _firePattern: 0
+    _heatPerShot: 0
+    _cooldownRate: 0
+    _tickInterval: 0
+    _turnRate: 0
+    _area: 0
+    _price: 0
+    _projectile: {fileID: 4581286917286831887, guid: 3f4a22ebd9cac4a5c8b10f728b3b8686, type: 3}
+    _hitEffect: {fileID: 0}
+  - _id: enemy_spray
+    _owner: 1
+    _delivery: 0
+    _damage: 8
+    _rate: 2
+    _projectileSpeed: 4
+    _barrelsMax: 4
+    _firePattern: 1
+    _heatPerShot: 0
+    _cooldownRate: 0
+    _tickInterval: 0
+    _turnRate: 0
+    _area: 0
+    _price: 0
+    _projectile: {fileID: 4581286917286831887, guid: 3f4a22ebd9cac4a5c8b10f728b3b8686, type: 3}
+    _hitEffect: {fileID: 0}
+  - _id: enemy_seeker
+    _owner: 1
+    _delivery: 1
+    _damage: 12
+    _rate: 2.5
+    _projectileSpeed: 4
+    _barrelsMax: 2
+    _firePattern: 0
+    _heatPerShot: 0
+    _cooldownRate: 0
+    _tickInterval: 0
+    _turnRate: 90
+    _area: 0
+    _price: 0
+    _projectile: {fileID: 4581286917286831887, guid: 3f4a22ebd9cac4a5c8b10f728b3b8686, type: 3}
     _hitEffect: {fileID: 0}
