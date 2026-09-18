@@ -47,7 +47,8 @@ namespace FlappyBridge
                 case "/invoke":
                     return SceneQuery.CallMethod(ReadString(query, "path", string.Empty),
                         ReadString(query, "component", string.Empty),
-                        ReadString(query, "method", string.Empty));
+                        ReadString(query, "method", string.Empty),
+                        ReadString(query, "arg", string.Empty));
 
                 case "/prop":
                     return SceneQuery.ReadProperty(ReadString(query, "path", string.Empty),
@@ -77,6 +78,10 @@ namespace FlappyBridge
                 case "/sprites":
                     return MakeSprites(ReadString(query, "path", string.Empty));
 
+                case "/border":
+                    return SetBorder(ReadString(query, "path", string.Empty),
+                        ReadString(query, "value", "0,0,0,0"));
+
                 case "/save":
                     return Save();
 
@@ -105,7 +110,7 @@ namespace FlappyBridge
 
                 default:
                     return Json.Error("unknown route " + url.AbsolutePath + "; available: /ping /status /log "
-                        + "/compile /resolve /shot /scene /object /prop /invoke /set /create /add /remove /sprites /save /menu /click /play /stop /pause /step /clear");
+                        + "/compile /resolve /shot /scene /object /prop /invoke /set /create /add /remove /sprites /border /save /menu /click /play /stop /pause /step /clear");
             }
         }
 
@@ -188,7 +193,11 @@ namespace FlappyBridge
                 string path = AssetDatabase.GUIDToAssetPath(guid);
                 TextureImporter importer = AssetImporter.GetAtPath(path) as TextureImporter;
 
-                if (importer == null || importer.textureType == TextureImporterType.Sprite)
+                if (importer == null)
+                    continue;
+
+                if (importer.textureType == TextureImporterType.Sprite
+                    && importer.spriteImportMode == SpriteImportMode.Single)
                     continue;
 
                 importer.textureType = TextureImporterType.Sprite;
@@ -202,6 +211,31 @@ namespace FlappyBridge
                 "\"ok\":true",
                 Json.Field("folder", folder),
                 Json.Field("converted", changed));
+        }
+
+        private static string SetBorder(string assetPath, string value)
+        {
+            TextureImporter importer = AssetImporter.GetAtPath(assetPath) as TextureImporter;
+
+            if (importer == null)
+                return Json.Error("no texture at " + assetPath);
+
+            string[] parts = value.Split(',');
+
+            if (parts.Length != 4)
+                return Json.Error("pass four numbers: left,bottom,right,top");
+
+            Vector4 border = new Vector4(
+                float.Parse(parts[0]), float.Parse(parts[1]),
+                float.Parse(parts[2]), float.Parse(parts[3]));
+
+            importer.spriteBorder = border;
+            importer.SaveAndReimport();
+
+            return Json.Object(
+                "\"ok\":true",
+                Json.Field("asset", assetPath),
+                Json.Field("border", border.ToString()));
         }
 
         private static string Save()

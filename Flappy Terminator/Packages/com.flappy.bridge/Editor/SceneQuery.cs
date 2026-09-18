@@ -104,6 +104,11 @@ namespace FlappyBridge
 
         public static string CallMethod(string path, string componentName, string methodName)
         {
+            return CallMethod(path, componentName, methodName, string.Empty);
+        }
+
+        public static string CallMethod(string path, string componentName, string methodName, string argument)
+        {
             Transform found = Find(path);
 
             if (found == null)
@@ -114,13 +119,25 @@ namespace FlappyBridge
                 if (component == null || component.GetType().Name != componentName)
                     continue;
 
-                System.Reflection.MethodInfo method = component.GetType()
-                    .GetMethod(methodName, System.Type.EmptyTypes);
+                System.Reflection.MethodInfo method = FindMethod(component, methodName, argument);
 
                 if (method == null)
-                    return Json.Error("no public method " + methodName + "() without arguments on " + componentName);
+                    return Json.Error("no public method " + methodName + " on " + componentName
+                        + " taking " + (argument.Length == 0 ? "no arguments" : "one simple argument"));
 
-                method.Invoke(component, null);
+                object[] arguments = null;
+
+                if (argument.Length > 0)
+                {
+                    object converted = Convert(argument, method.GetParameters()[0].ParameterType);
+
+                    if (converted == null)
+                        return Json.Error(argument + " does not fit " + method.GetParameters()[0].ParameterType.Name);
+
+                    arguments = new object[] { converted };
+                }
+
+                method.Invoke(component, arguments);
 
                 return Json.Object(
                     "\"ok\":true",
@@ -129,6 +146,44 @@ namespace FlappyBridge
             }
 
             return Json.Error("no component " + componentName + " on " + path);
+        }
+
+        private static System.Reflection.MethodInfo FindMethod(Component component, string name, string argument)
+        {
+            if (argument.Length == 0)
+                return component.GetType().GetMethod(name, System.Type.EmptyTypes);
+
+            foreach (System.Reflection.MethodInfo candidate in component.GetType().GetMethods())
+            {
+                if (candidate.Name != name)
+                    continue;
+
+                System.Reflection.ParameterInfo[] parameters = candidate.GetParameters();
+
+                if (parameters.Length == 1)
+                    return candidate;
+            }
+
+            return null;
+        }
+
+        private static object Convert(string text, System.Type type)
+        {
+            try
+            {
+                if (type == typeof(string))
+                    return text;
+
+                if (type == typeof(bool))
+                    return text == "true" || text == "1";
+
+                return System.Convert.ChangeType(text, type,
+                    System.Globalization.CultureInfo.InvariantCulture);
+            }
+            catch (System.Exception)
+            {
+                return null;
+            }
         }
 
         public static Transform Find(string path)
