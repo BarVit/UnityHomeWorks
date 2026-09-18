@@ -96,6 +96,9 @@ public class SpawnPool<T> : ISpawnPool where T : MonoBehaviour, IPoolable
 
     private void DestroyItem(T item)
     {
+        if (item == null)
+            return;
+
         UnityEngine.Object.Destroy(item.gameObject);
     }
 }
