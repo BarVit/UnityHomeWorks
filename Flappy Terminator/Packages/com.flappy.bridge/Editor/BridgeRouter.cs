@@ -74,6 +74,9 @@ namespace FlappyBridge
                     return SceneEdit.RemoveComponent(ReadString(query, "path", string.Empty),
                         ReadString(query, "type", string.Empty));
 
+                case "/sprites":
+                    return MakeSprites(ReadString(query, "path", string.Empty));
+
                 case "/save":
                     return Save();
 
@@ -102,7 +105,7 @@ namespace FlappyBridge
 
                 default:
                     return Json.Error("unknown route " + url.AbsolutePath + "; available: /ping /status /log "
-                        + "/compile /resolve /shot /scene /object /prop /invoke /set /create /add /remove /save /menu /click /play /stop /pause /step /clear");
+                        + "/compile /resolve /shot /scene /object /prop /invoke /set /create /add /remove /sprites /save /menu /click /play /stop /pause /step /clear");
             }
         }
 
@@ -171,6 +174,34 @@ namespace FlappyBridge
                 executed ? "\"ok\":true" : "\"ok\":false",
                 Json.Field("path", path),
                 Json.Field("note", executed ? "" : "no such menu item, or it refused to run"));
+        }
+
+        private static string MakeSprites(string folder)
+        {
+            if (folder.Length == 0)
+                return Json.Error("pass a folder under Assets/");
+
+            int changed = 0;
+
+            foreach (string guid in AssetDatabase.FindAssets("t:Texture2D", new string[] { folder }))
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                TextureImporter importer = AssetImporter.GetAtPath(path) as TextureImporter;
+
+                if (importer == null || importer.textureType == TextureImporterType.Sprite)
+                    continue;
+
+                importer.textureType = TextureImporterType.Sprite;
+                importer.spriteImportMode = SpriteImportMode.Single;
+                importer.alphaIsTransparency = true;
+                importer.SaveAndReimport();
+                changed++;
+            }
+
+            return Json.Object(
+                "\"ok\":true",
+                Json.Field("folder", folder),
+                Json.Field("converted", changed));
         }
 
         private static string Save()

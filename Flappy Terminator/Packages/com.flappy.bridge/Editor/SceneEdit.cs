@@ -268,6 +268,9 @@ namespace FlappyBridge
                 case SerializedPropertyType.Vector3:
                     return ApplyVector3(property, value);
 
+                case SerializedPropertyType.Quaternion:
+                    return ApplyQuaternion(property, value);
+
                 case SerializedPropertyType.Color:
                     return ApplyColor(property, value);
 
@@ -304,10 +307,10 @@ namespace FlappyBridge
 
             if (value.StartsWith("Assets/"))
             {
-                Object asset = AssetDatabase.LoadAssetAtPath<Object>(value);
+                Object asset = LoadMatching(value, property.type);
 
                 if (asset == null)
-                    return "no asset at " + value;
+                    return "no asset at " + value + " matching " + property.type;
 
                 property.objectReferenceValue = asset;
 
@@ -417,6 +420,35 @@ namespace FlappyBridge
                 return "expected three numbers separated by commas, got " + value;
 
             property.vector3Value = new Vector3(parts[0], parts[1], parts[2]);
+
+            return null;
+        }
+
+        private static Object LoadMatching(string path, string propertyType)
+        {
+            string wanted = propertyType;
+            int marker = wanted.IndexOf('$');
+
+            if (marker >= 0)
+                wanted = wanted.Substring(marker + 1).TrimEnd('>');
+
+            foreach (Object candidate in AssetDatabase.LoadAllAssetsAtPath(path))
+            {
+                if (candidate != null && candidate.GetType().Name == wanted)
+                    return candidate;
+            }
+
+            return AssetDatabase.LoadAssetAtPath<Object>(path);
+        }
+
+        private static string ApplyQuaternion(SerializedProperty property, string value)
+        {
+            float[] parts;
+
+            if (TryParseNumbers(value, 3, out parts) == false)
+                return "expected three angles separated by commas, got " + value;
+
+            property.quaternionValue = Quaternion.Euler(parts[0], parts[1], parts[2]);
 
             return null;
         }
