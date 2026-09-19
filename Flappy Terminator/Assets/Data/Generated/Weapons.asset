@@ -30,6 +30,7 @@ MonoBehaviour:
     _projectile: {fileID: 8728678904558988455, guid: 05f8103eab55149da8dcba277c3301aa, type: 3}
     _hitEffect: {fileID: 0}
     _beam: {fileID: 0}
+    _muzzle: {fileID: 244376032069848238, guid: 444d2e88e3fba42d38a38ba1fe2e238f, type: 3}
   - _id: plasma
     _owner: 0
     _delivery: 0
@@ -47,6 +48,7 @@ MonoBehaviour:
     _projectile: {fileID: 8728678904558988455, guid: 79b82508bda244037beb9d377f23f950, type: 3}
     _hitEffect: {fileID: 0}
     _beam: {fileID: 0}
+    _muzzle: {fileID: 0}
   - _id: rocket
     _owner: 0
     _delivery: 0
@@ -64,6 +66,7 @@ MonoBehaviour:
     _projectile: {fileID: 8728678904558988455, guid: 79b82508bda244037beb9d377f23f950, type: 3}
     _hitEffect: {fileID: 0}
     _beam: {fileID: 0}
+    _muzzle: {fileID: 0}
   - _id: homing
     _owner: 0
     _delivery: 1
@@ -81,6 +84,7 @@ MonoBehaviour:
     _projectile: {fileID: 8728678904558988455, guid: 79b82508bda244037beb9d377f23f950, type: 3}
     _hitEffect: {fileID: 0}
     _beam: {fileID: 0}
+    _muzzle: {fileID: 0}
   - _id: railgun
     _owner: 0
     _delivery: 2
@@ -98,6 +102,7 @@ MonoBehaviour:
     _projectile: {fileID: 0}
     _hitEffect: {fileID: -3751870904600509761, guid: 3a3ad20ac661444fca78e2501d44c8b8, type: 3}
     _beam: {fileID: 8352859674081126688, guid: 515114a3f4dd148ce90a8b6800a6074c, type: 3}
+    _muzzle: {fileID: 0}
   - _id: laser
     _owner: 0
     _delivery: 3
@@ -115,6 +120,7 @@ MonoBehaviour:
     _projectile: {fileID: 0}
     _hitEffect: {fileID: -3751870904600509761, guid: 3a3ad20ac661444fca78e2501d44c8b8, type: 3}
     _beam: {fileID: 1931004981861364774, guid: 7c7f7cacf8c234cd7bf9b4a0d9d5581d, type: 3}
+    _muzzle: {fileID: 0}
   - _id: plasma_orb
     _owner: 0
     _delivery: 4
@@ -132,6 +138,7 @@ MonoBehaviour:
     _projectile: {fileID: 8728678904558988455, guid: 79b82508bda244037beb9d377f23f950, type: 3}
     _hitEffect: {fileID: 0}
     _beam: {fileID: 0}
+    _muzzle: {fileID: 0}
   - _id: enemy_blaster
     _owner: 1
     _delivery: 0
@@ -149,6 +156,7 @@ MonoBehaviour:
     _projectile: {fileID: 4581286917286831887, guid: 3f4a22ebd9cac4a5c8b10f728b3b8686, type: 3}
     _hitEffect: {fileID: 0}
     _beam: {fileID: 0}
+    _muzzle: {fileID: 0}
   - _id: enemy_spray
     _owner: 1
     _delivery: 0
@@ -166,6 +174,7 @@ MonoBehaviour:
     _projectile: {fileID: 4581286917286831887, guid: 3f4a22ebd9cac4a5c8b10f728b3b8686, type: 3}
     _hitEffect: {fileID: 0}
     _beam: {fileID: 0}
+    _muzzle: {fileID: 0}
   - _id: enemy_seeker
     _owner: 1
     _delivery: 1
@@ -183,3 +192,4 @@ MonoBehaviour:
     _projectile: {fileID: 4581286917286831887, guid: 3f4a22ebd9cac4a5c8b10f728b3b8686, type: 3}
     _hitEffect: {fileID: 0}
     _beam: {fileID: 0}
+    _muzzle: {fileID: 0}

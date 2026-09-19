@@ -35,6 +35,7 @@ public class BeamDelivery : WeaponDelivery
             ? (Vector2)mount.position + direction * reach
             : _hits[0].point;
 
+        ShowMuzzle(barrel);
         Draw(mount.position, end, barrel);
 
         if (count == 0)

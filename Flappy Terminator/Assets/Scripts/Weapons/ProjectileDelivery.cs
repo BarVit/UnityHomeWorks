@@ -24,6 +24,8 @@ public class ProjectileDelivery : WeaponDelivery
         Transform mount = GetMount(barrel);
         Ammo ammo = _ammoPool.Get(mount.position, GetRotation(barrel));
 
+        ShowMuzzle(barrel);
+
         ammo.Init(_hitEffectPool);
         ammo.SetDamage(Row.Damage);
         ammo.Fly(ProjectileSpeed);
