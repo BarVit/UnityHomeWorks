@@ -19,13 +19,13 @@ public class WeaponRow
     [SerializeField] private float _area;
     [SerializeField] private int _price;
     [SerializeField] private Ammo _projectile;
-    [SerializeField] private ExplosionAnimation _hitEffect;
     [SerializeField] private BeamFlash _beam;
+    [SerializeField] private WeaponAssets _assets;
 
     public WeaponRow(string id, WeaponOwner owner, DeliveryKind delivery, int damage, float rate,
         float projectileSpeed, int barrelsMax, FirePattern firePattern, float heatPerShot,
         float cooldownRate, float tickInterval, float turnRate, float area, int price,
-        Ammo projectile, ExplosionAnimation hitEffect, BeamFlash beam)
+        Ammo projectile, BeamFlash beam, WeaponAssets assets)
     {
         _id = id;
         _owner = owner;
@@ -42,8 +42,8 @@ public class WeaponRow
         _area = area;
         _price = price;
         _projectile = projectile;
-        _hitEffect = hitEffect;
         _beam = beam;
+        _assets = assets;
     }
 
     public string Id => _id;
@@ -78,6 +78,9 @@ public class WeaponRow
 
     public BeamFlash Beam => _beam;
 
-    public ExplosionAnimation HitEffect =>
-        _hitEffect != null ? _hitEffect : (_projectile == null ? null : _projectile.HitEffectPrefab);
+    public WeaponAssets Assets => _assets;
+
+    public ExplosionAnimation HitEffect => _assets != null && _assets.HitTargetEffect != null
+        ? _assets.HitTargetEffect
+        : (_projectile == null ? null : _projectile.HitEffectPrefab);
 }

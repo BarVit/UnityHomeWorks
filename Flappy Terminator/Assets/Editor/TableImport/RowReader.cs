@@ -135,6 +135,36 @@ namespace TableImport
             return null;
         }
 
+        public TAsset ReadAsset<TAsset>(string column, bool required) where TAsset : UnityEngine.Object
+        {
+            string name = ReadCell(column);
+
+            if (name.Length == 0)
+            {
+                if (required)
+                    Fail("пустая ссылка на ассет в столбце " + column);
+
+                return null;
+            }
+
+            foreach (string guid in AssetDatabase.FindAssets(name + " t:" + typeof(TAsset).Name))
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+
+                foreach (UnityEngine.Object candidate in AssetDatabase.LoadAllAssetsAtPath(path))
+                {
+                    TAsset found = candidate as TAsset;
+
+                    if (found != null && found.name == name)
+                        return found;
+                }
+            }
+
+            Fail(column + ": не найден " + typeof(TAsset).Name + " с именем " + name);
+
+            return null;
+        }
+
         public void Fail(string message)
         {
             _log.Add(_document.File, _row.Line, message);
