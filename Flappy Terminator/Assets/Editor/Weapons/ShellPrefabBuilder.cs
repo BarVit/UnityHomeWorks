@@ -12,6 +12,8 @@ namespace WeaponContent
         private const string MaterialPath = "Assets/Prefabs/Beams/Beam.mat";
         private const string SoundPath = "Assets/Sounds/Rocket 1.wav";
         private const float Scale = 0.246f;
+        private const string TailName = "Tail";
+        private static readonly Vector3 TailOffset = new Vector3(-0.96f, 0f, 0f);
 
         [MenuItem("Tools/Weapons/Build Cannon Shell")]
         public static void Build()
@@ -74,10 +76,17 @@ namespace WeaponContent
 
         private static void SetTrail(GameObject root)
         {
-            TrailRenderer trail = root.GetComponent<TrailRenderer>();
+            Strip<TrailReset>(root);
+            Strip<TrailRenderer>(root);
+
+            Transform tail = GetTail(root.transform);
+            TrailRenderer trail = tail.GetComponent<TrailRenderer>();
 
             if (trail == null)
-                trail = root.AddComponent<TrailRenderer>();
+                trail = tail.gameObject.AddComponent<TrailRenderer>();
+
+            tail.localPosition = TailOffset;
+            tail.localRotation = Quaternion.identity;
 
             trail.time = 0.035f;
             trail.minVertexDistance = 0.02f;
@@ -92,8 +101,22 @@ namespace WeaponContent
             trail.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             trail.receiveShadows = false;
 
-            if (root.GetComponent<TrailReset>() == null)
-                root.AddComponent<TrailReset>();
+            if (tail.GetComponent<TrailReset>() == null)
+                tail.gameObject.AddComponent<TrailReset>();
+        }
+
+        private static Transform GetTail(Transform root)
+        {
+            Transform found = root.Find(TailName);
+
+            if (found != null)
+                return found;
+
+            Transform created = new GameObject(TailName).transform;
+
+            created.SetParent(root, false);
+
+            return created;
         }
 
         private static void SetSound(GameObject root)
