@@ -33,8 +33,8 @@ MonoBehaviour:
   - _id: rocket
     _owner: 0
     _delivery: 0
-    _damage: 25
-    _rate: 0.8
+    _damage: 35
+    _rate: 0.75
     _projectileSpeed: 8
     _barrelsMax: 4
     _firePattern: 2
@@ -50,8 +50,8 @@ MonoBehaviour:
   - _id: homing
     _owner: 0
     _delivery: 1
-    _damage: 20
-    _rate: 0.9
+    _damage: 25
+    _rate: 0.6
     _projectileSpeed: 7
     _barrelsMax: 4
     _firePattern: 0
@@ -67,8 +67,8 @@ MonoBehaviour:
   - _id: railgun
     _owner: 0
     _delivery: 2
-    _damage: 35
-    _rate: 1.2
+    _damage: 45
+    _rate: 0.9
     _projectileSpeed: 0
     _barrelsMax: 4
     _firePattern: 3
@@ -84,13 +84,13 @@ MonoBehaviour:
   - _id: laser
     _owner: 0
     _delivery: 3
-    _damage: 3
+    _damage: 5
     _rate: 0.05
     _projectileSpeed: 0
     _barrelsMax: 4
     _firePattern: 0
-    _heatPerShot: 6
-    _cooldownRate: 25
+    _heatPerShot: 3
+    _cooldownRate: 40
     _tickInterval: 0
     _turnRate: 0
     _area: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   - _id: plasma_orb
     _owner: 0
     _delivery: 4
-    _damage: 4
+    _damage: 6
     _rate: 3
     _projectileSpeed: 3
     _barrelsMax: 1
@@ -118,7 +118,7 @@ MonoBehaviour:
   - _id: enemy_blaster
     _owner: 1
     _delivery: 0
-    _damage: 10
+    _damage: 8
     _rate: 1.5
     _projectileSpeed: 5
     _barrelsMax: 4
@@ -135,7 +135,7 @@ MonoBehaviour:
   - _id: enemy_spray
     _owner: 1
     _delivery: 0
-    _damage: 8
+    _damage: 5
     _rate: 2
     _projectileSpeed: 4
     _barrelsMax: 4
