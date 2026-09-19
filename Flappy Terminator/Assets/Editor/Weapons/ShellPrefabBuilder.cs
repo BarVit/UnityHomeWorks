@@ -11,8 +11,6 @@ namespace WeaponContent
         private const string SpritePath = "Assets/Sprites/Ammo/Cannon/Cannon Shell.png";
         private const string MaterialPath = "Assets/Prefabs/Beams/Beam.mat";
         private const string SoundPath = "Assets/Sounds/Rocket 1.wav";
-        private const string GlowSpritePath = "Assets/Sprites/Ammo/Cannon/Glow.png";
-        private const string GlowName = "Glow";
         private const float Scale = 0.246f;
         private const string TailName = "Tail";
         private static readonly Vector3 TailOffset = new Vector3(-0.96f, 0f, 0f);
@@ -32,7 +30,6 @@ namespace WeaponContent
             SetSprite(root);
             SetCollider(root);
             SetTrail(root);
-            StripGlow(root);
             SetSound(root);
 
             PrefabUtility.SaveAsPrefabAsset(root, TargetPath);
@@ -106,14 +103,6 @@ namespace WeaponContent
 
             if (tail.GetComponent<TrailReset>() == null)
                 tail.gameObject.AddComponent<TrailReset>();
-        }
-
-        private static void StripGlow(GameObject root)
-        {
-            Transform glow = root.transform.Find(GlowName);
-
-            if (glow != null)
-                Object.DestroyImmediate(glow.gameObject, true);
         }
 
         private static Transform GetTail(Transform root)

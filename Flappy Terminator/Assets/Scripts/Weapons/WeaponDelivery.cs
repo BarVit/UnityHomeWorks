@@ -6,8 +6,6 @@ public abstract class WeaponDelivery
     private readonly WeaponContext _context;
     private readonly int _barrels;
 
-    private readonly SpawnPool<MuzzleFlash> _muzzlePool;
-
     private float _cooldownLeft;
 
     protected WeaponDelivery(WeaponRow row, WeaponContext context)
@@ -15,9 +13,6 @@ public abstract class WeaponDelivery
         _row = row;
         _context = context;
         _barrels = Mathf.Clamp(context.Barrels, 1, Mathf.Min(row.BarrelsMax, context.Mounts.Length));
-
-        if (row.Muzzle != null)
-            _muzzlePool = context.Pools.GetPool(row.Muzzle);
     }
 
     public virtual bool IsReady => _cooldownLeft <= 0f;
@@ -59,14 +54,6 @@ public abstract class WeaponDelivery
         float angle = FireSpread.GetAngle(_row.FirePattern, barrel, _barrels);
 
         return GetMount(barrel).rotation * Quaternion.Euler(0f, 0f, angle);
-    }
-
-    protected void ShowMuzzle(int barrel)
-    {
-        if (_muzzlePool == null)
-            return;
-
-        _muzzlePool.Get(GetMount(barrel).position, GetRotation(barrel));
     }
 
     protected abstract void OnFire();
