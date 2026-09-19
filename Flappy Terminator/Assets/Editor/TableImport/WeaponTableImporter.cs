@@ -11,12 +11,12 @@ namespace TableImport
 
         private static readonly string[] Columns =
         {
-            "id", "owner", "delivery", "damage", "rate", "projectile_speed", "barrels_max",
+            "id", "title", "owner", "delivery", "damage", "rate", "projectile_speed", "barrels_max",
             "fire_pattern", "heat_per_shot", "cooldown_rate", "tick_interval", "turn_rate",
             "area", "price", "projectile", "beam",
             "icon", "projectile_sprite", "projectile_animation", "shot_effect",
             "hit_target_effect", "hit_world_effect",
-            "shot_sound", "flight_sound", "hit_target_sound", "hit_world_sound"
+            "shot_sound", "flight_sound", "hit_target_sound", "hit_world_sound", "overheat_sound"
         };
 
         public static WeaponTable Import(TableLog log)
@@ -45,6 +45,7 @@ namespace TableImport
 
                 rows.Add(new WeaponRow(
                     id,
+                    reader.ReadText("title"),
                     reader.ReadEnum<WeaponOwner>("owner"),
                     delivery,
                     reader.ReadInt("damage", 1, 10000),
@@ -70,7 +71,8 @@ namespace TableImport
                         reader.ReadAsset<AudioClip>("shot_sound", false),
                         reader.ReadAsset<AudioClip>("flight_sound", false),
                         reader.ReadAsset<AudioClip>("hit_target_sound", false),
-                        reader.ReadAsset<AudioClip>("hit_world_sound", false))));
+                        reader.ReadAsset<AudioClip>("hit_world_sound", false),
+                        reader.ReadAsset<AudioClip>("overheat_sound", false))));
             }
 
             WeaponTable table = GeneratedAsset.LoadOrCreate<WeaponTable>(AssetPath);

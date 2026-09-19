@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponRow
 {
     [SerializeField] private string _id;
+    [SerializeField] private string _title;
     [SerializeField] private WeaponOwner _owner;
     [SerializeField] private DeliveryKind _delivery;
     [SerializeField] private int _damage;
@@ -22,12 +23,13 @@ public class WeaponRow
     [SerializeField] private BeamFlash _beam;
     [SerializeField] private WeaponAssets _assets;
 
-    public WeaponRow(string id, WeaponOwner owner, DeliveryKind delivery, int damage, float rate,
+    public WeaponRow(string id, string title, WeaponOwner owner, DeliveryKind delivery, int damage, float rate,
         float projectileSpeed, int barrelsMax, FirePattern firePattern, float heatPerShot,
         float cooldownRate, float tickInterval, float turnRate, float area, int price,
         Ammo projectile, BeamFlash beam, WeaponAssets assets)
     {
         _id = id;
+        _title = title;
         _owner = owner;
         _delivery = delivery;
         _damage = damage;
@@ -47,6 +49,8 @@ public class WeaponRow
     }
 
     public string Id => _id;
+
+    public string Title => _title;
 
     public WeaponOwner Owner => _owner;
 

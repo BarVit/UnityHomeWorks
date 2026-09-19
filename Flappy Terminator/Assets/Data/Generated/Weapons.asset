@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponTable
   _rows:
   - _id: cannon
+    _title: "\u041F\u0443\u0448\u043A\u0430"
     _owner: 0
     _delivery: 0
     _damage: 7
@@ -40,7 +41,9 @@ MonoBehaviour:
       _flightSound: {fileID: 0}
       _hitTargetSound: {fileID: 8300000, guid: db5a0c5135622436d987441a5ed3fc85, type: 3}
       _hitWorldSound: {fileID: 0}
+      _overheatSound: {fileID: 0}
   - _id: plasma
+    _title: "\u041F\u043B\u0430\u0437\u043C\u0430"
     _owner: 0
     _delivery: 0
     _damage: 10
@@ -67,7 +70,9 @@ MonoBehaviour:
       _flightSound: {fileID: 0}
       _hitTargetSound: {fileID: 8300000, guid: db5a0c5135622436d987441a5ed3fc85, type: 3}
       _hitWorldSound: {fileID: 0}
+      _overheatSound: {fileID: 0}
   - _id: rocket
+    _title: "\u0420\u0430\u043A\u0435\u0442\u043D\u0438\u0446\u0430"
     _owner: 0
     _delivery: 0
     _damage: 35
@@ -94,7 +99,9 @@ MonoBehaviour:
       _flightSound: {fileID: 0}
       _hitTargetSound: {fileID: 8300000, guid: db5a0c5135622436d987441a5ed3fc85, type: 3}
       _hitWorldSound: {fileID: 0}
+      _overheatSound: {fileID: 0}
   - _id: homing
+    _title: "\u0421\u0430\u043C\u043E\u043D\u0430\u0432\u043E\u0434\u044F\u0449\u0438\u0435\u0441\u044F"
     _owner: 0
     _delivery: 1
     _damage: 25
@@ -121,7 +128,9 @@ MonoBehaviour:
       _flightSound: {fileID: 0}
       _hitTargetSound: {fileID: 8300000, guid: db5a0c5135622436d987441a5ed3fc85, type: 3}
       _hitWorldSound: {fileID: 0}
+      _overheatSound: {fileID: 0}
   - _id: railgun
+    _title: "\u0420\u0435\u043B\u044C\u0441\u043E\u0442\u0440\u043E\u043D"
     _owner: 0
     _delivery: 2
     _damage: 45
@@ -148,7 +157,9 @@ MonoBehaviour:
       _flightSound: {fileID: 0}
       _hitTargetSound: {fileID: 8300000, guid: db5a0c5135622436d987441a5ed3fc85, type: 3}
       _hitWorldSound: {fileID: 0}
+      _overheatSound: {fileID: 0}
   - _id: laser
+    _title: "\u041B\u0430\u0437\u0435\u0440"
     _owner: 0
     _delivery: 3
     _damage: 5
@@ -175,7 +186,9 @@ MonoBehaviour:
       _flightSound: {fileID: 0}
       _hitTargetSound: {fileID: 8300000, guid: db5a0c5135622436d987441a5ed3fc85, type: 3}
       _hitWorldSound: {fileID: 0}
+      _overheatSound: {fileID: 0}
   - _id: plasma_orb
+    _title: "\u041F\u043B\u0430\u0437\u043C\u0435\u043D\u043D\u044B\u0439 \u0448\u0430\u0440"
     _owner: 0
     _delivery: 4
     _damage: 6
@@ -202,7 +215,9 @@ MonoBehaviour:
       _flightSound: {fileID: 0}
       _hitTargetSound: {fileID: 8300000, guid: db5a0c5135622436d987441a5ed3fc85, type: 3}
       _hitWorldSound: {fileID: 0}
+      _overheatSound: {fileID: 0}
   - _id: enemy_blaster
+    _title: "\u0411\u043B\u0430\u0441\u0442\u0435\u0440"
     _owner: 1
     _delivery: 0
     _damage: 8
@@ -229,7 +244,9 @@ MonoBehaviour:
       _flightSound: {fileID: 0}
       _hitTargetSound: {fileID: 0}
       _hitWorldSound: {fileID: 0}
+      _overheatSound: {fileID: 0}
   - _id: enemy_spray
+    _title: "\u0412\u0435\u0435\u0440"
     _owner: 1
     _delivery: 0
     _damage: 5
@@ -256,7 +273,9 @@ MonoBehaviour:
       _flightSound: {fileID: 0}
       _hitTargetSound: {fileID: 0}
       _hitWorldSound: {fileID: 0}
+      _overheatSound: {fileID: 0}
   - _id: enemy_seeker
+    _title: "\u0418\u0441\u043A\u0430\u0442\u0435\u043B\u044C"
     _owner: 1
     _delivery: 1
     _damage: 12
@@ -283,3 +302,4 @@ MonoBehaviour:
       _flightSound: {fileID: 0}
       _hitTargetSound: {fileID: 0}
       _hitWorldSound: {fileID: 0}
+      _overheatSound: {fileID: 0}

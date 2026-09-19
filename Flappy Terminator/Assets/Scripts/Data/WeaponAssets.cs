@@ -14,10 +14,12 @@ public class WeaponAssets
     [SerializeField] private AudioClip _flightSound;
     [SerializeField] private AudioClip _hitTargetSound;
     [SerializeField] private AudioClip _hitWorldSound;
+    [SerializeField] private AudioClip _overheatSound;
 
     public WeaponAssets(Sprite icon, Sprite projectileSprite, AnimationClip projectileAnimation,
         ExplosionAnimation shotEffect, ExplosionAnimation hitTargetEffect, ExplosionAnimation hitWorldEffect,
-        AudioClip shotSound, AudioClip flightSound, AudioClip hitTargetSound, AudioClip hitWorldSound)
+        AudioClip shotSound, AudioClip flightSound, AudioClip hitTargetSound, AudioClip hitWorldSound,
+        AudioClip overheatSound)
     {
         _icon = icon;
         _projectileSprite = projectileSprite;
@@ -29,6 +31,7 @@ public class WeaponAssets
         _flightSound = flightSound;
         _hitTargetSound = hitTargetSound;
         _hitWorldSound = hitWorldSound;
+        _overheatSound = overheatSound;
     }
 
     public Sprite Icon => _icon;
@@ -50,4 +53,6 @@ public class WeaponAssets
     public AudioClip HitTargetSound => _hitTargetSound;
 
     public AudioClip HitWorldSound => _hitWorldSound;
+
+    public AudioClip OverheatSound => _overheatSound;
 }
