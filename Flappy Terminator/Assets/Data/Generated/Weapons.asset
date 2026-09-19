@@ -30,7 +30,7 @@ MonoBehaviour:
     _projectile: {fileID: 8728678904558988455, guid: 05f8103eab55149da8dcba277c3301aa, type: 3}
     _hitEffect: {fileID: 0}
     _beam: {fileID: 0}
-    _muzzle: {fileID: 244376032069848238, guid: 444d2e88e3fba42d38a38ba1fe2e238f, type: 3}
+    _muzzle: {fileID: 0}
   - _id: plasma
     _owner: 0
     _delivery: 0

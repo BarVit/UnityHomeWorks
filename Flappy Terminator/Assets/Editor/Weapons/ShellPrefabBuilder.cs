@@ -12,7 +12,6 @@ namespace WeaponContent
         private const string MaterialPath = "Assets/Prefabs/Beams/Beam.mat";
         private const string SoundPath = "Assets/Sounds/Rocket 1.wav";
         private const string GlowSpritePath = "Assets/Sprites/Ammo/Cannon/Glow.png";
-        private const string FlashPath = "Assets/Prefabs/Muzzle Flash.prefab";
         private const string GlowName = "Glow";
         private const float Scale = 0.246f;
         private const string TailName = "Tail";
@@ -33,15 +32,14 @@ namespace WeaponContent
             SetSprite(root);
             SetCollider(root);
             SetTrail(root);
-            SetGlow(root);
+            StripGlow(root);
             SetSound(root);
 
             PrefabUtility.SaveAsPrefabAsset(root, TargetPath);
             PrefabUtility.UnloadPrefabContents(root);
-            BuildFlash();
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-            Debug.Log("Пушка: снаряд и вспышка собраны");
+            Debug.Log("Пушка: снаряд собран");
         }
 
         private static void Strip<TComponent>(GameObject root) where TComponent : Component
@@ -110,61 +108,12 @@ namespace WeaponContent
                 tail.gameObject.AddComponent<TrailReset>();
         }
 
-        private static void SetGlow(GameObject root)
+        private static void StripGlow(GameObject root)
         {
             Transform glow = root.transform.Find(GlowName);
 
-            if (glow == null)
-            {
-                glow = new GameObject(GlowName).transform;
-                glow.SetParent(root.transform, false);
-            }
-
-            glow.localPosition = Vector3.zero;
-            glow.localRotation = Quaternion.identity;
-
-            SpriteRenderer renderer = glow.GetComponent<SpriteRenderer>();
-
-            if (renderer == null)
-                renderer = glow.gameObject.AddComponent<SpriteRenderer>();
-
-            renderer.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(GlowSpritePath);
-            renderer.sortingOrder = root.GetComponent<SpriteRenderer>().sortingOrder + 1;
-
-            HeatFade fade = glow.GetComponent<HeatFade>();
-
-            if (fade == null)
-                fade = glow.gameObject.AddComponent<HeatFade>();
-
-            SerializedObject serialized = new SerializedObject(fade);
-
-            serialized.FindProperty("_hotColor").colorValue = new Color(1f, 0.95f, 0.7f, 1f);
-            serialized.FindProperty("_coolColor").colorValue = new Color(1f, 0.35f, 0.05f, 0.4f);
-            serialized.FindProperty("_hotScale").floatValue = 2.2f;
-            serialized.FindProperty("_coolScale").floatValue = 1.2f;
-            serialized.FindProperty("_duration").floatValue = 0.3f;
-            serialized.ApplyModifiedPropertiesWithoutUndo();
-        }
-
-        private static void BuildFlash()
-        {
-            GameObject root = new GameObject("Muzzle Flash");
-            SpriteRenderer renderer = root.AddComponent<SpriteRenderer>();
-
-            renderer.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(GlowSpritePath);
-            renderer.sortingOrder = 10;
-
-            MuzzleFlash flash = root.AddComponent<MuzzleFlash>();
-            SerializedObject serialized = new SerializedObject(flash);
-
-            serialized.FindProperty("_lifetime").floatValue = 0.06f;
-            serialized.FindProperty("_startScale").floatValue = 0.55f;
-            serialized.FindProperty("_endScale").floatValue = 0.15f;
-            serialized.FindProperty("_color").colorValue = new Color(1f, 0.82f, 0.45f, 1f);
-            serialized.ApplyModifiedPropertiesWithoutUndo();
-
-            PrefabUtility.SaveAsPrefabAsset(root, FlashPath);
-            Object.DestroyImmediate(root);
+            if (glow != null)
+                Object.DestroyImmediate(glow.gameObject, true);
         }
 
         private static Transform GetTail(Transform root)
