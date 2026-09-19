@@ -13,6 +13,23 @@ MonoBehaviour:
   m_Name: Weapons
   m_EditorClassIdentifier: Assembly-CSharp::WeaponTable
   _rows:
+  - _id: cannon
+    _owner: 0
+    _delivery: 0
+    _damage: 7
+    _rate: 0.4
+    _projectileSpeed: 18
+    _barrelsMax: 4
+    _firePattern: 0
+    _heatPerShot: 0
+    _cooldownRate: 0
+    _tickInterval: 0
+    _turnRate: 0
+    _area: 0
+    _price: 0
+    _projectile: {fileID: 8728678904558988455, guid: 05f8103eab55149da8dcba277c3301aa, type: 3}
+    _hitEffect: {fileID: 0}
+    _beam: {fileID: 0}
   - _id: plasma
     _owner: 0
     _delivery: 0
@@ -26,7 +43,7 @@ MonoBehaviour:
     _tickInterval: 0
     _turnRate: 0
     _area: 0
-    _price: 0
+    _price: 150
     _projectile: {fileID: 8728678904558988455, guid: 79b82508bda244037beb9d377f23f950, type: 3}
     _hitEffect: {fileID: 0}
     _beam: {fileID: 0}

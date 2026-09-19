@@ -14174,7 +14174,7 @@ PrefabInstance:
       objectReference: {fileID: 661464565}
     - target: {fileID: 8330222878791513292, guid: 09ba11221984c417dbda5f0b88456507, type: 3}
       propertyPath: _barrels
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8330222878791513292, guid: 09ba11221984c417dbda5f0b88456507, type: 3}
       propertyPath: _weapons
@@ -14182,7 +14182,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 05ad97f9a8c8d4ad79ac3a7dc03292af, type: 2}
     - target: {fileID: 8330222878791513292, guid: 09ba11221984c417dbda5f0b88456507, type: 3}
       propertyPath: _weaponId
-      value: plasma
+      value: cannon
       objectReference: {fileID: 0}
     - target: {fileID: 8330222878791513292, guid: 09ba11221984c417dbda5f0b88456507, type: 3}
       propertyPath: _mountRoot
