@@ -1,10 +1,10 @@
-id	owner	delivery	damage	rate	projectile_speed	barrels_max	fire_pattern	heat_per_shot	cooldown_rate	tick_interval	turn_rate	area	price	projectile	hit_effect
-plasma	Player	Projectile	10	0.25	12	4	Cone	0	0	0	0	0	0	PlayerBullet	
-rocket	Player	Projectile	25	0.8	8	4	ForwardAndSides	0	0	0	0	0	300	PlayerBullet	
-homing	Player	Homing	20	0.9	7	4	Parallel	0	0	0	180	0	600	PlayerBullet	
-railgun	Player	Beam	35	1.2	0	4	NarrowCone	0	0	0	0	0	900		PlayerBulletHit
-laser	Player	ContinuousBeam	3	0.05	0	4	Parallel	6	25	0	0	0	1200		PlayerBulletHit
-plasma_orb	Player	Orb	4	3.0	3	1	Single	0	0	0.25	0	1.2	2000	PlayerBullet	
-enemy_blaster	Enemy	Projectile	10	1.5	5	4	Parallel	0	0	0	0	0	0	Enemy Bullet	
-enemy_spray	Enemy	Projectile	8	2.0	4	4	Cone	0	0	0	0	0	0	Enemy Bullet	
-enemy_seeker	Enemy	Homing	12	2.5	4	2	Parallel	0	0	0	90	0	0	Enemy Bullet	
+id	owner	delivery	damage	rate	projectile_speed	barrels_max	fire_pattern	heat_per_shot	cooldown_rate	tick_interval	turn_rate	area	price	projectile	hit_effect	beam
+plasma	Player	Projectile	10	0.25	12	4	Cone	0	0	0	0	0	0	PlayerBullet		
+rocket	Player	Projectile	25	0.8	8	4	ForwardAndSides	0	0	0	0	0	300	PlayerBullet		
+homing	Player	Homing	20	0.9	7	4	Parallel	0	0	0	180	0	600	PlayerBullet		
+railgun	Player	Beam	35	1.2	0	4	NarrowCone	0	0	0	0	0	900		PlayerBulletHit	Railgun Beam
+laser	Player	ContinuousBeam	3	0.05	0	4	Parallel	6	25	0	0	0	1200		PlayerBulletHit	Laser Beam
+plasma_orb	Player	Orb	4	3.0	3	1	Single	0	0	0.25	0	1.2	2000	PlayerBullet		
+enemy_blaster	Enemy	Projectile	10	1.5	5	4	Parallel	0	0	0	0	0	0	Enemy Bullet		
+enemy_spray	Enemy	Projectile	8	2.0	4	4	Cone	0	0	0	0	0	0	Enemy Bullet		
+enemy_seeker	Enemy	Homing	12	2.5	4	2	Parallel	0	0	0	90	0	0	Enemy Bullet		
