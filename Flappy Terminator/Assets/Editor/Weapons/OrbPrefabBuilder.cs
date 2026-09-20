@@ -36,6 +36,7 @@ namespace WeaponContent
             Layer(root, "Veins A", VeinsPath, additive, 0.98f, 1, 38f, 0.8f);
             Layer(root, "Veins B", VeinsPath, additive, 0.82f, 2, -57f, 0.65f);
             SetArcs(root);
+            SetTether(root);
 
             PrefabUtility.SaveAsPrefabAsset(root, TargetPath);
             PrefabUtility.UnloadPrefabContents(root);
@@ -151,6 +152,31 @@ namespace WeaponContent
             SerializedObject serialized = new SerializedObject(arcs);
 
             serialized.FindProperty("_material").objectReferenceValue = GetArcMaterial();
+            serialized.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        private static void SetTether(GameObject root)
+        {
+            Transform found = root.transform.Find("Tether");
+
+            if (found == null)
+            {
+                found = new GameObject("Tether").transform;
+                found.SetParent(root.transform, false);
+            }
+
+            found.localPosition = Vector3.zero;
+            found.localScale = Vector3.one;
+
+            PlasmaTether tether = found.GetComponent<PlasmaTether>();
+
+            if (tether == null)
+                tether = found.gameObject.AddComponent<PlasmaTether>();
+
+            SerializedObject serialized = new SerializedObject(tether);
+
+            serialized.FindProperty("_material").objectReferenceValue =
+                AssetDatabase.LoadAssetAtPath<Material>(ArcMaterialPath);
             serialized.ApplyModifiedPropertiesWithoutUndo();
         }
 

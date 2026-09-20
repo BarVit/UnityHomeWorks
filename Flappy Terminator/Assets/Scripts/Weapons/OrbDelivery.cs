@@ -20,10 +20,10 @@ public class OrbDelivery : ProjectileDelivery
 
         orb.MakePersistent();
 
-        PlasmaArcs arcs = orb.GetComponentInChildren<PlasmaArcs>();
+        PlasmaTether tether = orb.GetComponentInChildren<PlasmaTether>();
 
-        if (arcs != null)
-            arcs.Aim(Context.TargetFilter);
+        if (tether != null)
+            tether.Aim(Context.TargetFilter);
 
         return orb;
     }
