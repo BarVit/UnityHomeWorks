@@ -8,6 +8,7 @@ namespace WeaponContent
     {
         private const string TexturePath = "Assets/Sprites/VFX/Smoke.png";
         private const string MaterialPath = "Assets/VFX/Smoke.mat";
+        private const string SampleMaterialPath = "Assets/GabrielAguiarProductions/Flare00_AB_2.mat";
         private const string PrefabPath = "Assets/Prefabs/Overheat Smoke.prefab";
         private const string MountPath = "Player Ship/ShootPoint/Mount 1";
         private const string SmokeName = "Overheat Smoke";
@@ -102,20 +103,27 @@ namespace WeaponContent
 
         private static Material GetMaterial()
         {
-            Material found = AssetDatabase.LoadAssetAtPath<Material>(MaterialPath);
+            if (File.Exists(MaterialPath))
+                AssetDatabase.DeleteAsset(MaterialPath);
 
-            if (found != null)
-                return found;
+            if (AssetDatabase.CopyAsset(SampleMaterialPath, MaterialPath) == false)
+            {
+                Debug.LogError("Перегрев: не удалось скопировать материал " + SampleMaterialPath);
 
-            Shader shader = Shader.Find("Universal Render Pipeline/Particles/Unlit");
+                return null;
+            }
 
-            if (shader == null)
-                shader = Shader.Find("Sprites/Default");
+            Material created = AssetDatabase.LoadAssetAtPath<Material>(MaterialPath);
 
-            Material created = new Material(shader);
+            created.SetTexture("_MainTex", AssetDatabase.LoadAssetAtPath<Texture2D>(TexturePath));
 
-            created.mainTexture = AssetDatabase.LoadAssetAtPath<Texture2D>(TexturePath);
-            AssetDatabase.CreateAsset(created, MaterialPath);
+            if (created.HasProperty("_Color"))
+                created.SetColor("_Color", new Color(0.85f, 0.87f, 0.9f, 1f));
+
+            if (created.HasProperty("_TintColor"))
+                created.SetColor("_TintColor", new Color(0.85f, 0.87f, 0.9f, 0.5f));
+
+            EditorUtility.SetDirty(created);
 
             return created;
         }
