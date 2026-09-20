@@ -16,6 +16,10 @@ public class TorpedoDelivery : ProjectileDelivery
     {
         Ammo torpedo = base.Launch(barrel);
 
+        torpedo.Init(null);
+        torpedo.SetDamage(0);
+        torpedo.Struck += OnStruck;
+
         if (torpedo.TryGetComponent(out TorpedoWarhead warhead))
             warhead.Cancel();
 
@@ -59,6 +63,12 @@ public class TorpedoDelivery : ProjectileDelivery
             warhead.StartFuse();
     }
 
+    private void OnStruck(Ammo torpedo, Vector2 point)
+    {
+        if (torpedo.TryGetComponent(out TorpedoWarhead warhead))
+            Blast(warhead, point);
+    }
+
     private bool IsOnCourse(Transform torpedo, TorpedoWarhead warhead)
     {
         Vector2 course = torpedo.right;
@@ -87,6 +97,7 @@ public class TorpedoDelivery : ProjectileDelivery
                 damageable.TakeDamage(Row.Damage);
         }
 
+        ShowHit(centre);
         Show(warhead, centre);
     }
 

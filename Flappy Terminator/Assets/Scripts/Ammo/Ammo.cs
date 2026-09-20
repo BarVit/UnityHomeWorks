@@ -23,6 +23,8 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
 
     public event Action<IPoolable> Released;
 
+    public event Action<Ammo, Vector2> Struck;
+
     private void Awake()
     {
         _bulletMover = GetComponent<BulletMover>();
@@ -37,6 +39,7 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
     {
         IsArmed = true;
         IsPersistent = false;
+        Struck = null;
     }
 
     public void MakePersistent()
@@ -76,6 +79,8 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
 
     public void Hit(Vector2 point)
     {
+        Struck?.Invoke(this, point);
+
         if (_hitEffectPool == null)
             return;
 

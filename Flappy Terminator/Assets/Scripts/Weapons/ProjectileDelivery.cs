@@ -15,6 +15,16 @@ public class ProjectileDelivery : WeaponDelivery
 
     protected SpawnPool<Ammo> AmmoPool => _ammoPool;
 
+    protected void ShowHit(Vector2 point)
+    {
+        if (_hitEffectPool == null)
+            return;
+
+        ExplosionAnimation hitEffect = _hitEffectPool.Get(point);
+
+        hitEffect.Play();
+    }
+
     protected override void OnFire()
     {
         for (int barrel = 0; barrel < Barrels; barrel++)
