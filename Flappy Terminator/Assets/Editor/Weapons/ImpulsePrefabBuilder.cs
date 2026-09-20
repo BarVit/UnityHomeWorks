@@ -43,7 +43,7 @@ namespace WeaponContent
             if (collider != null)
             {
                 collider.direction = CapsuleDirection2D.Horizontal;
-                collider.size = new Vector2(1.4f, 0.28f);
+                collider.size = new Vector2(0.7f, 0.07f);
                 collider.offset = Vector2.zero;
             }
 

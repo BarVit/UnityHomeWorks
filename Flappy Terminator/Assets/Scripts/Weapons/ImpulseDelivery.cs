@@ -3,6 +3,7 @@ using UnityEngine;
 public class ImpulseDelivery : ProjectileDelivery
 {
     private const int BoltsPerShot = 2;
+    private const float GapShare = 2f;
 
     public ImpulseDelivery(WeaponRow row, WeaponContext context) : base(row, context)
     {
@@ -17,13 +18,13 @@ public class ImpulseDelivery : ProjectileDelivery
     private void Volley(int barrel)
     {
         Quaternion rotation = GetRotation(barrel);
-        Vector3 back = rotation * Vector3.left * GetSpacing();
+        Vector3 step = rotation * Vector3.right * GetSpacing();
 
         for (int bolt = 0; bolt < BoltsPerShot; bolt++)
         {
             Ammo shot = Launch(barrel);
 
-            shot.transform.position += back * bolt;
+            shot.transform.position += step * bolt;
         }
     }
 
@@ -31,7 +32,7 @@ public class ImpulseDelivery : ProjectileDelivery
     {
         Sprite sprite = Row.Projectile == null ? null : GetSprite();
 
-        return sprite == null ? 1f : sprite.bounds.size.x * 1.05f;
+        return sprite == null ? 1f : sprite.bounds.size.x * GapShare;
     }
 
     private Sprite GetSprite()

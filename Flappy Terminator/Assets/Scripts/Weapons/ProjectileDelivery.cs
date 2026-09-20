@@ -9,8 +9,8 @@ public class ProjectileDelivery : WeaponDelivery
     {
         _ammoPool = context.Pools.GetPool(row.Projectile);
 
-        if (row.Projectile.HitEffectPrefab != null)
-            _hitEffectPool = context.Pools.GetPool(row.Projectile.HitEffectPrefab);
+        if (row.HitEffect != null)
+            _hitEffectPool = context.Pools.GetPool(row.HitEffect);
     }
 
     protected SpawnPool<Ammo> AmmoPool => _ammoPool;
