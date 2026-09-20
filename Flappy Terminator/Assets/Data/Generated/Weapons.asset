@@ -180,7 +180,7 @@ MonoBehaviour:
       _projectileSprite: {fileID: 0}
       _projectileAnimation: {fileID: 0}
       _shotEffect: {fileID: 0}
-      _hitTargetEffect: {fileID: -3751870904600509761, guid: 3a3ad20ac661444fca78e2501d44c8b8, type: 3}
+      _hitTargetEffect: {fileID: 448997599993396906, guid: 164af822f9b564bc591c0d136230db81, type: 3}
       _hitWorldEffect: {fileID: 0}
       _shotSound: {fileID: 8300000, guid: db5a0c5135622436d987441a5ed3fc85, type: 3}
       _flightSound: {fileID: 0}
@@ -209,7 +209,7 @@ MonoBehaviour:
       _projectileSprite: {fileID: 21300000, guid: 3e8e2a0357d124c59b3908bd31398907, type: 3}
       _projectileAnimation: {fileID: 0}
       _shotEffect: {fileID: 0}
-      _hitTargetEffect: {fileID: -3751870904600509761, guid: 3a3ad20ac661444fca78e2501d44c8b8, type: 3}
+      _hitTargetEffect: {fileID: 5744986427276319595, guid: 8f57d222c983e464fb534af1e60a859f, type: 3}
       _hitWorldEffect: {fileID: 0}
       _shotSound: {fileID: 8300000, guid: eaa03aaca78b14fc99a1a99fbd45e15b, type: 3}
       _flightSound: {fileID: 0}

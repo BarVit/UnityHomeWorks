@@ -4,10 +4,14 @@ public class OrbDelivery : ProjectileDelivery
 {
     private readonly Collider2D[] _touched = new Collider2D[16];
 
+    private readonly SpawnPool<ExplosionAnimation> _sparkPool;
+
     private float _tickLeft;
 
     public OrbDelivery(WeaponRow row, WeaponContext context) : base(row, context)
     {
+        if (row.HitEffect != null)
+            _sparkPool = context.Pools.GetPool(row.HitEffect);
     }
 
     protected override Ammo Launch(int barrel)
@@ -36,6 +40,16 @@ public class OrbDelivery : ProjectileDelivery
         AmmoPool.ForEachActive(Burn);
     }
 
+    private void Spark(Vector3 position)
+    {
+        if (_sparkPool == null)
+            return;
+
+        ExplosionAnimation spark = _sparkPool.Get(position);
+
+        spark.Play();
+    }
+
     private float GetRadius(Ammo orb)
     {
         SpriteRenderer renderer = orb.GetComponentInChildren<SpriteRenderer>();
@@ -57,14 +71,10 @@ public class OrbDelivery : ProjectileDelivery
             if (damageable == null)
                 continue;
 
-            if (Vector2.Distance(centre, _touched[i].transform.position) <= radius)
-            {
-                damageable.TakeDamage(Row.Damage);
+            bool isInside = Vector2.Distance(centre, _touched[i].transform.position) <= radius;
 
-                continue;
-            }
-
-            damageable.TakeDamage(Row.Damage / 2);
+            damageable.TakeDamage(isInside ? Row.Damage : Row.Damage / 2);
+            Spark(_touched[i].transform.position);
         }
     }
 }
