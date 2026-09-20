@@ -22,6 +22,8 @@ public class PlayerShooter : MonoBehaviour
 
     public int Barrels => _barrels;
 
+    public Transform LockTarget => _delivery == null ? null : _delivery.LockTarget;
+
     public float Readiness => _delivery == null ? 0f : _delivery.Readiness;
 
     public bool IsReady => _delivery != null && _delivery.IsReady;

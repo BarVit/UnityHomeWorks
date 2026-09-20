@@ -18,10 +18,19 @@ public class BeamDelivery : WeaponDelivery
             _beamPool = context.Pools.GetPool(row.Beam);
     }
 
+    protected Transform Target { get; private set; }
+
     protected override void OnFire()
     {
+        ForgetTarget();
+
         for (int barrel = 0; barrel < Barrels; barrel++)
             Shoot(barrel);
+    }
+
+    protected void ForgetTarget()
+    {
+        Target = null;
     }
 
     protected void Shoot(int barrel)
@@ -46,7 +55,12 @@ public class BeamDelivery : WeaponDelivery
             damageable = hit.collider.GetComponentInParent<IDamageable>();
 
         if (damageable != null)
+        {
             damageable.TakeDamage(Row.Damage);
+
+            if (Target == null)
+                Target = hit.collider.transform;
+        }
 
         ExplosionAnimation effect = _hitEffectPool.Get(hit.point);
 

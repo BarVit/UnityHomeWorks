@@ -19,8 +19,12 @@ public class ContinuousBeamDelivery : BeamDelivery
 
     public float Heat => _heat;
 
+    public override Transform LockTarget => Target;
+
     protected override void OnFire()
     {
+        ForgetTarget();
+
         for (int barrel = 0; barrel < Barrels; barrel++)
             Shoot(barrel);
 

@@ -17,6 +17,8 @@ public abstract class WeaponDelivery
 
     public virtual bool IsReady => _cooldownLeft <= 0f;
 
+    public virtual Transform LockTarget => null;
+
     public virtual float Readiness => _row.Rate <= 0f ? 1f : 1f - Mathf.Clamp01(_cooldownLeft / _row.Rate);
 
     protected WeaponRow Row => _row;
