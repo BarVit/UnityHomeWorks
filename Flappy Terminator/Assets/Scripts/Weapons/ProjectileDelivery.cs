@@ -8,7 +8,9 @@ public class ProjectileDelivery : WeaponDelivery
     public ProjectileDelivery(WeaponRow row, WeaponContext context) : base(row, context)
     {
         _ammoPool = context.Pools.GetPool(row.Projectile);
-        _hitEffectPool = context.Pools.GetPool(row.Projectile.HitEffectPrefab);
+
+        if (row.Projectile.HitEffectPrefab != null)
+            _hitEffectPool = context.Pools.GetPool(row.Projectile.HitEffectPrefab);
     }
 
     protected SpawnPool<Ammo> AmmoPool => _ammoPool;
@@ -23,6 +25,8 @@ public class ProjectileDelivery : WeaponDelivery
     {
         Transform mount = GetMount(barrel);
         Ammo ammo = _ammoPool.Get(mount.position, GetRotation(barrel));
+
+        ShowShot(barrel);
 
         ammo.Init(_hitEffectPool);
         ammo.SetDamage(Row.Damage);

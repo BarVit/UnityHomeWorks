@@ -76,6 +76,9 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
 
     public void Hit(Vector2 point)
     {
+        if (_hitEffectPool == null)
+            return;
+
         ExplosionAnimation hitEffect = _hitEffectPool.Get(point);
 
         hitEffect.Play();

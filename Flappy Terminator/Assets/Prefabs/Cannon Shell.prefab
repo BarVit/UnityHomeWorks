@@ -349,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c26ec1726fe9842f780e3c8cc5c8c6cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitEffectPrefab: {fileID: -3751870904600509761, guid: 3a3ad20ac661444fca78e2501d44c8b8, type: 3}
+  _hitEffectPrefab: {fileID: 0}
   _shotSound:
     _clip: {fileID: 8300000, guid: fdc735ea072a9410a98e635510b96568, type: 3}
     _volume: 0.2
