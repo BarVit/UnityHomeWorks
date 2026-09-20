@@ -4,7 +4,7 @@ plasma	Плазма	Player	Projectile	10	0.25	12	4	Cone	0	0	0	0	0	150	PlayerBull
 rocket	Ракетница	Player	Projectile	35	0.75	8	4	ForwardAndSides	0	0	0	0	0	300	PlayerBullet			spark-preview1	Spark Animation		PlayerBulletHit		Blaster		Plasma hit 2		
 homing	Самонаводящиеся	Player	Homing	25	0.6	7	4	Parallel	0	0	0	180	0	600	PlayerBullet			spark-preview1	Spark Animation		PlayerBulletHit		Blaster		Plasma hit 2		
 railgun	Рельсотрон	Player	Beam	45	0.9	0	4	NarrowCone	0	0	0	0	0	900		Railgun Beam					PlayerBulletHit		Rocket 2		Plasma hit 2		
-laser	Лазер	Player	ContinuousBeam	5	0.05	0	4	Parallel	3	40	0	0	0	1200		Laser Beam					PlayerBulletHit		Plasma hit 2		Plasma hit 2		
+laser	Лазер	Player	ContinuousBeam	2	0.05	0	4	Parallel	4	40	0	0	0	1200		Laser Beam					PlayerBulletHit		Plasma hit 2		Plasma hit 2		
 plasma_orb	Плазменный шар	Player	Orb	6	3.0	3	1	Single	0	0	0.25	0	1.2	2000	Plasma Orb			Plasma Orb			PlayerBulletHit		Blaster		Plasma hit 2		
 enemy_blaster	Бластер	Enemy	Projectile	8	1.5	5	4	Parallel	0	0	0	0	0	0	Enemy Bullet			2DShipsMissilesTorpedoesAtlas_2			vfx_RocketExplosion		Rocket 1				
 enemy_spray	Веер	Enemy	Projectile	5	2.0	4	4	Cone	0	0	0	0	0	0	Enemy Bullet			2DShipsMissilesTorpedoesAtlas_2			vfx_RocketExplosion		Rocket 1				

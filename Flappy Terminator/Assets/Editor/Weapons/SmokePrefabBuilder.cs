@@ -30,11 +30,13 @@ namespace WeaponContent
 
         private static void Shape(ParticleSystem smoke)
         {
+            smoke.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
             ParticleSystem.MainModule main = smoke.main;
 
+            main.playOnAwake = false;
             main.duration = 1f;
             main.loop = true;
-            main.playOnAwake = false;
             main.startLifetime = new ParticleSystem.MinMaxCurve(0.5f, 0.9f);
             main.startSpeed = new ParticleSystem.MinMaxCurve(0.2f, 0.5f);
             main.startSize = new ParticleSystem.MinMaxCurve(0.12f, 0.26f);
@@ -58,6 +60,7 @@ namespace WeaponContent
             drift.space = ParticleSystemSimulationSpace.World;
             drift.x = new ParticleSystem.MinMaxCurve(-0.45f, -0.15f);
             drift.y = new ParticleSystem.MinMaxCurve(0.25f, 0.7f);
+            drift.z = new ParticleSystem.MinMaxCurve(0f, 0f);
 
             ParticleSystem.SizeOverLifetimeModule grow = smoke.sizeOverLifetime;
 
@@ -134,10 +137,12 @@ namespace WeaponContent
             }
 
             Transform existing = mount.transform.Find(SmokeName);
-            GameObject instance = existing != null
-                ? existing.gameObject
-                : (GameObject)PrefabUtility.InstantiatePrefab(
-                    AssetDatabase.LoadAssetAtPath<GameObject>(PrefabPath), mount.transform);
+
+            if (existing != null)
+                Object.DestroyImmediate(existing.gameObject);
+
+            GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(
+                AssetDatabase.LoadAssetAtPath<GameObject>(PrefabPath), mount.transform);
 
             instance.transform.localPosition = Vector3.zero;
 

@@ -7,6 +7,9 @@ public class ShootCooldownBar : MonoBehaviour
     [SerializeField] private RectTransform _fill;
     [SerializeField] private Image _fillImage;
 
+    private const float WarmReadiness = 0.7f;
+    private const float HotReadiness = 0.4f;
+
     private static readonly Color CoolColor = new Color(0.25f, 1f, 0.35f);
     private static readonly Color WarmColor = new Color(1f, 0.92f, 0.2f);
     private static readonly Color HotColor = new Color(1f, 0.2f, 0.12f);
@@ -57,8 +60,17 @@ public class ShootCooldownBar : MonoBehaviour
             return;
         }
 
-        _fillImage.color = readiness < 0.5f
-            ? Color.Lerp(HotColor, WarmColor, readiness * 2f)
-            : Color.Lerp(WarmColor, CoolColor, (readiness - 0.5f) * 2f);
+        _fillImage.color = GetHeatColor(readiness);
+    }
+
+    private Color GetHeatColor(float readiness)
+    {
+        if (readiness >= WarmReadiness)
+            return Color.Lerp(WarmColor, CoolColor, (readiness - WarmReadiness) / (1f - WarmReadiness));
+
+        if (readiness >= HotReadiness)
+            return Color.Lerp(HotColor, WarmColor, (readiness - HotReadiness) / (WarmReadiness - HotReadiness));
+
+        return HotColor;
     }
 }

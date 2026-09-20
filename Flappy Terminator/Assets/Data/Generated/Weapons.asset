@@ -162,12 +162,12 @@ MonoBehaviour:
     _title: "\u041B\u0430\u0437\u0435\u0440"
     _owner: 0
     _delivery: 3
-    _damage: 5
+    _damage: 2
     _rate: 0.05
     _projectileSpeed: 0
     _barrelsMax: 4
     _firePattern: 0
-    _heatPerShot: 3
+    _heatPerShot: 4
     _cooldownRate: 40
     _tickInterval: 0
     _turnRate: 0
