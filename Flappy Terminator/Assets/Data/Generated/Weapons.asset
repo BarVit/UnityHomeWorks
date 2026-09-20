@@ -158,8 +158,8 @@ MonoBehaviour:
       _hitTargetSound: {fileID: 0}
       _hitWorldSound: {fileID: 0}
       _overheatSound: {fileID: 0}
-  - _id: laser
-    _title: "\u041B\u0430\u0437\u0435\u0440"
+  - _id: beam_laser
+    _title: "\u041B\u0443\u0447\u0435\u0432\u043E\u0439 \u043B\u0430\u0437\u0435\u0440"
     _owner: 0
     _delivery: 3
     _damage: 2
@@ -181,6 +181,35 @@ MonoBehaviour:
       _projectileAnimation: {fileID: 0}
       _shotEffect: {fileID: 0}
       _hitTargetEffect: {fileID: 1298199166716055104, guid: 6c20ecf95dd484f869025689b488ddfd, type: 3}
+      _hitWorldEffect: {fileID: 0}
+      _shotSound: {fileID: 0}
+      _flightSound: {fileID: 0}
+      _hitTargetSound: {fileID: 0}
+      _hitWorldSound: {fileID: 0}
+      _overheatSound: {fileID: 0}
+  - _id: impulse_laser
+    _title: "\u0418\u043C\u043F\u0443\u043B\u044C\u0441\u043D\u044B\u0439 \u043B\u0430\u0437\u0435\u0440"
+    _owner: 0
+    _delivery: 5
+    _damage: 6
+    _rate: 0.1
+    _projectileSpeed: 16
+    _barrelsMax: 4
+    _firePattern: 0
+    _heatPerShot: 7
+    _cooldownRate: 40
+    _tickInterval: 0
+    _turnRate: 0
+    _area: 0
+    _price: 1400
+    _projectile: {fileID: 8728678904558988455, guid: 6c969866c78ca421280b87ec44533a69, type: 3}
+    _beam: {fileID: 0}
+    _assets:
+      _icon: {fileID: 0}
+      _projectileSprite: {fileID: 21300000, guid: d45cbb8045075404c8c19bbb1e08b660, type: 3}
+      _projectileAnimation: {fileID: 0}
+      _shotEffect: {fileID: 0}
+      _hitTargetEffect: {fileID: 0}
       _hitWorldEffect: {fileID: 0}
       _shotSound: {fileID: 0}
       _flightSound: {fileID: 0}
@@ -212,6 +241,35 @@ MonoBehaviour:
       _hitTargetEffect: {fileID: 65737188426349923, guid: 95b69f301088b4bfe9e35e144de7b595, type: 3}
       _hitWorldEffect: {fileID: 0}
       _shotSound: {fileID: 0}
+      _flightSound: {fileID: 0}
+      _hitTargetSound: {fileID: 0}
+      _hitWorldSound: {fileID: 0}
+      _overheatSound: {fileID: 0}
+  - _id: torpedo
+    _title: "\u0422\u043E\u0440\u043F\u0435\u0434\u044B"
+    _owner: 0
+    _delivery: 6
+    _damage: 70
+    _rate: 1.2
+    _projectileSpeed: 5.33
+    _barrelsMax: 2
+    _firePattern: 0
+    _heatPerShot: 0
+    _cooldownRate: 0
+    _tickInterval: 0
+    _turnRate: 0
+    _area: 1.5
+    _price: 1600
+    _projectile: {fileID: 4581286917286831887, guid: 372aa549d65e142d0bfbf5336a07d24b, type: 3}
+    _beam: {fileID: 0}
+    _assets:
+      _icon: {fileID: 0}
+      _projectileSprite: {fileID: 21300000, guid: da841e0ed6399bd4695ebcfa661935f8, type: 3}
+      _projectileAnimation: {fileID: 0}
+      _shotEffect: {fileID: 0}
+      _hitTargetEffect: {fileID: 1650114164288651137, guid: 8dca398b28a6e45e78bd7b04a3a726b2, type: 3}
+      _hitWorldEffect: {fileID: 0}
+      _shotSound: {fileID: 8300000, guid: fdc735ea072a9410a98e635510b96568, type: 3}
       _flightSound: {fileID: 0}
       _hitTargetSound: {fileID: 0}
       _hitWorldSound: {fileID: 0}

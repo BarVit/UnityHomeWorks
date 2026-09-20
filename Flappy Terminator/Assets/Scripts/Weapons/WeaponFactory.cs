@@ -21,6 +21,12 @@ public static class WeaponFactory
             case DeliveryKind.Orb:
                 return new OrbDelivery(row, context);
 
+            case DeliveryKind.Impulse:
+                return new ImpulseDelivery(row, context);
+
+            case DeliveryKind.Torpedo:
+                return new TorpedoDelivery(row, context);
+
             default:
                 throw new NotSupportedException("Неизвестная механика доставки " + row.Delivery);
         }

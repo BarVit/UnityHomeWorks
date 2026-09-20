@@ -2,6 +2,9 @@ using UnityEngine;
 
 public abstract class WeaponDelivery
 {
+    private const float MaxHeat = 100f;
+    private const float UnlockHeat = MaxHeat * 0.5f;
+
     private readonly WeaponRow _row;
     private readonly WeaponContext _context;
     private readonly int _barrels;
@@ -9,6 +12,8 @@ public abstract class WeaponDelivery
     private readonly SpawnPool<ExplosionAnimation> _shotPool;
 
     private float _cooldownLeft;
+    private float _heat;
+    private bool _isOverheated;
 
     protected WeaponDelivery(WeaponRow row, WeaponContext context)
     {
@@ -20,21 +25,25 @@ public abstract class WeaponDelivery
             _shotPool = context.Pools.GetPool(row.Assets.ShotEffect);
     }
 
-    public virtual bool IsReady => _cooldownLeft <= 0f;
+    public virtual bool IsReady => _cooldownLeft <= 0f && _isOverheated == false;
 
     public virtual Transform LockTarget => null;
 
-    public virtual bool IsOverheated => false;
+    public bool IsOverheated => _isOverheated;
 
-    public virtual bool HasHeat => false;
+    public bool HasHeat => _row.HeatPerShot > 0f;
 
-    public virtual float Readiness => _row.Rate <= 0f ? 1f : 1f - Mathf.Clamp01(_cooldownLeft / _row.Rate);
+    public virtual float Readiness => HasHeat
+        ? 1f - Mathf.Clamp01(_heat / MaxHeat)
+        : (_row.Rate <= 0f ? 1f : 1f - Mathf.Clamp01(_cooldownLeft / _row.Rate));
 
     protected WeaponRow Row => _row;
 
     protected WeaponContext Context => _context;
 
     protected int Barrels => _barrels;
+
+    protected float HeatShare => Mathf.Clamp01(_heat / MaxHeat);
 
     protected float ProjectileSpeed => _row.ProjectileSpeed * _context.ProjectileSpeedScale;
 
@@ -44,6 +53,7 @@ public abstract class WeaponDelivery
             return;
 
         _cooldownLeft = _row.Rate;
+        Warm();
         OnFire();
     }
 
@@ -52,6 +62,7 @@ public abstract class WeaponDelivery
         if (_cooldownLeft > 0f)
             _cooldownLeft -= deltaTime;
 
+        Cool(deltaTime);
         OnTick(deltaTime);
     }
 
@@ -75,6 +86,31 @@ public abstract class WeaponDelivery
         ExplosionAnimation shot = _shotPool.Get(GetMount(barrel).position, GetRotation(barrel));
 
         shot.Play();
+    }
+
+    private void Warm()
+    {
+        if (HasHeat == false)
+            return;
+
+        _heat += _row.HeatPerShot;
+
+        if (_heat < MaxHeat)
+            return;
+
+        _heat = MaxHeat;
+        _isOverheated = true;
+    }
+
+    private void Cool(float deltaTime)
+    {
+        if (_heat <= 0f)
+            return;
+
+        _heat = Mathf.Max(0f, _heat - _row.CooldownRate * deltaTime);
+
+        if (_heat <= UnlockHeat)
+            _isOverheated = false;
     }
 
     protected abstract void OnFire();

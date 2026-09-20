@@ -12639,6 +12639,63 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1001 &989652517
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3103229141923176304, guid: 27bd167ceb3334f9d93a691fc44bf0ed, type: 3}
+      propertyPath: m_Name
+      value: Player ship explosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666431636338146133, guid: 27bd167ceb3334f9d93a691fc44bf0ed, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.34048
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666431636338146133, guid: 27bd167ceb3334f9d93a691fc44bf0ed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.3104
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666431636338146133, guid: 27bd167ceb3334f9d93a691fc44bf0ed, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666431636338146133, guid: 27bd167ceb3334f9d93a691fc44bf0ed, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666431636338146133, guid: 27bd167ceb3334f9d93a691fc44bf0ed, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666431636338146133, guid: 27bd167ceb3334f9d93a691fc44bf0ed, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666431636338146133, guid: 27bd167ceb3334f9d93a691fc44bf0ed, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666431636338146133, guid: 27bd167ceb3334f9d93a691fc44bf0ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666431636338146133, guid: 27bd167ceb3334f9d93a691fc44bf0ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666431636338146133, guid: 27bd167ceb3334f9d93a691fc44bf0ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 27bd167ceb3334f9d93a691fc44bf0ed, type: 3}
 --- !u!222 &990358826
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14288,7 +14345,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 05ad97f9a8c8d4ad79ac3a7dc03292af, type: 2}
     - target: {fileID: 8330222878791513292, guid: 09ba11221984c417dbda5f0b88456507, type: 3}
       propertyPath: _weaponId
-      value: laser
+      value: torpedo
       objectReference: {fileID: 0}
     - target: {fileID: 8330222878791513292, guid: 09ba11221984c417dbda5f0b88456507, type: 3}
       propertyPath: _mountRoot
@@ -14341,3 +14398,4 @@ SceneRoots:
   - {fileID: 1960120049}
   - {fileID: 262472789}
   - {fileID: 2090309296}
+  - {fileID: 989652517}

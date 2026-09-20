@@ -4,5 +4,7 @@ public enum DeliveryKind
     Homing,
     Beam,
     ContinuousBeam,
-    Orb
+    Orb,
+    Impulse,
+    Torpedo
 }
