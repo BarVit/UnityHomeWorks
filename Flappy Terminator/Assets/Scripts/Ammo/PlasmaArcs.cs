@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlasmaArcs : MonoBehaviour
@@ -11,6 +12,8 @@ public class PlasmaArcs : MonoBehaviour
     [SerializeField] private float _interval = 0.06f;
     [SerializeField] private float _width = 0.03f;
     [SerializeField] private int _sortingOrder = 3;
+
+    private readonly List<Transform> _targets = new List<Transform>();
 
     private LineRenderer[] _arcs;
     private Vector3[] _points;
@@ -28,6 +31,15 @@ public class PlasmaArcs : MonoBehaviour
     private void OnEnable()
     {
         _timeLeft = 0f;
+        _targets.Clear();
+    }
+
+    public void Latch(Collider2D[] found, int count)
+    {
+        _targets.Clear();
+
+        for (int i = 0; i < count; i++)
+            _targets.Add(found[i].transform);
     }
 
     private void Update()
@@ -39,8 +51,22 @@ public class PlasmaArcs : MonoBehaviour
 
         _timeLeft = _interval;
 
+        int aimed = 0;
+
         for (int i = 0; i < _arcs.Length; i++)
+        {
+            Vector2 target;
+
+            if (TryGetTarget(aimed, out target))
+            {
+                Strike(_arcs[i], target);
+                aimed++;
+
+                continue;
+            }
+
             Draw(_arcs[i]);
+        }
     }
 
     private LineRenderer Create(int index)
@@ -64,6 +90,32 @@ public class PlasmaArcs : MonoBehaviour
         return arc;
     }
 
+    private bool TryGetTarget(int index, out Vector2 local)
+    {
+        local = Vector2.zero;
+
+        if (index >= _targets.Count)
+            return false;
+
+        Transform target = _targets[index];
+
+        if (target == null || target.gameObject.activeInHierarchy == false)
+            return false;
+
+        local = transform.InverseTransformPoint(target.position);
+
+        return local.magnitude <= _outerRadius;
+    }
+
+    private void Strike(LineRenderer arc, Vector2 target)
+    {
+        float reach = target.magnitude;
+        Vector2 direction = reach <= Mathf.Epsilon ? Vector2.right : target / reach;
+        Vector2 side = new Vector2(-direction.y, direction.x);
+
+        Lay(arc, direction, side, Mathf.Max(_innerRadius, reach));
+    }
+
     private void Draw(LineRenderer arc)
     {
         float angle = Random.Range(0f, Mathf.PI * 2f);
@@ -71,6 +123,11 @@ public class PlasmaArcs : MonoBehaviour
         Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
         Vector2 side = new Vector2(-direction.y, direction.x);
 
+        Lay(arc, direction, side, reach);
+    }
+
+    private void Lay(LineRenderer arc, Vector2 direction, Vector2 side, float reach)
+    {
         for (int i = 0; i < _segments; i++)
         {
             float along = (float)i / (_segments - 1);
