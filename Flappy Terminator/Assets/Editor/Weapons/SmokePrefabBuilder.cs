@@ -41,13 +41,13 @@ namespace WeaponContent
             main.startLifetime = new ParticleSystem.MinMaxCurve(0.5f, 0.9f);
             main.startSpeed = new ParticleSystem.MinMaxCurve(0.2f, 0.5f);
             main.startSize = new ParticleSystem.MinMaxCurve(0.12f, 0.26f);
-            main.startColor = new Color(1f, 1f, 1f, 0.55f);
+            main.startColor = new Color(1f, 1f, 1f, 0.7f);
             main.simulationSpace = ParticleSystemSimulationSpace.World;
             main.maxParticles = 60;
 
             ParticleSystem.EmissionModule emission = smoke.emission;
 
-            emission.rateOverTime = 16f;
+            emission.rateOverTime = 32f;
 
             ParticleSystem.ShapeModule shape = smoke.shape;
 
@@ -82,7 +82,7 @@ namespace WeaponContent
                 new GradientColorKey[]
                 {
                     new GradientColorKey(Color.white, 0f),
-                    new GradientColorKey(new Color(0.85f, 0.88f, 0.92f), 1f)
+                    new GradientColorKey(new Color(0.96f, 0.97f, 1f), 1f)
                 },
                 new GradientAlphaKey[]
                 {
@@ -118,10 +118,10 @@ namespace WeaponContent
             created.SetTexture("_MainTex", AssetDatabase.LoadAssetAtPath<Texture2D>(TexturePath));
 
             if (created.HasProperty("_Color"))
-                created.SetColor("_Color", new Color(0.85f, 0.87f, 0.9f, 1f));
+                created.SetColor("_Color", new Color(0.97f, 0.98f, 1f, 1f));
 
             if (created.HasProperty("_TintColor"))
-                created.SetColor("_TintColor", new Color(0.85f, 0.87f, 0.9f, 0.5f));
+                created.SetColor("_TintColor", new Color(0.97f, 0.98f, 1f, 0.5f));
 
             EditorUtility.SetDirty(created);
 

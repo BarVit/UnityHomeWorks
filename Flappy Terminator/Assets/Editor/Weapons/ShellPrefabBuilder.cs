@@ -130,9 +130,7 @@ namespace WeaponContent
 
             serialized.FindProperty("_hitEffectPrefab").objectReferenceValue = null;
 
-            serialized.FindProperty("_shotSound._clip").objectReferenceValue =
-                AssetDatabase.LoadAssetAtPath<AudioClip>(SoundPath);
-            serialized.FindProperty("_shotSound._volume").floatValue = 0.2f;
+            serialized.FindProperty("_shotSound._clip").objectReferenceValue = null;
             serialized.ApplyModifiedPropertiesWithoutUndo();
         }
 

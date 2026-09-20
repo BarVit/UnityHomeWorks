@@ -64,9 +64,7 @@ namespace WeaponContent
             SerializedObject serialized = new SerializedObject(flash);
 
             serialized.FindProperty("_lifetime").floatValue = lifetime;
-            serialized.FindProperty("_shotSound._clip").objectReferenceValue =
-                AssetDatabase.LoadAssetAtPath<AudioClip>(soundPath);
-            serialized.FindProperty("_shotSound._volume").floatValue = volume;
+            serialized.FindProperty("_shotSound._clip").objectReferenceValue = null;
             serialized.ApplyModifiedPropertiesWithoutUndo();
 
             PrefabUtility.SaveAsPrefabAsset(root, path);

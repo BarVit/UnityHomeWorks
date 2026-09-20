@@ -12,7 +12,8 @@ public class BeamDelivery : WeaponDelivery
 
     public BeamDelivery(WeaponRow row, WeaponContext context) : base(row, context)
     {
-        _hitEffectPool = context.Pools.GetPool(row.HitEffect);
+        if (row.HitEffect != null)
+            _hitEffectPool = context.Pools.GetPool(row.HitEffect);
 
         if (row.Beam != null)
             _beamPool = context.Pools.GetPool(row.Beam);
@@ -61,6 +62,9 @@ public class BeamDelivery : WeaponDelivery
             if (Target == null)
                 Target = hit.collider.transform;
         }
+
+        if (_hitEffectPool == null)
+            return;
 
         ExplosionAnimation effect = _hitEffectPool.Get(hit.point);
 

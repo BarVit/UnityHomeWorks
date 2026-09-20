@@ -32,6 +32,8 @@ namespace WeaponContent
             if (root.GetComponent<OrbGrowth>() == null)
                 root.AddComponent<OrbGrowth>();
 
+            Hush(root);
+
             Layer(root, "Halo", HaloPath, additive, 1.9f, -1, 0f, 0.85f);
             Layer(root, "Veins A", VeinsPath, additive, 0.98f, 1, 38f, 0.8f);
             Layer(root, "Veins B", VeinsPath, additive, 0.82f, 2, -57f, 0.65f);
@@ -68,6 +70,19 @@ namespace WeaponContent
             renderer.sprite = sprite;
             renderer.color = Color.white;
             renderer.sortingOrder = 0;
+        }
+
+        private static void Hush(GameObject root)
+        {
+            Ammo ammo = root.GetComponent<Ammo>();
+
+            if (ammo == null)
+                return;
+
+            SerializedObject serialized = new SerializedObject(ammo);
+
+            serialized.FindProperty("_shotSound._clip").objectReferenceValue = null;
+            serialized.ApplyModifiedPropertiesWithoutUndo();
         }
 
         private static void SetCollider(GameObject root)

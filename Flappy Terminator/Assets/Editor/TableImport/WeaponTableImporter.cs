@@ -66,7 +66,7 @@ namespace TableImport
                         reader.ReadAsset<Sprite>("projectile_sprite", false),
                         reader.ReadAsset<AnimationClip>("projectile_animation", false),
                         reader.ReadPrefab<ExplosionAnimation>("shot_effect", false),
-                        reader.ReadPrefab<ExplosionAnimation>("hit_target_effect", needsProjectile == false),
+                        reader.ReadPrefab<ExplosionAnimation>("hit_target_effect", false),
                         reader.ReadPrefab<ExplosionAnimation>("hit_world_effect", false),
                         reader.ReadAsset<AudioClip>("shot_sound", false),
                         reader.ReadAsset<AudioClip>("flight_sound", false),
