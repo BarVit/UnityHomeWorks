@@ -41,6 +41,8 @@ namespace WeaponContent
                 float scale = rocketLength * SizeAgainstRocket / sprite.bounds.size.y;
 
                 body.transform.localScale = new Vector3(scale, scale, 1f);
+
+                SetHull(root, sprite.bounds.size.y * scale, sprite.bounds.size.x * scale);
             }
 
             SetLamp(root, body);
@@ -60,6 +62,17 @@ namespace WeaponContent
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             Debug.Log("Торпеда: собрана");
+        }
+
+        private static void SetHull(GameObject root, float length, float width)
+        {
+            BoxCollider2D hull = root.GetComponent<BoxCollider2D>();
+
+            if (hull == null)
+                return;
+
+            hull.size = new Vector2(length, width);
+            hull.offset = Vector2.zero;
         }
 
         private static float GetRocketLength()
