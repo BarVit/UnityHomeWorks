@@ -3,7 +3,6 @@ using UnityEngine;
 public class OrbDelivery : ProjectileDelivery
 {
     private readonly Collider2D[] _touched = new Collider2D[16];
-    private readonly Collider2D[] _reached = new Collider2D[8];
 
     private float _tickLeft;
 
@@ -16,6 +15,11 @@ public class OrbDelivery : ProjectileDelivery
         Ammo orb = base.Launch(barrel);
 
         orb.MakePersistent();
+
+        PlasmaArcs arcs = orb.GetComponentInChildren<PlasmaArcs>();
+
+        if (arcs != null)
+            arcs.Aim(Context.TargetFilter);
 
         return orb;
     }
@@ -44,7 +48,6 @@ public class OrbDelivery : ProjectileDelivery
         float radius = GetRadius(orb);
         Vector2 centre = orb.transform.position;
         int count = Physics2D.OverlapCircle(centre, radius * 2f, Context.TargetFilter, _touched);
-        int latched = 0;
 
         for (int i = 0; i < count; i++)
         {
@@ -62,23 +65,6 @@ public class OrbDelivery : ProjectileDelivery
             }
 
             damageable.TakeDamage(Row.Damage / 2);
-            _reached[latched] = _touched[i];
-            latched++;
-
-            if (latched == _reached.Length)
-                break;
         }
-
-        Latch(orb, latched);
-    }
-
-    private void Latch(Ammo orb, int count)
-    {
-        PlasmaArcs arcs = orb.GetComponentInChildren<PlasmaArcs>();
-
-        if (arcs == null)
-            return;
-
-        arcs.Latch(_reached, count);
     }
 }

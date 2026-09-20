@@ -59,7 +59,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6d29b3f47643f4cc3a0b84fd009ea4f8, type: 2}
+  - {fileID: 2100000, guid: 3ac64f3ed03294005b9e3cdd30dedec9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75215a37ce35b483faa7dc37a61afa79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlasmaArcs
-  _material: {fileID: 2100000, guid: 8ce1aa502dd1d4fa28a2f8c8ecd47f23, type: 2}
+  _material: {fileID: 2100000, guid: 698dce95343464e47b62cc2d5568de16, type: 2}
   _count: 9
   _segments: 7
   _innerRadius: 0.64
@@ -158,6 +158,8 @@ MonoBehaviour:
   _jitter: 0.1
   _interval: 0.06
   _width: 0.05
+  _tipShare: 0.12
+  _branchChance: 0.55
   _sortingOrder: 3
 --- !u!1 &3282793383372844016
 GameObject:
@@ -218,7 +220,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6d29b3f47643f4cc3a0b84fd009ea4f8, type: 2}
+  - {fileID: 2100000, guid: 3ac64f3ed03294005b9e3cdd30dedec9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -531,7 +533,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6d29b3f47643f4cc3a0b84fd009ea4f8, type: 2}
+  - {fileID: 2100000, guid: 3ac64f3ed03294005b9e3cdd30dedec9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
