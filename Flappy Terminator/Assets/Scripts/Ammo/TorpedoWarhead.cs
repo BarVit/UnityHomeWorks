@@ -5,7 +5,8 @@ public class TorpedoWarhead : MonoBehaviour
     [SerializeField] private BlastWave _blast;
     [SerializeField] private float _nearRadius = 0.3f;
     [SerializeField] private float _farRadius = 1.5f;
-    [SerializeField] private float _noseShare = 0.25f;
+    [SerializeField] private float _blastNoseShare = 0.25f;
+    [SerializeField] private float _fuseNoseShare = 0.1f;
     [SerializeField] private float _fuseDelay = 0.3f;
 
     private float _fuseLeft;
@@ -22,8 +23,9 @@ public class TorpedoWarhead : MonoBehaviour
 
     public float FarDiameter => _farRadius * 2f;
 
-    public Vector2 Centre => (Vector2)transform.position
-        + (Vector2)transform.right * (Length * _noseShare);
+    public Vector2 Centre => GetPoint(_blastNoseShare);
+
+    public Vector2 Sensor => GetPoint(_fuseNoseShare);
 
     public bool IsFuseBurning => _fuseLeft > 0f;
 
@@ -45,6 +47,12 @@ public class TorpedoWarhead : MonoBehaviour
         _fuseLeft -= deltaTime;
 
         return _fuseLeft <= 0f;
+    }
+
+    private Vector2 GetPoint(float noseShare)
+    {
+        return (Vector2)transform.position
+            + (Vector2)transform.right * (Length * (0.5f - noseShare));
     }
 
     private Vector2 GetSize()

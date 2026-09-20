@@ -260,7 +260,7 @@ MonoBehaviour:
     _turnRate: 0
     _area: 1.5
     _price: 1600
-    _projectile: {fileID: 4581286917286831887, guid: a9dcbb9dd575e4adc8296763510db584, type: 3}
+    _projectile: {fileID: 4581286917286831887, guid: d33ca7578e73849e6b70b2a52ce69696, type: 3}
     _beam: {fileID: 0}
     _assets:
       _icon: {fileID: 0}

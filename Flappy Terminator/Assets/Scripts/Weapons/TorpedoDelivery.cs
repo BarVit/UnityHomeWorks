@@ -40,7 +40,7 @@ public class TorpedoDelivery : ProjectileDelivery
         if (torpedo.TryGetComponent(out TorpedoWarhead warhead) == false)
             return;
 
-        Vector2 centre = torpedo.transform.position;
+        Vector2 sensor = warhead.Sensor;
 
         if (warhead.IsFuseBurning)
         {
@@ -53,13 +53,13 @@ public class TorpedoDelivery : ProjectileDelivery
             return;
         }
 
-        if (ScreenArea.Contains(Context.Camera, centre) == false)
+        if (ScreenArea.Contains(Context.Camera, sensor) == false)
             return;
 
         if (IsOnCourse(torpedo.transform, warhead))
             return;
 
-        if (Physics2D.OverlapCircle(centre, Row.Area, Context.TargetFilter, _near) > 0)
+        if (Physics2D.OverlapCircle(sensor, Row.Area, Context.TargetFilter, _near) > 0)
             warhead.StartFuse();
     }
 
@@ -73,9 +73,9 @@ public class TorpedoDelivery : ProjectileDelivery
     {
         Vector2 course = torpedo.right;
         Vector2 edge = new Vector2(-course.y, course.x) * (warhead.Width * 0.5f);
-        Vector2 centre = torpedo.position;
+        Vector2 sensor = warhead.Sensor;
 
-        return SeesTarget(centre + edge, course) || SeesTarget(centre - edge, course);
+        return SeesTarget(sensor + edge, course) || SeesTarget(sensor - edge, course);
     }
 
     private bool SeesTarget(Vector2 origin, Vector2 course)
@@ -86,23 +86,9 @@ public class TorpedoDelivery : ProjectileDelivery
     private void Blast(TorpedoWarhead warhead)
     {
         Vector2 centre = warhead.Centre;
-        int count = Physics2D.OverlapCircle(centre, warhead.Radius, Context.TargetFilter, _near);
-
-        for (int i = 0; i < count; i++)
-        {
-            if (_near[i].TryGetComponent(out IDamageable damageable) == false)
-                damageable = _near[i].GetComponentInParent<IDamageable>();
-
-            if (damageable != null)
-                damageable.TakeDamage(Row.Damage);
-        }
 
         ShowHit(centre);
-        Show(warhead, centre);
-    }
 
-    private void Show(TorpedoWarhead warhead, Vector2 centre)
-    {
         if (warhead.Blast == null)
             return;
 
@@ -111,6 +97,6 @@ public class TorpedoDelivery : ProjectileDelivery
 
         BlastWave wave = _blastPool.Get(centre);
 
-        wave.Play(warhead.NearDiameter, warhead.FarDiameter);
+        wave.Play(warhead.NearDiameter, warhead.FarDiameter, Row.Damage, Context.TargetFilter);
     }
 }
