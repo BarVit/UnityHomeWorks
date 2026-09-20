@@ -206,7 +206,7 @@ MonoBehaviour:
     _beam: {fileID: 0}
     _assets:
       _icon: {fileID: 0}
-      _projectileSprite: {fileID: 21300000, guid: 2d24b72a5000b4709a0dc3fa3492a850, type: 3}
+      _projectileSprite: {fileID: 21300000, guid: 3e8e2a0357d124c59b3908bd31398907, type: 3}
       _projectileAnimation: {fileID: 0}
       _shotEffect: {fileID: 0}
       _hitTargetEffect: {fileID: -3751870904600509761, guid: 3a3ad20ac661444fca78e2501d44c8b8, type: 3}
