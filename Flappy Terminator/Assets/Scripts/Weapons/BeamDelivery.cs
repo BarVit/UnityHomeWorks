@@ -3,12 +3,14 @@ using UnityEngine;
 public class BeamDelivery : WeaponDelivery
 {
     private const float MinSoundInterval = 0.2f;
+    private const float TargetMemory = 0.15f;
 
     private readonly SpawnPool<ExplosionAnimation> _hitEffectPool;
     private readonly SpawnPool<BeamFlash> _beamPool;
     private readonly RaycastHit2D[] _hits = new RaycastHit2D[1];
 
     private float _soundLeft;
+    private float _targetAge;
 
     public BeamDelivery(WeaponRow row, WeaponContext context) : base(row, context)
     {
@@ -32,6 +34,7 @@ public class BeamDelivery : WeaponDelivery
     protected void ForgetTarget()
     {
         Target = null;
+        _targetAge = 0f;
     }
 
     protected void Shoot(int barrel)
@@ -41,13 +44,14 @@ public class BeamDelivery : WeaponDelivery
         float reach = GetReach();
 
         int count = Physics2D.Raycast(mount.position, direction, Context.TargetFilter, _hits, reach);
-        Vector2 end = count == 0
-            ? (Vector2)mount.position + direction * reach
-            : _hits[0].point;
+        bool isSeen = count > 0 && ScreenArea.Contains(Context.Camera, _hits[0].point);
+        Vector2 end = isSeen
+            ? _hits[0].point
+            : (Vector2)mount.position + direction * reach;
 
         Draw(mount.position, end, barrel);
 
-        if (count == 0)
+        if (isSeen == false)
             return;
 
         RaycastHit2D hit = _hits[0];
@@ -92,6 +96,14 @@ public class BeamDelivery : WeaponDelivery
     {
         if (_soundLeft > 0f)
             _soundLeft -= deltaTime;
+
+        if (Target == null)
+            return;
+
+        _targetAge += deltaTime;
+
+        if (_targetAge > TargetMemory)
+            ForgetTarget();
     }
 
     protected virtual void Paint(BeamFlash flash)

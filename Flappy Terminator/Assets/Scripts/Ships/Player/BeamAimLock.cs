@@ -30,11 +30,17 @@ public class BeamAimLock : MonoBehaviour
             return;
         }
 
-        bool isOnTarget = _input.IsShooting && _shooter.LockTarget != null;
+        Transform target = _shooter.LockTarget;
+        bool isOnTarget = _input.IsShooting && IsAlive(target);
 
         if (isOnTarget && _wasOnTarget == false && _mover.IsHolding == false)
-            _mover.Hold(_duration, _shooter.LockTarget);
+            _mover.Hold(_duration, target);
 
         _wasOnTarget = isOnTarget;
+    }
+
+    private bool IsAlive(Transform target)
+    {
+        return target != null && target.gameObject.activeInHierarchy;
     }
 }
