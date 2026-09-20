@@ -23,7 +23,7 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
 
     public event Action<IPoolable> Released;
 
-    public event Action<Ammo, Vector2> Struck;
+    public event Action<Ammo> Struck;
 
     private void Awake()
     {
@@ -79,7 +79,7 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
 
     public void Hit(Vector2 point)
     {
-        Struck?.Invoke(this, point);
+        Struck?.Invoke(this);
 
         if (_hitEffectPool == null)
             return;

@@ -4,6 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class BlastWave : MonoBehaviour, IPoolable
 {
+    private const float GrowShare = 0.6f;
+
     [SerializeField] private float _lifetime = 0.35f;
 
     private SpriteRenderer _renderer;
@@ -54,12 +56,13 @@ public class BlastWave : MonoBehaviour, IPoolable
         Show(0f);
     }
 
-    private void Show(float grown)
+    private void Show(float life)
     {
+        float grown = Mathf.Clamp01(life / GrowShare);
         float scale = Mathf.Lerp(_fromScale, _toScale, grown);
         Color color = _renderer.color;
 
-        color.a = 1f - grown * grown;
+        color.a = 1f - life * life;
         _renderer.color = color;
         transform.localScale = new Vector3(scale, scale, 1f);
     }

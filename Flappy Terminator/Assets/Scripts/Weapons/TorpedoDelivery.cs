@@ -46,7 +46,7 @@ public class TorpedoDelivery : ProjectileDelivery
         {
             if (warhead.Burn(_deltaTime))
             {
-                Blast(warhead, centre);
+                Blast(warhead);
                 torpedo.Remove();
             }
 
@@ -63,10 +63,10 @@ public class TorpedoDelivery : ProjectileDelivery
             warhead.StartFuse();
     }
 
-    private void OnStruck(Ammo torpedo, Vector2 point)
+    private void OnStruck(Ammo torpedo)
     {
         if (torpedo.TryGetComponent(out TorpedoWarhead warhead))
-            Blast(warhead, point);
+            Blast(warhead);
     }
 
     private bool IsOnCourse(Transform torpedo, TorpedoWarhead warhead)
@@ -83,10 +83,10 @@ public class TorpedoDelivery : ProjectileDelivery
         return Physics2D.Raycast(origin, course, Context.TargetFilter, _ahead, Row.Area) > 0;
     }
 
-    private void Blast(TorpedoWarhead warhead, Vector2 centre)
+    private void Blast(TorpedoWarhead warhead)
     {
-        float radius = warhead.FarDiameter * 0.5f;
-        int count = Physics2D.OverlapCircle(centre, radius, Context.TargetFilter, _near);
+        Vector2 centre = warhead.Centre;
+        int count = Physics2D.OverlapCircle(centre, warhead.Radius, Context.TargetFilter, _near);
 
         for (int i = 0; i < count; i++)
         {

@@ -3,8 +3,9 @@ using UnityEngine;
 public class TorpedoWarhead : MonoBehaviour
 {
     [SerializeField] private BlastWave _blast;
-    [SerializeField] private float _nearShare = 0.5f;
-    [SerializeField] private float _farShare = 2f;
+    [SerializeField] private float _nearRadius = 0.3f;
+    [SerializeField] private float _farRadius = 1.5f;
+    [SerializeField] private float _noseShare = 0.25f;
     [SerializeField] private float _fuseDelay = 0.3f;
 
     private float _fuseLeft;
@@ -15,9 +16,14 @@ public class TorpedoWarhead : MonoBehaviour
 
     public float Width => GetSize().y;
 
-    public float NearDiameter => Length * _nearShare;
+    public float Radius => _farRadius;
 
-    public float FarDiameter => Length * _farShare;
+    public float NearDiameter => _nearRadius * 2f;
+
+    public float FarDiameter => _farRadius * 2f;
+
+    public Vector2 Centre => (Vector2)transform.position
+        + (Vector2)transform.right * (Length * _noseShare);
 
     public bool IsFuseBurning => _fuseLeft > 0f;
 
