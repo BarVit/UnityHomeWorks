@@ -202,12 +202,12 @@ MonoBehaviour:
     _turnRate: 0
     _area: 1.2
     _price: 2000
-    _projectile: {fileID: 8728678904558988455, guid: 79b82508bda244037beb9d377f23f950, type: 3}
+    _projectile: {fileID: 8728678904558988455, guid: 2aeac9335d3bb4f30a741ee699cb6950, type: 3}
     _beam: {fileID: 0}
     _assets:
       _icon: {fileID: 0}
-      _projectileSprite: {fileID: 21300000, guid: cf9760a2dafc94f97b705a62ec67e9ff, type: 3}
-      _projectileAnimation: {fileID: 7400000, guid: 69c06217529414af2abcb4f5023bc745, type: 2}
+      _projectileSprite: {fileID: 21300000, guid: 2d24b72a5000b4709a0dc3fa3492a850, type: 3}
+      _projectileAnimation: {fileID: 0}
       _shotEffect: {fileID: 0}
       _hitTargetEffect: {fileID: -3751870904600509761, guid: 3a3ad20ac661444fca78e2501d44c8b8, type: 3}
       _hitWorldEffect: {fileID: 0}
