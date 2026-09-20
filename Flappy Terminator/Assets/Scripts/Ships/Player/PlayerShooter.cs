@@ -24,6 +24,10 @@ public class PlayerShooter : MonoBehaviour
 
     public Transform LockTarget => _delivery == null ? null : _delivery.LockTarget;
 
+    public bool IsOverheated => _delivery != null && _delivery.IsOverheated;
+
+    public bool HasHeat => _delivery != null && _delivery.HasHeat;
+
     public float Readiness => _delivery == null ? 0f : _delivery.Readiness;
 
     public bool IsReady => _delivery != null && _delivery.IsReady;

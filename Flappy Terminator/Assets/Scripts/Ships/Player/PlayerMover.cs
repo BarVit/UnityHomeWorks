@@ -10,7 +10,7 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float _maxRotationZ;
     [SerializeField] private Vector2 _startPosition;
     [SerializeField] private float _softStartDuration = 0.5f;
-    [SerializeField] private float _aimSpeed = 720f;
+    [SerializeField] private float _aimSpeed = 180f;
 
     private Rigidbody2D _rigidbody2D;
     private Quaternion _minRotation;

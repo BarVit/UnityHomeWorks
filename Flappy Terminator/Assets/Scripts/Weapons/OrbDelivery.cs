@@ -31,9 +31,17 @@ public class OrbDelivery : ProjectileDelivery
         AmmoPool.ForEachActive(Burn);
     }
 
+    private float GetRadius(Ammo orb)
+    {
+        SpriteRenderer renderer = orb.GetComponentInChildren<SpriteRenderer>();
+
+        return renderer == null ? Row.Area : renderer.bounds.extents.x;
+    }
+
     private void Burn(Ammo orb)
     {
-        int count = Physics2D.OverlapCircle(orb.transform.position, Row.Area, Context.TargetFilter, _touched);
+        int count = Physics2D.OverlapCircle(orb.transform.position, GetRadius(orb), Context.TargetFilter,
+            _touched);
 
         for (int i = 0; i < count; i++)
         {

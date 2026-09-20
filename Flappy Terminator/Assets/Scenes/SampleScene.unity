@@ -9792,6 +9792,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shooter: {fileID: 92249141}
   _fill: {fileID: 866740719}
+  _fillImage: {fileID: 596181441}
 --- !u!1 &700323211
 GameObject:
   m_ObjectHideFlags: 0
@@ -12928,7 +12929,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1758507529}
   m_Father: {fileID: 139758762}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1312285595
@@ -13566,6 +13568,73 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1744696884}
   m_CullTransparentMesh: 1
+--- !u!1001 &1758507528
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1265942522}
+    m_Modifications:
+    - target: {fileID: 2136463093525809956, guid: 484d848771a704244847b95fbf54eed4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2136463093525809956, guid: 484d848771a704244847b95fbf54eed4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2136463093525809956, guid: 484d848771a704244847b95fbf54eed4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2136463093525809956, guid: 484d848771a704244847b95fbf54eed4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2136463093525809956, guid: 484d848771a704244847b95fbf54eed4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2136463093525809956, guid: 484d848771a704244847b95fbf54eed4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2136463093525809956, guid: 484d848771a704244847b95fbf54eed4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2136463093525809956, guid: 484d848771a704244847b95fbf54eed4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2136463093525809956, guid: 484d848771a704244847b95fbf54eed4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2136463093525809956, guid: 484d848771a704244847b95fbf54eed4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2970892791895769747, guid: 484d848771a704244847b95fbf54eed4, type: 3}
+      propertyPath: m_Name
+      value: Overheat Smoke
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 484d848771a704244847b95fbf54eed4, type: 3}
+--- !u!4 &1758507529 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2136463093525809956, guid: 484d848771a704244847b95fbf54eed4, type: 3}
+  m_PrefabInstance: {fileID: 1758507528}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1758507530 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5281269313287075349, guid: 484d848771a704244847b95fbf54eed4, type: 3}
+  m_PrefabInstance: {fileID: 1758507528}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1821601262 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4173006622923370558, guid: 09ba11221984c417dbda5f0b88456507, type: 3}
@@ -13585,6 +13654,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BeamAimLock
   _input: {fileID: 661464565}
   _duration: 0.5
+--- !u!114 &1821601272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821601262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b46bcf00e7f894964933ec83fd29a839, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OverheatSmoke
+  _shooter: {fileID: 92249141}
+  _smoke: {fileID: 1758507530}
 --- !u!1 &1834425286
 GameObject:
   m_ObjectHideFlags: 0
@@ -14140,6 +14223,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3651529538033820116, guid: 09ba11221984c417dbda5f0b88456507, type: 3}
+      propertyPath: _aimSpeed
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 3651529538033820116, guid: 09ba11221984c417dbda5f0b88456507, type: 3}
       propertyPath: _softStartDuration
       value: 0.5
       objectReference: {fileID: 0}
@@ -14230,6 +14317,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4173006622923370558, guid: 09ba11221984c417dbda5f0b88456507, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1821601271}
+    - targetCorrespondingSourceObject: {fileID: 4173006622923370558, guid: 09ba11221984c417dbda5f0b88456507, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1821601272}
   m_SourcePrefab: {fileID: 100100000, guid: 09ba11221984c417dbda5f0b88456507, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

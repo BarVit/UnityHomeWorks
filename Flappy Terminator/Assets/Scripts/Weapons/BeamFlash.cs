@@ -8,6 +8,9 @@ public class BeamFlash : MonoBehaviour, IPoolable
     [SerializeField] private Sound _shotSound;
 
     private LineRenderer _line;
+    private GradientAlphaKey[] _alphaKeys;
+    private GradientColorKey[] _colorKeys;
+    private Gradient _gradient;
     private float _timeLeft;
 
     public Sound ShotSound => _shotSound;
@@ -17,6 +20,9 @@ public class BeamFlash : MonoBehaviour, IPoolable
     private void Awake()
     {
         _line = GetComponent<LineRenderer>();
+        _alphaKeys = _line.colorGradient.alphaKeys;
+        _colorKeys = new GradientColorKey[3];
+        _gradient = new Gradient();
     }
 
     private void Update()
@@ -36,6 +42,16 @@ public class BeamFlash : MonoBehaviour, IPoolable
 
     public void OnDespawn()
     {
+    }
+
+    public void Tint(Color color)
+    {
+        _colorKeys[0] = new GradientColorKey(Color.Lerp(color, Color.white, 0.7f), 0f);
+        _colorKeys[1] = new GradientColorKey(color, 0.25f);
+        _colorKeys[2] = new GradientColorKey(color, 1f);
+
+        _gradient.SetKeys(_colorKeys, _alphaKeys);
+        _line.colorGradient = _gradient;
     }
 
     public void Show(Vector3 from, Vector3 to)

@@ -74,6 +74,7 @@ public class BeamDelivery : WeaponDelivery
 
         BeamFlash flash = _beamPool.Get(from);
 
+        Paint(flash);
         flash.Show(from, to);
 
         if (barrel != 0 || _soundLeft > 0f)
@@ -87,6 +88,10 @@ public class BeamDelivery : WeaponDelivery
     {
         if (_soundLeft > 0f)
             _soundLeft -= deltaTime;
+    }
+
+    protected virtual void Paint(BeamFlash flash)
+    {
     }
 
     private float GetReach()
