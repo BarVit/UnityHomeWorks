@@ -86,14 +86,14 @@
 | Пушка | Снаряд или луч | Эффект выстрела | Эффект попадания | Звуки |
 |---|---|---|---|---|
 | Пушка | `Cannon Shell` | `Muzzle Sparks` | — | — |
-| Плазма | `PlayerBullet` + анимация `Spark Animation` | — | `PlayerBulletHit` | `Blaster`, `Plasma hit 2` |
-| Ракетница | `Player Rocket` | — | `vfx_RocketExplosion` | `Rocket 1` |
-| Самонаводящиеся | `Player Rocket` | — | `vfx_RocketExplosion` | `Rocket 1` |
+| Плазма | `PlayerBullet` + анимация `Spark Animation` | — | `PlayerBulletHit` | `Blaster [341956]`, `Plasma hit 2 [168984]` |
+| Ракетница | `Player Rocket` | — | `vfx_RocketExplosion` | `Rocket 1 [441500]` |
+| Самонаводящиеся | `Player Rocket` | — | `vfx_RocketExplosion` | `Rocket 1 [441500]` |
 | Рельсотрон | `Railgun Beam` | — | — | — |
 | Лучевой лазер | `Laser Beam` | — | `Hit Sparks` | — |
 | Импульсный лазер | `Impulse Bolt` | — | `Hit Sparks` | — |
 | Плазменный шар | `Plasma Orb` | — | `Hit Sparks Blue` | — |
-| Торпеды | `Torpedo` | — | `vfx_RocketExplosion` | `Rocket 1` |
+| Торпеды | `Torpedo` | — | `vfx_RocketExplosion` | `Rocket 1 [441500]` |
 
 Чего нет ни у одной пушки: иконок для фитинга, звука полёта, эффекта и звука попадания
 в окружающий мир, звука перегрева. Звуки у пушки, обоих лазеров, шара и рельсотрона сняты

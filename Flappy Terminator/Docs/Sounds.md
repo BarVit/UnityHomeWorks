@@ -1,0 +1,23 @@
+# Звуки проекта
+
+[← Происхождение графики и звука](Assets.md)
+
+Файл собирается командой `Tools/Sounds/Write Register` и руками не правится.
+Номер в квадратных скобках — номер звука на Freesound, по нему звук находится
+и в библиотеке, и на сайте. «В игре» — звук достижим из сцен сборки.
+
+| Файл | Freesound | Длина | Размер | В игре | Где используется |
+|---|---|---|---|---|---|
+| `Blaster [341956].wav` | [341956](https://freesound.org/s/341956) | 0.58 с | 99 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/PlayerBullet.prefab` |
+| `Bump [330629].wav` | [330629](https://freesound.org/s/330629) | 1.4 с | 239 КБ | да | `Prefabs/Player Ship.prefab` |
+| `Bump 2 explosion_short.wav` | — | 0.41 с | 77 КБ | да | `Prefabs/Player Ship.prefab` |
+| `Explosion [402005].wav` | [402005](https://freesound.org/s/402005) | 1.8 с | 532 КБ | да | `VFX/Sparks/vfx_EnemyExposion.prefab`, `VFX/Sparks/vfx_RocketExplosion.prefab` |
+| `Music [398256].wav` | [398256](https://freesound.org/s/398256) | 34.7 с | 9.5 МБ | да | `Scenes/SampleScene.unity` |
+| `Music 2.wav` | — | 57.6 с | 10.5 МБ | да | `Scenes/SampleScene.unity` |
+| `Plasma hit [146725].wav` | [146725](https://freesound.org/s/146725) | 0.05 с | 4 КБ | **нет** | — |
+| `Plasma hit 2 [168984].wav` | [168984](https://freesound.org/s/168984) | 0.24 с | 40 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/PlayerBulletHit.prefab` |
+| `Player explosion [563932].wav` | [563932](https://freesound.org/s/563932) | 10.0 с | 3.4 МБ | да | `VFX/Sparks/Player ship explosion.prefab` |
+| `Rocket 1 [441500].wav` | [441500](https://freesound.org/s/441500) | 3.8 с | 647 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Enemy Bullet.prefab`, `Prefabs/Player Rocket.prefab`, `Prefabs/Torpedo.prefab` |
+| `Rocket 2 [441499].wav` | [441499](https://freesound.org/s/441499) | 4.0 с | 691 КБ | **нет** | — |
+
+Всего звуков: 11, из них в игре не используются: 2.
