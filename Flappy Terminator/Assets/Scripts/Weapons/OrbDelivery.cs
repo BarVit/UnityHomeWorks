@@ -97,6 +97,7 @@ public class OrbDelivery : ProjectileDelivery
         float radius = GetRadius(orb);
         Vector2 centre = orb.transform.position;
         int count = Physics2D.OverlapCircle(centre, radius * 2f, Context.TargetFilter, _touched);
+        bool isTouching = false;
 
         for (int i = 0; i < count; i++)
         {
@@ -110,6 +111,12 @@ public class OrbDelivery : ProjectileDelivery
 
             damageable.TakeDamage(isInside ? Row.Damage : Row.Damage / 2);
             Spark(_touched[i].transform.position);
+            isTouching = true;
         }
+
+        OrbArcSound sound = orb.GetComponentInChildren<OrbArcSound>();
+
+        if (sound != null)
+            sound.SetTouching(isTouching);
     }
 }

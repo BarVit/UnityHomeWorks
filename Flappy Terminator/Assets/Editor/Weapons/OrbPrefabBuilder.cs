@@ -1,6 +1,7 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Rendering;
 
 namespace WeaponContent
@@ -18,6 +19,10 @@ namespace WeaponContent
         private const string ShotSoundPath = "Assets/Sounds/Plasma shot [565450].wav";
         private const float ShotVolume = 0.3f;
         private const float AdditiveMode = 4f;
+        private const string ArcSoundPath = "Assets/Sounds/Electric arc [567269].wav";
+        private const string MixerPath = "Assets/Sounds/AudioMixer.mixer";
+        private const string EffectsGroup = "Effects";
+        private const float ArcVolume = 0.3f;
 
         [MenuItem("Tools/Weapons/Build Plasma Orb")]
         public static void Build()
@@ -43,6 +48,7 @@ namespace WeaponContent
             Layer(root, "Veins B", VeinsPath, additive, 0.82f, 2, -57f, 0.65f);
             SetArcs(root);
             SetTether(root);
+            SetArcSound(root);
 
             PrefabUtility.SaveAsPrefabAsset(root, TargetPath);
             PrefabUtility.UnloadPrefabContents(root);
@@ -174,6 +180,44 @@ namespace WeaponContent
 
             serialized.FindProperty("_material").objectReferenceValue = GetArcMaterial();
             serialized.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        private static void SetArcSound(GameObject root)
+        {
+            Transform found = root.transform.Find("Arc Sound");
+
+            if (found == null)
+            {
+                found = new GameObject("Arc Sound").transform;
+                found.SetParent(root.transform, false);
+            }
+
+            AudioSource source = found.GetComponent<AudioSource>();
+
+            if (source == null)
+                source = found.gameObject.AddComponent<AudioSource>();
+
+            source.clip = AssetDatabase.LoadAssetAtPath<AudioClip>(ArcSoundPath);
+            source.outputAudioMixerGroup = FindEffectsGroup();
+            source.volume = ArcVolume;
+            source.loop = true;
+            source.playOnAwake = false;
+            source.spatialBlend = 0f;
+
+            if (found.GetComponent<OrbArcSound>() == null)
+                found.gameObject.AddComponent<OrbArcSound>();
+        }
+
+        private static AudioMixerGroup FindEffectsGroup()
+        {
+            AudioMixer mixer = AssetDatabase.LoadAssetAtPath<AudioMixer>(MixerPath);
+
+            if (mixer == null)
+                return null;
+
+            AudioMixerGroup[] groups = mixer.FindMatchingGroups(EffectsGroup);
+
+            return groups.Length == 0 ? null : groups[0];
         }
 
         private static void SetTether(GameObject root)

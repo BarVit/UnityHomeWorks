@@ -242,7 +242,7 @@ MonoBehaviour:
       _hitWorldEffect: {fileID: 0}
       _shotSound: {fileID: 8300000, guid: 5fd07dddb78434ee987e56681ce7d7ea, type: 3}
       _flightSound: {fileID: 0}
-      _hitTargetSound: {fileID: 0}
+      _hitTargetSound: {fileID: 8300000, guid: d991e5aad589b458c9b0555a8624b268, type: 3}
       _hitWorldSound: {fileID: 0}
       _overheatSound: {fileID: 0}
   - _id: torpedo
