@@ -240,7 +240,7 @@ MonoBehaviour:
       _shotEffect: {fileID: 0}
       _hitTargetEffect: {fileID: 65737188426349923, guid: 95b69f301088b4bfe9e35e144de7b595, type: 3}
       _hitWorldEffect: {fileID: 0}
-      _shotSound: {fileID: 0}
+      _shotSound: {fileID: 8300000, guid: 5fd07dddb78434ee987e56681ce7d7ea, type: 3}
       _flightSound: {fileID: 0}
       _hitTargetSound: {fileID: 0}
       _hitWorldSound: {fileID: 0}

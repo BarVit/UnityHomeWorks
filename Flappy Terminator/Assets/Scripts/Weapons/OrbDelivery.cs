@@ -2,11 +2,15 @@ using UnityEngine;
 
 public class OrbDelivery : ProjectileDelivery
 {
+    private const float ChargeDuration = 0.3f;
+
     private readonly Collider2D[] _touched = new Collider2D[16];
 
     private readonly SpawnPool<ExplosionAnimation> _sparkPool;
 
     private float _tickLeft;
+    private Ammo _charging;
+    private float _chargeLeft;
 
     public OrbDelivery(WeaponRow row, WeaponContext context) : base(row, context)
     {
@@ -14,22 +18,33 @@ public class OrbDelivery : ProjectileDelivery
             _sparkPool = context.Pools.GetPool(row.HitEffect);
     }
 
+    public override float HoldLeft => _charging == null ? 0f : _chargeLeft;
+
     protected override Ammo Launch(int barrel)
     {
         Ammo orb = base.Launch(barrel);
 
         orb.MakePersistent();
+        orb.Stop();
 
         PlasmaTether tether = orb.GetComponentInChildren<PlasmaTether>();
 
         if (tether != null)
             tether.Aim(Context.TargetFilter);
 
+        if (orb.TryGetComponent(out OrbGrowth growth))
+            growth.Charge(ChargeDuration);
+
+        _charging = orb;
+        _chargeLeft = ChargeDuration;
+
         return orb;
     }
 
     protected override void OnTick(float deltaTime)
     {
+        Charge(deltaTime);
+
         _tickLeft -= deltaTime;
 
         if (_tickLeft > 0f)
@@ -38,6 +53,28 @@ public class OrbDelivery : ProjectileDelivery
         _tickLeft = Row.TickInterval;
 
         AmmoPool.ForEachActive(Burn);
+    }
+
+    private void Charge(float deltaTime)
+    {
+        if (_charging == null)
+            return;
+
+        if (_charging.gameObject.activeInHierarchy == false)
+        {
+            _charging = null;
+
+            return;
+        }
+
+        _charging.transform.SetPositionAndRotation(GetMount(0).position, GetRotation(0));
+        _chargeLeft -= deltaTime;
+
+        if (_chargeLeft > 0f)
+            return;
+
+        _charging.Fly(ProjectileSpeed);
+        _charging = null;
     }
 
     private void Spark(Vector3 position)

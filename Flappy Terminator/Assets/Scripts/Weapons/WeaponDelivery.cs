@@ -29,6 +29,8 @@ public abstract class WeaponDelivery
 
     public virtual Transform LockTarget => null;
 
+    public virtual float HoldLeft => 0f;
+
     public bool IsOverheated => _isOverheated;
 
     public bool HasHeat => _row.HeatPerShot > 0f;

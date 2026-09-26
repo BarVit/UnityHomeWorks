@@ -77,6 +77,11 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
         _bulletMover.Fly(speed);
     }
 
+    public void Stop()
+    {
+        _bulletMover.Stop();
+    }
+
     public void Hit(Vector2 point)
     {
         Struck?.Invoke(this);

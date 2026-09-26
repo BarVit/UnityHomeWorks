@@ -14,6 +14,8 @@ namespace WeaponContent
         private const string SamplePath = "Assets/GabrielAguiarProductions/Flare00_AB_2.mat";
         private const string AdditivePath = "Assets/VFX/Plasma Additive.mat";
         private const string ArcMaterialPath = "Assets/VFX/Plasma Arc.mat";
+        private const string ShotSoundPath = "Assets/Sounds/Plasma shot [565450].wav";
+        private const float ShotVolume = 0.3f;
 
         [MenuItem("Tools/Weapons/Build Plasma Orb")]
         public static void Build()
@@ -32,7 +34,7 @@ namespace WeaponContent
             if (root.GetComponent<OrbGrowth>() == null)
                 root.AddComponent<OrbGrowth>();
 
-            Hush(root);
+            SetShotSound(root);
 
             Layer(root, "Halo", HaloPath, additive, 1.9f, -1, 0f, 0.85f);
             Layer(root, "Veins A", VeinsPath, additive, 0.98f, 1, 38f, 0.8f);
@@ -72,7 +74,7 @@ namespace WeaponContent
             renderer.sortingOrder = 0;
         }
 
-        private static void Hush(GameObject root)
+        private static void SetShotSound(GameObject root)
         {
             Ammo ammo = root.GetComponent<Ammo>();
 
@@ -81,7 +83,9 @@ namespace WeaponContent
 
             SerializedObject serialized = new SerializedObject(ammo);
 
-            serialized.FindProperty("_shotSound._clip").objectReferenceValue = null;
+            serialized.FindProperty("_shotSound._clip").objectReferenceValue =
+                AssetDatabase.LoadAssetAtPath<AudioClip>(ShotSoundPath);
+            serialized.FindProperty("_shotSound._volume").floatValue = ShotVolume;
             serialized.ApplyModifiedPropertiesWithoutUndo();
         }
 
@@ -198,7 +202,7 @@ namespace WeaponContent
         private static Material GetArcMaterial()
         {
             if (File.Exists(ArcMaterialPath))
-                AssetDatabase.DeleteAsset(ArcMaterialPath);
+                return AssetDatabase.LoadAssetAtPath<Material>(ArcMaterialPath);
 
             AssetDatabase.CopyAsset(SamplePath, ArcMaterialPath);
 
@@ -220,7 +224,7 @@ namespace WeaponContent
         private static Material GetAdditive()
         {
             if (File.Exists(AdditivePath))
-                AssetDatabase.DeleteAsset(AdditivePath);
+                return AssetDatabase.LoadAssetAtPath<Material>(AdditivePath);
 
             AssetDatabase.CopyAsset(SamplePath, AdditivePath);
 

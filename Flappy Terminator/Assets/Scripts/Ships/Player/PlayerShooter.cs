@@ -24,6 +24,8 @@ public class PlayerShooter : MonoBehaviour
 
     public Transform LockTarget => _delivery == null ? null : _delivery.LockTarget;
 
+    public float HoldLeft => _delivery == null ? 0f : _delivery.HoldLeft;
+
     public bool IsOverheated => _delivery != null && _delivery.IsOverheated;
 
     public bool HasHeat => _delivery != null && _delivery.HasHeat;
