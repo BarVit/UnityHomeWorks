@@ -1,6 +1,7 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace WeaponContent
 {
@@ -16,6 +17,7 @@ namespace WeaponContent
         private const string ArcMaterialPath = "Assets/VFX/Plasma Arc.mat";
         private const string ShotSoundPath = "Assets/Sounds/Plasma shot [565450].wav";
         private const float ShotVolume = 0.3f;
+        private const float AdditiveMode = 4f;
 
         [MenuItem("Tools/Weapons/Build Plasma Orb")]
         public static void Build()
@@ -201,45 +203,52 @@ namespace WeaponContent
 
         private static Material GetArcMaterial()
         {
-            if (File.Exists(ArcMaterialPath))
-                return AssetDatabase.LoadAssetAtPath<Material>(ArcMaterialPath);
+            Material material = LoadOrCopy(ArcMaterialPath);
 
-            AssetDatabase.CopyAsset(SamplePath, ArcMaterialPath);
+            material.SetTexture("_MainTex", null);
 
-            Material created = AssetDatabase.LoadAssetAtPath<Material>(ArcMaterialPath);
+            if (material.HasProperty("_Color"))
+                material.SetColor("_Color", new Color(0.72f, 0.9f, 1f, 1f));
 
-            created.SetFloat("_SrcBlend", (float)UnityEngine.Rendering.BlendMode.SrcAlpha);
-            created.SetFloat("_DstBlend", (float)UnityEngine.Rendering.BlendMode.One);
-            created.SetFloat("_ZWrite", 0f);
-            created.SetTexture("_MainTex", null);
+            MakeAdditive(material);
 
-            if (created.HasProperty("_Color"))
-                created.SetColor("_Color", new Color(0.72f, 0.9f, 1f, 1f));
-
-            EditorUtility.SetDirty(created);
-
-            return created;
+            return material;
         }
 
         private static Material GetAdditive()
         {
-            if (File.Exists(AdditivePath))
-                return AssetDatabase.LoadAssetAtPath<Material>(AdditivePath);
+            Material material = LoadOrCopy(AdditivePath);
 
-            AssetDatabase.CopyAsset(SamplePath, AdditivePath);
+            if (material.HasProperty("_Color"))
+                material.SetColor("_Color", Color.white);
 
-            Material created = AssetDatabase.LoadAssetAtPath<Material>(AdditivePath);
+            MakeAdditive(material);
 
-            created.SetFloat("_SrcBlend", (float)UnityEngine.Rendering.BlendMode.SrcAlpha);
-            created.SetFloat("_DstBlend", (float)UnityEngine.Rendering.BlendMode.One);
-            created.SetFloat("_ZWrite", 0f);
+            return material;
+        }
 
-            if (created.HasProperty("_Color"))
-                created.SetColor("_Color", Color.white);
+        private static Material LoadOrCopy(string path)
+        {
+            if (File.Exists(path) == false)
+                AssetDatabase.CopyAsset(SamplePath, path);
 
-            EditorUtility.SetDirty(created);
+            return AssetDatabase.LoadAssetAtPath<Material>(path);
+        }
 
-            return created;
+        private static void MakeAdditive(Material material)
+        {
+            material.SetFloat("_Mode", AdditiveMode);
+            material.SetFloat("_BlendOp", (float)BlendOp.Add);
+            material.SetFloat("_SrcBlend", (float)BlendMode.SrcAlpha);
+            material.SetFloat("_DstBlend", (float)BlendMode.One);
+            material.SetFloat("_ZWrite", 0f);
+            material.SetOverrideTag("RenderType", "Transparent");
+            material.DisableKeyword("_ALPHATEST_ON");
+            material.EnableKeyword("_ALPHABLEND_ON");
+            material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            material.DisableKeyword("_ALPHAMODULATE_ON");
+            material.renderQueue = (int)RenderQueue.Transparent;
+            EditorUtility.SetDirty(material);
         }
     }
 }
