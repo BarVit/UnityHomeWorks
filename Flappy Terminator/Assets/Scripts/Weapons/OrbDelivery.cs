@@ -18,8 +18,6 @@ public class OrbDelivery : ProjectileDelivery
             _sparkPool = context.Pools.GetPool(row.HitEffect);
     }
 
-    public override float HoldLeft => _charging == null ? 0f : _chargeLeft;
-
     protected override Ammo Launch(int barrel)
     {
         Ammo orb = base.Launch(barrel);
