@@ -19,7 +19,7 @@ namespace WeaponContent
         private const string ShotSoundPath = "Assets/Sounds/Plasma shot [565450].wav";
         private const float ShotVolume = 0.3f;
         private const float AdditiveMode = 4f;
-        private const string ArcSoundPath = "Assets/Sounds/Electric arc [567269].wav";
+        private const string ArcSoundPath = "Assets/Sounds/Electric shock [655263].wav";
         private const string MixerPath = "Assets/Sounds/AudioMixer.mixer";
         private const string EffectsGroup = "Effects";
         private const float ArcVolume = 0.3f;
