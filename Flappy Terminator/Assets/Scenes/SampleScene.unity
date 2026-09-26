@@ -10135,6 +10135,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4adedd7671fd4e0fa222d9343a368669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tracks:
+  - {fileID: 8300000, guid: ba21898a44a4b4b83935ecf820babafc, type: 3}
+  - {fileID: 8300000, guid: e75df5cd9c1f944ce99e585d983fa119, type: 3}
+  _crossfadeDuration: 3
 --- !u!222 &715848224
 CanvasRenderer:
   m_ObjectHideFlags: 0

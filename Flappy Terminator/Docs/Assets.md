@@ -12,7 +12,7 @@
 | `Sprites/Ships/Boss 1…5.png` | `tinyShip13, 7, 11, 14, 20` | там же |
 | `2D Pixel Spaceships…/Sprites/ship1,2.png` | те же файлы | **2D Pixel Spaceships (2 Small Ships + Explosions)**, EVPO Games |
 | `Sprites/Ammo/{Spark,Pulse,Waveform,Hits}` | `Pixel Art/*` | **Warped Shooting Fx**, Ansimuz |
-| `Sounds/warped-shooting-fx.wav` | `Music/warped-shooting-fx.wav` | там же |
+| `Sounds/Music 2.wav` — вторая фоновая музыка | `Music/warped-shooting-fx.wav` | там же |
 | `Sprites/Ammo/Torpedo/2DShipsMissilesTorpedoesAtlas.png` | тот же файл | **2D Spaceships Free Trial**, MSGDI |
 | `Sprites/Asteroids.png` | `asteroids.png` 498×403 | **2D Pixel Asteroids**, EVPO Games |
 | `GabrielAguiarProductions/` | по имени папки | **Free Quick Effects Vol 1**, Gabriel Aguiar Prod |
