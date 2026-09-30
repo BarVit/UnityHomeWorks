@@ -184,7 +184,7 @@ MonoBehaviour:
       _hitWorldEffect: {fileID: 0}
       _shotSound: {fileID: 0}
       _flightSound: {fileID: 0}
-      _hitTargetSound: {fileID: 0}
+      _hitTargetSound: {fileID: 8300000, guid: e4a9454d0acc4456499dcede787b5f32, type: 3}
       _hitWorldSound: {fileID: 0}
       _overheatSound: {fileID: 0}
   - _id: impulse_laser

@@ -10,6 +10,7 @@ public class BeamDelivery : WeaponDelivery
     private readonly RaycastHit2D[] _hits = new RaycastHit2D[1];
 
     private float _soundLeft;
+    private float _burnLeft;
     private float _targetAge;
 
     public BeamDelivery(WeaponRow row, WeaponContext context) : base(row, context)
@@ -49,7 +50,7 @@ public class BeamDelivery : WeaponDelivery
             ? _hits[0].point
             : (Vector2)mount.position + direction * reach;
 
-        Draw(mount.position, end, barrel);
+        BeamFlash flash = Draw(mount.position, end, barrel);
 
         if (isSeen == false)
             return;
@@ -62,6 +63,7 @@ public class BeamDelivery : WeaponDelivery
         if (damageable != null)
         {
             damageable.TakeDamage(Row.Damage);
+            Burn(flash, hit.point);
 
             if (Target == null)
                 Target = hit.collider.transform;
@@ -75,10 +77,10 @@ public class BeamDelivery : WeaponDelivery
         effect.Play();
     }
 
-    private void Draw(Vector3 from, Vector3 to, int barrel)
+    private BeamFlash Draw(Vector3 from, Vector3 to, int barrel)
     {
         if (_beamPool == null)
-            return;
+            return null;
 
         BeamFlash flash = _beamPool.Get(from);
 
@@ -86,16 +88,35 @@ public class BeamDelivery : WeaponDelivery
         flash.Show(from, to);
 
         if (barrel != 0 || _soundLeft > 0f)
-            return;
+            return flash;
 
         _soundLeft = MinSoundInterval;
         Context.Audio.Play(flash.ShotSound, from);
+
+        return flash;
+    }
+
+    private void Burn(BeamFlash flash, Vector2 point)
+    {
+        if (flash == null || _burnLeft > 0f)
+            return;
+
+        Sound sound = flash.HitSound;
+
+        if (sound.Clip == null)
+            return;
+
+        _burnLeft = sound.Clip.length;
+        Context.Audio.Play(sound, point);
     }
 
     protected override void OnTick(float deltaTime)
     {
         if (_soundLeft > 0f)
             _soundLeft -= deltaTime;
+
+        if (_burnLeft > 0f)
+            _burnLeft -= deltaTime;
 
         if (Target == null)
             return;

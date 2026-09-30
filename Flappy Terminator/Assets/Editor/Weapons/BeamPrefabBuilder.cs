@@ -8,6 +8,8 @@ namespace WeaponContent
     {
         private const string Folder = "Assets/Prefabs/Beams";
         private const string MaterialPath = "Assets/Prefabs/Beams/Beam.mat";
+        private const string LaserHitSoundPath = "Assets/Sounds/Laser burn [670075].wav";
+        private const float LaserHitVolume = 1f;
 
         [MenuItem("Tools/Weapons/Build Beams")]
         public static void Build()
@@ -18,9 +20,9 @@ namespace WeaponContent
             Material material = GetMaterial();
 
             Create("Railgun Beam", material, new Color(0.65f, 0.9f, 1f), 0.16f, 0.07f,
-                "Assets/Sounds/Rocket 2.wav", 0.25f);
+                null, 0f);
             Create("Laser Beam", material, new Color(1f, 0.35f, 0.25f), 0.09f, 0.05f,
-                "Assets/Sounds/Plasma hit 2.wav", 0.12f);
+                LaserHitSoundPath, LaserHitVolume);
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
@@ -42,7 +44,7 @@ namespace WeaponContent
         }
 
         private static void Create(string name, Material material, Color color, float width,
-            float lifetime, string soundPath, float volume)
+            float lifetime, string hitSoundPath, float hitVolume)
         {
             string path = Folder + "/" + name + ".prefab";
             GameObject root = new GameObject(name);
@@ -65,6 +67,10 @@ namespace WeaponContent
 
             serialized.FindProperty("_lifetime").floatValue = lifetime;
             serialized.FindProperty("_shotSound._clip").objectReferenceValue = null;
+            serialized.FindProperty("_hitSound._clip").objectReferenceValue = hitSoundPath == null
+                ? null
+                : AssetDatabase.LoadAssetAtPath<AudioClip>(hitSoundPath);
+            serialized.FindProperty("_hitSound._volume").floatValue = hitVolume;
             serialized.ApplyModifiedPropertiesWithoutUndo();
 
             PrefabUtility.SaveAsPrefabAsset(root, path);
