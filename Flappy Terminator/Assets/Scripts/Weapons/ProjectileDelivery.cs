@@ -33,6 +33,16 @@ public class ProjectileDelivery : WeaponDelivery
 
     protected virtual Ammo Launch(int barrel)
     {
+        Ammo ammo = Spawn(barrel);
+
+        if (barrel == 0)
+            Context.Audio.Play(ammo.ShotSound, GetMount(barrel).position);
+
+        return ammo;
+    }
+
+    protected Ammo Spawn(int barrel)
+    {
         Transform mount = GetMount(barrel);
         Ammo ammo = _ammoPool.Get(mount.position, GetRotation(barrel));
 
@@ -41,9 +51,6 @@ public class ProjectileDelivery : WeaponDelivery
         ammo.Init(_hitEffectPool);
         ammo.SetDamage(Row.Damage);
         ammo.Fly(ProjectileSpeed);
-
-        if (barrel == 0)
-            Context.Audio.Play(ammo.ShotSound, mount.position);
 
         return ammo;
     }

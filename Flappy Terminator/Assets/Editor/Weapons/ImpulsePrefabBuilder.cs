@@ -10,6 +10,8 @@ namespace WeaponContent
         private const string TargetPath = "Assets/Prefabs/Impulse Bolt.prefab";
         private const string SpritePath = "Assets/Sprites/Ammo/Impulse/Impulse Bolt.png";
         private const string MaterialPath = "Assets/VFX/Plasma Additive.mat";
+        private const string ShotSoundPath = "Assets/Sounds/Laser shot [580308].wav";
+        private const float ShotVolume = 0.3f;
 
         [MenuItem("Tools/Weapons/Build Impulse Bolt")]
         public static void Build()
@@ -54,7 +56,9 @@ namespace WeaponContent
                 SerializedObject serialized = new SerializedObject(ammo);
 
                 serialized.FindProperty("_hitEffectPrefab").objectReferenceValue = null;
-                serialized.FindProperty("_shotSound._clip").objectReferenceValue = null;
+                serialized.FindProperty("_shotSound._clip").objectReferenceValue =
+                    AssetDatabase.LoadAssetAtPath<AudioClip>(ShotSoundPath);
+                serialized.FindProperty("_shotSound._volume").floatValue = ShotVolume;
                 serialized.ApplyModifiedPropertiesWithoutUndo();
             }
 

@@ -186,6 +186,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hitEffectPrefab: {fileID: 0}
   _shotSound:
-    _clip: {fileID: 0}
+    _clip: {fileID: 8300000, guid: 818da3d5b90734b639eb3d8fa31555ba, type: 3}
     _volume: 0.3
   <Damage>k__BackingField: 25
