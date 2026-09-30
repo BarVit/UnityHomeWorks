@@ -14,7 +14,7 @@
 | `Electric arc [567269].wav` | [567269](https://freesound.org/s/567269) | 3.3 с | 563 КБ | **нет** | — |
 | `Electric shock [655263].wav` | [655263](https://freesound.org/s/655263) | 6.3 с | 1.6 МБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Plasma Orb.prefab` |
 | `Explosion [402005].wav` | [402005](https://freesound.org/s/402005) | 1.8 с | 532 КБ | да | `VFX/Sparks/vfx_EnemyExposion.prefab`, `VFX/Sparks/vfx_RocketExplosion.prefab` |
-| `Laser shot [580308].wav` | [580308](https://freesound.org/s/580308) | 0.16 с | 60 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Impulse Bolt.prefab` |
+| `Laser shot [580308].wav` | [580308](https://freesound.org/s/580308) | 0.07 с | 27 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Impulse Bolt.prefab` |
 | `Music [398256].wav` | [398256](https://freesound.org/s/398256) | 34.7 с | 9.5 МБ | да | `Scenes/SampleScene.unity` |
 | `Music 2.wav` | — | 57.6 с | 10.5 МБ | да | `Scenes/SampleScene.unity` |
 | `Plasma hit [146725].wav` | [146725](https://freesound.org/s/146725) | 0.05 с | 4 КБ | **нет** | — |
