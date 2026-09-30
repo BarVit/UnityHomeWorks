@@ -12,6 +12,8 @@ namespace WeaponContent
         private const string MaterialPath = "Assets/VFX/Plasma Additive.mat";
         private const string ShotSoundPath = "Assets/Sounds/Laser shot [580308].wav";
         private const float ShotVolume = 0.3f;
+        private const string HitSoundPath = "Assets/Sounds/Laser burn [670075].wav";
+        private const float HitVolume = 1f;
 
         [MenuItem("Tools/Weapons/Build Impulse Bolt")]
         public static void Build()
@@ -59,6 +61,9 @@ namespace WeaponContent
                 serialized.FindProperty("_shotSound._clip").objectReferenceValue =
                     AssetDatabase.LoadAssetAtPath<AudioClip>(ShotSoundPath);
                 serialized.FindProperty("_shotSound._volume").floatValue = ShotVolume;
+                serialized.FindProperty("_hitSound._clip").objectReferenceValue =
+                    AssetDatabase.LoadAssetAtPath<AudioClip>(HitSoundPath);
+                serialized.FindProperty("_hitSound._volume").floatValue = HitVolume;
                 serialized.ApplyModifiedPropertiesWithoutUndo();
             }
 

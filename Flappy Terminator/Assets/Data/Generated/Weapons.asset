@@ -184,7 +184,7 @@ MonoBehaviour:
       _hitWorldEffect: {fileID: 0}
       _shotSound: {fileID: 0}
       _flightSound: {fileID: 0}
-      _hitTargetSound: {fileID: 8300000, guid: e4a9454d0acc4456499dcede787b5f32, type: 3}
+      _hitTargetSound: {fileID: 0}
       _hitWorldSound: {fileID: 0}
       _overheatSound: {fileID: 0}
   - _id: impulse_laser
@@ -202,7 +202,7 @@ MonoBehaviour:
     _turnRate: 0
     _area: 0
     _price: 1400
-    _projectile: {fileID: 8728678904558988455, guid: 898cd648ad80c41bd95ef4668747ca07, type: 3}
+    _projectile: {fileID: 8728678904558988455, guid: d8d5022e34238481a9b746320d8b5e40, type: 3}
     _beam: {fileID: 0}
     _assets:
       _icon: {fileID: 0}
@@ -213,7 +213,7 @@ MonoBehaviour:
       _hitWorldEffect: {fileID: 0}
       _shotSound: {fileID: 8300000, guid: 818da3d5b90734b639eb3d8fa31555ba, type: 3}
       _flightSound: {fileID: 0}
-      _hitTargetSound: {fileID: 0}
+      _hitTargetSound: {fileID: 8300000, guid: e4a9454d0acc4456499dcede787b5f32, type: 3}
       _hitWorldSound: {fileID: 0}
       _overheatSound: {fileID: 0}
   - _id: plasma_orb
