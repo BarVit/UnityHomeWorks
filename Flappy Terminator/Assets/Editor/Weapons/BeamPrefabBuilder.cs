@@ -15,7 +15,7 @@ namespace WeaponContent
         private const string RailgunWorldHitPath = "Assets/Sounds/Railgun hit [871710].wav";
         private const float RailgunWorldHitVolume = 0.2f;
         private const string LaserLoopPath = "Assets/Sounds/Laser beam [843455].wav";
-        private const float LaserLoopVolume = 0.3f;
+        private const float LaserLoopVolume = 0.2f;
 
         [MenuItem("Tools/Weapons/Build Beams")]
         public static void Build()
