@@ -15,6 +15,8 @@ namespace WeaponContent
         private const string BodySpriteName = "2DShipsMissilesTorpedoesAtlas_0";
         private const string MaterialPath = "Assets/VFX/Plasma Additive.mat";
         private const float SizeAgainstRocket = 2f;
+        private const string BlastSoundPath = "Assets/Sounds/Explosion [402005].wav";
+        private const float BlastSoundVolume = 1f;
 
         [MenuItem("Tools/Weapons/Build Torpedo")]
         public static void Build()
@@ -46,6 +48,7 @@ namespace WeaponContent
             }
 
             SetLamp(root, body);
+            Silence(root);
 
             TorpedoWarhead warhead = root.GetComponent<TorpedoWarhead>();
 
@@ -55,6 +58,9 @@ namespace WeaponContent
             SerializedObject serialized = new SerializedObject(warhead);
 
             serialized.FindProperty("_blast").objectReferenceValue = blast;
+            serialized.FindProperty("_blastSound._clip").objectReferenceValue =
+                AssetDatabase.LoadAssetAtPath<AudioClip>(BlastSoundPath);
+            serialized.FindProperty("_blastSound._volume").floatValue = BlastSoundVolume;
             serialized.ApplyModifiedPropertiesWithoutUndo();
 
             PrefabUtility.SaveAsPrefabAsset(root, TargetPath);
@@ -73,6 +79,20 @@ namespace WeaponContent
 
             hull.size = new Vector2(length, width);
             hull.offset = Vector2.zero;
+        }
+
+        private static void Silence(GameObject root)
+        {
+            Ammo ammo = root.GetComponent<Ammo>();
+
+            if (ammo == null)
+                return;
+
+            SerializedObject serialized = new SerializedObject(ammo);
+
+            serialized.FindProperty("_hitSound._clip").objectReferenceValue = null;
+            serialized.FindProperty("_worldHitSound._clip").objectReferenceValue = null;
+            serialized.ApplyModifiedPropertiesWithoutUndo();
         }
 
         private static float GetRocketLength()

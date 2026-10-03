@@ -4975,6 +4975,12 @@ MonoBehaviour:
   _shotSound:
     _clip: {fileID: 8300000, guid: fdc735ea072a9410a98e635510b96568, type: 3}
     _volume: 0.05
+  _hitSound:
+    _clip: {fileID: 8300000, guid: 073af4467d10246c190d3a3a29c9d2f4, type: 3}
+    _volume: 1
+  _worldHitSound:
+    _clip: {fileID: 8300000, guid: 073af4467d10246c190d3a3a29c9d2f4, type: 3}
+    _volume: 1
   <Damage>k__BackingField: 10
 --- !u!1 &6295457061521432461
 GameObject:

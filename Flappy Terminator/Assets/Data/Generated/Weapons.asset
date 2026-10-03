@@ -69,7 +69,7 @@ MonoBehaviour:
       _shotSound: {fileID: 8300000, guid: eaa03aaca78b14fc99a1a99fbd45e15b, type: 3}
       _flightSound: {fileID: 0}
       _hitTargetSound: {fileID: 8300000, guid: db5a0c5135622436d987441a5ed3fc85, type: 3}
-      _hitWorldSound: {fileID: 0}
+      _hitWorldSound: {fileID: 8300000, guid: db5a0c5135622436d987441a5ed3fc85, type: 3}
       _overheatSound: {fileID: 0}
   - _id: rocket
     _title: "\u0420\u0430\u043A\u0435\u0442\u043D\u0438\u0446\u0430"
@@ -86,7 +86,7 @@ MonoBehaviour:
     _turnRate: 0
     _area: 0
     _price: 300
-    _projectile: {fileID: 4581286917286831887, guid: f25b90339fe294ec7be1c43e7f3a8217, type: 3}
+    _projectile: {fileID: 4581286917286831887, guid: c73e30a42bca94a4294c192b14f3f7f4, type: 3}
     _beam: {fileID: 0}
     _assets:
       _icon: {fileID: 0}
@@ -97,8 +97,8 @@ MonoBehaviour:
       _hitWorldEffect: {fileID: 0}
       _shotSound: {fileID: 8300000, guid: fdc735ea072a9410a98e635510b96568, type: 3}
       _flightSound: {fileID: 0}
-      _hitTargetSound: {fileID: 0}
-      _hitWorldSound: {fileID: 0}
+      _hitTargetSound: {fileID: 8300000, guid: 073af4467d10246c190d3a3a29c9d2f4, type: 3}
+      _hitWorldSound: {fileID: 8300000, guid: 073af4467d10246c190d3a3a29c9d2f4, type: 3}
       _overheatSound: {fileID: 0}
   - _id: homing
     _title: "\u0421\u0430\u043C\u043E\u043D\u0430\u0432\u043E\u0434\u044F\u0449\u0438\u0435\u0441\u044F"
@@ -115,7 +115,7 @@ MonoBehaviour:
     _turnRate: 180
     _area: 0
     _price: 600
-    _projectile: {fileID: 4581286917286831887, guid: f25b90339fe294ec7be1c43e7f3a8217, type: 3}
+    _projectile: {fileID: 4581286917286831887, guid: c73e30a42bca94a4294c192b14f3f7f4, type: 3}
     _beam: {fileID: 0}
     _assets:
       _icon: {fileID: 0}
@@ -126,8 +126,8 @@ MonoBehaviour:
       _hitWorldEffect: {fileID: 0}
       _shotSound: {fileID: 8300000, guid: fdc735ea072a9410a98e635510b96568, type: 3}
       _flightSound: {fileID: 0}
-      _hitTargetSound: {fileID: 0}
-      _hitWorldSound: {fileID: 0}
+      _hitTargetSound: {fileID: 8300000, guid: 073af4467d10246c190d3a3a29c9d2f4, type: 3}
+      _hitWorldSound: {fileID: 8300000, guid: 073af4467d10246c190d3a3a29c9d2f4, type: 3}
       _overheatSound: {fileID: 0}
   - _id: railgun
     _title: "\u0420\u0435\u043B\u044C\u0441\u043E\u0442\u0440\u043E\u043D"
@@ -260,7 +260,7 @@ MonoBehaviour:
     _turnRate: 0
     _area: 1.5
     _price: 1600
-    _projectile: {fileID: 4581286917286831887, guid: d33ca7578e73849e6b70b2a52ce69696, type: 3}
+    _projectile: {fileID: 4581286917286831887, guid: da415fa81a1924dbdb7e6963dcbd4442, type: 3}
     _beam: {fileID: 0}
     _assets:
       _icon: {fileID: 0}
@@ -271,8 +271,8 @@ MonoBehaviour:
       _hitWorldEffect: {fileID: 0}
       _shotSound: {fileID: 8300000, guid: fdc735ea072a9410a98e635510b96568, type: 3}
       _flightSound: {fileID: 0}
-      _hitTargetSound: {fileID: 0}
-      _hitWorldSound: {fileID: 0}
+      _hitTargetSound: {fileID: 8300000, guid: 073af4467d10246c190d3a3a29c9d2f4, type: 3}
+      _hitWorldSound: {fileID: 8300000, guid: 073af4467d10246c190d3a3a29c9d2f4, type: 3}
       _overheatSound: {fileID: 0}
   - _id: enemy_blaster
     _title: "\u0411\u043B\u0430\u0441\u0442\u0435\u0440"
@@ -300,8 +300,8 @@ MonoBehaviour:
       _hitWorldEffect: {fileID: 0}
       _shotSound: {fileID: 8300000, guid: fdc735ea072a9410a98e635510b96568, type: 3}
       _flightSound: {fileID: 0}
-      _hitTargetSound: {fileID: 0}
-      _hitWorldSound: {fileID: 0}
+      _hitTargetSound: {fileID: 8300000, guid: 073af4467d10246c190d3a3a29c9d2f4, type: 3}
+      _hitWorldSound: {fileID: 8300000, guid: 073af4467d10246c190d3a3a29c9d2f4, type: 3}
       _overheatSound: {fileID: 0}
   - _id: enemy_spray
     _title: "\u0412\u0435\u0435\u0440"
@@ -329,8 +329,8 @@ MonoBehaviour:
       _hitWorldEffect: {fileID: 0}
       _shotSound: {fileID: 8300000, guid: fdc735ea072a9410a98e635510b96568, type: 3}
       _flightSound: {fileID: 0}
-      _hitTargetSound: {fileID: 0}
-      _hitWorldSound: {fileID: 0}
+      _hitTargetSound: {fileID: 8300000, guid: 073af4467d10246c190d3a3a29c9d2f4, type: 3}
+      _hitWorldSound: {fileID: 8300000, guid: 073af4467d10246c190d3a3a29c9d2f4, type: 3}
       _overheatSound: {fileID: 0}
   - _id: enemy_seeker
     _title: "\u0418\u0441\u043A\u0430\u0442\u0435\u043B\u044C"
@@ -358,6 +358,6 @@ MonoBehaviour:
       _hitWorldEffect: {fileID: 0}
       _shotSound: {fileID: 8300000, guid: fdc735ea072a9410a98e635510b96568, type: 3}
       _flightSound: {fileID: 0}
-      _hitTargetSound: {fileID: 0}
-      _hitWorldSound: {fileID: 0}
+      _hitTargetSound: {fileID: 8300000, guid: 073af4467d10246c190d3a3a29c9d2f4, type: 3}
+      _hitWorldSound: {fileID: 8300000, guid: 073af4467d10246c190d3a3a29c9d2f4, type: 3}
       _overheatSound: {fileID: 0}

@@ -16,13 +16,13 @@
 | `Cannon shot [155790].wav` | [155790](https://freesound.org/s/155790) | 1.7 с | 319 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Cannon Shell.prefab` |
 | `Electric arc [567269].wav` | [567269](https://freesound.org/s/567269) | 3.3 с | 563 КБ | **нет** | — |
 | `Electric shock [655263].wav` | [655263](https://freesound.org/s/655263) | 6.3 с | 1.6 МБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Plasma Orb.prefab` |
-| `Explosion [402005].wav` | [402005](https://freesound.org/s/402005) | 1.8 с | 532 КБ | да | `VFX/Sparks/vfx_EnemyExposion.prefab`, `VFX/Sparks/vfx_RocketExplosion.prefab` |
+| `Explosion [402005].wav` | [402005](https://freesound.org/s/402005) | 1.8 с | 532 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Enemy Bullet.prefab`, `Prefabs/Player Rocket.prefab`, `Prefabs/Torpedo.prefab`, `VFX/Sparks/vfx_EnemyExposion.prefab` |
 | `Laser burn [670075].wav` | [670075](https://freesound.org/s/670075) | 0.40 с | 68 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Impulse Bolt.prefab` |
 | `Laser shot [580308].wav` | [580308](https://freesound.org/s/580308) | 0.07 с | 27 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Impulse Bolt.prefab` |
 | `Music [398256].wav` | [398256](https://freesound.org/s/398256) | 34.7 с | 9.5 МБ | да | `Scenes/SampleScene.unity` |
 | `Music 2.wav` | — | 57.6 с | 10.5 МБ | да | `Scenes/SampleScene.unity` |
 | `Plasma hit [146725].wav` | [146725](https://freesound.org/s/146725) | 0.05 с | 4 КБ | **нет** | — |
-| `Plasma hit 2 [168984].wav` | [168984](https://freesound.org/s/168984) | 0.24 с | 40 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/PlayerBulletHit.prefab` |
+| `Plasma hit 2 [168984].wav` | [168984](https://freesound.org/s/168984) | 0.24 с | 40 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/PlayerBullet.prefab` |
 | `Plasma shot [565450].wav` | [565450](https://freesound.org/s/565450) | 2.5 с | 469 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Plasma Orb.prefab` |
 | `Player explosion [563932].wav` | [563932](https://freesound.org/s/563932) | 10.0 с | 3.4 МБ | **нет** | — |
 | `Railgun [394672].wav` | [394672](https://freesound.org/s/394672) | 1.2 с | 217 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Beams/Railgun Beam.prefab` |

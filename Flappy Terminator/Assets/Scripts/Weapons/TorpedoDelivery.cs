@@ -88,6 +88,7 @@ public class TorpedoDelivery : ProjectileDelivery
         Vector2 centre = warhead.Centre;
 
         ShowHit(centre);
+        Context.Audio.Play(warhead.BlastSound, centre);
 
         if (warhead.Blast == null)
             return;

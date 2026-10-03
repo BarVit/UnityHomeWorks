@@ -3,6 +3,7 @@ using UnityEngine;
 public class TorpedoWarhead : MonoBehaviour
 {
     [SerializeField] private BlastWave _blast;
+    [SerializeField] private Sound _blastSound;
     [SerializeField] private float _nearRadius = 0.3f;
     [SerializeField] private float _farRadius = 1.5f;
     [SerializeField] private float _blastNoseShare = 0.25f;
@@ -12,6 +13,8 @@ public class TorpedoWarhead : MonoBehaviour
     private float _fuseLeft;
 
     public BlastWave Blast => _blast;
+
+    public Sound BlastSound => _blastSound;
 
     public float Length => GetSize().x;
 
