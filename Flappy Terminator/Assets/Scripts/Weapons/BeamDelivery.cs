@@ -8,7 +8,13 @@ public class BeamDelivery : WeaponDelivery
     private readonly SpawnPool<ExplosionAnimation> _hitEffectPool;
     private readonly SpawnPool<BeamFlash> _beamPool;
     private readonly RaycastHit2D[] _hits = new RaycastHit2D[1];
+    private readonly RaycastHit2D[] _worldHits = new RaycastHit2D[1];
 
+    private BeamFlash _soundFlash;
+    private bool _hasTargetHit;
+    private bool _hasWorldHit;
+    private Vector2 _targetHitPoint;
+    private Vector2 _worldHitPoint;
     private float _soundLeft;
     private float _targetAge;
 
@@ -26,9 +32,12 @@ public class BeamDelivery : WeaponDelivery
     protected override void OnFire()
     {
         ForgetTarget();
+        ForgetHits();
 
         for (int barrel = 0; barrel < Barrels; barrel++)
             Shoot(barrel);
+
+        SoundHits();
     }
 
     protected void ForgetTarget()
@@ -49,10 +58,17 @@ public class BeamDelivery : WeaponDelivery
             ? _hits[0].point
             : (Vector2)mount.position + direction * reach;
 
-        Draw(mount.position, end, barrel);
+        BeamFlash flash = Draw(mount.position, end, barrel);
+
+        if (flash != null)
+            _soundFlash = flash;
 
         if (isSeen == false)
+        {
+            NoteWorldHit(mount.position, direction, reach);
+
             return;
+        }
 
         RaycastHit2D hit = _hits[0];
 
@@ -62,6 +78,7 @@ public class BeamDelivery : WeaponDelivery
         if (damageable != null)
         {
             damageable.TakeDamage(Row.Damage);
+            NoteTargetHit(hit.point);
 
             if (Target == null)
                 Target = hit.collider.transform;
@@ -75,10 +92,10 @@ public class BeamDelivery : WeaponDelivery
         effect.Play();
     }
 
-    private void Draw(Vector3 from, Vector3 to, int barrel)
+    private BeamFlash Draw(Vector3 from, Vector3 to, int barrel)
     {
         if (_beamPool == null)
-            return;
+            return null;
 
         BeamFlash flash = _beamPool.Get(from);
 
@@ -86,10 +103,52 @@ public class BeamDelivery : WeaponDelivery
         flash.Show(from, to);
 
         if (barrel != 0 || _soundLeft > 0f)
-            return;
+            return flash;
 
         _soundLeft = MinSoundInterval;
         Context.Audio.Play(flash.ShotSound, from);
+
+        return flash;
+    }
+
+    private void ForgetHits()
+    {
+        _hasTargetHit = false;
+        _hasWorldHit = false;
+    }
+
+    private void NoteTargetHit(Vector2 point)
+    {
+        if (_hasTargetHit)
+            return;
+
+        _hasTargetHit = true;
+        _targetHitPoint = point;
+    }
+
+    private void NoteWorldHit(Vector2 from, Vector2 direction, float reach)
+    {
+        if (_hasWorldHit)
+            return;
+
+        int count = Physics2D.Raycast(from, direction, Context.WorldFilter, _worldHits, reach);
+
+        if (count == 0 || ScreenArea.Contains(Context.Camera, _worldHits[0].point) == false)
+            return;
+
+        _hasWorldHit = true;
+        _worldHitPoint = _worldHits[0].point;
+    }
+
+    private void SoundHits()
+    {
+        if (_soundFlash == null)
+            return;
+
+        if (_hasTargetHit)
+            Context.Audio.Play(_soundFlash.HitSound, _targetHitPoint);
+        else if (_hasWorldHit)
+            Context.Audio.Play(_soundFlash.WorldHitSound, _worldHitPoint);
     }
 
     protected override void OnTick(float deltaTime)

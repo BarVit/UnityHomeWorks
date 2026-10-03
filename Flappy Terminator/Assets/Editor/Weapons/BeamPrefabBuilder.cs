@@ -10,6 +10,10 @@ namespace WeaponContent
         private const string MaterialPath = "Assets/Prefabs/Beams/Beam.mat";
         private const string RailgunShotPath = "Assets/Sounds/Railgun [394672].wav";
         private const float RailgunShotVolume = 0.5f;
+        private const string RailgunHitPath = "Assets/Sounds/Railgun enemy hit [724428].wav";
+        private const float RailgunHitVolume = 0.15f;
+        private const string RailgunWorldHitPath = "Assets/Sounds/Railgun hit [871710].wav";
+        private const float RailgunWorldHitVolume = 0.2f;
 
         [MenuItem("Tools/Weapons/Build Beams")]
         public static void Build()
@@ -20,9 +24,10 @@ namespace WeaponContent
             Material material = GetMaterial();
 
             Create("Railgun Beam", material, new Color(0.65f, 0.9f, 1f), 0.16f, 0.07f,
-                RailgunShotPath, RailgunShotVolume);
+                new BeamSounds(RailgunShotPath, RailgunShotVolume, RailgunHitPath, RailgunHitVolume,
+                    RailgunWorldHitPath, RailgunWorldHitVolume));
             Create("Laser Beam", material, new Color(1f, 0.35f, 0.25f), 0.09f, 0.05f,
-                null, 0f);
+                new BeamSounds(null, 0f, null, 0f, null, 0f));
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
@@ -44,7 +49,7 @@ namespace WeaponContent
         }
 
         private static void Create(string name, Material material, Color color, float width,
-            float lifetime, string shotSoundPath, float shotVolume)
+            float lifetime, BeamSounds sounds)
         {
             string path = Folder + "/" + name + ".prefab";
             GameObject root = new GameObject(name);
@@ -66,14 +71,21 @@ namespace WeaponContent
             SerializedObject serialized = new SerializedObject(flash);
 
             serialized.FindProperty("_lifetime").floatValue = lifetime;
-            serialized.FindProperty("_shotSound._clip").objectReferenceValue = shotSoundPath == null
-                ? null
-                : AssetDatabase.LoadAssetAtPath<AudioClip>(shotSoundPath);
-            serialized.FindProperty("_shotSound._volume").floatValue = shotVolume;
+            SetSound(serialized, "_shotSound", sounds.ShotPath, sounds.ShotVolume);
+            SetSound(serialized, "_hitSound", sounds.HitPath, sounds.HitVolume);
+            SetSound(serialized, "_worldHitSound", sounds.WorldHitPath, sounds.WorldHitVolume);
             serialized.ApplyModifiedPropertiesWithoutUndo();
 
             PrefabUtility.SaveAsPrefabAsset(root, path);
             Object.DestroyImmediate(root);
+        }
+
+        private static void SetSound(SerializedObject serialized, string field, string path, float volume)
+        {
+            serialized.FindProperty(field + "._clip").objectReferenceValue = path == null
+                ? null
+                : AssetDatabase.LoadAssetAtPath<AudioClip>(path);
+            serialized.FindProperty(field + "._volume").floatValue = volume;
         }
 
         private static Gradient GetGradient(Color color)

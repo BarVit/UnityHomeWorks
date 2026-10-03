@@ -168,3 +168,9 @@ MonoBehaviour:
   _shotSound:
     _clip: {fileID: 0}
     _volume: 0
+  _hitSound:
+    _clip: {fileID: 0}
+    _volume: 0
+  _worldHitSound:
+    _clip: {fileID: 0}
+    _volume: 0

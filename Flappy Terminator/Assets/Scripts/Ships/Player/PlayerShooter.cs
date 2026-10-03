@@ -9,6 +9,7 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private Transform _mountRoot;
     [SerializeField] private AudioSource _shotAudioSource;
     [SerializeField] private LayerMask _targetLayers;
+    [SerializeField] private LayerMask _worldLayers;
 
     private readonly PoolRegistry _pools = new PoolRegistry();
 
@@ -44,7 +45,7 @@ public class PlayerShooter : MonoBehaviour
 
         Camera camera = Camera.main;
         WeaponContext context = new WeaponContext(_mounts, _barrels, _pools,
-            new ShotAudio(_shotAudioSource, camera), _targetLayers, camera);
+            new ShotAudio(_shotAudioSource, camera), _targetLayers, camera, 1f, _worldLayers);
 
         _delivery = WeaponFactory.Create(row, context);
     }

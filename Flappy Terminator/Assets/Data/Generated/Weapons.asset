@@ -155,8 +155,8 @@ MonoBehaviour:
       _hitWorldEffect: {fileID: 0}
       _shotSound: {fileID: 8300000, guid: 8e138d16e6cff4e068f7f8dd1e265e5a, type: 3}
       _flightSound: {fileID: 0}
-      _hitTargetSound: {fileID: 0}
-      _hitWorldSound: {fileID: 0}
+      _hitTargetSound: {fileID: 8300000, guid: ed40fe411e5ef4c16ae52731d55342c1, type: 3}
+      _hitWorldSound: {fileID: 8300000, guid: 5612d8a83bc45475484c2e62d10abf1f, type: 3}
       _overheatSound: {fileID: 0}
   - _id: beam_laser
     _title: "\u041B\u0443\u0447\u0435\u0432\u043E\u0439 \u043B\u0430\u0437\u0435\u0440"

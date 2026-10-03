@@ -3,7 +3,7 @@ using UnityEngine;
 public class WeaponContext
 {
     public WeaponContext(Transform[] mounts, int barrels, PoolRegistry pools, ShotAudio audio,
-        LayerMask targetLayers, Camera camera, float projectileSpeedScale = 1f)
+        LayerMask targetLayers, Camera camera, float projectileSpeedScale = 1f, LayerMask worldLayers = default)
     {
         Mounts = mounts;
         Barrels = barrels;
@@ -19,6 +19,13 @@ public class WeaponContext
         filter.SetLayerMask(targetLayers);
 
         TargetFilter = filter;
+
+        ContactFilter2D world = new ContactFilter2D();
+
+        world.useTriggers = true;
+        world.SetLayerMask(worldLayers);
+
+        WorldFilter = world;
     }
 
     public Transform[] Mounts { get; private set; }
@@ -32,6 +39,8 @@ public class WeaponContext
     public LayerMask TargetLayers { get; private set; }
 
     public ContactFilter2D TargetFilter { get; private set; }
+
+    public ContactFilter2D WorldFilter { get; private set; }
 
     public Camera Camera { get; private set; }
 

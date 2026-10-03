@@ -168,3 +168,9 @@ MonoBehaviour:
   _shotSound:
     _clip: {fileID: 8300000, guid: 8e138d16e6cff4e068f7f8dd1e265e5a, type: 3}
     _volume: 0.5
+  _hitSound:
+    _clip: {fileID: 8300000, guid: ed40fe411e5ef4c16ae52731d55342c1, type: 3}
+    _volume: 0.15
+  _worldHitSound:
+    _clip: {fileID: 8300000, guid: 5612d8a83bc45475484c2e62d10abf1f, type: 3}
+    _volume: 0.2
