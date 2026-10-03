@@ -10,6 +10,10 @@ namespace WeaponContent
         private const string WarmPath = "Assets/VFX/Sparks/Hit Sparks.prefab";
         private const string ColdPath = "Assets/VFX/Sparks/Hit Sparks Blue.prefab";
         private const string MuzzlePath = "Assets/VFX/Sparks/Muzzle Sparks.prefab";
+        private const string FlashMaterialPath = "Assets/VFX/Plasma Additive.mat";
+        private const int FlashSortingOrder = 11;
+        private const float FlashStretch = 0.06f;
+        private static readonly Vector3 FlashOffset = new Vector3(0.3f, 0f, 0f);
 
         [MenuItem("Tools/Weapons/Build Hit Sparks")]
         public static void Build()
@@ -102,8 +106,83 @@ namespace WeaponContent
 
             Paint(root, tint);
             Float(root);
+            AddFlash(root);
             PrefabUtility.SaveAsPrefabAsset(root, path);
             Object.DestroyImmediate(root);
+        }
+
+        private static void AddFlash(GameObject root)
+        {
+            Material material = AssetDatabase.LoadAssetAtPath<Material>(FlashMaterialPath);
+
+            Burst core = new Burst("Flash Core", 1, new Vector2(0.7f, 0.85f), new Vector2(0.06f, 0.08f),
+                Vector2.zero, 0f, new Color(1f, 0.97f, 0.8f, 1f), new Color(1f, 0.88f, 0.5f, 1f));
+            Burst plume = new Burst("Flash Plume", 6, new Vector2(0.5f, 0.75f), new Vector2(0.08f, 0.12f),
+                new Vector2(4f, 9f), 14f, new Color(1f, 0.78f, 0.32f, 1f), new Color(1f, 0.48f, 0.12f, 1f));
+
+            AddBurst(root, core, material);
+            AddBurst(root, plume, material);
+        }
+
+        private static void AddBurst(GameObject root, Burst burst, Material material)
+        {
+            GameObject holder = new GameObject(burst.Name);
+
+            holder.transform.SetParent(root.transform, false);
+            holder.transform.localPosition = FlashOffset;
+
+            ParticleSystem system = holder.AddComponent<ParticleSystem>();
+
+            system.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
+            ParticleSystem.MainModule main = system.main;
+
+            main.duration = 0.1f;
+            main.loop = false;
+            main.playOnAwake = false;
+            main.startLifetime = new ParticleSystem.MinMaxCurve(burst.Lifetime.x, burst.Lifetime.y);
+            main.startSpeed = new ParticleSystem.MinMaxCurve(burst.Speed.x, burst.Speed.y);
+            main.startSize = new ParticleSystem.MinMaxCurve(burst.Size.x, burst.Size.y);
+            main.startColor = new ParticleSystem.MinMaxGradient(burst.From, burst.To);
+            main.simulationSpace = ParticleSystemSimulationSpace.Local;
+            main.gravityModifier = 0f;
+            main.maxParticles = 16;
+
+            ParticleSystem.EmissionModule emission = system.emission;
+
+            emission.rateOverTime = 0f;
+            emission.SetBursts(new ParticleSystem.Burst[] { new ParticleSystem.Burst(0f, burst.Count) });
+
+            ParticleSystem.ShapeModule shape = system.shape;
+
+            shape.enabled = burst.ConeAngle > 0f;
+            shape.shapeType = ParticleSystemShapeType.Cone;
+            shape.angle = burst.ConeAngle;
+            shape.radius = 0.02f;
+            shape.rotation = new Vector3(0f, 90f, 0f);
+
+            ParticleSystem.SizeOverLifetimeModule size = system.sizeOverLifetime;
+
+            size.enabled = true;
+            size.size = new ParticleSystem.MinMaxCurve(1f,
+                new AnimationCurve(new Keyframe(0f, 0.6f), new Keyframe(0.3f, 1f), new Keyframe(1f, 0.5f)));
+
+            ParticleSystem.ColorOverLifetimeModule color = system.colorOverLifetime;
+            Gradient fade = new Gradient();
+
+            fade.SetKeys(
+                new GradientColorKey[] { new GradientColorKey(Color.white, 0f), new GradientColorKey(Color.white, 1f) },
+                new GradientAlphaKey[] { new GradientAlphaKey(1f, 0f), new GradientAlphaKey(1f, 0.4f), new GradientAlphaKey(0f, 1f) });
+            color.enabled = true;
+            color.color = new ParticleSystem.MinMaxGradient(fade);
+
+            ParticleSystemRenderer renderer = holder.GetComponent<ParticleSystemRenderer>();
+
+            renderer.sharedMaterial = material;
+            renderer.renderMode = burst.ConeAngle > 0f ? ParticleSystemRenderMode.Stretch : ParticleSystemRenderMode.Billboard;
+            renderer.velocityScale = FlashStretch;
+            renderer.lengthScale = 1f;
+            renderer.sortingOrder = FlashSortingOrder;
         }
 
         private static void Float(GameObject root)
