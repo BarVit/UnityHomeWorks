@@ -18,8 +18,12 @@ public class WarpJump : MonoBehaviour
     [SerializeField] private float _stretchFactor = 2f;
     [SerializeField] private float _dashDuration = 0.15f;
     [SerializeField] private float _dashDistance = 16f;
+    [SerializeField] private AudioSource _sound;
+    [SerializeField] private float _soundFadeDuration = 0.5f;
 
     private Coroutine _jumping;
+    private Coroutine _fading;
+    private float _soundVolume;
 
     private float EffectDuration
     {
@@ -40,11 +44,18 @@ public class WarpJump : MonoBehaviour
 
     public event Action Finished;
 
+    private void Awake()
+    {
+        if (_sound != null)
+            _soundVolume = _sound.volume;
+    }
+
     public void Play()
     {
         if (_jumping != null)
             return;
 
+        StartSound();
         _jumping = StartCoroutine(Jump());
     }
 
@@ -69,6 +80,7 @@ public class WarpJump : MonoBehaviour
         _flash.Stop();
         _shockWave.Stop();
         _skipHint.SetActive(false);
+        FadeSound();
     }
 
     private IEnumerator Jump()
@@ -99,9 +111,49 @@ public class WarpJump : MonoBehaviour
 
         StopWarpEffect();
         _skipHint.SetActive(false);
+        FadeSound();
 
         _jumping = null;
         Finished?.Invoke();
+    }
+
+    private void StartSound()
+    {
+        if (_sound == null)
+            return;
+
+        if (_fading != null)
+        {
+            StopCoroutine(_fading);
+            _fading = null;
+        }
+
+        _sound.volume = _soundVolume;
+        _sound.Play();
+    }
+
+    private void FadeSound()
+    {
+        if (_sound == null || _sound.isPlaying == false || _fading != null)
+            return;
+
+        _fading = StartCoroutine(FadeOut());
+    }
+
+    private IEnumerator FadeOut()
+    {
+        float startVolume = _sound.volume;
+
+        foreach (float progress in Progress(_soundFadeDuration))
+        {
+            _sound.volume = Mathf.Lerp(startVolume, 0f, progress);
+
+            yield return null;
+        }
+
+        _sound.Stop();
+        _sound.volume = _soundVolume;
+        _fading = null;
     }
 
     private void StopWarpEffect()
