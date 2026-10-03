@@ -12,7 +12,7 @@
 | `Bump [330629].wav` | [330629](https://freesound.org/s/330629) | 1.4 с | 239 КБ | да | `Prefabs/Player Ship.prefab` |
 | `Bump 2 explosion_short.wav` | — | 0.41 с | 77 КБ | да | `Prefabs/Player Ship.prefab` |
 | `Cannon enemy hit [564887].wav` | [564887](https://freesound.org/s/564887) | 0.63 с | 117 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Cannon Shell.prefab` |
-| `Cannon hit [560576].wav` | [560576](https://freesound.org/s/560576) | 0.29 с | 50 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Cannon Shell.prefab` |
+| `Cannon hit [560576].wav` | [560576](https://freesound.org/s/560576) | 0.29 с | 50 КБ | **нет** | — |
 | `Electric arc [567269].wav` | [567269](https://freesound.org/s/567269) | 3.3 с | 563 КБ | **нет** | — |
 | `Electric shock [655263].wav` | [655263](https://freesound.org/s/655263) | 6.3 с | 1.6 МБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Plasma Orb.prefab` |
 | `Explosion [402005].wav` | [402005](https://freesound.org/s/402005) | 1.8 с | 532 КБ | да | `VFX/Sparks/vfx_EnemyExposion.prefab`, `VFX/Sparks/vfx_RocketExplosion.prefab` |
@@ -32,4 +32,4 @@
 | `Ship explosion [732252].wav` | [732252](https://freesound.org/s/732252) | 5.0 с | 864 КБ | да | `VFX/Sparks/Player ship explosion.prefab` |
 | `Warp jump [454683].wav` | [454683](https://freesound.org/s/454683) | 16.3 с | 12.0 МБ | да | `Scenes/SampleScene.unity` |
 
-Всего звуков: 23, из них в игре не используются: 4.
+Всего звуков: 23, из них в игре не используются: 5.
