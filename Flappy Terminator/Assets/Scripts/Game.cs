@@ -56,7 +56,7 @@ public class Game : MonoBehaviour
         if (_pause.IsPaused)
             return;
 
-        if (_warpJump.IsPlaying == false)
+        if (_warpJump.CanSkip == false)
             return;
 
         _input.ConsumeFire();

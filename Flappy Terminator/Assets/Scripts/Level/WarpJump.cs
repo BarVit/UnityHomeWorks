@@ -24,6 +24,7 @@ public class WarpJump : MonoBehaviour
     private Coroutine _jumping;
     private Coroutine _fading;
     private float _soundVolume;
+    private int _startFrame;
 
     private float EffectDuration
     {
@@ -42,6 +43,8 @@ public class WarpJump : MonoBehaviour
 
     public bool IsPlaying => _jumping != null;
 
+    public bool CanSkip => IsPlaying && Time.frameCount > _startFrame;
+
     public event Action Finished;
 
     private void Awake()
@@ -55,13 +58,14 @@ public class WarpJump : MonoBehaviour
         if (_jumping != null)
             return;
 
+        _startFrame = Time.frameCount;
         StartSound();
         _jumping = StartCoroutine(Jump());
     }
 
     public void Skip()
     {
-        if (_jumping == null)
+        if (CanSkip == false)
             return;
 
         Stop();
