@@ -20,11 +20,13 @@ public class WarpJump : MonoBehaviour
     [SerializeField] private float _dashDistance = 16f;
     [SerializeField] private AudioSource _sound;
     [SerializeField] private float _soundFadeDuration = 0.5f;
+    [SerializeField] private float _skipDelay = 0.5f;
 
     private Coroutine _jumping;
     private Coroutine _fading;
     private float _soundVolume;
     private int _startFrame;
+    private float _startTime;
 
     private float EffectDuration
     {
@@ -43,7 +45,7 @@ public class WarpJump : MonoBehaviour
 
     public bool IsPlaying => _jumping != null;
 
-    public bool CanSkip => IsPlaying && Time.frameCount > _startFrame;
+    public bool CanSkip => IsPlaying && Time.frameCount > _startFrame && Time.time >= _startTime + _skipDelay;
 
     public event Action Finished;
 
@@ -59,6 +61,7 @@ public class WarpJump : MonoBehaviour
             return;
 
         _startFrame = Time.frameCount;
+        _startTime = Time.time;
         StartSound();
         _jumping = StartCoroutine(Jump());
     }
