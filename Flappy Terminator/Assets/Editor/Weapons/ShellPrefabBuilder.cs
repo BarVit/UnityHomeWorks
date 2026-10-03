@@ -10,6 +10,8 @@ namespace WeaponContent
         private const string TargetPath = "Assets/Prefabs/Cannon Shell.prefab";
         private const string SpritePath = "Assets/Sprites/Ammo/Cannon/Cannon Shell.png";
         private const string MaterialPath = "Assets/Prefabs/Beams/Beam.mat";
+        private const string ShotSoundPath = "Assets/Sounds/Cannon shot [155790].wav";
+        private const float ShotVolume = 0.1f;
         private const string HitSoundPath = "Assets/Sounds/Cannon enemy hit [564887].wav";
         private const float HitVolume = 0.5f;
         private const float Scale = 0.246f;
@@ -131,7 +133,9 @@ namespace WeaponContent
 
             serialized.FindProperty("_hitEffectPrefab").objectReferenceValue = null;
 
-            serialized.FindProperty("_shotSound._clip").objectReferenceValue = null;
+            serialized.FindProperty("_shotSound._clip").objectReferenceValue =
+                AssetDatabase.LoadAssetAtPath<AudioClip>(ShotSoundPath);
+            serialized.FindProperty("_shotSound._volume").floatValue = ShotVolume;
             serialized.FindProperty("_hitSound._clip").objectReferenceValue =
                 AssetDatabase.LoadAssetAtPath<AudioClip>(HitSoundPath);
             serialized.FindProperty("_hitSound._volume").floatValue = HitVolume;
