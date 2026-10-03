@@ -13,6 +13,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private SystemTable _systems;
     [SerializeField] private ExplosionAnimation _explosionPrefab;
     [SerializeField] private EnemyDeadBody _deadBodyPrefab;
+    [SerializeField] private AudioSource _hitAudioSource;
     [SerializeField] private LayerMask _targetLayers;
     [SerializeField] private float _spawnDelay;
     [SerializeField] private float _spawnMargin = 1f;
@@ -37,7 +38,8 @@ public class EnemySpawner : MonoBehaviour
     {
         _camera = Camera.main;
         _created = OnEnemyCreated;
-        _context = new EnemyContext(_pools, _explosionPrefab, _deadBodyPrefab, _targetLayers, _camera);
+        _context = new EnemyContext(_pools, _explosionPrefab, _deadBodyPrefab,
+            new ShotAudio(_hitAudioSource, _camera), _targetLayers, _camera);
         _roster = new EnemyRoster(_enemyShips, _enemyTiers, _weapons, _locations, _systems);
     }
 

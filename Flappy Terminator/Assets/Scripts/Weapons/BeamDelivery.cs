@@ -146,9 +146,9 @@ public class BeamDelivery : WeaponDelivery
             return;
 
         if (_hasTargetHit)
-            Context.Audio.Play(_soundFlash.HitSound, _targetHitPoint);
+            Context.HitAudio.Play(_soundFlash.HitSound, _targetHitPoint);
         else if (_hasWorldHit)
-            Context.Audio.Play(_soundFlash.WorldHitSound, _worldHitPoint);
+            Context.HitAudio.Play(_soundFlash.WorldHitSound, _worldHitPoint);
     }
 
     protected override void OnTick(float deltaTime)

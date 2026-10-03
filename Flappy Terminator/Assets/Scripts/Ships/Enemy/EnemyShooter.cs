@@ -28,8 +28,8 @@ public class EnemyShooter : MonoBehaviour
     public void Arm(EnemySetup setup, EnemyContext context)
     {
         WeaponContext weapon = new WeaponContext(_mounts, setup.Barrels, context.Pools,
-            new ShotAudio(_shotAudioSource, context.Camera), context.TargetLayers, context.Camera,
-            setup.ProjectileSpeedScale);
+            new ShotAudio(_shotAudioSource, context.Camera), context.HitAudio, context.TargetLayers,
+            context.Camera, setup.ProjectileSpeedScale);
 
         _delivery = WeaponFactory.Create(setup.Weapon, weapon);
     }

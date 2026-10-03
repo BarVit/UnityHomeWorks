@@ -71,7 +71,7 @@ public class ProjectileDelivery : WeaponDelivery
             return;
 
         _hitSoundUntil = Time.time + GetHitSoundInterval(sound);
-        Context.Audio.Play(sound, ammo.transform.position);
+        Context.HitAudio.Play(sound, ammo.transform.position);
     }
 
     private bool IsTarget(GameObject struck)
