@@ -3,13 +3,15 @@ using UnityEngine;
 public class WeaponContext
 {
     public WeaponContext(Transform[] mounts, int barrels, PoolRegistry pools, ShotAudio audio,
-        ShotAudio hitAudio, LayerMask targetLayers, Camera camera, float projectileSpeedScale = 1f, LayerMask worldLayers = default)
+        ShotAudio hitAudio, LayerMask targetLayers, Camera camera, float projectileSpeedScale = 1f, LayerMask worldLayers = default,
+        ShotLoop loop = null)
     {
         Mounts = mounts;
         Barrels = barrels;
         Pools = pools;
         Audio = audio;
         HitAudio = hitAudio;
+        Loop = loop;
         TargetLayers = targetLayers;
         Camera = camera;
         ProjectileSpeedScale = projectileSpeedScale;
@@ -38,6 +40,8 @@ public class WeaponContext
     public ShotAudio Audio { get; private set; }
 
     public ShotAudio HitAudio { get; private set; }
+
+    public ShotLoop Loop { get; private set; }
 
     public LayerMask TargetLayers { get; private set; }
 

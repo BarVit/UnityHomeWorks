@@ -18,6 +18,8 @@ public class ContinuousBeamDelivery : BeamDelivery
 
         for (int barrel = 0; barrel < Barrels; barrel++)
             Shoot(barrel);
+
+        HoldLoop();
     }
 
     protected override void Paint(BeamFlash flash)

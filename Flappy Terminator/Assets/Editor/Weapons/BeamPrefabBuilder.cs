@@ -14,6 +14,8 @@ namespace WeaponContent
         private const float RailgunHitVolume = 0.15f;
         private const string RailgunWorldHitPath = "Assets/Sounds/Railgun hit [871710].wav";
         private const float RailgunWorldHitVolume = 0.2f;
+        private const string LaserLoopPath = "Assets/Sounds/Laser beam [843455].wav";
+        private const float LaserLoopVolume = 0.3f;
 
         [MenuItem("Tools/Weapons/Build Beams")]
         public static void Build()
@@ -25,9 +27,9 @@ namespace WeaponContent
 
             Create("Railgun Beam", material, new Color(0.65f, 0.9f, 1f), 0.16f, 0.07f,
                 new BeamSounds(RailgunShotPath, RailgunShotVolume, RailgunHitPath, RailgunHitVolume,
-                    RailgunWorldHitPath, RailgunWorldHitVolume));
+                    RailgunWorldHitPath, RailgunWorldHitVolume, null, 0f));
             Create("Laser Beam", material, new Color(1f, 0.35f, 0.25f), 0.09f, 0.05f,
-                new BeamSounds(null, 0f, null, 0f, null, 0f));
+                new BeamSounds(null, 0f, null, 0f, null, 0f, LaserLoopPath, LaserLoopVolume));
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
@@ -74,6 +76,7 @@ namespace WeaponContent
             SetSound(serialized, "_shotSound", sounds.ShotPath, sounds.ShotVolume);
             SetSound(serialized, "_hitSound", sounds.HitPath, sounds.HitVolume);
             SetSound(serialized, "_worldHitSound", sounds.WorldHitPath, sounds.WorldHitVolume);
+            SetSound(serialized, "_loopSound", sounds.LoopPath, sounds.LoopVolume);
             serialized.ApplyModifiedPropertiesWithoutUndo();
 
             PrefabUtility.SaveAsPrefabAsset(root, path);

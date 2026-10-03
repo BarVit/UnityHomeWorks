@@ -3,7 +3,7 @@ namespace WeaponContent
     public readonly struct BeamSounds
     {
         public BeamSounds(string shotPath, float shotVolume, string hitPath, float hitVolume,
-            string worldHitPath, float worldHitVolume)
+            string worldHitPath, float worldHitVolume, string loopPath, float loopVolume)
         {
             ShotPath = shotPath;
             ShotVolume = shotVolume;
@@ -11,6 +11,8 @@ namespace WeaponContent
             HitVolume = hitVolume;
             WorldHitPath = worldHitPath;
             WorldHitVolume = worldHitVolume;
+            LoopPath = loopPath;
+            LoopVolume = loopVolume;
         }
 
         public string ShotPath { get; }
@@ -24,5 +26,9 @@ namespace WeaponContent
         public string WorldHitPath { get; }
 
         public float WorldHitVolume { get; }
+
+        public string LoopPath { get; }
+
+        public float LoopVolume { get; }
     }
 }

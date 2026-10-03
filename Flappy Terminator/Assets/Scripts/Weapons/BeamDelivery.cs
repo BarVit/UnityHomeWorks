@@ -38,12 +38,21 @@ public class BeamDelivery : WeaponDelivery
             Shoot(barrel);
 
         SoundHits();
+        HoldLoop();
     }
 
     protected void ForgetTarget()
     {
         Target = null;
         _targetAge = 0f;
+    }
+
+    protected void HoldLoop()
+    {
+        if (Context.Loop == null || _soundFlash == null)
+            return;
+
+        Context.Loop.Hold(_soundFlash.LoopSound);
     }
 
     protected void Shoot(int barrel)
@@ -155,6 +164,9 @@ public class BeamDelivery : WeaponDelivery
     {
         if (_soundLeft > 0f)
             _soundLeft -= deltaTime;
+
+        if (Context.Loop != null)
+            Context.Loop.Tick(deltaTime);
 
         if (Target == null)
             return;
