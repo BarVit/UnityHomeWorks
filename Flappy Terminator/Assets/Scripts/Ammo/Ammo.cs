@@ -9,6 +9,7 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
     [SerializeField] private ExplosionAnimation _hitEffectPrefab;
     [SerializeField] private Sound _shotSound;
     [SerializeField] private Sound _hitSound;
+    [SerializeField] private Sound _worldHitSound;
 
     private BulletMover _bulletMover;
     private SpawnPool<ExplosionAnimation> _hitEffectPool;
@@ -19,6 +20,10 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
     public Sound ShotSound => _shotSound;
 
     public Sound HitSound => _hitSound;
+
+    public Sound WorldHitSound => _worldHitSound;
+
+    public GameObject StruckObject { get; private set; }
 
     public bool IsArmed { get; private set; }
 
@@ -42,6 +47,7 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
     {
         IsArmed = true;
         IsPersistent = false;
+        StruckObject = null;
         Struck = null;
     }
 
@@ -85,8 +91,9 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
         _bulletMover.Stop();
     }
 
-    public void Hit(Vector2 point)
+    public void Hit(Vector2 point, GameObject struck)
     {
+        StruckObject = struck;
         Struck?.Invoke(this);
 
         if (_hitEffectPool == null)

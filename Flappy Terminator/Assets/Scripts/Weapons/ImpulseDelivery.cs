@@ -7,7 +7,6 @@ public class ImpulseDelivery : ProjectileDelivery
 
     private Sound _echo;
     private float _echoLeft;
-    private float _hitLeft;
 
     public ImpulseDelivery(WeaponRow row, WeaponContext context) : base(row, context)
     {
@@ -21,9 +20,6 @@ public class ImpulseDelivery : ProjectileDelivery
 
     protected override void OnTick(float deltaTime)
     {
-        if (_hitLeft > 0f)
-            _hitLeft -= deltaTime;
-
         if (_echoLeft <= 0f)
             return;
 
@@ -31,6 +27,11 @@ public class ImpulseDelivery : ProjectileDelivery
 
         if (_echoLeft <= 0f)
             Context.Audio.Play(_echo, GetMount(0).position);
+    }
+
+    protected override float GetHitSoundInterval(Sound sound)
+    {
+        return sound.Clip.length;
     }
 
     private void Volley(int barrel)
@@ -43,25 +44,10 @@ public class ImpulseDelivery : ProjectileDelivery
             Ammo shot = bolt == 0 ? Launch(barrel) : Spawn(barrel);
 
             shot.transform.position += step * bolt;
-            shot.Struck += OnStruck;
 
             if (barrel == 0 && bolt > 0)
                 Echo(shot.ShotSound, step.magnitude * bolt);
         }
-    }
-
-    private void OnStruck(Ammo bolt)
-    {
-        if (_hitLeft > 0f)
-            return;
-
-        Sound sound = bolt.HitSound;
-
-        if (sound.Clip == null)
-            return;
-
-        _hitLeft = sound.Clip.length;
-        Context.Audio.Play(sound, bolt.transform.position);
     }
 
     private void Echo(Sound sound, float distance)

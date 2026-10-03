@@ -5,6 +5,8 @@ public class ProjectileDelivery : WeaponDelivery
     private readonly SpawnPool<Ammo> _ammoPool;
     private readonly SpawnPool<ExplosionAnimation> _hitEffectPool;
 
+    private float _hitSoundUntil = -1f;
+
     public ProjectileDelivery(WeaponRow row, WeaponContext context) : base(row, context)
     {
         _ammoPool = context.Pools.GetPool(row.Projectile);
@@ -51,7 +53,29 @@ public class ProjectileDelivery : WeaponDelivery
         ammo.Init(_hitEffectPool);
         ammo.SetDamage(Row.Damage);
         ammo.Fly(ProjectileSpeed);
+        ammo.Struck += OnStruck;
 
         return ammo;
+    }
+
+    protected virtual float GetHitSoundInterval(Sound sound)
+    {
+        return 0f;
+    }
+
+    private void OnStruck(Ammo ammo)
+    {
+        Sound sound = IsTarget(ammo.StruckObject) ? ammo.HitSound : ammo.WorldHitSound;
+
+        if (sound.Clip == null || Time.time <= _hitSoundUntil)
+            return;
+
+        _hitSoundUntil = Time.time + GetHitSoundInterval(sound);
+        Context.Audio.Play(sound, ammo.transform.position);
+    }
+
+    private bool IsTarget(GameObject struck)
+    {
+        return struck != null && struck.GetComponentInParent<IDamageable>() != null;
     }
 }

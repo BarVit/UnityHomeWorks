@@ -22,7 +22,7 @@ public class AmmoHitHandler : MonoBehaviour
             return;
 
         HitDetected?.Invoke(ammo);
-        ammo.Hit(other.ClosestPoint(transform.position));
+        ammo.Hit(other.ClosestPoint(transform.position), gameObject);
         ammo.Remove();
     }
 

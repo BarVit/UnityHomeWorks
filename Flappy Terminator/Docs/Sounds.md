@@ -11,6 +11,8 @@
 | `Blaster [341956].wav` | [341956](https://freesound.org/s/341956) | 0.58 с | 99 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/PlayerBullet.prefab` |
 | `Bump [330629].wav` | [330629](https://freesound.org/s/330629) | 1.4 с | 239 КБ | да | `Prefabs/Player Ship.prefab` |
 | `Bump 2 explosion_short.wav` | — | 0.41 с | 77 КБ | да | `Prefabs/Player Ship.prefab` |
+| `Cannon enemy hit [564887].wav` | [564887](https://freesound.org/s/564887) | 0.63 с | 117 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Cannon Shell.prefab` |
+| `Cannon hit [560576].wav` | [560576](https://freesound.org/s/560576) | 0.29 с | 50 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Cannon Shell.prefab` |
 | `Electric arc [567269].wav` | [567269](https://freesound.org/s/567269) | 3.3 с | 563 КБ | **нет** | — |
 | `Electric shock [655263].wav` | [655263](https://freesound.org/s/655263) | 6.3 с | 1.6 МБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Plasma Orb.prefab` |
 | `Explosion [402005].wav` | [402005](https://freesound.org/s/402005) | 1.8 с | 532 КБ | да | `VFX/Sparks/vfx_EnemyExposion.prefab`, `VFX/Sparks/vfx_RocketExplosion.prefab` |
@@ -25,4 +27,4 @@
 | `Rocket 1 [441500].wav` | [441500](https://freesound.org/s/441500) | 3.8 с | 647 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Enemy Bullet.prefab`, `Prefabs/Player Rocket.prefab`, `Prefabs/Torpedo.prefab` |
 | `Rocket 2 [441499].wav` | [441499](https://freesound.org/s/441499) | 4.0 с | 691 КБ | **нет** | — |
 
-Всего звуков: 16, из них в игре не используются: 3.
+Всего звуков: 18, из них в игре не используются: 3.

@@ -191,4 +191,7 @@ MonoBehaviour:
   _hitSound:
     _clip: {fileID: 8300000, guid: e4a9454d0acc4456499dcede787b5f32, type: 3}
     _volume: 1
+  _worldHitSound:
+    _clip: {fileID: 8300000, guid: e4a9454d0acc4456499dcede787b5f32, type: 3}
+    _volume: 1
   <Damage>k__BackingField: 25

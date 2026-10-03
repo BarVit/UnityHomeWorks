@@ -64,6 +64,9 @@ namespace WeaponContent
                 serialized.FindProperty("_hitSound._clip").objectReferenceValue =
                     AssetDatabase.LoadAssetAtPath<AudioClip>(HitSoundPath);
                 serialized.FindProperty("_hitSound._volume").floatValue = HitVolume;
+                serialized.FindProperty("_worldHitSound._clip").objectReferenceValue =
+                    AssetDatabase.LoadAssetAtPath<AudioClip>(HitSoundPath);
+                serialized.FindProperty("_worldHitSound._volume").floatValue = HitVolume;
                 serialized.ApplyModifiedPropertiesWithoutUndo();
             }
 
