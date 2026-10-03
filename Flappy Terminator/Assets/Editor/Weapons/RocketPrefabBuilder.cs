@@ -8,7 +8,7 @@ namespace WeaponContent
     {
         private const string SourcePath = "Assets/Prefabs/Enemy Bullet.prefab";
         private const string TargetPath = "Assets/Prefabs/Player Rocket.prefab";
-        private const float HitVolume = 0.5f;
+        private const float HitVolume = 0.25f;
         private const int PlayerAmmoLayer = 7;
 
         [MenuItem("Tools/Weapons/Build Player Rocket")]
