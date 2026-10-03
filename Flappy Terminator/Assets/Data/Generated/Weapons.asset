@@ -112,7 +112,7 @@ MonoBehaviour:
     _heatPerShot: 0
     _cooldownRate: 0
     _tickInterval: 0
-    _turnRate: 180
+    _turnRate: 90
     _area: 0
     _price: 600
     _projectile: {fileID: 4581286917286831887, guid: 3fffa4739d43f4c039a9ff680207e691, type: 3}
