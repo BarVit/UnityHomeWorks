@@ -24,7 +24,8 @@
 | `Plasma hit 2 [168984].wav` | [168984](https://freesound.org/s/168984) | 0.24 с | 40 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/PlayerBulletHit.prefab` |
 | `Plasma shot [565450].wav` | [565450](https://freesound.org/s/565450) | 2.5 с | 469 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Plasma Orb.prefab` |
 | `Player explosion [563932].wav` | [563932](https://freesound.org/s/563932) | 10.0 с | 3.4 МБ | да | `VFX/Sparks/Player ship explosion.prefab` |
+| `Railgun [394672].wav` | [394672](https://freesound.org/s/394672) | 1.2 с | 217 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Beams/Railgun Beam.prefab` |
 | `Rocket 1 [441500].wav` | [441500](https://freesound.org/s/441500) | 3.8 с | 647 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Enemy Bullet.prefab`, `Prefabs/Player Rocket.prefab`, `Prefabs/Torpedo.prefab` |
 | `Rocket 2 [441499].wav` | [441499](https://freesound.org/s/441499) | 4.0 с | 691 КБ | **нет** | — |
 
-Всего звуков: 18, из них в игре не используются: 3.
+Всего звуков: 19, из них в игре не используются: 3.

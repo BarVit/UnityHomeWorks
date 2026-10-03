@@ -166,5 +166,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BeamFlash
   _lifetime: 0.07
   _shotSound:
-    _clip: {fileID: 0}
-    _volume: 0
+    _clip: {fileID: 8300000, guid: 8e138d16e6cff4e068f7f8dd1e265e5a, type: 3}
+    _volume: 0.5

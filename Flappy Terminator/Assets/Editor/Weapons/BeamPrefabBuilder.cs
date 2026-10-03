@@ -8,6 +8,8 @@ namespace WeaponContent
     {
         private const string Folder = "Assets/Prefabs/Beams";
         private const string MaterialPath = "Assets/Prefabs/Beams/Beam.mat";
+        private const string RailgunShotPath = "Assets/Sounds/Railgun [394672].wav";
+        private const float RailgunShotVolume = 0.5f;
 
         [MenuItem("Tools/Weapons/Build Beams")]
         public static void Build()
@@ -17,8 +19,10 @@ namespace WeaponContent
 
             Material material = GetMaterial();
 
-            Create("Railgun Beam", material, new Color(0.65f, 0.9f, 1f), 0.16f, 0.07f);
-            Create("Laser Beam", material, new Color(1f, 0.35f, 0.25f), 0.09f, 0.05f);
+            Create("Railgun Beam", material, new Color(0.65f, 0.9f, 1f), 0.16f, 0.07f,
+                RailgunShotPath, RailgunShotVolume);
+            Create("Laser Beam", material, new Color(1f, 0.35f, 0.25f), 0.09f, 0.05f,
+                null, 0f);
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
@@ -40,7 +44,7 @@ namespace WeaponContent
         }
 
         private static void Create(string name, Material material, Color color, float width,
-            float lifetime)
+            float lifetime, string shotSoundPath, float shotVolume)
         {
             string path = Folder + "/" + name + ".prefab";
             GameObject root = new GameObject(name);
@@ -62,7 +66,10 @@ namespace WeaponContent
             SerializedObject serialized = new SerializedObject(flash);
 
             serialized.FindProperty("_lifetime").floatValue = lifetime;
-            serialized.FindProperty("_shotSound._clip").objectReferenceValue = null;
+            serialized.FindProperty("_shotSound._clip").objectReferenceValue = shotSoundPath == null
+                ? null
+                : AssetDatabase.LoadAssetAtPath<AudioClip>(shotSoundPath);
+            serialized.FindProperty("_shotSound._volume").floatValue = shotVolume;
             serialized.ApplyModifiedPropertiesWithoutUndo();
 
             PrefabUtility.SaveAsPrefabAsset(root, path);
