@@ -15,6 +15,7 @@ namespace WeaponContent
         private const float FlashStretch = 0.06f;
         private const float SprayHalfAngle = 30f;
         private const float SprayShare = 0.5f;
+        private const float SprayLifetimeShare = 0.5f;
         private static readonly Vector3 FlashOffset = new Vector3(0.3f, 0f, 0f);
 
         [MenuItem("Tools/Weapons/Build Hit Sparks")]
@@ -118,9 +119,9 @@ namespace WeaponContent
         {
             Material material = AssetDatabase.LoadAssetAtPath<Material>(FlashMaterialPath);
 
-            Burst core = new Burst("Flash Core", 1, new Vector2(1f, 1.2f), new Vector2(0.06f, 0.08f),
+            Burst core = new Burst("Flash Core", 1, new Vector2(1f, 1.2f), new Vector2(0.12f, 0.16f),
                 Vector2.zero, 0f, new Color(1f, 0.97f, 0.8f, 1f), new Color(1f, 0.88f, 0.5f, 1f));
-            Burst plume = new Burst("Flash Plume", 12, new Vector2(0.7f, 1.05f), new Vector2(0.08f, 0.12f),
+            Burst plume = new Burst("Flash Plume", 12, new Vector2(0.7f, 1.05f), new Vector2(0.16f, 0.24f),
                 new Vector2(4f, 9f), 14f, new Color(1f, 0.78f, 0.32f, 1f), new Color(1f, 0.48f, 0.12f, 1f));
 
             AddBurst(root, core, material);
@@ -140,7 +141,7 @@ namespace WeaponContent
 
             ParticleSystem.MainModule main = system.main;
 
-            main.duration = 0.1f;
+            main.duration = burst.Lifetime.y;
             main.loop = false;
             main.playOnAwake = false;
             main.startLifetime = new ParticleSystem.MinMaxCurve(burst.Lifetime.x, burst.Lifetime.y);
@@ -196,6 +197,10 @@ namespace WeaponContent
 
                 shape.angle = SprayHalfAngle;
                 shape.rotation = new Vector3(0f, 90f, 0f);
+
+                ParticleSystem.MainModule main = system.main;
+
+                main.startLifetimeMultiplier *= SprayLifetimeShare;
 
                 ParticleSystem.EmissionModule emission = system.emission;
                 ParticleSystem.Burst[] bursts = new ParticleSystem.Burst[emission.burstCount];
