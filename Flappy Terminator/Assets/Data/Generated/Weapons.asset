@@ -39,8 +39,8 @@ MonoBehaviour:
       _hitWorldEffect: {fileID: 0}
       _shotSound: {fileID: 8300000, guid: a7c3880d82cf24679a16d282f8296ac0, type: 3}
       _flightSound: {fileID: 0}
-      _hitTargetSound: {fileID: 8300000, guid: 67f47d899dd9b49e8b94640c68126c29, type: 3}
-      _hitWorldSound: {fileID: 8300000, guid: 67f47d899dd9b49e8b94640c68126c29, type: 3}
+      _hitTargetSound: {fileID: 8300000, guid: 12cb7e00e35f14d0db7055e5bda48597, type: 3}
+      _hitWorldSound: {fileID: 8300000, guid: 12cb7e00e35f14d0db7055e5bda48597, type: 3}
       _overheatSound: {fileID: 0}
   - _id: plasma
     _title: "\u041F\u043B\u0430\u0437\u043C\u0430"

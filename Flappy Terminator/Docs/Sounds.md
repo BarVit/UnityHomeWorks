@@ -11,8 +11,8 @@
 | `Blaster [341956].wav` | [341956](https://freesound.org/s/341956) | 0.58 с | 99 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/PlayerBullet.prefab` |
 | `Bump [330629].wav` | [330629](https://freesound.org/s/330629) | 1.4 с | 239 КБ | да | `Prefabs/Player Ship.prefab` |
 | `Bump 2 explosion_short.wav` | — | 0.41 с | 77 КБ | да | `Prefabs/Player Ship.prefab` |
-| `Cannon enemy hit [564887].wav` | [564887](https://freesound.org/s/564887) | 0.63 с | 117 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Cannon Shell.prefab` |
-| `Cannon hit [560576].wav` | [560576](https://freesound.org/s/560576) | 0.29 с | 50 КБ | **нет** | — |
+| `Cannon enemy hit [564887].wav` | [564887](https://freesound.org/s/564887) | 0.63 с | 117 КБ | **нет** | — |
+| `Cannon hit [560576].wav` | [560576](https://freesound.org/s/560576) | 0.29 с | 50 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Cannon Shell.prefab` |
 | `Cannon shot [155790].wav` | [155790](https://freesound.org/s/155790) | 1.7 с | 319 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Cannon Shell.prefab` |
 | `Electric arc [567269].wav` | [567269](https://freesound.org/s/567269) | 3.3 с | 563 КБ | **нет** | — |
 | `Electric shock [655263].wav` | [655263](https://freesound.org/s/655263) | 6.3 с | 1.6 МБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Plasma Orb.prefab` |

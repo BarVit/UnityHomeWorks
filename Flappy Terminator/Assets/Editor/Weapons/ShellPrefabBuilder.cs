@@ -11,9 +11,9 @@ namespace WeaponContent
         private const string SpritePath = "Assets/Sprites/Ammo/Cannon/Cannon Shell.png";
         private const string MaterialPath = "Assets/Prefabs/Beams/Beam.mat";
         private const string ShotSoundPath = "Assets/Sounds/Cannon shot [155790].wav";
-        private const float ShotVolume = 0.1f;
-        private const string HitSoundPath = "Assets/Sounds/Cannon enemy hit [564887].wav";
-        private const float HitVolume = 0.5f;
+        private const float ShotVolume = 0.15f;
+        private const string HitSoundPath = "Assets/Sounds/Cannon hit [560576].wav";
+        private const float HitVolume = 1f;
         private const float Scale = 0.246f;
         private const string TailName = "Tail";
         private static readonly Vector3 TailOffset = new Vector3(-0.96f, 0f, 0f);
