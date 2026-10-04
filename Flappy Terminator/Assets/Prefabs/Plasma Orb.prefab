@@ -625,8 +625,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OrbGrowth
   _startScale: 0.594
   _endScale: 1.875
-  _damageGrowth: 2
-  _maxDamage: 16
+  _damageGrowth: 2.5
+  _maxDamage: 20
 --- !u!1 &7796626988346774728
 GameObject:
   m_ObjectHideFlags: 0

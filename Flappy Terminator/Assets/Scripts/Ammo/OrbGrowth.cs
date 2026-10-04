@@ -4,8 +4,8 @@ public class OrbGrowth : MonoBehaviour
 {
     [SerializeField] private float _startScale = 0.594f;
     [SerializeField] private float _endScale = 1.875f;
-    [SerializeField] private float _damageGrowth = 2f;
-    [SerializeField] private float _maxDamage = 16f;
+    [SerializeField] private float _damageGrowth = 2.5f;
+    [SerializeField] private float _maxDamage = 20f;
 
     private Camera _camera;
     private float _startPositionX;
