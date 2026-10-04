@@ -13,7 +13,7 @@ namespace WeaponContent
         private const string ShotSoundPath = "Assets/Sounds/Laser shot [580308].wav";
         private const float ShotVolume = 0.3f;
         private const string HitSoundPath = "Assets/Sounds/Laser burn [670075].wav";
-        private const float HitVolume = 1f;
+        private const float HitVolume = 0.5f;
 
         [MenuItem("Tools/Weapons/Build Impulse Bolt")]
         public static void Build()

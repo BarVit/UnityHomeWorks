@@ -18,7 +18,7 @@ namespace WeaponContent
         private const string LaserLoopPath = "Assets/Sounds/Beam laser trill.wav";
         private const float LaserLoopVolume = 0.11f;
         private const string LaserBurnPath = "Assets/Sounds/Beam burn [843455].wav";
-        private const float LaserBurnVolume = 0.37f;
+        private const float LaserBurnVolume = 0.74f;
 
         [MenuItem("Tools/Weapons/Build Beams")]
         public static void Build()
