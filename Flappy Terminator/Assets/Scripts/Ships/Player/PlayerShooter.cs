@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerShooter : MonoBehaviour
@@ -24,6 +25,8 @@ public class PlayerShooter : MonoBehaviour
     public string WeaponId => _weaponId;
 
     public int Barrels => _barrels;
+
+    public IReadOnlyList<Transform> Mounts => _mounts;
 
     public Transform LockTarget => _delivery == null ? null : _delivery.LockTarget;
 

@@ -10,7 +10,7 @@ namespace WeaponContent
         private const string MaterialPath = "Assets/VFX/Smoke.mat";
         private const string SampleMaterialPath = "Assets/GabrielAguiarProductions/Flare00_AB_2.mat";
         private const string PrefabPath = "Assets/Prefabs/Overheat Smoke.prefab";
-        private const string MountPath = "Player Ship/ShootPoint/Mount 1";
+        private const string ShipPath = "Assets/Prefabs/Player Ship.prefab";
         private const string SmokeName = "Overheat Smoke";
 
         [MenuItem("Tools/Weapons/Build Overheat Smoke")]
@@ -134,39 +134,22 @@ namespace WeaponContent
             if (File.Exists(PrefabPath) == false)
                 Build();
 
-            GameObject ship = GameObject.Find("Player Ship");
-            GameObject mount = GameObject.Find(MountPath);
-
-            if (ship == null || mount == null)
-            {
-                Debug.LogError("Перегрев: не найден корабль или точка стрельбы");
-
-                return;
-            }
-
-            Transform existing = mount.transform.Find(SmokeName);
-
-            if (existing != null)
-                Object.DestroyImmediate(existing.gameObject);
-
-            GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(
-                AssetDatabase.LoadAssetAtPath<GameObject>(PrefabPath), mount.transform);
-
-            instance.transform.localPosition = Vector3.zero;
-
-            OverheatSmoke control = ship.GetComponent<OverheatSmoke>();
+            GameObject root = PrefabUtility.LoadPrefabContents(ShipPath);
+            OverheatSmoke control = root.GetComponent<OverheatSmoke>();
 
             if (control == null)
-                control = ship.AddComponent<OverheatSmoke>();
+                control = root.AddComponent<OverheatSmoke>();
 
             SerializedObject serialized = new SerializedObject(control);
 
-            serialized.FindProperty("_shooter").objectReferenceValue = ship.GetComponent<PlayerShooter>();
-            serialized.FindProperty("_smoke").objectReferenceValue = instance.GetComponent<ParticleSystem>();
+            serialized.FindProperty("_shooter").objectReferenceValue = root.GetComponent<PlayerShooter>();
+            serialized.FindProperty("_smokePrefab").objectReferenceValue =
+                AssetDatabase.LoadAssetAtPath<ParticleSystem>(PrefabPath);
             serialized.ApplyModifiedPropertiesWithoutUndo();
 
-            UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(ship.scene);
-            Debug.Log("Перегрев: дым подключён к точке стрельбы");
+            PrefabUtility.SaveAsPrefabAsset(root, ShipPath);
+            PrefabUtility.UnloadPrefabContents(root);
+            Debug.Log("Перегрев: дым подключён к стволам корабля");
         }
     }
 }
