@@ -260,7 +260,7 @@ MonoBehaviour:
     _turnRate: 0
     _area: 1.5
     _price: 1600
-    _projectile: {fileID: 4581286917286831887, guid: da415fa81a1924dbdb7e6963dcbd4442, type: 3}
+    _projectile: {fileID: 4581286917286831887, guid: 94a675fe41c74486cb65e12da497c18f, type: 3}
     _beam: {fileID: 0}
     _assets:
       _icon: {fileID: 0}
@@ -269,7 +269,7 @@ MonoBehaviour:
       _shotEffect: {fileID: 0}
       _hitTargetEffect: {fileID: 1650114164288651137, guid: 8dca398b28a6e45e78bd7b04a3a726b2, type: 3}
       _hitWorldEffect: {fileID: 0}
-      _shotSound: {fileID: 8300000, guid: fdc735ea072a9410a98e635510b96568, type: 3}
+      _shotSound: {fileID: 8300000, guid: 5bdbc73155716462fbc71697793b10c7, type: 3}
       _flightSound: {fileID: 0}
       _hitTargetSound: {fileID: 8300000, guid: 073af4467d10246c190d3a3a29c9d2f4, type: 3}
       _hitWorldSound: {fileID: 8300000, guid: 073af4467d10246c190d3a3a29c9d2f4, type: 3}

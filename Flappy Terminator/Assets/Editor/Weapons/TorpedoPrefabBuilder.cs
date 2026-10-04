@@ -17,6 +17,8 @@ namespace WeaponContent
         private const float SizeAgainstRocket = 2f;
         private const string BlastSoundPath = "Assets/Sounds/Explosion [402005].wav";
         private const float BlastSoundVolume = 1f;
+        private const string ShotSoundPath = "Assets/Sounds/Torpedo launch [100772].wav";
+        private const float ShotSoundVolume = 0.05f;
 
         [MenuItem("Tools/Weapons/Build Torpedo")]
         public static void Build()
@@ -48,7 +50,7 @@ namespace WeaponContent
             }
 
             SetLamp(root, body);
-            Silence(root);
+            Voice(root);
 
             TorpedoWarhead warhead = root.GetComponent<TorpedoWarhead>();
 
@@ -81,7 +83,7 @@ namespace WeaponContent
             hull.offset = Vector2.zero;
         }
 
-        private static void Silence(GameObject root)
+        private static void Voice(GameObject root)
         {
             Ammo ammo = root.GetComponent<Ammo>();
 
@@ -90,6 +92,9 @@ namespace WeaponContent
 
             SerializedObject serialized = new SerializedObject(ammo);
 
+            serialized.FindProperty("_shotSound._clip").objectReferenceValue =
+                AssetDatabase.LoadAssetAtPath<AudioClip>(ShotSoundPath);
+            serialized.FindProperty("_shotSound._volume").floatValue = ShotSoundVolume;
             serialized.FindProperty("_hitSound._clip").objectReferenceValue = null;
             serialized.FindProperty("_worldHitSound._clip").objectReferenceValue = null;
             serialized.ApplyModifiedPropertiesWithoutUndo();
