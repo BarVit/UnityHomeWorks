@@ -3,25 +3,17 @@ using UnityEngine;
 public static class FireSpread
 {
     private const float ConeStep = 12f;
-    private const float NarrowConeStep = 4f;
-    private const float SideAngle = 60f;
     private const int WingBarrels = 4;
 
-    public static float GetAngle(FirePattern pattern, int barrel, int rank, int barrels, float wingAngle)
+    public static float GetAngle(FirePattern pattern, int rank, int barrels, float wingAngle)
     {
         switch (pattern)
         {
             case FirePattern.Cone:
                 return Spread(rank, barrels, ConeStep);
 
-            case FirePattern.NarrowCone:
-                return Spread(rank, barrels, NarrowConeStep);
-
             case FirePattern.Wings:
                 return Wing(rank, barrels, wingAngle);
-
-            case FirePattern.ForwardAndSides:
-                return barrel < 2 ? 0f : (rank * 2 >= barrels - 1 ? SideAngle : -SideAngle);
 
             default:
                 return 0f;

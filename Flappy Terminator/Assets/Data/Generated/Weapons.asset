@@ -21,7 +21,7 @@ MonoBehaviour:
     _rate: 0.4
     _projectileSpeed: 18
     _barrelsMax: 4
-    _firePattern: 5
+    _firePattern: 3
     _sideAngle: 8
     _heatPerShot: 0
     _cooldownRate: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
     _rate: 0.25
     _projectileSpeed: 12
     _barrelsMax: 4
-    _firePattern: 5
+    _firePattern: 3
     _sideAngle: 12
     _heatPerShot: 0
     _cooldownRate: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
     _rate: 0.75
     _projectileSpeed: 8
     _barrelsMax: 4
-    _firePattern: 5
+    _firePattern: 3
     _sideAngle: 16
     _heatPerShot: 0
     _cooldownRate: 0
@@ -111,7 +111,7 @@ MonoBehaviour:
     _rate: 0.6
     _projectileSpeed: 7
     _barrelsMax: 4
-    _firePattern: 5
+    _firePattern: 3
     _sideAngle: 45
     _heatPerShot: 0
     _cooldownRate: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
     _rate: 0.1
     _projectileSpeed: 20
     _barrelsMax: 4
-    _firePattern: 5
+    _firePattern: 3
     _sideAngle: 10
     _heatPerShot: 7
     _cooldownRate: 40
@@ -231,7 +231,7 @@ MonoBehaviour:
     _rate: 3
     _projectileSpeed: 3
     _barrelsMax: 1
-    _firePattern: 4
+    _firePattern: 2
     _sideAngle: 0
     _heatPerShot: 0
     _cooldownRate: 0

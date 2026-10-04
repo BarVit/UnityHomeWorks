@@ -75,7 +75,7 @@ public abstract class WeaponDelivery
 
     protected Quaternion GetRotation(int barrel)
     {
-        float angle = FireSpread.GetAngle(_row.FirePattern, barrel, _ranks[barrel], _barrels, _row.SideAngle);
+        float angle = FireSpread.GetAngle(_row.FirePattern, _ranks[barrel], _barrels, _row.SideAngle);
 
         return GetMount(barrel).rotation * Quaternion.Euler(0f, 0f, angle);
     }
