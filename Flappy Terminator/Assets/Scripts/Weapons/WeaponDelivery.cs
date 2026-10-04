@@ -116,7 +116,7 @@ public abstract class WeaponDelivery
         if (HasHeat == false)
             return;
 
-        _heat += _row.HeatPerShot;
+        _heat += _row.HeatPerShot * _barrels;
 
         if (_heat < MaxHeat)
             return;
