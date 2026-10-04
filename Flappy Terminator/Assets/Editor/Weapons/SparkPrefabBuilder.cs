@@ -23,8 +23,8 @@ namespace WeaponContent
         private const float SprayShare = 0.5f;
         private const float SprayLifetimeShare = 0.5f;
         private const float FanArc = 180f;
-        private const float CannonSparkCountShare = 1f / 3f;
-        private const float CannonSparkLifetimeShare = 0.4f;
+        private const float CannonSparkCountShare = 0.48f;
+        private const float CannonSparkLifetimeShare = 0.75f;
         private const float CannonSparkStartRadius = 0.45f;
         private static readonly Vector3 FlashOffset = new Vector3(0.3f, 0f, 0f);
         private static readonly Color Yellow = new Color(1f, 0.85f, 0.15f, 1f);
@@ -35,7 +35,7 @@ namespace WeaponContent
             new Vector2(0.12f, 0.16f), Vector2.zero, 0f, new Color(1f, 0.97f, 0.8f, 1f), new Color(1f, 0.88f, 0.5f, 1f));
         private static readonly Burst MuzzlePlume = new Burst("Flash Plume", 12, new Vector2(0.7f, 1.05f),
             new Vector2(0.16f, 0.24f), new Vector2(4f, 9f), 14f, new Color(1f, 0.78f, 0.32f, 1f), new Color(1f, 0.48f, 0.12f, 1f));
-        private static readonly Burst CannonCircle = new Burst("Hit Circle", 1, new Vector2(2.25f, 2.75f),
+        private static readonly Burst CannonCircle = new Burst("Hit Circle", 1, new Vector2(1.575f, 1.925f),
             new Vector2(0.24f, 0.3f), Vector2.zero, 0f, new Color(1f, 0.92f, 0.35f, 1f), new Color(1f, 0.8f, 0.2f, 1f));
         private static readonly Burst CannonCore = new Burst("Hit Core", 1, new Vector2(1.6f, 2f),
             new Vector2(0.24f, 0.3f), Vector2.zero, 0f, new Color(1f, 1f, 0.95f, 1f), new Color(1f, 0.97f, 0.85f, 1f));
