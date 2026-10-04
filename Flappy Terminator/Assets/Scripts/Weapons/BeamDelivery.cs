@@ -12,6 +12,7 @@ public class BeamDelivery : WeaponDelivery
     private readonly RaycastHit2D[] _hits = new RaycastHit2D[1];
     private readonly RaycastHit2D[] _worldHits = new RaycastHit2D[1];
     private readonly RaycastHit2D[] _exitHits = new RaycastHit2D[8];
+    private readonly AimLine[] _sights;
 
     private BeamFlash _soundFlash;
     private bool _hasTargetHit;
@@ -34,6 +35,12 @@ public class BeamDelivery : WeaponDelivery
 
         if (row.Assets != null && row.Assets.HitWorldEffect != null)
             _worldEffectPool = context.Pools.GetPool(row.Assets.HitWorldEffect);
+
+        _sights = new AimLine[Barrels];
+
+        if (row.Beam != null && row.Beam.Sight != null)
+            for (int barrel = 0; barrel < Barrels; barrel++)
+                _sights[barrel] = CreateSight(row.Beam.Sight, barrel);
     }
 
     protected Transform Target { get; private set; }
@@ -70,23 +77,28 @@ public class BeamDelivery : WeaponDelivery
 
     protected void Shoot(int barrel)
     {
-        Transform mount = GetMount(barrel);
-        Vector2 direction = GetRotation(barrel) * Vector2.right;
+        AimLine sight = _sights[barrel];
+        Vector2 from = sight == null ? GetMount(barrel).position : sight.From;
+        Quaternion rotation = sight == null ? GetRotation(barrel) : sight.Rotation;
+        Vector2 direction = rotation * Vector2.right;
         float reach = GetReach();
 
-        float open = GetOpenDistance(mount.position, direction, reach);
-        Vector2 far = (Vector2)mount.position + direction * reach;
-        Vector2 end = (Vector2)mount.position + direction * open;
+        if (sight != null)
+            sight.Rest();
 
-        int count = Physics2D.Raycast(mount.position, direction, Context.TargetFilter, _hits, open);
+        float open = GetOpenDistance(from, direction, reach);
+        Vector2 far = from + direction * reach;
+        Vector2 end = from + direction * open;
+
+        int count = Physics2D.Raycast(from, direction, Context.TargetFilter, _hits, open);
         bool isSeen = count > 0 && ScreenArea.Contains(Context.Camera, _hits[0].point);
 
         if (isSeen == false)
         {
-            Remember(Draw(mount.position, end, barrel));
+            Remember(Draw(from, end, barrel));
 
             if (open < reach)
-                NoteWorldHit(end, GetRotation(barrel));
+                NoteWorldHit(end, rotation);
 
             return;
         }
@@ -98,10 +110,10 @@ public class BeamDelivery : WeaponDelivery
 
         bool isPierced = damageable != null && _piercePool != null;
 
-        Remember(Draw(mount.position, hit.point, barrel));
+        Remember(Draw(from, hit.point, barrel));
 
         if (isPierced)
-            ShowPierce(GetExit(hit.collider, hit.point, far), GetRotation(barrel));
+            ShowPierce(GetExit(hit.collider, hit.point, far), rotation);
 
         if (damageable != null)
         {
@@ -115,9 +127,19 @@ public class BeamDelivery : WeaponDelivery
         if (_hitEffectPool == null)
             return;
 
-        ExplosionAnimation effect = _hitEffectPool.Get(hit.point, GetRotation(barrel));
+        ExplosionAnimation effect = _hitEffectPool.Get(hit.point, rotation);
 
         effect.Play();
+    }
+
+    private AimLine CreateSight(AimLine prefab, int barrel)
+    {
+        Transform mount = GetMount(barrel);
+        AimLine sight = Object.Instantiate(prefab, mount);
+
+        sight.Follow(mount, Quaternion.Inverse(mount.rotation) * GetRotation(barrel));
+
+        return sight;
     }
 
     private void Remember(BeamFlash flash)

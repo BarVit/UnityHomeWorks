@@ -19,6 +19,11 @@ namespace WeaponContent
         private const float LaserLoopVolume = 0.11f;
         private const string LaserBurnPath = "Assets/Sounds/Beam burn [843455].wav";
         private const float LaserBurnVolume = 0.74f;
+        private const string SightName = "Railgun Sight";
+        private const float SightWidth = 0.03f;
+        private const float SightNearAlpha = 0.2f;
+        private const int SightSortingOrder = 4;
+        private static readonly Color SightColor = new Color(1f, 0.1f, 0.1f);
 
         [MenuItem("Tools/Weapons/Build Beams")]
         public static void Build()
@@ -27,17 +32,50 @@ namespace WeaponContent
                 AssetDatabase.CreateFolder("Assets/Prefabs", "Beams");
 
             Material material = GetMaterial();
+            AimLine sight = CreateSight(material);
 
             Create("Railgun Beam", material, new Color(0.65f, 0.9f, 1f), 0.08f, 1f, 0.14f,
                 new BeamSounds(RailgunShotPath, RailgunShotVolume, RailgunHitPath, RailgunHitVolume,
-                    RailgunWorldHitPath, RailgunWorldHitVolume, null, 0f, null, 0f), RailgunPiercePath);
+                    RailgunWorldHitPath, RailgunWorldHitVolume, null, 0f, null, 0f), RailgunPiercePath, sight);
             Create("Laser Beam", material, new Color(1f, 0.35f, 0.25f), 0.09f, 0.55f, 0.05f,
                 new BeamSounds(null, 0f, null, 0f, null, 0f, LaserLoopPath, LaserLoopVolume,
-                    LaserBurnPath, LaserBurnVolume), null);
+                    LaserBurnPath, LaserBurnVolume), null, null);
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             Debug.Log("Лучи: префабы собраны");
+        }
+
+        private static AimLine CreateSight(Material material)
+        {
+            string path = Folder + "/" + SightName + ".prefab";
+            GameObject root = new GameObject(SightName);
+            LineRenderer line = root.AddComponent<LineRenderer>();
+            Gradient gradient = new Gradient();
+
+            gradient.SetKeys(
+                new GradientColorKey[] { new GradientColorKey(SightColor, 0f), new GradientColorKey(SightColor, 1f) },
+                new GradientAlphaKey[] { new GradientAlphaKey(SightNearAlpha, 0f), new GradientAlphaKey(1f, 1f) });
+
+            line.useWorldSpace = true;
+            line.positionCount = 2;
+            line.alignment = LineAlignment.View;
+            line.textureMode = LineTextureMode.Stretch;
+            line.sharedMaterial = material;
+            line.widthMultiplier = SightWidth;
+            line.colorGradient = gradient;
+            line.sortingOrder = SightSortingOrder;
+            line.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            line.receiveShadows = false;
+            line.enabled = false;
+
+            root.AddComponent<AimLine>();
+
+            AimLine saved = PrefabUtility.SaveAsPrefabAsset(root, path).GetComponent<AimLine>();
+
+            Object.DestroyImmediate(root);
+
+            return saved;
         }
 
         private static Material GetMaterial()
@@ -55,7 +93,7 @@ namespace WeaponContent
         }
 
         private static void Create(string name, Material material, Color color, float width, float tipShare,
-            float lifetime, BeamSounds sounds, string piercePath)
+            float lifetime, BeamSounds sounds, string piercePath, AimLine sight)
         {
             string path = Folder + "/" + name + ".prefab";
             GameObject root = new GameObject(name);
@@ -85,6 +123,7 @@ namespace WeaponContent
             serialized.FindProperty("_pierceEffect").objectReferenceValue = piercePath == null
                 ? null
                 : AssetDatabase.LoadAssetAtPath<ExplosionAnimation>(piercePath);
+            serialized.FindProperty("_sight").objectReferenceValue = sight;
             serialized.ApplyModifiedPropertiesWithoutUndo();
 
             PrefabUtility.SaveAsPrefabAsset(root, path);

@@ -181,3 +181,4 @@ MonoBehaviour:
     _clip: {fileID: 0}
     _volume: 0
   _pierceEffect: {fileID: 0}
+  _sight: {fileID: 0}
