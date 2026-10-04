@@ -31,7 +31,7 @@ namespace WeaponContent
             new Vector2(0.12f, 0.16f), Vector2.zero, 0f, new Color(1f, 0.97f, 0.8f, 1f), new Color(1f, 0.88f, 0.5f, 1f));
         private static readonly Burst MuzzlePlume = new Burst("Flash Plume", 12, new Vector2(0.7f, 1.05f),
             new Vector2(0.16f, 0.24f), new Vector2(4f, 9f), 14f, new Color(1f, 0.78f, 0.32f, 1f), new Color(1f, 0.48f, 0.12f, 1f));
-        private static readonly Burst CannonCircle = new Burst("Hit Circle", 1, new Vector2(0.45f, 0.55f),
+        private static readonly Burst CannonCircle = new Burst("Hit Circle", 1, new Vector2(2.25f, 2.75f),
             new Vector2(0.08f, 0.1f), Vector2.zero, 0f, new Color(1f, 0.92f, 0.35f, 1f), new Color(1f, 0.8f, 0.2f, 1f));
         private static readonly Burst PierceCore = new Burst("Flash Core", 1, new Vector2(0.5f, 0.6f),
             new Vector2(0.06f, 0.08f), Vector2.zero, 0f, new Color(0.85f, 0.97f, 1f, 1f), new Color(0.6f, 0.9f, 1f, 1f));
