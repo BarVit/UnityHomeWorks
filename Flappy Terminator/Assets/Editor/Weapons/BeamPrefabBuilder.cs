@@ -20,8 +20,8 @@ namespace WeaponContent
         private const string LaserBurnPath = "Assets/Sounds/Beam burn [843455].wav";
         private const float LaserBurnVolume = 0.74f;
         private const string SightName = "Railgun Sight";
-        private const float SightWidth = 0.03f;
-        private const float SightNearAlpha = 0.2f;
+        private const float SightWidth = 0.02f;
+        private const float SightNearAlpha = 0f;
         private const int SightSortingOrder = 4;
         private static readonly Color SightColor = new Color(1f, 0.1f, 0.1f);
 
