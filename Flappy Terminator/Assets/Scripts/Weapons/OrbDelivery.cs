@@ -6,6 +6,7 @@ public class OrbDelivery : ProjectileDelivery
     private const float ChargeDuration = 0.3f;
     private const float ArcReach = 6f;
     private const float FarShare = 0.5f;
+    private const float GoneShare = 0.9f;
 
     private readonly Collider2D[] _touched = new Collider2D[16];
     private readonly Transform[] _ringed = new Transform[16];
@@ -85,6 +86,11 @@ public class OrbDelivery : ProjectileDelivery
         spark.Play();
     }
 
+    private bool IsGone(Vector2 centre, float radius)
+    {
+        return centre.x - radius * (GoneShare * 2f - 1f) >= ScreenArea.GetRightEdge(Context.Camera);
+    }
+
     private float GetDamageRate(Ammo orb)
     {
         return orb.TryGetComponent(out OrbGrowth growth) ? growth.GetDamageRate(Row.Damage) : Row.Damage;
@@ -115,7 +121,9 @@ public class OrbDelivery : ProjectileDelivery
         float radius = GetRadius(orb);
         float tickDamage = GetDamageRate(orb) * Row.TickInterval;
         Vector2 centre = orb.transform.position;
-        int count = Physics2D.OverlapCircle(centre, radius * ArcReach, Context.TargetFilter, _touched);
+        int count = IsGone(centre, radius)
+            ? 0
+            : Physics2D.OverlapCircle(centre, radius * ArcReach, Context.TargetFilter, _touched);
         int ringed = 0;
         bool isTouching = false;
 
