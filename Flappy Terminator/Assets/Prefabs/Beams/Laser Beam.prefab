@@ -182,7 +182,5 @@ MonoBehaviour:
     _volume: 0
   _pierceEffect: {fileID: 0}
   _sight: {fileID: 0}
-  _spiral: {fileID: 0}
-  _spiralRadius: 0.1
-  _spiralPitch: 0.3
+  _spirals: []
   _spiralLifetime: 0.1

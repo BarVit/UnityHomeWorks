@@ -26,6 +26,10 @@ namespace WeaponContent
         private static readonly Color SightColor = new Color(1f, 0.1f, 0.1f);
         private const float SpiralWidth = 0.05f;
         private const float SpiralLifetimeShare = 2f;
+        private const float SpiralRadius = 0.1f;
+        private const float SpiralPitch = 0.6f;
+        private const float DashedPitchShare = 1.5f;
+        private const int DashCount = 32;
         private const int CoreSortingOrder = 6;
         private const int SpiralSortingOrder = 5;
         private static readonly Color SpiralNear = new Color(0.9f, 0.97f, 1f);
@@ -52,12 +56,55 @@ namespace WeaponContent
             Debug.Log("Лучи: префабы собраны");
         }
 
-        private static LineRenderer AddSpiral(GameObject root, Material material)
+        private static BeamSpiral[] AddSpirals(GameObject root, Material material)
         {
-            GameObject holder = new GameObject("Spiral");
+            GameObject solid = new GameObject("Spiral");
 
-            holder.transform.SetParent(root.transform, false);
+            solid.transform.SetParent(root.transform, false);
+            AddSpiralLine(solid, material);
 
+            GameObject dashed = new GameObject("Dashed Spiral");
+
+            dashed.transform.SetParent(root.transform, false);
+
+            for (int i = 0; i < DashCount; i++)
+            {
+                GameObject dash = new GameObject("Dash " + (i + 1));
+
+                dash.transform.SetParent(dashed.transform, false);
+                AddSpiralLine(dash, material);
+            }
+
+            return new[]
+            {
+                SetSpiral(solid.AddComponent<BeamSpiral>(), SpiralPitch, 0f, false),
+                SetSpiral(dashed.AddComponent<BeamSpiral>(), SpiralPitch * DashedPitchShare, Mathf.PI * 0.5f, true)
+            };
+        }
+
+        private static BeamSpiral SetSpiral(BeamSpiral spiral, float pitch, float phase, bool isDashed)
+        {
+            SerializedObject serialized = new SerializedObject(spiral);
+
+            serialized.FindProperty("_radius").floatValue = SpiralRadius;
+            serialized.FindProperty("_pitch").floatValue = pitch;
+            serialized.FindProperty("_phase").floatValue = phase;
+            serialized.FindProperty("_isDashed").boolValue = isDashed;
+            serialized.ApplyModifiedPropertiesWithoutUndo();
+
+            return spiral;
+        }
+
+        private static void SetSpirals(SerializedProperty property, BeamSpiral[] spirals)
+        {
+            property.arraySize = spirals.Length;
+
+            for (int i = 0; i < spirals.Length; i++)
+                property.GetArrayElementAtIndex(i).objectReferenceValue = spirals[i];
+        }
+
+        private static void AddSpiralLine(GameObject holder, Material material)
+        {
             LineRenderer spiral = holder.AddComponent<LineRenderer>();
             Gradient gradient = new Gradient();
 
@@ -76,8 +123,6 @@ namespace WeaponContent
             spiral.sortingOrder = SpiralSortingOrder;
             spiral.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             spiral.receiveShadows = false;
-
-            return spiral;
         }
 
         private static AimLine CreateSight(Material material)
@@ -158,7 +203,7 @@ namespace WeaponContent
                 ? null
                 : AssetDatabase.LoadAssetAtPath<ExplosionAnimation>(piercePath);
             serialized.FindProperty("_sight").objectReferenceValue = sight;
-            serialized.FindProperty("_spiral").objectReferenceValue = hasSpiral ? AddSpiral(root, material) : null;
+            SetSpirals(serialized.FindProperty("_spirals"), hasSpiral ? AddSpirals(root, material) : new BeamSpiral[0]);
             serialized.FindProperty("_spiralLifetime").floatValue = lifetime * SpiralLifetimeShare;
             serialized.ApplyModifiedPropertiesWithoutUndo();
 
