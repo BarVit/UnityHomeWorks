@@ -86,7 +86,7 @@ public class BeamDelivery : WeaponDelivery
             Remember(Draw(mount.position, end, barrel));
 
             if (open < reach)
-                NoteWorldHit(end);
+                NoteWorldHit(end, GetRotation(barrel));
 
             return;
         }
@@ -189,9 +189,9 @@ public class BeamDelivery : WeaponDelivery
         return _worldHits[0].distance;
     }
 
-    private void NoteWorldHit(Vector2 point)
+    private void NoteWorldHit(Vector2 point, Quaternion rotation)
     {
-        ShowWorldHit(point);
+        ShowWorldHit(point, rotation);
 
         if (_hasWorldHit)
             return;
@@ -200,12 +200,12 @@ public class BeamDelivery : WeaponDelivery
         _worldHitPoint = point;
     }
 
-    private void ShowWorldHit(Vector2 point)
+    private void ShowWorldHit(Vector2 point, Quaternion rotation)
     {
         if (_worldEffectPool == null)
             return;
 
-        ExplosionAnimation effect = _worldEffectPool.Get(point);
+        ExplosionAnimation effect = _worldEffectPool.Get(point, rotation);
 
         effect.Play();
     }

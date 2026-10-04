@@ -27,6 +27,8 @@ namespace WeaponContent
         private const float ImpactSparkCountShare = 0.48f;
         private const float ImpactSparkLifetimeShare = 0.6f;
         private const float ImpactSparkStartRadius = 0.315f;
+        private const float WideSparkStartRadius = 0.45f;
+        private const float SparkMaterialBoost = 4f;
         private const float LaserSparkSizeShare = 1f / 1.5f;
         private const float PierceSprayGrowth = 2f;
         private const float JetHalfAngle = 10f;
@@ -39,6 +41,7 @@ namespace WeaponContent
         private static readonly Vector3 FlashOffset = new Vector3(0.3f, 0f, 0f);
         private static readonly Color Yellow = new Color(1f, 0.85f, 0.15f, 1f);
         private static readonly Color Cold = new Color(0.3f, 0.75f, 1f, 1f);
+        private static readonly Color LightBlue = new Color(0.5f, 0.85f, 1f, 1f);
         private static readonly Burst[] NoGlows = new Burst[0];
 
         private static readonly Burst MuzzleCore = new Burst("Flash Core", 1, new Vector2(1f, 1.2f),
@@ -60,7 +63,7 @@ namespace WeaponContent
             Make(WarmPath, "Hit Sparks", Color.clear, NoGlows);
             Resize(WarmPath, LaserSparkSizeShare, null);
             Make(ColdPath, "Hit Sparks Blue", Cold, NoGlows);
-            Make(WhitePath, "Hit Sparks White", Color.white, NoGlows);
+            MakeWideFan(WhitePath, "Hit Sparks White", Color.white, LightBlue);
             Make(CannonHitPath, "Cannon Hit", Yellow, new[] { CannonCircle, CannonCore });
             TuneImpactSparks(CannonHitPath);
             Make(RailgunHitPath, "Railgun Hit", Cold, NoGlows);
@@ -332,15 +335,7 @@ namespace WeaponContent
 
             if (sparks != null)
             {
-                ParticleSystem.ShapeModule shape = sparks.shape;
-
-                shape.enabled = true;
-                shape.shapeType = ParticleSystemShapeType.Circle;
-                shape.radius = ImpactSparkStartRadius;
-                shape.radiusThickness = 0f;
-                shape.arc = FanArc;
-                shape.arcMode = ParticleSystemShapeMultiModeValue.Random;
-                shape.rotation = new Vector3(0f, 0f, 90f);
+                Fan(sparks, ImpactSparkStartRadius);
 
                 ParticleSystem.MainModule main = sparks.main;
 
@@ -352,6 +347,51 @@ namespace WeaponContent
 
             PrefabUtility.SaveAsPrefabAsset(root, path);
             PrefabUtility.UnloadPrefabContents(root);
+        }
+
+        private static void MakeWideFan(string path, string name, Color tint, Color extraTint)
+        {
+            Make(path, name, tint, NoGlows);
+
+            GameObject root = PrefabUtility.LoadPrefabContents(path);
+            GameObject extra = (GameObject)PrefabUtility.InstantiatePrefab(
+                AssetDatabase.LoadAssetAtPath<GameObject>(SourcePath), root.transform);
+
+            PrefabUtility.UnpackPrefabInstance(extra, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
+
+            extra.name = "Extra";
+            extra.transform.localPosition = Vector3.zero;
+            extra.transform.localRotation = Quaternion.identity;
+            Strip<BumpEffect>(extra);
+
+            ParticleSystem extraSparks = extra.GetComponent<ParticleSystem>();
+            ParticleSystem.MainModule extraMain = extraSparks.main;
+
+            extraMain.startColor = new ParticleSystem.MinMaxGradient(UnderBoost(extraTint));
+            Fan(root.GetComponent<ParticleSystem>(), WideSparkStartRadius);
+            Fan(extraSparks, WideSparkStartRadius);
+
+            PrefabUtility.SaveAsPrefabAsset(root, path);
+            PrefabUtility.UnloadPrefabContents(root);
+        }
+
+        private static Color UnderBoost(Color color)
+        {
+            return new Color(color.r / SparkMaterialBoost, color.g / SparkMaterialBoost,
+                color.b / SparkMaterialBoost, color.a);
+        }
+
+        private static void Fan(ParticleSystem sparks, float startRadius)
+        {
+            ParticleSystem.ShapeModule shape = sparks.shape;
+
+            shape.enabled = true;
+            shape.shapeType = ParticleSystemShapeType.Circle;
+            shape.radius = startRadius;
+            shape.radiusThickness = 0f;
+            shape.arc = FanArc;
+            shape.arcMode = ParticleSystemShapeMultiModeValue.Random;
+            shape.rotation = new Vector3(0f, 0f, 90f);
         }
 
         private static ParticleSystem.MinMaxCurve Scale(ParticleSystem.MinMaxCurve curve, float share)
