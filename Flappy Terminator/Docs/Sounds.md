@@ -24,6 +24,7 @@
 | `Laser shot [580308].wav` | [580308](https://freesound.org/s/580308) | 0.07 с | 27 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Impulse Bolt.prefab` |
 | `Music [398256].wav` | [398256](https://freesound.org/s/398256) | 34.7 с | 9.5 МБ | да | `Scenes/SampleScene.unity` |
 | `Music 2.wav` | — | 57.6 с | 10.5 МБ | да | `Scenes/SampleScene.unity` |
+| `Overheat [266102].wav` | [266102](https://freesound.org/s/266102) | 1.5 с | 130 КБ | да | `Data/Generated/Weapons.asset` |
 | `Plasma hit [146725].wav` | [146725](https://freesound.org/s/146725) | 0.05 с | 4 КБ | **нет** | — |
 | `Plasma hit 2 [168984].wav` | [168984](https://freesound.org/s/168984) | 0.24 с | 40 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/PlayerBullet.prefab` |
 | `Plasma shot [565450].wav` | [565450](https://freesound.org/s/565450) | 2.5 с | 469 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Plasma Orb.prefab` |
@@ -37,4 +38,4 @@
 | `Torpedo launch [100772].wav` | [100772](https://freesound.org/s/100772) | 2.2 с | 379 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Torpedo.prefab` |
 | `Warp jump [454683].wav` | [454683](https://freesound.org/s/454683) | 16.3 с | 12.0 МБ | да | `Scenes/SampleScene.unity` |
 
-Всего звуков: 28, из них в игре не используются: 6.
+Всего звуков: 29, из них в игре не используются: 6.

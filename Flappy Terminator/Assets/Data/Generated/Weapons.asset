@@ -204,7 +204,7 @@ MonoBehaviour:
       _flightSound: {fileID: 0}
       _hitTargetSound: {fileID: 8300000, guid: db573893c60534256bca90dcd8ce844e, type: 3}
       _hitWorldSound: {fileID: 8300000, guid: db573893c60534256bca90dcd8ce844e, type: 3}
-      _overheatSound: {fileID: 0}
+      _overheatSound: {fileID: 8300000, guid: 70a4056725600485cb17bdc195c495e7, type: 3}
   - _id: impulse_laser
     _title: "\u0418\u043C\u043F\u0443\u043B\u044C\u0441\u043D\u044B\u0439 \u043B\u0430\u0437\u0435\u0440"
     _owner: 0
@@ -236,7 +236,7 @@ MonoBehaviour:
       _flightSound: {fileID: 0}
       _hitTargetSound: {fileID: 8300000, guid: e4a9454d0acc4456499dcede787b5f32, type: 3}
       _hitWorldSound: {fileID: 8300000, guid: e4a9454d0acc4456499dcede787b5f32, type: 3}
-      _overheatSound: {fileID: 0}
+      _overheatSound: {fileID: 8300000, guid: 70a4056725600485cb17bdc195c495e7, type: 3}
   - _id: plasma_orb
     _title: "\u041F\u043B\u0430\u0437\u043C\u0435\u043D\u043D\u044B\u0439 \u0448\u0430\u0440"
     _owner: 0

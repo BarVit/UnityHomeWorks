@@ -12,6 +12,7 @@ namespace WeaponContent
         private const string PrefabPath = "Assets/Prefabs/Overheat Smoke.prefab";
         private const string ShipPath = "Assets/Prefabs/Player Ship.prefab";
         private const string SmokeName = "Overheat Smoke";
+        private const float OverheatVolume = 0.8f;
 
         [MenuItem("Tools/Weapons/Build Overheat Smoke")]
         public static void Build()
@@ -146,10 +147,28 @@ namespace WeaponContent
             serialized.FindProperty("_smokePrefab").objectReferenceValue =
                 AssetDatabase.LoadAssetAtPath<ParticleSystem>(PrefabPath);
             serialized.ApplyModifiedPropertiesWithoutUndo();
+            AttachSound(root);
 
             PrefabUtility.SaveAsPrefabAsset(root, ShipPath);
             PrefabUtility.UnloadPrefabContents(root);
-            Debug.Log("Перегрев: дым подключён к стволам корабля");
+            Debug.Log("Перегрев: дым и звук подключены к кораблю");
+        }
+
+        private static void AttachSound(GameObject root)
+        {
+            PlayerShooter shooter = root.GetComponent<PlayerShooter>();
+            OverheatSound sound = root.GetComponent<OverheatSound>();
+
+            if (sound == null)
+                sound = root.AddComponent<OverheatSound>();
+
+            SerializedObject serialized = new SerializedObject(sound);
+
+            serialized.FindProperty("_shooter").objectReferenceValue = shooter;
+            serialized.FindProperty("_source").objectReferenceValue =
+                new SerializedObject(shooter).FindProperty("_shotAudioSource").objectReferenceValue;
+            serialized.FindProperty("_volume").floatValue = OverheatVolume;
+            serialized.ApplyModifiedPropertiesWithoutUndo();
         }
     }
 }

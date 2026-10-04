@@ -19,6 +19,7 @@ public class PlayerShooter : MonoBehaviour
 
     private Transform[] _mounts;
     private WeaponDelivery _delivery;
+    private AudioClip _overheatClip;
     private float _shownReadiness = -1f;
     private int _shownShots = -1;
 
@@ -35,6 +36,8 @@ public class PlayerShooter : MonoBehaviour
     public Transform LockTarget => _delivery == null ? null : _delivery.LockTarget;
 
     public bool IsOverheated => _delivery != null && _delivery.IsOverheated;
+
+    public AudioClip OverheatClip => _overheatClip;
 
     public bool HasHeat => _delivery != null && _delivery.HasHeat;
 
@@ -65,6 +68,7 @@ public class PlayerShooter : MonoBehaviour
             new ShotLoop(_hitLoopAudioSource));
 
         _delivery = WeaponFactory.Create(row, context);
+        _overheatClip = row.Assets == null ? null : row.Assets.OverheatSound;
     }
 
     private void Update()
