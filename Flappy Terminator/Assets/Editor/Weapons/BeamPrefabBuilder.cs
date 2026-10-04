@@ -24,6 +24,12 @@ namespace WeaponContent
         private const float SightNearAlpha = 0f;
         private const int SightSortingOrder = 4;
         private static readonly Color SightColor = new Color(1f, 0.1f, 0.1f);
+        private const float SpiralWidth = 0.05f;
+        private const float SpiralLifetimeShare = 2f;
+        private const int CoreSortingOrder = 6;
+        private const int SpiralSortingOrder = 5;
+        private static readonly Color SpiralNear = new Color(0.9f, 0.97f, 1f);
+        private static readonly Color SpiralFar = new Color(0.45f, 0.75f, 1f);
 
         [MenuItem("Tools/Weapons/Build Beams")]
         public static void Build()
@@ -34,16 +40,44 @@ namespace WeaponContent
             Material material = GetMaterial();
             AimLine sight = CreateSight(material);
 
-            Create("Railgun Beam", material, new Color(0.65f, 0.9f, 1f), 0.08f, 1f, 0.14f,
+            Create("Railgun Beam", material, Color.white, 0.03f, 1f, 0.14f,
                 new BeamSounds(RailgunShotPath, RailgunShotVolume, RailgunHitPath, RailgunHitVolume,
-                    RailgunWorldHitPath, RailgunWorldHitVolume, null, 0f, null, 0f), RailgunPiercePath, sight);
+                    RailgunWorldHitPath, RailgunWorldHitVolume, null, 0f, null, 0f), RailgunPiercePath, sight, true);
             Create("Laser Beam", material, new Color(1f, 0.35f, 0.25f), 0.09f, 0.55f, 0.05f,
                 new BeamSounds(null, 0f, null, 0f, null, 0f, LaserLoopPath, LaserLoopVolume,
-                    LaserBurnPath, LaserBurnVolume), null, null);
+                    LaserBurnPath, LaserBurnVolume), null, null, false);
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             Debug.Log("Лучи: префабы собраны");
+        }
+
+        private static LineRenderer AddSpiral(GameObject root, Material material)
+        {
+            GameObject holder = new GameObject("Spiral");
+
+            holder.transform.SetParent(root.transform, false);
+
+            LineRenderer spiral = holder.AddComponent<LineRenderer>();
+            Gradient gradient = new Gradient();
+
+            gradient.SetKeys(
+                new GradientColorKey[] { new GradientColorKey(SpiralNear, 0f), new GradientColorKey(SpiralFar, 0.2f), new GradientColorKey(SpiralFar, 1f) },
+                new GradientAlphaKey[] { new GradientAlphaKey(1f, 0f), new GradientAlphaKey(1f, 1f) });
+
+            spiral.useWorldSpace = true;
+            spiral.positionCount = 0;
+            spiral.numCapVertices = 2;
+            spiral.alignment = LineAlignment.View;
+            spiral.textureMode = LineTextureMode.Stretch;
+            spiral.sharedMaterial = material;
+            spiral.widthMultiplier = SpiralWidth;
+            spiral.colorGradient = gradient;
+            spiral.sortingOrder = SpiralSortingOrder;
+            spiral.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            spiral.receiveShadows = false;
+
+            return spiral;
         }
 
         private static AimLine CreateSight(Material material)
@@ -93,7 +127,7 @@ namespace WeaponContent
         }
 
         private static void Create(string name, Material material, Color color, float width, float tipShare,
-            float lifetime, BeamSounds sounds, string piercePath, AimLine sight)
+            float lifetime, BeamSounds sounds, string piercePath, AimLine sight, bool hasSpiral)
         {
             string path = Folder + "/" + name + ".prefab";
             GameObject root = new GameObject(name);
@@ -107,7 +141,7 @@ namespace WeaponContent
             line.sharedMaterial = material;
             line.widthCurve = AnimationCurve.Linear(0f, width, 1f, width * tipShare);
             line.colorGradient = GetGradient(color);
-            line.sortingOrder = 5;
+            line.sortingOrder = hasSpiral ? CoreSortingOrder : 5;
             line.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             line.receiveShadows = false;
 
@@ -124,6 +158,8 @@ namespace WeaponContent
                 ? null
                 : AssetDatabase.LoadAssetAtPath<ExplosionAnimation>(piercePath);
             serialized.FindProperty("_sight").objectReferenceValue = sight;
+            serialized.FindProperty("_spiral").objectReferenceValue = hasSpiral ? AddSpiral(root, material) : null;
+            serialized.FindProperty("_spiralLifetime").floatValue = lifetime * SpiralLifetimeShare;
             serialized.ApplyModifiedPropertiesWithoutUndo();
 
             PrefabUtility.SaveAsPrefabAsset(root, path);
