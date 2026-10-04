@@ -7,6 +7,8 @@ namespace TableImport
 {
     public class RowReader
     {
+        private const string NoneMark = "none";
+
         private readonly TsvDocument _document;
         private readonly TsvRow _row;
         private readonly TableLog _log;
@@ -100,7 +102,7 @@ namespace TableImport
         {
             string name = ReadCell(column);
 
-            if (name.Length == 0)
+            if (name.Length == 0 || name == NoneMark)
             {
                 if (required)
                     Fail("пустая ссылка на префаб в столбце " + column);
@@ -139,7 +141,7 @@ namespace TableImport
         {
             string name = ReadCell(column);
 
-            if (name.Length == 0)
+            if (name.Length == 0 || name == NoneMark)
             {
                 if (required)
                     Fail("пустая ссылка на ассет в столбце " + column);

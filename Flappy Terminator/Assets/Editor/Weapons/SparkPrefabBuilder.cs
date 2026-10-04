@@ -65,16 +65,16 @@ namespace WeaponContent
         {
             Make(WarmPath, "Hit Sparks", Color.clear, NoGlows);
             Resize(WarmPath, LaserSparkSizeShare, null);
-            Make(ColdPath, "Hit Sparks Blue", Cold, NoGlows);
+            Make(ColdPath, "Hit Sparks Blue", UnderBoost(Cold), NoGlows);
             MakeWideFan(WhitePath, "Hit Sparks White", Color.white, LightBlue);
             Make(CannonHitPath, "Cannon Hit", Yellow, new[] { CannonCircle, CannonCore });
             TuneImpactSparks(CannonHitPath);
-            Make(RailgunHitPath, "Railgun Hit", Cold, NoGlows);
+            Make(RailgunHitPath, "Railgun Hit", UnderBoost(Cold), NoGlows);
             TuneImpactSparks(RailgunHitPath);
             MakeDirected(MuzzlePath, "Muzzle Sparks", Yellow, MuzzleCore, MuzzlePlume, FlashOffset);
-            MakeDirected(PiercePath, "Pierce Sparks", Cold, PierceCore, PiercePlume, Vector3.zero);
+            MakeDirected(PiercePath, "Pierce Sparks", UnderBoost(Cold), PierceCore, PiercePlume, Vector3.zero);
             Resize(PiercePath, PierceSprayGrowth, "Spray");
-            AddJet(PiercePath, Cold);
+            AddJet(PiercePath, UnderBoost(Cold));
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
