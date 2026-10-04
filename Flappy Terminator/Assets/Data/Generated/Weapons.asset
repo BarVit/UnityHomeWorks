@@ -52,7 +52,7 @@ MonoBehaviour:
     _projectileSpeed: 12
     _barrelsMax: 4
     _firePattern: 5
-    _sideAngle: 15
+    _sideAngle: 12
     _heatPerShot: 0
     _cooldownRate: 0
     _tickInterval: 0
@@ -82,7 +82,7 @@ MonoBehaviour:
     _projectileSpeed: 8
     _barrelsMax: 4
     _firePattern: 5
-    _sideAngle: 20
+    _sideAngle: 16
     _heatPerShot: 0
     _cooldownRate: 0
     _tickInterval: 0
