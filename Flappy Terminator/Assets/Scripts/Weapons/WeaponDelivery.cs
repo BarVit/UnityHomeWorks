@@ -15,6 +15,8 @@ public abstract class WeaponDelivery
     private float _cooldownLeft;
     private float _heat;
     private bool _isOverheated;
+    private int _shotsLeft;
+    private float _reloadLeft;
 
     protected WeaponDelivery(WeaponRow row, WeaponContext context)
     {
@@ -22,12 +24,13 @@ public abstract class WeaponDelivery
         _context = context;
         _barrels = Mathf.Clamp(context.Barrels, 1, Mathf.Min(row.BarrelsMax, context.Mounts.Length));
         _ranks = RankByHeight();
+        _shotsLeft = row.Magazine;
 
         if (row.Assets != null && row.Assets.ShotEffect != null)
             _shotPool = context.Pools.GetPool(row.Assets.ShotEffect);
     }
 
-    public virtual bool IsReady => _cooldownLeft <= 0f && _isOverheated == false;
+    public virtual bool IsReady => _cooldownLeft <= 0f && _isOverheated == false && _reloadLeft <= 0f;
 
     public virtual Transform LockTarget => null;
 
@@ -35,9 +38,17 @@ public abstract class WeaponDelivery
 
     public bool HasHeat => _row.HeatPerShot > 0f;
 
-    public virtual float Readiness => HasHeat
-        ? 1f - Mathf.Clamp01(_heat / MaxHeat)
-        : (_row.Rate <= 0f ? 1f : 1f - Mathf.Clamp01(_cooldownLeft / _row.Rate));
+    public bool HasMagazine => _row.Magazine > 0;
+
+    public int ShotsLeft => _shotsLeft;
+
+    public int MagazineSize => _row.Magazine;
+
+    public virtual float Readiness => _reloadLeft > 0f
+        ? 1f - Mathf.Clamp01(_reloadLeft / _row.ReloadTime)
+        : (HasHeat
+            ? 1f - Mathf.Clamp01(_heat / MaxHeat)
+            : (_row.Rate <= 0f ? 1f : 1f - Mathf.Clamp01(_cooldownLeft / _row.Rate)));
 
     protected WeaponRow Row => _row;
 
@@ -57,6 +68,7 @@ public abstract class WeaponDelivery
         _cooldownLeft = _row.Rate;
         Warm();
         OnFire();
+        Spend();
     }
 
     public void Tick(float deltaTime)
@@ -65,6 +77,7 @@ public abstract class WeaponDelivery
             _cooldownLeft -= deltaTime;
 
         Cool(deltaTime);
+        Reload(deltaTime);
         OnTick(deltaTime);
     }
 
@@ -109,6 +122,33 @@ public abstract class WeaponDelivery
         float height = Vector3.Dot(GetMount(barrel).position, up);
 
         return otherHeight < height || (Mathf.Approximately(otherHeight, height) && other < barrel);
+    }
+
+    private void Spend()
+    {
+        if (HasMagazine == false)
+            return;
+
+        _shotsLeft--;
+
+        if (_shotsLeft > 0)
+            return;
+
+        _reloadLeft = _row.ReloadTime;
+
+        if (_reloadLeft <= 0f)
+            _shotsLeft = _row.Magazine;
+    }
+
+    private void Reload(float deltaTime)
+    {
+        if (_reloadLeft <= 0f)
+            return;
+
+        _reloadLeft -= deltaTime;
+
+        if (_reloadLeft <= 0f)
+            _shotsLeft = _row.Magazine;
     }
 
     private void Warm()

@@ -11,7 +11,7 @@ namespace TableImport
 
         private static readonly string[] Columns =
         {
-            "id", "title", "owner", "delivery", "damage", "rate", "projectile_speed", "barrels_max",
+            "id", "title", "owner", "delivery", "damage", "rate", "magazine", "reload_time", "projectile_speed", "barrels_max",
             "fire_pattern", "side_angle", "heat_per_shot", "cooldown_rate", "tick_interval", "turn_rate",
             "area", "price", "projectile", "beam",
             "icon", "projectile_sprite", "projectile_animation", "shot_effect",
@@ -50,6 +50,8 @@ namespace TableImport
                     delivery,
                     reader.ReadInt("damage", 1, 10000),
                     reader.ReadFloat("rate", 0.01f, 60f),
+                    reader.ReadInt("magazine", 0, 1000),
+                    reader.ReadFloat("reload_time", 0f, 60f),
                     reader.ReadFloat("projectile_speed", 0f, 100f),
                     reader.ReadInt("barrels_max", 1, 8),
                     reader.ReadEnum<FirePattern>("fire_pattern"),

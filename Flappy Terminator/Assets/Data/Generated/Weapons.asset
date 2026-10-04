@@ -19,6 +19,8 @@ MonoBehaviour:
     _delivery: 0
     _damage: 7
     _rate: 0.4
+    _magazine: 0
+    _reloadTime: 0
     _projectileSpeed: 18
     _barrelsMax: 4
     _firePattern: 3
@@ -49,6 +51,8 @@ MonoBehaviour:
     _delivery: 0
     _damage: 10
     _rate: 0.25
+    _magazine: 0
+    _reloadTime: 0
     _projectileSpeed: 12
     _barrelsMax: 4
     _firePattern: 3
@@ -79,6 +83,8 @@ MonoBehaviour:
     _delivery: 0
     _damage: 35
     _rate: 0.75
+    _magazine: 0
+    _reloadTime: 0
     _projectileSpeed: 8
     _barrelsMax: 4
     _firePattern: 3
@@ -109,6 +115,8 @@ MonoBehaviour:
     _delivery: 1
     _damage: 25
     _rate: 0.6
+    _magazine: 10
+    _reloadTime: 5
     _projectileSpeed: 7
     _barrelsMax: 4
     _firePattern: 3
@@ -139,6 +147,8 @@ MonoBehaviour:
     _delivery: 2
     _damage: 45
     _rate: 0.9
+    _magazine: 0
+    _reloadTime: 0
     _projectileSpeed: 0
     _barrelsMax: 3
     _firePattern: 0
@@ -169,6 +179,8 @@ MonoBehaviour:
     _delivery: 3
     _damage: 2
     _rate: 0.05
+    _magazine: 0
+    _reloadTime: 0
     _projectileSpeed: 0
     _barrelsMax: 1
     _firePattern: 0
@@ -199,6 +211,8 @@ MonoBehaviour:
     _delivery: 5
     _damage: 6
     _rate: 0.1
+    _magazine: 0
+    _reloadTime: 0
     _projectileSpeed: 20
     _barrelsMax: 4
     _firePattern: 3
@@ -229,6 +243,8 @@ MonoBehaviour:
     _delivery: 4
     _damage: 12
     _rate: 3
+    _magazine: 0
+    _reloadTime: 0
     _projectileSpeed: 3
     _barrelsMax: 1
     _firePattern: 2
@@ -259,6 +275,8 @@ MonoBehaviour:
     _delivery: 6
     _damage: 70
     _rate: 1.2
+    _magazine: 0
+    _reloadTime: 0
     _projectileSpeed: 5
     _barrelsMax: 2
     _firePattern: 0
@@ -289,6 +307,8 @@ MonoBehaviour:
     _delivery: 0
     _damage: 8
     _rate: 1.5
+    _magazine: 0
+    _reloadTime: 0
     _projectileSpeed: 5
     _barrelsMax: 4
     _firePattern: 0
@@ -319,6 +339,8 @@ MonoBehaviour:
     _delivery: 0
     _damage: 5
     _rate: 2
+    _magazine: 0
+    _reloadTime: 0
     _projectileSpeed: 4
     _barrelsMax: 4
     _firePattern: 1
@@ -349,6 +371,8 @@ MonoBehaviour:
     _delivery: 1
     _damage: 12
     _rate: 2.5
+    _magazine: 0
+    _reloadTime: 0
     _projectileSpeed: 4
     _barrelsMax: 2
     _firePattern: 0

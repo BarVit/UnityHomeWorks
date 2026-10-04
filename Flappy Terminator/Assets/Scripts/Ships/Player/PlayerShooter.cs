@@ -19,8 +19,11 @@ public class PlayerShooter : MonoBehaviour
     private Transform[] _mounts;
     private WeaponDelivery _delivery;
     private float _shownReadiness = -1f;
+    private int _shownShots = -1;
 
     public event Action<float> ReadinessChanged;
+
+    public event Action<int> ShotsLeftChanged;
 
     public string WeaponId => _weaponId;
 
@@ -37,6 +40,12 @@ public class PlayerShooter : MonoBehaviour
     public float Readiness => _delivery == null ? 0f : _delivery.Readiness;
 
     public bool IsReady => _delivery != null && _delivery.IsReady;
+
+    public bool HasMagazine => _delivery != null && _delivery.HasMagazine;
+
+    public int ShotsLeft => _delivery == null ? 0 : _delivery.ShotsLeft;
+
+    public int MagazineSize => _delivery == null ? 0 : _delivery.MagazineSize;
 
     private void Awake()
     {
@@ -60,6 +69,7 @@ public class PlayerShooter : MonoBehaviour
     {
         _delivery.Tick(Time.deltaTime);
         Show(_delivery.Readiness);
+        ShowShots(_delivery.ShotsLeft);
     }
 
     public void Shoot()
@@ -87,6 +97,15 @@ public class PlayerShooter : MonoBehaviour
             mounts[i] = layout.GetChild(i);
 
         return mounts;
+    }
+
+    private void ShowShots(int shotsLeft)
+    {
+        if (shotsLeft == _shownShots)
+            return;
+
+        _shownShots = shotsLeft;
+        ShotsLeftChanged?.Invoke(shotsLeft);
     }
 
     private void Show(float readiness)
