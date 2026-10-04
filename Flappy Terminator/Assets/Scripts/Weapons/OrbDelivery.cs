@@ -6,6 +6,7 @@ public class OrbDelivery : ProjectileDelivery
     private const float ArcReach = 3f;
 
     private readonly Collider2D[] _touched = new Collider2D[16];
+    private readonly Transform[] _ringed = new Transform[16];
 
     private readonly SpawnPool<ExplosionAnimation> _sparkPool;
 
@@ -25,11 +26,6 @@ public class OrbDelivery : ProjectileDelivery
 
         orb.MakePersistent();
         orb.Stop();
-
-        PlasmaTether tether = orb.GetComponentInChildren<PlasmaTether>();
-
-        if (tether != null)
-            tether.Aim(Context.TargetFilter);
 
         if (orb.TryGetComponent(out OrbGrowth growth))
             growth.Charge(ChargeDuration);
@@ -98,6 +94,7 @@ public class OrbDelivery : ProjectileDelivery
         float radius = GetRadius(orb);
         Vector2 centre = orb.transform.position;
         int count = Physics2D.OverlapCircle(centre, radius * ArcReach, Context.TargetFilter, _touched);
+        int ringed = 0;
         bool isTouching = false;
 
         for (int i = 0; i < count; i++)
@@ -108,12 +105,28 @@ public class OrbDelivery : ProjectileDelivery
             if (damageable == null)
                 continue;
 
-            bool isInside = Vector2.Distance(centre, _touched[i].transform.position) <= radius;
+            float distance = Vector2.Distance(centre, _touched[i].transform.position);
+
+            if (distance > radius * ArcReach)
+                continue;
+
+            bool isInside = distance <= radius;
 
             damageable.TakeDamage(isInside ? Row.Damage : Row.Damage / 2);
             Spark(_touched[i].transform.position);
             isTouching = true;
+
+            if (isInside)
+                continue;
+
+            _ringed[ringed] = _touched[i].transform;
+            ringed++;
         }
+
+        PlasmaTether tether = orb.GetComponentInChildren<PlasmaTether>();
+
+        if (tether != null)
+            tether.Hold(_ringed, ringed);
 
         OrbArcSound sound = orb.GetComponentInChildren<OrbArcSound>();
 

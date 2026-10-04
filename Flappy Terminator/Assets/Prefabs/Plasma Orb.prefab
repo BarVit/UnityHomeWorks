@@ -670,10 +670,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlasmaTether
   _material: {fileID: 2100000, guid: 27fec65e4758242c29ad8b6dd0d70a11, type: 2}
-  _count: 4
+  _count: 16
   _segments: 11
   _innerRadius: 0.64
-  _outerRadius: 1.92
   _jitter: 0.11
   _width: 0.045
   _tipShare: 0.4

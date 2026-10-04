@@ -3,10 +3,9 @@ using UnityEngine;
 public class PlasmaTether : MonoBehaviour
 {
     [SerializeField] private Material _material;
-    [SerializeField] private int _count = 4;
+    [SerializeField] private int _count = 16;
     [SerializeField] private int _segments = 11;
     [SerializeField] private float _innerRadius = 0.64f;
-    [SerializeField] private float _outerRadius = 1.92f;
     [SerializeField] private float _jitter = 0.11f;
     [SerializeField] private float _width = 0.045f;
     [SerializeField] private float _tipShare = 0.4f;
@@ -14,10 +13,9 @@ public class PlasmaTether : MonoBehaviour
     [SerializeField] private float _maxWaveRate = 16f;
     [SerializeField] private int _sortingOrder = 4;
 
-    private readonly Collider2D[] _found = new Collider2D[8];
+    private readonly Transform[] _wanted = new Transform[16];
 
-    private ContactFilter2D _filter;
-    private bool _isAiming;
+    private int _wantedCount;
     private LineRenderer[] _lines;
     private Transform[] _targets;
     private float[][] _phases;
@@ -44,16 +42,16 @@ public class PlasmaTether : MonoBehaviour
 
     private void OnEnable()
     {
+        _wantedCount = 0;
+
         for (int i = 0; i < _count; i++)
             Release(i);
     }
 
     private void Update()
     {
-        int found = Find();
-
-        Keep(found);
-        Take(found);
+        Keep();
+        Take();
 
         HeldCount = 0;
 
@@ -67,71 +65,42 @@ public class PlasmaTether : MonoBehaviour
         }
     }
 
-    public void Aim(ContactFilter2D filter)
+    public void Hold(Transform[] targets, int count)
     {
-        _filter = filter;
-        _isAiming = true;
+        _wantedCount = Mathf.Min(count, _wanted.Length);
+
+        for (int i = 0; i < _wantedCount; i++)
+            _wanted[i] = targets[i];
     }
 
-    private int Find()
-    {
-        if (_isAiming == false)
-            return 0;
-
-        float scale = Mathf.Max(0.0001f, transform.lossyScale.x);
-        int count = Physics2D.OverlapCircle(transform.position, _outerRadius * scale, _filter, _found);
-        int kept = 0;
-
-        for (int i = 0; i < count; i++)
-        {
-            if (IsInRing(_found[i].transform) == false)
-                continue;
-
-            _found[kept] = _found[i];
-            kept++;
-        }
-
-        return kept;
-    }
-
-    private bool IsInRing(Transform target)
-    {
-        if (target == null || target.gameObject.activeInHierarchy == false)
-            return false;
-
-        float distance = ((Vector2)transform.InverseTransformPoint(target.position)).magnitude;
-
-        return distance > _innerRadius && distance <= _outerRadius;
-    }
-
-    private void Keep(int found)
+    private void Keep()
     {
         for (int i = 0; i < _targets.Length; i++)
         {
             if (_targets[i] == null)
                 continue;
 
-            if (IsHeldAmong(_targets[i], found) == false)
+            if (_targets[i].gameObject.activeInHierarchy == false || IsWanted(_targets[i]) == false)
                 Release(i);
         }
     }
 
-    private bool IsHeldAmong(Transform target, int found)
+    private bool IsWanted(Transform target)
     {
-        for (int i = 0; i < found; i++)
+        for (int i = 0; i < _wantedCount; i++)
         {
-            if (_found[i].transform == target)
+            if (_wanted[i] == target)
                 return true;
         }
 
         return false;
     }
 
-    private void Take(int found)
+    private void Take()
     {
-        for (int i = 0; i < found; i++)
+        for (int i = 0; i < _wantedCount; i++)
         {
-            if (IsTaken(_found[i].transform))
+            if (_wanted[i] == null || _wanted[i].gameObject.activeInHierarchy == false || IsTaken(_wanted[i]))
                 continue;
 
             int free = GetFreeLine();
@@ -139,7 +108,7 @@ public class PlasmaTether : MonoBehaviour
             if (free < 0)
                 return;
 
-            Latch(free, _found[i].transform);
+            Latch(free, _wanted[i]);
         }
     }
 
