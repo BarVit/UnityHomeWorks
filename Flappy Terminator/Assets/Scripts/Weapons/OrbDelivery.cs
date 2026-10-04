@@ -5,7 +5,7 @@ public class OrbDelivery : ProjectileDelivery
 {
     private const float ChargeDuration = 0.3f;
     private const float ArcReach = 6f;
-    private const float RingShare = 0.5f;
+    private const float FarShare = 0.5f;
 
     private readonly Collider2D[] _touched = new Collider2D[16];
     private readonly Transform[] _ringed = new Transform[16];
@@ -133,8 +133,9 @@ public class OrbDelivery : ProjectileDelivery
                 continue;
 
             bool isInside = distance <= radius;
+            float share = Mathf.Lerp(1f, FarShare, Mathf.InverseLerp(radius, radius * ArcReach, distance));
 
-            Deal(damageable, isInside ? tickDamage : tickDamage * RingShare);
+            Deal(damageable, tickDamage * share);
             Spark(_touched[i].transform.position);
             isTouching = true;
 
