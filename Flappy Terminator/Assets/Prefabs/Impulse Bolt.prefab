@@ -187,7 +187,7 @@ MonoBehaviour:
   _hitEffectPrefab: {fileID: 0}
   _shotSound:
     _clip: {fileID: 8300000, guid: 818da3d5b90734b639eb3d8fa31555ba, type: 3}
-    _volume: 0.3
+    _volume: 0.2
   _hitSound:
     _clip: {fileID: 8300000, guid: e4a9454d0acc4456499dcede787b5f32, type: 3}
     _volume: 0.5

@@ -11,7 +11,7 @@ namespace WeaponContent
         private const string SpritePath = "Assets/Sprites/Ammo/Impulse/Impulse Bolt.png";
         private const string MaterialPath = "Assets/VFX/Plasma Additive.mat";
         private const string ShotSoundPath = "Assets/Sounds/Laser shot [580308].wav";
-        private const float ShotVolume = 0.3f;
+        private const float ShotVolume = 0.2f;
         private const string HitSoundPath = "Assets/Sounds/Laser burn [670075].wav";
         private const float HitVolume = 0.5f;
 
