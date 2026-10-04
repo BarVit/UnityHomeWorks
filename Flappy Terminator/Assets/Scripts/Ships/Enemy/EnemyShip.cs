@@ -4,11 +4,14 @@ using UnityEngine;
 [RequireComponent(typeof(Health), typeof(EnemyMover), typeof(EnemyShooter))]
 public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 {
+    private const float VisiblePixels = 2f;
+
     [SerializeField] private AmmoHitHandler _ammoHitHandler;
     [SerializeField] private float _exitMargin = 1f;
 
     private Camera _camera;
     private Animator _animator;
+    private SpriteRenderer _body;
     private Health _health;
     private EnemyMover _mover;
     private EnemyShooter _shooter;
@@ -29,6 +32,7 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
     {
         _camera = Camera.main;
         _animator = GetComponentInChildren<Animator>(true);
+        _body = GetComponentInChildren<SpriteRenderer>(true);
         _health = GetComponent<Health>();
         _mover = GetComponent<EnemyMover>();
         _shooter = GetComponent<EnemyShooter>();
@@ -88,6 +92,9 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
     public void TakeDamage(int damage)
     {
+        if (IsShown() == false)
+            return;
+
         _health.TakeDamage(damage);
     }
 
@@ -113,5 +120,10 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
     private void OnAmmoHit(Ammo ammo)
     {
         TakeDamage(ammo.Damage);
+    }
+
+    private bool IsShown()
+    {
+        return _body == null || ScreenArea.Shows(_camera, _body.bounds, VisiblePixels);
     }
 }

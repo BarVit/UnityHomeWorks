@@ -1,12 +1,15 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class OrbDelivery : ProjectileDelivery
 {
     private const float ChargeDuration = 0.3f;
     private const float ArcReach = 4f;
+    private const float RingShare = 0.5f;
 
     private readonly Collider2D[] _touched = new Collider2D[16];
     private readonly Transform[] _ringed = new Transform[16];
+    private readonly Dictionary<IDamageable, float> _owed = new Dictionary<IDamageable, float>();
 
     private readonly SpawnPool<ExplosionAnimation> _sparkPool;
 
@@ -82,6 +85,24 @@ public class OrbDelivery : ProjectileDelivery
         spark.Play();
     }
 
+    private float GetDamageRate(Ammo orb)
+    {
+        return orb.TryGetComponent(out OrbGrowth growth) ? growth.GetDamageRate(Row.Damage) : Row.Damage;
+    }
+
+    private void Deal(IDamageable damageable, float damage)
+    {
+        _owed.TryGetValue(damageable, out float owed);
+        owed += damage;
+
+        int whole = Mathf.FloorToInt(owed);
+
+        if (whole > 0)
+            damageable.TakeDamage(whole);
+
+        _owed[damageable] = owed - whole;
+    }
+
     private float GetRadius(Ammo orb)
     {
         SpriteRenderer renderer = orb.GetComponentInChildren<SpriteRenderer>();
@@ -92,6 +113,7 @@ public class OrbDelivery : ProjectileDelivery
     private void Burn(Ammo orb)
     {
         float radius = GetRadius(orb);
+        float tickDamage = GetDamageRate(orb) * Row.TickInterval;
         Vector2 centre = orb.transform.position;
         int count = Physics2D.OverlapCircle(centre, radius * ArcReach, Context.TargetFilter, _touched);
         int ringed = 0;
@@ -112,7 +134,7 @@ public class OrbDelivery : ProjectileDelivery
 
             bool isInside = distance <= radius;
 
-            damageable.TakeDamage(isInside ? Row.Damage : Row.Damage / 2);
+            Deal(damageable, isInside ? tickDamage : tickDamage * RingShare);
             Spark(_touched[i].transform.position);
             isTouching = true;
 

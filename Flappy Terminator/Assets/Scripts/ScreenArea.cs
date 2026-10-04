@@ -28,6 +28,19 @@ public static class ScreenArea
             && viewportPoint.y >= -verticalMargin && viewportPoint.y <= 1f + verticalMargin;
     }
 
+    public static bool Shows(Camera camera, Bounds bounds, float pixels)
+    {
+        if (camera == null)
+            return true;
+
+        float inset = pixels * camera.orthographicSize * 2f / Mathf.Max(1, camera.pixelHeight);
+        float bottom = camera.transform.position.y - camera.orthographicSize;
+        float top = camera.transform.position.y + camera.orthographicSize;
+
+        return bounds.max.x >= GetLeftEdge(camera) + inset && bounds.min.x <= GetRightEdge(camera) - inset
+            && bounds.max.y >= bottom + inset && bounds.min.y <= top - inset;
+    }
+
     public static float GetLeftEdge(Camera camera)
     {
         return camera.transform.position.x - GetHalfWidth(camera);
