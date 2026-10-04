@@ -3,6 +3,7 @@ using UnityEngine;
 public class OrbDelivery : ProjectileDelivery
 {
     private const float ChargeDuration = 0.3f;
+    private const float ArcReach = 3f;
 
     private readonly Collider2D[] _touched = new Collider2D[16];
 
@@ -96,7 +97,7 @@ public class OrbDelivery : ProjectileDelivery
     {
         float radius = GetRadius(orb);
         Vector2 centre = orb.transform.position;
-        int count = Physics2D.OverlapCircle(centre, radius * 2f, Context.TargetFilter, _touched);
+        int count = Physics2D.OverlapCircle(centre, radius * ArcReach, Context.TargetFilter, _touched);
         bool isTouching = false;
 
         for (int i = 0; i < count; i++)

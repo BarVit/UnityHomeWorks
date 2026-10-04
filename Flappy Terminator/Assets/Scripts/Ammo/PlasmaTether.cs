@@ -6,7 +6,7 @@ public class PlasmaTether : MonoBehaviour
     [SerializeField] private int _count = 4;
     [SerializeField] private int _segments = 11;
     [SerializeField] private float _innerRadius = 0.64f;
-    [SerializeField] private float _outerRadius = 1.28f;
+    [SerializeField] private float _outerRadius = 1.92f;
     [SerializeField] private float _jitter = 0.11f;
     [SerializeField] private float _width = 0.045f;
     [SerializeField] private float _tipShare = 0.4f;
