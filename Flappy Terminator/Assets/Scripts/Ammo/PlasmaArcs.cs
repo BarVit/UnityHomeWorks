@@ -6,7 +6,7 @@ public class PlasmaArcs : MonoBehaviour
     [SerializeField] private int _count = 9;
     [SerializeField] private int _segments = 9;
     [SerializeField] private float _innerRadius = 0.64f;
-    [SerializeField] private float _outerRadius = 1.6f;
+    [SerializeField] private float _outerRadius = 1.28f;
     [SerializeField] private float _jitter = 0.13f;
     [SerializeField] private float _interval = 0.05f;
     [SerializeField] private float _width = 0.035f;

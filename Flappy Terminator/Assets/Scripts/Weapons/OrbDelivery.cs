@@ -4,7 +4,7 @@ using UnityEngine;
 public class OrbDelivery : ProjectileDelivery
 {
     private const float ChargeDuration = 0.3f;
-    private const float ArcReach = 4f;
+    private const float ArcReach = 6f;
     private const float RingShare = 0.5f;
 
     private readonly Collider2D[] _touched = new Collider2D[16];
