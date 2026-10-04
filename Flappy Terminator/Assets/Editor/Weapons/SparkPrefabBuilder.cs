@@ -25,6 +25,7 @@ namespace WeaponContent
         private const float FanArc = 180f;
         private const float CannonSparkCountShare = 1f / 3f;
         private const float CannonSparkLifetimeShare = 0.4f;
+        private const float CannonSparkStartRadius = 0.45f;
         private static readonly Vector3 FlashOffset = new Vector3(0.3f, 0f, 0f);
         private static readonly Color Yellow = new Color(1f, 0.85f, 0.15f, 1f);
         private static readonly Color Cold = new Color(0.3f, 0.75f, 1f, 1f);
@@ -261,8 +262,8 @@ namespace WeaponContent
 
                 shape.enabled = true;
                 shape.shapeType = ParticleSystemShapeType.Circle;
-                shape.radius = 0.05f;
-                shape.radiusThickness = 1f;
+                shape.radius = CannonSparkStartRadius;
+                shape.radiusThickness = 0f;
                 shape.arc = FanArc;
                 shape.arcMode = ParticleSystemShapeMultiModeValue.Random;
                 shape.rotation = new Vector3(0f, 0f, 90f);
