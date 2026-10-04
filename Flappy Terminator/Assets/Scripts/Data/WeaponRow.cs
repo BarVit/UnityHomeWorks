@@ -13,6 +13,7 @@ public class WeaponRow
     [SerializeField] private float _projectileSpeed;
     [SerializeField] private int _barrelsMax;
     [SerializeField] private FirePattern _firePattern;
+    [SerializeField] private float _sideAngle;
     [SerializeField] private float _heatPerShot;
     [SerializeField] private float _cooldownRate;
     [SerializeField] private float _tickInterval;
@@ -24,7 +25,7 @@ public class WeaponRow
     [SerializeField] private WeaponAssets _assets;
 
     public WeaponRow(string id, string title, WeaponOwner owner, DeliveryKind delivery, int damage, float rate,
-        float projectileSpeed, int barrelsMax, FirePattern firePattern, float heatPerShot,
+        float projectileSpeed, int barrelsMax, FirePattern firePattern, float sideAngle, float heatPerShot,
         float cooldownRate, float tickInterval, float turnRate, float area, int price,
         Ammo projectile, BeamFlash beam, WeaponAssets assets)
     {
@@ -37,6 +38,7 @@ public class WeaponRow
         _projectileSpeed = projectileSpeed;
         _barrelsMax = barrelsMax;
         _firePattern = firePattern;
+        _sideAngle = sideAngle;
         _heatPerShot = heatPerShot;
         _cooldownRate = cooldownRate;
         _tickInterval = tickInterval;
@@ -65,6 +67,8 @@ public class WeaponRow
     public int BarrelsMax => _barrelsMax;
 
     public FirePattern FirePattern => _firePattern;
+
+    public float SideAngle => _sideAngle;
 
     public float HeatPerShot => _heatPerShot;
 

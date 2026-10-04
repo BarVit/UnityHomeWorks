@@ -4,5 +4,6 @@ public enum FirePattern
     Cone,
     ForwardAndSides,
     NarrowCone,
-    Single
+    Single,
+    Wings
 }
