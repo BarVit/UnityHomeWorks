@@ -32,7 +32,7 @@
 | `Rocket 1 [441500].wav` | [441500](https://freesound.org/s/441500) | 3.0 с | 516 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Enemy Bullet.prefab`, `Prefabs/Player Rocket.prefab` |
 | `Rocket 2 [441499].wav` | [441499](https://freesound.org/s/441499) | 4.0 с | 691 КБ | **нет** | — |
 | `Ship explosion [732252].wav` | [732252](https://freesound.org/s/732252) | 5.0 с | 864 КБ | да | `VFX/Sparks/Player ship explosion.prefab` |
-| `Torpedo launch [100772].wav` | [100772](https://freesound.org/s/100772) | 3.4 с | 582 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Torpedo.prefab` |
+| `Torpedo launch [100772].wav` | [100772](https://freesound.org/s/100772) | 2.7 с | 465 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Torpedo.prefab` |
 | `Warp jump [454683].wav` | [454683](https://freesound.org/s/454683) | 16.3 с | 12.0 МБ | да | `Scenes/SampleScene.unity` |
 
 Всего звуков: 26, из них в игре не используются: 5.
