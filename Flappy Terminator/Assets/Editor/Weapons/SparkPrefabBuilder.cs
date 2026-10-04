@@ -25,7 +25,9 @@ namespace WeaponContent
         private const float FanArc = 180f;
         private const float CannonSparkCountShare = 0.48f;
         private const float CannonSparkLifetimeShare = 0.6f;
-        private const float CannonSparkStartRadius = 0.45f;
+        private const float CannonSparkStartRadius = 0.315f;
+        private const float CannonSparkSizeShare = 0.7f;
+        private const float CannonSparkSpeedShare = 0.7f;
         private static readonly Vector3 FlashOffset = new Vector3(0.3f, 0f, 0f);
         private static readonly Color Yellow = new Color(1f, 0.85f, 0.15f, 1f);
         private static readonly Color Cold = new Color(0.3f, 0.75f, 1f, 1f);
@@ -271,6 +273,8 @@ namespace WeaponContent
                 ParticleSystem.MainModule main = sparks.main;
 
                 main.startLifetime = Scale(main.startLifetime, CannonSparkLifetimeShare);
+                main.startSize = Scale(main.startSize, CannonSparkSizeShare);
+                main.startSpeed = Scale(main.startSpeed, CannonSparkSpeedShare);
                 Thin(sparks, CannonSparkCountShare);
             }
 
