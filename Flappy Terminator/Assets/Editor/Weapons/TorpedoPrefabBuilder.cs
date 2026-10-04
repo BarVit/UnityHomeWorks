@@ -1,6 +1,7 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace WeaponContent
 {
@@ -19,6 +20,8 @@ namespace WeaponContent
         private const float BlastSoundVolume = 1f;
         private const string ShotSoundPath = "Assets/Sounds/Torpedo launch [100772].wav";
         private const float ShotSoundVolume = 0.4f;
+        private const string MixerPath = "Assets/Sounds/AudioMixer.mixer";
+        private const string EffectsGroup = "Effects";
 
         [MenuItem("Tools/Weapons/Build Torpedo")]
         public static void Build()
@@ -51,6 +54,7 @@ namespace WeaponContent
 
             SetLamp(root, body);
             Voice(root);
+            SetLaunchSound(root);
 
             TorpedoWarhead warhead = root.GetComponent<TorpedoWarhead>();
 
@@ -81,6 +85,43 @@ namespace WeaponContent
 
             hull.size = new Vector2(length, width);
             hull.offset = Vector2.zero;
+        }
+
+        private static void SetLaunchSound(GameObject root)
+        {
+            Transform found = root.transform.Find("Launch Sound");
+
+            if (found == null)
+            {
+                found = new GameObject("Launch Sound").transform;
+                found.SetParent(root.transform, false);
+            }
+
+            AudioSource source = found.GetComponent<AudioSource>();
+
+            if (source == null)
+                source = found.gameObject.AddComponent<AudioSource>();
+
+            source.clip = null;
+            source.outputAudioMixerGroup = FindEffectsGroup();
+            source.loop = false;
+            source.playOnAwake = false;
+            source.spatialBlend = 0f;
+
+            if (found.GetComponent<LaunchSound>() == null)
+                found.gameObject.AddComponent<LaunchSound>();
+        }
+
+        private static AudioMixerGroup FindEffectsGroup()
+        {
+            AudioMixer mixer = AssetDatabase.LoadAssetAtPath<AudioMixer>(MixerPath);
+
+            if (mixer == null)
+                return null;
+
+            AudioMixerGroup[] groups = mixer.FindMatchingGroups(EffectsGroup);
+
+            return groups.Length == 0 ? null : groups[0];
         }
 
         private static void Voice(GameObject root)

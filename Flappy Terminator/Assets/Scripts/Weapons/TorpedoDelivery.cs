@@ -14,7 +14,12 @@ public class TorpedoDelivery : ProjectileDelivery
 
     protected override Ammo Launch(int barrel)
     {
-        Ammo torpedo = base.Launch(barrel);
+        Ammo torpedo = Spawn(barrel);
+
+        LaunchSound launchSound = torpedo.GetComponentInChildren<LaunchSound>();
+
+        if (barrel == 0 && launchSound != null)
+            launchSound.Play(torpedo.ShotSound);
 
         torpedo.Init(null);
         torpedo.SetDamage(0);
