@@ -3,7 +3,7 @@ using UnityEngine;
 public class OrbGrowth : MonoBehaviour
 {
     [SerializeField] private float _startScale = 0.594f;
-    [SerializeField] private float _endScale = 2.375f;
+    [SerializeField] private float _endScale = 1.875f;
 
     private Camera _camera;
     private float _startPositionX;

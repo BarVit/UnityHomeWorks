@@ -3,7 +3,7 @@ using UnityEngine;
 public class OrbDelivery : ProjectileDelivery
 {
     private const float ChargeDuration = 0.3f;
-    private const float ArcReach = 3f;
+    private const float ArcReach = 4f;
 
     private readonly Collider2D[] _touched = new Collider2D[16];
     private readonly Transform[] _ringed = new Transform[16];

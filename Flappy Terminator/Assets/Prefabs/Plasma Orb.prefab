@@ -154,7 +154,7 @@ MonoBehaviour:
   _count: 9
   _segments: 7
   _innerRadius: 0.64
-  _outerRadius: 1.92
+  _outerRadius: 2.56
   _jitter: 0.1
   _interval: 0.06
   _width: 0.05
@@ -624,7 +624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OrbGrowth
   _startScale: 0.594
-  _endScale: 2.375
+  _endScale: 1.875
 --- !u!1 &7796626988346774728
 GameObject:
   m_ObjectHideFlags: 0
