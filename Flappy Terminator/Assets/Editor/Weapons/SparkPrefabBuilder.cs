@@ -29,6 +29,11 @@ namespace WeaponContent
         private const float ImpactSparkStartRadius = 0.315f;
         private const float LaserSparkSizeShare = 1f / 1.5f;
         private const float PierceSprayGrowth = 2f;
+        private const float JetHalfAngle = 10f;
+        private const short JetCount = 12;
+        private static readonly Vector2 JetSpeed = new Vector2(10f, 16f);
+        private static readonly Vector2 JetLifetime = new Vector2(0.15f, 0.22f);
+        private static readonly Vector2 JetSize = new Vector2(0.02f, 0.2f);
         private const float ImpactSparkSizeShare = 0.7f;
         private const float ImpactSparkSpeedShare = 0.7f;
         private static readonly Vector3 FlashOffset = new Vector3(0.3f, 0f, 0f);
@@ -63,6 +68,7 @@ namespace WeaponContent
             MakeDirected(MuzzlePath, "Muzzle Sparks", Yellow, MuzzleCore, MuzzlePlume, FlashOffset);
             MakeDirected(PiercePath, "Pierce Sparks", Cold, PierceCore, PiercePlume, Vector3.zero);
             Resize(PiercePath, PierceSprayGrowth, "Spray");
+            AddJet(PiercePath, Cold);
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
@@ -258,6 +264,47 @@ namespace WeaponContent
                 bursts[i].count = Scale(bursts[i].count, share);
 
             emission.SetBursts(bursts);
+        }
+
+        private static void AddJet(string path, Color tint)
+        {
+            GameObject source = AssetDatabase.LoadAssetAtPath<GameObject>(SourcePath);
+            GameObject root = PrefabUtility.LoadPrefabContents(path);
+            GameObject jet = (GameObject)PrefabUtility.InstantiatePrefab(source, root.transform);
+
+            PrefabUtility.UnpackPrefabInstance(jet, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
+
+            jet.name = "Jet";
+            jet.transform.localPosition = Vector3.zero;
+            jet.transform.localRotation = Quaternion.identity;
+            Strip<BumpEffect>(jet);
+
+            foreach (ParticleSystem system in jet.GetComponentsInChildren<ParticleSystem>(true))
+            {
+                ParticleSystem.MainModule main = system.main;
+
+                main.startSpeed = new ParticleSystem.MinMaxCurve(JetSpeed.x, JetSpeed.y);
+                main.startLifetime = new ParticleSystem.MinMaxCurve(JetLifetime.x, JetLifetime.y);
+                main.startSize = new ParticleSystem.MinMaxCurve(JetSize.x, JetSize.y);
+                main.startColor = new ParticleSystem.MinMaxGradient(tint);
+                main.gravityModifier = 0f;
+
+                ParticleSystem.ShapeModule shape = system.shape;
+
+                shape.enabled = true;
+                shape.shapeType = ParticleSystemShapeType.Cone;
+                shape.angle = JetHalfAngle;
+                shape.radius = 0.02f;
+                shape.rotation = new Vector3(0f, 90f, 0f);
+
+                ParticleSystem.EmissionModule emission = system.emission;
+
+                emission.rateOverTime = 0f;
+                emission.SetBursts(new[] { new ParticleSystem.Burst(0f, JetCount) });
+            }
+
+            PrefabUtility.SaveAsPrefabAsset(root, path);
+            PrefabUtility.UnloadPrefabContents(root);
         }
 
         private static void Resize(string path, float share, string only)
