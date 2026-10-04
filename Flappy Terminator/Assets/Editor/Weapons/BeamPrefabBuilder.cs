@@ -29,7 +29,7 @@ namespace WeaponContent
         private const float SpiralRadius = 0.1f;
         private const float SpiralPitch = 0.6f;
         private const float DashedPitchShare = 1.5f;
-        private const float DashedRadiusShare = 1.1f;
+        private const float DashedRadiusShare = 1.2f;
         private const int DashCount = 32;
         private const int CoreSortingOrder = 6;
         private const int SpiralSortingOrder = 5;
