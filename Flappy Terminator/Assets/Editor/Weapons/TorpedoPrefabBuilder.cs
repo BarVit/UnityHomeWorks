@@ -23,6 +23,10 @@ namespace WeaponContent
         private const string MixerPath = "Assets/Sounds/AudioMixer.mixer";
         private const string EffectsGroup = "Effects";
         private const string EngineFlarePath = "vfx_Flamethrower_01 Variant/Flare";
+        private const string EnginePath = "vfx_Flamethrower_01 Variant";
+        private const float EngineShare = 0.51f;
+        private const float LampShare = 0.14f;
+        private const float LampGlow = 3f;
 
         [MenuItem("Tools/Weapons/Build Torpedo")]
         public static void Build()
@@ -54,6 +58,7 @@ namespace WeaponContent
             }
 
             SetLamp(root, body);
+            SetEngine(root, body);
             HideEngineFlare(root);
             Voice(root);
             SetLaunchSound(root);
@@ -87,6 +92,20 @@ namespace WeaponContent
 
             hull.size = new Vector2(length, width);
             hull.offset = Vector2.zero;
+        }
+
+        private static void SetEngine(GameObject root, SpriteRenderer body)
+        {
+            Transform engine = root.transform.Find(EnginePath);
+
+            if (engine == null || body == null)
+                return;
+
+            float length = body.sprite.bounds.size.y * body.transform.localScale.y;
+            Vector3 position = engine.localPosition;
+
+            position.x = -length * EngineShare;
+            engine.localPosition = position;
         }
 
         private static void HideEngineFlare(GameObject root)
@@ -192,7 +211,7 @@ namespace WeaponContent
             float length = body == null ? 2f : body.sprite.bounds.size.y * body.transform.localScale.y;
 
             lamp.localPosition = new Vector3(length * 0.42f, 0f, 0f);
-            lamp.localScale = Vector3.one * (length * 0.14f);
+            lamp.localScale = Vector3.one * (length * LampShare * Mathf.Sqrt(LampGlow));
 
             SpriteRenderer renderer = lamp.GetComponent<SpriteRenderer>();
 
