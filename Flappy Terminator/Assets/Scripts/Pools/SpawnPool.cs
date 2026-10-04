@@ -6,14 +6,16 @@ using UnityEngine.Pool;
 public class SpawnPool<T> : ISpawnPool where T : MonoBehaviour, IPoolable
 {
     private readonly T _prefab;
+    private readonly Transform _folder;
     private readonly Action<T> _created;
     private readonly Action<IPoolable> _release;
     private readonly ObjectPool<T> _pool;
     private readonly List<T> _active = new();
 
-    public SpawnPool(T prefab, int capacity = 10, int maxSize = 100, Action<T> created = null)
+    public SpawnPool(T prefab, Transform folder, int capacity = 10, int maxSize = 100, Action<T> created = null)
     {
         _prefab = prefab;
+        _folder = folder;
         _created = created;
         _release = Release;
 
@@ -68,7 +70,7 @@ public class SpawnPool<T> : ISpawnPool where T : MonoBehaviour, IPoolable
 
     private T Create()
     {
-        T item = UnityEngine.Object.Instantiate(_prefab);
+        T item = UnityEngine.Object.Instantiate(_prefab, _folder);
 
         item.gameObject.SetActive(false);
         _created?.Invoke(item);

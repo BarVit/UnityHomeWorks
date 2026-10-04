@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerCollisionHandler : MonoBehaviour
 {
+    private const string BumpSection = "Bumps";
     private const float AsteroidBumpGravityFromAbove = -2f;
     private const float AsteroidBumpGravityFromBelow = 4f;
     private const float EnemyBumpGravity = 1f;
@@ -16,7 +17,7 @@ public class PlayerCollisionHandler : MonoBehaviour
 
     private void Awake()
     {
-        _bumpPool = new SpawnPool<BumpEffect>(_bumpPrefab);
+        _bumpPool = new SpawnPool<BumpEffect>(_bumpPrefab, SpawnFolder.Get(BumpSection));
     }
 
     private void OnValidate()

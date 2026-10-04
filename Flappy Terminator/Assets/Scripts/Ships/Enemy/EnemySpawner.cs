@@ -20,7 +20,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float _minSpawnPositionY = -3f;
     [SerializeField] private float _maxSpawnPositionY = 3f;
 
-    private readonly PoolRegistry _pools = new PoolRegistry();
+    private readonly PoolRegistry _pools = new PoolRegistry("Enemies");
     private readonly List<SpawnPool<EnemyShip>> _shipPools = new List<SpawnPool<EnemyShip>>();
     private readonly List<SpawnPool<Ammo>> _ammoPools = new List<SpawnPool<Ammo>>();
 

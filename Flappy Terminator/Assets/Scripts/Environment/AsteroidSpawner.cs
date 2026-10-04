@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AsteroidSpawner : MonoBehaviour
 {
+    private const string Section = "Asteroids";
+
     [SerializeField] private List<Asteroid> _prefabs;
     [SerializeField] private float _spawnDelay;
     [SerializeField] private float _spawnPositionX = 10f;
@@ -20,7 +22,7 @@ public class AsteroidSpawner : MonoBehaviour
         _pools = new List<SpawnPool<Asteroid>>();
 
         foreach (Asteroid prefab in _prefabs)
-            _pools.Add(new SpawnPool<Asteroid>(prefab));
+            _pools.Add(new SpawnPool<Asteroid>(prefab, SpawnFolder.Get(SpawnFolder.Get(Section), prefab.name)));
     }
 
     public void StartSpawn()

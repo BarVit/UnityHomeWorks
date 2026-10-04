@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public int Value { get; private set; }
+    [field: SerializeField] public int Value { get; private set; }
     [field: SerializeField] public int MaxValue { get; private set; }
 
     public event Action<int> Changed;

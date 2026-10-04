@@ -14,7 +14,7 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private LayerMask _targetLayers;
     [SerializeField] private LayerMask _worldLayers;
 
-    private readonly PoolRegistry _pools = new PoolRegistry();
+    private readonly PoolRegistry _pools = new PoolRegistry("Player Weapon");
 
     private Transform[] _mounts;
     private WeaponDelivery _delivery;
