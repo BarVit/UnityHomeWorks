@@ -22,6 +22,7 @@ namespace WeaponContent
         private const float ShotSoundVolume = 0.4f;
         private const string MixerPath = "Assets/Sounds/AudioMixer.mixer";
         private const string EffectsGroup = "Effects";
+        private const string EngineFlarePath = "vfx_Flamethrower_01 Variant/Flare";
 
         [MenuItem("Tools/Weapons/Build Torpedo")]
         public static void Build()
@@ -53,6 +54,7 @@ namespace WeaponContent
             }
 
             SetLamp(root, body);
+            HideEngineFlare(root);
             Voice(root);
             SetLaunchSound(root);
 
@@ -85,6 +87,14 @@ namespace WeaponContent
 
             hull.size = new Vector2(length, width);
             hull.offset = Vector2.zero;
+        }
+
+        private static void HideEngineFlare(GameObject root)
+        {
+            Transform flare = root.transform.Find(EngineFlarePath);
+
+            if (flare != null)
+                flare.gameObject.SetActive(false);
         }
 
         private static void SetLaunchSound(GameObject root)
