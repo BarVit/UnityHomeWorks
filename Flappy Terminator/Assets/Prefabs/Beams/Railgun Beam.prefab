@@ -3504,7 +3504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c711cd3bc51a0423ba7c32b41c4809dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BeamSpiral
-  _radius: 0.1
+  _radius: 0.11000001
   _pitch: 0.90000004
   _phase: 1.5707964
   _isDashed: 1

@@ -29,6 +29,7 @@ namespace WeaponContent
         private const float SpiralRadius = 0.1f;
         private const float SpiralPitch = 0.6f;
         private const float DashedPitchShare = 1.5f;
+        private const float DashedRadiusShare = 1.1f;
         private const int DashCount = 32;
         private const int CoreSortingOrder = 6;
         private const int SpiralSortingOrder = 5;
@@ -77,16 +78,17 @@ namespace WeaponContent
 
             return new[]
             {
-                SetSpiral(solid.AddComponent<BeamSpiral>(), SpiralPitch, 0f, false),
-                SetSpiral(dashed.AddComponent<BeamSpiral>(), SpiralPitch * DashedPitchShare, Mathf.PI * 0.5f, true)
+                SetSpiral(solid.AddComponent<BeamSpiral>(), SpiralRadius, SpiralPitch, 0f, false),
+                SetSpiral(dashed.AddComponent<BeamSpiral>(), SpiralRadius * DashedRadiusShare,
+                    SpiralPitch * DashedPitchShare, Mathf.PI * 0.5f, true)
             };
         }
 
-        private static BeamSpiral SetSpiral(BeamSpiral spiral, float pitch, float phase, bool isDashed)
+        private static BeamSpiral SetSpiral(BeamSpiral spiral, float radius, float pitch, float phase, bool isDashed)
         {
             SerializedObject serialized = new SerializedObject(spiral);
 
-            serialized.FindProperty("_radius").floatValue = SpiralRadius;
+            serialized.FindProperty("_radius").floatValue = radius;
             serialized.FindProperty("_pitch").floatValue = pitch;
             serialized.FindProperty("_phase").floatValue = phase;
             serialized.FindProperty("_isDashed").boolValue = isDashed;
