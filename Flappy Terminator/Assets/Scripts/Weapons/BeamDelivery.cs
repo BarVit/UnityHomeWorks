@@ -74,15 +74,19 @@ public class BeamDelivery : WeaponDelivery
         Vector2 direction = GetRotation(barrel) * Vector2.right;
         float reach = GetReach();
 
+        float open = GetOpenDistance(mount.position, direction, reach);
         Vector2 far = (Vector2)mount.position + direction * reach;
+        Vector2 end = (Vector2)mount.position + direction * open;
 
-        int count = Physics2D.Raycast(mount.position, direction, Context.TargetFilter, _hits, reach);
+        int count = Physics2D.Raycast(mount.position, direction, Context.TargetFilter, _hits, open);
         bool isSeen = count > 0 && ScreenArea.Contains(Context.Camera, _hits[0].point);
 
         if (isSeen == false)
         {
-            Remember(Draw(mount.position, far, barrel));
-            NoteWorldHit(mount.position, direction, reach);
+            Remember(Draw(mount.position, end, barrel));
+
+            if (open < reach)
+                NoteWorldHit(end);
 
             return;
         }
@@ -175,23 +179,25 @@ public class BeamDelivery : WeaponDelivery
         _targetHitPoint = point;
     }
 
-    private void NoteWorldHit(Vector2 from, Vector2 direction, float reach)
+    private float GetOpenDistance(Vector2 from, Vector2 direction, float reach)
     {
-        if (_hasWorldHit && _worldEffectPool == null)
-            return;
-
         int count = Physics2D.Raycast(from, direction, Context.WorldFilter, _worldHits, reach);
 
         if (count == 0 || ScreenArea.Contains(Context.Camera, _worldHits[0].point) == false)
-            return;
+            return reach;
 
-        ShowWorldHit(_worldHits[0].point);
+        return _worldHits[0].distance;
+    }
+
+    private void NoteWorldHit(Vector2 point)
+    {
+        ShowWorldHit(point);
 
         if (_hasWorldHit)
             return;
 
         _hasWorldHit = true;
-        _worldHitPoint = _worldHits[0].point;
+        _worldHitPoint = point;
     }
 
     private void ShowWorldHit(Vector2 point)
