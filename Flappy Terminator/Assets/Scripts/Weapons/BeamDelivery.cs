@@ -9,7 +9,8 @@ public class BeamDelivery : WeaponDelivery
     private readonly SpawnPool<BeamFlash> _beamPool;
     private readonly SpawnPool<ExplosionAnimation> _piercePool;
     private readonly SpawnPool<ExplosionAnimation> _worldEffectPool;
-    private readonly RaycastHit2D[] _hits = new RaycastHit2D[1];
+    private readonly RaycastHit2D[] _hits = new RaycastHit2D[16];
+    private readonly IDamageable[] _struck = new IDamageable[16];
     private readonly RaycastHit2D[] _worldHits = new RaycastHit2D[1];
     private readonly RaycastHit2D[] _exitHits = new RaycastHit2D[8];
     private readonly AimLine[] _sights;
@@ -91,28 +92,58 @@ public class BeamDelivery : WeaponDelivery
         Vector2 end = from + direction * open;
 
         int count = Physics2D.Raycast(from, direction, Context.TargetFilter, _hits, open);
-        bool isSeen = count > 0 && ScreenArea.Contains(Context.Camera, _hits[0].point);
+        int struck = 0;
+        Vector2 last = end;
 
-        if (isSeen == false)
+        for (int i = 0; i < count; i++)
         {
-            Remember(Draw(from, end, barrel));
+            RaycastHit2D hit = _hits[i];
 
-            if (open < reach)
-                NoteWorldHit(end, rotation);
+            if (ScreenArea.Contains(Context.Camera, hit.point) == false)
+                break;
 
-            return;
+            IDamageable damageable = FindDamageable(hit.collider);
+
+            if (damageable != null && IsStruck(damageable, struck))
+                continue;
+
+            Strike(hit, damageable, rotation, far);
+            _struck[struck] = damageable;
+            struck++;
+            last = hit.point;
+
+            if (_piercePool == null || struck == _struck.Length)
+                break;
         }
 
-        RaycastHit2D hit = _hits[0];
+        Remember(Draw(from, last, barrel));
 
-        if (hit.collider.TryGetComponent(out IDamageable damageable) == false)
-            damageable = hit.collider.GetComponentInParent<IDamageable>();
+        if (struck == 0 && open < reach)
+            NoteWorldHit(end, rotation);
+    }
 
-        bool isPierced = damageable != null && _piercePool != null;
+    private IDamageable FindDamageable(Collider2D collider)
+    {
+        if (collider.TryGetComponent(out IDamageable damageable) == false)
+            damageable = collider.GetComponentInParent<IDamageable>();
 
-        Remember(Draw(from, hit.point, barrel));
+        return damageable;
+    }
 
-        if (isPierced)
+    private bool IsStruck(IDamageable damageable, int struck)
+    {
+        for (int i = 0; i < struck; i++)
+        {
+            if (_struck[i] == damageable)
+                return true;
+        }
+
+        return false;
+    }
+
+    private void Strike(RaycastHit2D hit, IDamageable damageable, Quaternion rotation, Vector2 far)
+    {
+        if (damageable != null && _piercePool != null)
             ShowPierce(GetExit(hit.collider, hit.point, far), rotation);
 
         if (damageable != null)
