@@ -6,29 +6,29 @@ public static class FireSpread
     private const float NarrowConeStep = 4f;
     private const float SideAngle = 60f;
 
-    public static float GetAngle(FirePattern pattern, int barrel, int barrels)
+    public static float GetAngle(FirePattern pattern, int barrel, int rank, int barrels)
     {
         switch (pattern)
         {
             case FirePattern.Cone:
-                return Spread(barrel, barrels, ConeStep);
+                return Spread(rank, barrels, ConeStep);
 
             case FirePattern.NarrowCone:
-                return Spread(barrel, barrels, NarrowConeStep);
+                return Spread(rank, barrels, NarrowConeStep);
 
             case FirePattern.ForwardAndSides:
-                return barrel < 2 ? 0f : (barrel % 2 == 0 ? SideAngle : -SideAngle);
+                return barrel < 2 ? 0f : (rank * 2 >= barrels - 1 ? SideAngle : -SideAngle);
 
             default:
                 return 0f;
         }
     }
 
-    private static float Spread(int barrel, int barrels, float step)
+    private static float Spread(int rank, int barrels, float step)
     {
         if (barrels <= 1)
             return 0f;
 
-        return (barrel - (barrels - 1) * 0.5f) * step;
+        return (rank - (barrels - 1) * 0.5f) * step;
     }
 }

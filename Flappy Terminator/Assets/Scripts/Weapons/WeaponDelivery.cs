@@ -8,6 +8,7 @@ public abstract class WeaponDelivery
     private readonly WeaponRow _row;
     private readonly WeaponContext _context;
     private readonly int _barrels;
+    private readonly int[] _ranks;
 
     private readonly SpawnPool<ExplosionAnimation> _shotPool;
 
@@ -20,6 +21,7 @@ public abstract class WeaponDelivery
         _row = row;
         _context = context;
         _barrels = Mathf.Clamp(context.Barrels, 1, Mathf.Min(row.BarrelsMax, context.Mounts.Length));
+        _ranks = RankByHeight();
 
         if (row.Assets != null && row.Assets.ShotEffect != null)
             _shotPool = context.Pools.GetPool(row.Assets.ShotEffect);
@@ -73,7 +75,7 @@ public abstract class WeaponDelivery
 
     protected Quaternion GetRotation(int barrel)
     {
-        float angle = FireSpread.GetAngle(_row.FirePattern, barrel, _barrels);
+        float angle = FireSpread.GetAngle(_row.FirePattern, barrel, _ranks[barrel], _barrels);
 
         return GetMount(barrel).rotation * Quaternion.Euler(0f, 0f, angle);
     }
@@ -86,6 +88,27 @@ public abstract class WeaponDelivery
         ExplosionAnimation shot = _shotPool.Get(GetMount(barrel).position, GetRotation(barrel));
 
         shot.Play();
+    }
+
+    private int[] RankByHeight()
+    {
+        int[] ranks = new int[_barrels];
+        Vector3 up = GetMount(0).up;
+
+        for (int barrel = 0; barrel < _barrels; barrel++)
+            for (int other = 0; other < _barrels; other++)
+                if (IsBelow(other, barrel, up))
+                    ranks[barrel]++;
+
+        return ranks;
+    }
+
+    private bool IsBelow(int other, int barrel, Vector3 up)
+    {
+        float otherHeight = Vector3.Dot(GetMount(other).position, up);
+        float height = Vector3.Dot(GetMount(barrel).position, up);
+
+        return otherHeight < height || (Mathf.Approximately(otherHeight, height) && other < barrel);
     }
 
     private void Warm()
