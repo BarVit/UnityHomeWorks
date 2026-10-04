@@ -5000,7 +5000,7 @@ MonoBehaviour:
   _blast: {fileID: 1254689327260827870, guid: 40bd618c9af904f9ca9af321dfbc483c, type: 3}
   _blastSound:
     _clip: {fileID: 8300000, guid: 073af4467d10246c190d3a3a29c9d2f4, type: 3}
-    _volume: 1
+    _volume: 0.0625
   _nearRadius: 0.3
   _farRadius: 1.5
   _blastNoseShare: 0.25

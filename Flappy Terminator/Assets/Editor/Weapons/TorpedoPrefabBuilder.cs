@@ -17,7 +17,7 @@ namespace WeaponContent
         private const string MaterialPath = "Assets/VFX/Plasma Additive.mat";
         private const float SizeAgainstRocket = 2f;
         private const string BlastSoundPath = "Assets/Sounds/Explosion [402005].wav";
-        private const float BlastSoundVolume = 1f;
+        private const float BlastSoundVolume = 0.0625f;
         private const string ShotSoundPath = "Assets/Sounds/Torpedo launch [100772].wav";
         private const float ShotSoundVolume = 0.4f;
         private const string MixerPath = "Assets/Sounds/AudioMixer.mixer";
