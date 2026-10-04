@@ -27,8 +27,9 @@ namespace WeaponContent
         private const float ImpactSparkCountShare = 0.48f;
         private const float ImpactSparkLifetimeShare = 0.6f;
         private const float ImpactSparkStartRadius = 0.315f;
-        private const float WideSparkStartRadius = 0.39f;
-        private const float WideSparkSpeedShare = 0.8f;
+        private const float WideSparkStartRadius = 0.34f;
+        private const float WideSparkSpeedShare = 0.64f;
+        private const float WideSparkSizeShare = 0.8f;
         private const float WideSparkLifetimeShare = 0.8f;
         private const float SparkMaterialBoost = 4f;
         private const float LaserSparkSizeShare = 1f / 1.5f;
@@ -370,6 +371,10 @@ namespace WeaponContent
             ParticleSystem.MainModule extraMain = extraSparks.main;
 
             extraMain.startColor = new ParticleSystem.MinMaxGradient(UnderBoost(extraTint));
+            ParticleSystem.MainModule rootMain = root.GetComponent<ParticleSystem>().main;
+
+            rootMain.startSize = Scale(rootMain.startSize, WideSparkSizeShare);
+
             foreach (ParticleSystem sparks in root.GetComponentsInChildren<ParticleSystem>(true))
             {
                 ParticleSystem.MainModule main = sparks.main;

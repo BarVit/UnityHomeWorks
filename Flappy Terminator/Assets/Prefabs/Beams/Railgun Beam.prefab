@@ -180,4 +180,4 @@ MonoBehaviour:
   _worldHitSound:
     _clip: {fileID: 8300000, guid: 5612d8a83bc45475484c2e62d10abf1f, type: 3}
     _volume: 0.2
-  _pierceEffect: {fileID: 1907165287410158541, guid: 54e3df2fc38e44b52a3f85326243d75d, type: 3}
+  _pierceEffect: {fileID: 9074916415309109984, guid: 54e3df2fc38e44b52a3f85326243d75d, type: 3}
