@@ -16,7 +16,7 @@ namespace TableImport
             "area", "price", "projectile", "beam",
             "icon", "projectile_sprite", "projectile_animation", "shot_effect",
             "hit_target_effect", "hit_world_effect",
-            "shot_sound", "flight_sound", "hit_target_sound", "hit_world_sound", "overheat_sound"
+            "shot_sound", "hit_target_sound", "hit_world_sound", "overheat_sound"
         };
 
         public static WeaponTable Import(TableLog log)
@@ -72,7 +72,6 @@ namespace TableImport
                         reader.ReadPrefab<ExplosionAnimation>("hit_target_effect", false),
                         reader.ReadPrefab<ExplosionAnimation>("hit_world_effect", false),
                         reader.ReadAsset<AudioClip>("shot_sound", false),
-                        reader.ReadAsset<AudioClip>("flight_sound", false),
                         reader.ReadAsset<AudioClip>("hit_target_sound", false),
                         reader.ReadAsset<AudioClip>("hit_world_sound", false),
                         reader.ReadAsset<AudioClip>("overheat_sound", false))));
