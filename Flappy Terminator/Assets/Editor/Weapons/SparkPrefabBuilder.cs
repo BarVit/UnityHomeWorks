@@ -10,6 +10,7 @@ namespace WeaponContent
         private const string SourcePath = "Assets/VFX/Sparks/vfx_Sparks_01.prefab";
         private const string WarmPath = "Assets/VFX/Sparks/Hit Sparks.prefab";
         private const string ColdPath = "Assets/VFX/Sparks/Hit Sparks Blue.prefab";
+        private const string WhitePath = "Assets/VFX/Sparks/Hit Sparks White.prefab";
         private const string MuzzlePath = "Assets/VFX/Sparks/Muzzle Sparks.prefab";
         private const string CannonHitPath = "Assets/VFX/Sparks/Cannon Hit.prefab";
         private const string PiercePath = "Assets/VFX/Sparks/Pierce Sparks.prefab";
@@ -42,6 +43,7 @@ namespace WeaponContent
         {
             Make(WarmPath, "Hit Sparks", Color.clear, NoGlows);
             Make(ColdPath, "Hit Sparks Blue", Cold, NoGlows);
+            Make(WhitePath, "Hit Sparks White", Color.white, NoGlows);
             Make(CannonHitPath, "Cannon Hit", Yellow, new[] { CannonCircle });
             MakeDirected(MuzzlePath, "Muzzle Sparks", Yellow, MuzzleCore, MuzzlePlume, FlashOffset);
             MakeDirected(PiercePath, "Pierce Sparks", Cold, PierceCore, PiercePlume, Vector3.zero);

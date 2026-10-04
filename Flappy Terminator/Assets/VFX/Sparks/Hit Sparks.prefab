@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4316839822185376087}
   - component: {fileID: 7440191685052868192}
   - component: {fileID: 577526660719123766}
-  - component: {fileID: 6432477115178989239}
-  - component: {fileID: 1188182704016262323}
+  - component: {fileID: 7320003781192339559}
+  - component: {fileID: 5566684752619726643}
   m_Layer: 0
   m_Name: Hit Sparks
   m_TagString: Untagged
@@ -4896,7 +4896,7 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
---- !u!82 &6432477115178989239
+--- !u!82 &7320003781192339559
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4993,7 +4993,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1188182704016262323
+--- !u!114 &5566684752619726643
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5005,4 +5005,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 873598aa8580f4fe582c61879f2a68e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExplosionAnimation
-  _audioSource: {fileID: 6432477115178989239}
+  _audioSource: {fileID: 7320003781192339559}

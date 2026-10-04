@@ -8,6 +8,7 @@ public class BeamDelivery : WeaponDelivery
     private readonly SpawnPool<ExplosionAnimation> _hitEffectPool;
     private readonly SpawnPool<BeamFlash> _beamPool;
     private readonly SpawnPool<ExplosionAnimation> _piercePool;
+    private readonly SpawnPool<ExplosionAnimation> _worldEffectPool;
     private readonly RaycastHit2D[] _hits = new RaycastHit2D[1];
     private readonly RaycastHit2D[] _worldHits = new RaycastHit2D[1];
     private readonly RaycastHit2D[] _exitHits = new RaycastHit2D[8];
@@ -30,6 +31,9 @@ public class BeamDelivery : WeaponDelivery
 
         if (row.Beam != null && row.Beam.PierceEffect != null)
             _piercePool = context.Pools.GetPool(row.Beam.PierceEffect);
+
+        if (row.Assets != null && row.Assets.HitWorldEffect != null)
+            _worldEffectPool = context.Pools.GetPool(row.Assets.HitWorldEffect);
     }
 
     protected Transform Target { get; private set; }
@@ -169,7 +173,7 @@ public class BeamDelivery : WeaponDelivery
 
     private void NoteWorldHit(Vector2 from, Vector2 direction, float reach)
     {
-        if (_hasWorldHit)
+        if (_hasWorldHit && _worldEffectPool == null)
             return;
 
         int count = Physics2D.Raycast(from, direction, Context.WorldFilter, _worldHits, reach);
@@ -177,8 +181,23 @@ public class BeamDelivery : WeaponDelivery
         if (count == 0 || ScreenArea.Contains(Context.Camera, _worldHits[0].point) == false)
             return;
 
+        ShowWorldHit(_worldHits[0].point);
+
+        if (_hasWorldHit)
+            return;
+
         _hasWorldHit = true;
         _worldHitPoint = _worldHits[0].point;
+    }
+
+    private void ShowWorldHit(Vector2 point)
+    {
+        if (_worldEffectPool == null)
+            return;
+
+        ExplosionAnimation effect = _worldEffectPool.Get(point);
+
+        effect.Play();
     }
 
     private void SoundHits()
