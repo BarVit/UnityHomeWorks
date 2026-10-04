@@ -99,7 +99,7 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
         if (_hitEffectPool == null)
             return;
 
-        ExplosionAnimation hitEffect = _hitEffectPool.Get(point);
+        ExplosionAnimation hitEffect = _hitEffectPool.Get(point, transform.rotation);
 
         hitEffect.Play();
     }

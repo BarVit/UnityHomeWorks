@@ -22,6 +22,7 @@ namespace WeaponContent
         private const float SprayHalfAngle = 30f;
         private const float SprayShare = 0.5f;
         private const float SprayLifetimeShare = 0.5f;
+        private const float FanArc = 180f;
         private static readonly Vector3 FlashOffset = new Vector3(0.3f, 0f, 0f);
         private static readonly Color Yellow = new Color(1f, 0.85f, 0.15f, 1f);
         private static readonly Color Cold = new Color(0.3f, 0.75f, 1f, 1f);
@@ -32,7 +33,9 @@ namespace WeaponContent
         private static readonly Burst MuzzlePlume = new Burst("Flash Plume", 12, new Vector2(0.7f, 1.05f),
             new Vector2(0.16f, 0.24f), new Vector2(4f, 9f), 14f, new Color(1f, 0.78f, 0.32f, 1f), new Color(1f, 0.48f, 0.12f, 1f));
         private static readonly Burst CannonCircle = new Burst("Hit Circle", 1, new Vector2(2.25f, 2.75f),
-            new Vector2(0.08f, 0.1f), Vector2.zero, 0f, new Color(1f, 0.92f, 0.35f, 1f), new Color(1f, 0.8f, 0.2f, 1f));
+            new Vector2(0.16f, 0.2f), Vector2.zero, 0f, new Color(1f, 0.92f, 0.35f, 1f), new Color(1f, 0.8f, 0.2f, 1f));
+        private static readonly Burst CannonCore = new Burst("Hit Core", 1, new Vector2(0.8f, 1f),
+            new Vector2(0.16f, 0.2f), Vector2.zero, 0f, new Color(1f, 1f, 0.95f, 1f), new Color(1f, 0.97f, 0.85f, 1f));
         private static readonly Burst PierceCore = new Burst("Flash Core", 1, new Vector2(0.5f, 0.6f),
             new Vector2(0.06f, 0.08f), Vector2.zero, 0f, new Color(0.85f, 0.97f, 1f, 1f), new Color(0.6f, 0.9f, 1f, 1f));
         private static readonly Burst PiercePlume = new Burst("Flash Plume", 10, new Vector2(0.45f, 0.65f),
@@ -44,7 +47,8 @@ namespace WeaponContent
             Make(WarmPath, "Hit Sparks", Color.clear, NoGlows);
             Make(ColdPath, "Hit Sparks Blue", Cold, NoGlows);
             Make(WhitePath, "Hit Sparks White", Color.white, NoGlows);
-            Make(CannonHitPath, "Cannon Hit", Yellow, new[] { CannonCircle });
+            Make(CannonHitPath, "Cannon Hit", Yellow, new[] { CannonCircle, CannonCore });
+            FanBack(CannonHitPath);
             MakeDirected(MuzzlePath, "Muzzle Sparks", Yellow, MuzzleCore, MuzzlePlume, FlashOffset);
             MakeDirected(PiercePath, "Pierce Sparks", Cold, PierceCore, PiercePlume, Vector3.zero);
 
@@ -92,8 +96,8 @@ namespace WeaponContent
 
             Material material = GetBlendMaterial();
 
-            foreach (Burst glow in glows)
-                AddBurst(root, glow, material, Vector3.zero);
+            for (int i = 0; i < glows.Length; i++)
+                AddBurst(root, glows[i], material, Vector3.zero, FlashSortingOrder + i);
 
             PrefabUtility.SaveAsPrefabAsset(root, path);
             PrefabUtility.UnloadPrefabContents(root);
@@ -148,11 +152,12 @@ namespace WeaponContent
         {
             Material material = AssetDatabase.LoadAssetAtPath<Material>(FlashMaterialPath);
 
-            AddBurst(root, core, material, offset);
-            AddBurst(root, plume, material, offset);
+            AddBurst(root, core, material, offset, FlashSortingOrder);
+            AddBurst(root, plume, material, offset, FlashSortingOrder);
         }
 
-        private static void AddBurst(GameObject root, Burst burst, Material material, Vector3 offset)
+        private static void AddBurst(GameObject root, Burst burst, Material material, Vector3 offset,
+            int sortingOrder)
         {
             GameObject holder = new GameObject(burst.Name);
 
@@ -210,7 +215,7 @@ namespace WeaponContent
             renderer.renderMode = burst.ConeAngle > 0f ? ParticleSystemRenderMode.Stretch : ParticleSystemRenderMode.Billboard;
             renderer.velocityScale = FlashStretch;
             renderer.lengthScale = 1f;
-            renderer.sortingOrder = FlashSortingOrder;
+            renderer.sortingOrder = sortingOrder;
         }
 
         private static void Aim(GameObject spray)
@@ -245,6 +250,28 @@ namespace WeaponContent
                 return new ParticleSystem.MinMaxCurve(count.constantMin * SprayShare, count.constantMax * SprayShare);
 
             return new ParticleSystem.MinMaxCurve(count.constant * SprayShare);
+        }
+
+        private static void FanBack(string path)
+        {
+            GameObject root = PrefabUtility.LoadPrefabContents(path);
+            ParticleSystem sparks = root.GetComponent<ParticleSystem>();
+
+            if (sparks != null)
+            {
+                ParticleSystem.ShapeModule shape = sparks.shape;
+
+                shape.enabled = true;
+                shape.shapeType = ParticleSystemShapeType.Circle;
+                shape.radius = 0.05f;
+                shape.radiusThickness = 1f;
+                shape.arc = FanArc;
+                shape.arcMode = ParticleSystemShapeMultiModeValue.Random;
+                shape.rotation = new Vector3(0f, 0f, 90f);
+            }
+
+            PrefabUtility.SaveAsPrefabAsset(root, path);
+            PrefabUtility.UnloadPrefabContents(root);
         }
 
         private static Material GetBlendMaterial()
