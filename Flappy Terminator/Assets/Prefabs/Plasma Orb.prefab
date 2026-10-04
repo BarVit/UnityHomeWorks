@@ -154,7 +154,7 @@ MonoBehaviour:
   _count: 9
   _segments: 7
   _innerRadius: 0.64
-  _outerRadius: 2.56
+  _outerRadius: 1.6
   _jitter: 0.1
   _interval: 0.06
   _width: 0.05

@@ -6,7 +6,7 @@ public class PlasmaArcs : MonoBehaviour
     [SerializeField] private int _count = 9;
     [SerializeField] private int _segments = 9;
     [SerializeField] private float _innerRadius = 0.64f;
-    [SerializeField] private float _outerRadius = 2.56f;
+    [SerializeField] private float _outerRadius = 1.6f;
     [SerializeField] private float _jitter = 0.13f;
     [SerializeField] private float _interval = 0.05f;
     [SerializeField] private float _width = 0.035f;
@@ -60,7 +60,7 @@ public class PlasmaArcs : MonoBehaviour
         {
             float angle = Random.Range(0f, Mathf.PI * 2f);
             Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-            float reach = Random.Range(_outerRadius * 0.55f, _outerRadius);
+            float reach = Mathf.Lerp(_innerRadius, _outerRadius, Random.Range(0.55f, 1f));
 
             Lay(_bolts[i], _points, direction, reach, width);
             Branch(_branches[i], direction, reach, width);
