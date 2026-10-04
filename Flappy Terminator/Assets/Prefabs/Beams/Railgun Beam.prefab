@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37b5f57e0aabe45ee876ebb39e18fcf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BeamFlash
-  _lifetime: 0.07
+  _lifetime: 0.14
   _shotSound:
     _clip: {fileID: 8300000, guid: 8e138d16e6cff4e068f7f8dd1e265e5a, type: 3}
     _volume: 0.5

@@ -94,7 +94,7 @@ public class BeamDelivery : WeaponDelivery
 
         bool isPierced = damageable != null && _piercePool != null;
 
-        Remember(Draw(mount.position, isPierced ? far : hit.point, barrel));
+        Remember(Draw(mount.position, hit.point, barrel));
 
         if (isPierced)
             ShowPierce(GetExit(hit.collider, hit.point, far), GetRotation(barrel));

@@ -28,7 +28,7 @@ namespace WeaponContent
 
             Material material = GetMaterial();
 
-            Create("Railgun Beam", material, new Color(0.65f, 0.9f, 1f), 0.16f, 0.07f,
+            Create("Railgun Beam", material, new Color(0.65f, 0.9f, 1f), 0.16f, 0.14f,
                 new BeamSounds(RailgunShotPath, RailgunShotVolume, RailgunHitPath, RailgunHitVolume,
                     RailgunWorldHitPath, RailgunWorldHitVolume, null, 0f, null, 0f), RailgunPiercePath);
             Create("Laser Beam", material, new Color(1f, 0.35f, 0.25f), 0.09f, 0.05f,
