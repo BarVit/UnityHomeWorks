@@ -12,7 +12,7 @@ namespace WeaponContent
         private const string PrefabPath = "Assets/Prefabs/Overheat Smoke.prefab";
         private const string ShipPath = "Assets/Prefabs/Player Ship.prefab";
         private const string SmokeName = "Overheat Smoke";
-        private const float OverheatVolume = 0.8f;
+        private const float OverheatVolume = 1f;
 
         [MenuItem("Tools/Weapons/Build Overheat Smoke")]
         public static void Build()

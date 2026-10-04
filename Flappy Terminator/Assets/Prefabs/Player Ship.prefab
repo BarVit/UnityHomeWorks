@@ -873,7 +873,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OverheatSound
   _shooter: {fileID: 8330222878791513292}
   _source: {fileID: 966307815104933198}
-  _volume: 0.8
+  _volume: 1
 --- !u!1 &4179468045915044216
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ public class OverheatSound : MonoBehaviour
 {
     [SerializeField] private PlayerShooter _shooter;
     [SerializeField] private AudioSource _source;
-    [SerializeField, Range(0f, 1f)] private float _volume = 0.8f;
+    [SerializeField, Range(0f, 1f)] private float _volume = 1f;
 
     private bool _isOverheated;
 
