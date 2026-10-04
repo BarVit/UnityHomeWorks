@@ -1,24 +1,20 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyMover : MonoBehaviour
 {
-    [SerializeField] private float _minSpeed = 1f;
-    [SerializeField] private float _maxSpeed = 3f;
-    [SerializeField] private MovementSettings _movementSettings = new MovementSettings();
+    private readonly Dictionary<MovementProfile, EnemyMovement> _movements =
+        new Dictionary<MovementProfile, EnemyMovement>();
 
     private Rigidbody2D _rigidbody2D;
-    private ForwardMovement _forward;
-    private DriftMovement _drift;
-    private HoverMovement _hover;
+    private Camera _camera;
     private EnemyMovement _movement;
 
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _forward = new ForwardMovement(_rigidbody2D, _movementSettings);
-        _drift = new DriftMovement(_rigidbody2D, _movementSettings);
-        _hover = new HoverMovement(_rigidbody2D, _movementSettings);
+        _camera = Camera.main;
     }
 
     private void Update()
@@ -29,10 +25,10 @@ public class EnemyMover : MonoBehaviour
         _movement.Tick(Time.deltaTime);
     }
 
-    public void Fly(MovementKind kind)
+    public void Fly(MovementProfile profile)
     {
-        _movement = GetMovement(kind);
-        _movement.Begin(Random.Range(_minSpeed, _maxSpeed));
+        _movement = GetMovement(profile);
+        _movement.Begin(profile.GetSpeed());
     }
 
     public void Stop()
@@ -48,18 +44,14 @@ public class EnemyMover : MonoBehaviour
         _movement = null;
     }
 
-    private EnemyMovement GetMovement(MovementKind kind)
+    private EnemyMovement GetMovement(MovementProfile profile)
     {
-        switch (kind)
-        {
-            case MovementKind.Drift:
-                return _drift;
+        if (_movements.TryGetValue(profile, out EnemyMovement movement))
+            return movement;
 
-            case MovementKind.Hover:
-                return _hover;
+        movement = profile.Create(_rigidbody2D, _camera);
+        _movements.Add(profile, movement);
 
-            default:
-                return _forward;
-        }
+        return movement;
     }
 }

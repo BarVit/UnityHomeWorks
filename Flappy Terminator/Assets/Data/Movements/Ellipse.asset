@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e369020dff628494aba8959dd8729b1d, type: 3}
+  m_Name: Ellipse
+  m_EditorClassIdentifier: Assembly-CSharp::EllipseProfile
+  _minSpeed: 1
+  _maxSpeed: 3
+  _minRadiusShare: 0.3
+  _maxRadiusShare: 0.6
+  _backwardSpeedShare: 0.5

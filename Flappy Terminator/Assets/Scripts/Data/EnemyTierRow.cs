@@ -10,10 +10,10 @@ public class EnemyTierRow
     [SerializeField] private float _healthScale;
     [SerializeField] private float _projectileSpeedScale;
     [SerializeField] private int _barrels;
-    [SerializeField] private MovementKind _movement;
+    [SerializeField] private MovementProfile _movement;
 
     public EnemyTierRow(string id, string ship, int tier, float healthScale,
-        float projectileSpeedScale, int barrels, MovementKind movement)
+        float projectileSpeedScale, int barrels, MovementProfile movement)
     {
         _id = id;
         _ship = ship;
@@ -36,5 +36,5 @@ public class EnemyTierRow
 
     public int Barrels => _barrels;
 
-    public MovementKind Movement => _movement;
+    public MovementProfile Movement => _movement;
 }

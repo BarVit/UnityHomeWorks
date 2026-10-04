@@ -2,47 +2,71 @@ using UnityEngine;
 
 public class HoverMovement : EnemyMovement
 {
-    private float _holdPositionX;
+    private readonly HoverProfile _profile;
+
+    private float _firstStopShare;
+    private int _nextStop;
     private float _holdLeft;
     private bool _isHolding;
-    private bool _isHoldSpent;
+    private bool _hasStopped;
 
-    public HoverMovement(Rigidbody2D body, MovementSettings settings) : base(body, settings)
+    public HoverMovement(Rigidbody2D body, Camera camera, HoverProfile profile) : base(body, camera)
     {
+        _profile = profile;
     }
 
     public override void Tick(float deltaTime)
     {
-        if (_isHoldSpent)
-            return;
-
         if (_isHolding)
         {
-            _holdLeft -= deltaTime;
-
-            if (_holdLeft > 0f)
-                return;
-
-            _isHolding = false;
-            _isHoldSpent = true;
-            MoveForward();
+            Hold(deltaTime);
 
             return;
         }
 
-        if (Body.position.x > _holdPositionX)
+        if (_nextStop >= _profile.StopCount || HasPassed(GetStopShare(_nextStop)) == false)
             return;
 
+        bool isLast = _nextStop == _profile.StopCount - 1;
+
+        _nextStop++;
+
+        if (ShouldStop(isLast) == false)
+            return;
+
+        _hasStopped = true;
         _isHolding = true;
+        _holdLeft = _profile.GetHold();
         Stop();
     }
 
     protected override void OnBegin()
     {
-        _holdPositionX = Random.Range(Settings.MinHoldPositionX, Settings.MaxHoldPositionX);
-        _holdLeft = Settings.HoldDuration;
+        _firstStopShare = _profile.GetFirstStopShare();
+        _nextStop = 0;
         _isHolding = false;
-        _isHoldSpent = false;
+        _hasStopped = false;
         base.OnBegin();
+    }
+
+    private void Hold(float deltaTime)
+    {
+        _holdLeft -= deltaTime;
+
+        if (_holdLeft > 0f)
+            return;
+
+        _isHolding = false;
+        MoveForward();
+    }
+
+    private bool ShouldStop(bool isLast)
+    {
+        return (isLast && _hasStopped == false) || Random.value < _profile.StopChance;
+    }
+
+    private float GetStopShare(int stop)
+    {
+        return _firstStopShare + stop * _profile.StopStep;
     }
 }

@@ -19,102 +19,102 @@ MonoBehaviour:
     _healthScale: 1
     _projectileSpeedScale: 1
     _barrels: 1
-    _movement: 0
+    _movement: {fileID: 11400000, guid: 655d5bb0ee80e4eebb110e514052792d, type: 2}
   - _id: scout_2
     _ship: enemy_scout
     _tier: 2
     _healthScale: 1.5
     _projectileSpeedScale: 1.2
     _barrels: 1
-    _movement: 1
+    _movement: {fileID: 11400000, guid: ba870c54da02f4aabaab2e7fc7f400c6, type: 2}
   - _id: scout_3
     _ship: enemy_scout
     _tier: 3
     _healthScale: 2
     _projectileSpeedScale: 1.4
     _barrels: 2
-    _movement: 2
+    _movement: {fileID: 11400000, guid: fbee049361ca24f1e91d4612c690ef1d, type: 2}
   - _id: warden_1
     _ship: enemy_warden
     _tier: 1
     _healthScale: 1
     _projectileSpeedScale: 1
     _barrels: 1
-    _movement: 0
+    _movement: {fileID: 11400000, guid: 655d5bb0ee80e4eebb110e514052792d, type: 2}
   - _id: warden_2
     _ship: enemy_warden
     _tier: 2
     _healthScale: 1.5
     _projectileSpeedScale: 1.2
     _barrels: 1
-    _movement: 1
+    _movement: {fileID: 11400000, guid: ba870c54da02f4aabaab2e7fc7f400c6, type: 2}
   - _id: warden_3
     _ship: enemy_warden
     _tier: 3
     _healthScale: 2
     _projectileSpeedScale: 1.4
     _barrels: 2
-    _movement: 2
+    _movement: {fileID: 11400000, guid: fbee049361ca24f1e91d4612c690ef1d, type: 2}
   - _id: lancer_1
     _ship: enemy_lancer
     _tier: 1
     _healthScale: 1
     _projectileSpeedScale: 1
     _barrels: 1
-    _movement: 0
+    _movement: {fileID: 11400000, guid: 655d5bb0ee80e4eebb110e514052792d, type: 2}
   - _id: lancer_2
     _ship: enemy_lancer
     _tier: 2
     _healthScale: 1.5
     _projectileSpeedScale: 1.2
     _barrels: 1
-    _movement: 1
+    _movement: {fileID: 11400000, guid: ba870c54da02f4aabaab2e7fc7f400c6, type: 2}
   - _id: lancer_3
     _ship: enemy_lancer
     _tier: 3
     _healthScale: 2
     _projectileSpeedScale: 1.4
     _barrels: 2
-    _movement: 2
+    _movement: {fileID: 11400000, guid: fbee049361ca24f1e91d4612c690ef1d, type: 2}
   - _id: reaper_1
     _ship: enemy_reaper
     _tier: 1
     _healthScale: 1
     _projectileSpeedScale: 1
     _barrels: 1
-    _movement: 0
+    _movement: {fileID: 11400000, guid: 655d5bb0ee80e4eebb110e514052792d, type: 2}
   - _id: reaper_2
     _ship: enemy_reaper
     _tier: 2
     _healthScale: 1.5
     _projectileSpeedScale: 1.2
     _barrels: 1
-    _movement: 1
+    _movement: {fileID: 11400000, guid: ba870c54da02f4aabaab2e7fc7f400c6, type: 2}
   - _id: reaper_3
     _ship: enemy_reaper
     _tier: 3
     _healthScale: 2
     _projectileSpeedScale: 1.4
     _barrels: 2
-    _movement: 2
+    _movement: {fileID: 11400000, guid: fbee049361ca24f1e91d4612c690ef1d, type: 2}
   - _id: sentinel_1
     _ship: enemy_sentinel
     _tier: 1
     _healthScale: 1
     _projectileSpeedScale: 1
     _barrels: 1
-    _movement: 0
+    _movement: {fileID: 11400000, guid: 655d5bb0ee80e4eebb110e514052792d, type: 2}
   - _id: sentinel_2
     _ship: enemy_sentinel
     _tier: 2
     _healthScale: 1.5
     _projectileSpeedScale: 1.2
     _barrels: 1
-    _movement: 1
+    _movement: {fileID: 11400000, guid: ba870c54da02f4aabaab2e7fc7f400c6, type: 2}
   - _id: sentinel_3
     _ship: enemy_sentinel
     _tier: 3
     _healthScale: 2
     _projectileSpeedScale: 1.4
     _barrels: 2
-    _movement: 2
+    _movement: {fileID: 11400000, guid: fbee049361ca24f1e91d4612c690ef1d, type: 2}

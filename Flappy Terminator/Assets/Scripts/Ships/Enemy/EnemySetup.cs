@@ -27,7 +27,7 @@ public class EnemySetup
 
     public float ProjectileSpeedScale => _tier.ProjectileSpeedScale;
 
-    public MovementKind Movement => _tier.Movement;
+    public MovementProfile Movement => _tier.Movement;
 
     public WeaponRow Weapon => _weapon;
 }

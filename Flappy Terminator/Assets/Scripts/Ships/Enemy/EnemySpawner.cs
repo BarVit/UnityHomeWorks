@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -152,10 +151,8 @@ public class EnemySpawner : MonoBehaviour
     private void Release(EnemySetup setup)
     {
         SpawnPool<EnemyShip> pool = _pools.GetPool(setup.Prefab, _created);
-        EnemyShip ship = pool.Get(new Vector3(
-            ScreenArea.GetRightEdge(_camera) + _spawnMargin,
-            Random.Range(_minSpawnPositionY, _maxSpawnPositionY),
-            0));
+        EnemyShip ship = pool.Get(
+            setup.Movement.GetSpawnPoint(_camera, _spawnMargin, _minSpawnPositionY, _maxSpawnPositionY));
 
         ship.Launch(setup);
     }

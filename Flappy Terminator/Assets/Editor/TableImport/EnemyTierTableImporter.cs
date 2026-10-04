@@ -51,7 +51,7 @@ namespace TableImport
                     reader.ReadFloat("health_scale", 0.1f, 100f),
                     reader.ReadFloat("projectile_speed_scale", 0.1f, 10f),
                     barrels,
-                    reader.ReadEnum<MovementKind>("movement")));
+                    reader.ReadAsset<MovementProfile>("movement", true)));
             }
 
             EnemyTierTable table = GeneratedAsset.LoadOrCreate<EnemyTierTable>(AssetPath);

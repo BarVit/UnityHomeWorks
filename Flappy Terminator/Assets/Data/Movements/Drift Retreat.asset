@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 035391ab2e9844d628ddfd24934ee46b, type: 3}
+  m_Name: Drift Retreat
+  m_EditorClassIdentifier: Assembly-CSharp::DriftRetreatProfile
+  _minSpeed: 0.5
+  _maxSpeed: 3
+  _amplitude: 1.5
+  _period: 2
+  _advanceShare: 0.667
+  _retreatShare: 0.5
