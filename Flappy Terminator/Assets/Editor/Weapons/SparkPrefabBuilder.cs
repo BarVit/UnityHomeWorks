@@ -23,6 +23,8 @@ namespace WeaponContent
         private const float SprayShare = 0.5f;
         private const float SprayLifetimeShare = 0.5f;
         private const float FanArc = 180f;
+        private const float CannonSparkCountShare = 1f / 3f;
+        private const float CannonSparkLifetimeShare = 0.4f;
         private static readonly Vector3 FlashOffset = new Vector3(0.3f, 0f, 0f);
         private static readonly Color Yellow = new Color(1f, 0.85f, 0.15f, 1f);
         private static readonly Color Cold = new Color(0.3f, 0.75f, 1f, 1f);
@@ -33,9 +35,9 @@ namespace WeaponContent
         private static readonly Burst MuzzlePlume = new Burst("Flash Plume", 12, new Vector2(0.7f, 1.05f),
             new Vector2(0.16f, 0.24f), new Vector2(4f, 9f), 14f, new Color(1f, 0.78f, 0.32f, 1f), new Color(1f, 0.48f, 0.12f, 1f));
         private static readonly Burst CannonCircle = new Burst("Hit Circle", 1, new Vector2(2.25f, 2.75f),
-            new Vector2(0.16f, 0.2f), Vector2.zero, 0f, new Color(1f, 0.92f, 0.35f, 1f), new Color(1f, 0.8f, 0.2f, 1f));
-        private static readonly Burst CannonCore = new Burst("Hit Core", 1, new Vector2(0.8f, 1f),
-            new Vector2(0.16f, 0.2f), Vector2.zero, 0f, new Color(1f, 1f, 0.95f, 1f), new Color(1f, 0.97f, 0.85f, 1f));
+            new Vector2(0.24f, 0.3f), Vector2.zero, 0f, new Color(1f, 0.92f, 0.35f, 1f), new Color(1f, 0.8f, 0.2f, 1f));
+        private static readonly Burst CannonCore = new Burst("Hit Core", 1, new Vector2(1.6f, 2f),
+            new Vector2(0.24f, 0.3f), Vector2.zero, 0f, new Color(1f, 1f, 0.95f, 1f), new Color(1f, 0.97f, 0.85f, 1f));
         private static readonly Burst PierceCore = new Burst("Flash Core", 1, new Vector2(0.5f, 0.6f),
             new Vector2(0.06f, 0.08f), Vector2.zero, 0f, new Color(0.85f, 0.97f, 1f, 1f), new Color(0.6f, 0.9f, 1f, 1f));
         private static readonly Burst PiercePlume = new Burst("Flash Plume", 10, new Vector2(0.45f, 0.65f),
@@ -48,7 +50,7 @@ namespace WeaponContent
             Make(ColdPath, "Hit Sparks Blue", Cold, NoGlows);
             Make(WhitePath, "Hit Sparks White", Color.white, NoGlows);
             Make(CannonHitPath, "Cannon Hit", Yellow, new[] { CannonCircle, CannonCore });
-            FanBack(CannonHitPath);
+            TuneCannonSparks(CannonHitPath);
             MakeDirected(MuzzlePath, "Muzzle Sparks", Yellow, MuzzleCore, MuzzlePlume, FlashOffset);
             MakeDirected(PiercePath, "Pierce Sparks", Cold, PierceCore, PiercePlume, Vector3.zero);
 
@@ -230,29 +232,25 @@ namespace WeaponContent
                 ParticleSystem.MainModule main = system.main;
 
                 main.startLifetimeMultiplier *= SprayLifetimeShare;
-
-                ParticleSystem.EmissionModule emission = system.emission;
-                ParticleSystem.Burst[] bursts = new ParticleSystem.Burst[emission.burstCount];
-
-                emission.rateOverTimeMultiplier *= SprayShare;
-                emission.GetBursts(bursts);
-
-                for (int i = 0; i < bursts.Length; i++)
-                    bursts[i].count = Thin(bursts[i].count);
-
-                emission.SetBursts(bursts);
+                Thin(system, SprayShare);
             }
         }
 
-        private static ParticleSystem.MinMaxCurve Thin(ParticleSystem.MinMaxCurve count)
+        private static void Thin(ParticleSystem system, float share)
         {
-            if (count.mode == ParticleSystemCurveMode.TwoConstants)
-                return new ParticleSystem.MinMaxCurve(count.constantMin * SprayShare, count.constantMax * SprayShare);
+            ParticleSystem.EmissionModule emission = system.emission;
+            ParticleSystem.Burst[] bursts = new ParticleSystem.Burst[emission.burstCount];
 
-            return new ParticleSystem.MinMaxCurve(count.constant * SprayShare);
+            emission.rateOverTimeMultiplier *= share;
+            emission.GetBursts(bursts);
+
+            for (int i = 0; i < bursts.Length; i++)
+                bursts[i].count = Scale(bursts[i].count, share);
+
+            emission.SetBursts(bursts);
         }
 
-        private static void FanBack(string path)
+        private static void TuneCannonSparks(string path)
         {
             GameObject root = PrefabUtility.LoadPrefabContents(path);
             ParticleSystem sparks = root.GetComponent<ParticleSystem>();
@@ -268,10 +266,23 @@ namespace WeaponContent
                 shape.arc = FanArc;
                 shape.arcMode = ParticleSystemShapeMultiModeValue.Random;
                 shape.rotation = new Vector3(0f, 0f, 90f);
+
+                ParticleSystem.MainModule main = sparks.main;
+
+                main.startLifetime = Scale(main.startLifetime, CannonSparkLifetimeShare);
+                Thin(sparks, CannonSparkCountShare);
             }
 
             PrefabUtility.SaveAsPrefabAsset(root, path);
             PrefabUtility.UnloadPrefabContents(root);
+        }
+
+        private static ParticleSystem.MinMaxCurve Scale(ParticleSystem.MinMaxCurve curve, float share)
+        {
+            if (curve.mode == ParticleSystemCurveMode.TwoConstants)
+                return new ParticleSystem.MinMaxCurve(curve.constantMin * share, curve.constantMax * share);
+
+            return new ParticleSystem.MinMaxCurve(curve.constant * share);
         }
 
         private static Material GetBlendMaterial()
