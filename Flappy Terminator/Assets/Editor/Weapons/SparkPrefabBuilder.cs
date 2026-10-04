@@ -26,6 +26,7 @@ namespace WeaponContent
         private const float CannonSparkCountShare = 0.48f;
         private const float CannonSparkLifetimeShare = 0.6f;
         private const float CannonSparkStartRadius = 0.315f;
+        private const float LaserSparkSizeShare = 1f / 1.5f;
         private const float CannonSparkSizeShare = 0.7f;
         private const float CannonSparkSpeedShare = 0.7f;
         private static readonly Vector3 FlashOffset = new Vector3(0.3f, 0f, 0f);
@@ -50,6 +51,7 @@ namespace WeaponContent
         public static void Build()
         {
             Make(WarmPath, "Hit Sparks", Color.clear, NoGlows);
+            Shrink(WarmPath, LaserSparkSizeShare);
             Make(ColdPath, "Hit Sparks Blue", Cold, NoGlows);
             Make(WhitePath, "Hit Sparks White", Color.white, NoGlows);
             Make(CannonHitPath, "Cannon Hit", Yellow, new[] { CannonCircle, CannonCore });
@@ -251,6 +253,21 @@ namespace WeaponContent
                 bursts[i].count = Scale(bursts[i].count, share);
 
             emission.SetBursts(bursts);
+        }
+
+        private static void Shrink(string path, float share)
+        {
+            GameObject root = PrefabUtility.LoadPrefabContents(path);
+
+            foreach (ParticleSystem system in root.GetComponentsInChildren<ParticleSystem>(true))
+            {
+                ParticleSystem.MainModule main = system.main;
+
+                main.startSize = Scale(main.startSize, share);
+            }
+
+            PrefabUtility.SaveAsPrefabAsset(root, path);
+            PrefabUtility.UnloadPrefabContents(root);
         }
 
         private static void TuneCannonSparks(string path)

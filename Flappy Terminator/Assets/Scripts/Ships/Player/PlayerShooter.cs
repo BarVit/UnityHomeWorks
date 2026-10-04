@@ -11,6 +11,7 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private AudioSource _shotAudioSource;
     [SerializeField] private AudioSource _hitAudioSource;
     [SerializeField] private AudioSource _loopAudioSource;
+    [SerializeField] private AudioSource _hitLoopAudioSource;
     [SerializeField] private LayerMask _targetLayers;
     [SerializeField] private LayerMask _worldLayers;
 
@@ -60,7 +61,8 @@ public class PlayerShooter : MonoBehaviour
         Camera camera = Camera.main;
         WeaponContext context = new WeaponContext(_mounts, _barrels, _pools,
             new ShotAudio(_shotAudioSource, camera), new ShotAudio(_hitAudioSource, camera),
-            _targetLayers, camera, 1f, _worldLayers, new ShotLoop(_loopAudioSource));
+            _targetLayers, camera, 1f, _worldLayers, new ShotLoop(_loopAudioSource),
+            new ShotLoop(_hitLoopAudioSource));
 
         _delivery = WeaponFactory.Create(row, context);
     }

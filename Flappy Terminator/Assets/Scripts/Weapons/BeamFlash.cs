@@ -7,6 +7,7 @@ public class BeamFlash : MonoBehaviour, IPoolable
     [SerializeField] private float _lifetime = 0.08f;
     [SerializeField] private Sound _shotSound;
     [SerializeField] private Sound _loopSound;
+    [SerializeField] private Sound _hitLoopSound;
     [SerializeField] private Sound _hitSound;
     [SerializeField] private Sound _worldHitSound;
     [SerializeField] private ExplosionAnimation _pierceEffect;
@@ -20,6 +21,8 @@ public class BeamFlash : MonoBehaviour, IPoolable
     public Sound ShotSound => _shotSound;
 
     public Sound LoopSound => _loopSound;
+
+    public Sound HitLoopSound => _hitLoopSound;
 
     public Sound HitSound => _hitSound;
 

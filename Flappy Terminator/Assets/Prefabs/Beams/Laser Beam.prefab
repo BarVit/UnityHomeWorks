@@ -169,8 +169,11 @@ MonoBehaviour:
     _clip: {fileID: 0}
     _volume: 0
   _loopSound:
-    _clip: {fileID: 8300000, guid: 1755be10a44e94b46b48232446dc0a22, type: 3}
-    _volume: 0.4
+    _clip: {fileID: 8300000, guid: 15f5691fbefaa4c30b7579e6772e669a, type: 3}
+    _volume: 0.11
+  _hitLoopSound:
+    _clip: {fileID: 8300000, guid: db573893c60534256bca90dcd8ce844e, type: 3}
+    _volume: 0.37
   _hitSound:
     _clip: {fileID: 0}
     _volume: 0

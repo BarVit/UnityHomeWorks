@@ -8,6 +8,8 @@
 
 | Файл | Freesound | Длина | Размер | В игре | Где используется |
 |---|---|---|---|---|---|
+| `Beam burn [843455].wav` | [843455](https://freesound.org/s/843455) | 3.0 с | 517 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Beams/Laser Beam.prefab` |
+| `Beam laser trill.wav` | — | 3.0 с | 258 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Beams/Laser Beam.prefab` |
 | `Blaster [341956].wav` | [341956](https://freesound.org/s/341956) | 0.58 с | 99 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/PlayerBullet.prefab` |
 | `Bump [330629].wav` | [330629](https://freesound.org/s/330629) | 1.4 с | 239 КБ | да | `Prefabs/Player Ship.prefab` |
 | `Bump 2 explosion_short.wav` | — | 0.41 с | 77 КБ | да | `Prefabs/Player Ship.prefab` |
@@ -17,7 +19,7 @@
 | `Electric arc [567269].wav` | [567269](https://freesound.org/s/567269) | 3.3 с | 563 КБ | **нет** | — |
 | `Electric shock [655263].wav` | [655263](https://freesound.org/s/655263) | 6.3 с | 1.6 МБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Plasma Orb.prefab` |
 | `Explosion [402005].wav` | [402005](https://freesound.org/s/402005) | 1.8 с | 532 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Enemy Bullet.prefab`, `Prefabs/Player Rocket.prefab`, `Prefabs/Torpedo.prefab`, `VFX/Sparks/vfx_EnemyExposion.prefab` |
-| `Laser beam [843455].wav` | [843455](https://freesound.org/s/843455) | 3.0 с | 517 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Beams/Laser Beam.prefab` |
+| `Laser beam [843455].wav` | [843455](https://freesound.org/s/843455) | 3.0 с | 517 КБ | **нет** | — |
 | `Laser burn [670075].wav` | [670075](https://freesound.org/s/670075) | 0.40 с | 68 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Impulse Bolt.prefab` |
 | `Laser shot [580308].wav` | [580308](https://freesound.org/s/580308) | 0.07 с | 27 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Impulse Bolt.prefab` |
 | `Music [398256].wav` | [398256](https://freesound.org/s/398256) | 34.7 с | 9.5 МБ | да | `Scenes/SampleScene.unity` |
@@ -35,4 +37,4 @@
 | `Torpedo launch [100772].wav` | [100772](https://freesound.org/s/100772) | 2.2 с | 379 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Torpedo.prefab` |
 | `Warp jump [454683].wav` | [454683](https://freesound.org/s/454683) | 16.3 с | 12.0 МБ | да | `Scenes/SampleScene.unity` |
 
-Всего звуков: 26, из них в игре не используются: 5.
+Всего звуков: 28, из них в игре не используются: 6.

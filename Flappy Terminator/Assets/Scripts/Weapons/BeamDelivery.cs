@@ -58,10 +58,14 @@ public class BeamDelivery : WeaponDelivery
 
     protected void HoldLoop()
     {
-        if (Context.Loop == null || _soundFlash == null)
+        if (_soundFlash == null)
             return;
 
-        Context.Loop.Hold(_soundFlash.LoopSound);
+        if (Context.Loop != null)
+            Context.Loop.Hold(_soundFlash.LoopSound);
+
+        if (Context.HitLoop != null && (_hasTargetHit || _hasWorldHit))
+            Context.HitLoop.Hold(_soundFlash.HitLoopSound);
     }
 
     protected void Shoot(int barrel)
@@ -156,7 +160,7 @@ public class BeamDelivery : WeaponDelivery
         return flash;
     }
 
-    private void ForgetHits()
+    protected void ForgetHits()
     {
         _hasTargetHit = false;
         _hasWorldHit = false;
@@ -218,6 +222,9 @@ public class BeamDelivery : WeaponDelivery
 
         if (Context.Loop != null)
             Context.Loop.Tick(deltaTime);
+
+        if (Context.HitLoop != null)
+            Context.HitLoop.Tick(deltaTime);
 
         if (Target == null)
             return;

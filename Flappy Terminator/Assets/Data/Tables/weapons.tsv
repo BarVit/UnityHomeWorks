@@ -4,7 +4,7 @@ plasma	Плазма	Player	Projectile	10	0.25	0	0	12	4	Wings	12	0	0	0	0	0	150	Pl
 rocket	Ракетница	Player	Projectile	35	0.75	0	0	8	4	Wings	16	0	0	0	0	0	300	Player Rocket			2DShipsMissilesTorpedoesAtlas_2			vfx_RocketExplosion		Rocket 1 [441500]		Explosion [402005]	Explosion [402005]	
 homing	Самонаводящиеся	Player	Homing	25	0.6	10	5	7	4	Wings	45	0	0	0	90	0	600	Player Rocket			2DShipsMissilesTorpedoesAtlas_2			vfx_RocketExplosion		Rocket 1 [441500]		Explosion [402005]	Explosion [402005]	
 railgun	Рельсотрон	Player	Beam	45	0.9	0	0	0	3	Parallel	0	0	0	0	0	0	900		Railgun Beam					Hit Sparks Blue	Hit Sparks White	Railgun [394672]		Railgun enemy hit [724428]	Railgun hit [871710]	
-beam_laser	Лучевой лазер	Player	ContinuousBeam	2	0.05	0	0	0	1	Parallel	0	4	40	0	0	0	1200		Laser Beam					Hit Sparks		Laser beam [843455]				
+beam_laser	Лучевой лазер	Player	ContinuousBeam	2	0.05	0	0	0	1	Parallel	0	4	40	0	0	0	1200		Laser Beam					Hit Sparks		Beam laser trill		Beam burn [843455]	Beam burn [843455]	
 impulse_laser	Импульсный лазер	Player	Impulse	6	0.1	0	0	20	4	Wings	10	7	40	0	0	0	1400	Impulse Bolt			Impulse Bolt			Hit Sparks		Laser shot [580308]		Laser burn [670075]	Laser burn [670075]	
 plasma_orb	Плазменный шар	Player	Orb	12	3.0	0	0	2.5	1	Single	0	0	0	0.25	0	1.2	2000	Plasma Orb			Orb Core			Hit Sparks Blue		Plasma shot [565450]		Electric shock [655263]		
 torpedo	Торпеды	Player	Torpedo	70	1.2	0	0	5	2	Parallel	0	0	0	0	0	1.5	1600	Torpedo			2DShipsMissilesTorpedoesAtlas_0			vfx_RocketExplosion		Torpedo launch [100772]		Explosion [402005]	Explosion [402005]	

@@ -4,7 +4,7 @@ public class WeaponContext
 {
     public WeaponContext(Transform[] mounts, int barrels, PoolRegistry pools, ShotAudio audio,
         ShotAudio hitAudio, LayerMask targetLayers, Camera camera, float projectileSpeedScale = 1f, LayerMask worldLayers = default,
-        ShotLoop loop = null)
+        ShotLoop loop = null, ShotLoop hitLoop = null)
     {
         Mounts = mounts;
         Barrels = barrels;
@@ -12,6 +12,7 @@ public class WeaponContext
         Audio = audio;
         HitAudio = hitAudio;
         Loop = loop;
+        HitLoop = hitLoop;
         TargetLayers = targetLayers;
         Camera = camera;
         ProjectileSpeedScale = projectileSpeedScale;
@@ -42,6 +43,8 @@ public class WeaponContext
     public ShotAudio HitAudio { get; private set; }
 
     public ShotLoop Loop { get; private set; }
+
+    public ShotLoop HitLoop { get; private set; }
 
     public LayerMask TargetLayers { get; private set; }
 

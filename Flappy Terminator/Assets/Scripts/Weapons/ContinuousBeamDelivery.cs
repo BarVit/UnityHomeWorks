@@ -15,6 +15,7 @@ public class ContinuousBeamDelivery : BeamDelivery
     protected override void OnFire()
     {
         ForgetTarget();
+        ForgetHits();
 
         for (int barrel = 0; barrel < Barrels; barrel++)
             Shoot(barrel);

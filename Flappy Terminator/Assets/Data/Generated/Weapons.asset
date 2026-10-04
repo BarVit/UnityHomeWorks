@@ -200,10 +200,10 @@ MonoBehaviour:
       _shotEffect: {fileID: 0}
       _hitTargetEffect: {fileID: 2271400192939650251, guid: ff804d452e13443b99aeff7b5739a8f7, type: 3}
       _hitWorldEffect: {fileID: 0}
-      _shotSound: {fileID: 8300000, guid: 1755be10a44e94b46b48232446dc0a22, type: 3}
+      _shotSound: {fileID: 8300000, guid: 15f5691fbefaa4c30b7579e6772e669a, type: 3}
       _flightSound: {fileID: 0}
-      _hitTargetSound: {fileID: 0}
-      _hitWorldSound: {fileID: 0}
+      _hitTargetSound: {fileID: 8300000, guid: db573893c60534256bca90dcd8ce844e, type: 3}
+      _hitWorldSound: {fileID: 8300000, guid: db573893c60534256bca90dcd8ce844e, type: 3}
       _overheatSound: {fileID: 0}
   - _id: impulse_laser
     _title: "\u0418\u043C\u043F\u0443\u043B\u044C\u0441\u043D\u044B\u0439 \u043B\u0430\u0437\u0435\u0440"
