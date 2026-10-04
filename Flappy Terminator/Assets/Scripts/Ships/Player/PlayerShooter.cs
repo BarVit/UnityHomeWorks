@@ -6,7 +6,7 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private WeaponTable _weapons;
     [SerializeField] private string _weaponId;
     [SerializeField] private int _barrels = 1;
-    [SerializeField] private Transform _mountRoot;
+    [SerializeField] private Transform[] _layouts;
     [SerializeField] private AudioSource _shotAudioSource;
     [SerializeField] private AudioSource _hitAudioSource;
     [SerializeField] private AudioSource _loopAudioSource;
@@ -37,13 +37,13 @@ public class PlayerShooter : MonoBehaviour
 
     private void Awake()
     {
-        _mounts = CollectMounts();
-
         WeaponRow row = _weapons.GetRow(_weaponId);
 
         if (row == null)
             throw new InvalidOperationException(
                 "PlayerShooter: в таблице оружия нет строки с id " + _weaponId);
+
+        _mounts = CollectMounts(GetLayout(row));
 
         Camera camera = Camera.main;
         WeaponContext context = new WeaponContext(_mounts, _barrels, _pools,
@@ -69,12 +69,19 @@ public class PlayerShooter : MonoBehaviour
         _pools.ReleaseAll();
     }
 
-    private Transform[] CollectMounts()
+    private Transform GetLayout(WeaponRow row)
     {
-        Transform[] mounts = new Transform[_mountRoot.childCount];
+        int barrels = Mathf.Clamp(_barrels, 1, Mathf.Min(row.BarrelsMax, _layouts.Length));
+
+        return _layouts[barrels - 1];
+    }
+
+    private Transform[] CollectMounts(Transform layout)
+    {
+        Transform[] mounts = new Transform[layout.childCount];
 
         for (int i = 0; i < mounts.Length; i++)
-            mounts[i] = _mountRoot.GetChild(i);
+            mounts[i] = layout.GetChild(i);
 
         return mounts;
     }
