@@ -170,7 +170,7 @@ MonoBehaviour:
     _damage: 2
     _rate: 0.05
     _projectileSpeed: 0
-    _barrelsMax: 3
+    _barrelsMax: 1
     _firePattern: 0
     _sideAngle: 0
     _heatPerShot: 4
