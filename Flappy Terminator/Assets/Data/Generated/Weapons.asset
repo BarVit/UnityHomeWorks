@@ -34,7 +34,7 @@ MonoBehaviour:
     _projectile: {fileID: 8728678904558988455, guid: 05f8103eab55149da8dcba277c3301aa, type: 3}
     _beam: {fileID: 0}
     _assets:
-      _icon: {fileID: 0}
+      _icon: {fileID: 21300000, guid: 7c99aff838d554ea0901f472085e8c6a, type: 3}
       _projectileSprite: {fileID: 21300000, guid: 5f57a943903c347d3b570af2350a5cd6, type: 3}
       _projectileAnimation: {fileID: 0}
       _shotEffect: {fileID: 776118213256938459, guid: e2312b169c0ef421eb733a9b59fcfba1, type: 3}
@@ -65,7 +65,7 @@ MonoBehaviour:
     _projectile: {fileID: 8728678904558988455, guid: 79b82508bda244037beb9d377f23f950, type: 3}
     _beam: {fileID: 0}
     _assets:
-      _icon: {fileID: 0}
+      _icon: {fileID: 21300000, guid: c5b5251b582e54967b4f4b13a1c3b404, type: 3}
       _projectileSprite: {fileID: 21300000, guid: cf9760a2dafc94f97b705a62ec67e9ff, type: 3}
       _projectileAnimation: {fileID: 7400000, guid: 69c06217529414af2abcb4f5023bc745, type: 2}
       _shotEffect: {fileID: 0}
@@ -220,7 +220,7 @@ MonoBehaviour:
     _projectile: {fileID: 8728678904558988455, guid: dbdae465272cd47738793cfb08b47fd4, type: 3}
     _beam: {fileID: 0}
     _assets:
-      _icon: {fileID: 0}
+      _icon: {fileID: 21300000, guid: b551d4e5522a548d1ac53e325d276890, type: 3}
       _projectileSprite: {fileID: 21300000, guid: d45cbb8045075404c8c19bbb1e08b660, type: 3}
       _projectileAnimation: {fileID: 0}
       _shotEffect: {fileID: 0}
