@@ -27,7 +27,9 @@ namespace WeaponContent
         private const float ImpactSparkCountShare = 0.48f;
         private const float ImpactSparkLifetimeShare = 0.6f;
         private const float ImpactSparkStartRadius = 0.315f;
-        private const float WideSparkStartRadius = 0.45f;
+        private const float WideSparkStartRadius = 0.39f;
+        private const float WideSparkSpeedShare = 0.8f;
+        private const float WideSparkLifetimeShare = 0.8f;
         private const float SparkMaterialBoost = 4f;
         private const float LaserSparkSizeShare = 1f / 1.5f;
         private const float PierceSprayGrowth = 2f;
@@ -368,8 +370,14 @@ namespace WeaponContent
             ParticleSystem.MainModule extraMain = extraSparks.main;
 
             extraMain.startColor = new ParticleSystem.MinMaxGradient(UnderBoost(extraTint));
-            Fan(root.GetComponent<ParticleSystem>(), WideSparkStartRadius);
-            Fan(extraSparks, WideSparkStartRadius);
+            foreach (ParticleSystem sparks in root.GetComponentsInChildren<ParticleSystem>(true))
+            {
+                ParticleSystem.MainModule main = sparks.main;
+
+                main.startSpeed = Scale(main.startSpeed, WideSparkSpeedShare);
+                main.startLifetime = Scale(main.startLifetime, WideSparkLifetimeShare);
+                Fan(sparks, WideSparkStartRadius);
+            }
 
             PrefabUtility.SaveAsPrefabAsset(root, path);
             PrefabUtility.UnloadPrefabContents(root);
