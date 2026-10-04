@@ -5110,7 +5110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7826fedec57934cdcbd88e15aaabafb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WarheadBlink
-  _rate: 4
+  _onDuration: 0.25
+  _offDuration: 0.25
+  _fadeDuration: 0.05
   _dimAlpha: 0.1
 --- !u!1 &6295457061521432461
 GameObject:
