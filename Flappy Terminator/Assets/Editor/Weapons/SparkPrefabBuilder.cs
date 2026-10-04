@@ -14,6 +14,7 @@ namespace WeaponContent
         private const string MuzzlePath = "Assets/VFX/Sparks/Muzzle Sparks.prefab";
         private const string CannonHitPath = "Assets/VFX/Sparks/Cannon Hit.prefab";
         private const string PiercePath = "Assets/VFX/Sparks/Pierce Sparks.prefab";
+        private const string RailgunHitPath = "Assets/VFX/Sparks/Railgun Hit.prefab";
         private const string FlashMaterialPath = "Assets/VFX/Plasma Additive.mat";
         private const string BlendMaterialPath = "Assets/VFX/Plasma Blend.mat";
         private const float FadeMode = 2f;
@@ -23,12 +24,13 @@ namespace WeaponContent
         private const float SprayShare = 0.5f;
         private const float SprayLifetimeShare = 0.5f;
         private const float FanArc = 180f;
-        private const float CannonSparkCountShare = 0.48f;
-        private const float CannonSparkLifetimeShare = 0.6f;
-        private const float CannonSparkStartRadius = 0.315f;
+        private const float ImpactSparkCountShare = 0.48f;
+        private const float ImpactSparkLifetimeShare = 0.6f;
+        private const float ImpactSparkStartRadius = 0.315f;
         private const float LaserSparkSizeShare = 1f / 1.5f;
-        private const float CannonSparkSizeShare = 0.7f;
-        private const float CannonSparkSpeedShare = 0.7f;
+        private const float PierceSprayGrowth = 2f;
+        private const float ImpactSparkSizeShare = 0.7f;
+        private const float ImpactSparkSpeedShare = 0.7f;
         private static readonly Vector3 FlashOffset = new Vector3(0.3f, 0f, 0f);
         private static readonly Color Yellow = new Color(1f, 0.85f, 0.15f, 1f);
         private static readonly Color Cold = new Color(0.3f, 0.75f, 1f, 1f);
@@ -42,22 +44,25 @@ namespace WeaponContent
             new Vector2(0.24f, 0.3f), Vector2.zero, 0f, new Color(1f, 0.92f, 0.35f, 1f), new Color(1f, 0.8f, 0.2f, 1f));
         private static readonly Burst CannonCore = new Burst("Hit Core", 1, new Vector2(1.28f, 1.6f),
             new Vector2(0.24f, 0.3f), Vector2.zero, 0f, new Color(1f, 1f, 0.95f, 1f), new Color(1f, 0.97f, 0.85f, 1f));
-        private static readonly Burst PierceCore = new Burst("Flash Core", 1, new Vector2(0.5f, 0.6f),
-            new Vector2(0.06f, 0.08f), Vector2.zero, 0f, new Color(0.85f, 0.97f, 1f, 1f), new Color(0.6f, 0.9f, 1f, 1f));
-        private static readonly Burst PiercePlume = new Burst("Flash Plume", 10, new Vector2(0.45f, 0.65f),
-            new Vector2(0.1f, 0.16f), new Vector2(6f, 12f), 10f, new Color(0.55f, 0.85f, 1f, 1f), new Color(0.3f, 0.6f, 1f, 1f));
+        private static readonly Burst PierceCore = new Burst("Flash Core", 1, new Vector2(1f, 1.2f),
+            new Vector2(0.12f, 0.16f), Vector2.zero, 0f, new Color(0.85f, 0.97f, 1f, 1f), new Color(0.6f, 0.9f, 1f, 1f));
+        private static readonly Burst PiercePlume = new Burst("Flash Plume", 10, new Vector2(0.9f, 1.3f),
+            new Vector2(0.2f, 0.32f), new Vector2(6f, 12f), 10f, new Color(0.55f, 0.85f, 1f, 1f), new Color(0.3f, 0.6f, 1f, 1f));
 
         [MenuItem("Tools/Weapons/Build Hit Sparks")]
         public static void Build()
         {
             Make(WarmPath, "Hit Sparks", Color.clear, NoGlows);
-            Shrink(WarmPath, LaserSparkSizeShare);
+            Resize(WarmPath, LaserSparkSizeShare, null);
             Make(ColdPath, "Hit Sparks Blue", Cold, NoGlows);
             Make(WhitePath, "Hit Sparks White", Color.white, NoGlows);
             Make(CannonHitPath, "Cannon Hit", Yellow, new[] { CannonCircle, CannonCore });
-            TuneCannonSparks(CannonHitPath);
+            TuneImpactSparks(CannonHitPath);
+            Make(RailgunHitPath, "Railgun Hit", Cold, NoGlows);
+            TuneImpactSparks(RailgunHitPath);
             MakeDirected(MuzzlePath, "Muzzle Sparks", Yellow, MuzzleCore, MuzzlePlume, FlashOffset);
             MakeDirected(PiercePath, "Pierce Sparks", Cold, PierceCore, PiercePlume, Vector3.zero);
+            Resize(PiercePath, PierceSprayGrowth, "Spray");
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
@@ -255,12 +260,15 @@ namespace WeaponContent
             emission.SetBursts(bursts);
         }
 
-        private static void Shrink(string path, float share)
+        private static void Resize(string path, float share, string only)
         {
             GameObject root = PrefabUtility.LoadPrefabContents(path);
 
             foreach (ParticleSystem system in root.GetComponentsInChildren<ParticleSystem>(true))
             {
+                if (only != null && system.name != only)
+                    continue;
+
                 ParticleSystem.MainModule main = system.main;
 
                 main.startSize = Scale(main.startSize, share);
@@ -270,7 +278,7 @@ namespace WeaponContent
             PrefabUtility.UnloadPrefabContents(root);
         }
 
-        private static void TuneCannonSparks(string path)
+        private static void TuneImpactSparks(string path)
         {
             GameObject root = PrefabUtility.LoadPrefabContents(path);
             ParticleSystem sparks = root.GetComponent<ParticleSystem>();
@@ -281,7 +289,7 @@ namespace WeaponContent
 
                 shape.enabled = true;
                 shape.shapeType = ParticleSystemShapeType.Circle;
-                shape.radius = CannonSparkStartRadius;
+                shape.radius = ImpactSparkStartRadius;
                 shape.radiusThickness = 0f;
                 shape.arc = FanArc;
                 shape.arcMode = ParticleSystemShapeMultiModeValue.Random;
@@ -289,10 +297,10 @@ namespace WeaponContent
 
                 ParticleSystem.MainModule main = sparks.main;
 
-                main.startLifetime = Scale(main.startLifetime, CannonSparkLifetimeShare);
-                main.startSize = Scale(main.startSize, CannonSparkSizeShare);
-                main.startSpeed = Scale(main.startSpeed, CannonSparkSpeedShare);
-                Thin(sparks, CannonSparkCountShare);
+                main.startLifetime = Scale(main.startLifetime, ImpactSparkLifetimeShare);
+                main.startSize = Scale(main.startSize, ImpactSparkSizeShare);
+                main.startSpeed = Scale(main.startSpeed, ImpactSparkSpeedShare);
+                Thin(sparks, ImpactSparkCountShare);
             }
 
             PrefabUtility.SaveAsPrefabAsset(root, path);

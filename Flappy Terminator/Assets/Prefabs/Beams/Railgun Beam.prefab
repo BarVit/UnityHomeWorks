@@ -93,17 +93,17 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.16
+        value: 0.08
         inSlope: 0
-        outSlope: -0.072
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 1
-        value: 0.088
-        inSlope: -0.072
+        value: 0.08
+        inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
@@ -180,4 +180,4 @@ MonoBehaviour:
   _worldHitSound:
     _clip: {fileID: 8300000, guid: 5612d8a83bc45475484c2e62d10abf1f, type: 3}
     _volume: 0.2
-  _pierceEffect: {fileID: 8733601708220993544, guid: 54e3df2fc38e44b52a3f85326243d75d, type: 3}
+  _pierceEffect: {fileID: 9048287679974622811, guid: 54e3df2fc38e44b52a3f85326243d75d, type: 3}

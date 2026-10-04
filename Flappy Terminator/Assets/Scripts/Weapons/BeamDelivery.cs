@@ -111,7 +111,7 @@ public class BeamDelivery : WeaponDelivery
         if (_hitEffectPool == null)
             return;
 
-        ExplosionAnimation effect = _hitEffectPool.Get(hit.point);
+        ExplosionAnimation effect = _hitEffectPool.Get(hit.point, GetRotation(barrel));
 
         effect.Play();
     }

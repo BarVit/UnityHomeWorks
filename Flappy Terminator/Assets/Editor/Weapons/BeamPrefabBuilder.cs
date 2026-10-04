@@ -28,10 +28,10 @@ namespace WeaponContent
 
             Material material = GetMaterial();
 
-            Create("Railgun Beam", material, new Color(0.65f, 0.9f, 1f), 0.16f, 0.14f,
+            Create("Railgun Beam", material, new Color(0.65f, 0.9f, 1f), 0.08f, 1f, 0.14f,
                 new BeamSounds(RailgunShotPath, RailgunShotVolume, RailgunHitPath, RailgunHitVolume,
                     RailgunWorldHitPath, RailgunWorldHitVolume, null, 0f, null, 0f), RailgunPiercePath);
-            Create("Laser Beam", material, new Color(1f, 0.35f, 0.25f), 0.09f, 0.05f,
+            Create("Laser Beam", material, new Color(1f, 0.35f, 0.25f), 0.09f, 0.55f, 0.05f,
                 new BeamSounds(null, 0f, null, 0f, null, 0f, LaserLoopPath, LaserLoopVolume,
                     LaserBurnPath, LaserBurnVolume), null);
 
@@ -54,7 +54,7 @@ namespace WeaponContent
             return created;
         }
 
-        private static void Create(string name, Material material, Color color, float width,
+        private static void Create(string name, Material material, Color color, float width, float tipShare,
             float lifetime, BeamSounds sounds, string piercePath)
         {
             string path = Folder + "/" + name + ".prefab";
@@ -67,7 +67,7 @@ namespace WeaponContent
             line.textureMode = LineTextureMode.Stretch;
             line.alignment = LineAlignment.View;
             line.sharedMaterial = material;
-            line.widthCurve = AnimationCurve.Linear(0f, width, 1f, width * 0.55f);
+            line.widthCurve = AnimationCurve.Linear(0f, width, 1f, width * tipShare);
             line.colorGradient = GetGradient(color);
             line.sortingOrder = 5;
             line.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
