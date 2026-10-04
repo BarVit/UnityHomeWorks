@@ -14,6 +14,7 @@ namespace WeaponContent
         private const float RailgunHitVolume = 0.15f;
         private const string RailgunWorldHitPath = "Assets/Sounds/Railgun hit [871710].wav";
         private const float RailgunWorldHitVolume = 0.2f;
+        private const string RailgunPiercePath = "Assets/VFX/Sparks/Pierce Sparks.prefab";
         private const string LaserLoopPath = "Assets/Sounds/Laser beam [843455].wav";
         private const float LaserLoopVolume = 0.4f;
 
@@ -27,9 +28,9 @@ namespace WeaponContent
 
             Create("Railgun Beam", material, new Color(0.65f, 0.9f, 1f), 0.16f, 0.07f,
                 new BeamSounds(RailgunShotPath, RailgunShotVolume, RailgunHitPath, RailgunHitVolume,
-                    RailgunWorldHitPath, RailgunWorldHitVolume, null, 0f));
+                    RailgunWorldHitPath, RailgunWorldHitVolume, null, 0f), RailgunPiercePath);
             Create("Laser Beam", material, new Color(1f, 0.35f, 0.25f), 0.09f, 0.05f,
-                new BeamSounds(null, 0f, null, 0f, null, 0f, LaserLoopPath, LaserLoopVolume));
+                new BeamSounds(null, 0f, null, 0f, null, 0f, LaserLoopPath, LaserLoopVolume), null);
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
@@ -51,7 +52,7 @@ namespace WeaponContent
         }
 
         private static void Create(string name, Material material, Color color, float width,
-            float lifetime, BeamSounds sounds)
+            float lifetime, BeamSounds sounds, string piercePath)
         {
             string path = Folder + "/" + name + ".prefab";
             GameObject root = new GameObject(name);
@@ -77,6 +78,9 @@ namespace WeaponContent
             SetSound(serialized, "_hitSound", sounds.HitPath, sounds.HitVolume);
             SetSound(serialized, "_worldHitSound", sounds.WorldHitPath, sounds.WorldHitVolume);
             SetSound(serialized, "_loopSound", sounds.LoopPath, sounds.LoopVolume);
+            serialized.FindProperty("_pierceEffect").objectReferenceValue = piercePath == null
+                ? null
+                : AssetDatabase.LoadAssetAtPath<ExplosionAnimation>(piercePath);
             serialized.ApplyModifiedPropertiesWithoutUndo();
 
             PrefabUtility.SaveAsPrefabAsset(root, path);

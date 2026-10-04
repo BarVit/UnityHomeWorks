@@ -7,8 +7,10 @@ public class BeamDelivery : WeaponDelivery
 
     private readonly SpawnPool<ExplosionAnimation> _hitEffectPool;
     private readonly SpawnPool<BeamFlash> _beamPool;
+    private readonly SpawnPool<ExplosionAnimation> _piercePool;
     private readonly RaycastHit2D[] _hits = new RaycastHit2D[1];
     private readonly RaycastHit2D[] _worldHits = new RaycastHit2D[1];
+    private readonly RaycastHit2D[] _exitHits = new RaycastHit2D[8];
 
     private BeamFlash _soundFlash;
     private bool _hasTargetHit;
@@ -25,6 +27,9 @@ public class BeamDelivery : WeaponDelivery
 
         if (row.Beam != null)
             _beamPool = context.Pools.GetPool(row.Beam);
+
+        if (row.Beam != null && row.Beam.PierceEffect != null)
+            _piercePool = context.Pools.GetPool(row.Beam.PierceEffect);
     }
 
     protected Transform Target { get; private set; }
@@ -61,19 +66,14 @@ public class BeamDelivery : WeaponDelivery
         Vector2 direction = GetRotation(barrel) * Vector2.right;
         float reach = GetReach();
 
+        Vector2 far = (Vector2)mount.position + direction * reach;
+
         int count = Physics2D.Raycast(mount.position, direction, Context.TargetFilter, _hits, reach);
         bool isSeen = count > 0 && ScreenArea.Contains(Context.Camera, _hits[0].point);
-        Vector2 end = isSeen
-            ? _hits[0].point
-            : (Vector2)mount.position + direction * reach;
-
-        BeamFlash flash = Draw(mount.position, end, barrel);
-
-        if (flash != null)
-            _soundFlash = flash;
 
         if (isSeen == false)
         {
+            Remember(Draw(mount.position, far, barrel));
             NoteWorldHit(mount.position, direction, reach);
 
             return;
@@ -83,6 +83,13 @@ public class BeamDelivery : WeaponDelivery
 
         if (hit.collider.TryGetComponent(out IDamageable damageable) == false)
             damageable = hit.collider.GetComponentInParent<IDamageable>();
+
+        bool isPierced = damageable != null && _piercePool != null;
+
+        Remember(Draw(mount.position, isPierced ? far : hit.point, barrel));
+
+        if (isPierced)
+            ShowPierce(GetExit(hit.collider, hit.point, far), GetRotation(barrel));
 
         if (damageable != null)
         {
@@ -97,6 +104,31 @@ public class BeamDelivery : WeaponDelivery
             return;
 
         ExplosionAnimation effect = _hitEffectPool.Get(hit.point);
+
+        effect.Play();
+    }
+
+    private void Remember(BeamFlash flash)
+    {
+        if (flash != null)
+            _soundFlash = flash;
+    }
+
+    private Vector2 GetExit(Collider2D struck, Vector2 entry, Vector2 far)
+    {
+        Vector2 back = entry - far;
+        int count = Physics2D.Raycast(far, back.normalized, Context.TargetFilter, _exitHits, back.magnitude);
+
+        for (int i = 0; i < count; i++)
+            if (_exitHits[i].collider == struck)
+                return _exitHits[i].point;
+
+        return entry;
+    }
+
+    private void ShowPierce(Vector2 exit, Quaternion rotation)
+    {
+        ExplosionAnimation effect = _piercePool.Get(exit, rotation);
 
         effect.Play();
     }

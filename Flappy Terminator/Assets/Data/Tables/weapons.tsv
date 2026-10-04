@@ -1,9 +1,9 @@
 id	title	owner	delivery	damage	rate	projectile_speed	barrels_max	fire_pattern	heat_per_shot	cooldown_rate	tick_interval	turn_rate	area	price	projectile	beam	icon	projectile_sprite	projectile_animation	shot_effect	hit_target_effect	hit_world_effect	shot_sound	flight_sound	hit_target_sound	hit_world_sound	overheat_sound
-cannon	Пушка	Player	Projectile	7	0.4	18	4	Parallel	0	0	0	0	0	0	Cannon Shell			Cannon Shell		Muzzle Sparks			Cannon shot [155790]		Cannon hit [560576]	Cannon hit [560576]	
+cannon	Пушка	Player	Projectile	7	0.4	18	4	Parallel	0	0	0	0	0	0	Cannon Shell			Cannon Shell		Muzzle Sparks	Cannon Hit		Cannon shot [155790]		Cannon hit [560576]	Cannon hit [560576]	
 plasma	Плазма	Player	Projectile	10	0.25	12	4	Cone	0	0	0	0	0	150	PlayerBullet			spark-preview1	Spark Animation		PlayerBulletHit		Blaster [341956]		Plasma hit 2 [168984]	Plasma hit 2 [168984]	
 rocket	Ракетница	Player	Projectile	35	0.75	8	4	ForwardAndSides	0	0	0	0	0	300	Player Rocket			2DShipsMissilesTorpedoesAtlas_2			vfx_RocketExplosion		Rocket 1 [441500]		Explosion [402005]	Explosion [402005]	
 homing	Самонаводящиеся	Player	Homing	25	0.6	7	4	Parallel	0	0	0	90	0	600	Player Rocket			2DShipsMissilesTorpedoesAtlas_2			vfx_RocketExplosion		Rocket 1 [441500]		Explosion [402005]	Explosion [402005]	
-railgun	Рельсотрон	Player	Beam	45	0.9	0	4	NarrowCone	0	0	0	0	0	900		Railgun Beam							Railgun [394672]		Railgun enemy hit [724428]	Railgun hit [871710]	
+railgun	Рельсотрон	Player	Beam	45	0.9	0	4	NarrowCone	0	0	0	0	0	900		Railgun Beam					Hit Sparks Blue		Railgun [394672]		Railgun enemy hit [724428]	Railgun hit [871710]	
 beam_laser	Лучевой лазер	Player	ContinuousBeam	2	0.05	0	4	Parallel	4	40	0	0	0	1200		Laser Beam					Hit Sparks		Laser beam [843455]				
 impulse_laser	Импульсный лазер	Player	Impulse	6	0.1	20	4	Parallel	7	40	0	0	0	1400	Impulse Bolt			Impulse Bolt			Hit Sparks		Laser shot [580308]		Laser burn [670075]	Laser burn [670075]	
 plasma_orb	Плазменный шар	Player	Orb	12	3.0	3	1	Single	0	0	0.25	0	1.2	2000	Plasma Orb			Orb Core			Hit Sparks Blue		Plasma shot [565450]		Electric shock [655263]		

@@ -1,6 +1,7 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace WeaponContent
 {
@@ -10,27 +11,47 @@ namespace WeaponContent
         private const string WarmPath = "Assets/VFX/Sparks/Hit Sparks.prefab";
         private const string ColdPath = "Assets/VFX/Sparks/Hit Sparks Blue.prefab";
         private const string MuzzlePath = "Assets/VFX/Sparks/Muzzle Sparks.prefab";
+        private const string CannonHitPath = "Assets/VFX/Sparks/Cannon Hit.prefab";
+        private const string PiercePath = "Assets/VFX/Sparks/Pierce Sparks.prefab";
         private const string FlashMaterialPath = "Assets/VFX/Plasma Additive.mat";
+        private const string BlendMaterialPath = "Assets/VFX/Plasma Blend.mat";
+        private const float FadeMode = 2f;
         private const int FlashSortingOrder = 11;
         private const float FlashStretch = 0.06f;
         private const float SprayHalfAngle = 30f;
         private const float SprayShare = 0.5f;
         private const float SprayLifetimeShare = 0.5f;
         private static readonly Vector3 FlashOffset = new Vector3(0.3f, 0f, 0f);
+        private static readonly Color Yellow = new Color(1f, 0.85f, 0.15f, 1f);
+        private static readonly Color Cold = new Color(0.3f, 0.75f, 1f, 1f);
+        private static readonly Burst[] NoGlows = new Burst[0];
+
+        private static readonly Burst MuzzleCore = new Burst("Flash Core", 1, new Vector2(1f, 1.2f),
+            new Vector2(0.12f, 0.16f), Vector2.zero, 0f, new Color(1f, 0.97f, 0.8f, 1f), new Color(1f, 0.88f, 0.5f, 1f));
+        private static readonly Burst MuzzlePlume = new Burst("Flash Plume", 12, new Vector2(0.7f, 1.05f),
+            new Vector2(0.16f, 0.24f), new Vector2(4f, 9f), 14f, new Color(1f, 0.78f, 0.32f, 1f), new Color(1f, 0.48f, 0.12f, 1f));
+        private static readonly Burst CannonCircle = new Burst("Hit Circle", 1, new Vector2(0.45f, 0.55f),
+            new Vector2(0.08f, 0.1f), Vector2.zero, 0f, new Color(1f, 0.92f, 0.35f, 1f), new Color(1f, 0.8f, 0.2f, 1f));
+        private static readonly Burst PierceCore = new Burst("Flash Core", 1, new Vector2(0.5f, 0.6f),
+            new Vector2(0.06f, 0.08f), Vector2.zero, 0f, new Color(0.85f, 0.97f, 1f, 1f), new Color(0.6f, 0.9f, 1f, 1f));
+        private static readonly Burst PiercePlume = new Burst("Flash Plume", 10, new Vector2(0.45f, 0.65f),
+            new Vector2(0.1f, 0.16f), new Vector2(6f, 12f), 10f, new Color(0.55f, 0.85f, 1f, 1f), new Color(0.3f, 0.6f, 1f, 1f));
 
         [MenuItem("Tools/Weapons/Build Hit Sparks")]
         public static void Build()
         {
-            Make(WarmPath, "Hit Sparks", Color.clear);
-            Make(ColdPath, "Hit Sparks Blue", new Color(0.3f, 0.75f, 1f, 1f));
-            MakeDirected(MuzzlePath, "Muzzle Sparks", new Color(1f, 0.85f, 0.15f, 1f));
+            Make(WarmPath, "Hit Sparks", Color.clear, NoGlows);
+            Make(ColdPath, "Hit Sparks Blue", Cold, NoGlows);
+            Make(CannonHitPath, "Cannon Hit", Yellow, new[] { CannonCircle });
+            MakeDirected(MuzzlePath, "Muzzle Sparks", Yellow, MuzzleCore, MuzzlePlume, FlashOffset);
+            MakeDirected(PiercePath, "Pierce Sparks", Cold, PierceCore, PiercePlume, Vector3.zero);
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             Debug.Log("Искры попадания: собраны");
         }
 
-        private static void Make(string path, string name, Color tint)
+        private static void Make(string path, string name, Color tint, Burst[] glows)
         {
             if (File.Exists(path))
                 AssetDatabase.DeleteAsset(path);
@@ -67,11 +88,17 @@ namespace WeaponContent
             if (tint != Color.clear)
                 Paint(root, tint);
 
+            Material material = GetBlendMaterial();
+
+            foreach (Burst glow in glows)
+                AddBurst(root, glow, material, Vector3.zero);
+
             PrefabUtility.SaveAsPrefabAsset(root, path);
             PrefabUtility.UnloadPrefabContents(root);
         }
 
-        private static void MakeDirected(string path, string name, Color tint)
+        private static void MakeDirected(string path, string name, Color tint, Burst core, Burst plume,
+            Vector3 flashOffset)
         {
             if (File.Exists(path))
                 AssetDatabase.DeleteAsset(path);
@@ -110,30 +137,25 @@ namespace WeaponContent
             Paint(root, tint);
             Float(root);
             Aim(spray);
-            AddFlash(root);
+            AddFlash(root, core, plume, flashOffset);
             PrefabUtility.SaveAsPrefabAsset(root, path);
             Object.DestroyImmediate(root);
         }
 
-        private static void AddFlash(GameObject root)
+        private static void AddFlash(GameObject root, Burst core, Burst plume, Vector3 offset)
         {
             Material material = AssetDatabase.LoadAssetAtPath<Material>(FlashMaterialPath);
 
-            Burst core = new Burst("Flash Core", 1, new Vector2(1f, 1.2f), new Vector2(0.12f, 0.16f),
-                Vector2.zero, 0f, new Color(1f, 0.97f, 0.8f, 1f), new Color(1f, 0.88f, 0.5f, 1f));
-            Burst plume = new Burst("Flash Plume", 12, new Vector2(0.7f, 1.05f), new Vector2(0.16f, 0.24f),
-                new Vector2(4f, 9f), 14f, new Color(1f, 0.78f, 0.32f, 1f), new Color(1f, 0.48f, 0.12f, 1f));
-
-            AddBurst(root, core, material);
-            AddBurst(root, plume, material);
+            AddBurst(root, core, material, offset);
+            AddBurst(root, plume, material, offset);
         }
 
-        private static void AddBurst(GameObject root, Burst burst, Material material)
+        private static void AddBurst(GameObject root, Burst burst, Material material, Vector3 offset)
         {
             GameObject holder = new GameObject(burst.Name);
 
             holder.transform.SetParent(root.transform, false);
-            holder.transform.localPosition = FlashOffset;
+            holder.transform.localPosition = offset;
 
             ParticleSystem system = holder.AddComponent<ParticleSystem>();
 
@@ -221,6 +243,28 @@ namespace WeaponContent
                 return new ParticleSystem.MinMaxCurve(count.constantMin * SprayShare, count.constantMax * SprayShare);
 
             return new ParticleSystem.MinMaxCurve(count.constant * SprayShare);
+        }
+
+        private static Material GetBlendMaterial()
+        {
+            if (File.Exists(BlendMaterialPath) == false)
+                AssetDatabase.CopyAsset(FlashMaterialPath, BlendMaterialPath);
+
+            Material material = AssetDatabase.LoadAssetAtPath<Material>(BlendMaterialPath);
+
+            material.SetFloat("_Mode", FadeMode);
+            material.SetFloat("_BlendOp", (float)BlendOp.Add);
+            material.SetFloat("_SrcBlend", (float)BlendMode.SrcAlpha);
+            material.SetFloat("_DstBlend", (float)BlendMode.OneMinusSrcAlpha);
+            material.SetFloat("_ZWrite", 0f);
+            material.SetOverrideTag("RenderType", "Transparent");
+            material.DisableKeyword("_ALPHATEST_ON");
+            material.EnableKeyword("_ALPHABLEND_ON");
+            material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            material.renderQueue = (int)RenderQueue.Transparent;
+            EditorUtility.SetDirty(material);
+
+            return material;
         }
 
         private static void Float(GameObject root)

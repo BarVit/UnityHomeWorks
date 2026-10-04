@@ -9,6 +9,7 @@ public class BeamFlash : MonoBehaviour, IPoolable
     [SerializeField] private Sound _loopSound;
     [SerializeField] private Sound _hitSound;
     [SerializeField] private Sound _worldHitSound;
+    [SerializeField] private ExplosionAnimation _pierceEffect;
 
     private LineRenderer _line;
     private GradientAlphaKey[] _alphaKeys;
@@ -23,6 +24,8 @@ public class BeamFlash : MonoBehaviour, IPoolable
     public Sound HitSound => _hitSound;
 
     public Sound WorldHitSound => _worldHitSound;
+
+    public ExplosionAnimation PierceEffect => _pierceEffect;
 
     public event Action<IPoolable> Released;
 
