@@ -18,7 +18,7 @@ namespace WeaponContent
         private const string BlastSoundPath = "Assets/Sounds/Explosion [402005].wav";
         private const float BlastSoundVolume = 1f;
         private const string ShotSoundPath = "Assets/Sounds/Torpedo launch [100772].wav";
-        private const float ShotSoundVolume = 0.2f;
+        private const float ShotSoundVolume = 0.4f;
 
         [MenuItem("Tools/Weapons/Build Torpedo")]
         public static void Build()
