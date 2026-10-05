@@ -33,9 +33,10 @@ namespace WeaponContent
         private static readonly GradientColorKey[] BlueFlame =
         {
             new GradientColorKey(UnderBoost(Color.white), 0f),
-            new GradientColorKey(UnderBoost(new Color(0.55f, 0.82f, 1f)), 0.1f),
-            new GradientColorKey(UnderBoost(new Color(0.12f, 0.4f, 1f)), 0.22f),
-            new GradientColorKey(UnderBoost(new Color(0.01f, 0.02f, 0.26f)), 0.36f)
+            new GradientColorKey(UnderBoost(Color.white), 0.08f),
+            new GradientColorKey(UnderBoost(new Color(0.55f, 0.82f, 1f)), 0.3f),
+            new GradientColorKey(UnderBoost(new Color(0.12f, 0.4f, 1f)), 0.6f),
+            new GradientColorKey(UnderBoost(new Color(0.01f, 0.02f, 0.26f)), 1f)
         };
 
         [MenuItem("Tools/Weapons/Build Torpedo")]
