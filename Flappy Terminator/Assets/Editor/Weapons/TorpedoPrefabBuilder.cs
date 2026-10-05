@@ -24,9 +24,19 @@ namespace WeaponContent
         private const string EffectsGroup = "Effects";
         private const string EngineFlarePath = "vfx_Flamethrower_01 Variant/Flare";
         private const string EnginePath = "vfx_Flamethrower_01 Variant";
+        private const string EngineFlamesPath = "vfx_Flamethrower_01 Variant/Flames";
+        private const float FlameMaterialBoost = 4f;
         private const float EngineShare = 0.51f;
         private const float LampShare = 0.14f;
         private const float LampGlow = 3f;
+
+        private static readonly GradientColorKey[] BlueFlame =
+        {
+            new GradientColorKey(UnderBoost(new Color(0.75f, 0.9f, 1f)), 0f),
+            new GradientColorKey(UnderBoost(new Color(0.35f, 0.65f, 1f)), 0.1f),
+            new GradientColorKey(UnderBoost(new Color(0.1f, 0.35f, 1f)), 0.22f),
+            new GradientColorKey(new Color(0.075f, 0.075f, 0.075f), 0.36f)
+        };
 
         [MenuItem("Tools/Weapons/Build Torpedo")]
         public static void Build()
@@ -59,6 +69,7 @@ namespace WeaponContent
 
             SetLamp(root, body);
             SetEngine(root, body);
+            PaintEngine(root);
             HideEngineFlare(root);
             Voice(root);
             SetLaunchSound(root);
@@ -106,6 +117,30 @@ namespace WeaponContent
 
             position.x = -length * EngineShare;
             engine.localPosition = position;
+        }
+
+        private static void PaintEngine(GameObject root)
+        {
+            Transform flames = root.transform.Find(EngineFlamesPath);
+
+            if (flames == null)
+                return;
+
+            ParticleSystem.ColorOverLifetimeModule colorOverLifetime =
+                flames.GetComponent<ParticleSystem>().colorOverLifetime;
+            Gradient source = colorOverLifetime.color.gradient;
+            Gradient gradient = new Gradient();
+
+            gradient.mode = source.mode;
+            gradient.colorSpace = source.colorSpace;
+            gradient.SetKeys(BlueFlame, source.alphaKeys);
+            colorOverLifetime.color = new ParticleSystem.MinMaxGradient(gradient);
+        }
+
+        private static Color UnderBoost(Color color)
+        {
+            return new Color(color.r / FlameMaterialBoost, color.g / FlameMaterialBoost,
+                color.b / FlameMaterialBoost, color.a);
         }
 
         private static void HideEngineFlare(GameObject root)
