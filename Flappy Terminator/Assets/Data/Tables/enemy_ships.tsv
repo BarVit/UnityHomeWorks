@@ -1,6 +1,6 @@
 id	title	prefab	health	weapon	body_damage	from_location
-enemy_scout	Разведчик	Enemy 1	20	enemy_blaster	10	loc_01_01
-enemy_warden	Страж	Enemy 2	30	enemy_blaster	15	loc_01_03
-enemy_lancer	Копейщик	Enemy 3	45	enemy_spray	20	loc_02_01
-enemy_reaper	Жнец	Enemy 4	60	enemy_seeker	25	loc_03_01
-enemy_sentinel	Часовой	Enemy 5	80	enemy_blaster	30	loc_04_01
+enemy_warden	Страж	Enemy 1	20	enemy_blaster	10	loc_01_01
+enemy_hunter	Охотник	Enemy 2	30	enemy_blaster	15	loc_01_03
+enemy_reaper	Жнец	Enemy 3	45	enemy_spray	20	loc_02_01
+enemy_phantom	Призрак	Enemy 4	60	enemy_seeker	25	loc_03_01
+enemy_executioner	Палач	Enemy 5	80	enemy_blaster	30	loc_04_01
