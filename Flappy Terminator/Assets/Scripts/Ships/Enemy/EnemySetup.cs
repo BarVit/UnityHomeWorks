@@ -1,31 +1,54 @@
+using UnityEngine;
+
 public class EnemySetup
 {
-    private readonly EnemyShipRow _ship;
-    private readonly EnemyTierRow _tier;
-    private readonly WeaponRow _weapon;
-
-    public EnemySetup(EnemyShipRow ship, EnemyTierRow tier, WeaponRow weapon)
+    private EnemySetup(EnemyShip prefab, string shipId, int tier, int health, int bodyDamage, int barrels,
+        int damage, MovementProfile movement, WeaponRow weapon, int scale, Color tint)
     {
-        _ship = ship;
-        _tier = tier;
-        _weapon = weapon;
+        Prefab = prefab;
+        ShipId = shipId;
+        Tier = tier;
+        Health = health;
+        BodyDamage = bodyDamage;
+        Barrels = barrels;
+        Damage = damage;
+        Movement = movement;
+        Weapon = weapon;
+        Scale = scale;
+        Tint = tint;
     }
 
-    public EnemyShip Prefab => _ship.Prefab;
+    public EnemyShip Prefab { get; private set; }
 
-    public string ShipId => _ship.Id;
+    public string ShipId { get; private set; }
 
-    public int Tier => _tier.Tier;
+    public int Tier { get; private set; }
 
-    public int Health => _tier.Health;
+    public int Health { get; private set; }
 
-    public int BodyDamage => _ship.BodyDamage;
+    public int BodyDamage { get; private set; }
 
-    public int Barrels => _tier.Barrels;
+    public int Barrels { get; private set; }
 
-    public int Damage => _tier.Damage;
+    public int Damage { get; private set; }
 
-    public MovementProfile Movement => _tier.Movement;
+    public MovementProfile Movement { get; private set; }
 
-    public WeaponRow Weapon => _weapon;
+    public WeaponRow Weapon { get; private set; }
+
+    public int Scale { get; private set; }
+
+    public Color Tint { get; private set; }
+
+    public static EnemySetup ForTier(EnemyShipRow ship, EnemyTierRow tier, WeaponRow weapon)
+    {
+        return new EnemySetup(ship.Prefab, ship.Id, tier.Tier, tier.Health, ship.BodyDamage, tier.Barrels,
+            tier.Damage, tier.Movement, weapon, 1, Color.white);
+    }
+
+    public static EnemySetup ForBoss(BossRow boss, WeaponRow weapon)
+    {
+        return new EnemySetup(boss.Prefab, boss.Id, 0, boss.Health, boss.BodyDamage, boss.Barrels,
+            boss.Damage, boss.Movement, weapon, boss.Scale, boss.Tint);
+    }
 }

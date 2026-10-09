@@ -1,0 +1,17 @@
+id	title	kind	prefab	prototype	health	weapon	barrels	damage	body_damage	scale	tint	movement
+marauder_1	Мародёр I	MiniBoss	Enemy 1	warden_1	100	enemy_rocket	1	20	10	2	FFFFFF	Boss Up And Down
+marauder_2	Мародёр II	MiniBoss	Enemy 1	warden_2	125	enemy_rocket	1	20	10	2	FF9A8A	Boss Up And Down
+punisher_1	Каратель I	MiniBoss	Enemy 2	hunter_1	125	enemy_impulse_laser	1	14	15	2	FFFFFF	Boss Up And Down
+punisher_2	Каратель II	MiniBoss	Enemy 2	hunter_2	200	enemy_impulse_laser	2	14	15	2	FF9A8A	Boss Up And Down
+berserker_1	Берсерк I	MiniBoss	Enemy 3	reaper_1	150	enemy_homing	1	30	20	2	FFFFFF	Boss Up And Down
+berserker_2	Берсерк II	MiniBoss	Enemy 3	reaper_2	250	enemy_homing	1	40	20	2	FF9A8A	Boss Up And Down
+tormentor_1	Терзатель I	MiniBoss	Enemy 4	phantom_1	250	enemy_cannon	2	28	25	2	FFFFFF	Boss Up And Down
+tormentor_2	Терзатель II	MiniBoss	Enemy 4	phantom_2	350	enemy_cannon	2	28	25	2	FF9A8A	Boss Up And Down
+ripper_1	Потрошитель I	MiniBoss	Enemy 5	executioner_1	600	enemy_railgun	1	100	30	2	FFFFFF	Boss Up And Down
+ripper_2	Потрошитель II	MiniBoss	Enemy 5	executioner_2	750	enemy_torpedo	1	80	30	2	FF9A8A	Boss Up And Down
+hierarch	Иерарх	Boss	Boss 1	marauder_2	625	enemy_rocket	1	40	10	2	FFFFFF	Boss Up And Down
+magister	Магистр	Boss	Boss 2	punisher_2	1000	enemy_impulse_laser	2	28	15	2	FFFFFF	Boss Up And Down
+overlord	Владыка	Boss	Boss 3	berserker_2	1250	enemy_homing	1	80	20	2	FFFFFF	Boss Up And Down
+archon	Архонт	Boss	Boss 4	tormentor_2	1750	enemy_cannon	2	56	25	2	FFFFFF	Boss Up And Down
+titan	Титан	Boss	Boss 5	ripper_2	3750	enemy_torpedo	1	160	30	2	FFFFFF	Boss Up And Down
+emperor	Император	Boss	Boss 5	ripper_2	3750	enemy_torpedo	1	160	30	2	FFFFFF	Boss Up And Down

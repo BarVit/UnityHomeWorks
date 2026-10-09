@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEditor.Animations;
@@ -9,6 +10,10 @@ namespace EnemyContent
     {
         private const string BasePath = "Assets/Prefabs/Enemy Ship.prefab";
         private const string Folder = "Assets/Prefabs/Enemies";
+        private const string BossFolder = "Assets/Prefabs/Bosses";
+        private const int BossCount = 5;
+        private const float BaseHalfWidth = 0.39f;
+        private const float BaseHalfHeight = 0.405f;
         private const string MountRootName = "Mounts";
         private const int ShipCount = 5;
 
@@ -46,6 +51,20 @@ namespace EnemyContent
             Debug.Log("Враги: собрано префабов — " + ShipCount);
         }
 
+        [MenuItem("Tools/Enemies/Build Boss Prefabs")]
+        public static void BuildBosses()
+        {
+            if (Directory.Exists(BossFolder) == false)
+                AssetDatabase.CreateFolder("Assets/Prefabs", "Bosses");
+
+            for (int number = 1; number <= BossCount; number++)
+                ShapeBoss(number);
+
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+            Debug.Log("Боссы: собрано префабов — " + BossCount);
+        }
+
         private static void Shape(int number, string firstPath)
         {
             string path = GetPath(number);
@@ -56,41 +75,114 @@ namespace EnemyContent
             GameObject root = PrefabUtility.LoadPrefabContents(path);
 
             root.name = GetName(number);
-            SetSprite(root, number);
-            SetController(root, number);
-            SetMounts(root);
+            SetSprite(root, GetName(number));
+            SetController(root, GetName(number));
+            SetMounts(root, Vector2.one);
 
             PrefabUtility.SaveAsPrefabAsset(root, path);
             PrefabUtility.UnloadPrefabContents(root);
         }
 
-        private static void SetSprite(GameObject root, int number)
+        private static void ShapeBoss(int number)
         {
-            SpriteRenderer renderer = root.GetComponentInChildren<SpriteRenderer>(true);
-            Sprite sprite = LoadFirstSprite("Assets/Sprites/Ships/" + GetName(number) + ".png");
+            string name = "Boss " + number;
+            string path = BossFolder + "/" + name + ".prefab";
 
-            if (renderer == null || sprite == null)
+            if (File.Exists(path) == false)
+                AssetDatabase.CopyAsset(GetPath(1), path);
+
+            GameObject root = PrefabUtility.LoadPrefabContents(path);
+
+            root.name = name;
+
+            SpriteRenderer renderer = SetSprite(root, name);
+
+            SetController(root, name);
+            SetMounts(root, GetStretch(renderer));
+            FitCollider(renderer);
+
+            PrefabUtility.SaveAsPrefabAsset(root, path);
+            PrefabUtility.UnloadPrefabContents(root);
+        }
+
+        private static Vector2 GetStretch(SpriteRenderer renderer)
+        {
+            if (renderer == null || renderer.sprite == null)
+                return Vector2.one;
+
+            Vector3 scale = renderer.transform.localScale;
+            Vector3 extents = renderer.sprite.bounds.extents;
+
+            return new Vector2(extents.x * scale.x / BaseHalfWidth, extents.y * scale.y / BaseHalfHeight);
+        }
+
+        private static void FitCollider(SpriteRenderer renderer)
+        {
+            if (renderer == null || renderer.sprite == null)
+                return;
+
+            PolygonCollider2D collider = renderer.GetComponent<PolygonCollider2D>();
+
+            if (collider == null)
+                return;
+
+            Sprite sprite = renderer.sprite;
+            int count = sprite.GetPhysicsShapeCount();
+            List<Vector2> points = new List<Vector2>();
+
+            if (count == 0)
             {
-                Debug.LogWarning("EnemyPrefabBuilder: " + GetName(number) + " — рисователь "
-                    + (renderer == null ? "не найден" : renderer.name) + ", спрайт "
-                    + (sprite == null ? "не найден" : sprite.name));
+                Bounds bounds = sprite.bounds;
+
+                collider.pathCount = 1;
+                collider.SetPath(0, new[]
+                {
+                    new Vector2(bounds.min.x, bounds.min.y), new Vector2(bounds.min.x, bounds.max.y),
+                    new Vector2(bounds.max.x, bounds.max.y), new Vector2(bounds.max.x, bounds.min.y)
+                });
 
                 return;
             }
 
-            renderer.sprite = sprite;
+            collider.pathCount = count;
+
+            for (int shape = 0; shape < count; shape++)
+            {
+                points.Clear();
+                sprite.GetPhysicsShape(shape, points);
+                collider.SetPath(shape, points);
+            }
         }
 
-        private static void SetController(GameObject root, int number)
+        private static SpriteRenderer SetSprite(GameObject root, string name)
+        {
+            SpriteRenderer renderer = root.GetComponentInChildren<SpriteRenderer>(true);
+            Sprite sprite = LoadFirstSprite("Assets/Sprites/Ships/" + name + ".png");
+
+            if (renderer == null || sprite == null)
+            {
+                Debug.LogWarning("EnemyPrefabBuilder: " + name + " — рисователь "
+                    + (renderer == null ? "не найден" : renderer.name) + ", спрайт "
+                    + (sprite == null ? "не найден" : sprite.name));
+
+                return renderer;
+            }
+
+            renderer.sprite = sprite;
+
+            return renderer;
+        }
+
+        private static void SetController(GameObject root, string name)
         {
             Animator animator = root.GetComponentInChildren<Animator>(true);
             AnimationClip clip = AssetDatabase.LoadAssetAtPath<AnimationClip>(
-                "Assets/Animations/" + GetName(number) + " Idle.anim");
+                "Assets/Animations/" + name + " Idle.anim");
 
             if (animator == null || clip == null)
                 return;
 
-            string path = "Assets/Animations/" + GetName(number) + " animation controller.controller";
+            string path = "Assets/Animations/" + name + " animation controller.controller";
             AnimatorController controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(path);
 
             if (controller == null)
@@ -99,7 +191,7 @@ namespace EnemyContent
             animator.runtimeAnimatorController = controller;
         }
 
-        private static void SetMounts(GameObject root)
+        private static void SetMounts(GameObject root, Vector2 stretch)
         {
             Transform mounts = GetMountRoot(root.transform);
 
@@ -114,7 +206,7 @@ namespace EnemyContent
                 Transform mount = mounts.GetChild(i);
 
                 mount.name = "Mount " + (i + 1);
-                mount.localPosition = MountPositions[i];
+                mount.localPosition = Vector3.Scale(MountPositions[i], new Vector3(stretch.x, stretch.y, 1f));
                 mount.localRotation = Quaternion.Euler(0f, 0f, 180f);
             }
 

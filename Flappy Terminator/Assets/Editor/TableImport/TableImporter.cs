@@ -31,7 +31,8 @@ namespace TableImport
                 ProgressionTableImporter.Import(log);
                 WeaponTable weapons = WeaponTableImporter.Import(log);
                 EnemyShipTable ships = EnemyShipTableImporter.Import(locations, log);
-                EnemyTierTableImporter.Import(ships, weapons, log);
+                EnemyTierTable tiers = EnemyTierTableImporter.Import(ships, weapons, log);
+                BossTableImporter.Import(tiers, weapons, log);
 
                 if (log.HasProblems)
                 {

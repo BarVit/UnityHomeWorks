@@ -52,6 +52,14 @@ namespace EnemyContent
                 profile.FindProperty("_duration").floatValue = 30f;
                 profile.FindProperty("_edgeMargin").floatValue = 1f;
             });
+            Create<UpDownProfile>("Boss Up And Down", profile =>
+            {
+                SetSpeed(profile, 0.5f, 2f);
+                profile.FindProperty("_entryShare").floatValue = 0f;
+                profile.FindProperty("_duration").floatValue = 0f;
+                profile.FindProperty("_edgeMargin").floatValue = 0f;
+                profile.FindProperty("_bodyGapShare").floatValue = 0.333f;
+            });
             Create<EllipseProfile>("Ellipse", profile =>
             {
                 SetSpeed(profile, 1f, 3f);

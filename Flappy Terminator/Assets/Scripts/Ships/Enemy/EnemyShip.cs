@@ -67,6 +67,11 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
         Tier = setup.Tier;
         BodyDamage = setup.BodyDamage;
 
+        transform.localScale = Vector3.one * setup.Scale;
+
+        if (_body != null)
+            _body.color = setup.Tint;
+
         _health.Init(setup.Health);
         _shooter.Arm(setup, _context);
         _mover.Fly(setup.Movement);
@@ -107,10 +112,12 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
         EnemyDeadBody deadBody = _context.DeadBodies.Get(transform.position);
 
+        deadBody.transform.localScale = transform.localScale;
         deadBody.End(_animator == null ? null : _animator.runtimeAnimatorController);
 
         ExplosionAnimation explosion = _context.Explosions.Get(transform.position);
 
+        explosion.transform.localScale = transform.localScale;
         explosion.Play();
 
         Released?.Invoke(this);

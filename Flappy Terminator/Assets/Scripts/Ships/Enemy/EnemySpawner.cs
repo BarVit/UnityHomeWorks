@@ -148,6 +148,14 @@ public class EnemySpawner : MonoBehaviour
         _spawning = null;
     }
 
+    public void Spawn(EnemySetup setup)
+    {
+        if (setup.Weapon != null && setup.Weapon.Projectile != null)
+            Collect(_ammoPools, _pools.GetPool(setup.Weapon.Projectile));
+
+        Release(setup);
+    }
+
     private void Release(EnemySetup setup)
     {
         SpawnPool<EnemyShip> pool = _pools.GetPool(setup.Prefab, _created);

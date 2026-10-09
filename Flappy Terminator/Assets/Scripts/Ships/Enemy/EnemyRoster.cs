@@ -43,7 +43,7 @@ public class EnemyRoster
                 continue;
 
             foreach (EnemyTierRow tier in _tiers.GetTiers(ship.Id))
-                _available.Add(new EnemySetup(ship, tier, _weapons.GetRow(tier.Weapon)));
+                _available.Add(EnemySetup.ForTier(ship, tier, _weapons.GetRow(tier.Weapon)));
         }
     }
 

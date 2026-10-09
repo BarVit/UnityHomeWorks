@@ -55,6 +55,18 @@ namespace TableImport
             return value;
         }
 
+        public Color ReadColor(string column)
+        {
+            string text = ReadCell(column);
+
+            if (ColorUtility.TryParseHtmlString("#" + text, out Color color))
+                return color;
+
+            Fail(column + ": " + Describe(text) + " не цвет вида RRGGBB");
+
+            return Color.white;
+        }
+
         public float ReadFloat(string column, float minimum, float maximum)
         {
             string text = ReadCell(column);
