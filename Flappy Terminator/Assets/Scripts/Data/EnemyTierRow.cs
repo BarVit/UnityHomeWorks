@@ -7,20 +7,22 @@ public class EnemyTierRow
     [SerializeField] private string _id;
     [SerializeField] private string _ship;
     [SerializeField] private int _tier;
-    [SerializeField] private float _healthScale;
-    [SerializeField] private float _projectileSpeedScale;
+    [SerializeField] private int _health;
+    [SerializeField] private string _weapon;
     [SerializeField] private int _barrels;
+    [SerializeField] private int _damage;
     [SerializeField] private MovementProfile _movement;
 
-    public EnemyTierRow(string id, string ship, int tier, float healthScale,
-        float projectileSpeedScale, int barrels, MovementProfile movement)
+    public EnemyTierRow(string id, string ship, int tier, int health, string weapon, int barrels, int damage,
+        MovementProfile movement)
     {
         _id = id;
         _ship = ship;
         _tier = tier;
-        _healthScale = healthScale;
-        _projectileSpeedScale = projectileSpeedScale;
+        _health = health;
+        _weapon = weapon;
         _barrels = barrels;
+        _damage = damage;
         _movement = movement;
     }
 
@@ -30,11 +32,13 @@ public class EnemyTierRow
 
     public int Tier => _tier;
 
-    public float HealthScale => _healthScale;
+    public int Health => _health;
 
-    public float ProjectileSpeedScale => _projectileSpeedScale;
+    public string Weapon => _weapon;
 
     public int Barrels => _barrels;
+
+    public int Damage => _damage;
 
     public MovementProfile Movement => _movement;
 }

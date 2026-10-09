@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerShooter : MonoBehaviour
 {
+    private const string AmmoLayerName = "PlayerAmmo";
+
     [SerializeField] private WeaponTable _weapons;
     [SerializeField] private string _weaponId;
     [SerializeField] private int _barrels = 1;
@@ -64,7 +66,7 @@ public class PlayerShooter : MonoBehaviour
         Camera camera = Camera.main;
         WeaponContext context = new WeaponContext(_mounts, _barrels, _pools,
             new ShotAudio(_shotAudioSource, camera), new ShotAudio(_hitAudioSource, camera),
-            _targetLayers, camera, 1f, _worldLayers, new ShotLoop(_loopAudioSource),
+            _targetLayers, LayerMask.NameToLayer(AmmoLayerName), camera, _worldLayers, new ShotLoop(_loopAudioSource),
             new ShotLoop(_hitLoopAudioSource));
 
         _delivery = WeaponFactory.Create(row, context);

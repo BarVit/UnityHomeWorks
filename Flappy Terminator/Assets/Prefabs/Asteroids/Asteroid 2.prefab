@@ -201,4 +201,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ammoLayers:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 128

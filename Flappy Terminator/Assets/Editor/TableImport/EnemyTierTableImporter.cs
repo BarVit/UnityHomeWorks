@@ -10,7 +10,7 @@ namespace TableImport
 
         private static readonly string[] Columns =
         {
-            "id", "ship", "tier", "health_scale", "projectile_speed_scale", "barrels", "movement"
+            "id", "ship", "tier", "health", "weapon", "barrels", "damage", "movement"
         };
 
         public static EnemyTierTable Import(EnemyShipTable ships, WeaponTable weapons, TableLog log)
@@ -37,20 +37,23 @@ namespace TableImport
 
                 string ship = reader.ReadText("ship");
                 int tier = reader.ReadInt("tier", 1, 5);
+                string weapon = reader.ReadText("weapon");
                 int barrels = reader.ReadInt("barrels", 1, 8);
 
                 if (steps.Add(ship + " " + tier) == false)
                     reader.Fail("у корабля " + ship + " уже есть ступень " + tier);
 
-                CheckShip(ships, weapons, ship, barrels, reader);
+                CheckShip(ships, ship, reader);
+                CheckWeapon(weapons, weapon, barrels, reader);
 
                 rows.Add(new EnemyTierRow(
                     id,
                     ship,
                     tier,
-                    reader.ReadFloat("health_scale", 0.1f, 100f),
-                    reader.ReadFloat("projectile_speed_scale", 0.1f, 10f),
+                    reader.ReadInt("health", 1, 100000),
+                    weapon,
                     barrels,
+                    reader.ReadInt("damage", 1, 10000),
                     reader.ReadAsset<MovementProfile>("movement", true)));
             }
 
@@ -61,29 +64,35 @@ namespace TableImport
             return table;
         }
 
-        private static void CheckShip(EnemyShipTable ships, WeaponTable weapons, string ship,
-            int barrels, RowReader reader)
+        private static void CheckShip(EnemyShipTable ships, string ship, RowReader reader)
         {
             if (ships == null || ship.Length == 0)
                 return;
 
-            EnemyShipRow shipRow = ships.GetRow(ship);
-
-            if (shipRow == null)
-            {
+            if (ships.GetRow(ship) == null)
                 reader.Fail("ship: нет корабля с id " + ship + " в " + EnemyShipTableImporter.SourcePath);
+        }
+
+        private static void CheckWeapon(WeaponTable weapons, string weapon, int barrels, RowReader reader)
+        {
+            if (weapons == null || weapon.Length == 0)
+                return;
+
+            WeaponRow row = weapons.GetRow(weapon);
+
+            if (row == null)
+            {
+                reader.Fail("weapon: нет оружия с id " + weapon + " в " + WeaponTableImporter.SourcePath);
 
                 return;
             }
 
-            if (weapons == null)
-                return;
+            if (row.Owner != WeaponOwner.Enemy)
+                reader.Fail("weapon: " + weapon + " принадлежит игроку, врагу нужна строка с owner Enemy");
 
-            WeaponRow weapon = weapons.GetRow(shipRow.Weapon);
-
-            if (weapon != null && barrels > weapon.BarrelsMax)
+            if (barrels > row.BarrelsMax)
                 reader.Fail("barrels: " + barrels + " больше, чем barrels_max оружия "
-                    + weapon.Id + " (" + weapon.BarrelsMax + ")");
+                    + row.Id + " (" + row.BarrelsMax + ")");
         }
     }
 }

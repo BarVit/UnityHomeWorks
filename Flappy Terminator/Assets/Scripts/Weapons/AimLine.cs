@@ -16,6 +16,8 @@ public class AimLine : MonoBehaviour
 
     public Quaternion Rotation { get; private set; }
 
+    public float AimedTime { get; private set; }
+
     private void Awake()
     {
         _line = GetComponent<LineRenderer>();
@@ -39,6 +41,7 @@ public class AimLine : MonoBehaviour
         _line.SetPosition(0, From);
         _line.SetPosition(1, From + direction * GetLength(direction));
         _line.enabled = _restLeft <= 0f && (_ship == null || _ship.IsControlEnabled);
+        AimedTime = _line.enabled ? AimedTime + Time.deltaTime : 0f;
     }
 
     public void Follow(Transform mount, Quaternion offset)
@@ -53,15 +56,19 @@ public class AimLine : MonoBehaviour
     {
         _restLeft = _restDuration;
         _line.enabled = false;
+        AimedTime = 0f;
     }
 
     private float GetLength(Vector3 direction)
     {
         float width = ScreenArea.GetRightEdge(_camera) - ScreenArea.GetLeftEdge(_camera);
 
-        if (direction.x <= 0.01f)
-            return width;
+        if (direction.x > 0.01f)
+            return Mathf.Min((ScreenArea.GetRightEdge(_camera) - From.x) / direction.x, width * 2f);
 
-        return Mathf.Min((ScreenArea.GetRightEdge(_camera) - From.x) / direction.x, width * 2f);
+        if (direction.x < -0.01f)
+            return Mathf.Min((From.x - ScreenArea.GetLeftEdge(_camera)) / -direction.x, width * 2f);
+
+        return width;
     }
 }

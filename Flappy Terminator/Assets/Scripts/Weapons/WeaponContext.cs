@@ -3,8 +3,8 @@ using UnityEngine;
 public class WeaponContext
 {
     public WeaponContext(Transform[] mounts, int barrels, PoolRegistry pools, ShotAudio audio,
-        ShotAudio hitAudio, LayerMask targetLayers, Camera camera, float projectileSpeedScale = 1f, LayerMask worldLayers = default,
-        ShotLoop loop = null, ShotLoop hitLoop = null)
+        ShotAudio hitAudio, LayerMask targetLayers, int ammoLayer, Camera camera, LayerMask worldLayers = default,
+        ShotLoop loop = null, ShotLoop hitLoop = null, int damage = 0)
     {
         Mounts = mounts;
         Barrels = barrels;
@@ -14,8 +14,9 @@ public class WeaponContext
         Loop = loop;
         HitLoop = hitLoop;
         TargetLayers = targetLayers;
+        AmmoLayer = ammoLayer;
         Camera = camera;
-        ProjectileSpeedScale = projectileSpeedScale;
+        Damage = damage;
 
         ContactFilter2D filter = new ContactFilter2D();
 
@@ -48,11 +49,13 @@ public class WeaponContext
 
     public LayerMask TargetLayers { get; private set; }
 
+    public int AmmoLayer { get; private set; }
+
     public ContactFilter2D TargetFilter { get; private set; }
 
     public ContactFilter2D WorldFilter { get; private set; }
 
     public Camera Camera { get; private set; }
 
-    public float ProjectileSpeedScale { get; private set; }
+    public int Damage { get; private set; }
 }

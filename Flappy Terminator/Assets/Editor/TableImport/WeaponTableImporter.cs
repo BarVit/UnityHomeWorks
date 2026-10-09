@@ -12,7 +12,7 @@ namespace TableImport
         private static readonly string[] Columns =
         {
             "id", "title", "owner", "delivery", "damage", "rate", "magazine", "reload_time", "projectile_speed", "barrels_max",
-            "fire_pattern", "side_angle", "heat_per_shot", "cooldown_rate", "tick_interval", "turn_rate",
+            "fire_pattern", "side_angle", "heat_per_shot", "cooldown_rate", "unlock_heat", "tick_interval", "turn_rate", "aim_time",
             "area", "price", "projectile", "beam",
             "icon", "projectile_sprite", "projectile_animation", "shot_effect",
             "hit_target_effect", "hit_world_effect",
@@ -58,8 +58,10 @@ namespace TableImport
                     reader.ReadFloat("side_angle", 0f, 90f),
                     reader.ReadFloat("heat_per_shot", 0f, 100f),
                     reader.ReadFloat("cooldown_rate", 0f, 1000f),
+                    reader.ReadFloat("unlock_heat", 0f, 1f),
                     reader.ReadFloat("tick_interval", 0f, 10f),
                     reader.ReadFloat("turn_rate", 0f, 1000f),
+                    reader.ReadFloat("aim_time", 0f, 10f),
                     reader.ReadFloat("area", 0f, 20f),
                     reader.ReadInt("price", 0, 1000000),
                     reader.ReadPrefab<Ammo>("projectile", needsProjectile),

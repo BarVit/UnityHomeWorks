@@ -3,7 +3,6 @@ using UnityEngine;
 public abstract class WeaponDelivery
 {
     private const float MaxHeat = 100f;
-    private const float UnlockHeat = MaxHeat * 0.5f;
 
     private readonly WeaponRow _row;
     private readonly WeaponContext _context;
@@ -58,7 +57,9 @@ public abstract class WeaponDelivery
 
     protected float HeatShare => Mathf.Clamp01(_heat / MaxHeat);
 
-    protected float ProjectileSpeed => _row.ProjectileSpeed * _context.ProjectileSpeedScale;
+    protected float ProjectileSpeed => _row.ProjectileSpeed;
+
+    protected int Damage => _context.Damage > 0 ? _context.Damage : _row.Damage;
 
     public void Fire()
     {
@@ -172,8 +173,12 @@ public abstract class WeaponDelivery
 
         _heat = Mathf.Max(0f, _heat - _row.CooldownRate * deltaTime);
 
-        if (_heat <= UnlockHeat)
+        if (_heat <= MaxHeat * _row.UnlockHeat)
             _isOverheated = false;
+    }
+
+    public virtual void Dispose()
+    {
     }
 
     protected abstract void OnFire();

@@ -44,7 +44,16 @@ public class BeamDelivery : WeaponDelivery
                 _sights[barrel] = CreateSight(row.Beam.Sight, barrel);
     }
 
+    public override bool IsReady => base.IsReady && IsAimed();
+
     protected Transform Target { get; private set; }
+
+    public override void Dispose()
+    {
+        foreach (AimLine sight in _sights)
+            if (sight != null)
+                Object.Destroy(sight.gameObject);
+    }
 
     protected override void OnFire()
     {
@@ -148,7 +157,7 @@ public class BeamDelivery : WeaponDelivery
 
         if (damageable != null)
         {
-            damageable.TakeDamage(Row.Damage);
+            damageable.TakeDamage(Damage);
             NoteTargetHit(hit.point);
 
             if (Target == null)
@@ -161,6 +170,18 @@ public class BeamDelivery : WeaponDelivery
         ExplosionAnimation effect = _hitEffectPool.Get(hit.point, rotation);
 
         effect.Play();
+    }
+
+    private bool IsAimed()
+    {
+        if (Row.AimTime <= 0f)
+            return true;
+
+        foreach (AimLine sight in _sights)
+            if (sight != null && sight.AimedTime < Row.AimTime)
+                return false;
+
+        return true;
     }
 
     private AimLine CreateSight(AimLine prefab, int barrel)

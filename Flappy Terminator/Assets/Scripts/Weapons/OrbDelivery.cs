@@ -93,7 +93,7 @@ public class OrbDelivery : ProjectileDelivery
 
     private float GetDamageRate(Ammo orb)
     {
-        return orb.TryGetComponent(out OrbGrowth growth) ? growth.GetDamageRate(Row.Damage) : Row.Damage;
+        return orb.TryGetComponent(out OrbGrowth growth) ? growth.GetDamageRate(Damage) : Damage;
     }
 
     private void Deal(IDamageable damageable, float damage)

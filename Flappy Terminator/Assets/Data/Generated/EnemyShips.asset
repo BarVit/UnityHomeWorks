@@ -16,35 +16,25 @@ MonoBehaviour:
   - _id: enemy_warden
     _title: "\u0421\u0442\u0440\u0430\u0436"
     _prefab: {fileID: 748883696485598149, guid: 760552f2b84714314ac77afd244877e5, type: 3}
-    _health: 20
-    _weapon: enemy_blaster
     _bodyDamage: 10
     _fromLocation: loc_01_01
   - _id: enemy_hunter
     _title: "\u041E\u0445\u043E\u0442\u043D\u0438\u043A"
     _prefab: {fileID: 748883696485598149, guid: 16686150d903a469bad63cb034411710, type: 3}
-    _health: 30
-    _weapon: enemy_blaster
     _bodyDamage: 15
     _fromLocation: loc_01_03
   - _id: enemy_reaper
     _title: "\u0416\u043D\u0435\u0446"
     _prefab: {fileID: 748883696485598149, guid: 79fee06f008d942e7baa168b610dd793, type: 3}
-    _health: 45
-    _weapon: enemy_spray
     _bodyDamage: 20
     _fromLocation: loc_02_01
   - _id: enemy_phantom
     _title: "\u041F\u0440\u0438\u0437\u0440\u0430\u043A"
     _prefab: {fileID: 748883696485598149, guid: 18235c16a5303461787f966b277db17c, type: 3}
-    _health: 60
-    _weapon: enemy_seeker
     _bodyDamage: 25
     _fromLocation: loc_03_01
   - _id: enemy_executioner
     _title: "\u041F\u0430\u043B\u0430\u0447"
     _prefab: {fileID: 748883696485598149, guid: 8971cd4b3ded249faa09c9c5dd064fbe, type: 3}
-    _health: 80
-    _weapon: enemy_blaster
     _bodyDamage: 30
     _fromLocation: loc_04_01

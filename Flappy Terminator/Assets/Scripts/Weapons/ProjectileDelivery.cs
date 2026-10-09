@@ -50,8 +50,9 @@ public class ProjectileDelivery : WeaponDelivery
 
         ShowShot(barrel);
 
+        ammo.gameObject.layer = Context.AmmoLayer;
         ammo.Init(_hitEffectPool);
-        ammo.SetDamage(Row.Damage);
+        ammo.SetDamage(Damage);
         ammo.Fly(ProjectileSpeed);
         ammo.Struck += OnStruck;
 

@@ -2,16 +2,24 @@ using UnityEngine;
 
 public class EnemyShooter : MonoBehaviour
 {
+    private const string AmmoLayerName = "EnemyAmmo";
+
     [SerializeField] private Transform _mountRoot;
     [SerializeField] private AudioSource _shotAudioSource;
 
     private Transform[] _mounts;
+    private ShotLoop _loop;
+    private ShotLoop _hitLoop;
+    private int _ammoLayer;
     private WeaponDelivery _delivery;
     private bool _isShooting;
 
     private void Awake()
     {
         _mounts = CollectMounts();
+        _loop = new ShotLoop(CreateLoopSource());
+        _hitLoop = new ShotLoop(CreateLoopSource());
+        _ammoLayer = LayerMask.NameToLayer(AmmoLayerName);
     }
 
     private void Update()
@@ -29,7 +37,10 @@ public class EnemyShooter : MonoBehaviour
     {
         WeaponContext weapon = new WeaponContext(_mounts, setup.Barrels, context.Pools,
             new ShotAudio(_shotAudioSource, context.Camera), context.HitAudio, context.TargetLayers,
-            context.Camera, setup.ProjectileSpeedScale);
+            _ammoLayer, context.Camera, default, _loop, _hitLoop, setup.Damage);
+
+        if (_delivery != null)
+            _delivery.Dispose();
 
         _delivery = WeaponFactory.Create(setup.Weapon, weapon);
     }
@@ -42,6 +53,17 @@ public class EnemyShooter : MonoBehaviour
     public void StopShoot()
     {
         _isShooting = false;
+    }
+
+    private AudioSource CreateLoopSource()
+    {
+        AudioSource source = gameObject.AddComponent<AudioSource>();
+
+        source.outputAudioMixerGroup = _shotAudioSource.outputAudioMixerGroup;
+        source.spatialBlend = _shotAudioSource.spatialBlend;
+        source.playOnAwake = false;
+
+        return source;
     }
 
     private Transform[] CollectMounts()

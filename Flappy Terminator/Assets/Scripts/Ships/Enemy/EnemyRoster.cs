@@ -42,10 +42,8 @@ public class EnemyRoster
             if (IsOpen(ship, current) == false)
                 continue;
 
-            WeaponRow weapon = _weapons.GetRow(ship.Weapon);
-
             foreach (EnemyTierRow tier in _tiers.GetTiers(ship.Id))
-                _available.Add(new EnemySetup(ship, tier, weapon));
+                _available.Add(new EnemySetup(ship, tier, _weapons.GetRow(tier.Weapon)));
         }
     }
 

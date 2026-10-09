@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class EnemySetup
 {
     private readonly EnemyShipRow _ship;
@@ -19,13 +17,13 @@ public class EnemySetup
 
     public int Tier => _tier.Tier;
 
-    public int Health => Mathf.Max(1, Mathf.RoundToInt(_ship.Health * _tier.HealthScale));
+    public int Health => _tier.Health;
 
     public int BodyDamage => _ship.BodyDamage;
 
     public int Barrels => _tier.Barrels;
 
-    public float ProjectileSpeedScale => _tier.ProjectileSpeedScale;
+    public int Damage => _tier.Damage;
 
     public MovementProfile Movement => _tier.Movement;
 
