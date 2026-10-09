@@ -18,7 +18,7 @@
 | `Cannon shot [155790].wav` | [155790](https://freesound.org/s/155790) | 1.7 с | 319 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Cannon Shell.prefab` |
 | `Electric arc [567269].wav` | [567269](https://freesound.org/s/567269) | 3.3 с | 563 КБ | **нет** | — |
 | `Electric shock [655263].wav` | [655263](https://freesound.org/s/655263) | 6.3 с | 1.6 МБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Plasma Orb.prefab` |
-| `Explosion [402005].wav` | [402005](https://freesound.org/s/402005) | 1.8 с | 532 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Enemy Bullet.prefab`, `Prefabs/Player Rocket.prefab`, `Prefabs/Torpedo.prefab`, `VFX/Sparks/vfx_EnemyExposion.prefab` |
+| `Explosion [402005].wav` | [402005](https://freesound.org/s/402005) | 1.8 с | 532 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Player Rocket.prefab`, `Prefabs/Torpedo.prefab`, `VFX/Sparks/vfx_EnemyExposion.prefab` |
 | `Laser beam [843455].wav` | [843455](https://freesound.org/s/843455) | 3.0 с | 517 КБ | **нет** | — |
 | `Laser burn [670075].wav` | [670075](https://freesound.org/s/670075) | 0.40 с | 68 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Impulse Bolt.prefab` |
 | `Laser shot [580308].wav` | [580308](https://freesound.org/s/580308) | 0.07 с | 27 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Impulse Bolt.prefab` |
@@ -32,7 +32,7 @@
 | `Railgun [394672].wav` | [394672](https://freesound.org/s/394672) | 1.2 с | 217 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Beams/Railgun Beam.prefab` |
 | `Railgun enemy hit [724428].wav` | [724428](https://freesound.org/s/724428) | 0.68 с | 128 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Beams/Railgun Beam.prefab` |
 | `Railgun hit [871710].wav` | [871710](https://freesound.org/s/871710) | 0.60 с | 103 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Beams/Railgun Beam.prefab` |
-| `Rocket 1 [441500].wav` | [441500](https://freesound.org/s/441500) | 2.5 с | 430 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Enemy Bullet.prefab`, `Prefabs/Player Rocket.prefab` |
+| `Rocket 1 [441500].wav` | [441500](https://freesound.org/s/441500) | 2.5 с | 430 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Player Rocket.prefab` |
 | `Rocket 2 [441499].wav` | [441499](https://freesound.org/s/441499) | 4.0 с | 691 КБ | **нет** | — |
 | `Ship explosion [732252].wav` | [732252](https://freesound.org/s/732252) | 5.0 с | 864 КБ | да | `VFX/Sparks/Player ship explosion.prefab` |
 | `Torpedo launch [100772].wav` | [100772](https://freesound.org/s/100772) | 2.2 с | 379 КБ | да | `Data/Generated/Weapons.asset`, `Prefabs/Torpedo.prefab` |
