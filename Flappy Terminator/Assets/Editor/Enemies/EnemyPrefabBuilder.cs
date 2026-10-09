@@ -75,9 +75,12 @@ namespace EnemyContent
             GameObject root = PrefabUtility.LoadPrefabContents(path);
 
             root.name = GetName(number);
-            SetSprite(root, GetName(number));
+
+            SpriteRenderer renderer = SetSprite(root, GetName(number));
+
             SetController(root, GetName(number));
             SetMounts(root, Vector2.one);
+            FitCollider(renderer);
 
             PrefabUtility.SaveAsPrefabAsset(root, path);
             PrefabUtility.UnloadPrefabContents(root);

@@ -176,18 +176,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.040110826, y: 0.13358867}
-      - {x: -0.062411547, y: 0.10554314}
-      - {x: -0.10891533, y: 0.10619819}
-      - {x: -0.13, y: 0.07545078}
-      - {x: -0.13147032, y: -0.03398046}
-      - {x: -0.09558901, y: -0.10220957}
-      - {x: 0.08941494, y: -0.10662067}
-      - {x: 0.13147056, y: -0.043537706}
-      - {x: 0.13158178, y: 0.065053225}
-      - {x: 0.11015022, y: 0.095}
-      - {x: 0.07235193, y: 0.09686649}
-      - {x: 0.043684326, y: 0.13352966}
+    - - {x: -0.12, y: 0.14999999}
+      - {x: -0.17, y: 0}
+      - {x: -0.17, y: -0.17999999}
+      - {x: 0.17, y: -0.17999999}
+      - {x: 0.17, y: -0.04}
+      - {x: 0.099999994, y: 0.14999999}
   m_UseDelaunayMesh: 0
 --- !u!95 &2789972181480222087
 Animator:
@@ -379,14 +373,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28405b992efd46e7b9c2baa50429287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minSpeed: 0.5
-  _maxSpeed: 3
-  _movementSettings:
-    _driftAmplitude: 1.5
-    _driftPeriod: 2
-    _minHoldPositionX: 0
-    _maxHoldPositionX: 4
-    _holdDuration: 2
 --- !u!114 &5984674500403766263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,6 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af363375fb3b04b468a812ee08dc503a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Value>k__BackingField: 0
   <MaxValue>k__BackingField: 20
 --- !u!82 &292637438989
 AudioSource:
