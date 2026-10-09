@@ -7,6 +7,7 @@ public class ScreenNavigator : MonoBehaviour
     [SerializeField] private PauseScreen _pauseScreen;
     [SerializeField] private SettingsScreen _settingsScreen;
     [SerializeField] private GameOverScreen _gameOverScreen;
+    [SerializeField] private VictoryScreen _victoryScreen;
 
     private bool _isSettingsFromPause;
 
@@ -27,6 +28,7 @@ public class ScreenNavigator : MonoBehaviour
         _pauseScreen.RestartRequested += OnRestartFromPauseRequested;
         _pauseScreen.SettingsRequested += OpenSettingsFromPause;
         _gameOverScreen.RestartRequested += OnRestartRequested;
+        _victoryScreen.MenuRequested += ShowStart;
         _settingsScreen.CloseRequested += CloseSettings;
     }
 
@@ -39,6 +41,7 @@ public class ScreenNavigator : MonoBehaviour
         _pauseScreen.RestartRequested -= OnRestartFromPauseRequested;
         _pauseScreen.SettingsRequested -= OpenSettingsFromPause;
         _gameOverScreen.RestartRequested -= OnRestartRequested;
+        _victoryScreen.MenuRequested -= ShowStart;
         _settingsScreen.CloseRequested -= CloseSettings;
     }
 
@@ -46,6 +49,7 @@ public class ScreenNavigator : MonoBehaviour
     {
         _pauseScreen.Hide();
         _gameOverScreen.Hide();
+        _victoryScreen.Hide();
         _settingsScreen.Hide();
         _startScreen.Show();
     }
@@ -65,10 +69,18 @@ public class ScreenNavigator : MonoBehaviour
         _gameOverScreen.Show(kills);
     }
 
+    public void ShowVictory(int kills)
+    {
+        _pauseScreen.Hide();
+        _gameOverScreen.Hide();
+        _victoryScreen.Show(kills);
+    }
+
     public void HideOverlays()
     {
         IsSettingsOpen = false;
         _gameOverScreen.Hide();
+        _victoryScreen.Hide();
         _settingsScreen.Hide();
     }
 

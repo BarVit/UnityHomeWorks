@@ -27,6 +27,8 @@ public class LocationRunner : MonoBehaviour
 
     public bool IsLastLevel => _run.Level >= _location.Levels;
 
+    public bool IsTest => _locationId == _testLocationId;
+
     public int PendingReward => _run.PendingReward;
 
     public int BankedReward => _run.BankedReward;

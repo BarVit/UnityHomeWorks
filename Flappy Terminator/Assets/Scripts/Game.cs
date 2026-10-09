@@ -148,7 +148,11 @@ public class Game : MonoBehaviour
         _asteroidSpawner.StopSpawn();
         _playerShip.DisableControl();
         _playerShip.ReturnToStart();
-        _screens.ShowStart();
+
+        if (_runner.IsTest)
+            _screens.ShowStart();
+        else
+            _screens.ShowVictory(_killCounter.Kills);
     }
 
     private void StartLevel()
