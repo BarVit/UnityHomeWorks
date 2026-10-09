@@ -10,7 +10,7 @@ namespace TableImport
 
         private static readonly string[] Columns =
         {
-            "id", "ship", "tier", "health", "weapon", "barrels", "damage", "movement"
+            "id", "ship", "tier", "health", "weapon", "barrels", "damage", "movement", "skin"
         };
 
         public static EnemyTierTable Import(EnemyShipTable ships, WeaponTable weapons, TableLog log)
@@ -54,7 +54,8 @@ namespace TableImport
                     weapon,
                     barrels,
                     reader.ReadInt("damage", 1, 10000),
-                    reader.ReadAsset<MovementProfile>("movement", true)));
+                    reader.ReadAsset<MovementProfile>("movement", true),
+                    reader.ReadAsset<SpriteSkin>("skin", false)));
             }
 
             EnemyTierTable table = GeneratedAsset.LoadOrCreate<EnemyTierTable>(AssetPath);

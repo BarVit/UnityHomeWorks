@@ -21,6 +21,7 @@ MonoBehaviour:
     _barrels: 1
     _damage: 10
     _movement: {fileID: 11400000, guid: 655d5bb0ee80e4eebb110e514052792d, type: 2}
+    _skin: {fileID: 0}
   - _id: warden_2
     _ship: enemy_warden
     _tier: 2
@@ -29,6 +30,7 @@ MonoBehaviour:
     _barrels: 1
     _damage: 10
     _movement: {fileID: 11400000, guid: fbee049361ca24f1e91d4612c690ef1d, type: 2}
+    _skin: {fileID: 11400000, guid: 89dc4b05a995d40cb95d9826bb042676, type: 2}
   - _id: warden_3
     _ship: enemy_warden
     _tier: 3
@@ -37,6 +39,7 @@ MonoBehaviour:
     _barrels: 2
     _damage: 10
     _movement: {fileID: 11400000, guid: da73c4fdab4c54894b366a2a1f80dbc9, type: 2}
+    _skin: {fileID: 11400000, guid: 27b03022958b842d094826d4c6078463, type: 2}
   - _id: hunter_1
     _ship: enemy_hunter
     _tier: 1
@@ -45,6 +48,7 @@ MonoBehaviour:
     _barrels: 1
     _damage: 5
     _movement: {fileID: 11400000, guid: 655d5bb0ee80e4eebb110e514052792d, type: 2}
+    _skin: {fileID: 0}
   - _id: hunter_2
     _ship: enemy_hunter
     _tier: 2
@@ -53,6 +57,7 @@ MonoBehaviour:
     _barrels: 2
     _damage: 5
     _movement: {fileID: 11400000, guid: 90d8dd41b80474e9aa9bb1f27035f75b, type: 2}
+    _skin: {fileID: 0}
   - _id: hunter_3
     _ship: enemy_hunter
     _tier: 3
@@ -61,6 +66,7 @@ MonoBehaviour:
     _barrels: 1
     _damage: 20
     _movement: {fileID: 11400000, guid: 272ca042f1216401da0ac9cec62c4ca8, type: 2}
+    _skin: {fileID: 0}
   - _id: reaper_1
     _ship: enemy_reaper
     _tier: 1
@@ -69,6 +75,7 @@ MonoBehaviour:
     _barrels: 1
     _damage: 15
     _movement: {fileID: 11400000, guid: ba870c54da02f4aabaab2e7fc7f400c6, type: 2}
+    _skin: {fileID: 0}
   - _id: reaper_2
     _ship: enemy_reaper
     _tier: 2
@@ -77,6 +84,7 @@ MonoBehaviour:
     _barrels: 1
     _damage: 20
     _movement: {fileID: 11400000, guid: ec44c4c943f5c4325963d3017c8e51d1, type: 2}
+    _skin: {fileID: 0}
   - _id: reaper_3
     _ship: enemy_reaper
     _tier: 3
@@ -85,6 +93,7 @@ MonoBehaviour:
     _barrels: 1
     _damage: 25
     _movement: {fileID: 11400000, guid: ec44c4c943f5c4325963d3017c8e51d1, type: 2}
+    _skin: {fileID: 0}
   - _id: phantom_1
     _ship: enemy_phantom
     _tier: 1
@@ -93,6 +102,7 @@ MonoBehaviour:
     _barrels: 2
     _damage: 14
     _movement: {fileID: 11400000, guid: 90d8dd41b80474e9aa9bb1f27035f75b, type: 2}
+    _skin: {fileID: 0}
   - _id: phantom_2
     _ship: enemy_phantom
     _tier: 2
@@ -101,6 +111,7 @@ MonoBehaviour:
     _barrels: 2
     _damage: 14
     _movement: {fileID: 11400000, guid: 34cf25f610b76417aa1d0bdfc23682c0, type: 2}
+    _skin: {fileID: 0}
   - _id: phantom_3
     _ship: enemy_phantom
     _tier: 3
@@ -109,6 +120,7 @@ MonoBehaviour:
     _barrels: 3
     _damage: 14
     _movement: {fileID: 11400000, guid: 34cf25f610b76417aa1d0bdfc23682c0, type: 2}
+    _skin: {fileID: 0}
   - _id: executioner_1
     _ship: enemy_executioner
     _tier: 1
@@ -117,6 +129,7 @@ MonoBehaviour:
     _barrels: 1
     _damage: 50
     _movement: {fileID: 11400000, guid: da73c4fdab4c54894b366a2a1f80dbc9, type: 2}
+    _skin: {fileID: 0}
   - _id: executioner_2
     _ship: enemy_executioner
     _tier: 2
@@ -125,6 +138,7 @@ MonoBehaviour:
     _barrels: 1
     _damage: 40
     _movement: {fileID: 11400000, guid: 272ca042f1216401da0ac9cec62c4ca8, type: 2}
+    _skin: {fileID: 0}
   - _id: executioner_3
     _ship: enemy_executioner
     _tier: 3
@@ -133,3 +147,4 @@ MonoBehaviour:
     _barrels: 3
     _damage: 20
     _movement: {fileID: 11400000, guid: 272ca042f1216401da0ac9cec62c4ca8, type: 2}
+    _skin: {fileID: 0}

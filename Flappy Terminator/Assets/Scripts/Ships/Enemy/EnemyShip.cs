@@ -12,6 +12,8 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
     private Camera _camera;
     private Animator _animator;
     private SpriteRenderer _body;
+    private SkinnedSprite _skin;
+    private SpriteSkin _skinAsset;
     private Health _health;
     private EnemyMover _mover;
     private EnemyShooter _shooter;
@@ -33,6 +35,7 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
         _camera = Camera.main;
         _animator = GetComponentInChildren<Animator>(true);
         _body = GetComponentInChildren<SpriteRenderer>(true);
+        _skin = new SkinnedSprite(_body);
         _health = GetComponent<Health>();
         _mover = GetComponent<EnemyMover>();
         _shooter = GetComponent<EnemyShooter>();
@@ -48,6 +51,11 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
     {
         _ammoHitHandler.HitDetected -= OnAmmoHit;
         _health.Died -= Die;
+    }
+
+    private void LateUpdate()
+    {
+        _skin.Apply();
     }
 
     private void Update()
@@ -71,6 +79,9 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
         if (_body != null)
             _body.color = setup.Tint;
+
+        _skinAsset = setup.Skin;
+        _skin.Wear(_skinAsset);
 
         _health.Init(setup.Health);
         _shooter.Arm(setup, _context);
@@ -113,7 +124,7 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
         EnemyDeadBody deadBody = _context.DeadBodies.Get(transform.position);
 
         deadBody.transform.localScale = transform.localScale;
-        deadBody.End(_animator == null ? null : _animator.runtimeAnimatorController);
+        deadBody.End(_animator == null ? null : _animator.runtimeAnimatorController, _skinAsset);
 
         ExplosionAnimation explosion = _context.Explosions.Get(transform.position);
 

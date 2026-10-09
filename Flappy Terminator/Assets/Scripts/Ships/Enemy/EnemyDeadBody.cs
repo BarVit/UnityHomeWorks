@@ -7,6 +7,7 @@ public class EnemyDeadBody : MonoBehaviour, IPoolable
     [SerializeField] private float _lifetime = 0.4f;
 
     private Animator _animator;
+    private SkinnedSprite _skin;
     private Coroutine _lifetimeCountdown;
 
     public event Action<IPoolable> Released;
@@ -14,6 +15,7 @@ public class EnemyDeadBody : MonoBehaviour, IPoolable
     private void Awake()
     {
         _animator = GetComponentInChildren<Animator>(true);
+        _skin = new SkinnedSprite(GetComponentInChildren<SpriteRenderer>(true));
     }
 
     public void OnSpawn()
@@ -25,7 +27,7 @@ public class EnemyDeadBody : MonoBehaviour, IPoolable
         StopCountdown();
     }
 
-    public void End(RuntimeAnimatorController controller)
+    public void End(RuntimeAnimatorController controller, SpriteSkin skin)
     {
         if (_animator != null)
         {
@@ -36,7 +38,13 @@ public class EnemyDeadBody : MonoBehaviour, IPoolable
             _animator.Update(0f);
         }
 
+        _skin.Wear(skin);
         _lifetimeCountdown = StartCoroutine(CountLifetime());
+    }
+
+    private void LateUpdate()
+    {
+        _skin.Apply();
     }
 
     private void StopCountdown()

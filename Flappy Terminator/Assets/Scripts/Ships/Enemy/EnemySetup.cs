@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemySetup
 {
     private EnemySetup(EnemyShip prefab, string shipId, int tier, int health, int bodyDamage, int barrels,
-        int damage, MovementProfile movement, WeaponRow weapon, int scale, Color tint)
+        int damage, MovementProfile movement, WeaponRow weapon, int scale, Color tint, SpriteSkin skin)
     {
         Prefab = prefab;
         ShipId = shipId;
@@ -16,6 +16,7 @@ public class EnemySetup
         Weapon = weapon;
         Scale = scale;
         Tint = tint;
+        Skin = skin;
     }
 
     public EnemyShip Prefab { get; private set; }
@@ -40,15 +41,17 @@ public class EnemySetup
 
     public Color Tint { get; private set; }
 
+    public SpriteSkin Skin { get; private set; }
+
     public static EnemySetup ForTier(EnemyShipRow ship, EnemyTierRow tier, WeaponRow weapon)
     {
         return new EnemySetup(ship.Prefab, ship.Id, tier.Tier, tier.Health, ship.BodyDamage, tier.Barrels,
-            tier.Damage, tier.Movement, weapon, 1, Color.white);
+            tier.Damage, tier.Movement, weapon, 1, Color.white, tier.Skin);
     }
 
     public static EnemySetup ForBoss(BossRow boss, WeaponRow weapon)
     {
         return new EnemySetup(boss.Prefab, boss.Id, 0, boss.Health, boss.BodyDamage, boss.Barrels,
-            boss.Damage, boss.Movement, weapon, boss.Scale, boss.Tint);
+            boss.Damage, boss.Movement, weapon, boss.Scale, boss.Tint, null);
     }
 }

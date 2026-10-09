@@ -12,9 +12,10 @@ public class EnemyTierRow
     [SerializeField] private int _barrels;
     [SerializeField] private int _damage;
     [SerializeField] private MovementProfile _movement;
+    [SerializeField] private SpriteSkin _skin;
 
     public EnemyTierRow(string id, string ship, int tier, int health, string weapon, int barrels, int damage,
-        MovementProfile movement)
+        MovementProfile movement, SpriteSkin skin)
     {
         _id = id;
         _ship = ship;
@@ -24,6 +25,7 @@ public class EnemyTierRow
         _barrels = barrels;
         _damage = damage;
         _movement = movement;
+        _skin = skin;
     }
 
     public string Id => _id;
@@ -41,4 +43,6 @@ public class EnemyTierRow
     public int Damage => _damage;
 
     public MovementProfile Movement => _movement;
+
+    public SpriteSkin Skin => _skin;
 }
