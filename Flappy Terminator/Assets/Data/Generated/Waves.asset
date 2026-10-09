@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa3ff3fa2428d406a865c21cca513ad0, type: 3}
+  m_Name: Waves
+  m_EditorClassIdentifier: Assembly-CSharp::WaveTable
+  _rows:
+  - _location: loc_01_01
+    _level: 1
+    _order: 1
+    _count: 10
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 3
+  - _location: loc_01_01
+    _level: 2
+    _order: 1
+    _count: 10
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 3
+  - _location: loc_01_01
+    _level: 2
+    _order: 2
+    _count: 5
+    _mode: 1
+    _enemies:
+    - warden_2
+    _interval: 3
+  - _location: loc_01_01
+    _level: 3
+    _order: 1
+    _count: 20
+    _mode: 0
+    _enemies:
+    - warden_1
+    - warden_2
+    _interval: 3
+  - _location: loc_01_01
+    _level: 3
+    _order: 2
+    _count: 20
+    _mode: 1
+    _enemies:
+    - warden_1
+    - warden_2
+    - hunter_1
+    _interval: 3
+  - _location: loc_01_01
+    _level: 3
+    _order: 3
+    _count: 1
+    _mode: 2
+    _enemies:
+    - marauder_1
+    _interval: 0

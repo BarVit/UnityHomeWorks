@@ -10,6 +10,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private WeaponTable _weapons;
     [SerializeField] private LocationTable _locations;
     [SerializeField] private SystemTable _systems;
+    [SerializeField] private BossTable _bosses;
+    [SerializeField] private WaveTable _waves;
     [SerializeField] private ExplosionAnimation _explosionPrefab;
     [SerializeField] private EnemyDeadBody _deadBodyPrefab;
     [SerializeField] private AudioSource _hitAudioSource;
@@ -26,6 +28,7 @@ public class EnemySpawner : MonoBehaviour
     private Camera _camera;
     private EnemyContext _context;
     private EnemyRoster _roster;
+    private LevelPlanner _planner;
     private Action<EnemyShip> _created;
     private Coroutine _spawning;
     private Wave _wave;
@@ -40,15 +43,21 @@ public class EnemySpawner : MonoBehaviour
         _context = new EnemyContext(_pools, _explosionPrefab, _deadBodyPrefab,
             new ShotAudio(_hitAudioSource, _camera), _targetLayers, _camera);
         _roster = new EnemyRoster(_enemyShips, _enemyTiers, _weapons, _locations, _systems);
+        _planner = new LevelPlanner(_enemyShips, _enemyTiers, _weapons, _bosses, _waves, _roster);
     }
 
-    public void StartWave(int waveSize, string locationId)
+    public void StartLevel(string locationId, int level, int fallbackSize)
     {
         Open(locationId);
         ClearField();
 
-        _wave = new Wave(waveSize);
-        _spawning = StartCoroutine(Spawn());
+        List<PlannedSpawn> plan = _planner.Plan(locationId, level, fallbackSize, _spawnDelay);
+
+        foreach (PlannedSpawn spawn in plan)
+            CollectPools(spawn.Setup);
+
+        _wave = new Wave(plan.Count);
+        _spawning = StartCoroutine(Spawn(plan));
     }
 
     public void FinishWave()
@@ -72,20 +81,19 @@ public class EnemySpawner : MonoBehaviour
     {
         _roster.Open(locationId);
 
-        if (_roster.Available.Count == 0)
-            throw new InvalidOperationException(
-                "EnemySpawner: для локации " + locationId + " в таблицах нет ни одного врага");
-
         _shipPools.Clear();
         _ammoPools.Clear();
 
         foreach (EnemySetup setup in _roster.Available)
-        {
-            Collect(_shipPools, _pools.GetPool(setup.Prefab, _created));
+            CollectPools(setup);
+    }
 
-            if (setup.Weapon != null && setup.Weapon.Projectile != null)
-                Collect(_ammoPools, _pools.GetPool(setup.Weapon.Projectile));
-        }
+    private void CollectPools(EnemySetup setup)
+    {
+        Collect(_shipPools, _pools.GetPool(setup.Prefab, _created));
+
+        if (setup.Weapon != null && setup.Weapon.Projectile != null)
+            Collect(_ammoPools, _pools.GetPool(setup.Weapon.Projectile));
     }
 
     private void Collect<T>(List<SpawnPool<T>> pools, SpawnPool<T> pool)
@@ -134,15 +142,19 @@ public class EnemySpawner : MonoBehaviour
             WaveCleared?.Invoke();
     }
 
-    private IEnumerator Spawn()
+    private IEnumerator Spawn(List<PlannedSpawn> plan)
     {
-        WaitForSeconds spawnDelay = new(_spawnDelay);
-
-        for (int i = 0; i < _wave.Size; i++)
+        for (int i = 0; i < plan.Count; i++)
         {
-            Release(_roster.GetRandom());
+            PlannedSpawn spawn = plan[i];
 
-            yield return spawnDelay;
+            while (spawn.WaitsForClearField && _wave.RetiredCount < i)
+                yield return null;
+
+            Release(spawn.Setup);
+
+            for (float left = spawn.Interval; left > 0f; left -= Time.deltaTime)
+                yield return null;
         }
 
         _spawning = null;
@@ -150,9 +162,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void Spawn(EnemySetup setup)
     {
-        if (setup.Weapon != null && setup.Weapon.Projectile != null)
-            Collect(_ammoPools, _pools.GetPool(setup.Weapon.Projectile));
-
+        CollectPools(setup);
         Release(setup);
     }
 

@@ -77,3 +77,11 @@ MonoBehaviour:
     _flightMode: 0
     _firstWaveSize: 5
     _waveSizeGrowth: 3
+  - _id: loc_test
+    _system: sys_01
+    _order: 1
+    _levels: 3
+    _borderTheme: 
+    _flightMode: 0
+    _firstWaveSize: 3
+    _waveSizeGrowth: 3

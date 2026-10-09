@@ -1,0 +1,105 @@
+using System.Collections.Generic;
+using UnityEditor;
+
+namespace TableImport
+{
+    public static class WaveTableImporter
+    {
+        public const string SourcePath = "Assets/Data/Tables/waves.tsv";
+        public const string AssetPath = "Assets/Data/Generated/Waves.asset";
+
+        private const char ListSeparator = ',';
+
+        private static readonly string[] Columns =
+        {
+            "location", "level", "order", "count", "mode", "enemies", "interval"
+        };
+
+        public static WaveTable Import(LocationTable locations, EnemyTierTable tiers, BossTable bosses, TableLog log)
+        {
+            TsvDocument document = TsvReader.Read(SourcePath, log);
+
+            if (document == null)
+                return null;
+
+            if (document.HasColumns(Columns, log) == false)
+                return null;
+
+            List<WaveRow> rows = new List<WaveRow>();
+            HashSet<string> steps = new HashSet<string>();
+
+            foreach (TsvRow raw in document.Rows)
+            {
+                RowReader reader = new RowReader(document, raw, log);
+                string location = reader.ReadText("location");
+                int level = reader.ReadInt("level", 1, 20);
+                int order = reader.ReadInt("order", 1, 99);
+                int count = reader.ReadInt("count", 1, 1000);
+                WaveMode mode = reader.ReadEnum<WaveMode>("mode");
+                string[] enemies = Split(reader.ReadText("enemies"));
+
+                if (steps.Add(location + " " + level + " " + order) == false)
+                    reader.Fail("у локации " + location + " на уровне " + level + " уже есть группа " + order);
+
+                CheckLocation(locations, location, level, reader);
+                CheckEnemies(tiers, bosses, mode, count, enemies, reader);
+
+                rows.Add(new WaveRow(location, level, order, count, mode, enemies,
+                    reader.ReadFloat("interval", 0f, 60f)));
+            }
+
+            WaveTable table = GeneratedAsset.LoadOrCreate<WaveTable>(AssetPath);
+            table.Fill(rows.ToArray());
+            EditorUtility.SetDirty(table);
+
+            return table;
+        }
+
+        private static string[] Split(string text)
+        {
+            string[] parts = text.Split(ListSeparator);
+
+            for (int i = 0; i < parts.Length; i++)
+                parts[i] = parts[i].Trim();
+
+            return parts;
+        }
+
+        private static void CheckLocation(LocationTable locations, string location, int level, RowReader reader)
+        {
+            if (locations == null || location.Length == 0)
+                return;
+
+            LocationRow row = locations.GetRow(location);
+
+            if (row == null)
+                reader.Fail("location: нет локации с id " + location + " в " + LocationTableImporter.SourcePath);
+            else if (level > row.Levels)
+                reader.Fail("level: " + level + " больше, чем уровней у " + location + " (" + row.Levels + ")");
+        }
+
+        private static void CheckEnemies(EnemyTierTable tiers, BossTable bosses, WaveMode mode, int count,
+            string[] enemies, RowReader reader)
+        {
+            if (mode == WaveMode.Boss)
+            {
+                if (count != 1 || enemies.Length != 1)
+                    reader.Fail("Boss: нужен ровно один босс и count 1");
+
+                if (bosses != null && bosses.GetRow(enemies[0]) == null)
+                    reader.Fail("enemies: нет босса с id " + enemies[0] + " в " + BossTableImporter.SourcePath);
+
+                return;
+            }
+
+            if (tiers == null)
+                return;
+
+            foreach (string enemy in enemies)
+            {
+                if (tiers.GetRow(enemy) == null)
+                    reader.Fail("enemies: нет ступени с id " + enemy + " в " + EnemyTierTableImporter.SourcePath);
+            }
+        }
+    }
+}

@@ -22,7 +22,8 @@ public class Game : MonoBehaviour
         _enemySpawner.WaveCleared += WinLevel;
         _playerShip.Died += LoseLevel;
         _warpJump.Finished += FinishWarp;
-        _screens.StartRequested += StartLocation;
+        _screens.StartRequested += StartGame;
+        _screens.StartTestRequested += StartTest;
         _screens.ResumeRequested += Resume;
         _screens.RestartFromPauseRequested += RestartFromPause;
         _screens.RestartRequested += RestartRun;
@@ -43,7 +44,8 @@ public class Game : MonoBehaviour
         _enemySpawner.WaveCleared -= WinLevel;
         _playerShip.Died -= LoseLevel;
         _warpJump.Finished -= FinishWarp;
-        _screens.StartRequested -= StartLocation;
+        _screens.StartRequested -= StartGame;
+        _screens.StartTestRequested -= StartTest;
         _screens.ResumeRequested -= Resume;
         _screens.RestartFromPauseRequested -= RestartFromPause;
         _screens.RestartRequested -= RestartRun;
@@ -89,9 +91,17 @@ public class Game : MonoBehaviour
         _screens.HidePause();
     }
 
-    private void StartLocation()
+    private void StartGame()
     {
-        _runner.StartLocation();
+        _runner.StartGame();
+        _killCounter.Restart();
+
+        StartLevel();
+    }
+
+    private void StartTest()
+    {
+        _runner.StartTest();
         _killCounter.Restart();
 
         StartLevel();
@@ -150,7 +160,7 @@ public class Game : MonoBehaviour
         _isRunning = true;
         _screens.HideOverlays();
         _playerShip.Restart();
-        _enemySpawner.StartWave(_runner.WaveSize, _runner.LocationId);
+        _enemySpawner.StartLevel(_runner.LocationId, _runner.Level, _runner.WaveSize);
         _asteroidSpawner.StartSpawn();
     }
 

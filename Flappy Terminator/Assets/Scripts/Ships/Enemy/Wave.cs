@@ -11,6 +11,8 @@ public class Wave
 
     public int Size => _size;
 
+    public int RetiredCount => _retiredCount;
+
     public bool IsCleared => _retiredCount >= _size;
 
     public void CountRetired()

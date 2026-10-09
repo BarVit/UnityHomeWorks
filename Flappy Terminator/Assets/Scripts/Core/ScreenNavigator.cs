@@ -13,6 +13,7 @@ public class ScreenNavigator : MonoBehaviour
     public bool IsSettingsOpen { get; private set; }
 
     public event Action StartRequested;
+    public event Action StartTestRequested;
     public event Action ResumeRequested;
     public event Action RestartFromPauseRequested;
     public event Action RestartRequested;
@@ -20,6 +21,7 @@ public class ScreenNavigator : MonoBehaviour
     private void OnEnable()
     {
         _startScreen.StartRequested += OnStartRequested;
+        _startScreen.TestRequested += OnStartTestRequested;
         _startScreen.SettingsRequested += OpenSettingsFromStart;
         _pauseScreen.ResumeRequested += OnResumeRequested;
         _pauseScreen.RestartRequested += OnRestartFromPauseRequested;
@@ -31,6 +33,7 @@ public class ScreenNavigator : MonoBehaviour
     private void OnDisable()
     {
         _startScreen.StartRequested -= OnStartRequested;
+        _startScreen.TestRequested -= OnStartTestRequested;
         _startScreen.SettingsRequested -= OpenSettingsFromStart;
         _pauseScreen.ResumeRequested -= OnResumeRequested;
         _pauseScreen.RestartRequested -= OnRestartFromPauseRequested;
@@ -110,6 +113,12 @@ public class ScreenNavigator : MonoBehaviour
     {
         _startScreen.Hide();
         StartRequested?.Invoke();
+    }
+
+    private void OnStartTestRequested()
+    {
+        _startScreen.Hide();
+        StartTestRequested?.Invoke();
     }
 
     private void OnResumeRequested()

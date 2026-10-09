@@ -1,17 +1,21 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class LocationRunner : MonoBehaviour
 {
     private const int RewardPerKill = 1;
 
     [SerializeField] private LocationTable _locations;
-    [SerializeField] private string _locationId;
+    [FormerlySerializedAs("_locationId")]
+    [SerializeField] private string _gameLocationId;
+    [SerializeField] private string _testLocationId = "loc_test";
     [SerializeField] private EnemySpawner _enemySpawner;
 
     private readonly RunState _run = new RunState();
 
     private LocationRow _location;
+    private string _locationId;
 
     public string LocationId => _locationId;
 
@@ -35,11 +39,7 @@ public class LocationRunner : MonoBehaviour
 
     private void Awake()
     {
-        _location = _locations.GetRow(_locationId);
-
-        if (_location == null)
-            throw new InvalidOperationException(
-                "LocationRunner: в таблице локаций нет строки с id " + _locationId);
+        Select(_gameLocationId);
     }
 
     private void OnEnable()
@@ -52,10 +52,14 @@ public class LocationRunner : MonoBehaviour
         _enemySpawner.EnemyDied -= OnEnemyDied;
     }
 
-    public void StartLocation()
+    public void StartGame()
     {
-        _run.Restart();
-        LevelChanged?.Invoke(_run.Level);
+        StartLocation(_gameLocationId);
+    }
+
+    public void StartTest()
+    {
+        StartLocation(_testLocationId);
     }
 
     public void RestartRun()
@@ -86,6 +90,25 @@ public class LocationRunner : MonoBehaviour
     {
         _run.AdvanceLevel();
         LevelChanged?.Invoke(_run.Level);
+    }
+
+    private void StartLocation(string locationId)
+    {
+        Select(locationId);
+        _run.Restart();
+        LevelChanged?.Invoke(_run.Level);
+    }
+
+    private void Select(string locationId)
+    {
+        LocationRow location = _locations.GetRow(locationId);
+
+        if (location == null)
+            throw new InvalidOperationException(
+                "LocationRunner: в таблице локаций нет строки с id " + locationId);
+
+        _locationId = locationId;
+        _location = location;
     }
 
     private void OnEnemyDied(EnemyShip ship)
