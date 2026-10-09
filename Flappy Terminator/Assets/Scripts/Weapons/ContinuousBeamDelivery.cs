@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ContinuousBeamDelivery : BeamDelivery
@@ -5,6 +6,8 @@ public class ContinuousBeamDelivery : BeamDelivery
     private static readonly Color CoolColor = new Color(0.25f, 1f, 0.35f);
     private static readonly Color WarmColor = new Color(1f, 0.92f, 0.2f);
     private static readonly Color HotColor = new Color(1f, 0.2f, 0.12f);
+
+    private readonly Dictionary<IDamageable, float> _owed = new Dictionary<IDamageable, float>();
 
     public ContinuousBeamDelivery(WeaponRow row, WeaponContext context) : base(row, context)
     {
@@ -21,6 +24,19 @@ public class ContinuousBeamDelivery : BeamDelivery
             Shoot(barrel);
 
         HoldLoop();
+    }
+
+    protected override int GetStrikeDamage(IDamageable damageable)
+    {
+        _owed.TryGetValue(damageable, out float owed);
+
+        owed += Damage * Row.Rate;
+
+        int whole = Mathf.FloorToInt(owed);
+
+        _owed[damageable] = owed - whole;
+
+        return whole;
     }
 
     protected override void Paint(BeamFlash flash)

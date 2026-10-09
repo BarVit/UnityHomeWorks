@@ -157,7 +157,7 @@ public class BeamDelivery : WeaponDelivery
 
         if (damageable != null)
         {
-            damageable.TakeDamage(Damage);
+            damageable.TakeDamage(GetStrikeDamage(damageable));
             NoteTargetHit(hit.point);
 
             if (Target == null)
@@ -170,6 +170,11 @@ public class BeamDelivery : WeaponDelivery
         ExplosionAnimation effect = _hitEffectPool.Get(hit.point, rotation);
 
         effect.Play();
+    }
+
+    protected virtual int GetStrikeDamage(IDamageable damageable)
+    {
+        return Damage;
     }
 
     private bool IsAimed()
