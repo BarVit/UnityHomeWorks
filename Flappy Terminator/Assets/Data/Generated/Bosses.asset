@@ -58,7 +58,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 16686150d903a469bad63cb034411710, type: 3}
     _prototype: hunter_2
     _health: 200
-    _weapon: enemy_impulse_laser
+    _weapon: enemy_impulse_laser_twin
     _barrels: 2
     _damage: 14
     _bodyDamage: 15
@@ -162,7 +162,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: ba18fc5dc9df349c9a3317347b8941d8, type: 3}
     _prototype: punisher_2
     _health: 1000
-    _weapon: enemy_impulse_laser
+    _weapon: enemy_impulse_laser_twin
     _barrels: 2
     _damage: 28
     _bodyDamage: 15

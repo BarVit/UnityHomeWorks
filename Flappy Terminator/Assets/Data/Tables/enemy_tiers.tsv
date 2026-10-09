@@ -2,8 +2,8 @@ id	ship	tier	health	weapon	barrels	damage	movement
 warden_1	enemy_warden	1	20	enemy_rocket	1	10	Forward
 warden_2	enemy_warden	2	25	enemy_rocket	1	10	Hover
 warden_3	enemy_warden	3	40	enemy_rocket	2	10	Hover Guard
-hunter_1	enemy_hunter	1	25	enemy_impulse_laser	1	7	Forward
-hunter_2	enemy_hunter	2	40	enemy_impulse_laser	2	7	Forward Leap
+hunter_1	enemy_hunter	1	25	enemy_impulse_laser	1	5	Forward
+hunter_2	enemy_hunter	2	40	enemy_impulse_laser_twin	2	5	Forward Leap
 hunter_3	enemy_hunter	3	60	enemy_beam_laser	1	20	Up And Down
 reaper_1	enemy_reaper	1	30	enemy_homing	1	15	Drift
 reaper_2	enemy_reaper	2	50	enemy_homing	1	20	Drift Retreat
