@@ -356,7 +356,7 @@ MonoBehaviour:
     _barrelsMax: 4
     _firePattern: 2
     _sideAngle: 10
-    _heatPerShot: 34
+    _heatPerShot: 50
     _cooldownRate: 50
     _unlockHeat: 0
     _tickInterval: 0
@@ -390,7 +390,7 @@ MonoBehaviour:
     _barrelsMax: 4
     _firePattern: 2
     _sideAngle: 10
-    _heatPerShot: 17
+    _heatPerShot: 25
     _cooldownRate: 50
     _unlockHeat: 0
     _tickInterval: 0

@@ -62,7 +62,7 @@ MonoBehaviour:
     _health: 20
     _weapon: enemy_impulse_laser
     _barrels: 1
-    _damage: 5
+    _damage: 3
     _movement: {fileID: 11400000, guid: 655d5bb0ee80e4eebb110e514052792d, type: 2}
     _skin: {fileID: 0}
   - _id: hunter_2
@@ -75,7 +75,7 @@ MonoBehaviour:
     _health: 30
     _weapon: enemy_impulse_laser_twin
     _barrels: 2
-    _damage: 5
+    _damage: 3
     _movement: {fileID: 11400000, guid: 90d8dd41b80474e9aa9bb1f27035f75b, type: 2}
     _skin: {fileID: 0}
   - _id: hunter_3
