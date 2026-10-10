@@ -16,6 +16,7 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private AudioSource _hitLoopAudioSource;
     [SerializeField] private LayerMask _targetLayers;
     [SerializeField] private LayerMask _worldLayers;
+    [SerializeField] private CritMark _critMark;
 
     private readonly PoolRegistry _pools = new PoolRegistry("Player Weapon");
 
@@ -105,7 +106,7 @@ public class PlayerShooter : MonoBehaviour
         WeaponContext context = new WeaponContext(_mounts, _barrels, _pools,
             new ShotAudio(_shotAudioSource, camera), new ShotAudio(_hitAudioSource, camera),
             _targetLayers, LayerMask.NameToLayer(AmmoLayerName), camera, _worldLayers, new ShotLoop(_loopAudioSource),
-            new ShotLoop(_hitLoopAudioSource), boost: boost);
+            new ShotLoop(_hitLoopAudioSource), boost: boost, critMark: _critMark);
 
         _equippedId = weaponId;
         _delivery = WeaponFactory.Create(row, context);

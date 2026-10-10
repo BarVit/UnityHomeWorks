@@ -103,6 +103,11 @@ public class TorpedoDelivery : ProjectileDelivery
 
         BlastWave wave = _blastPool.Get(centre);
 
-        wave.Play(warhead.NearDiameter, warhead.FarDiameter, RollDamage(), Context.TargetFilter);
+        int damage = RollDamage(out bool isCrit);
+
+        wave.Play(warhead.NearDiameter, warhead.FarDiameter, damage, Context.TargetFilter);
+
+        if (isCrit)
+            ShowCrit(centre, damage);
     }
 }

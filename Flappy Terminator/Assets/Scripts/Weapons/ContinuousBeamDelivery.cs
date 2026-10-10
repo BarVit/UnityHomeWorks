@@ -26,17 +26,22 @@ public class ContinuousBeamDelivery : BeamDelivery
         HoldLoop();
     }
 
-    protected override int GetStrikeDamage(IDamageable damageable)
+    protected override int GetStrikeDamage(IDamageable damageable, out bool isCrit)
     {
         _owed.TryGetValue(damageable, out float owed);
 
-        owed += Context.Boost.Roll(Damage * Row.Rate);
+        owed += RollDamage(Damage * Row.Rate, out isCrit);
 
         int whole = Mathf.FloorToInt(owed);
 
         _owed[damageable] = owed - whole;
 
         return whole;
+    }
+
+    protected override void ShowStrikeCrit(Vector2 point, int damage)
+    {
+        ShowCrit(point);
     }
 
     protected override void Paint(BeamFlash flash)

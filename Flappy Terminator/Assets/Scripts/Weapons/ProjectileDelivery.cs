@@ -52,7 +52,7 @@ public class ProjectileDelivery : WeaponDelivery
 
         ammo.gameObject.layer = Context.AmmoLayer;
         ammo.Init(_hitEffectPool);
-        ammo.SetDamage(RollDamage());
+        ammo.SetDamage(RollDamage(out bool isCrit), isCrit);
         ammo.Fly(ProjectileSpeed);
         ammo.Struck += OnStruck;
 
@@ -66,7 +66,12 @@ public class ProjectileDelivery : WeaponDelivery
 
     private void OnStruck(Ammo ammo)
     {
-        Sound sound = IsTarget(ammo.StruckObject) ? ammo.HitSound : ammo.WorldHitSound;
+        bool isTarget = IsTarget(ammo.StruckObject);
+
+        if (isTarget && ammo.IsCrit)
+            ShowCrit(ammo.transform.position, ammo.Damage);
+
+        Sound sound = isTarget ? ammo.HitSound : ammo.WorldHitSound;
 
         if (sound.Clip == null || Time.time <= _hitSoundUntil)
             return;
@@ -77,6 +82,6 @@ public class ProjectileDelivery : WeaponDelivery
 
     private bool IsTarget(GameObject struck)
     {
-        return struck != null && struck.GetComponentInParent<IDamageable>() != null;
+        return struck != null && struck.GetComponentInParent<IDamageable>(true) != null;
     }
 }

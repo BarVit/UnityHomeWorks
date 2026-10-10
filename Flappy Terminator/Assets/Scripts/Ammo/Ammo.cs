@@ -25,6 +25,8 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
 
     public GameObject StruckObject { get; private set; }
 
+    public bool IsCrit { get; private set; }
+
     public bool IsArmed { get; private set; }
 
     public bool IsPersistent { get; private set; }
@@ -71,9 +73,10 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
         Released?.Invoke(this);
     }
 
-    public void SetDamage(int damage)
+    public void SetDamage(int damage, bool isCrit = false)
     {
         Damage = damage;
+        IsCrit = isCrit;
     }
 
     public void Fly()

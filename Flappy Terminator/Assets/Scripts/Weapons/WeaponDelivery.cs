@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class WeaponDelivery
 {
     private const float MaxHeat = 100f;
+    private const float CritMarkInterval = 0.25f;
 
     private readonly WeaponRow _row;
     private readonly WeaponContext _context;
@@ -10,12 +11,14 @@ public abstract class WeaponDelivery
     private readonly int[] _ranks;
 
     private readonly SpawnPool<ExplosionAnimation> _shotPool;
+    private readonly SpawnPool<CritMark> _critPool;
 
     private float _cooldownLeft;
     private float _heat;
     private bool _isOverheated;
     private int _shotsLeft;
     private float _reloadLeft;
+    private float _critMarkUntil = -1f;
 
     protected WeaponDelivery(WeaponRow row, WeaponContext context)
     {
@@ -27,6 +30,9 @@ public abstract class WeaponDelivery
 
         if (row.Assets != null && row.Assets.ShotEffect != null)
             _shotPool = context.Pools.GetPool(row.Assets.ShotEffect);
+
+        if (context.CritMark != null)
+            _critPool = context.Pools.GetPool(context.CritMark);
     }
 
     public virtual bool IsReady => _cooldownLeft <= 0f && _isOverheated == false && _reloadLeft <= 0f;
@@ -61,9 +67,33 @@ public abstract class WeaponDelivery
 
     protected int Damage => (_context.Damage > 0 ? _context.Damage : _row.Damage) + _context.Boost.DamageBonus;
 
-    protected int RollDamage()
+    protected int RollDamage(out bool isCrit)
     {
-        return _context.Boost.Roll(Damage);
+        isCrit = _context.Boost.RollCrit();
+
+        return isCrit ? _context.Boost.ApplyCrit(Damage) : Damage;
+    }
+
+    protected float RollDamage(float damage, out bool isCrit)
+    {
+        isCrit = _context.Boost.RollCrit();
+
+        return isCrit ? _context.Boost.ApplyCrit(damage) : damage;
+    }
+
+    protected void ShowCrit(Vector2 point, int damage)
+    {
+        if (_critPool != null)
+            _critPool.Get(point).Show(damage);
+    }
+
+    protected void ShowCrit(Vector2 point)
+    {
+        if (_critPool == null || Time.time < _critMarkUntil)
+            return;
+
+        _critMarkUntil = Time.time + CritMarkInterval;
+        _critPool.Get(point).Show();
     }
 
     public void Fire()

@@ -99,7 +99,10 @@ public class OrbDelivery : ProjectileDelivery
     private void Deal(IDamageable damageable, float damage)
     {
         _owed.TryGetValue(damageable, out float owed);
-        owed += Context.Boost.Roll(damage);
+        owed += RollDamage(damage, out bool isCrit);
+
+        if (isCrit && damageable is Component target)
+            ShowCrit(target.transform.position);
 
         int whole = Mathf.FloorToInt(owed);
 

@@ -157,7 +157,13 @@ public class BeamDelivery : WeaponDelivery
 
         if (damageable != null)
         {
-            damageable.TakeDamage(GetStrikeDamage(damageable));
+            int damage = GetStrikeDamage(damageable, out bool isCrit);
+
+            damageable.TakeDamage(damage);
+
+            if (isCrit)
+                ShowStrikeCrit(hit.point, damage);
+
             NoteTargetHit(hit.point);
 
             if (Target == null)
@@ -172,9 +178,14 @@ public class BeamDelivery : WeaponDelivery
         effect.Play();
     }
 
-    protected virtual int GetStrikeDamage(IDamageable damageable)
+    protected virtual int GetStrikeDamage(IDamageable damageable, out bool isCrit)
     {
-        return RollDamage();
+        return RollDamage(out isCrit);
+    }
+
+    protected virtual void ShowStrikeCrit(Vector2 point, int damage)
+    {
+        ShowCrit(point, damage);
     }
 
     private bool IsAimed()

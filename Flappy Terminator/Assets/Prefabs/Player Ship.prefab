@@ -476,6 +476,7 @@ MonoBehaviour:
   _worldLayers:
     serializedVersion: 2
     m_Bits: 0
+  _critMark: {fileID: 2349005165134710086, guid: 79c2637feefb048508cf5c25ffe01dee, type: 3}
 --- !u!114 &8249974635623417634
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,18 +15,18 @@ public readonly struct WeaponBoost
 
     public float CritMultiplier { get; }
 
-    public int Roll(int damage)
-    {
-        return IsCrit() ? Mathf.RoundToInt(damage * CritMultiplier) : damage;
-    }
-
-    public float Roll(float damage)
-    {
-        return IsCrit() ? damage * CritMultiplier : damage;
-    }
-
-    private bool IsCrit()
+    public bool RollCrit()
     {
         return CritChance > 0f && Random.value < CritChance;
+    }
+
+    public int ApplyCrit(int damage)
+    {
+        return Mathf.RoundToInt(damage * CritMultiplier);
+    }
+
+    public float ApplyCrit(float damage)
+    {
+        return damage * CritMultiplier;
     }
 }
