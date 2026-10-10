@@ -54,15 +54,15 @@ MonoBehaviour:
   - _location: loc_01_01
     _level: 3
     _order: 2
-    _count: 16
+    _count: 12
     _mode: 1
     _enemies:
     - warden_2
     - warden_2
     - hunter_1
     - hunter_1
-    _interval: 3
-    _intervalMax: 3
+    _interval: 4
+    _intervalMax: 4
   - _location: loc_01_01
     _level: 3
     _order: 3
