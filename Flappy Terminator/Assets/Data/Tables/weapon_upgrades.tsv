@@ -6,7 +6,7 @@ Damage	3	2	900
 Damage	4	2	1200
 Damage	5	2	1500
 CritChance	0	0	0
-CritChance	1	10	300
+CritChance	1	10	150
 CritChance	2	10	600
 CritChance	3	10	900
 CritChance	4	10	1200

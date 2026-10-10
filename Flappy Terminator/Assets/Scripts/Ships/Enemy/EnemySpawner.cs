@@ -25,6 +25,7 @@ public class EnemySpawner : MonoBehaviour
     private readonly PoolRegistry _pools = new PoolRegistry("Enemies");
     private readonly List<SpawnPool<EnemyShip>> _shipPools = new List<SpawnPool<EnemyShip>>();
     private readonly List<SpawnPool<Ammo>> _ammoPools = new List<SpawnPool<Ammo>>();
+    private readonly List<EnemySetup> _escaped = new List<EnemySetup>();
 
     private Camera _camera;
     private EnemyContext _context;
@@ -33,6 +34,8 @@ public class EnemySpawner : MonoBehaviour
     private Action<EnemyShip> _created;
     private Coroutine _spawning;
     private Wave _wave;
+    private List<PlannedSpawn> _plan;
+    private int _released;
 
     public event Action<EnemyShip> EnemyDied;
     public event Action WaveCleared;
@@ -57,6 +60,8 @@ public class EnemySpawner : MonoBehaviour
         foreach (PlannedSpawn spawn in plan)
             CollectPools(spawn.Setup);
 
+        _plan = plan;
+        _released = 0;
         _wave = new Wave(plan.Count);
         _spawning = StartCoroutine(Spawn(plan));
     }
@@ -79,6 +84,28 @@ public class EnemySpawner : MonoBehaviour
 
         foreach (SpawnPool<Ammo> pool in _ammoPools)
             pool.ForEachActive(ammo => ammo.Disarm());
+    }
+
+    public void DefeatAll()
+    {
+        if (_wave == null)
+            return;
+
+        StopSpawn();
+
+        _wave = null;
+
+        foreach (SpawnPool<EnemyShip> pool in _shipPools)
+            pool.ForEachActive(ship => ship.Die());
+
+        foreach (EnemySetup setup in _escaped)
+            Release(setup).Die();
+
+        for (int i = _released; i < _plan.Count; i++)
+            Release(_plan[i].Setup).Die();
+
+        _escaped.Clear();
+        WaveCleared?.Invoke();
     }
 
     public void StopSpawn()
@@ -127,6 +154,7 @@ public class EnemySpawner : MonoBehaviour
         StopSpawn();
 
         _wave = null;
+        _escaped.Clear();
 
         foreach (SpawnPool<EnemyShip> pool in _shipPools)
             pool.ReleaseAll();
@@ -149,6 +177,9 @@ public class EnemySpawner : MonoBehaviour
         if (_wave == null)
             return;
 
+        if (ship.IsDead == false)
+            _escaped.Add(ship.Setup);
+
         _wave.CountRetired();
 
         if (_wave.IsCleared)
@@ -165,6 +196,7 @@ public class EnemySpawner : MonoBehaviour
                 yield return null;
 
             Release(spawn.Setup);
+            _released = i + 1;
 
             for (float left = spawn.Interval; left > 0f; left -= Time.deltaTime)
                 yield return null;
@@ -179,12 +211,14 @@ public class EnemySpawner : MonoBehaviour
         Release(setup);
     }
 
-    private void Release(EnemySetup setup)
+    private EnemyShip Release(EnemySetup setup)
     {
         SpawnPool<EnemyShip> pool = _pools.GetPool(setup.Prefab, _created);
         EnemyShip ship = pool.Get(
             setup.Movement.GetSpawnPoint(_camera, _spawnMargin, _minSpawnPositionY, _maxSpawnPositionY));
 
         ship.Launch(setup);
+
+        return ship;
     }
 }

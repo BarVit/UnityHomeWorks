@@ -28,6 +28,10 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
     public Reward Reward { get; private set; }
 
+    public EnemySetup Setup { get; private set; }
+
+    public bool IsDead => _isDead;
+
     public event Action<IPoolable> Released;
     public event Action<EnemyShip> Died;
     public event Action<EnemyShip> Retired;
@@ -73,6 +77,7 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
     public void Launch(EnemySetup setup)
     {
+        Setup = setup;
         ShipId = setup.ShipId;
         Tier = setup.Tier;
         BodyDamage = setup.BodyDamage;

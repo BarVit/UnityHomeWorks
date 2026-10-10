@@ -11,8 +11,10 @@ public class BattleStats : MonoBehaviour
     [SerializeField] private float _noMissShare = 0.05f;
 
     private int _levelDamage;
+    private int _levelEnvironmentDamage;
     private int _levelFired;
     private int _levelHit;
+    private bool _isLevelForgiven;
 
     public int TotalEnemies { get; private set; }
 
@@ -74,12 +76,22 @@ public class BattleStats : MonoBehaviour
     public void BeginLevel()
     {
         _levelDamage = 0;
+        _levelEnvironmentDamage = 0;
         _levelFired = 0;
         _levelHit = 0;
+        _isLevelForgiven = false;
+    }
+
+    public void ForgiveLevel()
+    {
+        _isLevelForgiven = true;
     }
 
     public void CompleteLevel(Reward levelReward)
     {
+        if (_isLevelForgiven)
+            Forgive();
+
         if (_levelDamage == 0)
             NoDamageBonus += Share(levelReward, _noDamageShare);
 
@@ -90,6 +102,19 @@ public class BattleStats : MonoBehaviour
     public void PayBonus()
     {
         _economy.Grant(Bonus);
+    }
+
+    private void Forgive()
+    {
+        int misses = Mathf.Max(0, _levelFired - _levelHit);
+
+        DamageTaken -= _levelDamage;
+        EnvironmentDamage -= _levelEnvironmentDamage;
+        Fired -= misses;
+        _levelDamage = 0;
+        _levelEnvironmentDamage = 0;
+        _levelFired -= misses;
+        _isLevelForgiven = false;
     }
 
     private static Reward Share(Reward reward, float share)
@@ -108,8 +133,11 @@ public class BattleStats : MonoBehaviour
         DamageTaken += amount;
         _levelDamage += amount;
 
-        if (isEnvironment)
-            EnvironmentDamage += amount;
+        if (isEnvironment == false)
+            return;
+
+        EnvironmentDamage += amount;
+        _levelEnvironmentDamage += amount;
     }
 
     private void OnFired()

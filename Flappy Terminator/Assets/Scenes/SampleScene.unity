@@ -1388,6 +1388,7 @@ GameObject:
   - component: {fileID: 940566754}
   - component: {fileID: 940566755}
   - component: {fileID: 940566756}
+  - component: {fileID: 940566757}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -20008,6 +20009,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _input: {fileID: 661464565}
+  _cheatCode: {fileID: 940566757}
   _playerShip: {fileID: 92249140}
   _enemySpawner: {fileID: 1078558388}
   _asteroidSpawner: {fileID: 2000842824}
@@ -22956,6 +22958,20 @@ MonoBehaviour:
   _economy: {fileID: 940566754}
   _noDamageShare: 0.1
   _noMissShare: 0.05
+--- !u!114 &940566757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165193575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b49d9baecc61f48949a81290cca503c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheatCodeReader
+  _code: 1d0000001e000000
+  _maxInterval: 0.2
 --- !u!222 &943413463
 CanvasRenderer:
   m_ObjectHideFlags: 0

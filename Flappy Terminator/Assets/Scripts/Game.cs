@@ -4,6 +4,7 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     [SerializeField] private InputReader _input;
+    [SerializeField] private CheatCodeReader _cheatCode;
     [SerializeField] private PlayerShip _playerShip;
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private AsteroidSpawner _asteroidSpawner;
@@ -36,6 +37,7 @@ public class Game : MonoBehaviour
         _screens.ResultClosed += ShowClearedDock;
         _input.PauseToggled += TogglePause;
         _input.Shot += SkipCutscene;
+        _cheatCode.Entered += WinLevelInstantly;
     }
 
     private void Start()
@@ -62,6 +64,7 @@ public class Game : MonoBehaviour
         _screens.ResultClosed -= ShowClearedDock;
         _input.PauseToggled -= TogglePause;
         _input.Shot -= SkipCutscene;
+        _cheatCode.Entered -= WinLevelInstantly;
     }
 
     private void SkipCutscene()
@@ -239,6 +242,16 @@ public class Game : MonoBehaviour
         _enemySpawner.FinishWave();
         _asteroidSpawner.StopSpawn();
         _warpJump.Play();
+    }
+
+    private void WinLevelInstantly()
+    {
+        if (_isRunning == false || _isLevelOver || _pause.IsPaused)
+            return;
+
+        _stats.ForgiveLevel();
+        _playerShip.Shooter.ReleaseAll();
+        _enemySpawner.DefeatAll();
     }
 
     private IEnumerator ShowDeathScreen()

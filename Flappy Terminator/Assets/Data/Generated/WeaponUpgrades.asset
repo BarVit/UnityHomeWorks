@@ -44,7 +44,7 @@ MonoBehaviour:
   - _stat: 1
     _level: 1
     _bonus: 10
-    _price: 300
+    _price: 150
   - _stat: 1
     _level: 2
     _bonus: 10
