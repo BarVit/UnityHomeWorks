@@ -33,11 +33,14 @@ namespace UiContent
         private const float SystemNodeSize = 84f;
         private const float LocationNodeSize = 56f;
         private const float BorderWidth = 2.5f;
+        private const float SelectionScale = 1.6f;
+        private const string WavesAsset = "Assets/Data/Generated/Waves.asset";
 
         private static readonly Color Cyan = new Color(0.21f, 0.85f, 1f);
         private static readonly Color Muted = new Color(0.62f, 0.74f, 0.86f);
         private static readonly Color LockedLabel = new Color(0.55f, 0.6f, 0.68f);
         private static readonly Color BorderColor = new Color(0.21f, 0.85f, 1f, 0.55f);
+        private static readonly Color SelectionColor = new Color(1f, 1f, 1f, 0.9f);
 
         [Serializable]
         private class Point
@@ -140,6 +143,7 @@ namespace UiContent
             so.FindProperty("_panel").objectReferenceValue = panel.gameObject;
             so.FindProperty("_economy").objectReferenceValue = economy;
             so.FindProperty("_locations").objectReferenceValue = AssetDatabase.LoadAssetAtPath<LocationTable>(LocationsAsset);
+            so.FindProperty("_waves").objectReferenceValue = AssetDatabase.LoadAssetAtPath<WaveTable>(WavesAsset);
             so.FindProperty("_systems").objectReferenceValue = AssetDatabase.LoadAssetAtPath<SystemTable>(SystemsAsset);
             so.FindProperty("_galaxyView").objectReferenceValue = galaxyView.gameObject;
             so.FindProperty("_armView").objectReferenceValue = armView.gameObject;
@@ -159,6 +163,7 @@ namespace UiContent
             so.FindProperty("_menuButton").objectReferenceValue = menu;
             so.FindProperty("_dockButton").objectReferenceValue = dockButton;
             so.FindProperty("_playButton").objectReferenceValue = play;
+            so.FindProperty("_playLabel").objectReferenceValue = play.GetComponentInChildren<TMP_Text>();
             so.ApplyModifiedPropertiesWithoutUndo();
 
             screen.Configure(GetSystemPositions(systems), GetSystemSprites(), GetStarColors(systems),
@@ -245,6 +250,10 @@ namespace UiContent
         private static MapNode AddNode(RectTransform parent, string name, float size, int fontSize)
         {
             RectTransform root = DockScreenBuilder.Place(name, parent, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size, size));
+            RectTransform selection = DockScreenBuilder.Place("Selection", root, new Vector2(0.5f, 0.5f), Vector2.zero,
+                new Vector2(size * SelectionScale, size * SelectionScale));
+            DockScreenBuilder.AddImage(selection, Art("Map Node Ring")).color = SelectionColor;
+            selection.gameObject.SetActive(false);
             Image core = DockScreenBuilder.AddImage(DockScreenBuilder.Stretch("Core", root), Art("Map Node Core"));
             core.raycastTarget = true;
             Image ring = DockScreenBuilder.AddImage(DockScreenBuilder.Stretch("Ring", root), Art("Map Node Ring"));
@@ -259,6 +268,7 @@ namespace UiContent
             MapNode node = root.gameObject.AddComponent<MapNode>();
             SerializedObject so = new SerializedObject(node);
             so.FindProperty("_ring").objectReferenceValue = ring;
+            so.FindProperty("_selection").objectReferenceValue = selection.gameObject;
             so.FindProperty("_core").objectReferenceValue = core;
             so.FindProperty("_lock").objectReferenceValue = lockRect.gameObject;
             so.FindProperty("_label").objectReferenceValue = label;

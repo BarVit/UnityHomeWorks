@@ -31,6 +31,7 @@ public class Game : MonoBehaviour
         _screens.RestartFromPauseRequested += RestartFromPause;
         _screens.RestartRequested += RestartRun;
         _screens.PlayRequested += PlayFromDock;
+        _screens.LocationPlayRequested += PlayLocation;
         _input.PauseToggled += TogglePause;
         _input.Shot += SkipCutscene;
     }
@@ -55,6 +56,7 @@ public class Game : MonoBehaviour
         _screens.RestartFromPauseRequested -= RestartFromPause;
         _screens.RestartRequested -= RestartRun;
         _screens.PlayRequested -= PlayFromDock;
+        _screens.LocationPlayRequested -= PlayLocation;
         _input.PauseToggled -= TogglePause;
         _input.Shot -= SkipCutscene;
     }
@@ -112,6 +114,14 @@ public class Game : MonoBehaviour
         _dockReason = DockReason.TestStart;
         _screens.CanResumeSession = false;
         _screens.ShowDock(default, true, DockReason.TestStart);
+    }
+
+    private void PlayLocation(string locationId)
+    {
+        _runner.PlayLocation(locationId);
+        _hangar.Equip(_playerShip.Shooter);
+
+        StartLevel();
     }
 
     private void PlayFromDock()

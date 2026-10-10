@@ -10,6 +10,9 @@ public class MapScreen : MonoBehaviour
     private const string ArmTitle = "ORION ARM";
     private const string SystemTitle = "SYSTEM ";
     private const string DemoOnly = "NOT AVAILABLE IN DEMO";
+    private const string PlayText = "PLAY";
+    private const string ReplayText = "REPLAY";
+    private const int NoSelection = -1;
     private const float RouteWidth = 4f;
     private const float Dash = 14f;
     private const float Gap = 10f;
@@ -18,6 +21,7 @@ public class MapScreen : MonoBehaviour
     [SerializeField] private GameObject _panel;
     [SerializeField] private Economy _economy;
     [SerializeField] private LocationTable _locations;
+    [SerializeField] private WaveTable _waves;
     [SerializeField] private SystemTable _systems;
     [SerializeField] private string _testLocationId = "loc_test";
     [SerializeField] private GameObject _galaxyView;
@@ -42,6 +46,7 @@ public class MapScreen : MonoBehaviour
     [SerializeField] private Button _menuButton;
     [SerializeField] private Button _dockButton;
     [SerializeField] private Button _playButton;
+    [SerializeField] private TMP_Text _playLabel;
     [SerializeField] private Color _doneRouteColor = new Color(1f, 0.85f, 0.3f);
     [SerializeField] private Color _restRouteColor = new Color(0.6f, 0.7f, 0.85f, 0.35f);
 
@@ -49,10 +54,13 @@ public class MapScreen : MonoBehaviour
     private readonly List<SystemRow> _systemRoute = new List<SystemRow>();
     private int _currentLocation;
     private int _openedSystem = -1;
+    private int _selected = NoSelection;
+    private bool _canPlay;
 
     public event Action MenuRequested;
     public event Action DockRequested;
     public event Action PlayRequested;
+    public event Action<string> LocationPlayRequested;
 
     private void OnEnable()
     {
@@ -90,7 +98,8 @@ public class MapScreen : MonoBehaviour
 
     public void Show(bool canPlay)
     {
-        _playButton.gameObject.SetActive(canPlay);
+        _canPlay = canPlay;
+        Select(NoSelection);
         _panel.transform.SetAsLastSibling();
         _panel.SetActive(true);
         ReadProgress();
@@ -171,6 +180,7 @@ public class MapScreen : MonoBehaviour
     private void ShowSystem(int index)
     {
         _openedSystem = index;
+        Select(NoSelection);
         Open(_systemView, SystemTitle + _systemRoute[index].Order, true);
         _systemBackground.sprite = _systemSprites[index];
 
@@ -230,6 +240,9 @@ public class MapScreen : MonoBehaviour
 
     private void Open(GameObject view, string title, bool canGoBack)
     {
+        if (view != _systemView)
+            Select(NoSelection);
+
         _galaxyView.SetActive(view == _galaxyView);
         _armView.SetActive(view == _armView);
         _systemView.SetActive(view == _systemView);
@@ -306,10 +319,25 @@ public class MapScreen : MonoBehaviour
     private void OnLocationClicked(MapNode node)
     {
         LocationRow location = _route[node.Index];
+        bool canSelect = node.State != MapNodeState.Locked && _waves.HasLocation(location.Id);
         string state = node.State == MapNodeState.Completed ? "COMPLETED"
             : node.State == MapNodeState.Current ? "NEXT" : "LOCKED";
 
         _info.text = "LOCATION " + GetLabel(node.Index) + "     " + location.Levels + " LEVELS     " + state;
+        Select(canSelect ? node.Index : NoSelection);
+    }
+
+    private void Select(int index)
+    {
+        _selected = index;
+
+        foreach (MapNode node in _locationNodes)
+            node.SetSelected(node.gameObject.activeSelf && node.Index == index && index != NoSelection);
+
+        bool isReplay = index != NoSelection && index < _currentLocation;
+
+        _playLabel.text = isReplay ? ReplayText : PlayText;
+        _playButton.gameObject.SetActive(_canPlay || index != NoSelection);
     }
 
     private void OnMenuClicked()
@@ -324,7 +352,10 @@ public class MapScreen : MonoBehaviour
 
     private void OnPlayClicked()
     {
-        PlayRequested?.Invoke();
+        if (_selected == NoSelection)
+            PlayRequested?.Invoke();
+        else
+            LocationPlayRequested?.Invoke(_route[_selected].Id);
     }
 
 #if UNITY_EDITOR

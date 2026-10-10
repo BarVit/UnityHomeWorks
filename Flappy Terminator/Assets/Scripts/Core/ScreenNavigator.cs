@@ -25,6 +25,7 @@ public class ScreenNavigator : MonoBehaviour
     public event Action RestartFromPauseRequested;
     public event Action RestartRequested;
     public event Action PlayRequested;
+    public event Action<string> LocationPlayRequested;
 
     private void OnEnable()
     {
@@ -42,6 +43,7 @@ public class ScreenNavigator : MonoBehaviour
         _mapScreen.DockRequested += HideMap;
         _mapScreen.MenuRequested += ShowStart;
         _mapScreen.PlayRequested += OnPlayRequested;
+        _mapScreen.LocationPlayRequested += OnLocationPlayRequested;
         _settingsScreen.CloseRequested += CloseSettings;
     }
 
@@ -61,6 +63,7 @@ public class ScreenNavigator : MonoBehaviour
         _mapScreen.DockRequested -= HideMap;
         _mapScreen.MenuRequested -= ShowStart;
         _mapScreen.PlayRequested -= OnPlayRequested;
+        _mapScreen.LocationPlayRequested -= OnLocationPlayRequested;
         _settingsScreen.CloseRequested -= CloseSettings;
     }
 
@@ -188,5 +191,10 @@ public class ScreenNavigator : MonoBehaviour
     private void OnPlayRequested()
     {
         PlayRequested?.Invoke();
+    }
+
+    private void OnLocationPlayRequested(string locationId)
+    {
+        LocationPlayRequested?.Invoke(locationId);
     }
 }

@@ -82,6 +82,11 @@ public class LocationRunner : MonoBehaviour
         RewardChanged?.Invoke(LocationReward);
     }
 
+    public void PlayLocation(string locationId)
+    {
+        StartLocation(locationId);
+    }
+
     public void RetryLocation()
     {
         StartLocation(_locationId);

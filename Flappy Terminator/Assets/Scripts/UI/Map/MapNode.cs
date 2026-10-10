@@ -10,6 +10,7 @@ public class MapNode : MonoBehaviour, IPointerClickHandler
     private const float PulseAmount = 0.12f;
 
     [SerializeField] private Image _ring;
+    [SerializeField] private GameObject _selection;
     [SerializeField] private Image _core;
     [SerializeField] private GameObject _lock;
     [SerializeField] private TMP_Text _label;
@@ -47,6 +48,12 @@ public class MapNode : MonoBehaviour, IPointerClickHandler
         _ring.color = color;
         _core.color = state == MapNodeState.Locked ? _lockedColor : tint;
         _label.color = state == MapNodeState.Locked ? _lockedColor : Color.white;
+        SetSelected(false);
+    }
+
+    public void SetSelected(bool isSelected)
+    {
+        _selection.SetActive(isSelected);
     }
 
     public void OnPointerClick(PointerEventData eventData)
