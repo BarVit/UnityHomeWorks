@@ -30,7 +30,8 @@ public class BossPhaseRunner
     public void Start()
     {
         _shooter.Fired += OnFired;
-        Enter(0);
+        Begin(0);
+        _shooter.Arm(_phases[0].Armament, _context);
     }
 
     public void Stop()
@@ -67,15 +68,15 @@ public class BossPhaseRunner
                 return;
             }
 
-            Enter(next);
+            Begin(next);
+            _shooter.Rearm(_phases[next].Armament, _context);
         }
     }
 
-    private void Enter(int index)
+    private void Begin(int index)
     {
         Current = index;
         _exit = _phases[index].CreateExit();
-        _shooter.Arm(_phases[index].Armament, _context);
         PhaseChanged?.Invoke(index);
     }
 }

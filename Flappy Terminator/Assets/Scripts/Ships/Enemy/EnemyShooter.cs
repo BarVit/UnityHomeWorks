@@ -38,15 +38,12 @@ public class EnemyShooter : MonoBehaviour
 
     public void Arm(EnemyArmament armament, EnemyContext context)
     {
-        WeaponContext weapon = new WeaponContext(_mounts, armament.Barrels, context.Pools,
-            new ShotAudio(_shotAudioSource, context.Camera), context.HitAudio, context.TargetLayers,
-            _ammoLayer, context.Camera, default, _loop, _hitLoop, armament.Damage,
-            rateScale: armament.RateScale);
+        Arm(armament, context, 0f);
+    }
 
-        if (_delivery != null)
-            _delivery.Dispose();
-
-        _delivery = WeaponFactory.Create(armament.Weapon, weapon);
+    public void Rearm(EnemyArmament armament, EnemyContext context)
+    {
+        Arm(armament, context, _delivery == null ? 0f : _delivery.CooldownLeft);
     }
 
     public void StartShoot()
@@ -57,6 +54,20 @@ public class EnemyShooter : MonoBehaviour
     public void StopShoot()
     {
         _isShooting = false;
+    }
+
+    private void Arm(EnemyArmament armament, EnemyContext context, float cooldownLeft)
+    {
+        WeaponContext weapon = new WeaponContext(_mounts, armament.Barrels, context.Pools,
+            new ShotAudio(_shotAudioSource, context.Camera), context.HitAudio, context.TargetLayers,
+            _ammoLayer, context.Camera, default, _loop, _hitLoop, armament.Damage,
+            rateScale: armament.RateScale);
+
+        if (_delivery != null)
+            _delivery.Dispose();
+
+        _delivery = WeaponFactory.Create(armament.Weapon, weapon);
+        _delivery.ContinueCooldown(cooldownLeft);
     }
 
     private AudioSource CreateLoopSource()

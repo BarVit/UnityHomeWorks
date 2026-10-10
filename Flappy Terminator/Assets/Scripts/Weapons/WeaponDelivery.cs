@@ -41,6 +41,8 @@ public abstract class WeaponDelivery
 
     public bool IsOverheated => _isOverheated;
 
+    public float CooldownLeft => Mathf.Max(0f, _cooldownLeft);
+
     public bool HasHeat => _row.HeatPerShot > 0f;
 
     public bool HasMagazine => _row.Magazine > 0;
@@ -129,6 +131,11 @@ public abstract class WeaponDelivery
         Spend();
 
         return true;
+    }
+
+    public void ContinueCooldown(float cooldownLeft)
+    {
+        _cooldownLeft = Mathf.Max(_cooldownLeft, cooldownLeft);
     }
 
     public void Tick(float deltaTime)
