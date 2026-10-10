@@ -29,6 +29,8 @@ namespace UiContent
         private static readonly Color Cyan = new Color(0.21f, 0.85f, 1f);
         private static readonly Color Muted = new Color(0.62f, 0.74f, 0.86f);
         private static readonly Color PipOff = new Color(0.13f, 0.2f, 0.29f);
+        private static readonly Color MapIdle = new Color(0.8f, 0.8f, 0.8f);
+        private static readonly Color MapPressed = new Color(0.65f, 0.65f, 0.65f);
         private static readonly Color Gold = new Color(1f, 0.82f, 0.3f);
 
         private static TMP_FontAsset _font;
@@ -151,6 +153,7 @@ namespace UiContent
             UpgradeRowView crit = AddUpgradeRow(upgrades, UpgradeStat.CritChance, "CRIT CHANCE", "CRIT HIT DEALS x2", "Crit Icon", -148f);
 
             Button menu = AddButton(root, "Menu Button", "MENU", new Vector2(0f, 0f), new Vector2(150f, 62f), new Vector2(220f, 76f), 32);
+            AddMapButton(root);
             Button play = AddButton(root, "Play Button", "PLAY", new Vector2(1f, 0f), new Vector2(-190f, 62f), new Vector2(300f, 96f), 40);
 
             so.FindProperty("_hangar").objectReferenceValue = hangar;
@@ -346,6 +349,20 @@ namespace UiContent
             panel.gameObject.SetActive(false);
 
             return tooltip;
+        }
+
+        private static void AddMapButton(RectTransform root)
+        {
+            Button map = AddButton(root, "Map Button", "MAP", new Vector2(0.5f, 0f), new Vector2(0f, 62f), new Vector2(240f, 84f), 36);
+            ColorBlock colors = map.colors;
+
+            colors.normalColor = MapIdle;
+            colors.highlightedColor = Color.white;
+            colors.selectedColor = MapIdle;
+            colors.pressedColor = MapPressed;
+            colors.fadeDuration = 0.08f;
+            map.colors = colors;
+            map.gameObject.AddComponent<HoverScale>();
         }
 
         private static Button AddButton(RectTransform parent, string name, string text, Vector2 anchor, Vector2 position,
