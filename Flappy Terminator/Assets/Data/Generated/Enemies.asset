@@ -34,7 +34,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 760552f2b84714314ac77afd244877e5, type: 3}
     _bodyDamage: 10
     _fromLocation: loc_01_01
-    _health: 15
+    _health: 14
     _weapon: warden_2_gun
     _barrels: 2
     _damage: 8
@@ -76,7 +76,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 16686150d903a469bad63cb034411710, type: 3}
     _bodyDamage: 15
     _fromLocation: loc_01_03
-    _health: 30
+    _health: 32
     _weapon: hunter_2_gun
     _barrels: 2
     _damage: 2

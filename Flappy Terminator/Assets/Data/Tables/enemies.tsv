@@ -1,9 +1,9 @@
 id	type	title	tier	prefab	body_damage	from_location	health	weapon	barrels	damage	movement	skin	reward_money
 warden_1	enemy_warden	Страж I	1	Enemy 1	10	loc_01_01	10	warden_1_gun	1	10	Forward		100
-warden_2	enemy_warden	Страж II	2	Enemy 1	10	loc_01_01	15	warden_2_gun	2	8	Hover	Warden II	100
+warden_2	enemy_warden	Страж II	2	Enemy 1	10	loc_01_01	14	warden_2_gun	2	8	Hover	Warden II	100
 warden_3	enemy_warden	Страж III	3	Enemy 1	10	loc_01_01	40	warden_3_gun	3	12	Hover Guard	Warden III	100
 hunter_1	enemy_hunter	Охотник I	1	Enemy 2	15	loc_01_03	20	hunter_1_gun	1	2	Forward		100
-hunter_2	enemy_hunter	Охотник II	2	Enemy 2	15	loc_01_03	30	hunter_2_gun	2	2	Forward Leap		100
+hunter_2	enemy_hunter	Охотник II	2	Enemy 2	15	loc_01_03	32	hunter_2_gun	2	2	Forward Leap		100
 hunter_3	enemy_hunter	Охотник III	3	Enemy 2	15	loc_01_03	60	hunter_3_gun	1	20	Up And Down		100
 reaper_1	enemy_reaper	Жнец I	1	Enemy 3	20	loc_02_01	30	reaper_1_gun	1	15	Drift		100
 reaper_2	enemy_reaper	Жнец II	2	Enemy 3	20	loc_02_01	50	reaper_2_gun	1	20	Drift Retreat		100

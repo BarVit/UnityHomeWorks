@@ -13,11 +13,11 @@ namespace WeaponContent
         private const string PlayerPath = "Assets/Prefabs/Player Ship.prefab";
         private const float BurstPixelsPerUnit = 256f;
         private const float BurstScale = 1.4f;
-        private const float FontSize = 8f;
+        private const float FontSize = 6.4f;
         private const int BurstSortingOrder = 20;
         private const int LabelSortingOrder = 21;
         private static readonly Vector3 LabelOffset = new Vector3(0f, 0.3f, 0f);
-        private static readonly Color LabelColor = new Color(1f, 0.92f, 0.35f);
+        private static readonly Color LabelColor = new Color(0.82f, 0.94f, 1f);
 
         [MenuItem("Tools/Weapons/Build Crit Mark")]
         public static void Build()
