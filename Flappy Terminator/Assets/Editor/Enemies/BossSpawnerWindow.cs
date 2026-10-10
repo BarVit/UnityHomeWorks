@@ -45,7 +45,7 @@ namespace EnemyContent
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField(row.Title, GUILayout.Width(140));
             EditorGUILayout.LabelField(row.Health + " HP, " + row.Weapon + " ×" + row.Barrels + ", урон "
-                + row.Damage);
+                + row.Damage + (row.Phases.Count > 0 ? ", фаз " + row.Phases.Count : ""));
 
             GUI.enabled = Application.isPlaying;
 
@@ -67,7 +67,7 @@ namespace EnemyContent
                 return;
             }
 
-            spawner.Spawn(EnemySetup.ForBoss(row, weapons.GetRow(row.Weapon)));
+            spawner.Spawn(EnemySetup.ForBoss(row, weapons));
         }
     }
 }

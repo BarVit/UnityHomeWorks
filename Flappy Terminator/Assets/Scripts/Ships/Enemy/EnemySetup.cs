@@ -1,24 +1,26 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySetup
 {
-    private EnemySetup(EnemyShip prefab, string shipId, int tier, int health, int bodyDamage, int barrels,
-        int damage, MovementProfile movement, WeaponRow weapon, int scale, Color tint, SpriteSkin skin,
-        int rewardMoney)
+    private static readonly BossPhase[] NoPhases = new BossPhase[0];
+
+    private EnemySetup(EnemyShip prefab, string shipId, int tier, int health, int bodyDamage,
+        EnemyArmament armament, MovementProfile movement, int scale, Color tint, SpriteSkin skin,
+        int rewardMoney, IReadOnlyList<BossPhase> phases)
     {
         Prefab = prefab;
         ShipId = shipId;
         Tier = tier;
         Health = health;
         BodyDamage = bodyDamage;
-        Barrels = barrels;
-        Damage = damage;
+        Armament = armament;
         Movement = movement;
-        Weapon = weapon;
         Scale = scale;
         Tint = tint;
         Skin = skin;
         RewardMoney = rewardMoney;
+        Phases = phases;
     }
 
     public EnemyShip Prefab { get; private set; }
@@ -31,13 +33,9 @@ public class EnemySetup
 
     public int BodyDamage { get; private set; }
 
-    public int Barrels { get; private set; }
-
-    public int Damage { get; private set; }
-
     public MovementProfile Movement { get; private set; }
 
-    public WeaponRow Weapon { get; private set; }
+    public EnemyArmament Armament { get; private set; }
 
     public int Scale { get; private set; }
 
@@ -47,17 +45,43 @@ public class EnemySetup
 
     public int RewardMoney { get; private set; }
 
+    public IReadOnlyList<BossPhase> Phases { get; private set; }
+
     public static EnemySetup ForEnemy(EnemyRow enemy, WeaponRow weapon)
     {
-        return new EnemySetup(enemy.Prefab, enemy.Type, enemy.Tier, enemy.Health, enemy.BodyDamage, enemy.Barrels,
-            enemy.Damage, enemy.Movement, weapon, 1, Color.white, enemy.Skin,
-            enemy.RewardMoney);
+        return new EnemySetup(enemy.Prefab, enemy.Type, enemy.Tier, enemy.Health, enemy.BodyDamage,
+            new EnemyArmament(weapon, enemy.Barrels, enemy.Damage, 1f), enemy.Movement, 1, Color.white, enemy.Skin,
+            enemy.RewardMoney, NoPhases);
     }
 
-    public static EnemySetup ForBoss(BossRow boss, WeaponRow weapon)
+    public static EnemySetup ForBoss(BossRow boss, WeaponTable weapons)
     {
-        return new EnemySetup(boss.Prefab, boss.Id, 0, boss.Health, boss.BodyDamage, boss.Barrels,
-            boss.Damage, boss.Movement, weapon, boss.Scale, boss.Tint, null,
-            boss.RewardMoney);
+        return new EnemySetup(boss.Prefab, boss.Id, 0, boss.Health, boss.BodyDamage,
+            new EnemyArmament(weapons.GetRow(boss.Weapon), boss.Barrels, boss.Damage, 1f), boss.Movement,
+            boss.Scale, boss.Tint, null, boss.RewardMoney, CreatePhases(boss.Phases, weapons));
+    }
+
+    private static List<BossPhase> CreatePhases(IReadOnlyList<BossPhaseRow> rows, WeaponTable weapons)
+    {
+        List<BossPhase> phases = new List<BossPhase>();
+
+        for (int i = 0; i < rows.Count; i++)
+        {
+            BossPhaseRow row = rows[i];
+            EnemyArmament armament = new EnemyArmament(weapons.GetRow(row.Weapon), row.Barrels, row.Damage,
+                row.RateScale);
+
+            phases.Add(new BossPhase(armament, row.Exit, row.ExitValue, GetNextPhase(row, i, rows.Count)));
+        }
+
+        return phases;
+    }
+
+    private static int GetNextPhase(BossPhaseRow row, int index, int count)
+    {
+        if (row.Next != BossPhaseRow.FollowingPhase)
+            return row.Next - 1;
+
+        return index + 1 < count ? index + 1 : BossPhase.Stay;
     }
 }

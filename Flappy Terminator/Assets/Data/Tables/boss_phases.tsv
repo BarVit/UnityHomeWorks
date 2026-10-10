@@ -1,0 +1,4 @@
+boss	phase	weapon	barrels	damage	rate_scale	exit	exit_value	next
+marauder_1	1	marauder_1_gun	1	20	1	Health	0.67	0
+marauder_1	2	marauder_1_gun	2	20	1	Health	0.34	0
+marauder_1	3	marauder_1_gun	2	20	0.67	None	0	0

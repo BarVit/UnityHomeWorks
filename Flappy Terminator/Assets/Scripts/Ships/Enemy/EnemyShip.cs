@@ -18,6 +18,7 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
     private EnemyMover _mover;
     private EnemyShooter _shooter;
     private EnemyContext _context;
+    private BossPhaseRunner _phases;
     private bool _isDead;
 
     public int BodyDamage { get; private set; }
@@ -31,6 +32,8 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
     public EnemySetup Setup { get; private set; }
 
     public bool IsDead => _isDead;
+
+    public int Phase => _phases == null ? BossPhaseRunner.NoPhase : _phases.Current;
 
     public event Action<IPoolable> Released;
     public event Action<EnemyShip> Died;
@@ -66,6 +69,8 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
     private void Update()
     {
+        _phases?.Tick(Time.deltaTime);
+
         if (transform.position.x + _exitMargin < ScreenArea.GetLeftEdge(_camera))
             Remove();
     }
@@ -92,7 +97,7 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
         _skin.Wear(_skinAsset);
 
         _health.Init(setup.Health);
-        _shooter.Arm(setup, _context);
+        Arm(setup);
         _mover.Fly(setup.Movement);
         _shooter.StartShoot();
     }
@@ -104,6 +109,8 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
     public void OnDespawn()
     {
+        _phases?.Stop();
+        _phases = null;
         _shooter.StopShoot();
         _mover.Stop();
         Retired?.Invoke(this);
@@ -141,6 +148,19 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
         Released?.Invoke(this);
         Died?.Invoke(this);
+    }
+
+    private void Arm(EnemySetup setup)
+    {
+        if (setup.Phases.Count == 0)
+        {
+            _shooter.Arm(setup.Armament, _context);
+
+            return;
+        }
+
+        _phases = new BossPhaseRunner(setup.Phases, _health, _shooter, _context);
+        _phases.Start();
     }
 
     private void OnAmmoHit(Ammo ammo)

@@ -53,7 +53,7 @@ public class LevelPlanner
         {
             BossRow boss = _bosses.GetRow(row.Enemies[0]);
 
-            plan.Add(new PlannedSpawn(EnemySetup.ForBoss(boss, _weapons.GetRow(boss.Weapon)), GetInterval(row), true));
+            plan.Add(new PlannedSpawn(EnemySetup.ForBoss(boss, _weapons), GetInterval(row), true));
 
             return;
         }

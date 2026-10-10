@@ -137,9 +137,16 @@ public class EnemySpawner : MonoBehaviour
     private void CollectPools(EnemySetup setup)
     {
         Collect(_shipPools, _pools.GetPool(setup.Prefab, _created));
+        CollectAmmo(setup.Armament);
 
-        if (setup.Weapon != null && setup.Weapon.Projectile != null)
-            Collect(_ammoPools, _pools.GetPool(setup.Weapon.Projectile));
+        foreach (BossPhase phase in setup.Phases)
+            CollectAmmo(phase.Armament);
+    }
+
+    private void CollectAmmo(EnemyArmament armament)
+    {
+        if (armament.Weapon != null && armament.Weapon.Projectile != null)
+            Collect(_ammoPools, _pools.GetPool(armament.Weapon.Projectile));
     }
 
     private void Collect<T>(List<SpawnPool<T>> pools, SpawnPool<T> pool)

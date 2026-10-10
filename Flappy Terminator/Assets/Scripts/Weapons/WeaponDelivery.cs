@@ -53,7 +53,7 @@ public abstract class WeaponDelivery
         ? 1f - Mathf.Clamp01(_reloadLeft / _row.ReloadTime)
         : (HasHeat
             ? 1f - Mathf.Clamp01(_heat / MaxHeat)
-            : (_row.Rate <= 0f ? 1f : 1f - Mathf.Clamp01(_cooldownLeft / _row.Rate)));
+            : (Cooldown <= 0f ? 1f : 1f - Mathf.Clamp01(_cooldownLeft / Cooldown)));
 
     protected WeaponRow Row => _row;
 
@@ -64,6 +64,8 @@ public abstract class WeaponDelivery
     protected float HeatShare => Mathf.Clamp01(_heat / MaxHeat);
 
     protected float ProjectileSpeed => _row.ProjectileSpeed;
+
+    private float Cooldown => _row.Rate * _context.RateScale;
 
     private int BaseDamage => _context.Damage > 0 ? _context.Damage : _row.Damage;
 
@@ -116,15 +118,17 @@ public abstract class WeaponDelivery
         _critPool.Get(point).Show();
     }
 
-    public void Fire()
+    public bool Fire()
     {
         if (IsReady == false)
-            return;
+            return false;
 
-        _cooldownLeft = _row.Rate;
+        _cooldownLeft = Cooldown;
         Warm();
         OnFire();
         Spend();
+
+        return true;
     }
 
     public void Tick(float deltaTime)

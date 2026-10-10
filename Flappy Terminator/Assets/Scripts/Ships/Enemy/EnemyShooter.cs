@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyShooter : MonoBehaviour
@@ -14,6 +15,8 @@ public class EnemyShooter : MonoBehaviour
     private WeaponDelivery _delivery;
     private bool _isShooting;
 
+    public event Action Fired;
+
     private void Awake()
     {
         _mounts = CollectMounts();
@@ -29,20 +32,21 @@ public class EnemyShooter : MonoBehaviour
 
         _delivery.Tick(Time.deltaTime);
 
-        if (_isShooting)
-            _delivery.Fire();
+        if (_isShooting && _delivery.Fire())
+            Fired?.Invoke();
     }
 
-    public void Arm(EnemySetup setup, EnemyContext context)
+    public void Arm(EnemyArmament armament, EnemyContext context)
     {
-        WeaponContext weapon = new WeaponContext(_mounts, setup.Barrels, context.Pools,
+        WeaponContext weapon = new WeaponContext(_mounts, armament.Barrels, context.Pools,
             new ShotAudio(_shotAudioSource, context.Camera), context.HitAudio, context.TargetLayers,
-            _ammoLayer, context.Camera, default, _loop, _hitLoop, setup.Damage);
+            _ammoLayer, context.Camera, default, _loop, _hitLoop, armament.Damage,
+            rateScale: armament.RateScale);
 
         if (_delivery != null)
             _delivery.Dispose();
 
-        _delivery = WeaponFactory.Create(setup.Weapon, weapon);
+        _delivery = WeaponFactory.Create(armament.Weapon, weapon);
     }
 
     public void StartShoot()

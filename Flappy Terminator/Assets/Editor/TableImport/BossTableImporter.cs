@@ -30,6 +30,9 @@ namespace TableImport
             foreach (TsvRow raw in document.Rows)
                 ids.Add(new RowReader(document, raw, new TableLog()).ReadOptionalText("id"));
 
+            Dictionary<string, BossPhaseRow[]> phases = BossPhaseTableImporter.Read(weapons, log);
+            BossPhaseTableImporter.CheckBosses(phases, ids, log);
+
             HashSet<string> seen = new HashSet<string>();
 
             foreach (TsvRow raw in document.Rows)
@@ -61,7 +64,8 @@ namespace TableImport
                     reader.ReadInt("scale", 1, 10),
                     reader.ReadColor("tint"),
                     reader.ReadAsset<MovementProfile>("movement", true),
-                    reader.ReadInt("reward_money", 0, 1000000)));
+                    reader.ReadInt("reward_money", 0, 1000000),
+                    phases.TryGetValue(id, out BossPhaseRow[] bossPhases) ? bossPhases : new BossPhaseRow[0]));
             }
 
             BossTable table = GeneratedAsset.LoadOrCreate<BossTable>(AssetPath);
@@ -71,18 +75,7 @@ namespace TableImport
             return table;
         }
 
-        private static void CheckPrototype(EnemyTable enemies, HashSet<string> ids, string prototype,
-            RowReader reader)
-        {
-            if (enemies == null || prototype.Length == 0)
-                return;
-
-            if (enemies.GetRow(prototype) == null && ids.Contains(prototype) == false)
-                reader.Fail("prototype: " + prototype + " — нет ни врага в "
-                    + EnemyTableImporter.SourcePath + ", ни строки в этой таблице");
-        }
-
-        private static void CheckWeapon(WeaponTable weapons, string weapon, int barrels, RowReader reader)
+        public static void CheckWeapon(WeaponTable weapons, string weapon, int barrels, RowReader reader)
         {
             if (weapons == null || weapon.Length == 0)
                 return;
@@ -102,6 +95,17 @@ namespace TableImport
             if (barrels > row.BarrelsMax)
                 reader.Fail("barrels: " + barrels + " больше, чем barrels_max оружия "
                     + row.Id + " (" + row.BarrelsMax + ")");
+        }
+
+        private static void CheckPrototype(EnemyTable enemies, HashSet<string> ids, string prototype,
+            RowReader reader)
+        {
+            if (enemies == null || prototype.Length == 0)
+                return;
+
+            if (enemies.GetRow(prototype) == null && ids.Contains(prototype) == false)
+                reader.Fail("prototype: " + prototype + " — нет ни врага в "
+                    + EnemyTableImporter.SourcePath + ", ни строки в этой таблице");
         }
     }
 }
