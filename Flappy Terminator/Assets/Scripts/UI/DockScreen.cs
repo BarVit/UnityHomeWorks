@@ -1,12 +1,15 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class DockScreen : MonoBehaviour
 {
     private const string Arrow = "  >  ";
     private const string PercentSign = "%";
+    private const string ClearedStatus = "LOCATION CLEARED";
+    private const string DestroyedStatus = "SHIP DESTROYED";
 
     [SerializeField] private GameObject _panel;
     [SerializeField] private Hangar _hangar;
@@ -15,23 +18,25 @@ public class DockScreen : MonoBehaviour
     [SerializeField] private TMP_Text _xp;
     [SerializeField] private TMP_Text _money;
     [SerializeField] private TMP_Text _earned;
+    [SerializeField] private TMP_Text _status;
     [SerializeField] private SlotView[] _slots;
     [SerializeField] private Image _weaponIcon;
     [SerializeField] private TMP_Text _weaponTitle;
     [SerializeField] private GameObject _upgradePanel;
     [SerializeField] private UpgradeRowView[] _upgrades;
     [SerializeField] private Button _menuButton;
-    [SerializeField] private Button _nextButton;
+    [FormerlySerializedAs("_nextButton")]
+    [SerializeField] private Button _playButton;
 
     private int _selectedSlot = Hangar.FirstSlot;
 
     public event Action MenuRequested;
-    public event Action NextRequested;
+    public event Action PlayRequested;
 
     private void OnEnable()
     {
         _menuButton.onClick.AddListener(OnMenuClicked);
-        _nextButton.onClick.AddListener(OnNextClicked);
+        _playButton.onClick.AddListener(OnPlayClicked);
         _hangar.Changed += Refresh;
         _economy.Changed += Refresh;
 
@@ -45,7 +50,7 @@ public class DockScreen : MonoBehaviour
     private void OnDisable()
     {
         _menuButton.onClick.RemoveListener(OnMenuClicked);
-        _nextButton.onClick.RemoveListener(OnNextClicked);
+        _playButton.onClick.RemoveListener(OnPlayClicked);
         _hangar.Changed -= Refresh;
         _economy.Changed -= Refresh;
 
@@ -56,10 +61,11 @@ public class DockScreen : MonoBehaviour
             upgrade.Requested -= OnUpgradeRequested;
     }
 
-    public void Show(Reward earned, bool hasNextLocation)
+    public void Show(Reward earned, bool canPlay, bool isDestroyed)
     {
         _earned.text = "+" + earned.Xp + " XP     +" + earned.Money + " COINS";
-        _nextButton.gameObject.SetActive(hasNextLocation);
+        _status.text = isDestroyed ? DestroyedStatus : ClearedStatus;
+        _playButton.gameObject.SetActive(canPlay);
         _selectedSlot = Hangar.FirstSlot;
         _panel.SetActive(true);
         Refresh();
@@ -172,8 +178,8 @@ public class DockScreen : MonoBehaviour
         MenuRequested?.Invoke();
     }
 
-    private void OnNextClicked()
+    private void OnPlayClicked()
     {
-        NextRequested?.Invoke();
+        PlayRequested?.Invoke();
     }
 }

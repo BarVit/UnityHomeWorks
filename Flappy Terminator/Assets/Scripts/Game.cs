@@ -16,6 +16,7 @@ public class Game : MonoBehaviour
     private Coroutine _gameOverCountdown;
     private bool _isLevelOver;
     private bool _isRunning;
+    private bool _isRetryNext;
 
     private void OnEnable()
     {
@@ -27,7 +28,7 @@ public class Game : MonoBehaviour
         _screens.ResumeRequested += Resume;
         _screens.RestartFromPauseRequested += RestartFromPause;
         _screens.RestartRequested += RestartRun;
-        _screens.NextLocationRequested += StartNextLocation;
+        _screens.PlayRequested += PlayFromDock;
         _input.PauseToggled += TogglePause;
         _input.Shot += SkipCutscene;
     }
@@ -50,7 +51,7 @@ public class Game : MonoBehaviour
         _screens.ResumeRequested -= Resume;
         _screens.RestartFromPauseRequested -= RestartFromPause;
         _screens.RestartRequested -= RestartRun;
-        _screens.NextLocationRequested -= StartNextLocation;
+        _screens.PlayRequested -= PlayFromDock;
         _input.PauseToggled -= TogglePause;
         _input.Shot -= SkipCutscene;
     }
@@ -110,9 +111,13 @@ public class Game : MonoBehaviour
         StartLevel();
     }
 
-    private void StartNextLocation()
+    private void PlayFromDock()
     {
-        _runner.StartNextLocation();
+        if (_isRetryNext)
+            _runner.RetryLocation();
+        else
+            _runner.StartNextLocation();
+
         _hangar.Equip(_playerShip.Shooter);
 
         StartLevel();
@@ -162,7 +167,7 @@ public class Game : MonoBehaviour
         if (_runner.IsTest)
             _screens.ShowStart();
         else
-            _screens.ShowDock(_runner.BankedReward, _runner.HasNextLocation);
+            ShowDock(false);
     }
 
     private void StartLevel()
@@ -184,10 +189,13 @@ public class Game : MonoBehaviour
             return;
 
         _isLevelOver = true;
-        _runner.DropPendingReward();
+
+        if (_runner.IsTest)
+            _runner.DropPendingReward();
+
         _enemySpawner.StopSpawn();
         _asteroidSpawner.StopSpawn();
-        _gameOverCountdown = StartCoroutine(ShowGameOver());
+        _gameOverCountdown = StartCoroutine(ShowDeathScreen());
     }
 
     private void WinLevel()
@@ -201,13 +209,28 @@ public class Game : MonoBehaviour
         _warpJump.Play();
     }
 
-    private IEnumerator ShowGameOver()
+    private IEnumerator ShowDeathScreen()
     {
         yield return new WaitForSeconds(_playerShip.DeathDuration);
 
         _gameOverCountdown = null;
         _isRunning = false;
-        _screens.ShowGameOver(_runner.BankedReward);
+
+        if (_runner.IsTest)
+        {
+            _screens.ShowGameOver(_runner.BankedReward);
+
+            yield break;
+        }
+
+        _runner.BankLevel();
+        ShowDock(true);
+    }
+
+    private void ShowDock(bool isDestroyed)
+    {
+        _isRetryNext = isDestroyed;
+        _screens.ShowDock(_runner.BankedReward, isDestroyed || _runner.HasNextLocation, isDestroyed);
     }
 
     private void StopGameOverCountdown()

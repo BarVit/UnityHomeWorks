@@ -20,7 +20,7 @@ public class ScreenNavigator : MonoBehaviour
     public event Action ResumeRequested;
     public event Action RestartFromPauseRequested;
     public event Action RestartRequested;
-    public event Action NextLocationRequested;
+    public event Action PlayRequested;
 
     private void OnEnable()
     {
@@ -32,7 +32,7 @@ public class ScreenNavigator : MonoBehaviour
         _pauseScreen.SettingsRequested += OpenSettingsFromPause;
         _gameOverScreen.RestartRequested += OnRestartRequested;
         _dockScreen.MenuRequested += ShowStart;
-        _dockScreen.NextRequested += OnNextLocationRequested;
+        _dockScreen.PlayRequested += OnPlayRequested;
         _settingsScreen.CloseRequested += CloseSettings;
     }
 
@@ -46,7 +46,7 @@ public class ScreenNavigator : MonoBehaviour
         _pauseScreen.SettingsRequested -= OpenSettingsFromPause;
         _gameOverScreen.RestartRequested -= OnRestartRequested;
         _dockScreen.MenuRequested -= ShowStart;
-        _dockScreen.NextRequested -= OnNextLocationRequested;
+        _dockScreen.PlayRequested -= OnPlayRequested;
         _settingsScreen.CloseRequested -= CloseSettings;
     }
 
@@ -74,11 +74,11 @@ public class ScreenNavigator : MonoBehaviour
         _gameOverScreen.Show(reward);
     }
 
-    public void ShowDock(Reward earned, bool hasNextLocation)
+    public void ShowDock(Reward earned, bool canPlay, bool isDestroyed)
     {
         _pauseScreen.Hide();
         _gameOverScreen.Hide();
-        _dockScreen.Show(earned, hasNextLocation);
+        _dockScreen.Show(earned, canPlay, isDestroyed);
     }
 
     public void HideOverlays()
@@ -153,8 +153,8 @@ public class ScreenNavigator : MonoBehaviour
         RestartRequested?.Invoke();
     }
 
-    private void OnNextLocationRequested()
+    private void OnPlayRequested()
     {
-        NextLocationRequested?.Invoke();
+        PlayRequested?.Invoke();
     }
 }

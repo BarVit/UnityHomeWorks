@@ -114,7 +114,7 @@ namespace UiContent
 
             TMP_Text earned = AddText(Place("Earned", root, new Vector2(0f, 1f), new Vector2(360f, -122f), new Vector2(640f, 40f)),
                 "", 26, TextAlignmentOptions.Left, Gold);
-            AddText(Place("Cleared", root, new Vector2(0f, 1f), new Vector2(360f, -154f), new Vector2(640f, 30f)),
+            TMP_Text status = AddText(Place("Status", root, new Vector2(0f, 1f), new Vector2(360f, -154f), new Vector2(640f, 30f)),
                 "LOCATION CLEARED", 22, TextAlignmentOptions.Left, Muted);
 
             RectTransform wallet = Place("Wallet", root, new Vector2(1f, 1f), new Vector2(-250f, -58f), new Vector2(420f, 76f));
@@ -145,7 +145,7 @@ namespace UiContent
             UpgradeRowView crit = AddUpgradeRow(upgrades, UpgradeStat.CritChance, "CRIT CHANCE", "CRIT HIT DEALS x2", "Crit Icon", -148f);
 
             Button menu = AddButton(root, "Menu Button", "MENU", new Vector2(0f, 0f), new Vector2(150f, 62f), new Vector2(220f, 76f), 32);
-            Button next = AddButton(root, "Next Button", "NEXT LOCATION", new Vector2(1f, 0f), new Vector2(-260f, 62f), new Vector2(440f, 96f), 36);
+            Button play = AddButton(root, "Play Button", "PLAY", new Vector2(1f, 0f), new Vector2(-190f, 62f), new Vector2(300f, 96f), 40);
 
             so.FindProperty("_hangar").objectReferenceValue = hangar;
             so.FindProperty("_economy").objectReferenceValue = economy;
@@ -153,13 +153,14 @@ namespace UiContent
             so.FindProperty("_xp").objectReferenceValue = xp;
             so.FindProperty("_money").objectReferenceValue = money;
             so.FindProperty("_earned").objectReferenceValue = earned;
+            so.FindProperty("_status").objectReferenceValue = status;
             SetArray(so.FindProperty("_slots"), slots);
             so.FindProperty("_weaponIcon").objectReferenceValue = weaponIcon;
             so.FindProperty("_weaponTitle").objectReferenceValue = weaponTitle;
             so.FindProperty("_upgradePanel").objectReferenceValue = upgrades.gameObject;
             SetArray(so.FindProperty("_upgrades"), new Object[] { damage, crit });
             so.FindProperty("_menuButton").objectReferenceValue = menu;
-            so.FindProperty("_nextButton").objectReferenceValue = next;
+            so.FindProperty("_playButton").objectReferenceValue = play;
             so.ApplyModifiedPropertiesWithoutUndo();
         }
 
