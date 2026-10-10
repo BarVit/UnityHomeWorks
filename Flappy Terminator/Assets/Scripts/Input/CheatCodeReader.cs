@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public class CheatCodeReader : MonoBehaviour
 {
@@ -16,16 +17,25 @@ public class CheatCodeReader : MonoBehaviour
     {
         Keyboard keyboard = Keyboard.current;
 
-        if (keyboard == null || keyboard.anyKey.wasPressedThisFrame == false)
+        if (keyboard == null)
             return;
 
+        foreach (KeyControl key in keyboard.allKeys)
+        {
+            if (key != null && key.wasPressedThisFrame)
+                Read(key.keyCode);
+        }
+    }
+
+    private void Read(Key key)
+    {
         if (IsTooLate())
             _typed = 0;
 
-        if (keyboard[_code[_typed]].wasPressedThisFrame)
+        if (key == _code[_typed])
             _typed++;
         else
-            _typed = keyboard[_code[0]].wasPressedThisFrame ? 1 : 0;
+            _typed = key == _code[0] ? 1 : 0;
 
         _lastPressTime = Time.unscaledTime;
 
