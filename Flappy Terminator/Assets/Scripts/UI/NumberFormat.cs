@@ -50,6 +50,9 @@ public static class NumberFormat
         long scale = Pow10(decimals);
         long fraction = value % unit * scale / unit;
 
+        if (fraction == 0)
+            return whole.ToString();
+
         return whole.ToString() + DecimalSeparator + fraction.ToString().PadLeft(decimals, '0');
     }
 
