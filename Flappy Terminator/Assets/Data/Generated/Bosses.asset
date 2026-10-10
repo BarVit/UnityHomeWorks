@@ -19,7 +19,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 760552f2b84714314ac77afd244877e5, type: 3}
     _prototype: warden_1
     _health: 100
-    _weapon: enemy_rocket
+    _weapon: marauder_1_gun
     _barrels: 1
     _damage: 20
     _bodyDamage: 10
@@ -32,7 +32,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 760552f2b84714314ac77afd244877e5, type: 3}
     _prototype: warden_2
     _health: 125
-    _weapon: enemy_rocket
+    _weapon: marauder_2_gun
     _barrels: 1
     _damage: 20
     _bodyDamage: 10
@@ -45,7 +45,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 16686150d903a469bad63cb034411710, type: 3}
     _prototype: hunter_1
     _health: 125
-    _weapon: enemy_impulse_laser
+    _weapon: punisher_1_gun
     _barrels: 1
     _damage: 14
     _bodyDamage: 15
@@ -58,7 +58,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 16686150d903a469bad63cb034411710, type: 3}
     _prototype: hunter_2
     _health: 200
-    _weapon: enemy_impulse_laser_twin
+    _weapon: punisher_2_gun
     _barrels: 2
     _damage: 14
     _bodyDamage: 15
@@ -71,7 +71,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 79fee06f008d942e7baa168b610dd793, type: 3}
     _prototype: reaper_1
     _health: 150
-    _weapon: enemy_homing
+    _weapon: berserker_1_gun
     _barrels: 1
     _damage: 30
     _bodyDamage: 20
@@ -84,7 +84,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 79fee06f008d942e7baa168b610dd793, type: 3}
     _prototype: reaper_2
     _health: 250
-    _weapon: enemy_homing
+    _weapon: berserker_2_gun
     _barrels: 1
     _damage: 40
     _bodyDamage: 20
@@ -97,7 +97,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 18235c16a5303461787f966b277db17c, type: 3}
     _prototype: phantom_1
     _health: 250
-    _weapon: enemy_cannon
+    _weapon: tormentor_1_gun
     _barrels: 2
     _damage: 28
     _bodyDamage: 25
@@ -110,7 +110,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 18235c16a5303461787f966b277db17c, type: 3}
     _prototype: phantom_2
     _health: 350
-    _weapon: enemy_cannon
+    _weapon: tormentor_2_gun
     _barrels: 2
     _damage: 28
     _bodyDamage: 25
@@ -123,7 +123,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 8971cd4b3ded249faa09c9c5dd064fbe, type: 3}
     _prototype: executioner_1
     _health: 600
-    _weapon: enemy_railgun
+    _weapon: ripper_1_gun
     _barrels: 1
     _damage: 100
     _bodyDamage: 30
@@ -136,7 +136,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 8971cd4b3ded249faa09c9c5dd064fbe, type: 3}
     _prototype: executioner_2
     _health: 750
-    _weapon: enemy_torpedo
+    _weapon: ripper_2_gun
     _barrels: 1
     _damage: 80
     _bodyDamage: 30
@@ -149,7 +149,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 23a52b74b901f460b904b5d6e26f65fe, type: 3}
     _prototype: marauder_2
     _health: 625
-    _weapon: enemy_rocket
+    _weapon: hierarch_gun
     _barrels: 1
     _damage: 40
     _bodyDamage: 10
@@ -162,7 +162,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: ba18fc5dc9df349c9a3317347b8941d8, type: 3}
     _prototype: punisher_2
     _health: 1000
-    _weapon: enemy_impulse_laser_twin
+    _weapon: magister_gun
     _barrels: 2
     _damage: 28
     _bodyDamage: 15
@@ -175,7 +175,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 84c1437d9d9ee4198b7c7f20c205dd5d, type: 3}
     _prototype: berserker_2
     _health: 1250
-    _weapon: enemy_homing
+    _weapon: overlord_gun
     _barrels: 1
     _damage: 80
     _bodyDamage: 20
@@ -188,7 +188,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 1b9af5ded130841f9a7c90f392e9b9dc, type: 3}
     _prototype: tormentor_2
     _health: 1750
-    _weapon: enemy_cannon
+    _weapon: archon_gun
     _barrels: 2
     _damage: 56
     _bodyDamage: 25
@@ -201,7 +201,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 3b9c6531747c24b728628a6a4989b1f8, type: 3}
     _prototype: ripper_2
     _health: 3750
-    _weapon: enemy_torpedo
+    _weapon: titan_gun
     _barrels: 1
     _damage: 160
     _bodyDamage: 30
@@ -214,7 +214,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 3b9c6531747c24b728628a6a4989b1f8, type: 3}
     _prototype: ripper_2
     _health: 3750
-    _weapon: enemy_torpedo
+    _weapon: emperor_gun
     _barrels: 1
     _damage: 160
     _bodyDamage: 30
