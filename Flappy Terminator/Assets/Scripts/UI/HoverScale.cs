@@ -1,12 +1,19 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class HoverScale : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private float _hoverScale = 1.06f;
     [SerializeField] private float _speed = 10f;
 
+    private Selectable _selectable;
     private float _target = 1f;
+
+    private void Awake()
+    {
+        _selectable = GetComponent<Selectable>();
+    }
 
     private void Update()
     {
@@ -23,7 +30,8 @@ public class HoverScale : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        _target = _hoverScale;
+        if (_selectable == null || _selectable.IsInteractable())
+            _target = _hoverScale;
     }
 
     public void OnPointerExit(PointerEventData eventData)

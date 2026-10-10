@@ -9,8 +9,7 @@ namespace UiContent
     public static class DockScreenBuilder
     {
         private const string ArtFolder = "Assets/Sprites/UI/Dock/";
-        private const string ButtonSprite = "Assets/Sci-Fi UI/_SciFi_GUISkin_/Skin_Assets/buttons/button1.png";
-        private const string TitleSprite = "Assets/Sci-Fi UI/_SciFi_GUISkin_/Skin_Assets/buttons/button_active.png";
+                private const string TitleSprite = "Assets/Sci-Fi UI/_SciFi_GUISkin_/Skin_Assets/buttons/button_active.png";
         private const string PlayerSheet = "Assets/Sprites/Ships/Player.png";
         private const string PlayerFrame = "tinyShip5_0";
         private const string SlotsAsset = "Assets/Data/Generated/Slots.asset";
@@ -29,8 +28,6 @@ namespace UiContent
         private static readonly Color Cyan = new Color(0.21f, 0.85f, 1f);
         private static readonly Color Muted = new Color(0.62f, 0.74f, 0.86f);
         private static readonly Color PipOff = new Color(0.13f, 0.2f, 0.29f);
-        private static readonly Color MapIdle = new Color(0.8f, 0.8f, 0.8f);
-        private static readonly Color MapPressed = new Color(0.65f, 0.65f, 0.65f);
         private static readonly Color Gold = new Color(1f, 0.82f, 0.3f);
 
         private static TMP_FontAsset _font;
@@ -353,26 +350,18 @@ namespace UiContent
 
         private static void AddMapButton(RectTransform root)
         {
-            Button map = AddButton(root, "Map Button", "MAP", new Vector2(0.5f, 0f), new Vector2(0f, 62f), new Vector2(240f, 84f), 36);
-            ColorBlock colors = map.colors;
-
-            colors.normalColor = MapIdle;
-            colors.highlightedColor = Color.white;
-            colors.selectedColor = MapIdle;
-            colors.pressedColor = MapPressed;
-            colors.fadeDuration = 0.08f;
-            map.colors = colors;
-            map.gameObject.AddComponent<HoverScale>();
+            AddButton(root, "Map Button", "MAP", new Vector2(0.5f, 0f), new Vector2(0f, 62f), new Vector2(240f, 84f), 36);
         }
 
         private static Button AddButton(RectTransform parent, string name, string text, Vector2 anchor, Vector2 position,
             Vector2 size, int fontSize)
         {
             RectTransform rect = Place(name, parent, anchor, position, size);
-            Image image = AddImage(rect, Load<Sprite>(ButtonSprite));
+            Image image = AddImage(rect, Load<Sprite>(ButtonStyle.ButtonSprite));
             image.raycastTarget = true;
             Button button = rect.gameObject.AddComponent<Button>();
             button.targetGraphic = image;
+            ButtonStyle.Apply(button);
             AddText(Stretch("Label", rect), text, fontSize, TextAlignmentOptions.Center, Color.white).raycastTarget = false;
 
             return button;
