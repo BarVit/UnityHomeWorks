@@ -12,6 +12,9 @@ namespace UiContent
         private const int StarCount = 3;
         private const float RowHeight = 44f;
 
+        private const string StarHint = "STAR FOR CLEARING THE LOCATION\nSTAR FOR DESTROYING ALL ENEMIES\n"
+            + "STAR FOR NO DAMAGE FROM ASTEROIDS OR RAMMING";
+
         private static readonly Color Backdrop = new Color(0f, 0f, 0f, 0.8f);
         private static readonly Color Muted = new Color(0.62f, 0.74f, 0.86f);
         private static readonly Color Gold = new Color(1f, 0.82f, 0.3f);
@@ -52,12 +55,18 @@ namespace UiContent
             frame.type = Image.Type.Sliced;
 
             Image[] stars = new Image[StarCount];
+            RectTransform starGroup = DockScreenBuilder.Place("Stars", window, new Vector2(0.5f, 1f), new Vector2(0f, -70f),
+                new Vector2(320f, 110f));
+            Image hitArea = DockScreenBuilder.AddImage(starGroup, null);
+            hitArea.color = Color.clear;
+            hitArea.raycastTarget = true;
+            AddHint(starGroup, StarHint);
 
             for (int i = 0; i < StarCount; i++)
             {
                 float size = i == 1 ? 96f : 76f;
-                RectTransform star = DockScreenBuilder.Place("Star " + (i + 1), window, new Vector2(0.5f, 1f),
-                    new Vector2((i - 1) * 104f, i == 1 ? -64f : -76f), new Vector2(size, size));
+                RectTransform star = DockScreenBuilder.Place("Star " + (i + 1), starGroup, new Vector2(0.5f, 0.5f),
+                    new Vector2((i - 1) * 104f, i == 1 ? 6f : -6f), new Vector2(size, size));
                 stars[i] = DockScreenBuilder.AddImage(star, DockScreenBuilder.Art("Rating Star"));
                 stars[i].preserveAspect = true;
             }
@@ -115,6 +124,15 @@ namespace UiContent
 
             return DockScreenBuilder.AddText(DockScreenBuilder.Place("Value", rect, new Vector2(1f, 0.5f), new Vector2(-170f, 0f),
                 new Vector2(340f, RowHeight)), "", 28, TextAlignmentOptions.Right, valueColor);
+        }
+
+        private static void AddHint(RectTransform target, string text)
+        {
+            HoverHint hint = target.gameObject.AddComponent<HoverHint>();
+            SerializedObject so = new SerializedObject(hint);
+            so.FindProperty("_tooltip").objectReferenceValue = Object.FindAnyObjectByType<NumberTooltip>(FindObjectsInactive.Include);
+            so.FindProperty("_text").stringValue = text;
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         private static void Set(Object target, string field, Object value)

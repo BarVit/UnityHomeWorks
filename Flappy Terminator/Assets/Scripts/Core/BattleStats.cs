@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class BattleStats : MonoBehaviour
 {
-    private const int MaxStars = 3;
-
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private PlayerShip _playerShip;
     [SerializeField] private PlayerShooter _shooter;
@@ -36,9 +34,11 @@ public class BattleStats : MonoBehaviour
 
     public int Accuracy => Fired == 0 ? 100 : Mathf.FloorToInt(100f * Hit / Fired);
 
-    public int Stars => 1 + (Killed >= TotalEnemies ? 1 : 0) + (EnvironmentDamage == 0 ? 1 : 0);
+    public bool HasKilledAll => Killed >= TotalEnemies;
 
-    public int MaxStarCount => MaxStars;
+    public bool HasNoEnvironmentDamage => EnvironmentDamage == 0;
+
+    public int Stars => 1 + (HasKilledAll ? 1 : 0) + (HasNoEnvironmentDamage ? 1 : 0);
 
     public event Action Changed;
 

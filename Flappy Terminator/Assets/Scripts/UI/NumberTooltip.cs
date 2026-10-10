@@ -7,6 +7,7 @@ public class NumberTooltip : MonoBehaviour
     [SerializeField] private TMP_Text _label;
     [SerializeField] private float _padding = 14f;
     [SerializeField] private float _lift = 8f;
+    [SerializeField] private float _minHeight = 48f;
 
     private RectTransform _target;
 
@@ -16,7 +17,9 @@ public class NumberTooltip : MonoBehaviour
         _label.text = text;
         _panel.gameObject.SetActive(true);
         _panel.SetAsLastSibling();
-        _panel.sizeDelta = new Vector2(_label.GetPreferredValues(text).x + _padding * 2f, _panel.sizeDelta.y);
+        Vector2 preferred = _label.GetPreferredValues(text);
+
+        _panel.sizeDelta = new Vector2(preferred.x + _padding * 2f, Mathf.Max(_minHeight, preferred.y + _padding * 2f));
         Place();
     }
 

@@ -33,6 +33,10 @@
   округление обычное. Начисляются в кошелёк при завершении локации. При гибели окна нет и
   бонусы не начисляются.
 - **Звёзды:** 1 — пройдено; +1 — убиты все запланированные; +1 — нет урона от окружения.
+  Загораются подряд по количеству (решение пользователя), а не каждая по своему условию.
+  При наведении на звёзды — одна общая подсказка (`HoverHint` на группе звёзд, плашка
+  `NumberTooltip` подстраивается под многострочный текст): «STAR FOR CLEARING THE LOCATION /
+  STAR FOR DESTROYING ALL ENEMIES / STAR FOR NO DAMAGE FROM ASTEROIDS OR RAMMING».
 - **Окно** (`LocationResultScreen`, собирает `Tools → UI → Build Result Screen`): звёзды,
   LOCATION COMPLETE, ENEMIES KILLED, ACCURACY, DAMAGE TAKEN, EARNED, затем строки бонусов,
   только если они ненулевые, и кнопка TO DOCK. Док после него показывает заработанное вместе
