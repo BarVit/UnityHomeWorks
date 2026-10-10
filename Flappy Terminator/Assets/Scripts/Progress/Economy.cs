@@ -6,7 +6,7 @@ public class Economy : MonoBehaviour
     [SerializeField] private ProgressionTable _progression;
     [SerializeField] private LocationRunner _runner;
 
-    private SaveData _data;
+    private SessionProgress _data = new SessionProgress();
 
     public int PilotLevel => _data.Profile.PilotLevel;
 
@@ -25,11 +25,6 @@ public class Economy : MonoBehaviour
     public int CompletedLocations => _data.Galaxy.CompletedLocations.Count;
 
     public event Action Changed;
-
-    private void Awake()
-    {
-        _data = SaveStorage.Load();
-    }
 
     private void OnEnable()
     {
@@ -53,9 +48,10 @@ public class Economy : MonoBehaviour
         return true;
     }
 
-    public void Save()
+    public void StartNewSession()
     {
-        SaveStorage.Save(_data);
+        _data = new SessionProgress();
+        Changed?.Invoke();
     }
 
     private void Credit(Reward reward)
@@ -75,7 +71,6 @@ public class Economy : MonoBehaviour
     private void Complete(string locationId)
     {
         _data.Galaxy.Complete(locationId);
-        Save();
     }
 
     private void RaisePilotLevel()

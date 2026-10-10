@@ -96,6 +96,7 @@ public class Game : MonoBehaviour
     private void StartGame()
     {
         _runner.StartGame();
+        _hangar.StartNewSession();
         _hangar.Equip(_playerShip.Shooter);
 
         StartLevel();

@@ -20,8 +20,14 @@ public class Hangar : MonoBehaviour
 
     private void Start()
     {
-        if (Ship.UnlockedSlots == 0)
-            Ship.UnlockSlot(_slots.GetRow(FirstSlot).Weapon);
+        StartNewSession();
+    }
+
+    public void StartNewSession()
+    {
+        _economy.StartNewSession();
+        Ship.UnlockSlot(_slots.GetRow(FirstSlot).Weapon);
+        Changed?.Invoke();
     }
 
     public bool IsUnlocked(int slot)
@@ -119,7 +125,6 @@ public class Hangar : MonoBehaviour
 
     private void Commit()
     {
-        _economy.Save();
         Changed?.Invoke();
     }
 }

@@ -2,16 +2,11 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class SaveData
+public class SessionProgress
 {
-    public const int CurrentVersion = 2;
-
-    [SerializeField] private int _version = CurrentVersion;
     [SerializeField] private PlayerProfile _profile = new PlayerProfile();
     [SerializeField] private ShipProgress _ship = new ShipProgress();
     [SerializeField] private GalaxyProgress _galaxy = new GalaxyProgress();
-
-    public int Version => _version;
 
     public PlayerProfile Profile => _profile;
 
