@@ -25,6 +25,7 @@ public class Economy : MonoBehaviour
     public int CompletedLocations => _data.Galaxy.CompletedLocations.Count;
 
     public event Action Changed;
+    public event Action SessionStarted;
 
     private void OnEnable()
     {
@@ -43,6 +44,11 @@ public class Economy : MonoBehaviour
         return _data.Galaxy.IsCompleted(locationId);
     }
 
+    public int GetStars(string locationId)
+    {
+        return _data.Galaxy.GetStars(locationId);
+    }
+
     public bool TrySpend(int price)
     {
         if (_data.Profile.TrySpendMoney(price) == false)
@@ -56,6 +62,7 @@ public class Economy : MonoBehaviour
     public void StartNewSession()
     {
         _data = new SessionProgress();
+        SessionStarted?.Invoke();
         Changed?.Invoke();
     }
 
@@ -73,9 +80,9 @@ public class Economy : MonoBehaviour
         Changed?.Invoke();
     }
 
-    private void Complete(string locationId)
+    private void Complete(string locationId, int stars)
     {
-        _data.Galaxy.Complete(locationId);
+        _data.Galaxy.Complete(locationId, stars);
     }
 
     private void RaisePilotLevel()

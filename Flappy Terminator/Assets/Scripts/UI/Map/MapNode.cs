@@ -14,10 +14,13 @@ public class MapNode : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Image _core;
     [SerializeField] private GameObject _lock;
     [SerializeField] private TMP_Text _label;
+    [SerializeField] private Image[] _stars;
     [SerializeField] private Color _completedColor = new Color(0.21f, 0.85f, 1f);
     [SerializeField] private Color _currentColor = new Color(1f, 0.85f, 0.3f);
     [SerializeField] private Color _openColor = new Color(0.8f, 0.9f, 1f);
     [SerializeField] private Color _lockedColor = new Color(0.45f, 0.5f, 0.58f, 0.85f);
+    [SerializeField] private Color _starOn = new Color(1f, 0.82f, 0.3f);
+    [SerializeField] private Color _starOff = new Color(0.25f, 0.32f, 0.42f);
 
     private MapNodeState _state;
 
@@ -49,6 +52,16 @@ public class MapNode : MonoBehaviour, IPointerClickHandler
         _core.color = state == MapNodeState.Locked ? _lockedColor : tint;
         _label.color = state == MapNodeState.Locked ? _lockedColor : Color.white;
         SetSelected(false);
+        SetStars(0);
+    }
+
+    public void SetStars(int count)
+    {
+        for (int i = 0; i < _stars.Length; i++)
+        {
+            _stars[i].gameObject.SetActive(count > 0);
+            _stars[i].color = i < count ? _starOn : _starOff;
+        }
     }
 
     public void SetSelected(bool isSelected)

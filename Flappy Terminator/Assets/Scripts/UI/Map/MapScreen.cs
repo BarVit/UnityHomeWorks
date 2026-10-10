@@ -55,6 +55,7 @@ public class MapScreen : MonoBehaviour
     private int _currentLocation;
     private int _openedSystem = -1;
     private int _selected = NoSelection;
+    private GameObject _lastView;
     private bool _canPlay;
 
     public event Action MenuRequested;
@@ -68,6 +69,7 @@ public class MapScreen : MonoBehaviour
         _menuButton.onClick.AddListener(OnMenuClicked);
         _dockButton.onClick.AddListener(OnDockClicked);
         _playButton.onClick.AddListener(OnPlayClicked);
+        _economy.SessionStarted += ForgetView;
 
         foreach (MapRegion region in _regions)
             region.Clicked += OnRegionClicked;
@@ -85,6 +87,7 @@ public class MapScreen : MonoBehaviour
         _menuButton.onClick.RemoveListener(OnMenuClicked);
         _dockButton.onClick.RemoveListener(OnDockClicked);
         _playButton.onClick.RemoveListener(OnPlayClicked);
+        _economy.SessionStarted -= ForgetView;
 
         foreach (MapRegion region in _regions)
             region.Clicked -= OnRegionClicked;
@@ -103,7 +106,13 @@ public class MapScreen : MonoBehaviour
         _panel.transform.SetAsLastSibling();
         _panel.SetActive(true);
         ReadProgress();
-        ShowGalaxy();
+
+        if (_lastView == _galaxyView)
+            ShowGalaxy();
+        else if (_lastView == _armView)
+            ShowArm();
+        else
+            ShowSystem(_lastView == _systemView ? _openedSystem : GetCurrentSystem());
     }
 
     public void Hide()
@@ -150,6 +159,11 @@ public class MapScreen : MonoBehaviour
         found.Sort((left, right) => left.Order.CompareTo(right.Order));
 
         return found;
+    }
+
+    private void ForgetView()
+    {
+        _lastView = null;
     }
 
     private void ShowGalaxy()
@@ -202,6 +216,7 @@ public class MapScreen : MonoBehaviour
             node.anchorMin = node.anchorMax = new Vector2(positions[i].x, 1f - positions[i].y);
             node.anchoredPosition = Vector2.zero;
             _locationNodes[i].Show(first + i, GetLabel(first + i), GetLocationState(first + i), _starColors[index]);
+            _locationNodes[i].SetStars(_economy.GetStars(_route[first + i].Id));
         }
 
         int count = Mathf.Min(locations.Count, positions.Length);
@@ -243,6 +258,7 @@ public class MapScreen : MonoBehaviour
         if (view != _systemView)
             Select(NoSelection);
 
+        _lastView = view;
         _galaxyView.SetActive(view == _galaxyView);
         _armView.SetActive(view == _armView);
         _systemView.SetActive(view == _systemView);
@@ -275,6 +291,11 @@ public class MapScreen : MonoBehaviour
         string systemId = _route[locationIndex].System;
 
         return _systemRoute.FindIndex(system => system.Id == systemId);
+    }
+
+    private int GetCurrentSystem()
+    {
+        return Mathf.Min(GetSystemIndex(_currentLocation), _systemRoute.Count - 1);
     }
 
     private int GetFirstLocation(int system)

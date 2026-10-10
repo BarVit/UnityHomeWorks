@@ -32,6 +32,9 @@ namespace UiContent
         private const int LocationNodeCount = 10;
         private const float SystemNodeSize = 84f;
         private const float LocationNodeSize = 56f;
+        private const int LocationStarCount = 3;
+        private const float NodeStarSize = 18f;
+        private const float NodeStarStep = 20f;
         private const float BorderWidth = 2.5f;
         private const float SelectionScale = 1.6f;
         private const string WavesAsset = "Assets/Data/Generated/Waves.asset";
@@ -223,7 +226,7 @@ namespace UiContent
 
             for (int i = 0; i < SystemCount; i++)
             {
-                nodes[i] = AddNode(view, "System " + (i + 1), SystemNodeSize, 26);
+                nodes[i] = AddNode(view, "System " + (i + 1), SystemNodeSize, 26, 0);
                 Anchor((RectTransform)nodes[i].transform, systems.systems[i].position.ToVector());
             }
 
@@ -242,12 +245,12 @@ namespace UiContent
             nodes = new MapNode[LocationNodeCount];
 
             for (int i = 0; i < LocationNodeCount; i++)
-                nodes[i] = AddNode(view, "Location " + (i + 1), LocationNodeSize, 22);
+                nodes[i] = AddNode(view, "Location " + (i + 1), LocationNodeSize, 22, LocationStarCount);
 
             return view;
         }
 
-        private static MapNode AddNode(RectTransform parent, string name, float size, int fontSize)
+        private static MapNode AddNode(RectTransform parent, string name, float size, int fontSize, int starCount)
         {
             RectTransform root = DockScreenBuilder.Place(name, parent, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size, size));
             RectTransform selection = DockScreenBuilder.Place("Selection", root, new Vector2(0.5f, 0.5f), Vector2.zero,
@@ -264,6 +267,7 @@ namespace UiContent
                 new Vector2(0f, -fontSize * 0.8f), new Vector2(220f, fontSize + 8f)), "", fontSize, TextAlignmentOptions.Center,
                 Color.white);
             label.fontStyle = FontStyles.Bold;
+            Image[] stars = AddStars(root, starCount, -fontSize * 1.8f - NodeStarSize * 0.5f);
 
             MapNode node = root.gameObject.AddComponent<MapNode>();
             SerializedObject so = new SerializedObject(node);
@@ -272,9 +276,31 @@ namespace UiContent
             so.FindProperty("_core").objectReferenceValue = core;
             so.FindProperty("_lock").objectReferenceValue = lockRect.gameObject;
             so.FindProperty("_label").objectReferenceValue = label;
+            SerializedProperty starsProperty = so.FindProperty("_stars");
+            starsProperty.arraySize = stars.Length;
+
+            for (int i = 0; i < stars.Length; i++)
+                starsProperty.GetArrayElementAtIndex(i).objectReferenceValue = stars[i];
+
             so.ApplyModifiedPropertiesWithoutUndo();
 
             return node;
+        }
+
+        private static Image[] AddStars(RectTransform root, int count, float y)
+        {
+            Image[] stars = new Image[count];
+
+            for (int i = 0; i < count; i++)
+            {
+                RectTransform star = DockScreenBuilder.Place("Star " + (i + 1), root, new Vector2(0.5f, 0f),
+                    new Vector2((i - (count - 1) * 0.5f) * NodeStarStep, y), new Vector2(NodeStarSize, NodeStarSize));
+                stars[i] = DockScreenBuilder.AddImage(star, DockScreenBuilder.Art("Rating Star"));
+                stars[i].preserveAspect = true;
+                star.gameObject.SetActive(false);
+            }
+
+            return stars;
         }
 
         private static MapToast BuildToast(RectTransform panel)

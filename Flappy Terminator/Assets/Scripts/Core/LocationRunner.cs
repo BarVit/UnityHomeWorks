@@ -41,7 +41,7 @@ public class LocationRunner : MonoBehaviour
     public event Action<int> LevelChanged;
     public event Action<Reward> LevelBanked;
     public event Action<Reward> RewardChanged;
-    public event Action<string> LocationCompleted;
+    public event Action<string, int> LocationCompleted;
 
     private void Awake()
     {
@@ -118,9 +118,9 @@ public class LocationRunner : MonoBehaviour
         LevelBanked?.Invoke(earned);
     }
 
-    public void CompleteLocation()
+    public void CompleteLocation(int stars)
     {
-        LocationCompleted?.Invoke(_locationId);
+        LocationCompleted?.Invoke(_locationId, stars);
     }
 
     public void Advance()
