@@ -213,6 +213,7 @@ namespace UiContent
             RectTransform frame = Place("Slot " + slot, parent, new Vector2(0.5f, 0.5f), position, new Vector2(140f, 104f));
             Image image = AddImage(frame, Art("Slot Frame"));
             image.type = Image.Type.Sliced;
+            image.raycastTarget = true;
 
             Button button = frame.gameObject.AddComponent<Button>();
             button.targetGraphic = image;
@@ -305,6 +306,7 @@ namespace UiContent
         {
             RectTransform rect = Place(name, parent, anchor, position, size);
             Image image = AddImage(rect, Load<Sprite>(ButtonSprite));
+            image.raycastTarget = true;
             Button button = rect.gameObject.AddComponent<Button>();
             button.targetGraphic = image;
             AddText(Stretch("Label", rect), text, fontSize, TextAlignmentOptions.Center, Color.white).raycastTarget = false;
