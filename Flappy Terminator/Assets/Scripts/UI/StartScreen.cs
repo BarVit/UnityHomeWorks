@@ -1,15 +1,23 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StartScreen : MonoBehaviour
 {
+    private const string StartText = "START";
+    private const string ResumeText = "RESUME";
+
     [SerializeField] private GameObject _panel;
     [SerializeField] private Button _startButton;
+    [SerializeField] private TMP_Text _startLabel;
     [SerializeField] private Button _testButton;
     [SerializeField] private Button _settingsButton;
 
+    private bool _canResume;
+
     public event Action StartRequested;
+    public event Action ResumeRequested;
     public event Action TestRequested;
     public event Action SettingsRequested;
 
@@ -32,6 +40,13 @@ public class StartScreen : MonoBehaviour
         _panel.SetActive(true);
     }
 
+    public void Show(bool canResume)
+    {
+        _canResume = canResume;
+        _startLabel.text = canResume ? ResumeText : StartText;
+        Show();
+    }
+
     public void Hide()
     {
         _panel.SetActive(false);
@@ -39,7 +54,10 @@ public class StartScreen : MonoBehaviour
 
     private void OnStartClicked()
     {
-        StartRequested?.Invoke();
+        if (_canResume)
+            ResumeRequested?.Invoke();
+        else
+            StartRequested?.Invoke();
     }
 
     private void OnTestClicked()

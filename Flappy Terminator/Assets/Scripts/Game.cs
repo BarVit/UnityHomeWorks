@@ -17,6 +17,7 @@ public class Game : MonoBehaviour
     private bool _isLevelOver;
     private bool _isRunning;
     private DockReason _dockReason;
+    private Reward _dockEarned;
 
     private void OnEnable()
     {
@@ -24,6 +25,7 @@ public class Game : MonoBehaviour
         _playerShip.Died += LoseLevel;
         _warpJump.Finished += FinishWarp;
         _screens.StartRequested += StartGame;
+        _screens.SessionResumeRequested += ResumeSession;
         _screens.StartTestRequested += StartTest;
         _screens.ResumeRequested += Resume;
         _screens.RestartFromPauseRequested += RestartFromPause;
@@ -47,6 +49,7 @@ public class Game : MonoBehaviour
         _playerShip.Died -= LoseLevel;
         _warpJump.Finished -= FinishWarp;
         _screens.StartRequested -= StartGame;
+        _screens.SessionResumeRequested -= ResumeSession;
         _screens.StartTestRequested -= StartTest;
         _screens.ResumeRequested -= Resume;
         _screens.RestartFromPauseRequested -= RestartFromPause;
@@ -107,6 +110,7 @@ public class Game : MonoBehaviour
     {
         _hangar.StartTestSession(_playerShip.Shooter.TestWeaponId);
         _dockReason = DockReason.TestStart;
+        _screens.CanResumeSession = false;
         _screens.ShowDock(default, true, DockReason.TestStart);
     }
 
@@ -230,8 +234,17 @@ public class Game : MonoBehaviour
 
     private void ShowDock(DockReason reason)
     {
+        bool canPlay = reason != DockReason.Cleared || _runner.HasNextLocation;
+
         _dockReason = reason;
-        _screens.ShowDock(_runner.BankedReward, reason != DockReason.Cleared || _runner.HasNextLocation, reason);
+        _dockEarned = _runner.BankedReward;
+        _screens.CanResumeSession = canPlay;
+        _screens.ShowDock(_dockEarned, canPlay, reason);
+    }
+
+    private void ResumeSession()
+    {
+        _screens.ShowDock(_dockEarned, true, _dockReason);
     }
 
     private void StopGameOverCountdown()

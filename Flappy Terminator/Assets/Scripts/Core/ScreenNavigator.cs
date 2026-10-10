@@ -15,7 +15,10 @@ public class ScreenNavigator : MonoBehaviour
 
     public bool IsSettingsOpen { get; private set; }
 
+    public bool CanResumeSession { get; set; }
+
     public event Action StartRequested;
+    public event Action SessionResumeRequested;
     public event Action StartTestRequested;
     public event Action ResumeRequested;
     public event Action RestartFromPauseRequested;
@@ -25,6 +28,7 @@ public class ScreenNavigator : MonoBehaviour
     private void OnEnable()
     {
         _startScreen.StartRequested += OnStartRequested;
+        _startScreen.ResumeRequested += OnSessionResumeRequested;
         _startScreen.TestRequested += OnStartTestRequested;
         _startScreen.SettingsRequested += OpenSettingsFromStart;
         _pauseScreen.ResumeRequested += OnResumeRequested;
@@ -39,6 +43,7 @@ public class ScreenNavigator : MonoBehaviour
     private void OnDisable()
     {
         _startScreen.StartRequested -= OnStartRequested;
+        _startScreen.ResumeRequested -= OnSessionResumeRequested;
         _startScreen.TestRequested -= OnStartTestRequested;
         _startScreen.SettingsRequested -= OpenSettingsFromStart;
         _pauseScreen.ResumeRequested -= OnResumeRequested;
@@ -56,7 +61,7 @@ public class ScreenNavigator : MonoBehaviour
         _gameOverScreen.Hide();
         _dockScreen.Hide();
         _settingsScreen.Hide();
-        _startScreen.Show();
+        _startScreen.Show(CanResumeSession);
     }
 
     public void ShowPause()
@@ -130,6 +135,12 @@ public class ScreenNavigator : MonoBehaviour
     {
         _startScreen.Hide();
         StartRequested?.Invoke();
+    }
+
+    private void OnSessionResumeRequested()
+    {
+        _startScreen.Hide();
+        SessionResumeRequested?.Invoke();
     }
 
     private void OnStartTestRequested()

@@ -15174,6 +15174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _panel: {fileID: 452419521}
   _startButton: {fileID: 132356076}
+  _startLabel: {fileID: 213506502}
   _testButton: {fileID: 391943517}
   _settingsButton: {fileID: 376424885}
 --- !u!1 &906334301
