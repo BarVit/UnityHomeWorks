@@ -189,7 +189,7 @@ MonoBehaviour:
   _maxSpeed: 3
   _minRotationSpeed: -60
   _maxRotationSpeed: 60
-  <Damage>k__BackingField: 30
+  <Damage>k__BackingField: 20
 --- !u!114 &-645253238460093978
 MonoBehaviour:
   m_ObjectHideFlags: 0
