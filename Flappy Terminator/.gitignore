@@ -1,0 +1,4 @@
+Builds/
+# Written by the Performance Testing package on every player build
+Assets/Resources/PerformanceTestRun*
+Assets/Resources.meta
