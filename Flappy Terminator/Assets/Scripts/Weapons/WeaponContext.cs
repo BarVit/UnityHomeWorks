@@ -4,7 +4,8 @@ public class WeaponContext
 {
     public WeaponContext(Transform[] mounts, int barrels, PoolRegistry pools, ShotAudio audio,
         ShotAudio hitAudio, LayerMask targetLayers, int ammoLayer, Camera camera, LayerMask worldLayers = default,
-        ShotLoop loop = null, ShotLoop hitLoop = null, int damage = 0)
+        ShotLoop loop = null, ShotLoop hitLoop = null, int damage = 0,
+        WeaponBoost boost = default)
     {
         Mounts = mounts;
         Barrels = barrels;
@@ -17,6 +18,7 @@ public class WeaponContext
         AmmoLayer = ammoLayer;
         Camera = camera;
         Damage = damage;
+        Boost = boost;
 
         ContactFilter2D filter = new ContactFilter2D();
 
@@ -58,4 +60,6 @@ public class WeaponContext
     public Camera Camera { get; private set; }
 
     public int Damage { get; private set; }
+
+    public WeaponBoost Boost { get; private set; }
 }

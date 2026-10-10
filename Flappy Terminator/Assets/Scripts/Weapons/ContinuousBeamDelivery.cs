@@ -30,7 +30,7 @@ public class ContinuousBeamDelivery : BeamDelivery
     {
         _owed.TryGetValue(damageable, out float owed);
 
-        owed += Damage * Row.Rate;
+        owed += Context.Boost.Roll(Damage * Row.Rate);
 
         int whole = Mathf.FloorToInt(owed);
 

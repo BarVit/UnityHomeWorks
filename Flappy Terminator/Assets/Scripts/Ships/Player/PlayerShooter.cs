@@ -21,6 +21,7 @@ public class PlayerShooter : MonoBehaviour
 
     private Transform[] _mounts;
     private WeaponDelivery _delivery;
+    private string _equippedId;
     private AudioClip _overheatClip;
     private float _shownReadiness = -1f;
     private int _shownShots = -1;
@@ -29,7 +30,11 @@ public class PlayerShooter : MonoBehaviour
 
     public event Action<int> ShotsLeftChanged;
 
-    public string WeaponId => _weaponId;
+    public event Action WeaponChanged;
+
+    public string WeaponId => _equippedId;
+
+    public string TestWeaponId => _weaponId;
 
     public int Barrels => _barrels;
 
@@ -55,22 +60,7 @@ public class PlayerShooter : MonoBehaviour
 
     private void Awake()
     {
-        WeaponRow row = _weapons.GetRow(_weaponId);
-
-        if (row == null)
-            throw new InvalidOperationException(
-                "PlayerShooter: в таблице оружия нет строки с id " + _weaponId);
-
-        _mounts = CollectMounts(GetLayout(row));
-
-        Camera camera = Camera.main;
-        WeaponContext context = new WeaponContext(_mounts, _barrels, _pools,
-            new ShotAudio(_shotAudioSource, camera), new ShotAudio(_hitAudioSource, camera),
-            _targetLayers, LayerMask.NameToLayer(AmmoLayerName), camera, _worldLayers, new ShotLoop(_loopAudioSource),
-            new ShotLoop(_hitLoopAudioSource));
-
-        _delivery = WeaponFactory.Create(row, context);
-        _overheatClip = row.Assets == null ? null : row.Assets.OverheatSound;
+        EquipTestWeapon();
     }
 
     private void Update()
@@ -88,6 +78,41 @@ public class PlayerShooter : MonoBehaviour
     public void ReleaseAll()
     {
         _pools.ReleaseAll();
+    }
+
+    public void EquipTestWeapon()
+    {
+        Equip(_weaponId, new WeaponBoost(0, 0f, 1f));
+    }
+
+    public void Equip(string weaponId, WeaponBoost boost)
+    {
+        WeaponRow row = _weapons.GetRow(weaponId);
+
+        if (row == null)
+            throw new InvalidOperationException(
+                "PlayerShooter: в таблице оружия нет строки с id " + weaponId);
+
+        if (_delivery != null)
+        {
+            _delivery.Dispose();
+            _pools.ReleaseAll();
+        }
+
+        _mounts = CollectMounts(GetLayout(row));
+
+        Camera camera = Camera.main;
+        WeaponContext context = new WeaponContext(_mounts, _barrels, _pools,
+            new ShotAudio(_shotAudioSource, camera), new ShotAudio(_hitAudioSource, camera),
+            _targetLayers, LayerMask.NameToLayer(AmmoLayerName), camera, _worldLayers, new ShotLoop(_loopAudioSource),
+            new ShotLoop(_hitLoopAudioSource), boost: boost);
+
+        _equippedId = weaponId;
+        _delivery = WeaponFactory.Create(row, context);
+        _overheatClip = row.Assets == null ? null : row.Assets.OverheatSound;
+        _shownReadiness = -1f;
+        _shownShots = -1;
+        WeaponChanged?.Invoke();
     }
 
     private Transform GetLayout(WeaponRow row)

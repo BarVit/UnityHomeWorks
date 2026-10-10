@@ -3,7 +3,8 @@ using UnityEngine;
 public class EnemySetup
 {
     private EnemySetup(EnemyShip prefab, string shipId, int tier, int health, int bodyDamage, int barrels,
-        int damage, MovementProfile movement, WeaponRow weapon, int scale, Color tint, SpriteSkin skin)
+        int damage, MovementProfile movement, WeaponRow weapon, int scale, Color tint, SpriteSkin skin,
+        int rewardMoney)
     {
         Prefab = prefab;
         ShipId = shipId;
@@ -17,6 +18,7 @@ public class EnemySetup
         Scale = scale;
         Tint = tint;
         Skin = skin;
+        RewardMoney = rewardMoney;
     }
 
     public EnemyShip Prefab { get; private set; }
@@ -43,15 +45,19 @@ public class EnemySetup
 
     public SpriteSkin Skin { get; private set; }
 
+    public int RewardMoney { get; private set; }
+
     public static EnemySetup ForEnemy(EnemyRow enemy, WeaponRow weapon)
     {
         return new EnemySetup(enemy.Prefab, enemy.Type, enemy.Tier, enemy.Health, enemy.BodyDamage, enemy.Barrels,
-            enemy.Damage, enemy.Movement, weapon, 1, Color.white, enemy.Skin);
+            enemy.Damage, enemy.Movement, weapon, 1, Color.white, enemy.Skin,
+            enemy.RewardMoney);
     }
 
     public static EnemySetup ForBoss(BossRow boss, WeaponRow weapon)
     {
         return new EnemySetup(boss.Prefab, boss.Id, 0, boss.Health, boss.BodyDamage, boss.Barrels,
-            boss.Damage, boss.Movement, weapon, boss.Scale, boss.Tint, null);
+            boss.Damage, boss.Movement, weapon, boss.Scale, boss.Tint, null,
+            boss.RewardMoney);
     }
 }

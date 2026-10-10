@@ -174,7 +174,7 @@ public class BeamDelivery : WeaponDelivery
 
     protected virtual int GetStrikeDamage(IDamageable damageable)
     {
-        return Damage;
+        return RollDamage();
     }
 
     private bool IsAimed()

@@ -7,7 +7,7 @@ public class Game : MonoBehaviour
     [SerializeField] private PlayerShip _playerShip;
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private AsteroidSpawner _asteroidSpawner;
-    [SerializeField] private KillCounter _killCounter;
+    [SerializeField] private Hangar _hangar;
     [SerializeField] private WarpJump _warpJump;
     [SerializeField] private ScreenNavigator _screens;
     [SerializeField] private PauseController _pause;
@@ -96,7 +96,7 @@ public class Game : MonoBehaviour
     private void StartGame()
     {
         _runner.StartGame();
-        _killCounter.Restart();
+        _hangar.Equip(_playerShip.Shooter);
 
         StartLevel();
     }
@@ -104,7 +104,7 @@ public class Game : MonoBehaviour
     private void StartTest()
     {
         _runner.StartTest();
-        _killCounter.Restart();
+        _playerShip.Shooter.EquipTestWeapon();
 
         StartLevel();
     }
@@ -112,6 +112,7 @@ public class Game : MonoBehaviour
     private void StartNextLocation()
     {
         _runner.StartNextLocation();
+        _hangar.Equip(_playerShip.Shooter);
 
         StartLevel();
     }
@@ -119,7 +120,6 @@ public class Game : MonoBehaviour
     private void RestartRun()
     {
         _runner.RestartRun();
-        _killCounter.Restart();
 
         StartLevel();
     }
@@ -161,7 +161,7 @@ public class Game : MonoBehaviour
         if (_runner.IsTest)
             _screens.ShowStart();
         else
-            _screens.ShowVictory(_killCounter.Kills, _runner.HasNextLocation);
+            _screens.ShowDock(_runner.BankedReward, _runner.HasNextLocation);
     }
 
     private void StartLevel()
@@ -206,7 +206,7 @@ public class Game : MonoBehaviour
 
         _gameOverCountdown = null;
         _isRunning = false;
-        _screens.ShowGameOver(_killCounter.Kills);
+        _screens.ShowGameOver(_runner.BankedReward);
     }
 
     private void StopGameOverCountdown()

@@ -4,8 +4,6 @@ using UnityEngine.Serialization;
 
 public class LocationRunner : MonoBehaviour
 {
-    private const int RewardPerKill = 1;
-
     [SerializeField] private LocationTable _locations;
     [SerializeField] private WaveTable _waves;
     [FormerlySerializedAs("_locationId")]
@@ -32,14 +30,17 @@ public class LocationRunner : MonoBehaviour
 
     public bool HasNextLocation => FindNextLocation() != null;
 
-    public int PendingReward => _run.PendingReward;
+    public Reward PendingReward => _run.PendingReward;
 
-    public int BankedReward => _run.BankedReward;
+    public Reward BankedReward => _run.BankedReward;
+
+    public Reward LocationReward => _run.BankedReward + _run.PendingReward;
 
     public int WaveSize => _location.FirstWaveSize + (_run.Level - 1) * _location.WaveSizeGrowth;
 
     public event Action<int> LevelChanged;
-    public event Action<int> LevelBanked;
+    public event Action<Reward> LevelBanked;
+    public event Action<Reward> RewardChanged;
     public event Action<string> LocationCompleted;
 
     private void Awake()
@@ -76,24 +77,27 @@ public class LocationRunner : MonoBehaviour
                 "LocationRunner: у локации " + _locationId + " нет следующей локации со сценарием волн");
 
         Select(next.Id);
-        _run.RestartRun();
+        _run.Restart();
         LevelChanged?.Invoke(_run.Level);
+        RewardChanged?.Invoke(LocationReward);
     }
 
     public void RestartRun()
     {
         _run.RestartRun();
         LevelChanged?.Invoke(_run.Level);
+        RewardChanged?.Invoke(LocationReward);
     }
 
     public void DropPendingReward()
     {
         _run.DropPending();
+        RewardChanged?.Invoke(LocationReward);
     }
 
     public void BankLevel()
     {
-        int earned = _run.PendingReward;
+        Reward earned = _run.PendingReward;
 
         _run.BankReward();
         LevelBanked?.Invoke(earned);
@@ -115,6 +119,7 @@ public class LocationRunner : MonoBehaviour
         Select(locationId);
         _run.Restart();
         LevelChanged?.Invoke(_run.Level);
+        RewardChanged?.Invoke(LocationReward);
     }
 
     private void Select(string locationId)
@@ -144,6 +149,7 @@ public class LocationRunner : MonoBehaviour
 
     private void OnEnemyDied(EnemyShip ship)
     {
-        _run.AddReward(RewardPerKill);
+        _run.AddReward(ship.Reward);
+        RewardChanged?.Invoke(LocationReward);
     }
 }

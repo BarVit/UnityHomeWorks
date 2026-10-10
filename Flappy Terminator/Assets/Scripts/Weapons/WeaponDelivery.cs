@@ -59,7 +59,12 @@ public abstract class WeaponDelivery
 
     protected float ProjectileSpeed => _row.ProjectileSpeed;
 
-    protected int Damage => _context.Damage > 0 ? _context.Damage : _row.Damage;
+    protected int Damage => (_context.Damage > 0 ? _context.Damage : _row.Damage) + _context.Boost.DamageBonus;
+
+    protected int RollDamage()
+    {
+        return _context.Boost.Roll(Damage);
+    }
 
     public void Fire()
     {

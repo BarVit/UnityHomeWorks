@@ -10,8 +10,29 @@ public class OverheatSmoke : MonoBehaviour
 
     private bool _isSmoking;
 
+    private void OnEnable()
+    {
+        _shooter.WeaponChanged += Rebuild;
+    }
+
     private void Start()
     {
+        Rebuild();
+    }
+
+    private void OnDisable()
+    {
+        _shooter.WeaponChanged -= Rebuild;
+    }
+
+    private void Rebuild()
+    {
+        foreach (ParticleSystem smoke in _smokes)
+            Destroy(smoke.gameObject);
+
+        _smokes.Clear();
+        _isSmoking = false;
+
         foreach (Transform mount in _shooter.Mounts)
             _smokes.Add(Instantiate(_smokePrefab, mount.position, mount.rotation, mount));
     }

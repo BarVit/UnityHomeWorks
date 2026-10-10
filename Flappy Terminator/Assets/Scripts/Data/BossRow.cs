@@ -17,9 +17,11 @@ public class BossRow
     [SerializeField] private int _scale;
     [SerializeField] private Color _tint;
     [SerializeField] private MovementProfile _movement;
+    [SerializeField] private int _rewardMoney;
 
     public BossRow(string id, string title, BossKind kind, EnemyShip prefab, string prototype, int health,
-        string weapon, int barrels, int damage, int bodyDamage, int scale, Color tint, MovementProfile movement)
+        string weapon, int barrels, int damage, int bodyDamage, int scale, Color tint, MovementProfile movement,
+        int rewardMoney)
     {
         _id = id;
         _title = title;
@@ -34,6 +36,7 @@ public class BossRow
         _scale = scale;
         _tint = tint;
         _movement = movement;
+        _rewardMoney = rewardMoney;
     }
 
     public string Id => _id;
@@ -61,4 +64,6 @@ public class BossRow
     public Color Tint => _tint;
 
     public MovementProfile Movement => _movement;
+
+    public int RewardMoney => _rewardMoney;
 }

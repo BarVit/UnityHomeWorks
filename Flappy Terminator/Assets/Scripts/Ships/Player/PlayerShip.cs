@@ -46,6 +46,8 @@ public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
 
     public float DeathDuration => _deathCutsceneDuration;
 
+    public PlayerShooter Shooter => _playerShooter;
+
     public bool IsControlEnabled => _inputRouter.IsEnabled;
 
     public event Action Died;

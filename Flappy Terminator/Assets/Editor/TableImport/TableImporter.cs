@@ -33,6 +33,8 @@ namespace TableImport
                 EnemyTable enemies = EnemyTableImporter.Import(locations, weapons, log);
                 BossTable bosses = BossTableImporter.Import(enemies, weapons, log);
                 WaveTableImporter.Import(locations, enemies, bosses, log);
+                SlotTableImporter.Import(weapons, log);
+                UpgradeTableImporter.Import(log);
 
                 if (log.HasProblems)
                 {

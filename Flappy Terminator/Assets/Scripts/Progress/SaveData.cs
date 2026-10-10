@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class SaveData
 {
-    public const int CurrentVersion = 1;
+    public const int CurrentVersion = 2;
 
     [SerializeField] private int _version = CurrentVersion;
     [SerializeField] private PlayerProfile _profile = new PlayerProfile();

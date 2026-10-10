@@ -4,37 +4,37 @@ public class RunState
 
     public int Level { get; private set; } = FirstLevel;
 
-    public int PendingReward { get; private set; }
+    public Reward PendingReward { get; private set; }
 
-    public int BankedReward { get; private set; }
+    public Reward BankedReward { get; private set; }
 
     public void Restart()
     {
         Level = FirstLevel;
-        PendingReward = 0;
-        BankedReward = 0;
+        PendingReward = default;
+        BankedReward = default;
     }
 
     public void RestartRun()
     {
         Level = FirstLevel;
-        PendingReward = 0;
+        PendingReward = default;
     }
 
-    public void AddReward(int amount)
+    public void AddReward(Reward reward)
     {
-        PendingReward += amount;
+        PendingReward += reward;
     }
 
     public void DropPending()
     {
-        PendingReward = 0;
+        PendingReward = default;
     }
 
     public void BankReward()
     {
         BankedReward += PendingReward;
-        PendingReward = 0;
+        PendingReward = default;
     }
 
     public void AdvanceLevel()

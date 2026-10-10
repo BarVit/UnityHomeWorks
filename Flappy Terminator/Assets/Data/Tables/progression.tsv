@@ -1,11 +1,11 @@
-id	pilot_level	pilot_xp_required	ship_xp_required	kill_xp	kill_money	level_bonus
-pilot_01	1	100	120	10	5	1.0
-pilot_02	2	200	240	10	5	1.1
-pilot_03	3	300	360	10	5	1.2
-pilot_04	4	400	480	10	5	1.3
-pilot_05	5	500	600	10	5	1.4
-pilot_06	6	600	720	10	5	1.5
-pilot_07	7	700	840	10	5	1.6
-pilot_08	8	800	960	10	5	1.7
-pilot_09	9	900	1080	10	5	1.8
-pilot_10	10	1000	1200	10	5	1.9
+id	pilot_level	pilot_xp_required	ship_xp_required
+pilot_01	1	100	120
+pilot_02	2	200	240
+pilot_03	3	300	360
+pilot_04	4	400	480
+pilot_05	5	500	600
+pilot_06	6	600	720
+pilot_07	7	700	840
+pilot_08	8	800	960
+pilot_09	9	900	1080
+pilot_10	10	1000	1200

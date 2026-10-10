@@ -9,17 +9,24 @@ public class MagazineLabel : MonoBehaviour
     private void OnEnable()
     {
         _shooter.ShotsLeftChanged += Show;
+        _shooter.WeaponChanged += Refresh;
     }
 
     private void Start()
     {
-        _label.enabled = _shooter.HasMagazine;
-        Show(_shooter.ShotsLeft);
+        Refresh();
     }
 
     private void OnDisable()
     {
         _shooter.ShotsLeftChanged -= Show;
+        _shooter.WeaponChanged -= Refresh;
+    }
+
+    private void Refresh()
+    {
+        _label.enabled = _shooter.HasMagazine;
+        Show(_shooter.ShotsLeft);
     }
 
     private void Show(int shotsLeft)

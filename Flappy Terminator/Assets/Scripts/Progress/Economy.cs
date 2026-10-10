@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Economy : MonoBehaviour
@@ -11,13 +12,19 @@ public class Economy : MonoBehaviour
 
     public int PilotXp => _data.Profile.PilotXp;
 
+    public int TotalXp => _data.Profile.TotalXp;
+
     public int Money => _data.Profile.Money;
 
     public int ShipLevel => _data.Ship.ShipLevel;
 
     public int ShipXp => _data.Ship.ShipXp;
 
+    public ShipProgress Ship => _data.Ship;
+
     public int CompletedLocations => _data.Galaxy.CompletedLocations.Count;
+
+    public event Action Changed;
 
     private void Awake()
     {
@@ -36,26 +43,39 @@ public class Economy : MonoBehaviour
         _runner.LocationCompleted -= Complete;
     }
 
-    private void Credit(int kills)
+    public bool TrySpend(int price)
     {
-        if (kills <= 0)
+        if (_data.Profile.TrySpendMoney(price) == false)
+            return false;
+
+        Changed?.Invoke();
+
+        return true;
+    }
+
+    public void Save()
+    {
+        SaveStorage.Save(_data);
+    }
+
+    private void Credit(Reward reward)
+    {
+        if (reward.IsEmpty)
             return;
 
-        ProgressionRow pilotRow = _progression.GetRowByLevel(_data.Profile.PilotLevel);
-        ProgressionRow shipRow = _progression.GetRowByLevel(_data.Ship.ShipLevel);
-
-        _data.Profile.AddXp(Mathf.RoundToInt(kills * pilotRow.KillXp * pilotRow.LevelBonus));
-        _data.Profile.AddMoney(Mathf.RoundToInt(kills * pilotRow.KillMoney * pilotRow.LevelBonus));
-        _data.Ship.AddXp(Mathf.RoundToInt(kills * shipRow.KillXp * shipRow.LevelBonus));
+        _data.Profile.AddXp(reward.Xp);
+        _data.Profile.AddMoney(reward.Money);
+        _data.Ship.AddXp(reward.Xp);
 
         RaisePilotLevel();
         RaiseShipLevel();
+        Changed?.Invoke();
     }
 
     private void Complete(string locationId)
     {
         _data.Galaxy.Complete(locationId);
-        SaveStorage.Save(_data);
+        Save();
     }
 
     private void RaisePilotLevel()

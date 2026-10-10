@@ -10,8 +10,7 @@ namespace TableImport
 
         private static readonly string[] Columns =
         {
-            "id", "pilot_level", "pilot_xp_required", "ship_xp_required",
-            "kill_xp", "kill_money", "level_bonus"
+            "id", "pilot_level", "pilot_xp_required", "ship_xp_required"
         };
 
         public static ProgressionTable Import(TableLog log)
@@ -39,10 +38,7 @@ namespace TableImport
                     id,
                     reader.ReadInt("pilot_level", 1, 99),
                     reader.ReadInt("pilot_xp_required", 0, 1000000),
-                    reader.ReadInt("ship_xp_required", 0, 1000000),
-                    reader.ReadInt("kill_xp", 0, 100000),
-                    reader.ReadInt("kill_money", 0, 100000),
-                    reader.ReadFloat("level_bonus", 0f, 100f)));
+                    reader.ReadInt("ship_xp_required", 0, 1000000)));
             }
 
             ProgressionTable table = GeneratedAsset.LoadOrCreate<ProgressionTable>(AssetPath);

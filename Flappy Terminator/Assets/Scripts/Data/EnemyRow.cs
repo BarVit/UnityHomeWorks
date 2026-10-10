@@ -17,10 +17,11 @@ public class EnemyRow
     [SerializeField] private int _damage;
     [SerializeField] private MovementProfile _movement;
     [SerializeField] private SpriteSkin _skin;
+    [SerializeField] private int _rewardMoney;
 
     public EnemyRow(string id, string type, string title, int tier, EnemyShip prefab, int bodyDamage,
         string fromLocation, int health, string weapon, int barrels, int damage, MovementProfile movement,
-        SpriteSkin skin)
+        SpriteSkin skin, int rewardMoney)
     {
         _id = id;
         _type = type;
@@ -35,6 +36,7 @@ public class EnemyRow
         _damage = damage;
         _movement = movement;
         _skin = skin;
+        _rewardMoney = rewardMoney;
     }
 
     public string Id => _id;
@@ -62,4 +64,6 @@ public class EnemyRow
     public MovementProfile Movement => _movement;
 
     public SpriteSkin Skin => _skin;
+
+    public int RewardMoney => _rewardMoney;
 }

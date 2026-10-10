@@ -26,6 +26,7 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
+    _rewardMoney: 500
   - _id: marauder_2
     _title: "\u041C\u0430\u0440\u043E\u0434\u0451\u0440 II"
     _kind: 0
@@ -39,6 +40,7 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 0.6039216, b: 0.5411765, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
+    _rewardMoney: 500
   - _id: punisher_1
     _title: "\u041A\u0430\u0440\u0430\u0442\u0435\u043B\u044C I"
     _kind: 0
@@ -52,6 +54,7 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
+    _rewardMoney: 500
   - _id: punisher_2
     _title: "\u041A\u0430\u0440\u0430\u0442\u0435\u043B\u044C II"
     _kind: 0
@@ -65,6 +68,7 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 0.6039216, b: 0.5411765, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
+    _rewardMoney: 500
   - _id: berserker_1
     _title: "\u0411\u0435\u0440\u0441\u0435\u0440\u043A I"
     _kind: 0
@@ -78,6 +82,7 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
+    _rewardMoney: 500
   - _id: berserker_2
     _title: "\u0411\u0435\u0440\u0441\u0435\u0440\u043A II"
     _kind: 0
@@ -91,6 +96,7 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 0.6039216, b: 0.5411765, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
+    _rewardMoney: 500
   - _id: tormentor_1
     _title: "\u0422\u0435\u0440\u0437\u0430\u0442\u0435\u043B\u044C I"
     _kind: 0
@@ -104,6 +110,7 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
+    _rewardMoney: 500
   - _id: tormentor_2
     _title: "\u0422\u0435\u0440\u0437\u0430\u0442\u0435\u043B\u044C II"
     _kind: 0
@@ -117,6 +124,7 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 0.6039216, b: 0.5411765, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
+    _rewardMoney: 500
   - _id: ripper_1
     _title: "\u041F\u043E\u0442\u0440\u043E\u0448\u0438\u0442\u0435\u043B\u044C I"
     _kind: 0
@@ -130,6 +138,7 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
+    _rewardMoney: 500
   - _id: ripper_2
     _title: "\u041F\u043E\u0442\u0440\u043E\u0448\u0438\u0442\u0435\u043B\u044C II"
     _kind: 0
@@ -143,6 +152,7 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 0.6039216, b: 0.5411765, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
+    _rewardMoney: 500
   - _id: hierarch
     _title: "\u0418\u0435\u0440\u0430\u0440\u0445"
     _kind: 1
@@ -156,6 +166,7 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
+    _rewardMoney: 500
   - _id: magister
     _title: "\u041C\u0430\u0433\u0438\u0441\u0442\u0440"
     _kind: 1
@@ -169,6 +180,7 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
+    _rewardMoney: 500
   - _id: overlord
     _title: "\u0412\u043B\u0430\u0434\u044B\u043A\u0430"
     _kind: 1
@@ -182,6 +194,7 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
+    _rewardMoney: 500
   - _id: archon
     _title: "\u0410\u0440\u0445\u043E\u043D\u0442"
     _kind: 1
@@ -195,6 +208,7 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
+    _rewardMoney: 500
   - _id: titan
     _title: "\u0422\u0438\u0442\u0430\u043D"
     _kind: 1
@@ -208,6 +222,7 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
+    _rewardMoney: 500
   - _id: emperor
     _title: "\u0418\u043C\u043F\u0435\u0440\u0430\u0442\u043E\u0440"
     _kind: 1
@@ -221,3 +236,4 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
+    _rewardMoney: 500

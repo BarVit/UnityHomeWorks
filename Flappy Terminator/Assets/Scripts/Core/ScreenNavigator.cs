@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ScreenNavigator : MonoBehaviour
 {
@@ -7,7 +8,8 @@ public class ScreenNavigator : MonoBehaviour
     [SerializeField] private PauseScreen _pauseScreen;
     [SerializeField] private SettingsScreen _settingsScreen;
     [SerializeField] private GameOverScreen _gameOverScreen;
-    [SerializeField] private VictoryScreen _victoryScreen;
+    [FormerlySerializedAs("_victoryScreen")]
+    [SerializeField] private DockScreen _dockScreen;
 
     private bool _isSettingsFromPause;
 
@@ -29,8 +31,8 @@ public class ScreenNavigator : MonoBehaviour
         _pauseScreen.RestartRequested += OnRestartFromPauseRequested;
         _pauseScreen.SettingsRequested += OpenSettingsFromPause;
         _gameOverScreen.RestartRequested += OnRestartRequested;
-        _victoryScreen.MenuRequested += ShowStart;
-        _victoryScreen.NextRequested += OnNextLocationRequested;
+        _dockScreen.MenuRequested += ShowStart;
+        _dockScreen.NextRequested += OnNextLocationRequested;
         _settingsScreen.CloseRequested += CloseSettings;
     }
 
@@ -43,8 +45,8 @@ public class ScreenNavigator : MonoBehaviour
         _pauseScreen.RestartRequested -= OnRestartFromPauseRequested;
         _pauseScreen.SettingsRequested -= OpenSettingsFromPause;
         _gameOverScreen.RestartRequested -= OnRestartRequested;
-        _victoryScreen.MenuRequested -= ShowStart;
-        _victoryScreen.NextRequested -= OnNextLocationRequested;
+        _dockScreen.MenuRequested -= ShowStart;
+        _dockScreen.NextRequested -= OnNextLocationRequested;
         _settingsScreen.CloseRequested -= CloseSettings;
     }
 
@@ -52,7 +54,7 @@ public class ScreenNavigator : MonoBehaviour
     {
         _pauseScreen.Hide();
         _gameOverScreen.Hide();
-        _victoryScreen.Hide();
+        _dockScreen.Hide();
         _settingsScreen.Hide();
         _startScreen.Show();
     }
@@ -67,23 +69,23 @@ public class ScreenNavigator : MonoBehaviour
         _pauseScreen.Hide();
     }
 
-    public void ShowGameOver(int kills)
+    public void ShowGameOver(Reward reward)
     {
-        _gameOverScreen.Show(kills);
+        _gameOverScreen.Show(reward);
     }
 
-    public void ShowVictory(int kills, bool hasNextLocation)
+    public void ShowDock(Reward earned, bool hasNextLocation)
     {
         _pauseScreen.Hide();
         _gameOverScreen.Hide();
-        _victoryScreen.Show(kills, hasNextLocation);
+        _dockScreen.Show(earned, hasNextLocation);
     }
 
     public void HideOverlays()
     {
         IsSettingsOpen = false;
         _gameOverScreen.Hide();
-        _victoryScreen.Hide();
+        _dockScreen.Hide();
         _settingsScreen.Hide();
     }
 

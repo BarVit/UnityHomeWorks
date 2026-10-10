@@ -26,6 +26,8 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
     public int Tier { get; private set; }
 
+    public Reward Reward { get; private set; }
+
     public event Action<IPoolable> Released;
     public event Action<EnemyShip> Died;
     public event Action<EnemyShip> Retired;
@@ -74,6 +76,7 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
         ShipId = setup.ShipId;
         Tier = setup.Tier;
         BodyDamage = setup.BodyDamage;
+        Reward = new Reward(setup.Health, setup.RewardMoney);
 
         transform.localScale = Vector3.one * setup.Scale;
 

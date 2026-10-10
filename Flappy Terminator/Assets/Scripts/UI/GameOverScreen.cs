@@ -21,9 +21,9 @@ public class GameOverScreen : MonoBehaviour
         _restartButton.onClick.RemoveListener(OnRestartClicked);
     }
 
-    public void Show(int score)
+    public void Show(Reward reward)
     {
-        _score.text = $"SCORE  {score}";
+        _score.text = $"+{reward.Xp} XP   +{reward.Money} COINS";
         _panel.SetActive(true);
     }
 
