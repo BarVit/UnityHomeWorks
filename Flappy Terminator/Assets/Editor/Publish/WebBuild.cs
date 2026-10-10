@@ -10,6 +10,7 @@ namespace BuildTools
     {
         private const string OutputRoot = "Builds/Web";
         private const string FirstVersion = "0.1.0";
+        private const string Template = "PROJECT:Flappy Full Window";
         private const int ScreenWidth = 1280;
         private const int ScreenHeight = 720;
 
@@ -54,6 +55,7 @@ namespace BuildTools
         [MenuItem("Tools/Build/Apply Web Settings")]
         public static void ConfigurePlayer()
         {
+            PlayerSettings.WebGL.template = Template;
             PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Gzip;
             PlayerSettings.WebGL.decompressionFallback = true;
             PlayerSettings.WebGL.nameFilesAsHashes = true;
