@@ -102,6 +102,9 @@ public class BeamDelivery : WeaponDelivery
 
         int count = Physics2D.Raycast(from, direction, Context.TargetFilter, _hits, open);
         int struck = 0;
+        bool isOnTarget = false;
+
+        CountFired();
         Vector2 last = end;
 
         for (int i = 0; i < count; i++)
@@ -117,6 +120,7 @@ public class BeamDelivery : WeaponDelivery
                 continue;
 
             Strike(hit, damageable, rotation, far, barrel);
+            isOnTarget |= damageable != null;
             _struck[struck] = damageable;
             struck++;
             last = hit.point;
@@ -126,6 +130,9 @@ public class BeamDelivery : WeaponDelivery
         }
 
         Remember(Draw(from, last, barrel));
+
+        if (isOnTarget)
+            CountHit();
 
         if (struck == 0 && open < reach)
             NoteWorldHit(end, rotation);

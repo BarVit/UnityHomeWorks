@@ -91,6 +91,16 @@ public abstract class WeaponDelivery
         return isCrit ? boost.ApplyCrit(damage) : damage;
     }
 
+    protected void CountFired()
+    {
+        _context.Tally?.CountFired();
+    }
+
+    protected void CountHit()
+    {
+        _context.Tally?.CountHit();
+    }
+
     protected void ShowCrit(Vector2 point, int damage)
     {
         if (_critPool != null)

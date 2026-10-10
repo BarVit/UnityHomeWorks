@@ -29,6 +29,8 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
 
     public int Barrel { get; private set; }
 
+    public bool HasScored { get; private set; }
+
     public bool IsArmed { get; private set; }
 
     public bool IsPersistent { get; private set; }
@@ -52,6 +54,7 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
         IsArmed = true;
         IsPersistent = false;
         StruckObject = null;
+        HasScored = false;
         Struck = null;
     }
 
@@ -73,6 +76,16 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
     public void Remove()
     {
         Released?.Invoke(this);
+    }
+
+    public bool TryScore()
+    {
+        if (HasScored)
+            return false;
+
+        HasScored = true;
+
+        return true;
     }
 
     public void MarkBarrel(int barrel)

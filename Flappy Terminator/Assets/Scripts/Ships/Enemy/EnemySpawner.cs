@@ -61,6 +61,18 @@ public class EnemySpawner : MonoBehaviour
         _spawning = StartCoroutine(Spawn(plan));
     }
 
+    public int CountPlanned(string locationId, int levels, Func<int, int> fallbackSize)
+    {
+        Open(locationId);
+
+        int count = 0;
+
+        for (int level = 1; level <= levels; level++)
+            count += _planner.Plan(locationId, level, fallbackSize(level), _spawnDelay).Count;
+
+        return count;
+    }
+
     public void FinishWave()
     {
         EndWave();

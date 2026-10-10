@@ -51,6 +51,7 @@ public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
     public bool IsControlEnabled => _inputRouter.IsEnabled;
 
     public event Action Died;
+    public event Action<int, bool> Damaged;
     public event Action AsteroidBumped;
     public event Action EnemyBumped;
 
@@ -92,7 +93,19 @@ public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
 
     public void TakeDamage(int damage)
     {
+        ApplyDamage(damage, false);
+    }
+
+    private void ApplyDamage(int damage, bool isEnvironment)
+    {
+        int before = _health.Value;
+
         _health.TakeDamage(damage);
+
+        int lost = before - _health.Value;
+
+        if (lost > 0)
+            Damaged?.Invoke(lost, isEnvironment);
     }
 
     private void OnAmmoHit(Ammo ammo)
@@ -102,7 +115,7 @@ public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
 
     private void OnAsteroidBumped(Asteroid asteroid)
     {
-        TakeDamage(asteroid.Damage);
+        ApplyDamage(asteroid.Damage, true);
 
         if (_isDead)
             return;
@@ -113,7 +126,7 @@ public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
 
     private void OnEnemyBumped(EnemyShip enemyShip)
     {
-        TakeDamage(enemyShip.BodyDamage);
+        ApplyDamage(enemyShip.BodyDamage, true);
 
         if (_isDead)
             return;
@@ -153,6 +166,9 @@ public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
 
     public void Remove()
     {
+        if (_isDead == false)
+            ApplyDamage(_health.Value, true);
+
         Die();
     }
 

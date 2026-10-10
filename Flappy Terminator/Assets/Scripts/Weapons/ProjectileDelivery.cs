@@ -53,6 +53,7 @@ public class ProjectileDelivery : WeaponDelivery
         ammo.gameObject.layer = Context.AmmoLayer;
         ammo.Init(_hitEffectPool);
         ammo.MarkBarrel(barrel);
+        CountFired();
         ammo.SetDamage(RollDamage(barrel, out bool isCrit), isCrit);
         ammo.Fly(ProjectileSpeed);
         ammo.Struck += OnStruck;
@@ -68,6 +69,9 @@ public class ProjectileDelivery : WeaponDelivery
     private void OnStruck(Ammo ammo)
     {
         bool isTarget = IsTarget(ammo.StruckObject);
+
+        if (isTarget && ammo.TryScore())
+            CountHit();
 
         if (isTarget && ammo.IsCrit)
             ShowCrit(ammo.transform.position, ammo.Damage);

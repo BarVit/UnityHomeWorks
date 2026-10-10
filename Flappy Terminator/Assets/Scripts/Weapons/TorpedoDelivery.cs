@@ -51,6 +51,9 @@ public class TorpedoDelivery : ProjectileDelivery
         {
             if (warhead.Burn(_deltaTime))
             {
+                if (torpedo.TryScore())
+                    CountHit();
+
                 Blast(warhead, torpedo.Barrel);
                 torpedo.Remove();
             }

@@ -164,6 +164,9 @@ public class OrbDelivery : ProjectileDelivery
         if (tether != null)
             tether.Hold(_ringed, ringed);
 
+        if (isTouching && orb.TryScore())
+            CountHit();
+
         OrbArcSound sound = orb.GetComponentInChildren<OrbArcSound>();
 
         if (sound != null)

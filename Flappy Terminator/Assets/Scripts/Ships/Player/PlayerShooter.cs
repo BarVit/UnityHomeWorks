@@ -19,6 +19,7 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private CritMark _critMark;
 
     private readonly PoolRegistry _pools = new PoolRegistry("Player Weapon");
+    private readonly ShotTally _tally = new ShotTally();
 
     private Transform[] _mounts;
     private int _equippedBarrels = 1;
@@ -33,6 +34,8 @@ public class PlayerShooter : MonoBehaviour
     public event Action<int> ShotsLeftChanged;
 
     public event Action WeaponChanged;
+
+    public ShotTally Tally => _tally;
 
     public string WeaponId => _equippedId;
 
@@ -104,7 +107,8 @@ public class PlayerShooter : MonoBehaviour
         WeaponContext context = new WeaponContext(_mounts, _equippedBarrels, _pools,
             new ShotAudio(_shotAudioSource, camera), new ShotAudio(_hitAudioSource, camera),
             _targetLayers, LayerMask.NameToLayer(AmmoLayerName), camera, _worldLayers, new ShotLoop(_loopAudioSource),
-            new ShotLoop(_hitLoopAudioSource), boosts: boosts, critMark: _critMark);
+            new ShotLoop(_hitLoopAudioSource), boosts: boosts, critMark: _critMark,
+            tally: _tally);
 
         _equippedId = weaponId;
         _delivery = WeaponFactory.Create(row, context);

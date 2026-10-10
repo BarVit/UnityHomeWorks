@@ -11,6 +11,7 @@ public class ScreenNavigator : MonoBehaviour
     [FormerlySerializedAs("_victoryScreen")]
     [SerializeField] private DockScreen _dockScreen;
     [SerializeField] private MapScreen _mapScreen;
+    [SerializeField] private LocationResultScreen _resultScreen;
 
     private bool _isSettingsFromPause;
 
@@ -26,6 +27,7 @@ public class ScreenNavigator : MonoBehaviour
     public event Action RestartRequested;
     public event Action PlayRequested;
     public event Action<string> LocationPlayRequested;
+    public event Action ResultClosed;
 
     private void OnEnable()
     {
@@ -44,6 +46,7 @@ public class ScreenNavigator : MonoBehaviour
         _mapScreen.MenuRequested += ShowStart;
         _mapScreen.PlayRequested += OnPlayRequested;
         _mapScreen.LocationPlayRequested += OnLocationPlayRequested;
+        _resultScreen.DockRequested += OnResultClosed;
         _settingsScreen.CloseRequested += CloseSettings;
     }
 
@@ -64,6 +67,7 @@ public class ScreenNavigator : MonoBehaviour
         _mapScreen.MenuRequested -= ShowStart;
         _mapScreen.PlayRequested -= OnPlayRequested;
         _mapScreen.LocationPlayRequested -= OnLocationPlayRequested;
+        _resultScreen.DockRequested -= OnResultClosed;
         _settingsScreen.CloseRequested -= CloseSettings;
     }
 
@@ -73,6 +77,7 @@ public class ScreenNavigator : MonoBehaviour
         _gameOverScreen.Hide();
         _dockScreen.Hide();
         _mapScreen.Hide();
+        _resultScreen.Hide();
         _settingsScreen.Hide();
         _startScreen.Show(CanResumeSession);
     }
@@ -102,8 +107,16 @@ public class ScreenNavigator : MonoBehaviour
         _gameOverScreen.Show(reward);
     }
 
+    public void ShowResult(BattleStats stats, Reward earned)
+    {
+        _pauseScreen.Hide();
+        _gameOverScreen.Hide();
+        _resultScreen.Show(stats, earned);
+    }
+
     public void ShowDock(Reward earned, bool canPlay, DockReason reason)
     {
+        _resultScreen.Hide();
         _pauseScreen.Hide();
         _gameOverScreen.Hide();
         _dockScreen.Show(earned, canPlay, reason);
@@ -115,6 +128,7 @@ public class ScreenNavigator : MonoBehaviour
         _gameOverScreen.Hide();
         _dockScreen.Hide();
         _mapScreen.Hide();
+        _resultScreen.Hide();
         _settingsScreen.Hide();
     }
 
@@ -191,6 +205,12 @@ public class ScreenNavigator : MonoBehaviour
     private void OnPlayRequested()
     {
         PlayRequested?.Invoke();
+    }
+
+    private void OnResultClosed()
+    {
+        _resultScreen.Hide();
+        ResultClosed?.Invoke();
     }
 
     private void OnLocationPlayRequested(string locationId)

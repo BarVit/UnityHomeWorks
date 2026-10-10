@@ -8,6 +8,7 @@ public class Game : MonoBehaviour
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private AsteroidSpawner _asteroidSpawner;
     [SerializeField] private Hangar _hangar;
+    [SerializeField] private BattleStats _stats;
     [SerializeField] private WarpJump _warpJump;
     [SerializeField] private ScreenNavigator _screens;
     [SerializeField] private PauseController _pause;
@@ -32,6 +33,7 @@ public class Game : MonoBehaviour
         _screens.RestartRequested += RestartRun;
         _screens.PlayRequested += PlayFromDock;
         _screens.LocationPlayRequested += PlayLocation;
+        _screens.ResultClosed += ShowClearedDock;
         _input.PauseToggled += TogglePause;
         _input.Shot += SkipCutscene;
     }
@@ -57,6 +59,7 @@ public class Game : MonoBehaviour
         _screens.RestartRequested -= RestartRun;
         _screens.PlayRequested -= PlayFromDock;
         _screens.LocationPlayRequested -= PlayLocation;
+        _screens.ResultClosed -= ShowClearedDock;
         _input.PauseToggled -= TogglePause;
         _input.Shot -= SkipCutscene;
     }
@@ -155,6 +158,7 @@ public class Game : MonoBehaviour
     {
         bool wasLastLevel = _runner.IsLastLevel;
 
+        _stats.CompleteLevel(_runner.PendingReward);
         _runner.BankLevel();
 
         if (wasLastLevel)
@@ -179,10 +183,14 @@ public class Game : MonoBehaviour
         _playerShip.DisableControl();
         _playerShip.ReturnToStart();
 
-        if (_runner.IsTest)
-            _screens.ShowStart();
-        else
-            ShowDock(DockReason.Cleared);
+        ClearBattlefield();
+        _stats.PayBonus();
+        _screens.ShowResult(_stats, _runner.BankedReward);
+    }
+
+    private void ShowClearedDock()
+    {
+        ShowDock(DockReason.Cleared);
     }
 
     private void StartLevel()
@@ -194,8 +202,17 @@ public class Game : MonoBehaviour
         _isRunning = true;
         _screens.HideOverlays();
         _playerShip.Restart();
+        TrackLevel();
         _enemySpawner.StartLevel(_runner.LocationId, _runner.Level, _runner.WaveSize);
         _asteroidSpawner.StartSpawn();
+    }
+
+    private void TrackLevel()
+    {
+        if (_runner.Level == 1)
+            _stats.BeginLocation(_enemySpawner.CountPlanned(_runner.LocationId, _runner.LevelCount, _runner.GetWaveSize));
+
+        _stats.BeginLevel();
     }
 
     private void LoseLevel()
@@ -249,7 +266,7 @@ public class Game : MonoBehaviour
         bool canPlay = reason != DockReason.Cleared || _runner.HasNextLocation;
 
         _dockReason = reason;
-        _dockEarned = _runner.BankedReward;
+        _dockEarned = reason == DockReason.Cleared ? _runner.BankedReward + _stats.Bonus : _runner.BankedReward;
         _screens.CanResumeSession = canPlay;
         _screens.ShowDock(_dockEarned, canPlay, reason);
     }

@@ -75,6 +75,7 @@ namespace UiContent
             Prepare("Dock Panel", PanelBorder);
             Prepare("Slot Frame", SlotBorder);
             Prepare("Slot Selected", SlotBorder);
+            Prepare("Rating Star", 0);
 
             foreach (string name in new[] { "Coin Icon", "XP Icon", "Lock Icon", "Damage Icon", "Crit Icon", "Upgrade Pip" })
                 Prepare(name, 0);
@@ -178,41 +179,35 @@ namespace UiContent
             so.ApplyModifiedPropertiesWithoutUndo();
         }
 
-        private static void BuildHud(LocationRunner runner)
+        internal static void BuildHud(LocationRunner runner)
         {
-            Transform canvas = Object.FindAnyObjectByType<DockScreen>(FindObjectsInactive.Include).transform;
-            RewardViewer viewer = Object.FindAnyObjectByType<RewardViewer>(FindObjectsInactive.Include);
+            RectTransform canvas = (RectTransform)Object.FindAnyObjectByType<DockScreen>(FindObjectsInactive.Include).transform;
             Vector2 position = HudPosition;
             int sibling = 0;
 
-            if (viewer != null)
+            foreach (string name in new[] { "Run Reward", "Kills" })
             {
-                position = ((RectTransform)viewer.transform).anchoredPosition;
-                sibling = viewer.transform.GetSiblingIndex();
-                Object.DestroyImmediate(viewer.gameObject);
+                Transform old = canvas.Find(name);
+
+                if (old == null)
+                    continue;
+
+                position = ((RectTransform)old).anchoredPosition;
+                sibling = old.GetSiblingIndex();
+                Object.DestroyImmediate(old.gameObject);
             }
 
-            RectTransform hud = Place("Run Reward", (RectTransform)canvas, new Vector2(0.5f, 0.5f), position,
-                new Vector2(320f, 40f));
+            RectTransform hud = Place("Kills", canvas, new Vector2(0.5f, 0.5f), position, new Vector2(320f, 40f));
             hud.SetSiblingIndex(sibling);
 
-            CompactNumber xp = AddHudCounter(hud, "XP", "XP Icon", 0f);
-            CompactNumber money = AddHudCounter(hud, "Money", "Coin Icon", 150f);
+            AddImage(Place("Icon", hud, new Vector2(0f, 0.5f), new Vector2(18f, 0f), new Vector2(34f, 34f)), Art("Crit Icon"))
+                .preserveAspect = true;
+            TMP_Text label = AddText(Place("Value", hud, new Vector2(0f, 0.5f), new Vector2(128f, 0f), new Vector2(180f, 40f)),
+                "0 / 0", 30, TextAlignmentOptions.Left, Color.white);
 
-            viewer = hud.gameObject.AddComponent<RewardViewer>();
-            Set(viewer, "_runner", runner);
-            Set(viewer, "_economy", Object.FindAnyObjectByType<Economy>(FindObjectsInactive.Include));
-            Set(viewer, "_xp", xp);
-            Set(viewer, "_money", money);
-        }
-
-        private static CompactNumber AddHudCounter(RectTransform parent, string name, string icon, float x)
-        {
-            RectTransform group = Place(name, parent, new Vector2(0f, 0.5f), new Vector2(x + 70f, 0f), new Vector2(140f, 40f));
-            AddImage(Place("Icon", group, new Vector2(0f, 0.5f), new Vector2(18f, 0f), new Vector2(34f, 34f)), Art(icon)).preserveAspect = true;
-
-            return AddNumber(AddText(Place("Value", group, new Vector2(0f, 0.5f), new Vector2(88f, 0f), new Vector2(100f, 40f)),
-                "0", 30, TextAlignmentOptions.Left, Color.white));
+            KillsViewer viewer = hud.gameObject.AddComponent<KillsViewer>();
+            Set(viewer, "_stats", Object.FindAnyObjectByType<BattleStats>(FindObjectsInactive.Include));
+            Set(viewer, "_label", label);
         }
 
         private static CompactNumber AddCounter(RectTransform parent, string name, string icon, float x)
