@@ -57,8 +57,8 @@ MonoBehaviour:
     _count: 12
     _mode: 1
     _enemies:
-    - warden_2
-    - warden_2
+    - warden_1
+    - warden_1
     - hunter_1
     - hunter_1
     _interval: 4
