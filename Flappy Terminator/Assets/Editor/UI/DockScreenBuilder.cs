@@ -201,6 +201,7 @@ namespace UiContent
 
             viewer = hud.gameObject.AddComponent<RewardViewer>();
             Set(viewer, "_runner", runner);
+            Set(viewer, "_economy", Object.FindAnyObjectByType<Economy>(FindObjectsInactive.Include));
             Set(viewer, "_xp", xp);
             Set(viewer, "_money", money);
         }

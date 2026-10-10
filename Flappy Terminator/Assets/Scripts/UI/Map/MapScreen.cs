@@ -221,7 +221,7 @@ public class MapScreen : MonoBehaviour
             donePoints.Clear();
 
         done.color = _doneRouteColor;
-        done.SetStyle(RouteWidth, Dash, Gap, -DashSpeed);
+        done.SetStyle(RouteWidth, Dash, Gap, DashSpeed);
         done.SetPoints(donePoints);
         rest.color = _restRouteColor;
         rest.SetStyle(RouteWidth * 0.75f, Dash, Gap, 0f);

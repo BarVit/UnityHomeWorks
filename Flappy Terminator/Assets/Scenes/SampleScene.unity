@@ -29980,6 +29980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RewardViewer
   _runner: {fileID: 940566753}
+  _economy: {fileID: 940566754}
   _xp: {fileID: 1284750853}
   _money: {fileID: 791566474}
 --- !u!1 &1723618306
