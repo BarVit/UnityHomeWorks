@@ -49,9 +49,8 @@ public static class NumberFormat
 
         long scale = Pow10(decimals);
         long fraction = value % unit * scale / unit;
-        string tail = fraction.ToString().PadLeft(decimals, '0').TrimEnd('0');
 
-        return tail.Length == 0 ? whole.ToString() : whole.ToString() + DecimalSeparator + tail;
+        return whole.ToString() + DecimalSeparator + fraction.ToString().PadLeft(decimals, '0');
     }
 
     private static long Pow10(int power)
