@@ -28,13 +28,13 @@ public class Economy : MonoBehaviour
 
     private void OnEnable()
     {
-        _runner.LevelBanked += Credit;
+        _runner.LevelBanked += Grant;
         _runner.LocationCompleted += Complete;
     }
 
     private void OnDisable()
     {
-        _runner.LevelBanked -= Credit;
+        _runner.LevelBanked -= Grant;
         _runner.LocationCompleted -= Complete;
     }
 
@@ -54,7 +54,7 @@ public class Economy : MonoBehaviour
         Changed?.Invoke();
     }
 
-    private void Credit(Reward reward)
+    public void Grant(Reward reward)
     {
         if (reward.IsEmpty)
             return;

@@ -10,7 +10,7 @@ public class SlotView : MonoBehaviour
     [SerializeField] private Image _icon;
     [SerializeField] private GameObject _lock;
     [SerializeField] private GameObject _priceGroup;
-    [SerializeField] private TMP_Text _price;
+    [SerializeField] private CompactNumber _price;
     [SerializeField] private TMP_Text _caption;
     [SerializeField] private GameObject _selection;
     [SerializeField] private CanvasGroup _group;
@@ -48,7 +48,7 @@ public class SlotView : MonoBehaviour
         _lock.SetActive(true);
         _icon.gameObject.SetActive(false);
         _priceGroup.SetActive(true);
-        _price.text = price.ToString();
+        _price.Show(price);
         _caption.text = string.Empty;
         _selection.SetActive(false);
         _button.interactable = isNext && canAfford;

@@ -11,6 +11,8 @@ public class Hangar : MonoBehaviour
     [SerializeField] private Economy _economy;
     [SerializeField] private SlotTable _slots;
     [SerializeField] private UpgradeTable _upgrades;
+    [SerializeField] private int _testXp = 1000000;
+    [SerializeField] private int _testMoney = 1000000;
 
     public int SlotCount => _slots.Count;
 
@@ -25,9 +27,12 @@ public class Hangar : MonoBehaviour
 
     public void StartNewSession()
     {
-        _economy.StartNewSession();
-        Ship.UnlockSlot(_slots.GetRow(FirstSlot).Weapon);
-        Changed?.Invoke();
+        Begin(_slots.GetRow(FirstSlot).Weapon, default);
+    }
+
+    public void StartTestSession(string weaponId)
+    {
+        Begin(weaponId, new Reward(_testXp, _testMoney));
     }
 
     public bool IsUnlocked(int slot)
@@ -121,6 +126,14 @@ public class Hangar : MonoBehaviour
         string weaponId = GetWeapon(FirstSlot);
 
         shooter.Equip(weaponId, GetBoost(weaponId));
+    }
+
+    private void Begin(string weaponId, Reward grant)
+    {
+        _economy.StartNewSession();
+        _economy.Grant(grant);
+        Ship.UnlockSlot(weaponId);
+        Changed?.Invoke();
     }
 
     private void Commit()

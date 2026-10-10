@@ -10,14 +10,17 @@ public class DockScreen : MonoBehaviour
     private const string PercentSign = "%";
     private const string ClearedStatus = "LOCATION CLEARED";
     private const string DestroyedStatus = "SHIP DESTROYED";
+    private const string TestStatus = "TEST HANGAR";
 
     [SerializeField] private GameObject _panel;
     [SerializeField] private Hangar _hangar;
     [SerializeField] private Economy _economy;
     [SerializeField] private WeaponTable _weapons;
-    [SerializeField] private TMP_Text _xp;
-    [SerializeField] private TMP_Text _money;
-    [SerializeField] private TMP_Text _earned;
+    [SerializeField] private CompactNumber _xp;
+    [SerializeField] private CompactNumber _money;
+    [SerializeField] private GameObject _earned;
+    [SerializeField] private CompactNumber _earnedXp;
+    [SerializeField] private CompactNumber _earnedMoney;
     [SerializeField] private TMP_Text _status;
     [SerializeField] private SlotView[] _slots;
     [SerializeField] private Image _weaponIcon;
@@ -61,10 +64,12 @@ public class DockScreen : MonoBehaviour
             upgrade.Requested -= OnUpgradeRequested;
     }
 
-    public void Show(Reward earned, bool canPlay, bool isDestroyed)
+    public void Show(Reward earned, bool canPlay, DockReason reason)
     {
-        _earned.text = "+" + earned.Xp + " XP     +" + earned.Money + " COINS";
-        _status.text = isDestroyed ? DestroyedStatus : ClearedStatus;
+        _earned.SetActive(reason != DockReason.TestStart);
+        _earnedXp.Show(earned.Xp);
+        _earnedMoney.Show(earned.Money);
+        _status.text = GetStatus(reason);
         _playButton.gameObject.SetActive(canPlay);
         _selectedSlot = Hangar.FirstSlot;
         _panel.SetActive(true);
@@ -81,8 +86,8 @@ public class DockScreen : MonoBehaviour
         if (_panel.activeSelf == false)
             return;
 
-        _xp.text = _economy.TotalXp.ToString();
-        _money.text = _economy.Money.ToString();
+        _xp.Show(_economy.TotalXp);
+        _money.Show(_economy.Money);
 
         foreach (SlotView slot in _slots)
             ShowSlot(slot);
@@ -142,6 +147,19 @@ public class DockScreen : MonoBehaviour
                 return Mathf.RoundToInt(value) + PercentSign;
             default:
                 return "x" + value;
+        }
+    }
+
+    private string GetStatus(DockReason reason)
+    {
+        switch (reason)
+        {
+            case DockReason.Destroyed:
+                return DestroyedStatus;
+            case DockReason.TestStart:
+                return TestStatus;
+            default:
+                return ClearedStatus;
         }
     }
 

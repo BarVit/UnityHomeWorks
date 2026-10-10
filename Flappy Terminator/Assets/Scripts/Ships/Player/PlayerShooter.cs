@@ -61,7 +61,7 @@ public class PlayerShooter : MonoBehaviour
 
     private void Awake()
     {
-        EquipTestWeapon();
+        EquipDefault();
     }
 
     private void Update()
@@ -81,10 +81,6 @@ public class PlayerShooter : MonoBehaviour
         _pools.ReleaseAll();
     }
 
-    public void EquipTestWeapon()
-    {
-        Equip(_weaponId, new WeaponBoost(0, 0f, 1f));
-    }
 
     public void Equip(string weaponId, WeaponBoost boost)
     {
@@ -114,6 +110,11 @@ public class PlayerShooter : MonoBehaviour
         _shownReadiness = -1f;
         _shownShots = -1;
         WeaponChanged?.Invoke();
+    }
+
+    private void EquipDefault()
+    {
+        Equip(_weaponId, new WeaponBoost(0, 0f, 1f));
     }
 
     private Transform GetLayout(WeaponRow row)

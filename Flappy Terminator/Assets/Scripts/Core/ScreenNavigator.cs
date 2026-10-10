@@ -74,11 +74,11 @@ public class ScreenNavigator : MonoBehaviour
         _gameOverScreen.Show(reward);
     }
 
-    public void ShowDock(Reward earned, bool canPlay, bool isDestroyed)
+    public void ShowDock(Reward earned, bool canPlay, DockReason reason)
     {
         _pauseScreen.Hide();
         _gameOverScreen.Hide();
-        _dockScreen.Show(earned, canPlay, isDestroyed);
+        _dockScreen.Show(earned, canPlay, reason);
     }
 
     public void HideOverlays()

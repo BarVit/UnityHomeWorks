@@ -9,11 +9,13 @@ public class UpgradeRowView : MonoBehaviour
     [SerializeField] private TMP_Text _value;
     [SerializeField] private Image[] _pips;
     [SerializeField] private Button _button;
-    [SerializeField] private TMP_Text _price;
+    [SerializeField] private CompactNumber _price;
+    [SerializeField] private TMP_Text _priceLabel;
     [SerializeField] private Color _pipOn = Color.white;
     [SerializeField] private Color _pipOff = Color.white;
 
     private const float DimAlpha = 0.4f;
+    private const string MaxText = "MAX";
 
     public UpgradeStat Stat => _stat;
 
@@ -38,9 +40,13 @@ public class UpgradeRowView : MonoBehaviour
 
         bool isMaxed = price < 0;
 
-        _price.text = isMaxed ? "MAX" : price.ToString();
+        if (isMaxed)
+            _price.ShowText(MaxText);
+        else
+            _price.Show(price);
+
         _button.interactable = isMaxed == false && canBuy;
-        _price.alpha = _button.interactable ? 1f : DimAlpha;
+        _priceLabel.alpha = _button.interactable ? 1f : DimAlpha;
     }
 
     private void OnClicked()

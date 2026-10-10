@@ -23,7 +23,7 @@ public class GameOverScreen : MonoBehaviour
 
     public void Show(Reward reward)
     {
-        _score.text = $"+{reward.Xp} XP   +{reward.Money} COINS";
+        _score.text = $"+{NumberFormat.Compact(reward.Xp)} XP   +{NumberFormat.Compact(reward.Money)} COINS";
         _panel.SetActive(true);
     }
 

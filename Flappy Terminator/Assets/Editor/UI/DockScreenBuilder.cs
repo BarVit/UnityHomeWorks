@@ -17,6 +17,7 @@ namespace UiContent
         private const string UpgradesAsset = "Assets/Data/Generated/WeaponUpgrades.asset";
         private const string WeaponsAsset = "Assets/Data/Generated/Weapons.asset";
 
+        private const string TooltipName = "Number Tooltip";
         private const int PanelBorder = 30;
         private const int SlotBorder = 22;
         private const int SlotCount = 4;
@@ -31,6 +32,7 @@ namespace UiContent
         private static readonly Color Gold = new Color(1f, 0.82f, 0.3f);
 
         private static TMP_FontAsset _font;
+        private static NumberTooltip _tooltip;
 
         [MenuItem("Tools/UI/Build Dock Screen")]
         public static void Build()
@@ -54,6 +56,7 @@ namespace UiContent
             Set(hangar, "_upgrades", AssetDatabase.LoadAssetAtPath<UpgradeTable>(UpgradesAsset));
             Set(game, "_hangar", hangar);
 
+            _tooltip = BuildTooltip((RectTransform)dock.transform);
             BuildDock(dock, hangar, economy);
             BuildHud(runner);
 
@@ -112,15 +115,18 @@ namespace UiContent
             AddImage(plate, Load<Sprite>(TitleSprite)).type = Image.Type.Sliced;
             AddText(Stretch("Title", plate), "DOCK", 44, TextAlignmentOptions.Center, Color.white);
 
-            TMP_Text earned = AddText(Place("Earned", root, new Vector2(0f, 1f), new Vector2(360f, -122f), new Vector2(640f, 40f)),
-                "", 26, TextAlignmentOptions.Left, Gold);
+            RectTransform earned = Place("Earned", root, new Vector2(0f, 1f), new Vector2(360f, -122f), new Vector2(640f, 40f));
+            CompactNumber earnedXp = AddNumber(AddText(Place("XP", earned, new Vector2(0f, 0.5f), new Vector2(150f, 0f), new Vector2(300f, 40f)),
+                "", 26, TextAlignmentOptions.Left, Gold), "+", " XP");
+            CompactNumber earnedMoney = AddNumber(AddText(Place("Money", earned, new Vector2(0f, 0.5f), new Vector2(390f, 0f), new Vector2(300f, 40f)),
+                "", 26, TextAlignmentOptions.Left, Gold), "+", " COINS");
             TMP_Text status = AddText(Place("Status", root, new Vector2(0f, 1f), new Vector2(360f, -154f), new Vector2(640f, 30f)),
                 "LOCATION CLEARED", 22, TextAlignmentOptions.Left, Muted);
 
             RectTransform wallet = Place("Wallet", root, new Vector2(1f, 1f), new Vector2(-250f, -58f), new Vector2(420f, 76f));
             AddPanel(wallet);
-            TMP_Text xp = AddCounter(wallet, "XP", "XP Icon", -100f);
-            TMP_Text money = AddCounter(wallet, "Money", "Coin Icon", 100f);
+            CompactNumber xp = AddCounter(wallet, "XP", "XP Icon", -100f);
+            CompactNumber money = AddCounter(wallet, "Money", "Coin Icon", 100f);
 
             RectTransform loadout = Place("Loadout", root, new Vector2(1f, 0.5f), new Vector2(-350f, 6f), new Vector2(640f, 470f));
             AddPanel(loadout);
@@ -152,7 +158,9 @@ namespace UiContent
             so.FindProperty("_weapons").objectReferenceValue = AssetDatabase.LoadAssetAtPath<WeaponTable>(WeaponsAsset);
             so.FindProperty("_xp").objectReferenceValue = xp;
             so.FindProperty("_money").objectReferenceValue = money;
-            so.FindProperty("_earned").objectReferenceValue = earned;
+            so.FindProperty("_earned").objectReferenceValue = earned.gameObject;
+            so.FindProperty("_earnedXp").objectReferenceValue = earnedXp;
+            so.FindProperty("_earnedMoney").objectReferenceValue = earnedMoney;
             so.FindProperty("_status").objectReferenceValue = status;
             SetArray(so.FindProperty("_slots"), slots);
             so.FindProperty("_weaponIcon").objectReferenceValue = weaponIcon;
@@ -182,8 +190,8 @@ namespace UiContent
                 new Vector2(320f, 40f));
             hud.SetSiblingIndex(sibling);
 
-            TMP_Text xp = AddHudCounter(hud, "XP", "XP Icon", 0f);
-            TMP_Text money = AddHudCounter(hud, "Money", "Coin Icon", 150f);
+            CompactNumber xp = AddHudCounter(hud, "XP", "XP Icon", 0f);
+            CompactNumber money = AddHudCounter(hud, "Money", "Coin Icon", 150f);
 
             viewer = hud.gameObject.AddComponent<RewardViewer>();
             Set(viewer, "_runner", runner);
@@ -191,22 +199,22 @@ namespace UiContent
             Set(viewer, "_money", money);
         }
 
-        private static TMP_Text AddHudCounter(RectTransform parent, string name, string icon, float x)
+        private static CompactNumber AddHudCounter(RectTransform parent, string name, string icon, float x)
         {
             RectTransform group = Place(name, parent, new Vector2(0f, 0.5f), new Vector2(x + 70f, 0f), new Vector2(140f, 40f));
             AddImage(Place("Icon", group, new Vector2(0f, 0.5f), new Vector2(18f, 0f), new Vector2(34f, 34f)), Art(icon)).preserveAspect = true;
 
-            return AddText(Place("Value", group, new Vector2(0f, 0.5f), new Vector2(88f, 0f), new Vector2(100f, 40f)),
-                "0", 30, TextAlignmentOptions.Left, Color.white);
+            return AddNumber(AddText(Place("Value", group, new Vector2(0f, 0.5f), new Vector2(88f, 0f), new Vector2(100f, 40f)),
+                "0", 30, TextAlignmentOptions.Left, Color.white));
         }
 
-        private static TMP_Text AddCounter(RectTransform parent, string name, string icon, float x)
+        private static CompactNumber AddCounter(RectTransform parent, string name, string icon, float x)
         {
             RectTransform group = Place(name, parent, new Vector2(0.5f, 0.5f), new Vector2(x, 0f), new Vector2(190f, 60f));
             AddImage(Place("Icon", group, new Vector2(0f, 0.5f), new Vector2(26f, 0f), new Vector2(44f, 44f)), Art(icon)).preserveAspect = true;
 
-            return AddText(Place("Value", group, new Vector2(0f, 0.5f), new Vector2(118f, 0f), new Vector2(130f, 50f)),
-                "0", 34, TextAlignmentOptions.Left, Color.white);
+            return AddNumber(AddText(Place("Value", group, new Vector2(0f, 0.5f), new Vector2(118f, 0f), new Vector2(130f, 50f)),
+                "0", 34, TextAlignmentOptions.Left, Color.white));
         }
 
         private static SlotView AddSlot(RectTransform parent, int slot, Vector2 position)
@@ -236,8 +244,8 @@ namespace UiContent
 
             RectTransform priceGroup = Place("Price", frame, new Vector2(0.5f, 0f), new Vector2(0f, 20f), new Vector2(130f, 26f));
             AddImage(Place("Coin", priceGroup, new Vector2(0f, 0.5f), new Vector2(22f, 0f), new Vector2(22f, 22f)), Art("Coin Icon")).raycastTarget = false;
-            TMP_Text price = AddText(Place("Value", priceGroup, new Vector2(0f, 0.5f), new Vector2(78f, 0f), new Vector2(90f, 26f)),
-                "0", 22, TextAlignmentOptions.Left, Gold);
+            CompactNumber price = AddNumber(AddText(Place("Value", priceGroup, new Vector2(0f, 0.5f), new Vector2(78f, 0f), new Vector2(90f, 26f)),
+                "0", 22, TextAlignmentOptions.Left, Gold));
 
             SlotView view = frame.gameObject.AddComponent<SlotView>();
             SerializedObject so = new SerializedObject(view);
@@ -282,9 +290,10 @@ namespace UiContent
             label.anchorMax = new Vector2(1f, 1f);
             label.offsetMin = new Vector2(52f, 0f);
             label.offsetMax = new Vector2(-14f, 0f);
-            TMP_Text price = label.GetComponent<TMP_Text>();
-            price.alignment = TextAlignmentOptions.Left;
-            price.color = Gold;
+            TMP_Text priceLabel = label.GetComponent<TMP_Text>();
+            priceLabel.alignment = TextAlignmentOptions.Left;
+            priceLabel.color = Gold;
+            CompactNumber price = AddNumber(priceLabel);
             AddImage(Place("Coin", (RectTransform)button.transform, new Vector2(0f, 0.5f), new Vector2(34f, 0f), new Vector2(28f, 28f)),
                 Art("Coin Icon")).raycastTarget = false;
 
@@ -295,11 +304,48 @@ namespace UiContent
             SetArray(so.FindProperty("_pips"), pips);
             so.FindProperty("_button").objectReferenceValue = button;
             so.FindProperty("_price").objectReferenceValue = price;
+            so.FindProperty("_priceLabel").objectReferenceValue = priceLabel;
             so.FindProperty("_pipOn").colorValue = Cyan;
             so.FindProperty("_pipOff").colorValue = PipOff;
             so.ApplyModifiedPropertiesWithoutUndo();
 
             return view;
+        }
+
+        private static CompactNumber AddNumber(TMP_Text text, string prefix = "", string suffix = "")
+        {
+            text.raycastTarget = true;
+
+            CompactNumber number = text.gameObject.AddComponent<CompactNumber>();
+            SerializedObject so = new SerializedObject(number);
+            so.FindProperty("_tooltip").objectReferenceValue = _tooltip;
+            so.FindProperty("_prefix").stringValue = prefix;
+            so.FindProperty("_suffix").stringValue = suffix;
+            so.ApplyModifiedPropertiesWithoutUndo();
+
+            return number;
+        }
+
+        private static NumberTooltip BuildTooltip(RectTransform canvas)
+        {
+            Transform old = canvas.Find(TooltipName);
+
+            if (old != null)
+                Object.DestroyImmediate(old.gameObject);
+
+            RectTransform panel = Place(TooltipName, canvas, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(200f, 48f));
+            AddImage(panel, Art("Slot Frame")).type = Image.Type.Sliced;
+            TMP_Text label = AddText(Stretch("Label", panel), "0", 24, TextAlignmentOptions.Center, Color.white);
+
+            NumberTooltip tooltip = panel.gameObject.AddComponent<NumberTooltip>();
+            SerializedObject so = new SerializedObject(tooltip);
+            so.FindProperty("_panel").objectReferenceValue = panel;
+            so.FindProperty("_label").objectReferenceValue = label;
+            so.ApplyModifiedPropertiesWithoutUndo();
+
+            panel.gameObject.SetActive(false);
+
+            return tooltip;
         }
 
         private static Button AddButton(RectTransform parent, string name, string text, Vector2 anchor, Vector2 position,

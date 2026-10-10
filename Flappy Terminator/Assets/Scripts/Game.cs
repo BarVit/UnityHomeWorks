@@ -16,7 +16,7 @@ public class Game : MonoBehaviour
     private Coroutine _gameOverCountdown;
     private bool _isLevelOver;
     private bool _isRunning;
-    private bool _isRetryNext;
+    private DockReason _dockReason;
 
     private void OnEnable()
     {
@@ -105,15 +105,16 @@ public class Game : MonoBehaviour
 
     private void StartTest()
     {
-        _runner.StartTest();
-        _playerShip.Shooter.EquipTestWeapon();
-
-        StartLevel();
+        _hangar.StartTestSession(_playerShip.Shooter.TestWeaponId);
+        _dockReason = DockReason.TestStart;
+        _screens.ShowDock(default, true, DockReason.TestStart);
     }
 
     private void PlayFromDock()
     {
-        if (_isRetryNext)
+        if (_dockReason == DockReason.TestStart)
+            _runner.StartTest();
+        else if (_dockReason == DockReason.Destroyed)
             _runner.RetryLocation();
         else
             _runner.StartNextLocation();
@@ -167,7 +168,7 @@ public class Game : MonoBehaviour
         if (_runner.IsTest)
             _screens.ShowStart();
         else
-            ShowDock(false);
+            ShowDock(DockReason.Cleared);
     }
 
     private void StartLevel()
@@ -224,13 +225,13 @@ public class Game : MonoBehaviour
         }
 
         _runner.BankLevel();
-        ShowDock(true);
+        ShowDock(DockReason.Destroyed);
     }
 
-    private void ShowDock(bool isDestroyed)
+    private void ShowDock(DockReason reason)
     {
-        _isRetryNext = isDestroyed;
-        _screens.ShowDock(_runner.BankedReward, isDestroyed || _runner.HasNextLocation, isDestroyed);
+        _dockReason = reason;
+        _screens.ShowDock(_runner.BankedReward, reason != DockReason.Cleared || _runner.HasNextLocation, reason);
     }
 
     private void StopGameOverCountdown()

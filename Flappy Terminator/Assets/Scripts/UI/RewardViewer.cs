@@ -1,11 +1,10 @@
-using TMPro;
 using UnityEngine;
 
 public class RewardViewer : MonoBehaviour
 {
     [SerializeField] private LocationRunner _runner;
-    [SerializeField] private TMP_Text _xp;
-    [SerializeField] private TMP_Text _money;
+    [SerializeField] private CompactNumber _xp;
+    [SerializeField] private CompactNumber _money;
 
     private void OnEnable()
     {
@@ -24,7 +23,7 @@ public class RewardViewer : MonoBehaviour
 
     private void Show(Reward reward)
     {
-        _xp.text = reward.Xp.ToString();
-        _money.text = reward.Money.ToString();
+        _xp.Show(reward.Xp);
+        _money.Show(reward.Money);
     }
 }
