@@ -214,7 +214,7 @@ namespace UiContent
             AddImage(Place("Icon", group, new Vector2(0f, 0.5f), new Vector2(26f, 0f), new Vector2(44f, 44f)), Art(icon)).preserveAspect = true;
 
             return AddNumber(AddText(Place("Value", group, new Vector2(0f, 0.5f), new Vector2(118f, 0f), new Vector2(130f, 50f)),
-                "0", 34, TextAlignmentOptions.Left, Color.white));
+                "0", 34, TextAlignmentOptions.Left, Color.white), hasTooltip: true);
         }
 
         private static SlotView AddSlot(RectTransform parent, int slot, Vector2 position)
@@ -312,13 +312,14 @@ namespace UiContent
             return view;
         }
 
-        private static CompactNumber AddNumber(TMP_Text text, string prefix = "", string suffix = "")
+        private static CompactNumber AddNumber(TMP_Text text, string prefix = "", string suffix = "",
+            bool hasTooltip = false)
         {
-            text.raycastTarget = true;
+            text.raycastTarget = hasTooltip;
 
             CompactNumber number = text.gameObject.AddComponent<CompactNumber>();
             SerializedObject so = new SerializedObject(number);
-            so.FindProperty("_tooltip").objectReferenceValue = _tooltip;
+            so.FindProperty("_tooltip").objectReferenceValue = hasTooltip ? _tooltip : null;
             so.FindProperty("_prefix").stringValue = prefix;
             so.FindProperty("_suffix").stringValue = suffix;
             so.ApplyModifiedPropertiesWithoutUndo();
