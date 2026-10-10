@@ -116,7 +116,7 @@ public class BeamDelivery : WeaponDelivery
             if (damageable != null && IsStruck(damageable, struck))
                 continue;
 
-            Strike(hit, damageable, rotation, far);
+            Strike(hit, damageable, rotation, far, barrel);
             _struck[struck] = damageable;
             struck++;
             last = hit.point;
@@ -150,14 +150,14 @@ public class BeamDelivery : WeaponDelivery
         return false;
     }
 
-    private void Strike(RaycastHit2D hit, IDamageable damageable, Quaternion rotation, Vector2 far)
+    private void Strike(RaycastHit2D hit, IDamageable damageable, Quaternion rotation, Vector2 far, int barrel)
     {
         if (damageable != null && _piercePool != null)
             ShowPierce(GetExit(hit.collider, hit.point, far), rotation);
 
         if (damageable != null)
         {
-            int damage = GetStrikeDamage(damageable, out bool isCrit);
+            int damage = GetStrikeDamage(damageable, barrel, out bool isCrit);
 
             damageable.TakeDamage(damage);
 
@@ -178,9 +178,9 @@ public class BeamDelivery : WeaponDelivery
         effect.Play();
     }
 
-    protected virtual int GetStrikeDamage(IDamageable damageable, out bool isCrit)
+    protected virtual int GetStrikeDamage(IDamageable damageable, int barrel, out bool isCrit)
     {
-        return RollDamage(out isCrit);
+        return RollDamage(barrel, out isCrit);
     }
 
     protected virtual void ShowStrikeCrit(Vector2 point, int damage)

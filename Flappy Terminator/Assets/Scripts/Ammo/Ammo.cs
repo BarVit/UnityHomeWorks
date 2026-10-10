@@ -27,6 +27,8 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
 
     public bool IsCrit { get; private set; }
 
+    public int Barrel { get; private set; }
+
     public bool IsArmed { get; private set; }
 
     public bool IsPersistent { get; private set; }
@@ -71,6 +73,11 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
     public void Remove()
     {
         Released?.Invoke(this);
+    }
+
+    public void MarkBarrel(int barrel)
+    {
+        Barrel = barrel;
     }
 
     public void SetDamage(int damage, bool isCrit = false)

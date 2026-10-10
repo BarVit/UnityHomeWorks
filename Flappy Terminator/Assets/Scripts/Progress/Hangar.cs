@@ -11,14 +11,27 @@ public class Hangar : MonoBehaviour
     [SerializeField] private Economy _economy;
     [SerializeField] private SlotTable _slots;
     [SerializeField] private UpgradeTable _upgrades;
+    [SerializeField] private WeaponTable _weapons;
     [SerializeField] private int _testXp = 1000000;
     [SerializeField] private int _testMoney = 1000000;
 
-    public int SlotCount => _slots.Count;
-
     public event Action Changed;
 
+    public string WeaponId => Ship.WeaponId;
+
+    public int SlotCount
+    {
+        get
+        {
+            WeaponRow row = _weapons.GetRow(WeaponId);
+
+            return row == null ? 0 : Mathf.Min(row.BarrelsMax, _slots.Count);
+        }
+    }
+
     private ShipProgress Ship => _economy.Ship;
+
+    private WeaponLoadout Loadout => Ship.GetLoadout(WeaponId);
 
     private void Start()
     {
@@ -37,12 +50,12 @@ public class Hangar : MonoBehaviour
 
     public bool IsUnlocked(int slot)
     {
-        return slot <= Ship.UnlockedSlots;
+        return slot <= Loadout.BarrelCount;
     }
 
     public bool IsNextToUnlock(int slot)
     {
-        return slot == Ship.UnlockedSlots + 1;
+        return slot == Loadout.BarrelCount + 1;
     }
 
     public int GetUnlockPrice(int slot)
@@ -54,7 +67,8 @@ public class Hangar : MonoBehaviour
 
     public bool CanUnlock(int slot)
     {
-        return IsNextToUnlock(slot) && GetUnlockPrice(slot) != NoPrice && _economy.Money >= GetUnlockPrice(slot);
+        return slot <= SlotCount && IsNextToUnlock(slot) && GetUnlockPrice(slot) != NoPrice
+            && _economy.Money >= GetUnlockPrice(slot);
     }
 
     public bool TryUnlock(int slot)
@@ -62,20 +76,15 @@ public class Hangar : MonoBehaviour
         if (CanUnlock(slot) == false || _economy.TrySpend(GetUnlockPrice(slot)) == false)
             return false;
 
-        Ship.UnlockSlot(_slots.GetRow(slot).Weapon);
+        Loadout.AddBarrel();
         Commit();
 
         return true;
     }
 
-    public string GetWeapon(int slot)
+    public int GetLevel(int slot, UpgradeStat stat)
     {
-        return Ship.GetSlotWeapon(slot);
-    }
-
-    public int GetLevel(string weaponId, UpgradeStat stat)
-    {
-        return Ship.GetUpgrades(weaponId).GetLevel(stat);
+        return GetBarrel(slot).GetLevel(stat);
     }
 
     public int GetMaxLevel(UpgradeStat stat)
@@ -83,56 +92,64 @@ public class Hangar : MonoBehaviour
         return _upgrades.GetMaxLevel(stat);
     }
 
-    public float GetValue(string weaponId, UpgradeStat stat, int levelShift = 0)
+    public float GetValue(int slot, UpgradeStat stat, int levelShift = 0)
     {
-        return _upgrades.GetValue(stat, GetLevel(weaponId, stat) + levelShift);
+        return _upgrades.GetValue(stat, GetLevel(slot, stat) + levelShift);
     }
 
-    public int GetUpgradePrice(string weaponId, UpgradeStat stat)
+    public int GetUpgradePrice(int slot, UpgradeStat stat)
     {
-        UpgradeRow next = _upgrades.GetRow(stat, GetLevel(weaponId, stat) + 1);
+        UpgradeRow next = _upgrades.GetRow(stat, GetLevel(slot, stat) + 1);
 
         return next == null ? NoPrice : next.Price;
     }
 
-    public bool CanUpgrade(string weaponId, UpgradeStat stat)
+    public bool CanUpgrade(int slot, UpgradeStat stat)
     {
-        int price = GetUpgradePrice(weaponId, stat);
+        int price = GetUpgradePrice(slot, stat);
 
-        return price != NoPrice && _economy.Money >= price;
+        return IsUnlocked(slot) && price != NoPrice && _economy.Money >= price;
     }
 
-    public bool TryUpgrade(string weaponId, UpgradeStat stat)
+    public bool TryUpgrade(int slot, UpgradeStat stat)
     {
-        if (CanUpgrade(weaponId, stat) == false || _economy.TrySpend(GetUpgradePrice(weaponId, stat)) == false)
+        if (CanUpgrade(slot, stat) == false || _economy.TrySpend(GetUpgradePrice(slot, stat)) == false)
             return false;
 
-        Ship.GetUpgrades(weaponId).Raise(stat);
+        GetBarrel(slot).Raise(stat);
         Commit();
 
         return true;
     }
 
-    public WeaponBoost GetBoost(string weaponId)
-    {
-        return new WeaponBoost(
-            Mathf.RoundToInt(GetValue(weaponId, UpgradeStat.Damage)),
-            GetValue(weaponId, UpgradeStat.CritChance) * PercentShare,
-            GetValue(weaponId, UpgradeStat.CritDamage));
-    }
-
     public void Equip(PlayerShooter shooter)
     {
-        string weaponId = GetWeapon(FirstSlot);
+        WeaponBoost[] boosts = new WeaponBoost[Loadout.BarrelCount];
 
-        shooter.Equip(weaponId, GetBoost(weaponId));
+        for (int i = 0; i < boosts.Length; i++)
+            boosts[i] = GetBoost(i + FirstSlot);
+
+        shooter.Equip(WeaponId, boosts);
+    }
+
+    private WeaponBoost GetBoost(int slot)
+    {
+        return new WeaponBoost(
+            Mathf.RoundToInt(GetValue(slot, UpgradeStat.Damage)),
+            GetValue(slot, UpgradeStat.CritChance) * PercentShare,
+            GetValue(slot, UpgradeStat.CritDamage));
+    }
+
+    private BarrelUpgrades GetBarrel(int slot)
+    {
+        return Loadout.GetBarrel(slot - FirstSlot);
     }
 
     private void Begin(string weaponId, Reward grant)
     {
         _economy.StartNewSession();
         _economy.Grant(grant);
-        Ship.UnlockSlot(weaponId);
+        Ship.SelectWeapon(weaponId);
         Changed?.Invoke();
     }
 

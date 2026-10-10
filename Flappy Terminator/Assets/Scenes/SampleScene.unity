@@ -15665,6 +15665,7 @@ MonoBehaviour:
   _economy: {fileID: 940566754}
   _slots: {fileID: 11400000, guid: 2de9e0cedbc15451099b8768c0c51403, type: 2}
   _upgrades: {fileID: 11400000, guid: 413233fdfceac4a3780618993841ccd1, type: 2}
+  _weapons: {fileID: 11400000, guid: 05ad97f9a8c8d4ad79ac3a7dc03292af, type: 2}
   _testXp: 1000000
   _testMoney: 1000000
 --- !u!222 &943413463

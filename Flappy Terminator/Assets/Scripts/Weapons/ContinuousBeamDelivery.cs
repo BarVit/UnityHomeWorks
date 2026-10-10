@@ -26,11 +26,11 @@ public class ContinuousBeamDelivery : BeamDelivery
         HoldLoop();
     }
 
-    protected override int GetStrikeDamage(IDamageable damageable, out bool isCrit)
+    protected override int GetStrikeDamage(IDamageable damageable, int barrel, out bool isCrit)
     {
         _owed.TryGetValue(damageable, out float owed);
 
-        owed += RollDamage(Damage * Row.Rate, out isCrit);
+        owed += RollDamage(GetDamage(barrel) * Row.Rate, barrel, out isCrit);
 
         int whole = Mathf.FloorToInt(owed);
 

@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class WeaponContext
 {
+    private readonly WeaponBoost[] _boosts;
+
     public WeaponContext(Transform[] mounts, int barrels, PoolRegistry pools, ShotAudio audio,
         ShotAudio hitAudio, LayerMask targetLayers, int ammoLayer, Camera camera, LayerMask worldLayers = default,
         ShotLoop loop = null, ShotLoop hitLoop = null, int damage = 0,
-        WeaponBoost boost = default, CritMark critMark = null)
+        WeaponBoost[] boosts = null, CritMark critMark = null)
     {
         Mounts = mounts;
         Barrels = barrels;
@@ -18,7 +20,7 @@ public class WeaponContext
         AmmoLayer = ammoLayer;
         Camera = camera;
         Damage = damage;
-        Boost = boost;
+        _boosts = boosts ?? new WeaponBoost[0];
         CritMark = critMark;
 
         ContactFilter2D filter = new ContactFilter2D();
@@ -62,7 +64,10 @@ public class WeaponContext
 
     public int Damage { get; private set; }
 
-    public WeaponBoost Boost { get; private set; }
+    public WeaponBoost GetBoost(int barrel)
+    {
+        return barrel >= 0 && barrel < _boosts.Length ? _boosts[barrel] : default;
+    }
 
     public CritMark CritMark { get; private set; }
 }

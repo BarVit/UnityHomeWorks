@@ -65,20 +65,30 @@ public abstract class WeaponDelivery
 
     protected float ProjectileSpeed => _row.ProjectileSpeed;
 
-    protected int Damage => (_context.Damage > 0 ? _context.Damage : _row.Damage) + _context.Boost.DamageBonus;
+    private int BaseDamage => _context.Damage > 0 ? _context.Damage : _row.Damage;
 
-    protected int RollDamage(out bool isCrit)
+    protected int GetDamage(int barrel)
     {
-        isCrit = _context.Boost.RollCrit();
-
-        return isCrit ? _context.Boost.ApplyCrit(Damage) : Damage;
+        return BaseDamage + _context.GetBoost(barrel).DamageBonus;
     }
 
-    protected float RollDamage(float damage, out bool isCrit)
+    protected int RollDamage(int barrel, out bool isCrit)
     {
-        isCrit = _context.Boost.RollCrit();
+        WeaponBoost boost = _context.GetBoost(barrel);
+        int damage = GetDamage(barrel);
 
-        return isCrit ? _context.Boost.ApplyCrit(damage) : damage;
+        isCrit = boost.RollCrit();
+
+        return isCrit ? boost.ApplyCrit(damage) : damage;
+    }
+
+    protected float RollDamage(float damage, int barrel, out bool isCrit)
+    {
+        WeaponBoost boost = _context.GetBoost(barrel);
+
+        isCrit = boost.RollCrit();
+
+        return isCrit ? boost.ApplyCrit(damage) : damage;
     }
 
     protected void ShowCrit(Vector2 point, int damage)

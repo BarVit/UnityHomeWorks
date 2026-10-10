@@ -2,19 +2,11 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class WeaponUpgrades
+public class BarrelUpgrades
 {
-    [SerializeField] private string _weaponId;
     [SerializeField] private int _damage;
     [SerializeField] private int _critChance;
     [SerializeField] private int _critDamage;
-
-    public WeaponUpgrades(string weaponId)
-    {
-        _weaponId = weaponId;
-    }
-
-    public string WeaponId => _weaponId;
 
     public int GetLevel(UpgradeStat stat)
     {

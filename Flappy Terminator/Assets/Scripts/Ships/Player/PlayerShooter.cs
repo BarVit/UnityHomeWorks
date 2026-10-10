@@ -21,6 +21,7 @@ public class PlayerShooter : MonoBehaviour
     private readonly PoolRegistry _pools = new PoolRegistry("Player Weapon");
 
     private Transform[] _mounts;
+    private int _equippedBarrels = 1;
     private WeaponDelivery _delivery;
     private string _equippedId;
     private AudioClip _overheatClip;
@@ -37,7 +38,7 @@ public class PlayerShooter : MonoBehaviour
 
     public string TestWeaponId => _weaponId;
 
-    public int Barrels => _barrels;
+    public int Barrels => _equippedBarrels;
 
     public IReadOnlyList<Transform> Mounts => _mounts;
 
@@ -82,7 +83,7 @@ public class PlayerShooter : MonoBehaviour
     }
 
 
-    public void Equip(string weaponId, WeaponBoost boost)
+    public void Equip(string weaponId, WeaponBoost[] boosts)
     {
         WeaponRow row = _weapons.GetRow(weaponId);
 
@@ -96,13 +97,14 @@ public class PlayerShooter : MonoBehaviour
             _pools.ReleaseAll();
         }
 
+        _equippedBarrels = Mathf.Max(1, boosts.Length);
         _mounts = CollectMounts(GetLayout(row));
 
         Camera camera = Camera.main;
-        WeaponContext context = new WeaponContext(_mounts, _barrels, _pools,
+        WeaponContext context = new WeaponContext(_mounts, _equippedBarrels, _pools,
             new ShotAudio(_shotAudioSource, camera), new ShotAudio(_hitAudioSource, camera),
             _targetLayers, LayerMask.NameToLayer(AmmoLayerName), camera, _worldLayers, new ShotLoop(_loopAudioSource),
-            new ShotLoop(_hitLoopAudioSource), boost: boost, critMark: _critMark);
+            new ShotLoop(_hitLoopAudioSource), boosts: boosts, critMark: _critMark);
 
         _equippedId = weaponId;
         _delivery = WeaponFactory.Create(row, context);
@@ -114,12 +116,12 @@ public class PlayerShooter : MonoBehaviour
 
     private void EquipDefault()
     {
-        Equip(_weaponId, new WeaponBoost(0, 0f, 1f));
+        Equip(_weaponId, new WeaponBoost[Mathf.Max(1, _barrels)]);
     }
 
     private Transform GetLayout(WeaponRow row)
     {
-        int barrels = Mathf.Clamp(_barrels, 1, Mathf.Min(row.BarrelsMax, _layouts.Length));
+        int barrels = Mathf.Clamp(_equippedBarrels, 1, Mathf.Min(row.BarrelsMax, _layouts.Length));
 
         return _layouts[barrels - 1];
     }

@@ -7,14 +7,14 @@ public class ShipProgress
 {
     [SerializeField] private int _shipLevel = 1;
     [SerializeField] private int _shipXp;
-    [SerializeField] private List<string> _slotWeapons = new List<string>();
-    [SerializeField] private List<WeaponUpgrades> _upgrades = new List<WeaponUpgrades>();
+    [SerializeField] private string _weaponId = string.Empty;
+    [SerializeField] private List<WeaponLoadout> _loadouts = new List<WeaponLoadout>();
 
     public int ShipLevel => _shipLevel;
 
     public int ShipXp => _shipXp;
 
-    public int UnlockedSlots => _slotWeapons.Count;
+    public string WeaponId => _weaponId;
 
     public void AddXp(int amount)
     {
@@ -27,29 +27,22 @@ public class ShipProgress
         _shipLevel++;
     }
 
-    public string GetSlotWeapon(int slot)
+    public void SelectWeapon(string weaponId)
     {
-        int index = slot - 1;
-
-        return index >= 0 && index < _slotWeapons.Count ? _slotWeapons[index] : string.Empty;
+        _weaponId = weaponId;
     }
 
-    public void UnlockSlot(string weaponId)
+    public WeaponLoadout GetLoadout(string weaponId)
     {
-        _slotWeapons.Add(weaponId ?? string.Empty);
-    }
-
-    public WeaponUpgrades GetUpgrades(string weaponId)
-    {
-        foreach (WeaponUpgrades upgrades in _upgrades)
+        foreach (WeaponLoadout loadout in _loadouts)
         {
-            if (upgrades.WeaponId == weaponId)
-                return upgrades;
+            if (loadout.WeaponId == weaponId)
+                return loadout;
         }
 
-        WeaponUpgrades created = new WeaponUpgrades(weaponId);
+        WeaponLoadout created = new WeaponLoadout(weaponId);
 
-        _upgrades.Add(created);
+        _loadouts.Add(created);
 
         return created;
     }

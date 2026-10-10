@@ -53,6 +53,7 @@ namespace UiContent
             Set(hangar, "_economy", economy);
             Set(hangar, "_slots", AssetDatabase.LoadAssetAtPath<SlotTable>(SlotsAsset));
             Set(hangar, "_upgrades", AssetDatabase.LoadAssetAtPath<UpgradeTable>(UpgradesAsset));
+            Set(hangar, "_weapons", AssetDatabase.LoadAssetAtPath<WeaponTable>(WeaponsAsset));
             Set(game, "_hangar", hangar);
 
             _tooltip = BuildTooltip((RectTransform)dock.transform);

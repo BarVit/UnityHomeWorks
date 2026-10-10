@@ -51,7 +51,7 @@ public class TorpedoDelivery : ProjectileDelivery
         {
             if (warhead.Burn(_deltaTime))
             {
-                Blast(warhead);
+                Blast(warhead, torpedo.Barrel);
                 torpedo.Remove();
             }
 
@@ -71,7 +71,7 @@ public class TorpedoDelivery : ProjectileDelivery
     private void OnStruck(Ammo torpedo)
     {
         if (torpedo.TryGetComponent(out TorpedoWarhead warhead))
-            Blast(warhead);
+            Blast(warhead, torpedo.Barrel);
     }
 
     private bool IsOnCourse(Transform torpedo, TorpedoWarhead warhead)
@@ -88,7 +88,7 @@ public class TorpedoDelivery : ProjectileDelivery
         return Physics2D.Raycast(origin, course, Context.TargetFilter, _ahead, Row.Area) > 0;
     }
 
-    private void Blast(TorpedoWarhead warhead)
+    private void Blast(TorpedoWarhead warhead, int barrel)
     {
         Vector2 centre = warhead.Centre;
 
@@ -103,7 +103,7 @@ public class TorpedoDelivery : ProjectileDelivery
 
         BlastWave wave = _blastPool.Get(centre);
 
-        int damage = RollDamage(out bool isCrit);
+        int damage = RollDamage(barrel, out bool isCrit);
 
         wave.Play(warhead.NearDiameter, warhead.FarDiameter, damage, Context.TargetFilter);
 

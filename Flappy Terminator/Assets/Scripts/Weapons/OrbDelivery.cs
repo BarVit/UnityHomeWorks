@@ -93,13 +93,15 @@ public class OrbDelivery : ProjectileDelivery
 
     private float GetDamageRate(Ammo orb)
     {
-        return orb.TryGetComponent(out OrbGrowth growth) ? growth.GetDamageRate(Damage) : Damage;
+        int damage = GetDamage(orb.Barrel);
+
+        return orb.TryGetComponent(out OrbGrowth growth) ? growth.GetDamageRate(damage) : damage;
     }
 
-    private void Deal(IDamageable damageable, float damage)
+    private void Deal(IDamageable damageable, float damage, int barrel)
     {
         _owed.TryGetValue(damageable, out float owed);
-        owed += RollDamage(damage, out bool isCrit);
+        owed += RollDamage(damage, barrel, out bool isCrit);
 
         if (isCrit && damageable is Component target)
             ShowCrit(target.transform.position);
@@ -146,7 +148,7 @@ public class OrbDelivery : ProjectileDelivery
             bool isInside = distance <= radius;
             float share = Mathf.Lerp(1f, FarShare, Mathf.InverseLerp(radius, radius * ArcReach, distance));
 
-            Deal(damageable, tickDamage * share);
+            Deal(damageable, tickDamage * share, orb.Barrel);
             Spark(_touched[i].transform.position);
             isTouching = true;
 

@@ -8,6 +8,7 @@ public class DockScreen : MonoBehaviour
 {
     private const string Arrow = "  >  ";
     private const string PercentSign = "%";
+    private const string BarrelMark = "  #";
     private const string ClearedStatus = "LOCATION CLEARED";
     private const string DestroyedStatus = "SHIP DESTROYED";
     private const string TestStatus = "TEST HANGAR";
@@ -89,14 +90,26 @@ public class DockScreen : MonoBehaviour
         _xp.Show(_economy.TotalXp);
         _money.Show(_economy.Money);
 
-        foreach (SlotView slot in _slots)
-            ShowSlot(slot);
+        WeaponRow row = _weapons.GetRow(_hangar.WeaponId);
 
-        ShowWeapon(_hangar.GetWeapon(_selectedSlot));
+        if (_hangar.IsUnlocked(_selectedSlot) == false)
+            _selectedSlot = Hangar.FirstSlot;
+
+        foreach (SlotView slot in _slots)
+            ShowSlot(slot, row);
+
+        ShowWeapon(row);
     }
 
-    private void ShowSlot(SlotView slot)
+    private void ShowSlot(SlotView slot, WeaponRow row)
     {
+        bool isAvailable = row != null && slot.Slot <= _hangar.SlotCount;
+
+        slot.gameObject.SetActive(isAvailable);
+
+        if (isAvailable == false)
+            return;
+
         if (_hangar.IsUnlocked(slot.Slot) == false)
         {
             slot.ShowLocked(_hangar.GetUnlockPrice(slot.Slot), _hangar.IsNextToUnlock(slot.Slot),
@@ -105,22 +118,18 @@ public class DockScreen : MonoBehaviour
             return;
         }
 
-        WeaponRow row = _weapons.GetRow(_hangar.GetWeapon(slot.Slot));
-
-        slot.ShowWeapon(GetIcon(row), row == null ? "EMPTY" : GetTitle(row), slot.Slot == _selectedSlot);
+        slot.ShowWeapon(GetIcon(row), GetTitle(row), slot.Slot == _selectedSlot);
     }
 
-    private void ShowWeapon(string weaponId)
+    private void ShowWeapon(WeaponRow row)
     {
-        WeaponRow row = _weapons.GetRow(weaponId);
-
         _upgradePanel.SetActive(row != null);
 
         if (row == null)
             return;
 
         _weaponIcon.sprite = GetIcon(row);
-        _weaponTitle.text = GetTitle(row);
+        _weaponTitle.text = _hangar.SlotCount > 1 ? GetTitle(row) + BarrelMark + _selectedSlot : GetTitle(row);
 
         foreach (UpgradeRowView upgrade in _upgrades)
             ShowUpgrade(upgrade, row);
@@ -129,12 +138,12 @@ public class DockScreen : MonoBehaviour
     private void ShowUpgrade(UpgradeRowView upgrade, WeaponRow row)
     {
         UpgradeStat stat = upgrade.Stat;
-        int level = _hangar.GetLevel(row.Id, stat);
-        int price = _hangar.GetUpgradePrice(row.Id, stat);
-        string now = Format(row, stat, _hangar.GetValue(row.Id, stat));
-        string value = price < 0 ? now : now + Arrow + Format(row, stat, _hangar.GetValue(row.Id, stat, 1));
+        int level = _hangar.GetLevel(_selectedSlot, stat);
+        int price = _hangar.GetUpgradePrice(_selectedSlot, stat);
+        string now = Format(row, stat, _hangar.GetValue(_selectedSlot, stat));
+        string value = price < 0 ? now : now + Arrow + Format(row, stat, _hangar.GetValue(_selectedSlot, stat, 1));
 
-        upgrade.Show(value, level, price, _hangar.CanUpgrade(row.Id, stat));
+        upgrade.Show(value, level, price, _hangar.CanUpgrade(_selectedSlot, stat));
     }
 
     private string Format(WeaponRow row, UpgradeStat stat, float value)
@@ -175,20 +184,16 @@ public class DockScreen : MonoBehaviour
 
     private void OnSlotClicked(int slot)
     {
-        if (_hangar.IsUnlocked(slot))
+        if (_hangar.IsUnlocked(slot) || _hangar.TryUnlock(slot))
         {
             _selectedSlot = slot;
             Refresh();
-
-            return;
         }
-
-        _hangar.TryUnlock(slot);
     }
 
     private void OnUpgradeRequested(UpgradeStat stat)
     {
-        _hangar.TryUpgrade(_hangar.GetWeapon(_selectedSlot), stat);
+        _hangar.TryUpgrade(_selectedSlot, stat);
     }
 
     private void OnMenuClicked()
