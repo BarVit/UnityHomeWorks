@@ -17,7 +17,7 @@ MonoBehaviour:
     _price: 0
     _weapon: cannon
   - _slot: 2
-    _price: 1500
+    _price: 1200
     _weapon: 
   - _slot: 3
     _price: 4000
