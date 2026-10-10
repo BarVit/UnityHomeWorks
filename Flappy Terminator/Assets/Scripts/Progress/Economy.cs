@@ -38,6 +38,11 @@ public class Economy : MonoBehaviour
         _runner.LocationCompleted -= Complete;
     }
 
+    public bool IsLocationCompleted(string locationId)
+    {
+        return _data.Galaxy.IsCompleted(locationId);
+    }
+
     public bool TrySpend(int price)
     {
         if (_data.Profile.TrySpendMoney(price) == false)

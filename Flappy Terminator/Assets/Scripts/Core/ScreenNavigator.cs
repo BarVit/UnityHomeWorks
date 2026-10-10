@@ -10,6 +10,7 @@ public class ScreenNavigator : MonoBehaviour
     [SerializeField] private GameOverScreen _gameOverScreen;
     [FormerlySerializedAs("_victoryScreen")]
     [SerializeField] private DockScreen _dockScreen;
+    [SerializeField] private MapScreen _mapScreen;
 
     private bool _isSettingsFromPause;
 
@@ -37,6 +38,10 @@ public class ScreenNavigator : MonoBehaviour
         _gameOverScreen.RestartRequested += OnRestartRequested;
         _dockScreen.MenuRequested += ShowStart;
         _dockScreen.PlayRequested += OnPlayRequested;
+        _dockScreen.MapRequested += ShowMap;
+        _mapScreen.DockRequested += HideMap;
+        _mapScreen.MenuRequested += ShowStart;
+        _mapScreen.PlayRequested += OnPlayRequested;
         _settingsScreen.CloseRequested += CloseSettings;
     }
 
@@ -52,6 +57,10 @@ public class ScreenNavigator : MonoBehaviour
         _gameOverScreen.RestartRequested -= OnRestartRequested;
         _dockScreen.MenuRequested -= ShowStart;
         _dockScreen.PlayRequested -= OnPlayRequested;
+        _dockScreen.MapRequested -= ShowMap;
+        _mapScreen.DockRequested -= HideMap;
+        _mapScreen.MenuRequested -= ShowStart;
+        _mapScreen.PlayRequested -= OnPlayRequested;
         _settingsScreen.CloseRequested -= CloseSettings;
     }
 
@@ -60,8 +69,19 @@ public class ScreenNavigator : MonoBehaviour
         _pauseScreen.Hide();
         _gameOverScreen.Hide();
         _dockScreen.Hide();
+        _mapScreen.Hide();
         _settingsScreen.Hide();
         _startScreen.Show(CanResumeSession);
+    }
+
+    public void ShowMap()
+    {
+        _mapScreen.Show(_dockScreen.CanPlay);
+    }
+
+    public void HideMap()
+    {
+        _mapScreen.Hide();
     }
 
     public void ShowPause()
@@ -91,6 +111,7 @@ public class ScreenNavigator : MonoBehaviour
         IsSettingsOpen = false;
         _gameOverScreen.Hide();
         _dockScreen.Hide();
+        _mapScreen.Hide();
         _settingsScreen.Hide();
     }
 

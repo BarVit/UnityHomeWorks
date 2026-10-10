@@ -29,17 +29,22 @@ public class DockScreen : MonoBehaviour
     [SerializeField] private GameObject _upgradePanel;
     [SerializeField] private UpgradeRowView[] _upgrades;
     [SerializeField] private Button _menuButton;
+    [SerializeField] private Button _mapButton;
     [FormerlySerializedAs("_nextButton")]
     [SerializeField] private Button _playButton;
 
     private int _selectedSlot = Hangar.FirstSlot;
 
+    public bool CanPlay => _playButton.gameObject.activeSelf;
+
     public event Action MenuRequested;
+    public event Action MapRequested;
     public event Action PlayRequested;
 
     private void OnEnable()
     {
         _menuButton.onClick.AddListener(OnMenuClicked);
+        _mapButton.onClick.AddListener(OnMapClicked);
         _playButton.onClick.AddListener(OnPlayClicked);
         _hangar.Changed += Refresh;
         _economy.Changed += Refresh;
@@ -54,6 +59,7 @@ public class DockScreen : MonoBehaviour
     private void OnDisable()
     {
         _menuButton.onClick.RemoveListener(OnMenuClicked);
+        _mapButton.onClick.RemoveListener(OnMapClicked);
         _playButton.onClick.RemoveListener(OnPlayClicked);
         _hangar.Changed -= Refresh;
         _economy.Changed -= Refresh;
@@ -199,6 +205,11 @@ public class DockScreen : MonoBehaviour
     private void OnMenuClicked()
     {
         MenuRequested?.Invoke();
+    }
+
+    private void OnMapClicked()
+    {
+        MapRequested?.Invoke();
     }
 
     private void OnPlayClicked()

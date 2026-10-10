@@ -33,6 +33,11 @@ namespace UiContent
         private static TMP_FontAsset _font;
         private static NumberTooltip _tooltip;
 
+        internal static void UseDefaultFont()
+        {
+            _font = TMP_Settings.defaultFontAsset;
+        }
+
         [MenuItem("Tools/UI/Build Dock Screen")]
         public static void Build()
         {
@@ -355,7 +360,7 @@ namespace UiContent
             AddButton(root, "Map Button", "MAP", new Vector2(0.5f, 0f), new Vector2(0f, 62f), new Vector2(240f, 84f), 36);
         }
 
-        private static Button AddButton(RectTransform parent, string name, string text, Vector2 anchor, Vector2 position,
+        internal static Button AddButton(RectTransform parent, string name, string text, Vector2 anchor, Vector2 position,
             Vector2 size, int fontSize)
         {
             RectTransform rect = Place(name, parent, anchor, position, size);
@@ -375,7 +380,7 @@ namespace UiContent
             image.type = Image.Type.Sliced;
         }
 
-        private static RectTransform Stretch(string name, RectTransform parent)
+        internal static RectTransform Stretch(string name, RectTransform parent)
         {
             RectTransform rect = Create(name, parent);
             rect.anchorMin = Vector2.zero;
@@ -386,7 +391,7 @@ namespace UiContent
             return rect;
         }
 
-        private static RectTransform Place(string name, RectTransform parent, Vector2 anchor, Vector2 position, Vector2 size)
+        internal static RectTransform Place(string name, RectTransform parent, Vector2 anchor, Vector2 position, Vector2 size)
         {
             RectTransform rect = Create(name, parent);
             rect.anchorMin = anchor;
@@ -407,7 +412,7 @@ namespace UiContent
             return (RectTransform)go.transform;
         }
 
-        private static Image AddImage(RectTransform rect, Sprite sprite)
+        internal static Image AddImage(RectTransform rect, Sprite sprite)
         {
             Image image = rect.gameObject.AddComponent<Image>();
             image.sprite = sprite;
@@ -416,7 +421,7 @@ namespace UiContent
             return image;
         }
 
-        private static TMP_Text AddText(RectTransform rect, string text, int size, TextAlignmentOptions alignment, Color color)
+        internal static TMP_Text AddText(RectTransform rect, string text, int size, TextAlignmentOptions alignment, Color color)
         {
             TextMeshProUGUI label = rect.gameObject.AddComponent<TextMeshProUGUI>();
             label.font = _font;
@@ -430,7 +435,7 @@ namespace UiContent
             return label;
         }
 
-        private static Sprite Art(string name)
+        internal static Sprite Art(string name)
         {
             return Load<Sprite>(ArtFolder + name + ".png");
         }

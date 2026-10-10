@@ -1,0 +1,340 @@
+using System;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class MapScreen : MonoBehaviour
+{
+    private const string GalaxyTitle = "MILKY WAY";
+    private const string ArmTitle = "ORION ARM";
+    private const string SystemTitle = "SYSTEM ";
+    private const string DemoOnly = "NOT AVAILABLE IN DEMO";
+    private const float RouteWidth = 4f;
+    private const float Dash = 14f;
+    private const float Gap = 10f;
+    private const float DashSpeed = 40f;
+
+    [SerializeField] private GameObject _panel;
+    [SerializeField] private Economy _economy;
+    [SerializeField] private LocationTable _locations;
+    [SerializeField] private SystemTable _systems;
+    [SerializeField] private string _testLocationId = "loc_test";
+    [SerializeField] private GameObject _galaxyView;
+    [SerializeField] private GameObject _armView;
+    [SerializeField] private GameObject _systemView;
+    [SerializeField] private MapRegion[] _regions;
+    [SerializeField] private MapNode[] _systemNodes;
+    [SerializeField] private Vector2[] _systemPositions;
+    [SerializeField] private UiPolyline _armDone;
+    [SerializeField] private UiPolyline _armRest;
+    [SerializeField] private Image _systemBackground;
+    [SerializeField] private Sprite[] _systemSprites;
+    [SerializeField] private Color[] _starColors;
+    [SerializeField] private MapNode[] _locationNodes;
+    [SerializeField] private UiPolyline _routeDone;
+    [SerializeField] private UiPolyline _routeRest;
+    [SerializeField] private LocationPositions[] _locationPositions;
+    [SerializeField] private TMP_Text _title;
+    [SerializeField] private TMP_Text _info;
+    [SerializeField] private Button _backButton;
+    [SerializeField] private MapToast _toast;
+    [SerializeField] private Button _menuButton;
+    [SerializeField] private Button _dockButton;
+    [SerializeField] private Button _playButton;
+    [SerializeField] private Color _doneRouteColor = new Color(1f, 0.85f, 0.3f);
+    [SerializeField] private Color _restRouteColor = new Color(0.6f, 0.7f, 0.85f, 0.35f);
+
+    private readonly List<LocationRow> _route = new List<LocationRow>();
+    private readonly List<SystemRow> _systemRoute = new List<SystemRow>();
+    private int _currentLocation;
+    private int _openedSystem = -1;
+
+    public event Action MenuRequested;
+    public event Action DockRequested;
+    public event Action PlayRequested;
+
+    private void OnEnable()
+    {
+        _backButton.onClick.AddListener(Back);
+        _menuButton.onClick.AddListener(OnMenuClicked);
+        _dockButton.onClick.AddListener(OnDockClicked);
+        _playButton.onClick.AddListener(OnPlayClicked);
+
+        foreach (MapRegion region in _regions)
+            region.Clicked += OnRegionClicked;
+
+        foreach (MapNode node in _systemNodes)
+            node.Clicked += OnSystemClicked;
+
+        foreach (MapNode node in _locationNodes)
+            node.Clicked += OnLocationClicked;
+    }
+
+    private void OnDisable()
+    {
+        _backButton.onClick.RemoveListener(Back);
+        _menuButton.onClick.RemoveListener(OnMenuClicked);
+        _dockButton.onClick.RemoveListener(OnDockClicked);
+        _playButton.onClick.RemoveListener(OnPlayClicked);
+
+        foreach (MapRegion region in _regions)
+            region.Clicked -= OnRegionClicked;
+
+        foreach (MapNode node in _systemNodes)
+            node.Clicked -= OnSystemClicked;
+
+        foreach (MapNode node in _locationNodes)
+            node.Clicked -= OnLocationClicked;
+    }
+
+    public void Show(bool canPlay)
+    {
+        _playButton.gameObject.SetActive(canPlay);
+        _panel.transform.SetAsLastSibling();
+        _panel.SetActive(true);
+        ReadProgress();
+        ShowGalaxy();
+    }
+
+    public void Hide()
+    {
+        _panel.SetActive(false);
+    }
+
+    private void ReadProgress()
+    {
+        _systemRoute.Clear();
+        _route.Clear();
+
+        foreach (SystemRow system in _systems.Rows)
+            _systemRoute.Add(system);
+
+        _systemRoute.Sort((left, right) => left.Order.CompareTo(right.Order));
+
+        foreach (SystemRow system in _systemRoute)
+            _route.AddRange(GetLocations(system.Id));
+
+        _currentLocation = _route.Count;
+
+        for (int i = 0; i < _route.Count; i++)
+        {
+            if (_economy.IsLocationCompleted(_route[i].Id) == false)
+            {
+                _currentLocation = i;
+
+                break;
+            }
+        }
+    }
+
+    private List<LocationRow> GetLocations(string systemId)
+    {
+        List<LocationRow> found = new List<LocationRow>();
+
+        foreach (LocationRow location in _locations.Rows)
+        {
+            if (location.System == systemId && location.Id != _testLocationId)
+                found.Add(location);
+        }
+
+        found.Sort((left, right) => left.Order.CompareTo(right.Order));
+
+        return found;
+    }
+
+    private void ShowGalaxy()
+    {
+        Open(_galaxyView, GalaxyTitle, false);
+    }
+
+    private void ShowArm()
+    {
+        Open(_armView, ArmTitle, true);
+
+        int currentSystem = GetSystemIndex(_currentLocation);
+
+        for (int i = 0; i < _systemNodes.Length; i++)
+        {
+            bool exists = i < _systemRoute.Count;
+
+            _systemNodes[i].gameObject.SetActive(exists);
+
+            if (exists)
+                _systemNodes[i].Show(i, SystemTitle + _systemRoute[i].Order, GetSystemState(i, currentSystem), _starColors[i]);
+        }
+
+        ShowRoute(_armDone, _armRest, _systemPositions, Mathf.Min(currentSystem, _systemPositions.Length - 1),
+            currentSystem >= _systemPositions.Length);
+    }
+
+    private void ShowSystem(int index)
+    {
+        _openedSystem = index;
+        Open(_systemView, SystemTitle + _systemRoute[index].Order, true);
+        _systemBackground.sprite = _systemSprites[index];
+
+        int first = GetFirstLocation(index);
+        List<LocationRow> locations = GetLocations(_systemRoute[index].Id);
+        Vector2[] positions = _locationPositions[index].Points;
+
+        for (int i = 0; i < _locationNodes.Length; i++)
+        {
+            bool exists = i < locations.Count && i < positions.Length;
+
+            _locationNodes[i].gameObject.SetActive(exists);
+
+            if (exists == false)
+                continue;
+
+            RectTransform node = (RectTransform)_locationNodes[i].transform;
+
+            node.anchorMin = node.anchorMax = new Vector2(positions[i].x, 1f - positions[i].y);
+            node.anchoredPosition = Vector2.zero;
+            _locationNodes[i].Show(first + i, GetLabel(first + i), GetLocationState(first + i), _starColors[index]);
+        }
+
+        int count = Mathf.Min(locations.Count, positions.Length);
+        Vector2[] route = new Vector2[count];
+
+        Array.Copy(positions, route, count);
+        ShowRoute(_routeDone, _routeRest, route, Mathf.Clamp(_currentLocation - first, -1, count - 1),
+            _currentLocation - first >= count);
+    }
+
+    private void ShowRoute(UiPolyline done, UiPolyline rest, Vector2[] points, int reached, bool isAllDone)
+    {
+        List<Vector2> donePoints = new List<Vector2>();
+        List<Vector2> restPoints = new List<Vector2>();
+        int split = isAllDone ? points.Length - 1 : reached;
+
+        for (int i = 0; i < points.Length; i++)
+        {
+            if (i <= split)
+                donePoints.Add(points[i]);
+
+            if (i >= Mathf.Max(split, 0))
+                restPoints.Add(points[i]);
+        }
+
+        if (split < 0)
+            donePoints.Clear();
+
+        done.color = _doneRouteColor;
+        done.SetStyle(RouteWidth, Dash, Gap, -DashSpeed);
+        done.SetPoints(donePoints);
+        rest.color = _restRouteColor;
+        rest.SetStyle(RouteWidth * 0.75f, Dash, Gap, 0f);
+        rest.SetPoints(isAllDone ? new List<Vector2>() : restPoints);
+    }
+
+    private void Open(GameObject view, string title, bool canGoBack)
+    {
+        _galaxyView.SetActive(view == _galaxyView);
+        _armView.SetActive(view == _armView);
+        _systemView.SetActive(view == _systemView);
+        _title.text = title;
+        _info.text = string.Empty;
+        _backButton.gameObject.SetActive(canGoBack);
+    }
+
+    private MapNodeState GetSystemState(int system, int currentSystem)
+    {
+        if (system < currentSystem)
+            return MapNodeState.Completed;
+
+        return system == currentSystem ? MapNodeState.Current : MapNodeState.Locked;
+    }
+
+    private MapNodeState GetLocationState(int index)
+    {
+        if (index < _currentLocation)
+            return MapNodeState.Completed;
+
+        return index == _currentLocation ? MapNodeState.Current : MapNodeState.Locked;
+    }
+
+    private int GetSystemIndex(int locationIndex)
+    {
+        if (locationIndex >= _route.Count)
+            return _systemRoute.Count;
+
+        string systemId = _route[locationIndex].System;
+
+        return _systemRoute.FindIndex(system => system.Id == systemId);
+    }
+
+    private int GetFirstLocation(int system)
+    {
+        int first = 0;
+
+        for (int i = 0; i < system; i++)
+            first += GetLocations(_systemRoute[i].Id).Count;
+
+        return first;
+    }
+
+    private string GetLabel(int index)
+    {
+        LocationRow location = _route[index];
+        int system = _systemRoute.FindIndex(row => row.Id == location.System);
+
+        return _systemRoute[system].Order + "-" + location.Order;
+    }
+
+    private void Back()
+    {
+        if (_systemView.activeSelf)
+            ShowArm();
+        else
+            ShowGalaxy();
+    }
+
+    private void OnRegionClicked(MapRegion region)
+    {
+        if (region.IsAvailable)
+            ShowArm();
+        else
+            _toast.Show(DemoOnly);
+    }
+
+    private void OnSystemClicked(MapNode node)
+    {
+        ShowSystem(node.Index);
+    }
+
+    private void OnLocationClicked(MapNode node)
+    {
+        LocationRow location = _route[node.Index];
+        string state = node.State == MapNodeState.Completed ? "COMPLETED"
+            : node.State == MapNodeState.Current ? "NEXT" : "LOCKED";
+
+        _info.text = "LOCATION " + GetLabel(node.Index) + "     " + location.Levels + " LEVELS     " + state;
+    }
+
+    private void OnMenuClicked()
+    {
+        MenuRequested?.Invoke();
+    }
+
+    private void OnDockClicked()
+    {
+        DockRequested?.Invoke();
+    }
+
+    private void OnPlayClicked()
+    {
+        PlayRequested?.Invoke();
+    }
+
+#if UNITY_EDITOR
+    public void Configure(Vector2[] systemPositions, Sprite[] systemSprites, Color[] starColors,
+        LocationPositions[] locationPositions)
+    {
+        _systemPositions = systemPositions;
+        _systemSprites = systemSprites;
+        _starColors = starColors;
+        _locationPositions = locationPositions;
+    }
+#endif
+}
