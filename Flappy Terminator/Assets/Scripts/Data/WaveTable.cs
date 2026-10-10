@@ -25,6 +25,20 @@ public class WaveTable : ScriptableObject
         return found;
     }
 
+    public bool HasLocation(string location)
+    {
+        if (_rows == null)
+            return false;
+
+        foreach (WaveRow row in _rows)
+        {
+            if (row.Location == location)
+                return true;
+        }
+
+        return false;
+    }
+
 #if UNITY_EDITOR
     public void Fill(WaveRow[] rows)
     {

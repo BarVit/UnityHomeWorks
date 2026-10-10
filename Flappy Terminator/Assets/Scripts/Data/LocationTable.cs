@@ -21,6 +21,20 @@ public class LocationTable : ScriptableObject
         return null;
     }
 
+    public LocationRow GetNext(LocationRow location)
+    {
+        if (_rows == null)
+            return null;
+
+        foreach (LocationRow row in _rows)
+        {
+            if (row.System == location.System && row.Order == location.Order + 1)
+                return row;
+        }
+
+        return null;
+    }
+
 #if UNITY_EDITOR
     public void Fill(LocationRow[] rows)
     {

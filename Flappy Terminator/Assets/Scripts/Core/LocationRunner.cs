@@ -7,6 +7,7 @@ public class LocationRunner : MonoBehaviour
     private const int RewardPerKill = 1;
 
     [SerializeField] private LocationTable _locations;
+    [SerializeField] private WaveTable _waves;
     [FormerlySerializedAs("_locationId")]
     [SerializeField] private string _gameLocationId;
     [SerializeField] private string _testLocationId = "loc_test";
@@ -28,6 +29,8 @@ public class LocationRunner : MonoBehaviour
     public bool IsLastLevel => _run.Level >= _location.Levels;
 
     public bool IsTest => _locationId == _testLocationId;
+
+    public bool HasNextLocation => FindNextLocation() != null;
 
     public int PendingReward => _run.PendingReward;
 
@@ -62,6 +65,19 @@ public class LocationRunner : MonoBehaviour
     public void StartTest()
     {
         StartLocation(_testLocationId);
+    }
+
+    public void StartNextLocation()
+    {
+        LocationRow next = FindNextLocation();
+
+        if (next == null)
+            throw new InvalidOperationException(
+                "LocationRunner: у локации " + _locationId + " нет следующей локации со сценарием волн");
+
+        Select(next.Id);
+        _run.RestartRun();
+        LevelChanged?.Invoke(_run.Level);
     }
 
     public void RestartRun()
@@ -111,6 +127,19 @@ public class LocationRunner : MonoBehaviour
 
         _locationId = locationId;
         _location = location;
+    }
+
+    private LocationRow FindNextLocation()
+    {
+        if (IsTest)
+            return null;
+
+        LocationRow next = _locations.GetNext(_location);
+
+        if (next == null || _waves.HasLocation(next.Id) == false)
+            return null;
+
+        return next;
     }
 
     private void OnEnemyDied(EnemyShip ship)

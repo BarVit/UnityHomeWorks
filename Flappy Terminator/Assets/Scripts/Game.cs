@@ -27,6 +27,7 @@ public class Game : MonoBehaviour
         _screens.ResumeRequested += Resume;
         _screens.RestartFromPauseRequested += RestartFromPause;
         _screens.RestartRequested += RestartRun;
+        _screens.NextLocationRequested += StartNextLocation;
         _input.PauseToggled += TogglePause;
         _input.Shot += SkipCutscene;
     }
@@ -49,6 +50,7 @@ public class Game : MonoBehaviour
         _screens.ResumeRequested -= Resume;
         _screens.RestartFromPauseRequested -= RestartFromPause;
         _screens.RestartRequested -= RestartRun;
+        _screens.NextLocationRequested -= StartNextLocation;
         _input.PauseToggled -= TogglePause;
         _input.Shot -= SkipCutscene;
     }
@@ -107,6 +109,13 @@ public class Game : MonoBehaviour
         StartLevel();
     }
 
+    private void StartNextLocation()
+    {
+        _runner.StartNextLocation();
+
+        StartLevel();
+    }
+
     private void RestartRun()
     {
         _runner.RestartRun();
@@ -152,7 +161,7 @@ public class Game : MonoBehaviour
         if (_runner.IsTest)
             _screens.ShowStart();
         else
-            _screens.ShowVictory(_killCounter.Kills);
+            _screens.ShowVictory(_killCounter.Kills, _runner.HasNextLocation);
     }
 
     private void StartLevel()
