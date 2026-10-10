@@ -234,12 +234,23 @@ public class Game : MonoBehaviour
 
     private void ShowDock(DockReason reason)
     {
+        ClearBattlefield();
+
         bool canPlay = reason != DockReason.Cleared || _runner.HasNextLocation;
 
         _dockReason = reason;
         _dockEarned = _runner.BankedReward;
         _screens.CanResumeSession = canPlay;
         _screens.ShowDock(_dockEarned, canPlay, reason);
+    }
+
+    private void ClearBattlefield()
+    {
+        _warpJump.Stop();
+        _enemySpawner.ClearField();
+        _asteroidSpawner.Clear();
+        _playerShip.DisableControl();
+        _playerShip.Shooter.ReleaseAll();
     }
 
     private void ResumeSession()

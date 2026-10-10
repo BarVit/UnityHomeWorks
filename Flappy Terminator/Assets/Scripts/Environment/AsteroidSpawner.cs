@@ -35,6 +35,14 @@ public class AsteroidSpawner : MonoBehaviour
         _spawning = StartCoroutine(Spawn());
     }
 
+    public void Clear()
+    {
+        StopSpawn();
+
+        foreach (SpawnPool<Asteroid> pool in _pools)
+            pool.ReleaseAll();
+    }
+
     public void StopSpawn()
     {
         if (_spawning == null)

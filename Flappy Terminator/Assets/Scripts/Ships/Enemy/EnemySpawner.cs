@@ -78,6 +78,12 @@ public class EnemySpawner : MonoBehaviour
         _spawning = null;
     }
 
+    public void ClearField()
+    {
+        EndWave();
+        _pools.ReleaseAll();
+    }
+
     private void Open(string locationId)
     {
         _roster.Open(locationId);
@@ -102,12 +108,6 @@ public class EnemySpawner : MonoBehaviour
     {
         if (pools.Contains(pool) == false)
             pools.Add(pool);
-    }
-
-    private void ClearField()
-    {
-        EndWave();
-        _pools.ReleaseAll();
     }
 
     private void EndWave()
