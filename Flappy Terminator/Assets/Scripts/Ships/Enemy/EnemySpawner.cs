@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private EnemyShipTable _enemyShips;
-    [SerializeField] private EnemyTierTable _enemyTiers;
+    [FormerlySerializedAs("_enemyTiers")]
+    [SerializeField] private EnemyTable _enemies;
     [SerializeField] private WeaponTable _weapons;
     [SerializeField] private LocationTable _locations;
     [SerializeField] private SystemTable _systems;
@@ -42,8 +43,8 @@ public class EnemySpawner : MonoBehaviour
         _created = OnEnemyCreated;
         _context = new EnemyContext(_pools, _explosionPrefab, _deadBodyPrefab,
             new ShotAudio(_hitAudioSource, _camera), _targetLayers, _camera);
-        _roster = new EnemyRoster(_enemyShips, _enemyTiers, _weapons, _locations, _systems);
-        _planner = new LevelPlanner(_enemyShips, _enemyTiers, _weapons, _bosses, _waves, _roster);
+        _roster = new EnemyRoster(_enemies, _weapons, _locations, _systems);
+        _planner = new LevelPlanner(_enemies, _weapons, _bosses, _waves, _roster);
     }
 
     public void StartLevel(string locationId, int level, int fallbackSize)

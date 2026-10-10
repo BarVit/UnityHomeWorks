@@ -4,18 +4,16 @@ using Random = UnityEngine.Random;
 
 public class LevelPlanner
 {
-    private readonly EnemyShipTable _ships;
-    private readonly EnemyTierTable _tiers;
+    private readonly EnemyTable _enemies;
     private readonly WeaponTable _weapons;
     private readonly BossTable _bosses;
     private readonly WaveTable _waves;
     private readonly EnemyRoster _roster;
 
-    public LevelPlanner(EnemyShipTable ships, EnemyTierTable tiers, WeaponTable weapons, BossTable bosses,
-        WaveTable waves, EnemyRoster roster)
+    public LevelPlanner(EnemyTable enemies, WeaponTable weapons, BossTable bosses, WaveTable waves,
+        EnemyRoster roster)
     {
-        _ships = ships;
-        _tiers = tiers;
+        _enemies = enemies;
         _weapons = weapons;
         _bosses = bosses;
         _waves = waves;
@@ -62,11 +60,11 @@ public class LevelPlanner
 
         for (int i = 0; i < row.Count; i++)
         {
-            string tierId = row.Mode == WaveMode.Sequence
+            string enemyId = row.Mode == WaveMode.Sequence
                 ? row.Enemies[i % row.Enemies.Length]
                 : row.Enemies[Random.Range(0, row.Enemies.Length)];
 
-            plan.Add(new PlannedSpawn(CreateTier(tierId), GetInterval(row), false));
+            plan.Add(new PlannedSpawn(CreateEnemy(enemyId), GetInterval(row), false));
         }
     }
 
@@ -75,10 +73,10 @@ public class LevelPlanner
         return row.IntervalMax > row.Interval ? Random.Range(row.Interval, row.IntervalMax) : row.Interval;
     }
 
-    private EnemySetup CreateTier(string tierId)
+    private EnemySetup CreateEnemy(string enemyId)
     {
-        EnemyTierRow tier = _tiers.GetRow(tierId);
+        EnemyRow enemy = _enemies.GetRow(enemyId);
 
-        return EnemySetup.ForTier(_ships.GetRow(tier.Ship), tier, _weapons.GetRow(tier.Weapon));
+        return EnemySetup.ForEnemy(enemy, _weapons.GetRow(enemy.Weapon));
     }
 }

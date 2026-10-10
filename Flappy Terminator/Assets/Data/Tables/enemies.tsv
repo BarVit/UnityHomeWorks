@@ -1,0 +1,16 @@
+id	type	title	tier	prefab	body_damage	from_location	health	weapon	barrels	damage	movement	skin
+warden_1	enemy_warden	Страж I	1	Enemy 1	10	loc_01_01	10	enemy_rocket	1	10	Forward	
+warden_2	enemy_warden	Страж II	2	Enemy 1	10	loc_01_01	15	enemy_rocket	2	8	Hover	Warden II
+warden_3	enemy_warden	Страж III	3	Enemy 1	10	loc_01_01	40	enemy_rocket	3	12	Hover Guard	Warden III
+hunter_1	enemy_hunter	Охотник I	1	Enemy 2	15	loc_01_03	20	enemy_impulse_laser	1	5	Forward	
+hunter_2	enemy_hunter	Охотник II	2	Enemy 2	15	loc_01_03	30	enemy_impulse_laser_twin	2	5	Forward Leap	
+hunter_3	enemy_hunter	Охотник III	3	Enemy 2	15	loc_01_03	60	enemy_beam_laser	1	20	Up And Down	
+reaper_1	enemy_reaper	Жнец I	1	Enemy 3	20	loc_02_01	30	enemy_homing	1	15	Drift	
+reaper_2	enemy_reaper	Жнец II	2	Enemy 3	20	loc_02_01	50	enemy_homing	1	20	Drift Retreat	
+reaper_3	enemy_reaper	Жнец III	3	Enemy 3	20	loc_02_01	80	enemy_homing	2	15	Drift Retreat	
+phantom_1	enemy_phantom	Призрак I	1	Enemy 4	25	loc_03_01	40	enemy_cannon	2	14	Forward Leap	
+phantom_2	enemy_phantom	Призрак II	2	Enemy 4	25	loc_03_01	60	enemy_cannon	2	20	Ellipse	
+phantom_3	enemy_phantom	Призрак III	3	Enemy 4	25	loc_03_01	90	enemy_cannon	3	20	Ellipse	
+executioner_1	enemy_executioner	Палач I	1	Enemy 5	30	loc_04_01	120	enemy_railgun	1	50	Hover Guard	
+executioner_2	enemy_executioner	Палач II	2	Enemy 5	30	loc_04_01	150	enemy_torpedo	1	40	Up And Down	
+executioner_3	enemy_executioner	Палач III	3	Enemy 5	30	loc_04_01	200	enemy_plasma	3	20	Up And Down	

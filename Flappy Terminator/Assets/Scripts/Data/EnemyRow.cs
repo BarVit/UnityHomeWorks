@@ -2,11 +2,15 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class EnemyTierRow
+public class EnemyRow
 {
     [SerializeField] private string _id;
-    [SerializeField] private string _ship;
+    [SerializeField] private string _type;
+    [SerializeField] private string _title;
     [SerializeField] private int _tier;
+    [SerializeField] private EnemyShip _prefab;
+    [SerializeField] private int _bodyDamage;
+    [SerializeField] private string _fromLocation;
     [SerializeField] private int _health;
     [SerializeField] private string _weapon;
     [SerializeField] private int _barrels;
@@ -14,12 +18,17 @@ public class EnemyTierRow
     [SerializeField] private MovementProfile _movement;
     [SerializeField] private SpriteSkin _skin;
 
-    public EnemyTierRow(string id, string ship, int tier, int health, string weapon, int barrels, int damage,
-        MovementProfile movement, SpriteSkin skin)
+    public EnemyRow(string id, string type, string title, int tier, EnemyShip prefab, int bodyDamage,
+        string fromLocation, int health, string weapon, int barrels, int damage, MovementProfile movement,
+        SpriteSkin skin)
     {
         _id = id;
-        _ship = ship;
+        _type = type;
+        _title = title;
         _tier = tier;
+        _prefab = prefab;
+        _bodyDamage = bodyDamage;
+        _fromLocation = fromLocation;
         _health = health;
         _weapon = weapon;
         _barrels = barrels;
@@ -30,9 +39,17 @@ public class EnemyTierRow
 
     public string Id => _id;
 
-    public string Ship => _ship;
+    public string Type => _type;
+
+    public string Title => _title;
 
     public int Tier => _tier;
+
+    public EnemyShip Prefab => _prefab;
+
+    public int BodyDamage => _bodyDamage;
+
+    public string FromLocation => _fromLocation;
 
     public int Health => _health;
 

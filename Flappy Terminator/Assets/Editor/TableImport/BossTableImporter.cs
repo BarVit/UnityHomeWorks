@@ -14,7 +14,7 @@ namespace TableImport
             "body_damage", "scale", "tint", "movement"
         };
 
-        public static BossTable Import(EnemyTierTable tiers, WeaponTable weapons, TableLog log)
+        public static BossTable Import(EnemyTable enemies, WeaponTable weapons, TableLog log)
         {
             TsvDocument document = TsvReader.Read(SourcePath, log);
 
@@ -44,7 +44,7 @@ namespace TableImport
                 string weapon = reader.ReadText("weapon");
                 int barrels = reader.ReadInt("barrels", 1, 8);
 
-                CheckPrototype(tiers, ids, prototype, reader);
+                CheckPrototype(enemies, ids, prototype, reader);
                 CheckWeapon(weapons, weapon, barrels, reader);
 
                 rows.Add(new BossRow(
@@ -70,15 +70,15 @@ namespace TableImport
             return table;
         }
 
-        private static void CheckPrototype(EnemyTierTable tiers, HashSet<string> ids, string prototype,
+        private static void CheckPrototype(EnemyTable enemies, HashSet<string> ids, string prototype,
             RowReader reader)
         {
-            if (tiers == null || prototype.Length == 0)
+            if (enemies == null || prototype.Length == 0)
                 return;
 
-            if (tiers.GetRow(prototype) == null && ids.Contains(prototype) == false)
-                reader.Fail("prototype: " + prototype + " — нет ни ступени в "
-                    + EnemyTierTableImporter.SourcePath + ", ни строки в этой таблице");
+            if (enemies.GetRow(prototype) == null && ids.Contains(prototype) == false)
+                reader.Fail("prototype: " + prototype + " — нет ни врага в "
+                    + EnemyTableImporter.SourcePath + ", ни строки в этой таблице");
         }
 
         private static void CheckWeapon(WeaponTable weapons, string weapon, int barrels, RowReader reader)

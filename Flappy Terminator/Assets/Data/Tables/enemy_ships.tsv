@@ -1,6 +1,0 @@
-id	title	prefab	body_damage	from_location
-enemy_warden	Страж	Enemy 1	10	loc_01_01
-enemy_hunter	Охотник	Enemy 2	15	loc_01_03
-enemy_reaper	Жнец	Enemy 3	20	loc_02_01
-enemy_phantom	Призрак	Enemy 4	25	loc_03_01
-enemy_executioner	Палач	Enemy 5	30	loc_04_01

@@ -3,17 +3,18 @@ using UnityEditor;
 
 namespace TableImport
 {
-    public static class EnemyTierTableImporter
+    public static class EnemyTableImporter
     {
-        public const string SourcePath = "Assets/Data/Tables/enemy_tiers.tsv";
-        public const string AssetPath = "Assets/Data/Generated/EnemyTiers.asset";
+        public const string SourcePath = "Assets/Data/Tables/enemies.tsv";
+        public const string AssetPath = "Assets/Data/Generated/Enemies.asset";
 
         private static readonly string[] Columns =
         {
-            "id", "ship", "tier", "health", "weapon", "barrels", "damage", "movement", "skin"
+            "id", "type", "title", "tier", "prefab", "body_damage", "from_location", "health", "weapon",
+            "barrels", "damage", "movement", "skin"
         };
 
-        public static EnemyTierTable Import(EnemyShipTable ships, WeaponTable weapons, TableLog log)
+        public static EnemyTable Import(LocationTable locations, WeaponTable weapons, TableLog log)
         {
             TsvDocument document = TsvReader.Read(SourcePath, log);
 
@@ -23,9 +24,10 @@ namespace TableImport
             if (document.HasColumns(Columns, log) == false)
                 return null;
 
-            List<EnemyTierRow> rows = new List<EnemyTierRow>();
+            List<EnemyRow> rows = new List<EnemyRow>();
             HashSet<string> ids = new HashSet<string>();
             HashSet<string> steps = new HashSet<string>();
+            Dictionary<string, EnemyShip> prefabs = new Dictionary<string, EnemyShip>();
 
             foreach (TsvRow raw in document.Rows)
             {
@@ -35,21 +37,28 @@ namespace TableImport
                 if (ids.Add(id) == false)
                     reader.Fail("повторяющийся id " + id);
 
-                string ship = reader.ReadText("ship");
+                string type = reader.ReadText("type");
                 int tier = reader.ReadInt("tier", 1, 5);
+                EnemyShip prefab = reader.ReadPrefab<EnemyShip>("prefab", true);
+                string fromLocation = reader.ReadText("from_location");
                 string weapon = reader.ReadText("weapon");
                 int barrels = reader.ReadInt("barrels", 1, 8);
 
-                if (steps.Add(ship + " " + tier) == false)
-                    reader.Fail("у корабля " + ship + " уже есть ступень " + tier);
+                if (steps.Add(type + " " + tier) == false)
+                    reader.Fail("у типа " + type + " уже есть ступень " + tier);
 
-                CheckShip(ships, ship, reader);
+                CheckPrefab(prefabs, type, prefab, reader);
+                CheckLocation(locations, fromLocation, reader);
                 CheckWeapon(weapons, weapon, barrels, reader);
 
-                rows.Add(new EnemyTierRow(
+                rows.Add(new EnemyRow(
                     id,
-                    ship,
+                    type,
+                    reader.ReadText("title"),
                     tier,
+                    prefab,
+                    reader.ReadInt("body_damage", 0, 1000),
+                    fromLocation,
                     reader.ReadInt("health", 1, 100000),
                     weapon,
                     barrels,
@@ -58,20 +67,34 @@ namespace TableImport
                     reader.ReadAsset<SpriteSkin>("skin", false)));
             }
 
-            EnemyTierTable table = GeneratedAsset.LoadOrCreate<EnemyTierTable>(AssetPath);
+            EnemyTable table = GeneratedAsset.LoadOrCreate<EnemyTable>(AssetPath);
             table.Fill(rows.ToArray());
             EditorUtility.SetDirty(table);
 
             return table;
         }
 
-        private static void CheckShip(EnemyShipTable ships, string ship, RowReader reader)
+        private static void CheckPrefab(Dictionary<string, EnemyShip> prefabs, string type, EnemyShip prefab,
+            RowReader reader)
         {
-            if (ships == null || ship.Length == 0)
+            if (prefab == null || type.Length == 0)
                 return;
 
-            if (ships.GetRow(ship) == null)
-                reader.Fail("ship: нет корабля с id " + ship + " в " + EnemyShipTableImporter.SourcePath);
+            if (prefabs.TryGetValue(type, out EnemyShip first) == false)
+                prefabs.Add(type, prefab);
+            else if (first != prefab)
+                reader.Fail("prefab: у ступеней типа " + type + " разные префабы — " + first.name + " и "
+                    + prefab.name);
+        }
+
+        private static void CheckLocation(LocationTable locations, string location, RowReader reader)
+        {
+            if (locations == null || location.Length == 0)
+                return;
+
+            if (locations.GetRow(location) == null)
+                reader.Fail("from_location: нет локации с id " + location
+                    + " в " + LocationTableImporter.SourcePath);
         }
 
         private static void CheckWeapon(WeaponTable weapons, string weapon, int barrels, RowReader reader)

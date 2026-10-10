@@ -30,10 +30,9 @@ namespace TableImport
                 LocationTable locations = LocationTableImporter.Import(systems, log);
                 ProgressionTableImporter.Import(log);
                 WeaponTable weapons = WeaponTableImporter.Import(log);
-                EnemyShipTable ships = EnemyShipTableImporter.Import(locations, log);
-                EnemyTierTable tiers = EnemyTierTableImporter.Import(ships, weapons, log);
-                BossTable bosses = BossTableImporter.Import(tiers, weapons, log);
-                WaveTableImporter.Import(locations, tiers, bosses, log);
+                EnemyTable enemies = EnemyTableImporter.Import(locations, weapons, log);
+                BossTable bosses = BossTableImporter.Import(enemies, weapons, log);
+                WaveTableImporter.Import(locations, enemies, bosses, log);
 
                 if (log.HasProblems)
                 {

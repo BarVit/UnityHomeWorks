@@ -43,10 +43,10 @@ public class EnemySetup
 
     public SpriteSkin Skin { get; private set; }
 
-    public static EnemySetup ForTier(EnemyShipRow ship, EnemyTierRow tier, WeaponRow weapon)
+    public static EnemySetup ForEnemy(EnemyRow enemy, WeaponRow weapon)
     {
-        return new EnemySetup(ship.Prefab, ship.Id, tier.Tier, tier.Health, ship.BodyDamage, tier.Barrels,
-            tier.Damage, tier.Movement, weapon, 1, Color.white, tier.Skin);
+        return new EnemySetup(enemy.Prefab, enemy.Type, enemy.Tier, enemy.Health, enemy.BodyDamage, enemy.Barrels,
+            enemy.Damage, enemy.Movement, weapon, 1, Color.white, enemy.Skin);
     }
 
     public static EnemySetup ForBoss(BossRow boss, WeaponRow weapon)

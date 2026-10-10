@@ -15,7 +15,7 @@ namespace TableImport
             "location", "level", "order", "count", "mode", "enemies", "interval", "interval_max"
         };
 
-        public static WaveTable Import(LocationTable locations, EnemyTierTable tiers, BossTable bosses, TableLog log)
+        public static WaveTable Import(LocationTable locations, EnemyTable enemies, BossTable bosses, TableLog log)
         {
             TsvDocument document = TsvReader.Read(SourcePath, log);
 
@@ -36,13 +36,13 @@ namespace TableImport
                 int order = reader.ReadInt("order", 1, 99);
                 int count = reader.ReadInt("count", 1, 1000);
                 WaveMode mode = reader.ReadEnum<WaveMode>("mode");
-                string[] enemies = Split(reader.ReadText("enemies"));
+                string[] list = Split(reader.ReadText("enemies"));
 
                 if (steps.Add(location + " " + level + " " + order) == false)
                     reader.Fail("у локации " + location + " на уровне " + level + " уже есть группа " + order);
 
                 CheckLocation(locations, location, level, reader);
-                CheckEnemies(tiers, bosses, mode, count, enemies, reader);
+                CheckEnemies(enemies, bosses, mode, count, list, reader);
 
                 float interval = reader.ReadFloat("interval", 0f, 60f);
                 float intervalMax = reader.ReadFloat("interval_max", 0f, 60f);
@@ -50,7 +50,7 @@ namespace TableImport
                 if (intervalMax < interval)
                     reader.Fail("interval_max: " + intervalMax + " меньше interval " + interval);
 
-                rows.Add(new WaveRow(location, level, order, count, mode, enemies, interval, intervalMax));
+                rows.Add(new WaveRow(location, level, order, count, mode, list, interval, intervalMax));
             }
 
             WaveTable table = GeneratedAsset.LoadOrCreate<WaveTable>(AssetPath);
@@ -83,27 +83,27 @@ namespace TableImport
                 reader.Fail("level: " + level + " больше, чем уровней у " + location + " (" + row.Levels + ")");
         }
 
-        private static void CheckEnemies(EnemyTierTable tiers, BossTable bosses, WaveMode mode, int count,
-            string[] enemies, RowReader reader)
+        private static void CheckEnemies(EnemyTable enemies, BossTable bosses, WaveMode mode, int count,
+            string[] list, RowReader reader)
         {
             if (mode == WaveMode.Boss)
             {
-                if (count != 1 || enemies.Length != 1)
+                if (count != 1 || list.Length != 1)
                     reader.Fail("Boss: нужен ровно один босс и count 1");
 
-                if (bosses != null && bosses.GetRow(enemies[0]) == null)
-                    reader.Fail("enemies: нет босса с id " + enemies[0] + " в " + BossTableImporter.SourcePath);
+                if (bosses != null && bosses.GetRow(list[0]) == null)
+                    reader.Fail("enemies: нет босса с id " + list[0] + " в " + BossTableImporter.SourcePath);
 
                 return;
             }
 
-            if (tiers == null)
+            if (enemies == null)
                 return;
 
-            foreach (string enemy in enemies)
+            foreach (string enemy in list)
             {
-                if (tiers.GetRow(enemy) == null)
-                    reader.Fail("enemies: нет ступени с id " + enemy + " в " + EnemyTierTableImporter.SourcePath);
+                if (enemies.GetRow(enemy) == null)
+                    reader.Fail("enemies: нет врага с id " + enemy + " в " + EnemyTableImporter.SourcePath);
             }
         }
     }

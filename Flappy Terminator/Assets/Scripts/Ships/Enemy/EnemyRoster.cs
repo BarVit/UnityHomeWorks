@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class EnemyRoster
 {
-    private readonly EnemyShipTable _ships;
-    private readonly EnemyTierTable _tiers;
+    private readonly EnemyTable _enemies;
     private readonly WeaponTable _weapons;
     private readonly LocationTable _locations;
     private readonly SystemTable _systems;
@@ -12,11 +11,9 @@ public class EnemyRoster
 
     private string _locationId;
 
-    public EnemyRoster(EnemyShipTable ships, EnemyTierTable tiers, WeaponTable weapons,
-        LocationTable locations, SystemTable systems)
+    public EnemyRoster(EnemyTable enemies, WeaponTable weapons, LocationTable locations, SystemTable systems)
     {
-        _ships = ships;
-        _tiers = tiers;
+        _enemies = enemies;
         _weapons = weapons;
         _locations = locations;
         _systems = systems;
@@ -37,13 +34,10 @@ public class EnemyRoster
         if (current == null)
             return;
 
-        foreach (EnemyShipRow ship in _ships.Rows)
+        foreach (EnemyRow enemy in _enemies.Rows)
         {
-            if (IsOpen(ship, current) == false)
-                continue;
-
-            foreach (EnemyTierRow tier in _tiers.GetTiers(ship.Id))
-                _available.Add(EnemySetup.ForTier(ship, tier, _weapons.GetRow(tier.Weapon)));
+            if (IsOpen(enemy.FromLocation, current))
+                _available.Add(EnemySetup.ForEnemy(enemy, _weapons.GetRow(enemy.Weapon)));
         }
     }
 
@@ -55,9 +49,9 @@ public class EnemyRoster
         return _available[Random.Range(0, _available.Count)];
     }
 
-    private bool IsOpen(EnemyShipRow ship, LocationRow current)
+    private bool IsOpen(string fromLocation, LocationRow current)
     {
-        LocationRow from = _locations.GetRow(ship.FromLocation);
+        LocationRow from = _locations.GetRow(fromLocation);
 
         if (from == null)
             return false;
