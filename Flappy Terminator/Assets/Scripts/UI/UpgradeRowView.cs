@@ -13,6 +13,8 @@ public class UpgradeRowView : MonoBehaviour
     [SerializeField] private Color _pipOn = Color.white;
     [SerializeField] private Color _pipOff = Color.white;
 
+    private const float DimAlpha = 0.4f;
+
     public UpgradeStat Stat => _stat;
 
     public event Action<UpgradeStat> Requested;
@@ -38,6 +40,7 @@ public class UpgradeRowView : MonoBehaviour
 
         _price.text = isMaxed ? "MAX" : price.ToString();
         _button.interactable = isMaxed == false && canBuy;
+        _price.alpha = _button.interactable ? 1f : DimAlpha;
     }
 
     private void OnClicked()
