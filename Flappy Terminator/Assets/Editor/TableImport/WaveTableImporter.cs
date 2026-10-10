@@ -12,7 +12,7 @@ namespace TableImport
 
         private static readonly string[] Columns =
         {
-            "location", "level", "order", "count", "mode", "enemies", "interval"
+            "location", "level", "order", "count", "mode", "enemies", "interval", "interval_max"
         };
 
         public static WaveTable Import(LocationTable locations, EnemyTierTable tiers, BossTable bosses, TableLog log)
@@ -44,8 +44,13 @@ namespace TableImport
                 CheckLocation(locations, location, level, reader);
                 CheckEnemies(tiers, bosses, mode, count, enemies, reader);
 
-                rows.Add(new WaveRow(location, level, order, count, mode, enemies,
-                    reader.ReadFloat("interval", 0f, 60f)));
+                float interval = reader.ReadFloat("interval", 0f, 60f);
+                float intervalMax = reader.ReadFloat("interval_max", 0f, 60f);
+
+                if (intervalMax < interval)
+                    reader.Fail("interval_max: " + intervalMax + " меньше interval " + interval);
+
+                rows.Add(new WaveRow(location, level, order, count, mode, enemies, interval, intervalMax));
             }
 
             WaveTable table = GeneratedAsset.LoadOrCreate<WaveTable>(AssetPath);

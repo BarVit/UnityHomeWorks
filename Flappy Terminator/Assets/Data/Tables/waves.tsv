@@ -1,7 +1,7 @@
-location	level	order	count	mode	enemies	interval
-loc_01_01	1	1	10	Sequence	warden_1	3
-loc_01_01	2	1	10	Sequence	warden_1	3
-loc_01_01	2	2	5	Sequence	warden_2	3
-loc_01_01	3	1	20	Random	warden_1,warden_2	3
-loc_01_01	3	2	20	Sequence	warden_1,warden_2,hunter_1	3
-loc_01_01	3	3	1	Boss	marauder_1	0
+location	level	order	count	mode	enemies	interval	interval_max
+loc_01_01	1	1	5	Sequence	warden_1	3	3
+loc_01_01	2	1	10	Sequence	warden_1	1	3
+loc_01_01	2	2	2	Sequence	warden_2	3	3
+loc_01_01	3	1	12	Sequence	warden_1,warden_1,warden_2	3	3
+loc_01_01	3	2	16	Sequence	warden_2,warden_2,hunter_1,hunter_1	3	3
+loc_01_01	3	3	1	Boss	marauder_1	0	0

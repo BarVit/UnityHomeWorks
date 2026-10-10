@@ -11,9 +11,10 @@ public class WaveRow
     [SerializeField] private WaveMode _mode;
     [SerializeField] private string[] _enemies;
     [SerializeField] private float _interval;
+    [SerializeField] private float _intervalMax;
 
     public WaveRow(string location, int level, int order, int count, WaveMode mode, string[] enemies,
-        float interval)
+        float interval, float intervalMax)
     {
         _location = location;
         _level = level;
@@ -22,6 +23,7 @@ public class WaveRow
         _mode = mode;
         _enemies = enemies;
         _interval = interval;
+        _intervalMax = intervalMax;
     }
 
     public string Location => _location;
@@ -37,4 +39,6 @@ public class WaveRow
     public string[] Enemies => _enemies;
 
     public float Interval => _interval;
+
+    public float IntervalMax => _intervalMax;
 }

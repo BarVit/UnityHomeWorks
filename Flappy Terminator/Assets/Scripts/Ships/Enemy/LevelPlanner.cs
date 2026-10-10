@@ -55,7 +55,7 @@ public class LevelPlanner
         {
             BossRow boss = _bosses.GetRow(row.Enemies[0]);
 
-            plan.Add(new PlannedSpawn(EnemySetup.ForBoss(boss, _weapons.GetRow(boss.Weapon)), row.Interval, true));
+            plan.Add(new PlannedSpawn(EnemySetup.ForBoss(boss, _weapons.GetRow(boss.Weapon)), GetInterval(row), true));
 
             return;
         }
@@ -66,8 +66,13 @@ public class LevelPlanner
                 ? row.Enemies[i % row.Enemies.Length]
                 : row.Enemies[Random.Range(0, row.Enemies.Length)];
 
-            plan.Add(new PlannedSpawn(CreateTier(tierId), row.Interval, false));
+            plan.Add(new PlannedSpawn(CreateTier(tierId), GetInterval(row), false));
         }
+    }
+
+    private float GetInterval(WaveRow row)
+    {
+        return row.IntervalMax > row.Interval ? Random.Range(row.Interval, row.IntervalMax) : row.Interval;
     }
 
     private EnemySetup CreateTier(string tierId)
