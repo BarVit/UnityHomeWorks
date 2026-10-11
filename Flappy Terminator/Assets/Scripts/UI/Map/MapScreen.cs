@@ -506,7 +506,7 @@ public class MapScreen : MonoBehaviour
         string state = node.State == MapNodeState.Completed ? "COMPLETED"
             : node.State == MapNodeState.Current ? "NEXT" : "LOCKED";
 
-        _info.text = "LOCATION " + GetLabel(node.Index) + "     " + location.Levels + " LEVELS     " + state;
+        _info.text = "LOCATION " + GetLabel(node.Index) + "     " + location.Levels + GetLevelsWord(location) + state;
         Select(canSelect ? location.Id : NoSelection);
     }
 
@@ -518,10 +518,13 @@ public class MapScreen : MonoBehaviour
         bool canSelect = node.State != MapNodeState.Locked && _waves.HasLocation(branch.Id);
         string state = node.State == MapNodeState.Completed ? "COMPLETED"
             : node.State == MapNodeState.Current ? "OPEN" : "LOCKED UNTIL " + GetLabel(_route.IndexOf(parent)) + " IS CLEARED";
-        string levels = branch.Levels == 1 ? " LEVEL     " : " LEVELS     ";
-
-        _info.text = branch.Title + "     " + branch.Levels + levels + state;
+        _info.text = branch.Title + "     " + branch.Levels + GetLevelsWord(branch) + state;
         Select(canSelect ? branch.Id : NoSelection);
+    }
+
+    private string GetLevelsWord(LocationRow location)
+    {
+        return location.Levels == 1 ? " LEVEL     " : " LEVELS     ";
     }
 
     private void OnGateClicked()
