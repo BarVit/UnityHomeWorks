@@ -5,6 +5,6 @@ gun	slot	price	weapon
 	4	8000	
 cannon	3	8000	
 cannon	4	20000	
-impulse_laser	2	10000	
-impulse_laser	3	20000	
-impulse_laser	4	40000	
+impulse_laser	2	4000	
+impulse_laser	3	16000	
+impulse_laser	4	32000	
