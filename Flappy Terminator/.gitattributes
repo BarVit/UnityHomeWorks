@@ -1,3 +1,4 @@
 # Tables live in UTF-16 with a BOM on disk so Excel on macOS opens them with Cyrillic
 # and tab columns intact; git keeps them as UTF-8 so diffs stay readable.
 Assets/Data/Tables/*.tsv text working-tree-encoding=UTF-16LE-BOM
+Assets/Data/Reports/*.tsv text working-tree-encoding=UTF-16LE-BOM
