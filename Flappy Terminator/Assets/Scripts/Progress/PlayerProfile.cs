@@ -8,6 +8,8 @@ public class PlayerProfile
     [SerializeField] private int _totalXp;
     [SerializeField] private int _money;
     [SerializeField] private LevelBook _skills = new LevelBook();
+    [SerializeField] private long _spentMoney;
+    [SerializeField] private long _spentXp;
 
     public int Xp => _xp;
 
@@ -16,6 +18,10 @@ public class PlayerProfile
     public int Money => _money;
 
     public LevelBook Skills => _skills;
+
+    public long SpentMoney => _spentMoney;
+
+    public long SpentXp => _spentXp;
 
     public void AddXp(int amount)
     {
@@ -34,6 +40,7 @@ public class PlayerProfile
             return false;
 
         _money -= amount;
+        _spentMoney += amount;
 
         return true;
     }
@@ -44,6 +51,7 @@ public class PlayerProfile
             return false;
 
         _xp -= amount;
+        _spentXp += amount;
 
         return true;
     }

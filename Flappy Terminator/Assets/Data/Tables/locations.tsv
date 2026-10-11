@@ -36,5 +36,4 @@ loc_05_07	sys_05	7	3		Normal	5	3
 loc_05_08	sys_05	8	3		Normal	5	3		
 loc_05_09	sys_05	9	3		Normal	5	3		
 loc_05_10	sys_05	10	3		Normal	5	3		
-loc_test	sys_01	1	3		Normal	3	3		
 gate_ashen_void	sys_03	1	1		Normal	3	3	ASHEN VOID GATE	loc_03_07

@@ -21,6 +21,9 @@ public class DockScreen : MonoBehaviour
     private const string ClearedStatus = "LOCATION CLEARED";
     private const string DestroyedStatus = "SHIP DESTROYED";
     private const string TestStatus = "TEST HANGAR";
+    private const string SpentCaption = "SPENT\n";
+    private const string CoinsCaption = " COINS\n";
+    private const string XpCaption = " XP";
 
     [SerializeField] private GameObject _panel;
     [SerializeField] private Hangar _hangar;
@@ -33,6 +36,8 @@ public class DockScreen : MonoBehaviour
     [SerializeField] private CompactNumber _earnedXp;
     [SerializeField] private CompactNumber _earnedMoney;
     [SerializeField] private TMP_Text _status;
+    [SerializeField] private Button _resetButton;
+    [SerializeField] private TMP_Text _spent;
     [SerializeField] private TabView[] _tabs;
     [SerializeField] private GameObject[] _pages;
     [SerializeField] private SlotView[] _slots;
@@ -72,6 +77,7 @@ public class DockScreen : MonoBehaviour
     public event Action MenuRequested;
     public event Action MapRequested;
     public event Action PlayRequested;
+    public event Action ResetRequested;
 
     private void OnEnable()
     {
@@ -79,6 +85,7 @@ public class DockScreen : MonoBehaviour
         _mapButton.onClick.AddListener(OnMapClicked);
         _playButton.onClick.AddListener(OnPlayClicked);
         _shopButton.onClick.AddListener(OnShopClicked);
+        _resetButton.onClick.AddListener(OnResetClicked);
         _removeModuleButton.onClick.AddListener(OnRemoveModuleClicked);
         _hangar.Changed += Refresh;
         _modules.Changed += Refresh;
@@ -110,6 +117,7 @@ public class DockScreen : MonoBehaviour
         _mapButton.onClick.RemoveListener(OnMapClicked);
         _playButton.onClick.RemoveListener(OnPlayClicked);
         _shopButton.onClick.RemoveListener(OnShopClicked);
+        _resetButton.onClick.RemoveListener(OnResetClicked);
         _removeModuleButton.onClick.RemoveListener(OnRemoveModuleClicked);
         _hangar.Changed -= Refresh;
         _modules.Changed -= Refresh;
@@ -171,6 +179,10 @@ public class DockScreen : MonoBehaviour
 
         _xp.Show(_economy.Xp);
         _money.Show(_economy.Money);
+        _resetButton.gameObject.SetActive(_economy.IsTestSession);
+        _spent.gameObject.SetActive(_economy.IsTestSession);
+        _spent.text = SpentCaption + NumberFormat.Full(_economy.SpentMoney) + CoinsCaption
+            + NumberFormat.Full(_economy.SpentXp) + XpCaption;
 
         for (int i = 0; i < _tabs.Length; i++)
         {
@@ -515,6 +527,11 @@ public class DockScreen : MonoBehaviour
     private void OnShopClicked()
     {
         _shop.Open(_tab == ModulesTab ? ShopWindow.ModulesTab : ShopWindow.WeaponsTab);
+    }
+
+    private void OnResetClicked()
+    {
+        ResetRequested?.Invoke();
     }
 
     private void OnMenuClicked()

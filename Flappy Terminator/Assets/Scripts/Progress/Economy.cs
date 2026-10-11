@@ -13,6 +13,10 @@ public class Economy : MonoBehaviour
 
     public int Money => _data.Profile.Money;
 
+    public long SpentMoney => _data.Profile.SpentMoney;
+
+    public long SpentXp => _data.Profile.SpentXp;
+
     public ShipProgress Ship => _data.Ship;
 
     public LevelBook Skills => _data.Profile.Skills;

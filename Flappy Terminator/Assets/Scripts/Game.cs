@@ -34,6 +34,7 @@ public class Game : MonoBehaviour
         _screens.StartRequested += StartGame;
         _screens.SessionResumeRequested += ResumeSession;
         _screens.StartTestRequested += StartTest;
+        _screens.TestResetRequested += StartTest;
         _screens.ResumeRequested += Resume;
         _screens.RestartFromPauseRequested += RestartFromPause;
         _screens.RestartRequested += RestartRun;
@@ -61,6 +62,7 @@ public class Game : MonoBehaviour
         _screens.StartRequested -= StartGame;
         _screens.SessionResumeRequested -= ResumeSession;
         _screens.StartTestRequested -= StartTest;
+        _screens.TestResetRequested -= StartTest;
         _screens.ResumeRequested -= Resume;
         _screens.RestartFromPauseRequested -= RestartFromPause;
         _screens.RestartRequested -= RestartRun;
@@ -140,7 +142,7 @@ public class Game : MonoBehaviour
         _hangar.StartTestSession(_playerShip.Shooter.TestWeaponId);
         _dockReason = DockReason.TestStart;
         _screens.CanResumeSession = false;
-        _screens.ShowDock(default, true, DockReason.TestStart);
+        _screens.ShowDock(default, false, DockReason.TestStart);
     }
 
     private void PlayLocation(string locationId)
@@ -154,7 +156,7 @@ public class Game : MonoBehaviour
     private void PlayFromDock()
     {
         if (_dockReason == DockReason.TestStart)
-            _runner.StartTest();
+            _runner.StartGame();
         else if (_dockReason == DockReason.Destroyed)
             _runner.RetryLocation();
         else
@@ -247,9 +249,6 @@ public class Game : MonoBehaviour
 
         _isLevelOver = true;
 
-        if (_runner.IsTest)
-            _runner.DropPendingReward();
-
         _enemySpawner.StopSpawn();
         _asteroidSpawner.StopSpawn();
         _gameOverCountdown = StartCoroutine(ShowDeathScreen());
@@ -289,13 +288,6 @@ public class Game : MonoBehaviour
         _cutsceneSkip.End();
         _gameOverCountdown = null;
         _isRunning = false;
-
-        if (_runner.IsTest)
-        {
-            _screens.ShowGameOver(_runner.BankedReward);
-
-            yield break;
-        }
 
         _runner.BankLevel();
         ShowDock(DockReason.Destroyed);

@@ -166,6 +166,10 @@ namespace UiContent
                 "", 26, TextAlignmentOptions.Left, Gold), "+", " COINS");
             TMP_Text status = AddText(Place("Status", root, new Vector2(0f, 1f), new Vector2(360f, -154f), new Vector2(640f, 30f)),
                 "LOCATION CLEARED", 22, TextAlignmentOptions.Left, Muted);
+            Button reset = AddButton(root, "Reset Button", "RESET", new Vector2(0f, 1f), new Vector2(120f, -202f),
+                new Vector2(160f, 48f), 22);
+            TMP_Text spent = AddText(Place("Spent", root, new Vector2(0f, 1f), new Vector2(360f, -272f), new Vector2(640f, 84f)),
+                "", 18, TextAlignmentOptions.TopLeft, Muted);
 
             RectTransform wallet = Place("Wallet", root, new Vector2(1f, 1f), new Vector2(-250f, -58f), new Vector2(420f, 76f));
             AddPanel(wallet);
@@ -237,6 +241,8 @@ namespace UiContent
             so.FindProperty("_earnedXp").objectReferenceValue = earnedXp;
             so.FindProperty("_earnedMoney").objectReferenceValue = earnedMoney;
             so.FindProperty("_status").objectReferenceValue = status;
+            so.FindProperty("_resetButton").objectReferenceValue = reset;
+            so.FindProperty("_spent").objectReferenceValue = spent;
             SetArray(so.FindProperty("_tabs"), tabs);
             SetArray(so.FindProperty("_pages"), new Object[] { weaponPage.gameObject, modulePage.gameObject, skillPage.gameObject });
             SetArray(so.FindProperty("_slots"), slots);

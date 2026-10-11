@@ -22,6 +22,7 @@ public class ScreenNavigator : MonoBehaviour
     public event Action StartRequested;
     public event Action SessionResumeRequested;
     public event Action StartTestRequested;
+    public event Action TestResetRequested;
     public event Action ResumeRequested;
     public event Action RestartFromPauseRequested;
     public event Action RestartRequested;
@@ -42,6 +43,7 @@ public class ScreenNavigator : MonoBehaviour
         _dockScreen.MenuRequested += ShowStart;
         _dockScreen.PlayRequested += OnPlayRequested;
         _dockScreen.MapRequested += ShowMap;
+        _dockScreen.ResetRequested += OnTestResetRequested;
         _mapScreen.DockRequested += HideMap;
         _mapScreen.MenuRequested += ShowStart;
         _mapScreen.PlayRequested += OnPlayRequested;
@@ -63,6 +65,7 @@ public class ScreenNavigator : MonoBehaviour
         _dockScreen.MenuRequested -= ShowStart;
         _dockScreen.PlayRequested -= OnPlayRequested;
         _dockScreen.MapRequested -= ShowMap;
+        _dockScreen.ResetRequested -= OnTestResetRequested;
         _mapScreen.DockRequested -= HideMap;
         _mapScreen.MenuRequested -= ShowStart;
         _mapScreen.PlayRequested -= OnPlayRequested;
@@ -188,6 +191,11 @@ public class ScreenNavigator : MonoBehaviour
     {
         _startScreen.Hide();
         StartTestRequested?.Invoke();
+    }
+
+    private void OnTestResetRequested()
+    {
+        TestResetRequested?.Invoke();
     }
 
     private void OnResumeRequested()

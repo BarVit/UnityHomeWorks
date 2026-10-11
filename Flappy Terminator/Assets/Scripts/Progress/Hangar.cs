@@ -13,8 +13,8 @@ public class Hangar : MonoBehaviour
     [SerializeField] private SlotTable _slots;
     [SerializeField] private UpgradeTable _upgrades;
     [SerializeField] private WeaponTable _weapons;
-    [SerializeField] private int _testXp = 1000000;
-    [SerializeField] private int _testMoney = 1000000;
+    [SerializeField] private int _testXp = 1000000000;
+    [SerializeField] private int _testMoney = 1000000000;
 
     public event Action Changed;
 

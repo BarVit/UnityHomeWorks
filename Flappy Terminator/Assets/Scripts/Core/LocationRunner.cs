@@ -8,7 +8,6 @@ public class LocationRunner : MonoBehaviour
     [SerializeField] private WaveTable _waves;
     [FormerlySerializedAs("_locationId")]
     [SerializeField] private string _gameLocationId;
-    [SerializeField] private string _testLocationId = "loc_test";
     [SerializeField] private EnemySpawner _enemySpawner;
 
     private readonly RunState _run = new RunState();
@@ -25,8 +24,6 @@ public class LocationRunner : MonoBehaviour
     public int LevelCount => _location.Levels;
 
     public bool IsLastLevel => _run.Level >= _location.Levels;
-
-    public bool IsTest => _locationId == _testLocationId;
 
     public bool HasNextLocation => FindNextLocation() != null;
 
@@ -61,11 +58,6 @@ public class LocationRunner : MonoBehaviour
     public void StartGame()
     {
         StartLocation(_gameLocationId);
-    }
-
-    public void StartTest()
-    {
-        StartLocation(_testLocationId);
     }
 
     public void StartNextLocation()
@@ -151,9 +143,6 @@ public class LocationRunner : MonoBehaviour
 
     private LocationRow FindNextLocation()
     {
-        if (IsTest)
-            return null;
-
         LocationRow next = _locations.GetNext(_location);
 
         if (next == null || _waves.HasLocation(next.Id) == false)

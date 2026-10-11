@@ -28,7 +28,6 @@ public class MapScreen : MonoBehaviour
     [SerializeField] private LocationTable _locations;
     [SerializeField] private WaveTable _waves;
     [SerializeField] private SystemTable _systems;
-    [SerializeField] private string _testLocationId = "loc_test";
     [SerializeField] private GameObject _galaxyView;
     [SerializeField] private GameObject _armView;
     [SerializeField] private GameObject _systemView;
@@ -192,7 +191,7 @@ public class MapScreen : MonoBehaviour
 
         foreach (LocationRow location in _locations.Rows)
         {
-            if (location.System == systemId && location.Id != _testLocationId && location.IsBranch == false)
+            if (location.System == systemId && location.IsBranch == false)
                 found.Add(location);
         }
 
@@ -311,7 +310,7 @@ public class MapScreen : MonoBehaviour
 
         Vector2 position = _gatePositions[system];
         RectTransform rect = (RectTransform)_starGate.transform;
-        bool isOpen = _economy.IsLocationCompleted(locations[route.Length - 1].Id);
+        bool isOpen = _economy.IsTestSession || _economy.IsLocationCompleted(locations[route.Length - 1].Id);
 
         rect.anchorMin = rect.anchorMax = new Vector2(position.x, 1f - position.y);
         rect.anchoredPosition = Vector2.zero;
@@ -380,6 +379,9 @@ public class MapScreen : MonoBehaviour
         if (_economy.IsLocationCompleted(branch.Id))
             return MapNodeState.Completed;
 
+        if (_economy.IsTestSession)
+            return MapNodeState.Open;
+
         return _economy.IsLocationCompleted(branch.BranchOf) ? MapNodeState.Current : MapNodeState.Locked;
     }
 
@@ -429,11 +431,17 @@ public class MapScreen : MonoBehaviour
         if (system < currentSystem)
             return MapNodeState.Completed;
 
+        if (_economy.IsTestSession && system != currentSystem)
+            return MapNodeState.Open;
+
         return system == currentSystem ? MapNodeState.Current : MapNodeState.Locked;
     }
 
     private MapNodeState GetLocationState(int index)
     {
+        if (_economy.IsTestSession)
+            return _economy.IsLocationCompleted(_route[index].Id) ? MapNodeState.Completed : MapNodeState.Open;
+
         if (index < _currentLocation)
             return MapNodeState.Completed;
 
@@ -504,7 +512,8 @@ public class MapScreen : MonoBehaviour
         LocationRow location = _route[node.Index];
         bool canSelect = node.State != MapNodeState.Locked && _waves.HasLocation(location.Id);
         string state = node.State == MapNodeState.Completed ? "COMPLETED"
-            : node.State == MapNodeState.Current ? "NEXT" : "LOCKED";
+            : node.State == MapNodeState.Current ? "NEXT"
+            : node.State == MapNodeState.Open ? GetOpenCaption(location) : "LOCKED";
 
         _info.text = "LOCATION " + GetLabel(node.Index) + "     " + location.Levels + GetLevelsWord(location) + state;
         Select(canSelect ? location.Id : NoSelection);
@@ -517,9 +526,15 @@ public class MapScreen : MonoBehaviour
         LocationRow parent = _locations.GetRow(branch.BranchOf);
         bool canSelect = node.State != MapNodeState.Locked && _waves.HasLocation(branch.Id);
         string state = node.State == MapNodeState.Completed ? "COMPLETED"
-            : node.State == MapNodeState.Current ? "OPEN" : "LOCKED UNTIL " + GetLabel(_route.IndexOf(parent)) + " IS CLEARED";
+            : node.State == MapNodeState.Current || node.State == MapNodeState.Open ? GetOpenCaption(branch)
+            : "LOCKED UNTIL " + GetLabel(_route.IndexOf(parent)) + " IS CLEARED";
         _info.text = branch.Title + "     " + branch.Levels + GetLevelsWord(branch) + state;
         Select(canSelect ? branch.Id : NoSelection);
+    }
+
+    private string GetOpenCaption(LocationRow location)
+    {
+        return _waves.HasLocation(location.Id) ? "OPEN" : "NO WAVES YET";
     }
 
     private string GetLevelsWord(LocationRow location)
