@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,7 +12,10 @@ public class MapRegion : MaskableGraphic, ICanvasRaycastFilter, IPointerEnterHan
     [SerializeField] private bool _isAvailable;
     [SerializeField] private List<Vector2> _polygon = new List<Vector2>();
     [SerializeField] private Color _hoverColor = new Color(0.4f, 0.85f, 1f, 0.18f);
-    [SerializeField] private Color _lockedHoverColor = new Color(1f, 1f, 1f, 0.06f);
+    [SerializeField] private Color _lockedHoverColor = new Color(0.6f, 0.75f, 1f, 0.025f);
+    [SerializeField] private TMP_Text _label;
+    [SerializeField] private Color _labelColor = new Color(0.55f, 0.6f, 0.68f);
+    [SerializeField] private Color _labelHoverColor = Color.white;
 
     public string Id => _id;
 
@@ -30,17 +34,20 @@ public class MapRegion : MaskableGraphic, ICanvasRaycastFilter, IPointerEnterHan
     {
         base.OnDisable();
         color = Color.clear;
+        LightLabel(false);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         color = _isAvailable ? _hoverColor : _lockedHoverColor;
+        LightLabel(true);
         Hovered?.Invoke(this, true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         color = Color.clear;
+        LightLabel(false);
         Hovered?.Invoke(this, false);
     }
 
@@ -81,6 +88,14 @@ public class MapRegion : MaskableGraphic, ICanvasRaycastFilter, IPointerEnterHan
 
         foreach (Vector3Int triangle in Triangulate())
             vertices.AddTriangle(triangle.x, triangle.y, triangle.z);
+    }
+
+    private void LightLabel(bool isLit)
+    {
+        if (_label == null || _isAvailable)
+            return;
+
+        _label.color = isLit ? _labelHoverColor : _labelColor;
     }
 
     private bool Contains(Vector2 point)

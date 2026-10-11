@@ -232,6 +232,11 @@ namespace UiContent
                     arm.available ? Cyan : LockedLabel);
                 text.fontStyle = FontStyles.Bold;
                 text.fontSharedMaterial = AssetDatabase.LoadAssetAtPath<Material>(OutlineMaterial);
+
+                SerializedObject regionSo = new SerializedObject(region);
+                regionSo.FindProperty("_label").objectReferenceValue = text;
+                regionSo.FindProperty("_labelColor").colorValue = text.color;
+                regionSo.ApplyModifiedPropertiesWithoutUndo();
             }
 
             if (galaxy.borders != null)
