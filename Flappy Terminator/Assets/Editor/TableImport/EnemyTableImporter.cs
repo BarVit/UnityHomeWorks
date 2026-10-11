@@ -11,7 +11,7 @@ namespace TableImport
         private static readonly string[] Columns =
         {
             "id", "type", "title", "tier", "prefab", "body_damage", "from_location", "health", "weapon",
-            "barrels", "damage", "movement", "skin", "reward_money", "reward_xp"
+            "base_weapon", "barrels", "damage", "movement", "skin", "reward_money", "reward_xp"
         };
 
         public static EnemyTable Import(LocationTable locations, WeaponTable weapons, TableLog log)
@@ -50,6 +50,7 @@ namespace TableImport
                 CheckPrefab(prefabs, type, prefab, reader);
                 CheckLocation(locations, fromLocation, reader);
                 CheckWeapon(weapons, weapon, barrels, reader);
+                CheckBaseWeapon(weapons, weapon, reader.ReadText("base_weapon"), reader);
 
                 rows.Add(new EnemyRow(
                     id,
@@ -119,6 +120,29 @@ namespace TableImport
             if (barrels > row.BarrelsMax)
                 reader.Fail("barrels: " + barrels + " больше, чем barrels_max оружия "
                     + row.Id + " (" + row.BarrelsMax + ")");
+        }
+
+        private static void CheckBaseWeapon(WeaponTable weapons, string weapon, string baseWeapon, RowReader reader)
+        {
+            if (weapons == null)
+                return;
+
+            WeaponRow baseRow = weapons.GetRow(baseWeapon);
+            WeaponRow gun = weapons.GetRow(weapon);
+
+            if (baseRow == null || baseRow.Owner != WeaponOwner.Player)
+            {
+                reader.Fail("base_weapon: " + baseWeapon + " — нет такой пушки игрока в " + WeaponTableImporter.SourcePath);
+
+                return;
+            }
+
+            if (gun == null)
+                return;
+
+            if (gun.Delivery != baseRow.Delivery || gun.Projectile != baseRow.Projectile || gun.Beam != baseRow.Beam)
+                reader.Fail("base_weapon: " + weapon + " стреляет не как " + baseWeapon
+                    + " (другой способ стрельбы, снаряд или луч)");
         }
     }
 }
