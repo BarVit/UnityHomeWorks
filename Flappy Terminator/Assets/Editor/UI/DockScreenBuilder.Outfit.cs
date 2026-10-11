@@ -17,6 +17,7 @@ namespace UiContent
         private const int ShopCardCount = 10;
         private const int ShopColumns = 5;
         private const float ShieldSizeShare = 1.16f;
+        private const float BubbleRingShare = 116f / 128f;
 
         private static readonly Color TabIdle = new Color(0.45f, 0.55f, 0.66f, 0.9f);
         private static readonly Color Shade = new Color(0f, 0.02f, 0.05f, 0.72f);
@@ -255,13 +256,27 @@ namespace UiContent
                 float scale = size / (bubbleSprite.bounds.size.x * prefab.transform.lossyScale.x);
                 bubbleObject.transform.localScale = Vector3.one * scale;
 
+                holder.layer = body.gameObject.layer;
+                CircleCollider2D circle = holder.AddComponent<CircleCollider2D>();
+                circle.isTrigger = true;
+                circle.radius = bubbleSprite.bounds.extents.x * BubbleRingShare * scale;
+                circle.enabled = false;
+
+                AmmoHitHandler bodyHits = body.GetComponent<AmmoHitHandler>();
+                AmmoHitHandler shieldHits = holder.AddComponent<AmmoHitHandler>();
+                SerializedObject hitsSo = new SerializedObject(shieldHits);
+                hitsSo.FindProperty("_ammoLayers").intValue = new SerializedObject(bodyHits).FindProperty("_ammoLayers").intValue;
+                hitsSo.ApplyModifiedPropertiesWithoutUndo();
+
                 EnergyShield shield = holder.AddComponent<EnergyShield>();
                 SerializedObject shieldSo = new SerializedObject(shield);
                 shieldSo.FindProperty("_bubble").objectReferenceValue = bubble;
+                shieldSo.FindProperty("_collider").objectReferenceValue = circle;
                 shieldSo.ApplyModifiedPropertiesWithoutUndo();
 
                 SerializedObject shipSo = new SerializedObject(ship);
                 shipSo.FindProperty("_shield").objectReferenceValue = shield;
+                shipSo.FindProperty("_shieldHitHandler").objectReferenceValue = shieldHits;
                 shipSo.ApplyModifiedPropertiesWithoutUndo();
 
                 PrefabUtility.SaveAsPrefabAsset(prefab, PlayerPrefab);

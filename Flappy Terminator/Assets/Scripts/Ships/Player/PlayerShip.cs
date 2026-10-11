@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
 {
     [SerializeField] private AmmoHitHandler _ammoHitHandler;
+    [SerializeField] private AmmoHitHandler _shieldHitHandler;
     [SerializeField] private PlayerCollisionHandler _playerCollisionHandler;
     [SerializeField] private Collider2D _bodyCollider;
     [SerializeField] private SpriteRenderer _shipSprite;
@@ -35,6 +36,7 @@ public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
     private void OnEnable()
     {
         _ammoHitHandler.HitDetected += OnAmmoHit;
+        _shieldHitHandler.HitDetected += OnAmmoHit;
         _playerCollisionHandler.AsteroidBumped += OnAsteroidBumped;
         _playerCollisionHandler.EnemyBumped += OnEnemyBumped;
         _health.Died += Die;
@@ -43,6 +45,7 @@ public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
     private void OnDisable()
     {
         _ammoHitHandler.HitDetected -= OnAmmoHit;
+        _shieldHitHandler.HitDetected -= OnAmmoHit;
         _playerCollisionHandler.AsteroidBumped -= OnAsteroidBumped;
         _playerCollisionHandler.EnemyBumped -= OnEnemyBumped;
         _health.Died -= Die;

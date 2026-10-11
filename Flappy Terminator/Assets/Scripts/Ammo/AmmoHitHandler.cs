@@ -31,6 +31,7 @@ public class AmmoHitHandler : MonoBehaviour
         if (Contains(ammo.gameObject.layer) == false)
             return;
 
+        ammo.Disarm();
         HitDetected?.Invoke(ammo);
         ammo.Hit(other.ClosestPoint(transform.position), gameObject);
         ammo.Remove();

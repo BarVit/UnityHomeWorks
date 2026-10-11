@@ -128,7 +128,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1264825286514263537}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2259106337816886636
+--- !u!1 &2088635680533165056
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,8 +136,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4294397265555009647}
-  - component: {fileID: 2445537534881628641}
+  - component: {fileID: 5547858459565305846}
+  - component: {fileID: 8364223861023037823}
   m_Layer: 0
   m_Name: Bubble
   m_TagString: Untagged
@@ -145,29 +145,29 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4294397265555009647
+--- !u!4 &5547858459565305846
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2259106337816886636}
+  m_GameObject: {fileID: 2088635680533165056}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.68875015, y: 0.68875015, z: 0.68875015}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7032313720789961323}
+  m_Father: {fileID: 2736911149965095862}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &2445537534881628641
+--- !u!212 &8364223861023037823
 SpriteRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2259106337816886636}
+  m_GameObject: {fileID: 2088635680533165056}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -391,7 +391,7 @@ Transform:
   - {fileID: 7917310512439759139}
   - {fileID: 8305098014945860838}
   - {fileID: 4553086573173472957}
-  - {fileID: 7032313720789961323}
+  - {fileID: 2736911149965095862}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &2638179971147453657
@@ -582,12 +582,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ammoHitHandler: {fileID: 307056008311267323}
+  _shieldHitHandler: {fileID: 2446271243942364471}
   _playerCollisionHandler: {fileID: 3094829726805730626}
   _bodyCollider: {fileID: 3170934345470343946}
   _shipSprite: {fileID: 796812979710454581}
   _explosion: {fileID: 7711000000000000102}
   _deathCutsceneDuration: 7.5
-  _shield: {fileID: 5681366359233089141}
+  _shield: {fileID: 5127933496765810686}
 --- !u!114 &3369771758799880655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1336,7 +1337,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7900449787531056683}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6047271731411006592
+--- !u!1 &6465499844628996449
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1344,44 +1345,98 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7032313720789961323}
-  - component: {fileID: 5681366359233089141}
-  m_Layer: 0
+  - component: {fileID: 2736911149965095862}
+  - component: {fileID: 2505219389159522706}
+  - component: {fileID: 2446271243942364471}
+  - component: {fileID: 5127933496765810686}
+  m_Layer: 6
   m_Name: Energy Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7032313720789961323
+--- !u!4 &2736911149965095862
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6047271731411006592}
+  m_GameObject: {fileID: 6465499844628996449}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4294397265555009647}
+  - {fileID: 5547858459565305846}
   m_Father: {fileID: 4591410997553302837}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5681366359233089141
+--- !u!58 &2505219389159522706
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6465499844628996449}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.79895014
+--- !u!114 &2446271243942364471
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6047271731411006592}
+  m_GameObject: {fileID: 6465499844628996449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfa614011e7f740be990b8fb2c10dfc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AmmoHitHandler
+  _ammoLayers:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!114 &5127933496765810686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6465499844628996449}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4986ace15ff5b4e1cbdaa111953d6f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnergyShield
-  _bubble: {fileID: 2445537534881628641}
+  _bubble: {fileID: 8364223861023037823}
+  _collider: {fileID: 2505219389159522706}
   _color: {r: 0.35, g: 0.88, b: 1, a: 1}
   _raiseDuration: 0.2
   _breakDuration: 0.35

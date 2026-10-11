@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnergyShield : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _bubble;
+    [SerializeField] private Collider2D _collider;
     [SerializeField] private Color _color = new Color(0.35f, 0.88f, 1f);
     [SerializeField] private float _raiseDuration = 0.2f;
     [SerializeField] private float _breakDuration = 0.35f;
@@ -29,6 +30,7 @@ public class EnergyShield : MonoBehaviour
     {
         _baseScale = _bubble.transform.localScale;
         _bubble.enabled = false;
+        _collider.enabled = false;
     }
 
     private void Update()
@@ -47,6 +49,7 @@ public class EnergyShield : MonoBehaviour
         _flashLeft = 0f;
         _breakLeft = 0f;
         _bubble.enabled = true;
+        _collider.enabled = true;
     }
 
     public int Absorb(int damage)
@@ -68,11 +71,13 @@ public class EnergyShield : MonoBehaviour
         _left = 0;
         _breakLeft = 0f;
         _bubble.enabled = false;
+        _collider.enabled = false;
     }
 
     private void Break()
     {
         _breakLeft = _breakDuration;
+        _collider.enabled = false;
         Broken?.Invoke();
     }
 
