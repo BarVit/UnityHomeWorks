@@ -99,8 +99,7 @@ namespace UiContent
         {
             RectTransform card = Place("Card " + (index + 1), parent, new Vector2(0.5f, 0.5f), position, new Vector2(178f, 206f));
             AddImage(card, Art("Slot Frame")).type = Image.Type.Sliced;
-            GameObject highlight = AddImage(Stretch("Highlight", card), Art("Slot Selected")).gameObject;
-            highlight.GetComponent<Image>().type = Image.Type.Sliced;
+            GameObject highlight = AddSelection("Highlight", card);
 
             Image icon = AddImage(Place("Icon", card, new Vector2(0.5f, 0.5f), new Vector2(0f, 54f), new Vector2(150f, 58f)), null);
             icon.preserveAspect = true;
@@ -140,7 +139,7 @@ namespace UiContent
             if (old != null)
                 Object.DestroyImmediate(old.gameObject);
 
-            RectTransform bar = Place(ModuleBarName, canvas, new Vector2(0.5f, 0f), new Vector2(0f, 52f), new Vector2(240f, 72f));
+            RectTransform bar = Place(ModuleBarName, canvas, new Vector2(0.5f, 0f), new Vector2(0f, 176f), new Vector2(240f, 72f));
             bar.SetSiblingIndex(Mathf.Min(sibling, canvas.childCount - 1));
 
             ModuleButtonView[] buttons = new ModuleButtonView[ModuleSlotCount];
@@ -175,8 +174,7 @@ namespace UiContent
             cooldown.fillClockwise = false;
             cooldown.fillAmount = 0f;
 
-            GameObject ring = AddImage(Stretch("Active", rect), Art("Slot Selected")).gameObject;
-            ring.GetComponent<Image>().type = Image.Type.Sliced;
+            GameObject ring = AddSelection("Active", rect);
 
             TMP_Text key = AddText(Place("Key", rect, new Vector2(1f, 0f), new Vector2(-10f, 10f), new Vector2(20f, 20f)),
                 (slot + 1).ToString(), 16, TextAlignmentOptions.Center, Color.white);

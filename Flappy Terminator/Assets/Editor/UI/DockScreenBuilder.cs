@@ -23,6 +23,7 @@ namespace UiContent
         private const string TooltipName = "Number Tooltip";
         private const int PanelBorder = 30;
         private const int SlotBorder = 22;
+        private const int GlowPadding = 16;
         private const int SlotCount = 4;
         private const int ModuleSlotCount = 3;
         private const int UpgradeRowCount = 3;
@@ -105,7 +106,7 @@ namespace UiContent
             Prepare("Dock Background", 0);
             Prepare("Dock Panel", PanelBorder);
             Prepare("Slot Frame", SlotBorder);
-            Prepare("Slot Selected", SlotBorder);
+            Prepare("Slot Selected", SlotBorder + GlowPadding);
             Prepare("Rating Star", 0);
 
             foreach (string name in new[] { "Coin Icon", "XP Icon", "Lock Icon", "Damage Icon", "Crit Icon", "Upgrade Pip",
@@ -325,9 +326,7 @@ namespace UiContent
             button.targetGraphic = image;
             CanvasGroup group = frame.gameObject.AddComponent<CanvasGroup>();
 
-            GameObject selection = AddImage(Stretch("Selection", frame), Art("Slot Selected")).gameObject;
-            selection.GetComponent<Image>().type = Image.Type.Sliced;
-            selection.GetComponent<Image>().raycastTarget = false;
+            GameObject selection = AddSelection("Selection", frame);
 
             Image icon = AddImage(Place("Icon", frame, new Vector2(0.5f, 0.5f), new Vector2(0f, 10f), new Vector2(118f, 46f)), null);
             icon.preserveAspect = true;
@@ -491,6 +490,18 @@ namespace UiContent
             rect.offsetMax = Vector2.zero;
 
             return rect;
+        }
+
+        internal static GameObject AddSelection(string name, RectTransform parent)
+        {
+            RectTransform rect = Stretch(name, parent);
+            rect.offsetMin = -Vector2.one * GlowPadding;
+            rect.offsetMax = Vector2.one * GlowPadding;
+            Image image = AddImage(rect, Art("Slot Selected"));
+            image.type = Image.Type.Sliced;
+            image.raycastTarget = false;
+
+            return image.gameObject;
         }
 
         internal static RectTransform Place(string name, RectTransform parent, Vector2 anchor, Vector2 position, Vector2 size)
