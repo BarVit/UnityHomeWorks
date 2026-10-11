@@ -7,6 +7,7 @@ public class WeaponLoadout
 {
     [SerializeField] private string _weaponId;
     [SerializeField] private List<BarrelUpgrades> _barrels = new List<BarrelUpgrades>();
+    [SerializeField] private LevelBook _weaponLevels = new LevelBook();
 
     public WeaponLoadout(string weaponId)
     {
@@ -17,6 +18,8 @@ public class WeaponLoadout
     public string WeaponId => _weaponId;
 
     public int BarrelCount => _barrels.Count;
+
+    public LevelBook WeaponLevels => _weaponLevels;
 
     public BarrelUpgrades GetBarrel(int barrel)
     {

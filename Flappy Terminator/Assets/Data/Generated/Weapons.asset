@@ -18,7 +18,7 @@ MonoBehaviour:
     _owner: 0
     _delivery: 0
     _damage: 10
-    _rate: 0.4
+    _rate: 0.5
     _magazine: 0
     _reloadTime: 0
     _projectileSpeed: 18
@@ -65,7 +65,7 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
-    _price: 150
+    _price: 2700
     _projectile: {fileID: 8728678904558988455, guid: 79b82508bda244037beb9d377f23f950, type: 3}
     _beam: {fileID: 0}
     _assets:
@@ -98,7 +98,7 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
-    _price: 300
+    _price: 7200
     _projectile: {fileID: 4581286917286831887, guid: 3fffa4739d43f4c039a9ff680207e691, type: 3}
     _beam: {fileID: 0}
     _assets:
@@ -131,7 +131,7 @@ MonoBehaviour:
     _turnRate: 90
     _aimTime: 0
     _area: 0
-    _price: 600
+    _price: 19000
     _projectile: {fileID: 4581286917286831887, guid: 3fffa4739d43f4c039a9ff680207e691, type: 3}
     _beam: {fileID: 0}
     _assets:
@@ -164,7 +164,7 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
-    _price: 900
+    _price: 52000
     _projectile: {fileID: 0}
     _beam: {fileID: 8352859674081126688, guid: 515114a3f4dd148ce90a8b6800a6074c, type: 3}
     _assets:
@@ -197,7 +197,7 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
-    _price: 1200
+    _price: 140000
     _projectile: {fileID: 0}
     _beam: {fileID: 1931004981861364774, guid: 7c7f7cacf8c234cd7bf9b4a0d9d5581d, type: 3}
     _assets:
@@ -230,7 +230,7 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
-    _price: 1400
+    _price: 1000
     _projectile: {fileID: 8728678904558988455, guid: dbdae465272cd47738793cfb08b47fd4, type: 3}
     _beam: {fileID: 0}
     _assets:
@@ -263,7 +263,7 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 1.2
-    _price: 2000
+    _price: 1000000
     _projectile: {fileID: 8728678904558988455, guid: 2aeac9335d3bb4f30a741ee699cb6950, type: 3}
     _beam: {fileID: 0}
     _assets:
@@ -296,7 +296,7 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 1.5
-    _price: 1600
+    _price: 370000
     _projectile: {fileID: 4581286917286831887, guid: 39b8feebdbe9d4a6d8c35e7db650cfcd, type: 3}
     _beam: {fileID: 0}
     _assets:

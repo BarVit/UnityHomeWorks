@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace UiContent
 {
-    public static class DockScreenBuilder
+    public static partial class DockScreenBuilder
     {
         private const string ArtFolder = "Assets/Sprites/UI/Dock/";
                 private const string TitleSprite = "Assets/Sci-Fi UI/_SciFi_GUISkin_/Skin_Assets/buttons/button_active.png";
@@ -14,12 +14,20 @@ namespace UiContent
         private const string PlayerFrame = "tinyShip5_0";
         private const string SlotsAsset = "Assets/Data/Generated/Slots.asset";
         private const string UpgradesAsset = "Assets/Data/Generated/WeaponUpgrades.asset";
+        private const string ModulesAsset = "Assets/Data/Generated/Modules.asset";
+        private const string ModuleUpgradesAsset = "Assets/Data/Generated/ModuleUpgrades.asset";
+        private const string ModuleSlotsAsset = "Assets/Data/Generated/ModuleSlots.asset";
+        private const string SkillsAsset = "Assets/Data/Generated/Skills.asset";
         private const string WeaponsAsset = "Assets/Data/Generated/Weapons.asset";
 
         private const string TooltipName = "Number Tooltip";
         private const int PanelBorder = 30;
         private const int SlotBorder = 22;
         private const int SlotCount = 4;
+        private const int ModuleSlotCount = 3;
+        private const int UpgradeRowCount = 3;
+        private const int SkillRowCount = 4;
+        private const float RowStep = 74f;
         private const int PipCount = 5;
         private const float ShipScale = 6f;
 
@@ -61,9 +69,32 @@ namespace UiContent
             Set(hangar, "_weapons", AssetDatabase.LoadAssetAtPath<WeaponTable>(WeaponsAsset));
             Set(game, "_hangar", hangar);
 
+            ModuleRack modules = GetOrAdd<ModuleRack>(economy.gameObject);
+            Set(modules, "_economy", economy);
+            Set(modules, "_modules", AssetDatabase.LoadAssetAtPath<ModuleTable>(ModulesAsset));
+            Set(modules, "_upgrades", AssetDatabase.LoadAssetAtPath<ModuleUpgradeTable>(ModuleUpgradesAsset));
+            Set(modules, "_slots", AssetDatabase.LoadAssetAtPath<SlotTable>(ModuleSlotsAsset));
+
+            PlayerShip playerShip = Object.FindAnyObjectByType<PlayerShip>(FindObjectsInactive.Include);
+            SkillBook skills = GetOrAdd<SkillBook>(economy.gameObject);
+            Set(skills, "_economy", economy);
+            Set(skills, "_skills", AssetDatabase.LoadAssetAtPath<SkillTable>(SkillsAsset));
+            Set(skills, "_ship", playerShip);
+
+            EnergyShield shield = BuildShield(playerShip);
+            BattleModules battle = GetOrAdd<BattleModules>(game.gameObject);
+            Set(battle, "_input", Object.FindAnyObjectByType<InputReader>(FindObjectsInactive.Include));
+            Set(battle, "_ship", playerShip);
+            Set(battle, "_shield", shield);
+
+            Set(game, "_moduleRack", modules);
+            Set(game, "_skills", skills);
+            Set(game, "_battleModules", battle);
+
             _tooltip = BuildTooltip((RectTransform)dock.transform);
-            BuildDock(dock, hangar, economy);
+            BuildDock(dock, hangar, modules, skills, economy);
             BuildHud(runner);
+            BuildModuleHud((RectTransform)dock.transform, battle);
 
             EditorSceneManager.MarkSceneDirty(dock.gameObject.scene);
             Debug.Log("Док: экран собран.");
@@ -77,7 +108,8 @@ namespace UiContent
             Prepare("Slot Selected", SlotBorder);
             Prepare("Rating Star", 0);
 
-            foreach (string name in new[] { "Coin Icon", "XP Icon", "Lock Icon", "Damage Icon", "Crit Icon", "Upgrade Pip" })
+            foreach (string name in new[] { "Coin Icon", "XP Icon", "Lock Icon", "Damage Icon", "Crit Icon", "Upgrade Pip",
+                         "Energy Shield Icon", "Health Icon", "Cooldown Icon", "White Square" })
                 Prepare(name, 0);
         }
 
@@ -97,7 +129,7 @@ namespace UiContent
             importer.SaveAndReimport();
         }
 
-        private static void BuildDock(DockScreen dock, Hangar hangar, Economy economy)
+        private static void BuildDock(DockScreen dock, Hangar hangar, ModuleRack modules, SkillBook skills, Economy economy)
         {
             SerializedObject so = new SerializedObject(dock);
             GameObject panel = (GameObject)so.FindProperty("_panel").objectReferenceValue;
@@ -134,49 +166,115 @@ namespace UiContent
             CompactNumber xp = AddCounter(wallet, "XP", "XP Icon", -100f);
             CompactNumber money = AddCounter(wallet, "Money", "Coin Icon", 100f);
 
-            RectTransform loadout = Place("Loadout", root, new Vector2(1f, 0.5f), new Vector2(-350f, 6f), new Vector2(640f, 470f));
+            Button shopButton = AddButton(root, "Shop Button", "SHOP", new Vector2(0.5f, 1f), new Vector2(40f, -58f), new Vector2(220f, 76f), 34);
+
+            RectTransform loadout = Place("Loadout", root, new Vector2(1f, 0.5f), new Vector2(-350f, -2f), new Vector2(640f, 486f));
             AddPanel(loadout);
-            AddText(Place("Header", loadout, new Vector2(0f, 1f), new Vector2(170f, -34f), new Vector2(300f, 36f)),
-                "WEAPON SLOTS", 26, TextAlignmentOptions.Left, Cyan);
+
+            TabView[] tabs =
+            {
+                AddTab(loadout, 0, "WEAPON", new Vector2(-200f, 207f), new Vector2(190f, 48f)),
+                AddTab(loadout, 1, "MODULES", new Vector2(0f, 207f), new Vector2(190f, 48f)),
+                AddTab(loadout, 2, "SKILLS", new Vector2(200f, 207f), new Vector2(190f, 48f)),
+            };
+
+            RectTransform weaponPage = Stretch("Weapon Page", loadout);
+            RectTransform modulePage = Stretch("Module Page", loadout);
+            RectTransform skillPage = Stretch("Skill Page", loadout);
 
             SlotView[] slots = new SlotView[SlotCount];
 
             for (int i = 0; i < SlotCount; i++)
-                slots[i] = AddSlot(loadout, i + 1, new Vector2(-226.5f + i * 151f, 132f));
+                slots[i] = AddSlot(weaponPage, i + 1, new Vector2(-226.5f + i * 151f, 128f));
 
-            RectTransform divider = Place("Divider", loadout, new Vector2(0.5f, 0.5f), new Vector2(0f, 64f), new Vector2(580f, 2f));
-            AddImage(divider, null).color = new Color(Cyan.r, Cyan.g, Cyan.b, 0.35f);
+            AddDivider(weaponPage);
 
-            RectTransform upgrades = Place("Upgrades", loadout, new Vector2(0.5f, 0.5f), new Vector2(0f, -86f), new Vector2(640f, 290f));
-            Image weaponIcon = AddImage(Place("Weapon Icon", upgrades, new Vector2(0f, 1f), new Vector2(120f, -40f), new Vector2(180f, 71f)), null);
+            RectTransform upgrades = Stretch("Upgrades", weaponPage);
+            Image weaponIcon = AddImage(Place("Weapon Icon", upgrades, new Vector2(0.5f, 0.5f), new Vector2(-200f, 34f), new Vector2(150f, 52f)), null);
             weaponIcon.preserveAspect = true;
-            TMP_Text weaponTitle = AddText(Place("Weapon Title", upgrades, new Vector2(0f, 1f), new Vector2(390f, -40f), new Vector2(330f, 50f)),
-                "", 34, TextAlignmentOptions.Left, Color.white);
+            TMP_Text weaponTitle = AddText(Place("Weapon Title", upgrades, new Vector2(0.5f, 0.5f), new Vector2(70f, 34f), new Vector2(330f, 44f)),
+                "", 30, TextAlignmentOptions.Left, Color.white);
+            UpgradeRowView[] weaponRows = AddUpgradeRows(upgrades, UpgradeRowCount, -22f);
 
-            UpgradeRowView damage = AddUpgradeRow(upgrades, UpgradeStat.Damage, "DAMAGE", "+2 PER LEVEL", "Damage Icon", -58f);
-            UpgradeRowView crit = AddUpgradeRow(upgrades, UpgradeStat.CritChance, "CRIT CHANCE", "CRIT HIT DEALS x2", "Crit Icon", -148f);
+            SlotView[] moduleSlots = new SlotView[ModuleSlotCount];
+
+            for (int i = 0; i < ModuleSlotCount; i++)
+                moduleSlots[i] = AddSlot(modulePage, i + 1, new Vector2(-151f + i * 151f, 128f));
+
+            AddDivider(modulePage);
+
+            RectTransform modulePanel = Stretch("Module", modulePage);
+            Image moduleIcon = AddImage(Place("Module Icon", modulePanel, new Vector2(0.5f, 0.5f), new Vector2(-250f, 34f), new Vector2(52f, 52f)), null);
+            moduleIcon.preserveAspect = true;
+            TMP_Text moduleTitle = AddText(Place("Module Title", modulePanel, new Vector2(0.5f, 0.5f), new Vector2(-40f, 34f), new Vector2(330f, 44f)),
+                "", 30, TextAlignmentOptions.Left, Color.white);
+            Button remove = AddButton(modulePanel, "Remove Button", "REMOVE", new Vector2(0.5f, 0.5f), new Vector2(222f, 34f), new Vector2(140f, 46f), 20);
+            UpgradeRowView[] moduleRows = AddUpgradeRows(modulePanel, UpgradeRowCount, -22f);
+            TMP_Text moduleHint = AddText(Place("Hint", modulePage, new Vector2(0.5f, 0.5f), new Vector2(0f, -40f), new Vector2(560f, 80f)),
+                "EMPTY SLOT\nBUY A MODULE IN THE SHOP", 24, TextAlignmentOptions.Center, Muted);
+
+            AddText(Place("Header", skillPage, new Vector2(0.5f, 0.5f), new Vector2(0f, 150f), new Vector2(580f, 34f)),
+                "PILOT SKILLS ARE PAID WITH XP", 22, TextAlignmentOptions.Center, Muted);
+            UpgradeRowView[] skillRows = AddUpgradeRows(skillPage, SkillRowCount, 96f);
 
             Button menu = AddButton(root, "Menu Button", "MENU", new Vector2(0f, 0f), new Vector2(150f, 62f), new Vector2(220f, 76f), 32);
             AddMapButton(root);
             Button play = AddButton(root, "Play Button", "PLAY", new Vector2(1f, 0f), new Vector2(-190f, 62f), new Vector2(300f, 96f), 40);
 
+            ShopWindow shop = BuildShop(root, hangar, modules, economy);
+
             so.FindProperty("_hangar").objectReferenceValue = hangar;
+            so.FindProperty("_modules").objectReferenceValue = modules;
+            so.FindProperty("_skills").objectReferenceValue = skills;
             so.FindProperty("_economy").objectReferenceValue = economy;
-            so.FindProperty("_weapons").objectReferenceValue = AssetDatabase.LoadAssetAtPath<WeaponTable>(WeaponsAsset);
             so.FindProperty("_xp").objectReferenceValue = xp;
             so.FindProperty("_money").objectReferenceValue = money;
             so.FindProperty("_earned").objectReferenceValue = earned.gameObject;
             so.FindProperty("_earnedXp").objectReferenceValue = earnedXp;
             so.FindProperty("_earnedMoney").objectReferenceValue = earnedMoney;
             so.FindProperty("_status").objectReferenceValue = status;
+            SetArray(so.FindProperty("_tabs"), tabs);
+            SetArray(so.FindProperty("_pages"), new Object[] { weaponPage.gameObject, modulePage.gameObject, skillPage.gameObject });
             SetArray(so.FindProperty("_slots"), slots);
             so.FindProperty("_weaponIcon").objectReferenceValue = weaponIcon;
             so.FindProperty("_weaponTitle").objectReferenceValue = weaponTitle;
             so.FindProperty("_upgradePanel").objectReferenceValue = upgrades.gameObject;
-            SetArray(so.FindProperty("_upgrades"), new Object[] { damage, crit });
+            SetArray(so.FindProperty("_upgrades"), weaponRows);
+            SetArray(so.FindProperty("_moduleSlots"), moduleSlots);
+            so.FindProperty("_modulePanel").objectReferenceValue = modulePanel.gameObject;
+            so.FindProperty("_moduleIcon").objectReferenceValue = moduleIcon;
+            so.FindProperty("_moduleTitle").objectReferenceValue = moduleTitle;
+            so.FindProperty("_removeModuleButton").objectReferenceValue = remove;
+            SetArray(so.FindProperty("_moduleUpgrades"), moduleRows);
+            so.FindProperty("_moduleHint").objectReferenceValue = moduleHint;
+            SetArray(so.FindProperty("_skillRows"), skillRows);
+            so.FindProperty("_coinIcon").objectReferenceValue = Art("Coin Icon");
+            so.FindProperty("_xpIcon").objectReferenceValue = Art("XP Icon");
+            so.FindProperty("_damageIcon").objectReferenceValue = Art("Damage Icon");
+            so.FindProperty("_critIcon").objectReferenceValue = Art("Crit Icon");
+            so.FindProperty("_cooldownIcon").objectReferenceValue = Art("Cooldown Icon");
+            so.FindProperty("_healthIcon").objectReferenceValue = Art("Health Icon");
+            so.FindProperty("_shop").objectReferenceValue = shop;
+            so.FindProperty("_shopButton").objectReferenceValue = shopButton;
             so.FindProperty("_menuButton").objectReferenceValue = menu;
             so.FindProperty("_playButton").objectReferenceValue = play;
             so.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        private static void AddDivider(RectTransform parent)
+        {
+            RectTransform divider = Place("Divider", parent, new Vector2(0.5f, 0.5f), new Vector2(0f, 70f), new Vector2(580f, 2f));
+            AddImage(divider, null).color = new Color(Cyan.r, Cyan.g, Cyan.b, 0.35f);
+        }
+
+        private static UpgradeRowView[] AddUpgradeRows(RectTransform parent, int count, float top)
+        {
+            UpgradeRowView[] rows = new UpgradeRowView[count];
+
+            for (int i = 0; i < count; i++)
+                rows[i] = AddUpgradeRow(parent, "Row " + (i + 1), top - i * RowStep);
+
+            return rows;
         }
 
         internal static void BuildHud(LocationRunner runner)
@@ -238,8 +336,11 @@ namespace UiContent
             icon.preserveAspect = true;
             icon.raycastTarget = false;
 
-            TMP_Text caption = AddText(Place("Caption", frame, new Vector2(0.5f, 0f), new Vector2(0f, 18f), new Vector2(130f, 24f)),
+            TMP_Text caption = AddText(Place("Caption", frame, new Vector2(0.5f, 0f), new Vector2(0f, 18f), new Vector2(126f, 24f)),
                 "", 18, TextAlignmentOptions.Center, Muted);
+            caption.enableAutoSizing = true;
+            caption.fontSizeMin = 11f;
+            caption.fontSizeMax = 18f;
 
             GameObject lockGroup = Place("Lock", frame, new Vector2(0.5f, 0.5f), new Vector2(0f, 14f), new Vector2(48f, 48f)).gameObject;
             AddImage((RectTransform)lockGroup.transform, Art("Lock Icon")).raycastTarget = false;
@@ -265,28 +366,31 @@ namespace UiContent
             return view;
         }
 
-        private static UpgradeRowView AddUpgradeRow(RectTransform parent, UpgradeStat stat, string title, string hint,
-            string icon, float y)
+        private static UpgradeRowView AddUpgradeRow(RectTransform parent, string name, float y)
         {
-            RectTransform row = Place(title, parent, new Vector2(0.5f, 1f), new Vector2(0f, y - 70f), new Vector2(600f, 82f));
-            AddImage(Place("Icon", row, new Vector2(0f, 0.5f), new Vector2(36f, 0f), new Vector2(60f, 60f)), Art(icon)).preserveAspect = true;
-            AddText(Place("Title", row, new Vector2(0f, 0.5f), new Vector2(190f, 20f), new Vector2(240f, 30f)),
-                title, 24, TextAlignmentOptions.Left, Color.white);
-            AddText(Place("Hint", row, new Vector2(0f, 0.5f), new Vector2(190f, -4f), new Vector2(240f, 22f)),
-                hint, 16, TextAlignmentOptions.Left, Muted);
-            TMP_Text value = AddText(Place("Value", row, new Vector2(0f, 0.5f), new Vector2(190f, -28f), new Vector2(240f, 26f)),
-                "", 22, TextAlignmentOptions.Left, Cyan);
+            RectTransform row = Place(name, parent, new Vector2(0.5f, 0.5f), new Vector2(0f, y), new Vector2(600f, 70f));
+            Image icon = AddImage(Place("Icon", row, new Vector2(0f, 0.5f), new Vector2(36f, 0f), new Vector2(56f, 56f)), null);
+            icon.preserveAspect = true;
+            TMP_Text title = AddText(Place("Title", row, new Vector2(0f, 0.5f), new Vector2(190f, 18f), new Vector2(240f, 28f)),
+                "", 22, TextAlignmentOptions.Left, Color.white);
+            TMP_Text hint = AddText(Place("Hint", row, new Vector2(0f, 0.5f), new Vector2(190f, -3f), new Vector2(240f, 20f)),
+                "", 14, TextAlignmentOptions.Left, Muted);
+            TMP_Text value = AddText(Place("Value", row, new Vector2(0f, 0.5f), new Vector2(190f, -23f), new Vector2(240f, 24f)),
+                "", 20, TextAlignmentOptions.Left, Cyan);
 
             Image[] pips = new Image[PipCount];
 
             for (int i = 0; i < PipCount; i++)
             {
-                pips[i] = AddImage(Place("Pip " + (i + 1), row, new Vector2(0f, 0.5f), new Vector2(330f + i * 22f, 0f), new Vector2(18f, 28f)),
+                pips[i] = AddImage(Place("Pip " + (i + 1), row, new Vector2(0f, 0.5f), new Vector2(330f + i * 22f, 0f), new Vector2(18f, 26f)),
                     Art("Upgrade Pip"));
                 pips[i].color = PipOff;
             }
 
-            Button button = AddButton(row, "Buy Button", "", new Vector2(1f, 0.5f), new Vector2(-82f, 0f), new Vector2(156f, 62f), 26);
+            TMP_Text level = AddText(Place("Level", row, new Vector2(0f, 0.5f), new Vector2(370f, 0f), new Vector2(110f, 28f)),
+                "", 20, TextAlignmentOptions.Center, Cyan);
+
+            Button button = AddButton(row, "Buy Button", "", new Vector2(1f, 0.5f), new Vector2(-82f, 0f), new Vector2(156f, 58f), 24);
             RectTransform label = (RectTransform)button.transform.Find("Label");
             label.anchorMin = new Vector2(0f, 0f);
             label.anchorMax = new Vector2(1f, 1f);
@@ -296,17 +400,22 @@ namespace UiContent
             priceLabel.alignment = TextAlignmentOptions.Left;
             priceLabel.color = Gold;
             CompactNumber price = AddNumber(priceLabel);
-            AddImage(Place("Coin", (RectTransform)button.transform, new Vector2(0f, 0.5f), new Vector2(34f, 0f), new Vector2(28f, 28f)),
-                Art("Coin Icon")).raycastTarget = false;
+            Image currency = AddImage(Place("Currency", (RectTransform)button.transform, new Vector2(0f, 0.5f), new Vector2(34f, 0f),
+                new Vector2(28f, 28f)), Art("Coin Icon"));
+            currency.preserveAspect = true;
 
             UpgradeRowView view = row.gameObject.AddComponent<UpgradeRowView>();
             SerializedObject so = new SerializedObject(view);
-            so.FindProperty("_stat").enumValueIndex = (int)stat;
+            so.FindProperty("_icon").objectReferenceValue = icon;
+            so.FindProperty("_title").objectReferenceValue = title;
+            so.FindProperty("_hint").objectReferenceValue = hint;
             so.FindProperty("_value").objectReferenceValue = value;
             SetArray(so.FindProperty("_pips"), pips);
+            so.FindProperty("_level").objectReferenceValue = level;
             so.FindProperty("_button").objectReferenceValue = button;
             so.FindProperty("_price").objectReferenceValue = price;
             so.FindProperty("_priceLabel").objectReferenceValue = priceLabel;
+            so.FindProperty("_currency").objectReferenceValue = currency;
             so.FindProperty("_pipOn").colorValue = Cyan;
             so.FindProperty("_pipOff").colorValue = PipOff;
             so.ApplyModifiedPropertiesWithoutUndo();
@@ -450,6 +559,13 @@ namespace UiContent
         private static T Load<T>(string path) where T : Object
         {
             return AssetDatabase.LoadAssetAtPath<T>(path);
+        }
+
+        private static T GetOrAdd<T>(GameObject owner) where T : Component
+        {
+            T component = owner.GetComponent<T>();
+
+            return component != null ? component : owner.AddComponent<T>();
         }
 
         private static void Set(Object target, string field, Object value)

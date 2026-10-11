@@ -5,30 +5,35 @@ using UnityEngine;
 [Serializable]
 public class ShipProgress
 {
-    [SerializeField] private int _shipLevel = 1;
-    [SerializeField] private int _shipXp;
     [SerializeField] private string _weaponId = string.Empty;
+    [SerializeField] private List<string> _ownedWeapons = new List<string>();
     [SerializeField] private List<WeaponLoadout> _loadouts = new List<WeaponLoadout>();
-
-    public int ShipLevel => _shipLevel;
-
-    public int ShipXp => _shipXp;
+    [SerializeField] private List<string> _ownedModules = new List<string>();
+    [SerializeField] private List<string> _installedModules = new List<string> { string.Empty };
+    [SerializeField] private LevelBook _moduleLevels = new LevelBook();
 
     public string WeaponId => _weaponId;
 
-    public void AddXp(int amount)
+    public IReadOnlyList<string> InstalledModules => _installedModules;
+
+    public int ModuleSlots => _installedModules.Count;
+
+    public LevelBook ModuleLevels => _moduleLevels;
+
+    public bool OwnsWeapon(string weaponId)
     {
-        _shipXp += amount;
+        return _ownedWeapons.Contains(weaponId);
     }
 
-    public void SpendXp(int amount)
+    public void AddWeapon(string weaponId)
     {
-        _shipXp -= amount;
-        _shipLevel++;
+        if (OwnsWeapon(weaponId) == false)
+            _ownedWeapons.Add(weaponId);
     }
 
     public void SelectWeapon(string weaponId)
     {
+        AddWeapon(weaponId);
         _weaponId = weaponId;
     }
 
@@ -45,5 +50,31 @@ public class ShipProgress
         _loadouts.Add(created);
 
         return created;
+    }
+
+    public bool OwnsModule(string moduleId)
+    {
+        return _ownedModules.Contains(moduleId);
+    }
+
+    public void AddModule(string moduleId)
+    {
+        if (OwnsModule(moduleId) == false)
+            _ownedModules.Add(moduleId);
+    }
+
+    public void AddModuleSlot()
+    {
+        _installedModules.Add(string.Empty);
+    }
+
+    public int FindModuleSlot(string moduleId)
+    {
+        return _installedModules.IndexOf(moduleId);
+    }
+
+    public void SetModule(int index, string moduleId)
+    {
+        _installedModules[index] = moduleId;
     }
 }

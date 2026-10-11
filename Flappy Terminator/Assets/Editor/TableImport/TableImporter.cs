@@ -28,13 +28,16 @@ namespace TableImport
                 TableLog log = new TableLog();
                 SystemTable systems = SystemTableImporter.Import(log);
                 LocationTable locations = LocationTableImporter.Import(systems, log);
-                ProgressionTableImporter.Import(log);
                 WeaponTable weapons = WeaponTableImporter.Import(log);
                 EnemyTable enemies = EnemyTableImporter.Import(locations, weapons, log);
                 BossTable bosses = BossTableImporter.Import(enemies, weapons, log);
                 WaveTableImporter.Import(locations, enemies, bosses, log);
                 SlotTableImporter.Import(weapons, log);
-                UpgradeTableImporter.Import(log);
+                UpgradeTableImporter.Import(weapons, log);
+                ModuleTable modules = ModuleTableImporter.Import(log);
+                ModuleTableImporter.ImportUpgrades(modules, log);
+                SlotTableImporter.ImportModuleSlots(log);
+                SkillTableImporter.Import(log);
 
                 if (log.HasProblems)
                 {

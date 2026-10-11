@@ -3,24 +3,19 @@ using UnityEngine;
 
 public class Economy : MonoBehaviour
 {
-    [SerializeField] private ProgressionTable _progression;
     [SerializeField] private LocationRunner _runner;
 
     private SessionProgress _data = new SessionProgress();
 
-    public int PilotLevel => _data.Profile.PilotLevel;
-
-    public int PilotXp => _data.Profile.PilotXp;
+    public int Xp => _data.Profile.Xp;
 
     public int TotalXp => _data.Profile.TotalXp;
 
     public int Money => _data.Profile.Money;
 
-    public int ShipLevel => _data.Ship.ShipLevel;
-
-    public int ShipXp => _data.Ship.ShipXp;
-
     public ShipProgress Ship => _data.Ship;
+
+    public LevelBook Skills => _data.Profile.Skills;
 
     public int CompletedLocations => _data.Galaxy.CompletedLocations.Count;
 
@@ -59,6 +54,16 @@ public class Economy : MonoBehaviour
         return true;
     }
 
+    public bool TrySpendXp(int price)
+    {
+        if (_data.Profile.TrySpendXp(price) == false)
+            return false;
+
+        Changed?.Invoke();
+
+        return true;
+    }
+
     public void StartNewSession()
     {
         _data = new SessionProgress();
@@ -73,49 +78,11 @@ public class Economy : MonoBehaviour
 
         _data.Profile.AddXp(reward.Xp);
         _data.Profile.AddMoney(reward.Money);
-        _data.Ship.AddXp(reward.Xp);
-
-        RaisePilotLevel();
-        RaiseShipLevel();
         Changed?.Invoke();
     }
 
     private void Complete(string locationId, int stars)
     {
         _data.Galaxy.Complete(locationId, stars);
-    }
-
-    private void RaisePilotLevel()
-    {
-        ProgressionRow row = _progression.GetRowByLevel(_data.Profile.PilotLevel);
-
-        while (row.PilotXpRequired > 0 && _data.Profile.PilotXp >= row.PilotXpRequired)
-        {
-            _data.Profile.SpendXp(row.PilotXpRequired);
-
-            ProgressionRow next = _progression.GetRowByLevel(_data.Profile.PilotLevel);
-
-            if (next == row)
-                return;
-
-            row = next;
-        }
-    }
-
-    private void RaiseShipLevel()
-    {
-        ProgressionRow row = _progression.GetRowByLevel(_data.Ship.ShipLevel);
-
-        while (row.ShipXpRequired > 0 && _data.Ship.ShipXp >= row.ShipXpRequired)
-        {
-            _data.Ship.SpendXp(row.ShipXpRequired);
-
-            ProgressionRow next = _progression.GetRowByLevel(_data.Ship.ShipLevel);
-
-            if (next == row)
-                return;
-
-            row = next;
-        }
     }
 }

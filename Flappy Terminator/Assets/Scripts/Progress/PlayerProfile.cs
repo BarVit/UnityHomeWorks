@@ -4,22 +4,22 @@ using UnityEngine;
 [Serializable]
 public class PlayerProfile
 {
-    [SerializeField] private int _pilotLevel = 1;
-    [SerializeField] private int _pilotXp;
+    [SerializeField] private int _xp;
     [SerializeField] private int _totalXp;
     [SerializeField] private int _money;
+    [SerializeField] private LevelBook _skills = new LevelBook();
 
-    public int PilotLevel => _pilotLevel;
-
-    public int PilotXp => _pilotXp;
+    public int Xp => _xp;
 
     public int TotalXp => _totalXp;
 
     public int Money => _money;
 
+    public LevelBook Skills => _skills;
+
     public void AddXp(int amount)
     {
-        _pilotXp += amount;
+        _xp += amount;
         _totalXp += amount;
     }
 
@@ -38,9 +38,13 @@ public class PlayerProfile
         return true;
     }
 
-    public void SpendXp(int amount)
+    public bool TrySpendXp(int amount)
     {
-        _pilotXp -= amount;
-        _pilotLevel++;
+        if (amount < 0 || amount > _xp)
+            return false;
+
+        _xp -= amount;
+
+        return true;
     }
 }

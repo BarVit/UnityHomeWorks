@@ -15,6 +15,45 @@ namespace TableImport
             "slot", "price", "weapon"
         };
 
+        public const string ModuleSourcePath = "Assets/Data/Tables/module_slots.tsv";
+        public const string ModuleAssetPath = "Assets/Data/Generated/ModuleSlots.asset";
+
+        private static readonly string[] ModuleColumns =
+        {
+            "slot", "price"
+        };
+
+        public static SlotTable ImportModuleSlots(TableLog log)
+        {
+            TsvDocument document = TsvReader.Read(ModuleSourcePath, log);
+
+            if (document == null || document.HasColumns(ModuleColumns, log) == false)
+                return null;
+
+            List<SlotRow> rows = new List<SlotRow>();
+
+            foreach (TsvRow raw in document.Rows)
+            {
+                RowReader reader = new RowReader(document, raw, log);
+                int slot = reader.ReadInt("slot", FirstSlot, 3);
+                int price = reader.ReadInt("price", 0, 10000000);
+
+                if (slot != FirstSlot + rows.Count)
+                    reader.Fail("slot: ждали " + (FirstSlot + rows.Count) + ", слоты идут подряд с 1");
+
+                if (slot == FirstSlot && price != 0)
+                    reader.Fail("слот 1 открыт с начала: цена 0");
+
+                rows.Add(new SlotRow(slot, price, string.Empty));
+            }
+
+            SlotTable table = GeneratedAsset.LoadOrCreate<SlotTable>(ModuleAssetPath);
+            table.Fill(rows.ToArray());
+            EditorUtility.SetDirty(table);
+
+            return table;
+        }
+
         public static SlotTable Import(WeaponTable weapons, TableLog log)
         {
             TsvDocument document = TsvReader.Read(SourcePath, log);

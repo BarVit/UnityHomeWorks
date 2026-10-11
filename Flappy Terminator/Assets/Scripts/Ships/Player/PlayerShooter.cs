@@ -86,7 +86,7 @@ public class PlayerShooter : MonoBehaviour
     }
 
 
-    public void Equip(string weaponId, WeaponBoost[] boosts)
+    public void Equip(string weaponId, WeaponBoost[] boosts, float rateScale = 1f)
     {
         WeaponRow row = _weapons.GetRow(weaponId);
 
@@ -108,7 +108,7 @@ public class PlayerShooter : MonoBehaviour
             new ShotAudio(_shotAudioSource, camera), new ShotAudio(_hitAudioSource, camera),
             _targetLayers, LayerMask.NameToLayer(AmmoLayerName), camera, _worldLayers, new ShotLoop(_loopAudioSource),
             new ShotLoop(_hitLoopAudioSource), boosts: boosts, critMark: _critMark,
-            tally: _tally);
+            tally: _tally, rateScale: rateScale);
 
         _equippedId = weaponId;
         _delivery = WeaponFactory.Create(row, context);

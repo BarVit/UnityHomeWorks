@@ -9,6 +9,9 @@ public class Game : MonoBehaviour
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private AsteroidSpawner _asteroidSpawner;
     [SerializeField] private Hangar _hangar;
+    [SerializeField] private ModuleRack _moduleRack;
+    [SerializeField] private SkillBook _skills;
+    [SerializeField] private BattleModules _battleModules;
     [SerializeField] private BattleStats _stats;
     [SerializeField] private WarpJump _warpJump;
     [SerializeField] private CutsceneSkip _cutsceneSkip;
@@ -127,7 +130,7 @@ public class Game : MonoBehaviour
     {
         _runner.StartGame();
         _hangar.StartNewSession();
-        _hangar.Equip(_playerShip.Shooter);
+        EquipShip();
 
         StartLevel();
     }
@@ -143,7 +146,7 @@ public class Game : MonoBehaviour
     private void PlayLocation(string locationId)
     {
         _runner.PlayLocation(locationId);
-        _hangar.Equip(_playerShip.Shooter);
+        EquipShip();
 
         StartLevel();
     }
@@ -157,7 +160,7 @@ public class Game : MonoBehaviour
         else
             _runner.StartNextLocation();
 
-        _hangar.Equip(_playerShip.Shooter);
+        EquipShip();
 
         StartLevel();
     }
@@ -222,6 +225,7 @@ public class Game : MonoBehaviour
         _isLevelOver = false;
         _isRunning = true;
         _screens.HideOverlays();
+        _battleModules.ResetForLevel();
         _playerShip.Restart();
         TrackLevel();
         _enemySpawner.StartLevel(_runner.LocationId, _runner.Level, _runner.WaveSize);
@@ -316,11 +320,19 @@ public class Game : MonoBehaviour
         _asteroidSpawner.Clear();
         _playerShip.DisableControl();
         _playerShip.Shooter.ReleaseAll();
+        _battleModules.ResetForLevel();
     }
 
     private void ResumeSession()
     {
         _screens.ShowDock(_dockEarned, true, _dockReason);
+    }
+
+    private void EquipShip()
+    {
+        _hangar.Equip(_playerShip.Shooter);
+        _moduleRack.Equip(_battleModules);
+        _skills.Equip(_playerShip);
     }
 
     private void StopGameOverCountdown()

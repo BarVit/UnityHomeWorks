@@ -11,12 +11,15 @@ public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
     [SerializeField] private SpriteRenderer _shipSprite;
     [SerializeField] private ShipExplosion _explosion;
     [SerializeField] private float _deathCutsceneDuration = 7.5f;
+    [SerializeField] private EnergyShield _shield;
 
     private PlayerInputRouter _inputRouter;
     private PlayerShooter _playerShooter;
     private Health _health;
     private PlayerMover _playerMover;
     private Vector3 _startScale;
+    private int _baseMaxHealth;
+    private int _healthBonus;
     private bool _isDead;
 
     private void Awake()
@@ -26,6 +29,7 @@ public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
         _playerMover = GetComponent<PlayerMover>();
         _inputRouter = GetComponent<PlayerInputRouter>();
         _startScale = transform.localScale;
+        _baseMaxHealth = _health.MaxValue;
     }
 
     private void OnEnable()
@@ -98,8 +102,20 @@ public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
         ApplyDamage(damage, false);
     }
 
+    public int BaseMaxHealth => _baseMaxHealth;
+
+    public void SetHealthBonus(int bonus)
+    {
+        _healthBonus = Mathf.Max(0, bonus);
+    }
+
     private void ApplyDamage(int damage, bool isEnvironment)
     {
+        damage = _shield.Absorb(damage);
+
+        if (damage <= 0)
+            return;
+
         int before = _health.Value;
 
         _health.TakeDamage(damage);
@@ -161,7 +177,7 @@ public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
         _playerShooter.ReleaseAll();
         _explosion.ReleaseAll();
         _playerCollisionHandler.ReleaseAll();
-        _health.Init();
+        _health.Init(_baseMaxHealth + _healthBonus);
         EnableControl();
         ReturnToStart();
     }

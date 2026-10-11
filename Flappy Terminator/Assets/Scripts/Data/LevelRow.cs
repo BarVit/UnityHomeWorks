@@ -2,22 +2,26 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class UpgradeRow
+public class LevelRow<TStat> where TStat : struct, Enum
 {
-    [SerializeField] private UpgradeStat _stat;
+    [SerializeField] private string _owner;
+    [SerializeField] private TStat _stat;
     [SerializeField] private int _level;
     [SerializeField] private float _bonus;
     [SerializeField] private int _price;
 
-    public UpgradeRow(UpgradeStat stat, int level, float bonus, int price)
+    public LevelRow(string owner, TStat stat, int level, float bonus, int price)
     {
+        _owner = owner;
         _stat = stat;
         _level = level;
         _bonus = bonus;
         _price = price;
     }
 
-    public UpgradeStat Stat => _stat;
+    public string Owner => _owner;
+
+    public TStat Stat => _stat;
 
     public int Level => _level;
 

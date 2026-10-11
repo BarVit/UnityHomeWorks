@@ -134,6 +134,9 @@ public class ScreenNavigator : MonoBehaviour
 
     public bool TryGoBack()
     {
+        if (_dockScreen.TryCloseShop())
+            return true;
+
         if (IsSettingsOpen == false)
             return false;
 

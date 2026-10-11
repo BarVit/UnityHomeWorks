@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Hangar : MonoBehaviour
@@ -48,6 +49,70 @@ public class Hangar : MonoBehaviour
         Begin(weaponId, new Reward(_testXp, _testMoney));
     }
 
+    public List<WeaponRow> GetShopWeapons()
+    {
+        List<WeaponRow> weapons = new List<WeaponRow>();
+
+        foreach (WeaponRow row in _weapons.Rows)
+        {
+            if (row.Owner == WeaponOwner.Player)
+                weapons.Add(row);
+        }
+
+        weapons.Sort((left, right) => left.Price.CompareTo(right.Price));
+
+        return weapons;
+    }
+
+    public bool OwnsWeapon(string weaponId)
+    {
+        return Ship.OwnsWeapon(weaponId);
+    }
+
+    public bool CanBuyWeapon(string weaponId)
+    {
+        WeaponRow row = _weapons.GetRow(weaponId);
+
+        return row != null && OwnsWeapon(weaponId) == false && _economy.Money >= row.Price;
+    }
+
+    public bool TryBuyWeapon(string weaponId)
+    {
+        if (CanBuyWeapon(weaponId) == false || _economy.TrySpend(_weapons.GetRow(weaponId).Price) == false)
+            return false;
+
+        Ship.SelectWeapon(weaponId);
+        Commit();
+
+        return true;
+    }
+
+    public bool TrySelectWeapon(string weaponId)
+    {
+        if (OwnsWeapon(weaponId) == false)
+            return false;
+
+        Ship.SelectWeapon(weaponId);
+        Commit();
+
+        return true;
+    }
+
+    public List<UpgradeStat> GetUpgradeStats()
+    {
+        return _upgrades.GetUpgradableStats(WeaponId);
+    }
+
+    public WeaponRow GetWeapon()
+    {
+        return _weapons.GetRow(WeaponId);
+    }
+
+    public bool IsWeaponWide(UpgradeStat stat)
+    {
+        return stat == UpgradeStat.Cooldown;
+    }
+
     public bool IsUnlocked(int slot)
     {
         return slot <= Loadout.BarrelCount;
@@ -84,22 +149,27 @@ public class Hangar : MonoBehaviour
 
     public int GetLevel(int slot, UpgradeStat stat)
     {
-        return GetBarrel(slot).GetLevel(stat);
+        return IsWeaponWide(stat) ? Loadout.WeaponLevels.Get(stat.ToString()) : GetBarrel(slot).GetLevel(stat);
     }
 
     public int GetMaxLevel(UpgradeStat stat)
     {
-        return _upgrades.GetMaxLevel(stat);
+        return _upgrades.GetMaxLevel(WeaponId, stat);
+    }
+
+    public float GetStep(UpgradeStat stat)
+    {
+        return _upgrades.GetStep(WeaponId, stat);
     }
 
     public float GetValue(int slot, UpgradeStat stat, int levelShift = 0)
     {
-        return _upgrades.GetValue(stat, GetLevel(slot, stat) + levelShift);
+        return _upgrades.GetValue(WeaponId, stat, GetLevel(slot, stat) + levelShift);
     }
 
     public int GetUpgradePrice(int slot, UpgradeStat stat)
     {
-        UpgradeRow next = _upgrades.GetRow(stat, GetLevel(slot, stat) + 1);
+        LevelRow<UpgradeStat> next = _upgrades.GetRow(WeaponId, stat, GetLevel(slot, stat) + 1);
 
         return next == null ? NoPrice : next.Price;
     }
@@ -116,7 +186,11 @@ public class Hangar : MonoBehaviour
         if (CanUpgrade(slot, stat) == false || _economy.TrySpend(GetUpgradePrice(slot, stat)) == false)
             return false;
 
-        GetBarrel(slot).Raise(stat);
+        if (IsWeaponWide(stat))
+            Loadout.WeaponLevels.Raise(stat.ToString());
+        else
+            GetBarrel(slot).Raise(stat);
+
         Commit();
 
         return true;
@@ -129,7 +203,17 @@ public class Hangar : MonoBehaviour
         for (int i = 0; i < boosts.Length; i++)
             boosts[i] = GetBoost(i + FirstSlot);
 
-        shooter.Equip(WeaponId, boosts);
+        shooter.Equip(WeaponId, boosts, GetRateScale());
+    }
+
+    private float GetRateScale()
+    {
+        WeaponRow row = _weapons.GetRow(WeaponId);
+
+        if (row == null || row.Rate <= 0f)
+            return 1f;
+
+        return Mathf.Max(0f, row.Rate + GetValue(FirstSlot, UpgradeStat.Cooldown)) / row.Rate;
     }
 
     private WeaponBoost GetBoost(int slot)

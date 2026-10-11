@@ -43,6 +43,17 @@ public class SlotView : MonoBehaviour
         _group.alpha = 1f;
     }
 
+    public void ShowEmpty(string caption, bool isSelected)
+    {
+        _lock.SetActive(false);
+        _priceGroup.SetActive(false);
+        _icon.gameObject.SetActive(false);
+        _caption.text = caption;
+        _selection.SetActive(isSelected);
+        _button.interactable = true;
+        _group.alpha = 1f;
+    }
+
     public void ShowLocked(int price, bool isNext, bool canAfford)
     {
         _lock.SetActive(true);

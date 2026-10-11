@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using UnityEditor;
-
 namespace TableImport
 {
     public static class UpgradeTableImporter
@@ -8,48 +5,23 @@ namespace TableImport
         public const string SourcePath = "Assets/Data/Tables/weapon_upgrades.tsv";
         public const string AssetPath = "Assets/Data/Generated/WeaponUpgrades.asset";
 
-        private static readonly string[] Columns =
+        public static UpgradeTable Import(WeaponTable weapons, TableLog log)
         {
-            "stat", "level", "bonus", "price"
-        };
+            return LevelTableImporter.Import<UpgradeTable, UpgradeStat>(SourcePath, AssetPath, "weapon", "stat",
+                weapon => CheckWeapon(weapons, weapon), log);
+        }
 
-        public static UpgradeTable Import(TableLog log)
+        private static string CheckWeapon(WeaponTable weapons, string weapon)
         {
-            TsvDocument document = TsvReader.Read(SourcePath, log);
-
-            if (document == null)
+            if (weapons == null || weapon.Length == 0)
                 return null;
 
-            if (document.HasColumns(Columns, log) == false)
-                return null;
+            WeaponRow row = weapons.GetRow(weapon);
 
-            List<UpgradeRow> rows = new List<UpgradeRow>();
-            Dictionary<UpgradeStat, int> lastLevels = new Dictionary<UpgradeStat, int>();
+            if (row == null)
+                return "нет оружия с id " + weapon + " в " + WeaponTableImporter.SourcePath;
 
-            foreach (TsvRow raw in document.Rows)
-            {
-                RowReader reader = new RowReader(document, raw, log);
-                UpgradeStat stat = reader.ReadEnum<UpgradeStat>("stat");
-                int level = reader.ReadInt("level", 0, 50);
-                int expected = lastLevels.TryGetValue(stat, out int last) ? last + 1 : 0;
-
-                if (level != expected)
-                    reader.Fail("level: у " + stat + " ждали уровень " + expected + ", уровни идут подряд с 0");
-
-                lastLevels[stat] = level;
-
-                rows.Add(new UpgradeRow(
-                    stat,
-                    level,
-                    reader.ReadFloat("bonus", 0f, 100000f),
-                    reader.ReadInt("price", 0, 10000000)));
-            }
-
-            UpgradeTable table = GeneratedAsset.LoadOrCreate<UpgradeTable>(AssetPath);
-            table.Fill(rows.ToArray());
-            EditorUtility.SetDirty(table);
-
-            return table;
+            return row.Owner == WeaponOwner.Player ? null : weapon + " не пушка игрока";
         }
     }
 }
