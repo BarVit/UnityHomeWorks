@@ -16,12 +16,12 @@ MonoBehaviour:
   - _owner: energy_shield
     _stat: 0
     _level: 0
-    _bonus: 20
+    _bonus: 10
     _price: 0
   - _owner: energy_shield
     _stat: 0
     _level: 1
-    _bonus: 10
+    _bonus: 5
     _price: 300
   - _owner: energy_shield
     _stat: 0
@@ -31,17 +31,17 @@ MonoBehaviour:
   - _owner: energy_shield
     _stat: 0
     _level: 3
-    _bonus: 10
+    _bonus: 15
     _price: 900
   - _owner: energy_shield
     _stat: 0
     _level: 4
-    _bonus: 10
+    _bonus: 20
     _price: 1200
   - _owner: energy_shield
     _stat: 0
     _level: 5
-    _bonus: 10
+    _bonus: 50
     _price: 1500
   - _owner: energy_shield
     _stat: 1

@@ -15,6 +15,7 @@ public class DockScreen : MonoBehaviour
     private const string Seconds = " S";
     private const string BarrelMark = "  #";
     private const string EmptyCaption = "EMPTY";
+    private const string MaxLevelHint = "MAX LEVEL";
     private const string EmptySlotHint = "EMPTY SLOT\nBUY A MODULE IN THE SHOP";
     private const string LockedSlotHint = "MODULE SLOT IS LOCKED\nUNLOCK IT TO INSTALL MODULES";
     private const string ClearedStatus = "LOCATION CLEARED";
@@ -358,9 +359,10 @@ public class DockScreen : MonoBehaviour
         int price = _modules.GetUpgradePrice(module.Id, stat);
         string now = FormatModule(stat, _modules.GetValue(module.Id, stat));
         string value = price < 0 ? now : now + Arrow + FormatModule(stat, _modules.GetValue(module.Id, stat, 1));
-        float step = _modules.GetStep(module.Id, stat);
+        float step = _modules.GetValue(module.Id, stat, 1) - _modules.GetValue(module.Id, stat);
         string title = stat == ModuleStat.Capacity ? "SHIELD CAPACITY" : "COOLDOWN";
-        string hint = (step > 0f ? "+" : "") + step + (stat == ModuleStat.Cooldown ? Seconds : "") + " PER LEVEL";
+        string hint = price < 0 ? MaxLevelHint
+            : (step > 0f ? "+" : "") + step + (stat == ModuleStat.Cooldown ? Seconds : "") + " NEXT LEVEL";
         Sprite icon = stat == ModuleStat.Capacity ? module.Icon : _cooldownIcon;
 
         return new UpgradeRowData(icon, title, hint, value, _modules.GetLevel(module.Id, stat),

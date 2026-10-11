@@ -143,11 +143,6 @@ public class ModuleRack : MonoBehaviour
         return _upgrades.GetMaxLevel(moduleId, stat);
     }
 
-    public float GetStep(string moduleId, ModuleStat stat)
-    {
-        return _upgrades.GetStep(moduleId, stat);
-    }
-
     public float GetValue(string moduleId, ModuleStat stat, int levelShift = 0)
     {
         return _upgrades.GetValue(moduleId, stat, GetLevel(moduleId, stat) + levelShift);

@@ -17,8 +17,8 @@ MonoBehaviour:
     _price: 1000
     _weapon: 
   - _slot: 2
-    _price: 2000
+    _price: 10000
     _weapon: 
   - _slot: 3
-    _price: 6000
+    _price: 100000
     _weapon: 
