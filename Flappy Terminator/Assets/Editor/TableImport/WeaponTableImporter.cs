@@ -13,13 +13,13 @@ namespace TableImport
         {
             "id", "title", "owner", "delivery", "damage", "rate", "magazine", "reload_time", "projectile_speed", "barrels_max",
             "fire_pattern", "side_angle", "heat_per_shot", "cooldown_rate", "unlock_heat", "tick_interval", "turn_rate", "aim_time",
-            "area", "price", "projectile", "beam",
+            "area", "price", "unlock_after", "projectile", "beam",
             "icon", "projectile_sprite", "projectile_animation", "shot_effect",
             "hit_target_effect", "hit_world_effect",
             "shot_sound", "hit_target_sound", "hit_world_sound", "overheat_sound"
         };
 
-        public static WeaponTable Import(TableLog log)
+        public static WeaponTable Import(LocationTable locations, TableLog log)
         {
             TsvDocument document = TsvReader.Read(SourcePath, log);
 
@@ -40,13 +40,15 @@ namespace TableImport
                 if (ids.Add(id) == false)
                     reader.Fail("повторяющийся id " + id);
 
+                WeaponOwner owner = reader.ReadEnum<WeaponOwner>("owner");
                 DeliveryKind delivery = reader.ReadEnum<DeliveryKind>("delivery");
+                string unlockAfter = reader.ReadOptionalText("unlock_after");
                 bool needsProjectile = delivery != DeliveryKind.Beam && delivery != DeliveryKind.ContinuousBeam;
 
                 rows.Add(new WeaponRow(
                     id,
                     reader.ReadText("title"),
-                    reader.ReadEnum<WeaponOwner>("owner"),
+                    owner,
                     delivery,
                     reader.ReadInt("damage", 1, 10000),
                     reader.ReadFloat("rate", 0.01f, 60f),
@@ -64,6 +66,7 @@ namespace TableImport
                     reader.ReadFloat("aim_time", 0f, 10f),
                     reader.ReadFloat("area", 0f, 20f),
                     reader.ReadInt("price", 0, 1000000),
+                    unlockAfter,
                     reader.ReadPrefab<Ammo>("projectile", needsProjectile),
                     reader.ReadPrefab<BeamFlash>("beam", needsProjectile == false),
                     new WeaponAssets(
@@ -77,6 +80,8 @@ namespace TableImport
                         reader.ReadAsset<AudioClip>("hit_target_sound", false),
                         reader.ReadAsset<AudioClip>("hit_world_sound", false),
                         reader.ReadAsset<AudioClip>("overheat_sound", false))));
+
+                CheckUnlock(locations, owner, unlockAfter, reader);
             }
 
             WeaponTable table = GeneratedAsset.LoadOrCreate<WeaponTable>(AssetPath);
@@ -84,6 +89,17 @@ namespace TableImport
             EditorUtility.SetDirty(table);
 
             return table;
+        }
+
+        private static void CheckUnlock(LocationTable locations, WeaponOwner owner, string unlockAfter, RowReader reader)
+        {
+            if (unlockAfter.Length == 0)
+                return;
+
+            if (owner != WeaponOwner.Player)
+                reader.Fail("unlock_after: открывать покупку можно только пушкам игрока");
+            else if (locations != null && locations.GetRow(unlockAfter) == null)
+                reader.Fail("unlock_after: нет локации " + unlockAfter + " в " + LocationTableImporter.SourcePath);
         }
     }
 }

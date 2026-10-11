@@ -10,6 +10,8 @@ public class ShopWindow : MonoBehaviour
     private const string EquipText = "EQUIP";
     private const string EquippedText = "EQUIPPED";
     private const string NoSlotText = "NO FREE SLOT";
+    private const string LockedText = "LOCKED";
+    private const string ClearText = "CLEAR ";
 
     [SerializeField] private GameObject _panel;
     [SerializeField] private Hangar _hangar;
@@ -96,7 +98,9 @@ public class ShopWindow : MonoBehaviour
             string title = UiText.Title(row.Id);
             string details = "DAMAGE " + row.Damage;
 
-            if (_hangar.OwnsWeapon(row.Id) == false)
+            if (_hangar.IsWeaponOpen(row.Id) == false)
+                _cards[i].ShowAction(row.Id, icon, title, details, GetLockText(row.Id), false, false);
+            else if (_hangar.OwnsWeapon(row.Id) == false)
                 _cards[i].ShowPrice(row.Id, icon, title, details, row.Price, _hangar.CanBuyWeapon(row.Id));
             else if (row.Id == _hangar.WeaponId)
                 _cards[i].ShowAction(row.Id, icon, title, details, EquippedText, false, true);
@@ -131,6 +135,13 @@ public class ShopWindow : MonoBehaviour
             else
                 _cards[i].ShowAction(row.Id, row.Icon, title, details, NoSlotText, false, false);
         }
+    }
+
+    private string GetLockText(string weaponId)
+    {
+        string label = _hangar.GetUnlockLabel(weaponId);
+
+        return label == null ? LockedText : ClearText + label;
     }
 
     private string GetModuleDetails(ModuleRow row)

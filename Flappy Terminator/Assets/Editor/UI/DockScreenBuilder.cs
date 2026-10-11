@@ -19,6 +19,8 @@ namespace UiContent
         private const string ModuleSlotsAsset = "Assets/Data/Generated/ModuleSlots.asset";
         private const string SkillsAsset = "Assets/Data/Generated/Skills.asset";
         private const string WeaponsAsset = "Assets/Data/Generated/Weapons.asset";
+        private const string LocationsAsset = "Assets/Data/Generated/Locations.asset";
+        private const string SystemsAsset = "Assets/Data/Generated/Systems.asset";
 
         private const string TooltipName = "Number Tooltip";
         private const int PanelBorder = 30;
@@ -68,6 +70,8 @@ namespace UiContent
             Set(hangar, "_slots", AssetDatabase.LoadAssetAtPath<SlotTable>(SlotsAsset));
             Set(hangar, "_upgrades", AssetDatabase.LoadAssetAtPath<UpgradeTable>(UpgradesAsset));
             Set(hangar, "_weapons", AssetDatabase.LoadAssetAtPath<WeaponTable>(WeaponsAsset));
+            Set(hangar, "_locations", AssetDatabase.LoadAssetAtPath<LocationTable>(LocationsAsset));
+            Set(hangar, "_systems", AssetDatabase.LoadAssetAtPath<SystemTable>(SystemsAsset));
             Set(game, "_hangar", hangar);
 
             ModuleRack modules = GetOrAdd<ModuleRack>(economy.gameObject);
