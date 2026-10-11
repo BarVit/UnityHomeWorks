@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SlotTable
   _rows:
   - _slot: 1
-    _price: 0
+    _price: 1000
     _weapon: 
   - _slot: 2
     _price: 2000

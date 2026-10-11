@@ -41,9 +41,6 @@ namespace TableImport
                 if (slot != FirstSlot + rows.Count)
                     reader.Fail("slot: ждали " + (FirstSlot + rows.Count) + ", слоты идут подряд с 1");
 
-                if (slot == FirstSlot && price != 0)
-                    reader.Fail("слот 1 открыт с начала: цена 0");
-
                 rows.Add(new SlotRow(slot, price, string.Empty));
             }
 

@@ -9,7 +9,7 @@ public class ShipProgress
     [SerializeField] private List<string> _ownedWeapons = new List<string>();
     [SerializeField] private List<WeaponLoadout> _loadouts = new List<WeaponLoadout>();
     [SerializeField] private List<string> _ownedModules = new List<string>();
-    [SerializeField] private List<string> _installedModules = new List<string> { string.Empty };
+    [SerializeField] private List<string> _installedModules = new List<string>();
     [SerializeField] private LevelBook _moduleLevels = new LevelBook();
 
     public string WeaponId => _weaponId;

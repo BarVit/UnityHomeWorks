@@ -15,6 +15,8 @@ public class DockScreen : MonoBehaviour
     private const string Seconds = " S";
     private const string BarrelMark = "  #";
     private const string EmptyCaption = "EMPTY";
+    private const string EmptySlotHint = "EMPTY SLOT\nBUY A MODULE IN THE SHOP";
+    private const string LockedSlotHint = "MODULE SLOT IS LOCKED\nUNLOCK IT TO INSTALL MODULES";
     private const string ClearedStatus = "LOCATION CLEARED";
     private const string DestroyedStatus = "SHIP DESTROYED";
     private const string TestStatus = "TEST HANGAR";
@@ -308,6 +310,7 @@ public class DockScreen : MonoBehaviour
 
         _modulePanel.SetActive(module != null);
         _moduleHint.gameObject.SetActive(module == null);
+        _moduleHint.text = _modules.IsUnlocked(_selectedModuleSlot) ? EmptySlotHint : LockedSlotHint;
 
         if (module == null)
             return;
