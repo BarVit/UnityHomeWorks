@@ -11,6 +11,7 @@ public class Game : MonoBehaviour
     [SerializeField] private Hangar _hangar;
     [SerializeField] private BattleStats _stats;
     [SerializeField] private WarpJump _warpJump;
+    [SerializeField] private CutsceneSkip _cutsceneSkip;
     [SerializeField] private ScreenNavigator _screens;
     [SerializeField] private PauseController _pause;
     [SerializeField] private LocationRunner _runner;
@@ -18,6 +19,7 @@ public class Game : MonoBehaviour
     private Coroutine _gameOverCountdown;
     private bool _isLevelOver;
     private bool _isRunning;
+    private bool _isDeathSkipped;
     private DockReason _dockReason;
     private Reward _dockEarned;
 
@@ -72,11 +74,27 @@ public class Game : MonoBehaviour
         if (_pause.IsPaused)
             return;
 
+        if (_gameOverCountdown != null)
+        {
+            SkipDeath();
+
+            return;
+        }
+
         if (_warpJump.CanSkip == false)
             return;
 
         _input.ConsumeFire();
         _warpJump.Skip();
+    }
+
+    private void SkipDeath()
+    {
+        if (_cutsceneSkip.CanSkip == false)
+            return;
+
+        _input.ConsumeFire();
+        _isDeathSkipped = true;
     }
 
     private void TogglePause()
@@ -256,8 +274,15 @@ public class Game : MonoBehaviour
 
     private IEnumerator ShowDeathScreen()
     {
-        yield return new WaitForSeconds(_playerShip.DeathDuration);
+        float end = Time.time + _playerShip.DeathDuration;
 
+        _isDeathSkipped = false;
+        _cutsceneSkip.Begin();
+
+        while (Time.time < end && _isDeathSkipped == false)
+            yield return null;
+
+        _cutsceneSkip.End();
         _gameOverCountdown = null;
         _isRunning = false;
 
@@ -305,5 +330,6 @@ public class Game : MonoBehaviour
 
         StopCoroutine(_gameOverCountdown);
         _gameOverCountdown = null;
+        _cutsceneSkip.End();
     }
 }

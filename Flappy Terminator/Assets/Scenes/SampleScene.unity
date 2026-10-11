@@ -2108,6 +2108,7 @@ GameObject:
   - component: {fileID: 940566755}
   - component: {fileID: 940566756}
   - component: {fileID: 940566757}
+  - component: {fileID: 940566758}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -21222,6 +21223,7 @@ MonoBehaviour:
   _hangar: {fileID: 940566755}
   _stats: {fileID: 940566756}
   _warpJump: {fileID: 940566751}
+  _cutsceneSkip: {fileID: 940566758}
   _screens: {fileID: 771200001}
   _pause: {fileID: 771200002}
   _runner: {fileID: 940566753}
@@ -23979,7 +23981,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerShip: {fileID: 92249140}
   _warpEffect: {fileID: 262472788}
-  _skipHint: {fileID: 771100001}
+  _skip: {fileID: 940566758}
   _shockWave: {fileID: 518721903}
   _flash: {fileID: 333709892}
   _engineOffset: {x: -0.6, y: 0}
@@ -23992,7 +23994,6 @@ MonoBehaviour:
   _dashDistance: 4
   _sound: {fileID: 1816600172}
   _soundFadeDuration: 0.5
-  _skipDelay: 0.5
 --- !u!114 &940566752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24094,6 +24095,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CheatCodeReader
   _code: 1d0000001e000000
   _maxInterval: 0.2
+--- !u!114 &940566758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165193575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3399198eb37d74259a97660424dd2271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CutsceneSkip
+  _hint: {fileID: 771100001}
+  _delay: 1
 --- !u!222 &943413463
 CanvasRenderer:
   m_ObjectHideFlags: 0

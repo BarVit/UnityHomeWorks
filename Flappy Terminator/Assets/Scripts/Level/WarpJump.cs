@@ -7,7 +7,7 @@ public class WarpJump : MonoBehaviour
 {
     [SerializeField] private PlayerShip _playerShip;
     [SerializeField] private ParticleSystem _warpEffect;
-    [SerializeField] private GameObject _skipHint;
+    [SerializeField] private CutsceneSkip _skip;
     [SerializeField] private ExpandingFade _shockWave;
     [SerializeField] private ExpandingFade _flash;
     [SerializeField] private Vector2 _engineOffset = new(-0.6f, 0f);
@@ -20,13 +20,10 @@ public class WarpJump : MonoBehaviour
     [SerializeField] private float _dashDistance = 16f;
     [SerializeField] private AudioSource _sound;
     [SerializeField] private float _soundFadeDuration = 0.5f;
-    [SerializeField] private float _skipDelay = 0.5f;
 
     private Coroutine _jumping;
     private Coroutine _fading;
     private float _soundVolume;
-    private int _startFrame;
-    private float _startTime;
 
     private float EffectDuration
     {
@@ -45,7 +42,7 @@ public class WarpJump : MonoBehaviour
 
     public bool IsPlaying => _jumping != null;
 
-    public bool CanSkip => IsPlaying && Time.frameCount > _startFrame && Time.time >= _startTime + _skipDelay;
+    public bool CanSkip => IsPlaying && _skip.CanSkip;
 
     public event Action Finished;
 
@@ -60,8 +57,7 @@ public class WarpJump : MonoBehaviour
         if (_jumping != null)
             return;
 
-        _startFrame = Time.frameCount;
-        _startTime = Time.time;
+        _skip.Begin();
         StartSound();
         _jumping = StartCoroutine(Jump());
     }
@@ -86,7 +82,7 @@ public class WarpJump : MonoBehaviour
         StopWarpEffect();
         _flash.Stop();
         _shockWave.Stop();
-        _skipHint.SetActive(false);
+        _skip.End();
         FadeSound();
     }
 
@@ -95,7 +91,6 @@ public class WarpJump : MonoBehaviour
         Transform ship = _playerShip.transform;
 
         _playerShip.DisableControl();
-        _skipHint.SetActive(true);
 
         yield return Align(ship);
 
@@ -117,7 +112,7 @@ public class WarpJump : MonoBehaviour
         yield return new WaitForSeconds(TailDuration);
 
         StopWarpEffect();
-        _skipHint.SetActive(false);
+        _skip.End();
         FadeSound();
 
         _jumping = null;
