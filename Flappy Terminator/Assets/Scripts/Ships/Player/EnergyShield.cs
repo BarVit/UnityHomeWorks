@@ -7,7 +7,7 @@ public class EnergyShield : MonoBehaviour
     [SerializeField] private Collider2D _collider;
     [SerializeField] private Color _color = new Color(0.35f, 0.88f, 1f);
     [SerializeField] private float _raiseDuration = 0.2f;
-    [SerializeField] private float _breakDuration = 0.35f;
+    [SerializeField] private float _breakDuration = 0.5f;
     [SerializeField] private float _flashDuration = 0.15f;
     [SerializeField] private float _pulseSpeed = 3f;
     [SerializeField] private float _pulseAmount = 0.04f;
@@ -23,6 +23,8 @@ public class EnergyShield : MonoBehaviour
     private float _breakLeft;
 
     public bool IsUp => _left > 0;
+
+    public bool IsGuarding => IsUp || _breakLeft > 0f;
 
     public event Action Broken;
 
@@ -54,8 +56,11 @@ public class EnergyShield : MonoBehaviour
 
     public int Absorb(int damage)
     {
-        if (IsUp == false || damage <= 0)
+        if (IsGuarding == false || damage <= 0)
             return damage;
+
+        if (IsUp == false)
+            return 0;
 
         _left = Mathf.Max(0, _left - damage);
         _flashLeft = _flashDuration;
@@ -77,7 +82,6 @@ public class EnergyShield : MonoBehaviour
     private void Break()
     {
         _breakLeft = _breakDuration;
-        _collider.enabled = false;
         Broken?.Invoke();
     }
 
@@ -107,7 +111,10 @@ public class EnergyShield : MonoBehaviour
         _bubble.transform.localScale = _baseScale * Mathf.Lerp(1f, _breakScale, progress);
         _bubble.color = new Color(1f, 1f, 1f, 1f - progress);
 
-        if (_breakLeft <= 0f)
-            _bubble.enabled = false;
+        if (_breakLeft > 0f)
+            return;
+
+        _bubble.enabled = false;
+        _collider.enabled = false;
     }
 }
