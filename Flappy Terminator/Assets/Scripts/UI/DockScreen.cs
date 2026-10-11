@@ -393,12 +393,21 @@ public class DockScreen : MonoBehaviour
         string now = FormatSkill(skill, 0);
         string value = price < 0 ? now : now + Arrow + FormatSkill(skill, 1);
         bool isHull = skill.Stat == SkillStat.Health;
-        string hint = isHull ? GetHullHint(skill, price)
-            : "+" + _skills.GetStep(skill) + PercentSign + " FIRE RATE PER LEVEL";
+        string hint = isHull ? GetHullHint(skill, price) : GetCooldownHint(skill, price);
         string title = isHull ? "HULL" : UiText.Title(skill.Weapon) + " COOLDOWN";
 
         return new UpgradeRowData(isHull ? _healthIcon : _cooldownIcon, title, hint, value,
             _skills.GetLevel(skill), _skills.GetMaxLevel(skill), price, _skills.CanUpgrade(skill), _xpIcon);
+    }
+
+    private string GetCooldownHint(SkillKey skill, int price)
+    {
+        if (price < 0)
+            return MaxLevelHint;
+
+        float drop = 1f - _skills.GetRateScale(skill.Weapon, 1) / _skills.GetRateScale(skill.Weapon);
+
+        return "-" + Mathf.RoundToInt(drop * 100f) + PercentSign + " COOLDOWN NEXT LEVEL";
     }
 
     private string GetHullHint(SkillKey skill, int price)
