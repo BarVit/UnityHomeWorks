@@ -405,9 +405,7 @@ public class DockScreen : MonoBehaviour
         if (price < 0)
             return MaxLevelHint;
 
-        float drop = 1f - _skills.GetRateScale(skill.Weapon, 1) / _skills.GetRateScale(skill.Weapon);
-
-        return "-" + Mathf.RoundToInt(drop * 100f) + PercentSign + " COOLDOWN NEXT LEVEL";
+        return _skills.GetStep(skill).ToString("0.00") + Seconds + " PER LEVEL";
     }
 
     private string GetHullHint(SkillKey skill, int price)

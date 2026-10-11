@@ -81,6 +81,7 @@ namespace UiContent
             PlayerShip playerShip = Object.FindAnyObjectByType<PlayerShip>(FindObjectsInactive.Include);
             SkillBook skills = GetOrAdd<SkillBook>(economy.gameObject);
             Set(skills, "_economy", economy);
+            Set(skills, "_weapons", AssetDatabase.LoadAssetAtPath<WeaponTable>(WeaponsAsset));
             Set(skills, "_skills", AssetDatabase.LoadAssetAtPath<SkillTable>(SkillsAsset));
             Set(skills, "_ship", playerShip);
 

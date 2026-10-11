@@ -5,10 +5,11 @@ using UnityEngine;
 public class SkillBook : MonoBehaviour
 {
     private const int NoPrice = -1;
-    private const float PercentShare = 0.01f;
+    private const float MinCooldown = 0.01f;
 
     [SerializeField] private Economy _economy;
     [SerializeField] private SkillTable _skills;
+    [SerializeField] private WeaponTable _weapons;
     [SerializeField] private PlayerShip _ship;
 
     public event Action Changed;
@@ -59,9 +60,14 @@ public class SkillBook : MonoBehaviour
 
     public float GetRateScale(string weaponId, int levelShift = 0)
     {
-        SkillKey skill = new SkillKey(SkillStat.Cooldown, weaponId);
+        WeaponRow weapon = _weapons.GetRow(weaponId);
 
-        return 1f / (1f + GetValue(skill, levelShift) * PercentShare);
+        if (weapon == null || weapon.Rate <= 0f)
+            return 1f;
+
+        float bonus = GetValue(new SkillKey(SkillStat.Cooldown, weaponId), levelShift);
+
+        return Mathf.Max(MinCooldown, weapon.Rate + bonus) / weapon.Rate;
     }
 
     public bool CanUpgrade(SkillKey skill)
