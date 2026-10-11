@@ -3,8 +3,8 @@ warden_1	enemy_warden	Страж I	1	Enemy 1	10	loc_01_01	10	warden_1_gun	rocket
 warden_2	enemy_warden	Страж II	2	Enemy 1	10	loc_01_01	14	warden_2_gun	rocket	2	8	Hover	Warden II	110	14
 warden_3	enemy_warden	Страж III	3	Enemy 1	10	loc_01_01	40	warden_3_gun	rocket	3	12	Hover Guard	Warden III	200	40
 hunter_1	enemy_hunter	Охотник I	1	Enemy 2	15	loc_01_03	20	hunter_1_gun	impulse_laser	1	2	Forward		100	20
-hunter_2	enemy_hunter	Охотник II	2	Enemy 2	15	loc_01_03	32	hunter_2_gun	impulse_laser	2	2	Forward Leap		160	32
-hunter_3	enemy_hunter	Охотник III	3	Enemy 2	15	loc_01_03	60	hunter_3_gun	beam_laser	1	20	Up And Down		300	60
+hunter_2	enemy_hunter	Охотник II	2	Enemy 2	15	loc_01_03	32	hunter_2_gun	impulse_laser	2	2	Forward Leap	Hunter II	160	32
+hunter_3	enemy_hunter	Охотник III	3	Enemy 2	15	loc_01_03	60	hunter_3_gun	beam_laser	1	20	Up And Down	Hunter III	300	60
 reaper_1	enemy_reaper	Жнец I	1	Enemy 3	20	loc_02_01	30	reaper_1_gun	homing	1	15	Drift		150	30
 reaper_2	enemy_reaper	Жнец II	2	Enemy 3	20	loc_02_01	50	reaper_2_gun	homing	1	20	Drift Retreat		240	50
 reaper_3	enemy_reaper	Жнец III	3	Enemy 3	20	loc_02_01	80	reaper_3_gun	homing	2	15	Drift Retreat		450	80

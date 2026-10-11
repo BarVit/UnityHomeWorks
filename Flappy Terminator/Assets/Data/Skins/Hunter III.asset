@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fea624d612b94ccab29d31921208a30, type: 3}
+  m_Name: Hunter III
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteSkin
+  _from:
+  - {fileID: 98067213, guid: 524fdd27a44d1e540a6ad316152fd4a3, type: 3}
+  - {fileID: -1136419617, guid: 524fdd27a44d1e540a6ad316152fd4a3, type: 3}
+  - {fileID: -39684785, guid: 524fdd27a44d1e540a6ad316152fd4a3, type: 3}
+  - {fileID: 1659718838, guid: 524fdd27a44d1e540a6ad316152fd4a3, type: 3}
+  - {fileID: 205499959, guid: 524fdd27a44d1e540a6ad316152fd4a3, type: 3}
+  - {fileID: -183319323, guid: 524fdd27a44d1e540a6ad316152fd4a3, type: 3}
+  - {fileID: 326211839, guid: 524fdd27a44d1e540a6ad316152fd4a3, type: 3}
+  - {fileID: 1657125338, guid: 524fdd27a44d1e540a6ad316152fd4a3, type: 3}
+  - {fileID: 795762348, guid: 524fdd27a44d1e540a6ad316152fd4a3, type: 3}
+  - {fileID: 1713677310, guid: 524fdd27a44d1e540a6ad316152fd4a3, type: 3}
+  - {fileID: 697341971, guid: 524fdd27a44d1e540a6ad316152fd4a3, type: 3}
+  - {fileID: -1427930963, guid: 524fdd27a44d1e540a6ad316152fd4a3, type: 3}
+  - {fileID: -529843016, guid: 524fdd27a44d1e540a6ad316152fd4a3, type: 3}
+  - {fileID: 624367300, guid: 524fdd27a44d1e540a6ad316152fd4a3, type: 3}
+  _to:
+  - {fileID: 98067213, guid: 7471c28f9b7fd4f9ba1a08bd5ef88943, type: 3}
+  - {fileID: -1136419617, guid: 7471c28f9b7fd4f9ba1a08bd5ef88943, type: 3}
+  - {fileID: -39684785, guid: 7471c28f9b7fd4f9ba1a08bd5ef88943, type: 3}
+  - {fileID: 1659718838, guid: 7471c28f9b7fd4f9ba1a08bd5ef88943, type: 3}
+  - {fileID: 205499959, guid: 7471c28f9b7fd4f9ba1a08bd5ef88943, type: 3}
+  - {fileID: -183319323, guid: 7471c28f9b7fd4f9ba1a08bd5ef88943, type: 3}
+  - {fileID: 326211839, guid: 7471c28f9b7fd4f9ba1a08bd5ef88943, type: 3}
+  - {fileID: 1657125338, guid: 7471c28f9b7fd4f9ba1a08bd5ef88943, type: 3}
+  - {fileID: 795762348, guid: 7471c28f9b7fd4f9ba1a08bd5ef88943, type: 3}
+  - {fileID: 1713677310, guid: 7471c28f9b7fd4f9ba1a08bd5ef88943, type: 3}
+  - {fileID: 697341971, guid: 7471c28f9b7fd4f9ba1a08bd5ef88943, type: 3}
+  - {fileID: -1427930963, guid: 7471c28f9b7fd4f9ba1a08bd5ef88943, type: 3}
+  - {fileID: -529843016, guid: 7471c28f9b7fd4f9ba1a08bd5ef88943, type: 3}
+  - {fileID: 624367300, guid: 7471c28f9b7fd4f9ba1a08bd5ef88943, type: 3}
