@@ -402,4 +402,4 @@ MonoBehaviour:
     _firstWaveSize: 3
     _waveSizeGrowth: 3
     _title: ASHEN VOID GATE
-    _branchOf: loc_03_03
+    _branchOf: loc_03_07
