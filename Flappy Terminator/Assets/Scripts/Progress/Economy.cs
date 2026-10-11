@@ -19,6 +19,8 @@ public class Economy : MonoBehaviour
 
     public int CompletedLocations => _data.Galaxy.CompletedLocations.Count;
 
+    public bool IsTestSession { get; private set; }
+
     public event Action Changed;
     public event Action SessionStarted;
 
@@ -64,8 +66,9 @@ public class Economy : MonoBehaviour
         return true;
     }
 
-    public void StartNewSession()
+    public void StartNewSession(bool isTest)
     {
+        IsTestSession = isTest;
         _data = new SessionProgress();
         SessionStarted?.Invoke();
         Changed?.Invoke();

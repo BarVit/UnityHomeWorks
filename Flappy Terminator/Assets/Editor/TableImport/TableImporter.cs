@@ -34,10 +34,10 @@ namespace TableImport
                 WaveTable waves = WaveTableImporter.Import(locations, enemies, bosses, log);
                 SlotTableImporter.Import(weapons, log);
                 UpgradeTableImporter.Import(weapons, log);
-                ModuleTable modules = ModuleTableImporter.Import(log);
+                ModuleTable modules = ModuleTableImporter.Import(locations, log);
                 ModuleTableImporter.ImportUpgrades(modules, log);
                 SlotTableImporter.ImportModuleSlots(log);
-                SkillTableImporter.Import(log);
+                SkillTableImporter.Import(weapons, log);
 
                 if (log.HasProblems)
                 {

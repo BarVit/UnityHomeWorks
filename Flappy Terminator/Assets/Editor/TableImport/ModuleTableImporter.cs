@@ -16,10 +16,10 @@ namespace TableImport
 
         private static readonly string[] Columns =
         {
-            "id", "title", "kind", "price", "icon", "description"
+            "id", "title", "kind", "price", "icon", "description", "unlock_after"
         };
 
-        public static ModuleTable Import(TableLog log)
+        public static ModuleTable Import(LocationTable locations, TableLog log)
         {
             TsvDocument document = TsvReader.Read(SourcePath, log);
 
@@ -43,7 +43,8 @@ namespace TableImport
                     reader.ReadEnum<ModuleKind>("kind"),
                     reader.ReadInt("price", 0, 100000000),
                     reader.ReadAsset<Sprite>("icon", false),
-                    reader.ReadOptionalText("description")));
+                    reader.ReadOptionalText("description"),
+                    ReadUnlock(locations, reader)));
             }
 
             ModuleTable table = GeneratedAsset.LoadOrCreate<ModuleTable>(AssetPath);
@@ -51,6 +52,16 @@ namespace TableImport
             EditorUtility.SetDirty(table);
 
             return table;
+        }
+
+        private static string ReadUnlock(LocationTable locations, RowReader reader)
+        {
+            string unlockAfter = reader.ReadOptionalText("unlock_after");
+
+            if (unlockAfter.Length > 0 && locations != null && locations.GetRow(unlockAfter) == null)
+                reader.Fail("unlock_after: нет локации " + unlockAfter + " в " + LocationTableImporter.SourcePath);
+
+            return unlockAfter;
         }
 
         public static ModuleUpgradeTable ImportUpgrades(ModuleTable modules, TableLog log)

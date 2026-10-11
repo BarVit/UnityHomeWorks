@@ -17,6 +17,8 @@ public class ShopWindow : MonoBehaviour
     [SerializeField] private Hangar _hangar;
     [SerializeField] private ModuleRack _modules;
     [SerializeField] private Economy _economy;
+    [SerializeField] private LocationTable _locations;
+    [SerializeField] private SystemTable _systems;
     [SerializeField] private Button _closeButton;
     [SerializeField] private TabView[] _tabs;
     [SerializeField] private ShopCardView[] _cards;
@@ -99,7 +101,7 @@ public class ShopWindow : MonoBehaviour
             string details = "DAMAGE " + row.Damage;
 
             if (_hangar.IsWeaponOpen(row.Id) == false)
-                _cards[i].ShowAction(row.Id, icon, title, details, GetLockText(row.Id), false, false);
+                _cards[i].ShowAction(row.Id, icon, title, details, GetLockText(row.UnlockAfter), false, false);
             else if (_hangar.OwnsWeapon(row.Id) == false)
                 _cards[i].ShowPrice(row.Id, icon, title, details, row.Price, _hangar.CanBuyWeapon(row.Id));
             else if (row.Id == _hangar.WeaponId)
@@ -126,7 +128,9 @@ public class ShopWindow : MonoBehaviour
             string title = UiText.Title(row.Id);
             string details = GetModuleDetails(row);
 
-            if (_modules.Owns(row.Id) == false)
+            if (_modules.IsOpen(row.Id) == false)
+                _cards[i].ShowAction(row.Id, row.Icon, title, details, GetLockText(row.UnlockAfter), false, false);
+            else if (_modules.Owns(row.Id) == false)
                 _cards[i].ShowPrice(row.Id, row.Icon, title, details, row.Price, _modules.CanBuy(row.Id));
             else if (_modules.IsInstalled(row.Id))
                 _cards[i].ShowAction(row.Id, row.Icon, title, details, EquippedText, false, true);
@@ -137,11 +141,19 @@ public class ShopWindow : MonoBehaviour
         }
     }
 
-    private string GetLockText(string weaponId)
+    private string GetLockText(string locationId)
     {
-        string label = _hangar.GetUnlockLabel(weaponId);
+        LocationRow location = string.IsNullOrEmpty(locationId) ? null : _locations.GetRow(locationId);
 
-        return label == null ? LockedText : ClearText + label;
+        if (location == null)
+            return LockedText;
+
+        if (location.IsBranch)
+            return ClearText + location.Title;
+
+        SystemRow system = _systems.GetRow(location.System);
+
+        return ClearText + (system == null ? location.Id : system.Order + "-" + location.Order);
     }
 
     private string GetModuleDetails(ModuleRow row)

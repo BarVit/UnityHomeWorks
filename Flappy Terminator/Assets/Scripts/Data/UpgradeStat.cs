@@ -2,5 +2,6 @@ public enum UpgradeStat
 {
     Damage,
     CritChance,
-    CritDamage
+    CritDamage,
+    HeatReduction
 }

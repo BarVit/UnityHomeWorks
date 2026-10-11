@@ -13,12 +13,8 @@ public class Hangar : MonoBehaviour
     [SerializeField] private SlotTable _slots;
     [SerializeField] private UpgradeTable _upgrades;
     [SerializeField] private WeaponTable _weapons;
-    [SerializeField] private LocationTable _locations;
-    [SerializeField] private SystemTable _systems;
     [SerializeField] private int _testXp = 1000000;
     [SerializeField] private int _testMoney = 1000000;
-
-    private bool _isTest;
 
     public event Action Changed;
 
@@ -45,14 +41,12 @@ public class Hangar : MonoBehaviour
 
     public void StartNewSession()
     {
-        _isTest = false;
-        Begin(_slots.GetRow(FirstSlot).Weapon, default);
+        Begin(_slots.GetRow(FirstSlot).Weapon, default, false);
     }
 
     public void StartTestSession(string weaponId)
     {
-        _isTest = true;
-        Begin(weaponId, new Reward(_testXp, _testMoney));
+        Begin(weaponId, new Reward(_testXp, _testMoney), true);
     }
 
     public List<WeaponRow> GetShopWeapons()
@@ -89,26 +83,10 @@ public class Hangar : MonoBehaviour
         if (row == null)
             return false;
 
-        if (_isTest || OwnsWeapon(weaponId))
+        if (_economy.IsTestSession || OwnsWeapon(weaponId))
             return true;
 
         return string.IsNullOrEmpty(row.UnlockAfter) == false && _economy.IsLocationCompleted(row.UnlockAfter);
-    }
-
-    public string GetUnlockLabel(string weaponId)
-    {
-        WeaponRow row = _weapons.GetRow(weaponId);
-        LocationRow location = row == null || string.IsNullOrEmpty(row.UnlockAfter) ? null : _locations.GetRow(row.UnlockAfter);
-
-        if (location == null)
-            return null;
-
-        if (location.IsBranch)
-            return location.Title;
-
-        SystemRow system = _systems.GetRow(location.System);
-
-        return system == null ? location.Id : system.Order + "-" + location.Order;
     }
 
     public bool TryBuyWeapon(string weaponId)
@@ -143,6 +121,11 @@ public class Hangar : MonoBehaviour
         return _weapons.GetRow(WeaponId);
     }
 
+    public WeaponRow GetWeapon(string weaponId)
+    {
+        return _weapons.GetRow(weaponId);
+    }
+
     public bool IsUnlocked(int slot)
     {
         return slot <= Loadout.BarrelCount;
@@ -155,7 +138,7 @@ public class Hangar : MonoBehaviour
 
     public int GetUnlockPrice(int slot)
     {
-        SlotRow row = _slots.GetRow(slot);
+        SlotRow row = _slots.GetRow(WeaponId, slot);
 
         return row == null ? NoPrice : row.Price;
     }
@@ -238,7 +221,8 @@ public class Hangar : MonoBehaviour
         return new WeaponBoost(
             Mathf.RoundToInt(GetValue(slot, UpgradeStat.Damage)),
             GetValue(slot, UpgradeStat.CritChance) * PercentShare,
-            GetValue(slot, UpgradeStat.CritDamage));
+            GetValue(slot, UpgradeStat.CritDamage),
+            GetValue(slot, UpgradeStat.HeatReduction) * PercentShare);
     }
 
     private BarrelUpgrades GetBarrel(int slot)
@@ -246,9 +230,9 @@ public class Hangar : MonoBehaviour
         return Loadout.GetBarrel(slot - FirstSlot);
     }
 
-    private void Begin(string weaponId, Reward grant)
+    private void Begin(string weaponId, Reward grant, bool isTest)
     {
-        _economy.StartNewSession();
+        _economy.StartNewSession(isTest);
         _economy.Grant(grant);
         Ship.SelectWeapon(weaponId);
         Changed?.Invoke();

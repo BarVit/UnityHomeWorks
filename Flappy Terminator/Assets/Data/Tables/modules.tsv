@@ -1,2 +1,2 @@
-id	title	kind	price	icon	description
-energy_shield	Энергощит	Shield	3000	Energy Shield Icon	ABSORBS DAMAGE UNTIL BROKEN
+id	title	kind	price	icon	description	unlock_after
+energy_shield	Энергощит	Shield	3000	Energy Shield Icon	ABSORBS DAMAGE UNTIL BROKEN	loc_01_02

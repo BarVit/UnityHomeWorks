@@ -70,8 +70,6 @@ namespace UiContent
             Set(hangar, "_slots", AssetDatabase.LoadAssetAtPath<SlotTable>(SlotsAsset));
             Set(hangar, "_upgrades", AssetDatabase.LoadAssetAtPath<UpgradeTable>(UpgradesAsset));
             Set(hangar, "_weapons", AssetDatabase.LoadAssetAtPath<WeaponTable>(WeaponsAsset));
-            Set(hangar, "_locations", AssetDatabase.LoadAssetAtPath<LocationTable>(LocationsAsset));
-            Set(hangar, "_systems", AssetDatabase.LoadAssetAtPath<SystemTable>(SystemsAsset));
             Set(game, "_hangar", hangar);
 
             ModuleRack modules = GetOrAdd<ModuleRack>(economy.gameObject);

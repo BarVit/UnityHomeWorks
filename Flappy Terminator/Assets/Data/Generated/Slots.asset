@@ -16,12 +16,36 @@ MonoBehaviour:
   - _slot: 1
     _price: 0
     _weapon: cannon
+    _gun: 
   - _slot: 2
     _price: 1200
     _weapon: 
+    _gun: 
   - _slot: 3
     _price: 4000
     _weapon: 
+    _gun: 
   - _slot: 4
     _price: 8000
     _weapon: 
+    _gun: 
+  - _slot: 3
+    _price: 8000
+    _weapon: 
+    _gun: cannon
+  - _slot: 4
+    _price: 20000
+    _weapon: 
+    _gun: cannon
+  - _slot: 2
+    _price: 10000
+    _weapon: 
+    _gun: impulse_laser
+  - _slot: 3
+    _price: 20000
+    _weapon: 
+    _gun: impulse_laser
+  - _slot: 4
+    _price: 40000
+    _weapon: 
+    _gun: impulse_laser

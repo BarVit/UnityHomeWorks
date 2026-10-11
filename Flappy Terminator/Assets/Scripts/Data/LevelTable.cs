@@ -15,6 +15,8 @@ public abstract class LevelTable<TStat> : ScriptableObject where TStat : struct,
         if (_rows == null)
             return null;
 
+        owner = Resolve(owner, stat);
+
         foreach (LevelRow<TStat> row in _rows)
         {
             if (Matches(row, owner, stat) && row.Level == level)
@@ -31,6 +33,8 @@ public abstract class LevelTable<TStat> : ScriptableObject where TStat : struct,
         if (_rows == null)
             return max;
 
+        owner = Resolve(owner, stat);
+
         foreach (LevelRow<TStat> row in _rows)
         {
             if (Matches(row, owner, stat) && row.Level > max)
@@ -46,6 +50,8 @@ public abstract class LevelTable<TStat> : ScriptableObject where TStat : struct,
 
         if (_rows == null)
             return value;
+
+        owner = Resolve(owner, stat);
 
         foreach (LevelRow<TStat> row in _rows)
         {
@@ -74,9 +80,20 @@ public abstract class LevelTable<TStat> : ScriptableObject where TStat : struct,
         return stats;
     }
 
+    private string Resolve(string owner, TStat stat)
+    {
+        foreach (LevelRow<TStat> row in _rows)
+        {
+            if (row.Owner == owner && EqualityComparer<TStat>.Default.Equals(row.Stat, stat))
+                return owner;
+        }
+
+        return Everyone;
+    }
+
     private static bool Matches(LevelRow<TStat> row, string owner, TStat stat)
     {
-        return EqualityComparer<TStat>.Default.Equals(row.Stat, stat) && (row.Owner == owner || row.Owner == Everyone);
+        return EqualityComparer<TStat>.Default.Equals(row.Stat, stat) && row.Owner == owner;
     }
 
 #if UNITY_EDITOR

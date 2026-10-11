@@ -10,9 +10,12 @@ public class ModuleRow
     [SerializeField] private int _price;
     [SerializeField] private Sprite _icon;
     [SerializeField] private string _description;
+    [SerializeField] private string _unlockAfter;
 
-    public ModuleRow(string id, string title, ModuleKind kind, int price, Sprite icon, string description)
+    public ModuleRow(string id, string title, ModuleKind kind, int price, Sprite icon, string description,
+        string unlockAfter)
     {
+        _unlockAfter = unlockAfter;
         _id = id;
         _title = title;
         _kind = kind;
@@ -32,4 +35,6 @@ public class ModuleRow
     public Sprite Icon => _icon;
 
     public string Description => _description;
+
+    public string UnlockAfter => _unlockAfter;
 }

@@ -236,7 +236,7 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
-    _price: 1000
+    _price: 10000
     _unlockAfter: loc_01_04
     _projectile: {fileID: 8728678904558988455, guid: dbdae465272cd47738793cfb08b47fd4, type: 3}
     _beam: {fileID: 0}

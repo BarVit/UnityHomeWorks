@@ -21,204 +21,204 @@ MonoBehaviour:
   - _owner: 
     _stat: 0
     _level: 1
-    _bonus: 12
+    _bonus: 8
     _price: 20
   - _owner: 
     _stat: 0
     _level: 2
-    _bonus: 14
+    _bonus: 9
     _price: 28
   - _owner: 
     _stat: 0
     _level: 3
-    _bonus: 15
+    _bonus: 10
     _price: 38
   - _owner: 
     _stat: 0
     _level: 4
-    _bonus: 17
+    _bonus: 11
     _price: 53
   - _owner: 
     _stat: 0
     _level: 5
-    _bonus: 20
+    _bonus: 12
     _price: 74
   - _owner: 
     _stat: 0
     _level: 6
-    _bonus: 22
+    _bonus: 12
     _price: 100
   - _owner: 
     _stat: 0
     _level: 7
-    _bonus: 24
+    _bonus: 14
     _price: 140
   - _owner: 
     _stat: 0
     _level: 8
-    _bonus: 27
+    _bonus: 14
     _price: 200
   - _owner: 
     _stat: 0
     _level: 9
-    _bonus: 31
+    _bonus: 16
     _price: 270
   - _owner: 
     _stat: 0
     _level: 10
-    _bonus: 34
+    _bonus: 18
     _price: 380
   - _owner: 
     _stat: 0
     _level: 11
-    _bonus: 39
+    _bonus: 18
     _price: 530
   - _owner: 
     _stat: 0
     _level: 12
-    _bonus: 43
+    _bonus: 21
     _price: 730
   - _owner: 
     _stat: 0
     _level: 13
-    _bonus: 49
+    _bonus: 22
     _price: 1000
   - _owner: 
     _stat: 0
     _level: 14
-    _bonus: 54
+    _bonus: 24
     _price: 1400
   - _owner: 
     _stat: 0
     _level: 15
-    _bonus: 61
+    _bonus: 25
     _price: 1900
   - _owner: 
     _stat: 0
     _level: 16
-    _bonus: 69
+    _bonus: 28
     _price: 2700
   - _owner: 
     _stat: 0
     _level: 17
-    _bonus: 77
+    _bonus: 31
     _price: 3700
   - _owner: 
     _stat: 0
     _level: 18
-    _bonus: 86
+    _bonus: 33
     _price: 5200
   - _owner: 
     _stat: 0
     _level: 19
-    _bonus: 97
+    _bonus: 35
     _price: 7200
   - _owner: 
     _stat: 0
     _level: 20
-    _bonus: 109
+    _bonus: 39
     _price: 10000
-  - _owner: 
+  - _owner: cannon
     _stat: 1
     _level: 0
     _bonus: 0
     _price: 0
-  - _owner: 
+  - _owner: cannon
     _stat: 1
     _level: 1
     _bonus: 10
     _price: 20
-  - _owner: 
+  - _owner: cannon
     _stat: 1
     _level: 2
     _bonus: 10
     _price: 28
-  - _owner: 
+  - _owner: cannon
     _stat: 1
     _level: 3
     _bonus: 10
     _price: 38
-  - _owner: 
+  - _owner: cannon
     _stat: 1
     _level: 4
     _bonus: 10
     _price: 53
-  - _owner: 
+  - _owner: cannon
     _stat: 1
     _level: 5
     _bonus: 10
     _price: 74
-  - _owner: 
+  - _owner: cannon
     _stat: 1
     _level: 6
     _bonus: 10
     _price: 100
-  - _owner: 
+  - _owner: cannon
     _stat: 1
     _level: 7
     _bonus: 10
     _price: 140
-  - _owner: 
+  - _owner: cannon
     _stat: 1
     _level: 8
     _bonus: 10
     _price: 200
-  - _owner: 
+  - _owner: cannon
     _stat: 1
     _level: 9
     _bonus: 10
     _price: 270
-  - _owner: 
+  - _owner: cannon
     _stat: 1
     _level: 10
     _bonus: 10
     _price: 380
-  - _owner: 
+  - _owner: cannon
     _stat: 1
     _level: 11
     _bonus: 10
     _price: 530
-  - _owner: 
+  - _owner: cannon
     _stat: 1
     _level: 12
     _bonus: 10
     _price: 730
-  - _owner: 
+  - _owner: cannon
     _stat: 1
     _level: 13
     _bonus: 10
     _price: 1000
-  - _owner: 
+  - _owner: cannon
     _stat: 1
     _level: 14
     _bonus: 10
     _price: 1400
-  - _owner: 
+  - _owner: cannon
     _stat: 1
     _level: 15
     _bonus: 10
     _price: 1900
-  - _owner: 
+  - _owner: cannon
     _stat: 1
     _level: 16
     _bonus: 10
     _price: 2700
-  - _owner: 
+  - _owner: cannon
     _stat: 1
     _level: 17
     _bonus: 10
     _price: 3700
-  - _owner: 
+  - _owner: cannon
     _stat: 1
     _level: 18
     _bonus: 10
     _price: 5200
-  - _owner: 
+  - _owner: cannon
     _stat: 1
     _level: 19
     _bonus: 10
     _price: 7200
-  - _owner: 
+  - _owner: cannon
     _stat: 1
     _level: 20
     _bonus: 10

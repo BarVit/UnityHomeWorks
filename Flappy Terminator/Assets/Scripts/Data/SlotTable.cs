@@ -7,16 +7,43 @@ public class SlotTable : ScriptableObject
 
     public IReadOnlyList<SlotRow> Rows => _rows;
 
-    public int Count => _rows == null ? 0 : _rows.Length;
+    public int Count
+    {
+        get
+        {
+            int count = 0;
+
+            if (_rows == null)
+                return count;
+
+            foreach (SlotRow row in _rows)
+            {
+                if (row.Gun == SlotRow.AllGuns)
+                    count++;
+            }
+
+            return count;
+        }
+    }
 
     public SlotRow GetRow(int slot)
+    {
+        return Find(SlotRow.AllGuns, slot);
+    }
+
+    public SlotRow GetRow(string gun, int slot)
+    {
+        return Find(gun, slot) ?? Find(SlotRow.AllGuns, slot);
+    }
+
+    private SlotRow Find(string gun, int slot)
     {
         if (_rows == null)
             return null;
 
         foreach (SlotRow row in _rows)
         {
-            if (row.Slot == slot)
+            if (row.Gun == gun && row.Slot == slot)
                 return row;
         }
 

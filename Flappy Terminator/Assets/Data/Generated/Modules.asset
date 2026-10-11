@@ -19,3 +19,4 @@ MonoBehaviour:
     _price: 3000
     _icon: {fileID: 21300000, guid: 78c240d502bb54629ac03300d9394bfc, type: 3}
     _description: ABSORBS DAMAGE UNTIL BROKEN
+    _unlockAfter: loc_01_02

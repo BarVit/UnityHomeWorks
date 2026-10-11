@@ -78,7 +78,20 @@ public class ModuleRack : MonoBehaviour
     {
         ModuleRow row = _modules.GetRow(moduleId);
 
-        return row != null && Owns(moduleId) == false && _economy.Money >= row.Price;
+        return row != null && Owns(moduleId) == false && IsOpen(moduleId) && _economy.Money >= row.Price;
+    }
+
+    public bool IsOpen(string moduleId)
+    {
+        ModuleRow row = _modules.GetRow(moduleId);
+
+        if (row == null)
+            return false;
+
+        if (_economy.IsTestSession || Owns(moduleId))
+            return true;
+
+        return string.IsNullOrEmpty(row.UnlockAfter) == false && _economy.IsLocationCompleted(row.UnlockAfter);
     }
 
     public bool TryBuy(string moduleId)

@@ -1,5 +1,10 @@
-slot	price	weapon
-1	0	cannon
-2	1200	
-3	4000	
-4	8000	
+gun	slot	price	weapon
+	1	0	cannon
+	2	1200	
+	3	4000	
+	4	8000	
+cannon	3	8000	
+cannon	4	20000	
+impulse_laser	2	10000	
+impulse_laser	3	20000	
+impulse_laser	4	40000	

@@ -2,8 +2,9 @@ using UnityEngine;
 
 public readonly struct WeaponBoost
 {
-    public WeaponBoost(int damageBonus, float critChance, float critMultiplier)
+    public WeaponBoost(int damageBonus, float critChance, float critMultiplier, float heatReduction)
     {
+        HeatReduction = heatReduction;
         DamageBonus = damageBonus;
         CritChance = critChance;
         CritMultiplier = critMultiplier;
@@ -14,6 +15,10 @@ public readonly struct WeaponBoost
     public float CritChance { get; }
 
     public float CritMultiplier { get; }
+
+    public float HeatReduction { get; }
+
+    public float HeatScale => 1f - Mathf.Clamp01(HeatReduction);
 
     public bool RollCrit()
     {

@@ -65,7 +65,7 @@ public class DockScreen : MonoBehaviour
     private int _selectedModuleSlot = ModuleRack.FirstSlot;
     private List<UpgradeStat> _weaponStats = new List<UpgradeStat>();
     private List<ModuleStat> _moduleStats = new List<ModuleStat>();
-    private List<SkillStat> _skillStats = new List<SkillStat>();
+    private List<SkillKey> _skillStats = new List<SkillKey>();
 
     public bool CanPlay => _playButton.gameObject.activeSelf;
 
@@ -253,6 +253,8 @@ public class DockScreen : MonoBehaviour
                 return (row.Damage + Mathf.RoundToInt(value)).ToString();
             case UpgradeStat.CritChance:
                 return Mathf.RoundToInt(value) + PercentSign;
+            case UpgradeStat.HeatReduction:
+                return Mathf.RoundToInt(100f - value) + PercentSign;
             default:
                 return "x" + value;
         }
@@ -260,20 +262,41 @@ public class DockScreen : MonoBehaviour
 
     private string GetWeaponTitle(UpgradeStat stat)
     {
-        return stat == UpgradeStat.Damage ? "DAMAGE" : "CRIT CHANCE";
+        switch (stat)
+        {
+            case UpgradeStat.Damage:
+                return "DAMAGE";
+            case UpgradeStat.HeatReduction:
+                return "HEAT PER SHOT";
+            default:
+                return "CRIT CHANCE";
+        }
     }
 
     private string GetWeaponHint(UpgradeStat stat)
     {
-        if (stat == UpgradeStat.Damage)
-            return "+" + _hangar.GetStep(stat) + " PER LEVEL";
-
-        return "CRIT HIT DEALS x" + _hangar.GetValue(_selectedSlot, UpgradeStat.CritDamage);
+        switch (stat)
+        {
+            case UpgradeStat.Damage:
+                return "+" + _hangar.GetStep(stat) + " PER LEVEL";
+            case UpgradeStat.HeatReduction:
+                return "-" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
+            default:
+                return "CRIT HIT DEALS x" + _hangar.GetValue(_selectedSlot, UpgradeStat.CritDamage);
+        }
     }
 
     private Sprite GetWeaponIcon(UpgradeStat stat)
     {
-        return stat == UpgradeStat.Damage ? _damageIcon : _critIcon;
+        switch (stat)
+        {
+            case UpgradeStat.Damage:
+                return _damageIcon;
+            case UpgradeStat.HeatReduction:
+                return _cooldownIcon;
+            default:
+                return _critIcon;
+        }
     }
 
     private void ShowModulePage()
@@ -364,20 +387,21 @@ public class DockScreen : MonoBehaviour
         }
     }
 
-    private UpgradeRowData GetSkillRow(SkillStat skill)
+    private UpgradeRowData GetSkillRow(SkillKey skill)
     {
         int price = _skills.GetPrice(skill);
         string now = FormatSkill(skill, 0);
         string value = price < 0 ? now : now + Arrow + FormatSkill(skill, 1);
-        bool isHull = skill == SkillStat.Health;
+        bool isHull = skill.Stat == SkillStat.Health;
         string hint = isHull ? GetHullHint(skill, price)
             : "+" + _skills.GetStep(skill) + PercentSign + " FIRE RATE PER LEVEL";
+        string title = isHull ? "HULL" : UiText.Title(skill.Weapon) + " COOLDOWN";
 
-        return new UpgradeRowData(isHull ? _healthIcon : _cooldownIcon, isHull ? "HULL" : "COOLDOWN", hint, value,
+        return new UpgradeRowData(isHull ? _healthIcon : _cooldownIcon, title, hint, value,
             _skills.GetLevel(skill), _skills.GetMaxLevel(skill), price, _skills.CanUpgrade(skill), _xpIcon);
     }
 
-    private string GetHullHint(SkillStat skill, int price)
+    private string GetHullHint(SkillKey skill, int price)
     {
         if (price < 0)
             return MaxLevelHint;
@@ -385,15 +409,15 @@ public class DockScreen : MonoBehaviour
         return "+" + Mathf.RoundToInt(_skills.GetValue(skill, 1) - _skills.GetValue(skill)) + " HEALTH NEXT LEVEL";
     }
 
-    private string FormatSkill(SkillStat skill, int levelShift)
+    private string FormatSkill(SkillKey skill, int levelShift)
     {
-        if (skill == SkillStat.Health)
+        if (skill.Stat == SkillStat.Health)
             return (_skills.BaseHealth + Mathf.RoundToInt(_skills.GetValue(skill, levelShift))).ToString();
 
-        WeaponRow row = _hangar.GetWeapon();
+        WeaponRow row = _hangar.GetWeapon(skill.Weapon);
         float rate = row == null ? 0f : row.Rate;
 
-        return (rate * _skills.GetRateScale(levelShift)).ToString("0.00") + Seconds;
+        return (rate * _skills.GetRateScale(skill.Weapon, levelShift)).ToString("0.00") + Seconds;
     }
 
     private string GetStatus(DockReason reason)

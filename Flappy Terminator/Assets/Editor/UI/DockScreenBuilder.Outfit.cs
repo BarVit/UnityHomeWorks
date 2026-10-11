@@ -87,6 +87,8 @@ namespace UiContent
             so.FindProperty("_hangar").objectReferenceValue = hangar;
             so.FindProperty("_modules").objectReferenceValue = modules;
             so.FindProperty("_economy").objectReferenceValue = economy;
+            so.FindProperty("_locations").objectReferenceValue = AssetDatabase.LoadAssetAtPath<LocationTable>(LocationsAsset);
+            so.FindProperty("_systems").objectReferenceValue = AssetDatabase.LoadAssetAtPath<SystemTable>(SystemsAsset);
             so.FindProperty("_closeButton").objectReferenceValue = close;
             SetArray(so.FindProperty("_tabs"), tabs);
             SetArray(so.FindProperty("_cards"), cards);
