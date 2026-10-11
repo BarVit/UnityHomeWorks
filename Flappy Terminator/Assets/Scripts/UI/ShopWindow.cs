@@ -96,7 +96,7 @@ public class ShopWindow : MonoBehaviour
             WeaponRow row = weapons[i];
             Sprite icon = row.Assets == null ? null : row.Assets.Icon;
             string title = UiText.Title(row.Id);
-            string details = "DMG " + row.Damage + "   CD " + row.Rate.ToString("0.00") + " S";
+            string details = "DAMAGE " + row.Damage;
 
             if (_hangar.OwnsWeapon(row.Id) == false)
                 _cards[i].ShowPrice(row.Id, icon, title, details, row.Price, _hangar.CanBuyWeapon(row.Id));
@@ -140,8 +140,7 @@ public class ShopWindow : MonoBehaviour
         switch (row.Kind)
         {
             case ModuleKind.Shield:
-                return "ABSORBS " + Mathf.RoundToInt(_modules.GetValue(row.Id, ModuleStat.Capacity))
-                    + "   CD " + _modules.GetValue(row.Id, ModuleStat.Cooldown) + " S";
+                return "ABSORBS " + Mathf.RoundToInt(_modules.GetValue(row.Id, ModuleStat.Capacity));
             default:
                 return row.Description;
         }
