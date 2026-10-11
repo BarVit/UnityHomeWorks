@@ -79,7 +79,7 @@ MonoBehaviour:
     _health: 400
     _weapon: punisher_1_gun
     _barrels: 2
-    _damage: 14
+    _damage: 10
     _bodyDamage: 15
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}

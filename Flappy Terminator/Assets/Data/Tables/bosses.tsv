@@ -1,7 +1,7 @@
 id	title	kind	prefab	prototype	health	weapon	barrels	damage	body_damage	scale	tint	movement	reward_money	reward_xp	intro
 marauder_1	Мародёр I	MiniBoss	Enemy 1	warden_1	200	marauder_1_gun	1	20	10	2	FFFFFF	Boss Up And Down	500	100	
 marauder_2	Мародёр II	MiniBoss	Enemy 1	warden_2	500	marauder_2_gun	1	20	10	2	FF9A8A	Boss Up And Down	800	125	
-punisher_1	Каратель I	MiniBoss	Enemy 2	hunter_1	400	punisher_1_gun	2	14	15	2	FFFFFF	Boss Up And Down	625	125	
+punisher_1	Каратель I	MiniBoss	Enemy 2	hunter_1	400	punisher_1_gun	2	10	15	2	FFFFFF	Boss Up And Down	625	125	
 punisher_2	Каратель II	MiniBoss	Enemy 2	hunter_2	1000	punisher_2_gun	2	14	15	2	FF9A8A	Boss Up And Down	1000	200	
 berserker_1	Берсерк I	MiniBoss	Enemy 3	reaper_1	2000	berserker_1_gun	1	30	20	2	FFFFFF	Boss Up And Down	750	150	
 berserker_2	Берсерк II	MiniBoss	Enemy 3	reaper_2	5000	berserker_2_gun	1	40	20	2	FF9A8A	Boss Up And Down	1200	250	
