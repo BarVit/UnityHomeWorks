@@ -12,6 +12,8 @@ public class MapScreen : MonoBehaviour
     private const string DemoOnly = "NOT AVAILABLE IN DEMO";
     private const string PlayText = "PLAY";
     private const string ReplayText = "REPLAY";
+    private const string ToArmText = "ARM";
+    private const string ToGalaxyText = "GALAXY";
     private const string NoSelection = null;
     private const float BranchDistance = 230f;
     private const float ImageWidth = 1920f;
@@ -44,11 +46,14 @@ public class MapScreen : MonoBehaviour
     [SerializeField] private LocationPositions[] _locationPositions;
     [SerializeField] private MapNode[] _branchNodes;
     [SerializeField] private UiPolyline[] _branchLinks;
+    [SerializeField] private MapNode[] _armBranchNodes;
+    [SerializeField] private BranchPlacement[] _branchPlacements;
     [SerializeField] private Vector2 _starCentre = new Vector2(0.5f, 0.4907f);
     [SerializeField] private Color _branchColor = new Color(0.7f, 0.62f, 1f);
     [SerializeField] private TMP_Text _title;
     [SerializeField] private TMP_Text _info;
     [SerializeField] private Button _backButton;
+    [SerializeField] private TMP_Text _backLabel;
     [SerializeField] private MapToast _toast;
     [SerializeField] private Button _menuButton;
     [SerializeField] private Button _dockButton;
@@ -60,6 +65,7 @@ public class MapScreen : MonoBehaviour
     private readonly List<LocationRow> _route = new List<LocationRow>();
     private readonly List<SystemRow> _systemRoute = new List<SystemRow>();
     private readonly List<LocationRow> _shownBranches = new List<LocationRow>();
+    private readonly List<LocationRow> _shownArmBranches = new List<LocationRow>();
     private int _currentLocation;
     private int _openedSystem = -1;
     private string _selected = NoSelection;
@@ -93,6 +99,9 @@ public class MapScreen : MonoBehaviour
 
         foreach (MapNode node in _branchNodes)
             node.Clicked += OnBranchClicked;
+
+        foreach (MapNode node in _armBranchNodes)
+            node.Clicked += OnBranchClicked;
     }
 
     private void OnDisable()
@@ -116,6 +125,9 @@ public class MapScreen : MonoBehaviour
             node.Clicked -= OnLocationClicked;
 
         foreach (MapNode node in _branchNodes)
+            node.Clicked -= OnBranchClicked;
+
+        foreach (MapNode node in _armBranchNodes)
             node.Clicked -= OnBranchClicked;
     }
 
@@ -210,6 +222,34 @@ public class MapScreen : MonoBehaviour
 
         ShowRoute(_armDone, _armRest, _systemPositions, Mathf.Min(currentSystem, _systemPositions.Length - 1),
             currentSystem >= _systemPositions.Length);
+        ShowArmBranches();
+    }
+
+    private void ShowArmBranches()
+    {
+        _shownArmBranches.Clear();
+
+        foreach (BranchPlacement placement in _branchPlacements)
+        {
+            LocationRow branch = _locations.GetRow(placement.Id);
+
+            if (branch == null || _shownArmBranches.Count >= _armBranchNodes.Length)
+                continue;
+
+            int index = _shownArmBranches.Count;
+            MapNode node = _armBranchNodes[index];
+            RectTransform rect = (RectTransform)node.transform;
+
+            node.gameObject.SetActive(true);
+            rect.anchorMin = rect.anchorMax = new Vector2(placement.Arm.x, 1f - placement.Arm.y);
+            rect.anchoredPosition = Vector2.zero;
+            node.Show(index, branch.Title, GetBranchState(branch), _branchColor);
+            node.SetStars(_economy.GetStars(branch.Id));
+            _shownArmBranches.Add(branch);
+        }
+
+        for (int i = _shownArmBranches.Count; i < _armBranchNodes.Length; i++)
+            _armBranchNodes[i].gameObject.SetActive(false);
     }
 
     private void ShowSystem(int index)
@@ -260,7 +300,7 @@ public class MapScreen : MonoBehaviour
                 if (_shownBranches.Count >= _branchNodes.Length)
                     break;
 
-                ShowBranch(_shownBranches.Count, branch, positions[i]);
+                ShowBranch(_shownBranches.Count, branch, positions[i], GetBranchPosition(branch, positions[i]));
                 _shownBranches.Add(branch);
             }
         }
@@ -272,9 +312,8 @@ public class MapScreen : MonoBehaviour
         }
     }
 
-    private void ShowBranch(int index, LocationRow branch, Vector2 parent)
+    private void ShowBranch(int index, LocationRow branch, Vector2 parent, Vector2 position)
     {
-        Vector2 position = GetBranchPosition(parent);
         RectTransform node = (RectTransform)_branchNodes[index].transform;
 
         _branchNodes[index].gameObject.SetActive(true);
@@ -291,8 +330,14 @@ public class MapScreen : MonoBehaviour
         link.SetPoints(new List<Vector2> { parent, position });
     }
 
-    private Vector2 GetBranchPosition(Vector2 parent)
+    private Vector2 GetBranchPosition(LocationRow branch, Vector2 parent)
     {
+        foreach (BranchPlacement placement in _branchPlacements)
+        {
+            if (placement.Id == branch.Id)
+                return placement.System;
+        }
+
         float side = parent.x < _starCentre.x ? -1f : 1f;
 
         return parent + new Vector2(side * BranchDistance / ImageWidth, 0f);
@@ -344,6 +389,7 @@ public class MapScreen : MonoBehaviour
         _title.text = title;
         _info.text = string.Empty;
         _backButton.gameObject.SetActive(canGoBack);
+        _backLabel.text = view == _systemView ? ToArmText : ToGalaxyText;
     }
 
     private MapNodeState GetSystemState(int system, int currentSystem)
@@ -434,7 +480,8 @@ public class MapScreen : MonoBehaviour
 
     private void OnBranchClicked(MapNode node)
     {
-        LocationRow branch = _shownBranches[node.Index];
+        bool isOnArm = Array.IndexOf(_armBranchNodes, node) >= 0;
+        LocationRow branch = isOnArm ? _shownArmBranches[node.Index] : _shownBranches[node.Index];
         LocationRow parent = _locations.GetRow(branch.BranchOf);
         bool canSelect = node.State != MapNodeState.Locked && _waves.HasLocation(branch.Id);
         string state = node.State == MapNodeState.Completed ? "COMPLETED"
@@ -455,6 +502,10 @@ public class MapScreen : MonoBehaviour
         for (int i = 0; i < _branchNodes.Length; i++)
             _branchNodes[i].SetSelected(i < _shownBranches.Count && _branchNodes[i].gameObject.activeSelf
                 && _shownBranches[i].Id == locationId);
+
+        for (int i = 0; i < _armBranchNodes.Length; i++)
+            _armBranchNodes[i].SetSelected(i < _shownArmBranches.Count && _armBranchNodes[i].gameObject.activeSelf
+                && _shownArmBranches[i].Id == locationId);
 
         bool isReplay = locationId != NoSelection && _economy.IsLocationCompleted(locationId);
 
@@ -482,8 +533,9 @@ public class MapScreen : MonoBehaviour
 
 #if UNITY_EDITOR
     public void Configure(Vector2[] systemPositions, Sprite[] systemSprites, Color[] starColors,
-        LocationPositions[] locationPositions)
+        LocationPositions[] locationPositions, BranchPlacement[] branchPlacements)
     {
+        _branchPlacements = branchPlacements;
         _systemPositions = systemPositions;
         _systemSprites = systemSprites;
         _starColors = starColors;

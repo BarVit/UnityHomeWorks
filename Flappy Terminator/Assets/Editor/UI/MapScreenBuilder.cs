@@ -98,9 +98,18 @@ namespace UiContent
         }
 
         [Serializable]
+        private class BranchPoint
+        {
+            public string id;
+            public Point system;
+            public Point arm;
+        }
+
+        [Serializable]
         private class Systems
         {
             public StarSystem[] systems;
+            public BranchPoint[] branches;
         }
 
         [MenuItem("Tools/UI/Build Map Screen")]
@@ -143,16 +152,16 @@ namespace UiContent
             RectTransform galaxyView = BuildGalaxy(viewport, galaxy, galaxyArt, out MapRegion[] regions,
                 out MapOverlay overlay);
             RectTransform armView = BuildArm(viewport, systems, out MapNode[] systemNodes, out UiPolyline armDone,
-                out UiPolyline armRest);
+                out UiPolyline armRest, out MapNode[] armBranchNodes);
             RectTransform systemView = BuildSystemView(viewport, out Image systemBackground, out MapNode[] locationNodes,
                 out UiPolyline routeDone, out UiPolyline routeRest, out MapNode[] branchNodes, out UiPolyline[] branchLinks);
 
             Button back = DockScreenBuilder.AddButton(panel, "Back Button", "BACK", new Vector2(0f, 1f), new Vector2(110f, -54f),
                 new Vector2(170f, 64f), 28);
-            TMP_Text title = DockScreenBuilder.AddText(DockScreenBuilder.Place("Title", panel, new Vector2(0f, 1f),
-                new Vector2(440f, -54f), new Vector2(460f, 60f)), "MILKY WAY", 40, TextAlignmentOptions.Left, Color.white);
-            TMP_Text info = DockScreenBuilder.AddText(DockScreenBuilder.Place("Info", panel, new Vector2(0.5f, 1f),
-                new Vector2(0f, -120f), new Vector2(900f, 40f)), "", 26, TextAlignmentOptions.Center, Cyan);
+            TMP_Text title = DockScreenBuilder.AddText(DockScreenBuilder.Place("Title", panel, new Vector2(0.5f, 1f),
+                new Vector2(0f, -54f), new Vector2(700f, 60f)), "MILKY WAY", 40, TextAlignmentOptions.Center, Color.white);
+            TMP_Text info = DockScreenBuilder.AddText(DockScreenBuilder.Place("Info", panel, new Vector2(0.5f, 0f),
+                new Vector2(0f, 136f), new Vector2(900f, 40f)), "", 26, TextAlignmentOptions.Center, Cyan);
             MapToast toast = BuildToast(panel);
 
             Button menu = DockScreenBuilder.AddButton(panel, "Menu Button", "MENU", new Vector2(0f, 0f), new Vector2(150f, 62f),
@@ -188,6 +197,8 @@ namespace UiContent
             so.FindProperty("_routeRest").objectReferenceValue = routeRest;
             SetArray(so.FindProperty("_branchNodes"), branchNodes);
             SetArray(so.FindProperty("_branchLinks"), branchLinks);
+            SetArray(so.FindProperty("_armBranchNodes"), armBranchNodes);
+            so.FindProperty("_backLabel").objectReferenceValue = back.GetComponentInChildren<TMP_Text>();
             so.FindProperty("_title").objectReferenceValue = title;
             so.FindProperty("_info").objectReferenceValue = info;
             so.FindProperty("_backButton").objectReferenceValue = back;
@@ -199,7 +210,7 @@ namespace UiContent
             so.ApplyModifiedPropertiesWithoutUndo();
 
             screen.Configure(GetSystemPositions(systems), GetSystemSprites(), GetStarColors(systems),
-                GetLocationPositions(systems));
+                GetLocationPositions(systems), GetBranchPlacements(systems));
             EditorUtility.SetDirty(screen);
 
             WireNavigation(dock, screen);
@@ -290,7 +301,7 @@ namespace UiContent
         }
 
         private static RectTransform BuildArm(RectTransform viewport, Systems systems, out MapNode[] nodes,
-            out UiPolyline done, out UiPolyline rest)
+            out UiPolyline done, out UiPolyline rest, out MapNode[] branches)
         {
             RectTransform view = DockScreenBuilder.Stretch("Arm", viewport);
             DockScreenBuilder.AddImage(view, Art("Orion Arm Map")).raycastTarget = true;
@@ -304,6 +315,11 @@ namespace UiContent
                 nodes[i] = AddNode(view, "System " + (i + 1), SystemNodeSize, 26, 0);
                 Anchor((RectTransform)nodes[i].transform, systems.systems[i].position.ToVector());
             }
+
+            branches = new MapNode[BranchNodeCount];
+
+            for (int i = 0; i < BranchNodeCount; i++)
+                branches[i] = AddNode(view, "Arm Branch " + (i + 1), LocationNodeSize, 18, LocationStarCount);
 
             return view;
         }
@@ -469,6 +485,22 @@ namespace UiContent
                 ColorUtility.TryParseHtmlString(systems.systems[i].color, out colors[i]);
 
             return colors;
+        }
+
+        private static BranchPlacement[] GetBranchPlacements(Systems systems)
+        {
+            if (systems.branches == null)
+                return new BranchPlacement[0];
+
+            BranchPlacement[] placements = new BranchPlacement[systems.branches.Length];
+
+            for (int i = 0; i < placements.Length; i++)
+            {
+                BranchPoint branch = systems.branches[i];
+                placements[i] = new BranchPlacement(branch.id, branch.system.ToVector(), branch.arm.ToVector());
+            }
+
+            return placements;
         }
 
         private static LocationPositions[] GetLocationPositions(Systems systems)
