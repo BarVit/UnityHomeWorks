@@ -25,7 +25,7 @@ MonoBehaviour:
   - _location: loc_01_01
     _level: 2
     _order: 1
-    _count: 10
+    _count: 7
     _mode: 1
     _enemies:
     - warden_1
@@ -43,37 +43,35 @@ MonoBehaviour:
   - _location: loc_01_02
     _level: 1
     _order: 1
-    _count: 12
+    _count: 8
     _mode: 1
     _enemies:
     - warden_1
-    - warden_1
     - warden_2
-    _interval: 3
+    _interval: 2
     _intervalMax: 3
   - _location: loc_01_02
     _level: 1
     _order: 2
-    _count: 12
+    _count: 9
     _mode: 1
     _enemies:
     - warden_1
-    - warden_1
     - hunter_1
     - hunter_1
-    _interval: 4
+    _interval: 3
     _intervalMax: 4
   - _location: loc_01_02
     _level: 2
     _order: 1
-    _count: 20
+    _count: 12
     _mode: 1
     _enemies:
-    - warden_2
+    - warden_1
     - warden_2
     - hunter_1
     - hunter_1
-    _interval: 4
+    _interval: 2
     _intervalMax: 4
   - _location: loc_01_02
     _level: 2
