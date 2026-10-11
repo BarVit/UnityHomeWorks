@@ -62,7 +62,7 @@ namespace TableImport
                     kind,
                     reader.ReadPrefab<EnemyShip>("prefab", true),
                     prototype,
-                    reader.ReadInt("health", 1, 1000000),
+                    reader.ReadInt("health", 1, 1000000000),
                     weapon,
                     barrels,
                     reader.ReadInt("damage", 1, 100000),
