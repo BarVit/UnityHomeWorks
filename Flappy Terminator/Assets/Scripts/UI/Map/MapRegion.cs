@@ -18,6 +18,7 @@ public class MapRegion : MaskableGraphic, ICanvasRaycastFilter, IPointerEnterHan
     public bool IsAvailable => _isAvailable;
 
     public event Action<MapRegion> Clicked;
+    public event Action<MapRegion, bool> Hovered;
 
     protected override void Awake()
     {
@@ -34,11 +35,13 @@ public class MapRegion : MaskableGraphic, ICanvasRaycastFilter, IPointerEnterHan
     public void OnPointerEnter(PointerEventData eventData)
     {
         color = _isAvailable ? _hoverColor : _lockedHoverColor;
+        Hovered?.Invoke(this, true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         color = Color.clear;
+        Hovered?.Invoke(this, false);
     }
 
     public void OnPointerClick(PointerEventData eventData)

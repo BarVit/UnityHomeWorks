@@ -28,6 +28,7 @@ public class MapScreen : MonoBehaviour
     [SerializeField] private GameObject _armView;
     [SerializeField] private GameObject _systemView;
     [SerializeField] private MapRegion[] _regions;
+    [SerializeField] private MapOverlay _galaxyOverlay;
     [SerializeField] private MapNode[] _systemNodes;
     [SerializeField] private Vector2[] _systemPositions;
     [SerializeField] private UiPolyline _armDone;
@@ -72,7 +73,10 @@ public class MapScreen : MonoBehaviour
         _economy.SessionStarted += ForgetView;
 
         foreach (MapRegion region in _regions)
+        {
             region.Clicked += OnRegionClicked;
+            region.Hovered += OnRegionHovered;
+        }
 
         foreach (MapNode node in _systemNodes)
             node.Clicked += OnSystemClicked;
@@ -90,7 +94,10 @@ public class MapScreen : MonoBehaviour
         _economy.SessionStarted -= ForgetView;
 
         foreach (MapRegion region in _regions)
+        {
             region.Clicked -= OnRegionClicked;
+            region.Hovered -= OnRegionHovered;
+        }
 
         foreach (MapNode node in _systemNodes)
             node.Clicked -= OnSystemClicked;
@@ -169,6 +176,7 @@ public class MapScreen : MonoBehaviour
     private void ShowGalaxy()
     {
         Open(_galaxyView, GalaxyTitle, false);
+        _galaxyOverlay.HideNow();
     }
 
     private void ShowArm()
@@ -330,6 +338,11 @@ public class MapScreen : MonoBehaviour
             ShowArm();
         else
             _toast.Show(DemoOnly);
+    }
+
+    private void OnRegionHovered(MapRegion region, bool isHovered)
+    {
+        _galaxyOverlay.Show(isHovered);
     }
 
     private void OnSystemClicked(MapNode node)

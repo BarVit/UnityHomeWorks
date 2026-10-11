@@ -26,6 +26,8 @@ namespace UiContent
         private const string LocationsAsset = "Assets/Data/Generated/Locations.asset";
         private const string SystemsAsset = "Assets/Data/Generated/Systems.asset";
         private const string PanelName = "Map";
+        private const string GalaxyArt = "Galaxy Map v2";
+        private const string FirstGalaxyArt = "Galaxy Map";
         private const string OutlineMaterial = "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Outline.mat";
         private const float Aspect = 16f / 9f;
         private const int SystemCount = 5;
@@ -69,9 +71,16 @@ namespace UiContent
         }
 
         [Serializable]
+        private class Line
+        {
+            public Point[] points;
+        }
+
+        [Serializable]
         private class Galaxy
         {
             public Arm[] arms;
+            public Line[] borders;
         }
 
         [Serializable]
@@ -92,10 +101,21 @@ namespace UiContent
         [MenuItem("Tools/UI/Build Map Screen")]
         public static void Build()
         {
+            Build(GalaxyArt);
+        }
+
+        [MenuItem("Tools/UI/Build Map Screen (Galaxy v1)")]
+        public static void BuildFirstGalaxy()
+        {
+            Build(FirstGalaxyArt);
+        }
+
+        private static void Build(string galaxyArt)
+        {
             PrepareSprites();
             DockScreenBuilder.UseDefaultFont();
 
-            Galaxy galaxy = JsonUtility.FromJson<Galaxy>(Read("Galaxy Map.json"));
+            Galaxy galaxy = JsonUtility.FromJson<Galaxy>(Read(galaxyArt + ".json"));
             Systems systems = JsonUtility.FromJson<Systems>(Read("Systems Map.json"));
 
             DockScreen dock = UnityEngine.Object.FindAnyObjectByType<DockScreen>(FindObjectsInactive.Include);
@@ -115,7 +135,8 @@ namespace UiContent
             fitter.aspectMode = AspectRatioFitter.AspectMode.EnvelopeParent;
             fitter.aspectRatio = Aspect;
 
-            RectTransform galaxyView = BuildGalaxy(viewport, galaxy, out MapRegion[] regions);
+            RectTransform galaxyView = BuildGalaxy(viewport, galaxy, galaxyArt, out MapRegion[] regions,
+                out MapOverlay overlay);
             RectTransform armView = BuildArm(viewport, systems, out MapNode[] systemNodes, out UiPolyline armDone,
                 out UiPolyline armRest);
             RectTransform systemView = BuildSystemView(viewport, out Image systemBackground, out MapNode[] locationNodes,
@@ -152,6 +173,7 @@ namespace UiContent
             so.FindProperty("_armView").objectReferenceValue = armView.gameObject;
             so.FindProperty("_systemView").objectReferenceValue = systemView.gameObject;
             SetArray(so.FindProperty("_regions"), regions);
+            so.FindProperty("_galaxyOverlay").objectReferenceValue = overlay;
             SetArray(so.FindProperty("_systemNodes"), systemNodes);
             so.FindProperty("_armDone").objectReferenceValue = armDone;
             so.FindProperty("_armRest").objectReferenceValue = armRest;
@@ -179,13 +201,16 @@ namespace UiContent
             Debug.Log("Карта: экран собран.");
         }
 
-        private static RectTransform BuildGalaxy(RectTransform viewport, Galaxy galaxy, out MapRegion[] regions)
+        private static RectTransform BuildGalaxy(RectTransform viewport, Galaxy galaxy, string galaxyArt,
+            out MapRegion[] regions, out MapOverlay overlay)
         {
             RectTransform view = DockScreenBuilder.Stretch("Galaxy", viewport);
-            Image background = DockScreenBuilder.AddImage(view, Art("Galaxy Map"));
+            Image background = DockScreenBuilder.AddImage(view, Art(galaxyArt));
             background.raycastTarget = true;
 
             regions = new MapRegion[galaxy.arms.Length];
+            RectTransform layer = DockScreenBuilder.Stretch("Overlay", view);
+            overlay = BuildOverlay(layer);
 
             for (int i = 0; i < galaxy.arms.Length; i++)
             {
@@ -199,19 +224,48 @@ namespace UiContent
                 so.ApplyModifiedPropertiesWithoutUndo();
                 regions[i] = region;
 
-                UiPolyline border = DockScreenBuilder.Stretch(arm.title + " Border", view).gameObject.AddGraphic<UiPolyline>();
-                border.color = BorderColor;
-                border.SetStyle(BorderWidth, 0f, 0f, 0f);
-                border.SetPoints(ToVectors(arm.border));
+                if (arm.border != null && arm.border.Length > 1)
+                    AddBorder(layer, arm.title + " Border", arm.border);
 
-                RectTransform label = Anchor(arm.title + " Label", view, arm.label.ToVector(), new Vector2(380f, 34f));
+                RectTransform label = Anchor(arm.title + " Label", layer, arm.label.ToVector(), new Vector2(380f, 34f));
                 TMP_Text text = DockScreenBuilder.AddText(label, arm.title, arm.available ? 26 : 20, TextAlignmentOptions.Center,
                     arm.available ? Cyan : LockedLabel);
                 text.fontStyle = FontStyles.Bold;
                 text.fontSharedMaterial = AssetDatabase.LoadAssetAtPath<Material>(OutlineMaterial);
             }
 
+            if (galaxy.borders != null)
+            {
+                for (int i = 0; i < galaxy.borders.Length; i++)
+                    AddBorder(layer, "Border " + (i + 1), galaxy.borders[i].points);
+            }
+
+            layer.SetAsLastSibling();
+
             return view;
+        }
+
+        private static MapOverlay BuildOverlay(RectTransform layer)
+        {
+            CanvasGroup group = layer.gameObject.AddComponent<CanvasGroup>();
+            group.alpha = 0f;
+            group.blocksRaycasts = false;
+            group.interactable = false;
+
+            MapOverlay overlay = layer.gameObject.AddComponent<MapOverlay>();
+            SerializedObject so = new SerializedObject(overlay);
+            so.FindProperty("_group").objectReferenceValue = group;
+            so.ApplyModifiedPropertiesWithoutUndo();
+
+            return overlay;
+        }
+
+        private static void AddBorder(RectTransform layer, string name, Point[] points)
+        {
+            UiPolyline border = DockScreenBuilder.Stretch(name, layer).gameObject.AddGraphic<UiPolyline>();
+            border.color = BorderColor;
+            border.SetStyle(BorderWidth, 0f, 0f, 0f);
+            border.SetPoints(ToVectors(points));
         }
 
         private static RectTransform BuildArm(RectTransform viewport, Systems systems, out MapNode[] nodes,
@@ -335,7 +389,7 @@ namespace UiContent
 
         private static void PrepareSprites()
         {
-            foreach (string name in new[] { "Galaxy Map", "Orion Arm Map", "System 1 Map", "System 2 Map", "System 3 Map",
+            foreach (string name in new[] { FirstGalaxyArt, GalaxyArt, "Orion Arm Map", "System 1 Map", "System 2 Map", "System 3 Map",
                          "System 4 Map", "System 5 Map" })
                 Prepare(name, TextureImporterCompression.Compressed);
 
