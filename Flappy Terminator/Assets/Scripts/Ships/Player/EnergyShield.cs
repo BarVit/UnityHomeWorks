@@ -54,15 +54,13 @@ public class EnergyShield : MonoBehaviour
         if (IsUp == false || damage <= 0)
             return damage;
 
-        int taken = Mathf.Min(damage, _left);
-
-        _left -= taken;
+        _left = Mathf.Max(0, _left - damage);
         _flashLeft = _flashDuration;
 
         if (_left == 0)
             Break();
 
-        return damage - taken;
+        return 0;
     }
 
     public void Drop()
