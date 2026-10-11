@@ -21,6 +21,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float _spawnMargin = 1f;
     [SerializeField] private float _minSpawnPositionY = -3f;
     [SerializeField] private float _maxSpawnPositionY = 3f;
+    [SerializeField] private float _announcementDuration = 2f;
 
     private readonly PoolRegistry _pools = new PoolRegistry("Enemies");
     private readonly List<SpawnPool<EnemyShip>> _shipPools = new List<SpawnPool<EnemyShip>>();
@@ -39,6 +40,7 @@ public class EnemySpawner : MonoBehaviour
 
     public event Action<EnemyShip> EnemyDied;
     public event Action WaveCleared;
+    public event Action<string, float> BossAnnounced;
 
     private void Awake()
     {
@@ -201,6 +203,14 @@ public class EnemySpawner : MonoBehaviour
 
             while (spawn.WaitsForClearField && _wave.RetiredCount < i)
                 yield return null;
+
+            if (spawn.HasAnnouncement)
+            {
+                BossAnnounced?.Invoke(spawn.Announcement, _announcementDuration);
+
+                for (float left = _announcementDuration; left > 0f; left -= Time.deltaTime)
+                    yield return null;
+            }
 
             Release(spawn.Setup);
             _released = i + 1;

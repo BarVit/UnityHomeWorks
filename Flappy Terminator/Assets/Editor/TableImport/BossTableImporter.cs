@@ -8,10 +8,12 @@ namespace TableImport
         public const string SourcePath = "Assets/Data/Tables/bosses.tsv";
         public const string AssetPath = "Assets/Data/Generated/Bosses.asset";
 
+        private const string LineBreakMark = "\\n";
+
         private static readonly string[] Columns =
         {
             "id", "title", "kind", "prefab", "prototype", "health", "weapon", "barrels", "damage",
-            "body_damage", "scale", "tint", "movement", "reward_money", "reward_xp"
+            "body_damage", "scale", "tint", "movement", "reward_money", "reward_xp", "intro"
         };
 
         public static BossTable Import(EnemyTable enemies, WeaponTable weapons, TableLog log)
@@ -47,13 +49,17 @@ namespace TableImport
                 string weapon = reader.ReadText("weapon");
                 int barrels = reader.ReadInt("barrels", 1, 8);
 
+                BossKind kind = reader.ReadEnum<BossKind>("kind");
+                string intro = reader.ReadOptionalText("intro").Replace(LineBreakMark, "\n");
+
                 CheckPrototype(enemies, ids, prototype, reader);
+                CheckIntro(kind, intro, reader);
                 CheckWeapon(weapons, weapon, barrels, reader);
 
                 rows.Add(new BossRow(
                     id,
                     reader.ReadText("title"),
-                    reader.ReadEnum<BossKind>("kind"),
+                    kind,
                     reader.ReadPrefab<EnemyShip>("prefab", true),
                     prototype,
                     reader.ReadInt("health", 1, 1000000),
@@ -66,6 +72,7 @@ namespace TableImport
                     reader.ReadAsset<MovementProfile>("movement", true),
                     reader.ReadInt("reward_money", 0, 1000000),
                     reader.ReadInt("reward_xp", 0, 1000000),
+                    intro,
                     phases.TryGetValue(id, out BossPhaseRow[] bossPhases) ? bossPhases : new BossPhaseRow[0]));
             }
 
@@ -96,6 +103,14 @@ namespace TableImport
             if (barrels > row.BarrelsMax)
                 reader.Fail("barrels: " + barrels + " больше, чем barrels_max оружия "
                     + row.Id + " (" + row.BarrelsMax + ")");
+        }
+
+        private static void CheckIntro(BossKind kind, string intro, RowReader reader)
+        {
+            if (kind == BossKind.Boss && intro.Length == 0)
+                reader.Fail("intro: боссу нужна надпись перед появлением");
+            else if (kind == BossKind.MiniBoss && intro.Length > 0)
+                reader.Fail("intro: у мини-босса надписи перед появлением нет, оставьте пустым");
         }
 
         private static void CheckPrototype(EnemyTable enemies, HashSet<string> ids, string prototype,

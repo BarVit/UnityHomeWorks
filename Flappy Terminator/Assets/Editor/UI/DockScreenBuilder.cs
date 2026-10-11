@@ -100,6 +100,8 @@ namespace UiContent
             BuildDock(dock, hangar, modules, skills, economy);
             BuildHud(runner);
             BuildModuleHud((RectTransform)dock.transform, battle);
+            BuildBossAnnouncement((RectTransform)dock.transform,
+                Object.FindAnyObjectByType<EnemySpawner>(FindObjectsInactive.Include));
 
             EditorSceneManager.MarkSceneDirty(dock.gameObject.scene);
             Debug.Log("Док: экран собран.");

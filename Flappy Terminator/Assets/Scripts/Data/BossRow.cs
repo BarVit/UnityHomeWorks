@@ -20,11 +20,12 @@ public class BossRow
     [SerializeField] private MovementProfile _movement;
     [SerializeField] private int _rewardMoney;
     [SerializeField] private int _rewardXp;
+    [SerializeField] private string _intro;
     [SerializeField] private BossPhaseRow[] _phases;
 
     public BossRow(string id, string title, BossKind kind, EnemyShip prefab, string prototype, int health,
         string weapon, int barrels, int damage, int bodyDamage, int scale, Color tint, MovementProfile movement,
-        int rewardMoney, int rewardXp, BossPhaseRow[] phases)
+        int rewardMoney, int rewardXp, string intro, BossPhaseRow[] phases)
     {
         _id = id;
         _title = title;
@@ -41,6 +42,7 @@ public class BossRow
         _movement = movement;
         _rewardMoney = rewardMoney;
         _rewardXp = rewardXp;
+        _intro = intro;
         _phases = phases;
     }
 
@@ -73,6 +75,8 @@ public class BossRow
     public int RewardMoney => _rewardMoney;
 
     public int RewardXp => _rewardXp;
+
+    public string Intro => _intro;
 
     public IReadOnlyList<BossPhaseRow> Phases => _phases ?? Array.Empty<BossPhaseRow>();
 }

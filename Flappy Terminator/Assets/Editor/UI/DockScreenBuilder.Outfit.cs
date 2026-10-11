@@ -9,6 +9,8 @@ namespace UiContent
     {
         private const string ShopName = "Shop";
         private const string ModuleBarName = "Module Bar";
+        private const string AnnouncementName = "Boss Announcement";
+        private const string OutlineMaterial = "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Outline.mat";
         private const string ShieldName = "Energy Shield";
         private const string PlayerPrefab = "Assets/Prefabs/Player Ship.prefab";
         private const string BubbleSprite = "Assets/Sprites/VFX/Energy Shield Bubble.png";
@@ -151,6 +153,34 @@ namespace UiContent
             SerializedObject so = new SerializedObject(hud);
             so.FindProperty("_modules").objectReferenceValue = battle;
             SetArray(so.FindProperty("_buttons"), buttons);
+            so.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        private static void BuildBossAnnouncement(RectTransform canvas, EnemySpawner spawner)
+        {
+            Transform old = canvas.Find(AnnouncementName);
+            int sibling = old == null ? canvas.childCount : old.GetSiblingIndex();
+
+            if (old != null)
+                Object.DestroyImmediate(old.gameObject);
+
+            RectTransform rect = Place(AnnouncementName, canvas, new Vector2(0.5f, 0.5f), new Vector2(0f, 60f),
+                new Vector2(1200f, 200f));
+            rect.SetSiblingIndex(Mathf.Min(sibling, canvas.childCount - 1));
+            CanvasGroup group = rect.gameObject.AddComponent<CanvasGroup>();
+            group.alpha = 0f;
+            group.blocksRaycasts = false;
+            group.interactable = false;
+
+            TMP_Text label = AddText(Stretch("Label", rect), "", 48, TextAlignmentOptions.Center, Color.white);
+            label.fontStyle = FontStyles.Bold;
+            label.fontSharedMaterial = AssetDatabase.LoadAssetAtPath<Material>(OutlineMaterial);
+            label.raycastTarget = false;
+
+            BossAnnouncement announcement = rect.gameObject.AddComponent<BossAnnouncement>();
+            SerializedObject so = new SerializedObject(announcement);
+            so.FindProperty("_spawner").objectReferenceValue = spawner;
+            so.FindProperty("_label").objectReferenceValue = label;
             so.ApplyModifiedPropertiesWithoutUndo();
         }
 

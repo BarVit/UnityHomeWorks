@@ -28,6 +28,7 @@ MonoBehaviour:
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
     _rewardMoney: 500
     _rewardXp: 100
+    _intro: 
     _phases:
     - _phase: 1
       _weapon: marauder_1_gun
@@ -68,6 +69,7 @@ MonoBehaviour:
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
     _rewardMoney: 800
     _rewardXp: 125
+    _intro: 
     _phases: []
   - _id: punisher_1
     _title: "\u041A\u0430\u0440\u0430\u0442\u0435\u043B\u044C I"
@@ -84,6 +86,7 @@ MonoBehaviour:
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
     _rewardMoney: 625
     _rewardXp: 125
+    _intro: 
     _phases: []
   - _id: punisher_2
     _title: "\u041A\u0430\u0440\u0430\u0442\u0435\u043B\u044C II"
@@ -100,6 +103,7 @@ MonoBehaviour:
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
     _rewardMoney: 1000
     _rewardXp: 200
+    _intro: 
     _phases: []
   - _id: berserker_1
     _title: "\u0411\u0435\u0440\u0441\u0435\u0440\u043A I"
@@ -116,6 +120,7 @@ MonoBehaviour:
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
     _rewardMoney: 750
     _rewardXp: 150
+    _intro: 
     _phases: []
   - _id: berserker_2
     _title: "\u0411\u0435\u0440\u0441\u0435\u0440\u043A II"
@@ -132,6 +137,7 @@ MonoBehaviour:
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
     _rewardMoney: 1200
     _rewardXp: 250
+    _intro: 
     _phases: []
   - _id: tormentor_1
     _title: "\u0422\u0435\u0440\u0437\u0430\u0442\u0435\u043B\u044C I"
@@ -148,6 +154,7 @@ MonoBehaviour:
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
     _rewardMoney: 1250
     _rewardXp: 250
+    _intro: 
     _phases: []
   - _id: tormentor_2
     _title: "\u0422\u0435\u0440\u0437\u0430\u0442\u0435\u043B\u044C II"
@@ -164,6 +171,7 @@ MonoBehaviour:
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
     _rewardMoney: 2000
     _rewardXp: 350
+    _intro: 
     _phases: []
   - _id: ripper_1
     _title: "\u041F\u043E\u0442\u0440\u043E\u0448\u0438\u0442\u0435\u043B\u044C I"
@@ -180,6 +188,7 @@ MonoBehaviour:
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
     _rewardMoney: 3000
     _rewardXp: 600
+    _intro: 
     _phases: []
   - _id: ripper_2
     _title: "\u041F\u043E\u0442\u0440\u043E\u0448\u0438\u0442\u0435\u043B\u044C II"
@@ -196,6 +205,7 @@ MonoBehaviour:
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
     _rewardMoney: 4800
     _rewardXp: 750
+    _intro: 
     _phases: []
   - _id: hierarch
     _title: "\u0418\u0435\u0440\u0430\u0440\u0445"
@@ -212,6 +222,9 @@ MonoBehaviour:
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
     _rewardMoney: 3125
     _rewardXp: 625
+    _intro: 'HIERARCH GUARDS THE STAR GATE.
+
+      GET READY TO FIGHT THE BOSS!'
     _phases: []
   - _id: magister
     _title: "\u041C\u0430\u0433\u0438\u0441\u0442\u0440"
@@ -228,6 +241,9 @@ MonoBehaviour:
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
     _rewardMoney: 5000
     _rewardXp: 1000
+    _intro: 'MAGISTER GUARDS THE STAR GATE.
+
+      GET READY TO FIGHT THE BOSS!'
     _phases: []
   - _id: overlord
     _title: "\u0412\u043B\u0430\u0434\u044B\u043A\u0430"
@@ -244,6 +260,9 @@ MonoBehaviour:
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
     _rewardMoney: 6250
     _rewardXp: 1250
+    _intro: 'OVERLORD GUARDS THE STAR GATE.
+
+      GET READY TO FIGHT THE BOSS!'
     _phases: []
   - _id: archon
     _title: "\u0410\u0440\u0445\u043E\u043D\u0442"
@@ -260,6 +279,9 @@ MonoBehaviour:
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
     _rewardMoney: 8750
     _rewardXp: 1750
+    _intro: 'ARCHON GUARDS THE STAR GATE.
+
+      GET READY TO FIGHT THE BOSS!'
     _phases: []
   - _id: titan
     _title: "\u0422\u0438\u0442\u0430\u043D"
@@ -276,6 +298,9 @@ MonoBehaviour:
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
     _rewardMoney: 18750
     _rewardXp: 3750
+    _intro: 'TITAN BLOCKS YOUR WAY.
+
+      GET READY TO FIGHT THE BOSS!'
     _phases: []
   - _id: emperor
     _title: "\u0418\u043C\u043F\u0435\u0440\u0430\u0442\u043E\u0440"
@@ -292,4 +317,7 @@ MonoBehaviour:
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
     _rewardMoney: 18750
     _rewardXp: 3750
+    _intro: 'THE EMPEROR AWAITS YOU.
+
+      GET READY TO FIGHT THE BOSS!'
     _phases: []

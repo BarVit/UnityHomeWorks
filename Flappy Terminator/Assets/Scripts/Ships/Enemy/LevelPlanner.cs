@@ -44,7 +44,7 @@ public class LevelPlanner
             throw new InvalidOperationException("LevelPlanner: для локации нет ни одного открытого врага");
 
         for (int i = 0; i < size; i++)
-            plan.Add(new PlannedSpawn(_roster.GetRandom(), interval, false));
+            plan.Add(new PlannedSpawn(_roster.GetRandom(), interval, false, PlannedSpawn.NoAnnouncement));
     }
 
     private void AddGroup(List<PlannedSpawn> plan, WaveRow row)
@@ -53,7 +53,7 @@ public class LevelPlanner
         {
             BossRow boss = _bosses.GetRow(row.Enemies[0]);
 
-            plan.Add(new PlannedSpawn(EnemySetup.ForBoss(boss, _weapons), GetInterval(row), true));
+            plan.Add(new PlannedSpawn(EnemySetup.ForBoss(boss, _weapons), GetInterval(row), true, boss.Intro));
 
             return;
         }
@@ -64,7 +64,7 @@ public class LevelPlanner
                 ? row.Enemies[i % row.Enemies.Length]
                 : row.Enemies[Random.Range(0, row.Enemies.Length)];
 
-            plan.Add(new PlannedSpawn(CreateEnemy(enemyId), GetInterval(row), false));
+            plan.Add(new PlannedSpawn(CreateEnemy(enemyId), GetInterval(row), false, PlannedSpawn.NoAnnouncement));
         }
     }
 
