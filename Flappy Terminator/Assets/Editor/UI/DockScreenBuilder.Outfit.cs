@@ -14,7 +14,7 @@ namespace UiContent
         private const string BubbleSprite = "Assets/Sprites/VFX/Energy Shield Bubble.png";
         private const int ShopCardCount = 10;
         private const int ShopColumns = 5;
-        private const float ShieldSizeShare = 1.45f;
+        private const float ShieldSizeShare = 1.16f;
 
         private static readonly Color TabIdle = new Color(0.45f, 0.55f, 0.66f, 0.9f);
         private static readonly Color Shade = new Color(0f, 0.02f, 0.05f, 0.72f);
