@@ -14,6 +14,7 @@ public class MapScreen : MonoBehaviour
     private const string ReplayText = "REPLAY";
     private const string ToArmText = "ARM";
     private const string ToGalaxyText = "GALAXY";
+    private const string GateText = "STAR GATE";
     private const string NoSelection = null;
     private const float BranchDistance = 230f;
     private const float ImageWidth = 1920f;
@@ -48,6 +49,9 @@ public class MapScreen : MonoBehaviour
     [SerializeField] private UiPolyline[] _branchLinks;
     [SerializeField] private MapNode[] _armBranchNodes;
     [SerializeField] private BranchPlacement[] _branchPlacements;
+    [SerializeField] private StarGateView _starGate;
+    [SerializeField] private UiPolyline _gateLink;
+    [SerializeField] private Vector2[] _gatePositions;
     [SerializeField] private Vector2 _starCentre = new Vector2(0.5f, 0.4907f);
     [SerializeField] private Color _branchColor = new Color(0.7f, 0.62f, 1f);
     [SerializeField] private TMP_Text _title;
@@ -102,6 +106,8 @@ public class MapScreen : MonoBehaviour
 
         foreach (MapNode node in _armBranchNodes)
             node.Clicked += OnBranchClicked;
+
+        _starGate.Clicked += OnGateClicked;
     }
 
     private void OnDisable()
@@ -129,6 +135,8 @@ public class MapScreen : MonoBehaviour
 
         foreach (MapNode node in _armBranchNodes)
             node.Clicked -= OnBranchClicked;
+
+        _starGate.Clicked -= OnGateClicked;
     }
 
     public void Show(bool canPlay)
@@ -287,6 +295,30 @@ public class MapScreen : MonoBehaviour
         ShowRoute(_routeDone, _routeRest, route, Mathf.Clamp(_currentLocation - first, -1, count - 1),
             _currentLocation - first >= count);
         ShowBranches(locations, route);
+        ShowGate(index, locations, route);
+    }
+
+    private void ShowGate(int system, List<LocationRow> locations, Vector2[] route)
+    {
+        bool exists = system + 1 < _systemRoute.Count && system < _gatePositions.Length
+            && _gatePositions[system] != Vector2.zero && route.Length > 0;
+
+        _starGate.gameObject.SetActive(exists);
+        _gateLink.gameObject.SetActive(exists);
+
+        if (exists == false)
+            return;
+
+        Vector2 position = _gatePositions[system];
+        RectTransform rect = (RectTransform)_starGate.transform;
+        bool isOpen = _economy.IsLocationCompleted(locations[route.Length - 1].Id);
+
+        rect.anchorMin = rect.anchorMax = new Vector2(position.x, 1f - position.y);
+        rect.anchoredPosition = Vector2.zero;
+        _starGate.Show(GateText, isOpen);
+        _gateLink.color = isOpen ? _doneRouteColor : _restRouteColor;
+        _gateLink.SetStyle(RouteWidth * 0.75f, Dash, Gap, isOpen ? DashSpeed : 0f);
+        _gateLink.SetPoints(new List<Vector2> { route[route.Length - 1], position });
     }
 
     private void ShowBranches(List<LocationRow> locations, Vector2[] positions)
@@ -492,6 +524,24 @@ public class MapScreen : MonoBehaviour
         Select(canSelect ? branch.Id : NoSelection);
     }
 
+    private void OnGateClicked()
+    {
+        int next = _openedSystem + 1;
+
+        if (_starGate.IsOpen)
+        {
+            ShowSystem(next);
+
+            return;
+        }
+
+        int last = GetFirstLocation(_openedSystem) + GetLocations(_systemRoute[_openedSystem].Id).Count - 1;
+
+        _info.text = GateText + " TO " + SystemTitle + _systemRoute[next].Order + "     LOCKED UNTIL " + GetLabel(last)
+            + " IS CLEARED";
+        Select(NoSelection);
+    }
+
     private void Select(string locationId)
     {
         _selected = locationId;
@@ -533,9 +583,10 @@ public class MapScreen : MonoBehaviour
 
 #if UNITY_EDITOR
     public void Configure(Vector2[] systemPositions, Sprite[] systemSprites, Color[] starColors,
-        LocationPositions[] locationPositions, BranchPlacement[] branchPlacements)
+        LocationPositions[] locationPositions, BranchPlacement[] branchPlacements, Vector2[] gatePositions)
     {
         _branchPlacements = branchPlacements;
+        _gatePositions = gatePositions;
         _systemPositions = systemPositions;
         _systemSprites = systemSprites;
         _starColors = starColors;

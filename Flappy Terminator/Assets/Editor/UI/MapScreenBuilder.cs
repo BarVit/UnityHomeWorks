@@ -41,6 +41,7 @@ namespace UiContent
         private const float NodeStarStep = 20f;
         private const float BorderWidth = 2.5f;
         private const float SelectionScale = 1.6f;
+        private const float GateSize = 110f;
         private const string WavesAsset = "Assets/Data/Generated/Waves.asset";
 
         private static readonly Color Cyan = new Color(0.21f, 0.85f, 1f);
@@ -106,10 +107,19 @@ namespace UiContent
         }
 
         [Serializable]
+        private class GatePoint
+        {
+            public string system;
+            public float x;
+            public float y;
+        }
+
+        [Serializable]
         private class Systems
         {
             public StarSystem[] systems;
             public BranchPoint[] branches;
+            public GatePoint[] gates;
         }
 
         [MenuItem("Tools/UI/Build Map Screen")]
@@ -154,7 +164,8 @@ namespace UiContent
             RectTransform armView = BuildArm(viewport, systems, out MapNode[] systemNodes, out UiPolyline armDone,
                 out UiPolyline armRest, out MapNode[] armBranchNodes);
             RectTransform systemView = BuildSystemView(viewport, out Image systemBackground, out MapNode[] locationNodes,
-                out UiPolyline routeDone, out UiPolyline routeRest, out MapNode[] branchNodes, out UiPolyline[] branchLinks);
+                out UiPolyline routeDone, out UiPolyline routeRest, out MapNode[] branchNodes, out UiPolyline[] branchLinks,
+                out StarGateView starGate, out UiPolyline gateLink);
 
             Button back = DockScreenBuilder.AddButton(panel, "Back Button", "BACK", new Vector2(0f, 1f), new Vector2(110f, -54f),
                 new Vector2(170f, 64f), 28);
@@ -198,6 +209,8 @@ namespace UiContent
             SetArray(so.FindProperty("_branchNodes"), branchNodes);
             SetArray(so.FindProperty("_branchLinks"), branchLinks);
             SetArray(so.FindProperty("_armBranchNodes"), armBranchNodes);
+            so.FindProperty("_starGate").objectReferenceValue = starGate;
+            so.FindProperty("_gateLink").objectReferenceValue = gateLink;
             so.FindProperty("_backLabel").objectReferenceValue = back.GetComponentInChildren<TMP_Text>();
             so.FindProperty("_title").objectReferenceValue = title;
             so.FindProperty("_info").objectReferenceValue = info;
@@ -210,7 +223,7 @@ namespace UiContent
             so.ApplyModifiedPropertiesWithoutUndo();
 
             screen.Configure(GetSystemPositions(systems), GetSystemSprites(), GetStarColors(systems),
-                GetLocationPositions(systems), GetBranchPlacements(systems));
+                GetLocationPositions(systems), GetBranchPlacements(systems), GetGatePositions(systems));
             EditorUtility.SetDirty(screen);
 
             WireNavigation(dock, screen);
@@ -325,7 +338,8 @@ namespace UiContent
         }
 
         private static RectTransform BuildSystemView(RectTransform viewport, out Image background, out MapNode[] nodes,
-            out UiPolyline done, out UiPolyline rest, out MapNode[] branches, out UiPolyline[] links)
+            out UiPolyline done, out UiPolyline rest, out MapNode[] branches, out UiPolyline[] links, out StarGateView gate,
+            out UiPolyline gateLink)
         {
             RectTransform view = DockScreenBuilder.Stretch("System", viewport);
             background = DockScreenBuilder.AddImage(view, Art("System 1 Map"));
@@ -338,6 +352,9 @@ namespace UiContent
             for (int i = 0; i < BranchNodeCount; i++)
                 links[i] = DockScreenBuilder.Stretch("Branch Link " + (i + 1), view).gameObject.AddGraphic<UiPolyline>();
 
+            gateLink = DockScreenBuilder.Stretch("Gate Link", view).gameObject.AddGraphic<UiPolyline>();
+            gate = AddGate(view);
+
             nodes = new MapNode[LocationNodeCount];
 
             for (int i = 0; i < LocationNodeCount; i++)
@@ -349,6 +366,32 @@ namespace UiContent
                 branches[i] = AddNode(view, "Branch " + (i + 1), LocationNodeSize, 18, LocationStarCount);
 
             return view;
+        }
+
+        private static StarGateView AddGate(RectTransform parent)
+        {
+            RectTransform root = DockScreenBuilder.Place("Star Gate", parent, new Vector2(0.5f, 0.5f), Vector2.zero,
+                new Vector2(GateSize, GateSize));
+            RectTransform vortex = DockScreenBuilder.Stretch("Vortex", root);
+            DockScreenBuilder.AddImage(vortex, Art("Star Gate Vortex"));
+            Image ring = DockScreenBuilder.AddImage(DockScreenBuilder.Stretch("Ring", root), Art("Star Gate"));
+            ring.raycastTarget = true;
+            RectTransform lockRect = DockScreenBuilder.Place("Lock", root, new Vector2(0.5f, 0.5f), Vector2.zero,
+                new Vector2(GateSize * 0.32f, GateSize * 0.32f));
+            DockScreenBuilder.AddImage(lockRect, DockScreenBuilder.Art("Lock Icon"));
+            TMP_Text label = DockScreenBuilder.AddText(DockScreenBuilder.Place("Label", root, new Vector2(0.5f, 0f),
+                new Vector2(0f, -16f), new Vector2(220f, 30f)), "", 22, TextAlignmentOptions.Center, Color.white);
+            label.fontStyle = FontStyles.Bold;
+
+            StarGateView gate = root.gameObject.AddComponent<StarGateView>();
+            SerializedObject so = new SerializedObject(gate);
+            so.FindProperty("_ring").objectReferenceValue = ring;
+            so.FindProperty("_vortex").objectReferenceValue = vortex;
+            so.FindProperty("_lock").objectReferenceValue = lockRect.gameObject;
+            so.FindProperty("_label").objectReferenceValue = label;
+            so.ApplyModifiedPropertiesWithoutUndo();
+
+            return gate;
         }
 
         private static MapNode AddNode(RectTransform parent, string name, float size, int fontSize, int starCount)
@@ -442,6 +485,8 @@ namespace UiContent
 
             Prepare("Map Node Ring", TextureImporterCompression.Uncompressed);
             Prepare("Map Node Core", TextureImporterCompression.Uncompressed);
+            Prepare("Star Gate", TextureImporterCompression.Uncompressed);
+            Prepare("Star Gate Vortex", TextureImporterCompression.Uncompressed);
         }
 
         private static void Prepare(string name, TextureImporterCompression compression)
@@ -485,6 +530,26 @@ namespace UiContent
                 ColorUtility.TryParseHtmlString(systems.systems[i].color, out colors[i]);
 
             return colors;
+        }
+
+        private static Vector2[] GetGatePositions(Systems systems)
+        {
+            Vector2[] positions = new Vector2[systems.systems.Length];
+
+            if (systems.gates == null)
+                return positions;
+
+            foreach (GatePoint gate in systems.gates)
+            {
+                int index = Array.FindIndex(systems.systems, system => system.id == gate.system);
+
+                if (index < 0)
+                    throw new InvalidOperationException("Systems Map.json: врата у неизвестной системы " + gate.system);
+
+                positions[index] = new Vector2(gate.x, gate.y);
+            }
+
+            return positions;
         }
 
         private static BranchPlacement[] GetBranchPlacements(Systems systems)
