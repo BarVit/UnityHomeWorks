@@ -202,10 +202,6 @@
  "branches": [
   {
    "id": "gate_ashen_void",
-   "system": {
-    "x": 0.6085,
-    "y": 0.1449
-   },
    "arm": {
     "x": 0.786,
     "y": 0.767

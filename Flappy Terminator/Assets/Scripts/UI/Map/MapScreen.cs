@@ -233,7 +233,7 @@ public class MapScreen : MonoBehaviour
         {
             LocationRow branch = _locations.GetRow(placement.Id);
 
-            if (branch == null || _shownArmBranches.Count >= _armBranchNodes.Length)
+            if (branch == null || placement.Arm == Vector2.zero || _shownArmBranches.Count >= _armBranchNodes.Length)
                 continue;
 
             int index = _shownArmBranches.Count;
@@ -334,7 +334,7 @@ public class MapScreen : MonoBehaviour
     {
         foreach (BranchPlacement placement in _branchPlacements)
         {
-            if (placement.Id == branch.Id)
+            if (placement.Id == branch.Id && placement.System != Vector2.zero)
                 return placement.System;
         }
 

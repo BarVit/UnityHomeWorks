@@ -160,8 +160,8 @@ namespace UiContent
                 new Vector2(170f, 64f), 28);
             TMP_Text title = DockScreenBuilder.AddText(DockScreenBuilder.Place("Title", panel, new Vector2(0.5f, 1f),
                 new Vector2(0f, -54f), new Vector2(700f, 60f)), "MILKY WAY", 40, TextAlignmentOptions.Center, Color.white);
-            TMP_Text info = DockScreenBuilder.AddText(DockScreenBuilder.Place("Info", panel, new Vector2(0.5f, 0f),
-                new Vector2(0f, 136f), new Vector2(900f, 40f)), "", 26, TextAlignmentOptions.Center, Cyan);
+            TMP_Text info = DockScreenBuilder.AddText(DockScreenBuilder.Place("Info", panel, new Vector2(0.5f, 1f),
+                new Vector2(0f, -104f), new Vector2(900f, 40f)), "", 26, TextAlignmentOptions.Center, Cyan);
             MapToast toast = BuildToast(panel);
 
             Button menu = DockScreenBuilder.AddButton(panel, "Menu Button", "MENU", new Vector2(0f, 0f), new Vector2(150f, 62f),
@@ -497,10 +497,15 @@ namespace UiContent
             for (int i = 0; i < placements.Length; i++)
             {
                 BranchPoint branch = systems.branches[i];
-                placements[i] = new BranchPlacement(branch.id, branch.system.ToVector(), branch.arm.ToVector());
+                placements[i] = new BranchPlacement(branch.id, ToVectorOrZero(branch.system), ToVectorOrZero(branch.arm));
             }
 
             return placements;
+        }
+
+        private static Vector2 ToVectorOrZero(Point point)
+        {
+            return point == null ? Vector2.zero : point.ToVector();
         }
 
         private static LocationPositions[] GetLocationPositions(Systems systems)

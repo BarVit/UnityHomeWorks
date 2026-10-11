@@ -394,7 +394,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
   - _id: gate_ashen_void
-    _system: sys_01
+    _system: sys_03
     _order: 1
     _levels: 1
     _borderTheme: 
@@ -402,4 +402,4 @@ MonoBehaviour:
     _firstWaveSize: 3
     _waveSizeGrowth: 3
     _title: ASHEN VOID GATE
-    _branchOf: loc_01_03
+    _branchOf: loc_03_03
