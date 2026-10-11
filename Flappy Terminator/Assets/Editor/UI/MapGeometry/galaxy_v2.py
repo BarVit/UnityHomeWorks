@@ -274,7 +274,9 @@ geometry = {
              for aid, title, available, poly, offset in zones],
     "borders": [{"points": [norm(p) for p in line]} for line in borders],
 }
-json.dump(geometry, open('Galaxy Map v2.json', 'w'), indent=1)
+# the playable zones now come from hand-drawn borders (Galaxy Borders.json -> zones_from_borders.py);
+# this generated geometry is only the starting point the border editor began with
+json.dump(geometry, open('Galaxy Map v2 generated.json', 'w'), indent=1)
 print('zones', [(z[0], len(z[3])) for z in zones], 'fork', round(R_FORK), 'starts', [round(s) for s in starts])
 
 # preview with borders and labels, to check by eye

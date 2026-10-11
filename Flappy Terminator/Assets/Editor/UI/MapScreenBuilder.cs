@@ -28,6 +28,7 @@ namespace UiContent
         private const string PanelName = "Map";
         private const string GalaxyArt = "Galaxy Map v2";
         private const string FirstGalaxyArt = "Galaxy Map";
+        private const string VoidKind = "void";
         private const string OutlineMaterial = "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Outline.mat";
         private const float Aspect = 16f / 9f;
         private const int SystemCount = 5;
@@ -44,6 +45,7 @@ namespace UiContent
         private static readonly Color Cyan = new Color(0.21f, 0.85f, 1f);
         private static readonly Color Muted = new Color(0.62f, 0.74f, 0.86f);
         private static readonly Color LockedLabel = new Color(0.55f, 0.6f, 0.68f);
+        private static readonly Color VoidLabel = new Color(0.7f, 0.62f, 1f);
         private static readonly Color BorderColor = new Color(0.21f, 0.85f, 1f, 0.55f);
         private static readonly Color SelectionColor = new Color(1f, 1f, 1f, 0.9f);
 
@@ -64,6 +66,8 @@ namespace UiContent
         {
             public string id;
             public string title;
+            public string caption;
+            public string kind;
             public bool available;
             public Point[] polygon;
             public Point[] border;
@@ -227,9 +231,10 @@ namespace UiContent
                 if (arm.border != null && arm.border.Length > 1)
                     AddBorder(layer, arm.title + " Border", arm.border);
 
-                RectTransform label = Anchor(arm.title + " Label", layer, arm.label.ToVector(), new Vector2(380f, 34f));
-                TMP_Text text = DockScreenBuilder.AddText(label, arm.title, arm.available ? 26 : 20, TextAlignmentOptions.Center,
-                    arm.available ? Cyan : LockedLabel);
+                RectTransform label = Anchor(arm.title + " Label", layer, arm.label.ToVector(), new Vector2(380f, 64f));
+                string caption = string.IsNullOrEmpty(arm.caption) ? arm.title : arm.caption;
+                TMP_Text text = DockScreenBuilder.AddText(label, caption, arm.available ? 26 : 20, TextAlignmentOptions.Center,
+                    GetLabelColor(arm));
                 text.fontStyle = FontStyles.Bold;
                 text.fontSharedMaterial = AssetDatabase.LoadAssetAtPath<Material>(OutlineMaterial);
 
@@ -248,6 +253,14 @@ namespace UiContent
             layer.SetAsLastSibling();
 
             return view;
+        }
+
+        private static Color GetLabelColor(Arm arm)
+        {
+            if (arm.available)
+                return Cyan;
+
+            return arm.kind == VoidKind ? VoidLabel : LockedLabel;
         }
 
         private static MapOverlay BuildOverlay(RectTransform layer)
