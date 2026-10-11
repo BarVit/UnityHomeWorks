@@ -13,7 +13,8 @@ namespace TableImport
         private static readonly string[] Columns =
         {
             "id", "title", "kind", "prefab", "prototype", "health", "weapon", "barrels", "damage",
-            "body_damage", "scale", "tint", "movement", "reward_money", "reward_xp", "intro"
+            "body_damage", "scale", "tint", "movement", "reward_money", "reward_xp", "intro",
+            "special_every", "special_weapon", "special_barrels"
         };
 
         public static BossTable Import(EnemyTable enemies, WeaponTable weapons, TableLog log)
@@ -54,6 +55,12 @@ namespace TableImport
 
                 CheckPrototype(enemies, ids, prototype, reader);
                 CheckIntro(kind, intro, reader);
+
+                int specialEvery = reader.ReadInt("special_every", 0, 100);
+                string specialWeapon = reader.ReadOptionalText("special_weapon");
+                int specialBarrels = reader.ReadInt("special_barrels", 0, 8);
+
+                CheckSpecial(weapons, specialEvery, specialWeapon, specialBarrels, reader);
                 CheckWeapon(weapons, weapon, barrels, reader);
 
                 rows.Add(new BossRow(
@@ -73,6 +80,9 @@ namespace TableImport
                     reader.ReadInt("reward_money", 0, 1000000),
                     reader.ReadInt("reward_xp", 0, 1000000),
                     intro,
+                    specialEvery,
+                    specialWeapon,
+                    specialBarrels,
                     phases.TryGetValue(id, out BossPhaseRow[] bossPhases) ? bossPhases : new BossPhaseRow[0]));
             }
 
@@ -103,6 +113,25 @@ namespace TableImport
             if (barrels > row.BarrelsMax)
                 reader.Fail("barrels: " + barrels + " больше, чем barrels_max оружия "
                     + row.Id + " (" + row.BarrelsMax + ")");
+        }
+
+        private static void CheckSpecial(WeaponTable weapons, int every, string weapon, int barrels, RowReader reader)
+        {
+            if (every == 0)
+            {
+                if (weapon.Length > 0 || barrels > 0)
+                    reader.Fail("special_weapon, special_barrels: без special_every особая атака не сработает");
+
+                return;
+            }
+
+            if (every < 2)
+                reader.Fail("special_every: особая атака — каждый N-й выстрел, N от 2");
+
+            if (weapon.Length == 0 || barrels < 1)
+                reader.Fail("special_weapon, special_barrels: у особой атаки нужны оружие и стволы");
+            else
+                CheckWeapon(weapons, weapon, barrels, reader);
         }
 
         private static void CheckIntro(BossKind kind, string intro, RowReader reader)

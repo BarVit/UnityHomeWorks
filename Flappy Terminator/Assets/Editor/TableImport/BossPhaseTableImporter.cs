@@ -11,7 +11,8 @@ namespace TableImport
 
         private static readonly string[] Columns =
         {
-            "boss", "phase", "weapon", "barrels", "damage", "rate_scale", "exit", "exit_value", "next"
+            "boss", "phase", "weapon", "barrels", "damage", "rate_scale", "exit", "exit_value", "next",
+            "escape_health", "escape_to"
         };
 
         public static Dictionary<string, BossPhaseRow[]> Read(WeaponTable weapons, TableLog log)
@@ -45,7 +46,9 @@ namespace TableImport
                     reader.ReadFloat("rate_scale", 0.05f, 10f),
                     exit,
                     exitValue,
-                    reader.ReadInt("next", BossPhaseRow.FollowingPhase, MaxPhases));
+                    reader.ReadInt("next", BossPhaseRow.FollowingPhase, MaxPhases),
+                    reader.ReadFloat("escape_health", 0f, 0.99f),
+                    reader.ReadInt("escape_to", 0, MaxPhases));
 
                 if (byBoss.TryGetValue(boss, out List<BossPhaseRow> list) == false)
                 {
@@ -109,6 +112,14 @@ namespace TableImport
 
                 if (rows[i].Next > rows.Count)
                     reader.Fail("next: у босса нет фазы " + rows[i].Next);
+
+                bool hasEscape = rows[i].EscapeHealth > 0f;
+
+                if (hasEscape && (rows[i].EscapeTo < 1 || rows[i].EscapeTo > rows.Count))
+                    reader.Fail("escape_to: при escape_health нужна существующая фаза, а здесь " + rows[i].EscapeTo);
+
+                if (hasEscape == false && rows[i].EscapeTo != 0)
+                    reader.Fail("escape_to: без escape_health переход не сработает");
 
                 if (rows[i].Exit == PhaseExitKind.None && rows[i].Next != BossPhaseRow.FollowingPhase)
                     reader.Fail("next: у фазы без выхода (exit None) переход не сработает");

@@ -150,6 +150,23 @@ public abstract class WeaponDelivery
         return true;
     }
 
+    public bool PassTurn()
+    {
+        if (IsReady == false)
+            return false;
+
+        _cooldownLeft = Cooldown;
+        Warm();
+        Spend();
+
+        return true;
+    }
+
+    public void FireOutOfTurn()
+    {
+        OnFire();
+    }
+
     public void ContinueCooldown(float cooldownLeft)
     {
         _cooldownLeft = Mathf.Max(_cooldownLeft, cooldownLeft);

@@ -57,14 +57,28 @@ public class BossPhaseRunner
 
     private void Advance()
     {
-        for (int step = 0; step < _phases.Count && _exit.IsDone(HealthShare); step++)
+        for (int step = 0; step < _phases.Count; step++)
         {
-            int next = _phases[Current].Next;
+            BossPhase phase = _phases[Current];
+            int next;
 
-            if (next == BossPhase.Stay)
+            if (phase.ShouldEscape(HealthShare))
             {
-                _exit = new PhaseExit();
+                next = phase.EscapeTo;
+            }
+            else if (_exit.IsDone(HealthShare))
+            {
+                next = phase.Next;
 
+                if (next == BossPhase.Stay)
+                {
+                    _exit = new PhaseExit();
+
+                    return;
+                }
+            }
+            else
+            {
                 return;
             }
 

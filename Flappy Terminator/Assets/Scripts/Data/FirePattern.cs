@@ -2,5 +2,6 @@ public enum FirePattern
 {
     Parallel,
     Single,
-    Wings
+    Wings,
+    Fan
 }

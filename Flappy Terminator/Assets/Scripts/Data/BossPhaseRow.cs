@@ -14,10 +14,14 @@ public class BossPhaseRow
     [SerializeField] private PhaseExitKind _exit;
     [SerializeField] private float _exitValue;
     [SerializeField] private int _next;
+    [SerializeField] private float _escapeHealth;
+    [SerializeField] private int _escapeTo;
 
     public BossPhaseRow(int phase, string weapon, int barrels, int damage, float rateScale, PhaseExitKind exit,
-        float exitValue, int next)
+        float exitValue, int next, float escapeHealth, int escapeTo)
     {
+        _escapeHealth = escapeHealth;
+        _escapeTo = escapeTo;
         _phase = phase;
         _weapon = weapon;
         _barrels = barrels;
@@ -43,4 +47,8 @@ public class BossPhaseRow
     public float ExitValue => _exitValue;
 
     public int Next => _next;
+
+    public float EscapeHealth => _escapeHealth;
+
+    public int EscapeTo => _escapeTo;
 }

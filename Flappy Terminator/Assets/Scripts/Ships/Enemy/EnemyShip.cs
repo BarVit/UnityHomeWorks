@@ -161,6 +161,8 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
     private void Arm(EnemySetup setup)
     {
+        _shooter.ArmSpecial(setup.Special, setup.SpecialEvery, _context);
+
         if (setup.Phases.Count == 0)
         {
             _shooter.Arm(setup.Armament, _context);

@@ -29,6 +29,9 @@ MonoBehaviour:
     _rewardMoney: 500
     _rewardXp: 100
     _intro: 
+    _specialEvery: 0
+    _specialWeapon: 
+    _specialBarrels: 0
     _phases:
     - _phase: 1
       _weapon: marauder_1_gun
@@ -38,6 +41,8 @@ MonoBehaviour:
       _exit: 1
       _exitValue: 0.67
       _next: 0
+      _escapeHealth: 0
+      _escapeTo: 0
     - _phase: 2
       _weapon: marauder_1_gun
       _barrels: 2
@@ -46,6 +51,8 @@ MonoBehaviour:
       _exit: 1
       _exitValue: 0.34
       _next: 0
+      _escapeHealth: 0
+      _escapeTo: 0
     - _phase: 3
       _weapon: marauder_1_gun
       _barrels: 2
@@ -54,6 +61,8 @@ MonoBehaviour:
       _exit: 0
       _exitValue: 0
       _next: 0
+      _escapeHealth: 0
+      _escapeTo: 0
   - _id: marauder_2
     _title: "\u041C\u0430\u0440\u043E\u0434\u0451\u0440 II"
     _kind: 0
@@ -70,6 +79,9 @@ MonoBehaviour:
     _rewardMoney: 800
     _rewardXp: 125
     _intro: 
+    _specialEvery: 0
+    _specialWeapon: 
+    _specialBarrels: 0
     _phases: []
   - _id: punisher_1
     _title: "\u041A\u0430\u0440\u0430\u0442\u0435\u043B\u044C I"
@@ -87,6 +99,9 @@ MonoBehaviour:
     _rewardMoney: 625
     _rewardXp: 125
     _intro: 
+    _specialEvery: 0
+    _specialWeapon: 
+    _specialBarrels: 0
     _phases: []
   - _id: punisher_2
     _title: "\u041A\u0430\u0440\u0430\u0442\u0435\u043B\u044C II"
@@ -104,6 +119,9 @@ MonoBehaviour:
     _rewardMoney: 1000
     _rewardXp: 200
     _intro: 
+    _specialEvery: 0
+    _specialWeapon: 
+    _specialBarrels: 0
     _phases: []
   - _id: berserker_1
     _title: "\u0411\u0435\u0440\u0441\u0435\u0440\u043A I"
@@ -121,6 +139,9 @@ MonoBehaviour:
     _rewardMoney: 750
     _rewardXp: 150
     _intro: 
+    _specialEvery: 0
+    _specialWeapon: 
+    _specialBarrels: 0
     _phases: []
   - _id: berserker_2
     _title: "\u0411\u0435\u0440\u0441\u0435\u0440\u043A II"
@@ -138,6 +159,9 @@ MonoBehaviour:
     _rewardMoney: 1200
     _rewardXp: 250
     _intro: 
+    _specialEvery: 0
+    _specialWeapon: 
+    _specialBarrels: 0
     _phases: []
   - _id: tormentor_1
     _title: "\u0422\u0435\u0440\u0437\u0430\u0442\u0435\u043B\u044C I"
@@ -155,6 +179,9 @@ MonoBehaviour:
     _rewardMoney: 1250
     _rewardXp: 250
     _intro: 
+    _specialEvery: 0
+    _specialWeapon: 
+    _specialBarrels: 0
     _phases: []
   - _id: tormentor_2
     _title: "\u0422\u0435\u0440\u0437\u0430\u0442\u0435\u043B\u044C II"
@@ -172,6 +199,9 @@ MonoBehaviour:
     _rewardMoney: 2000
     _rewardXp: 350
     _intro: 
+    _specialEvery: 0
+    _specialWeapon: 
+    _specialBarrels: 0
     _phases: []
   - _id: ripper_1
     _title: "\u041F\u043E\u0442\u0440\u043E\u0448\u0438\u0442\u0435\u043B\u044C I"
@@ -189,6 +219,9 @@ MonoBehaviour:
     _rewardMoney: 3000
     _rewardXp: 600
     _intro: 
+    _specialEvery: 0
+    _specialWeapon: 
+    _specialBarrels: 0
     _phases: []
   - _id: ripper_2
     _title: "\u041F\u043E\u0442\u0440\u043E\u0448\u0438\u0442\u0435\u043B\u044C II"
@@ -206,6 +239,9 @@ MonoBehaviour:
     _rewardMoney: 4800
     _rewardXp: 750
     _intro: 
+    _specialEvery: 0
+    _specialWeapon: 
+    _specialBarrels: 0
     _phases: []
   - _id: hierarch
     _title: "\u0418\u0435\u0440\u0430\u0440\u0445"
@@ -215,7 +251,7 @@ MonoBehaviour:
     _health: 1200
     _weapon: hierarch_gun
     _barrels: 1
-    _damage: 40
+    _damage: 25
     _bodyDamage: 10
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
@@ -225,47 +261,80 @@ MonoBehaviour:
     _intro: 'HIERARCH GUARDS THE STAR GATE.
 
       GET READY TO FIGHT THE BOSS!'
+    _specialEvery: 5
+    _specialWeapon: hierarch_gun_fan
+    _specialBarrels: 3
     _phases:
     - _phase: 1
       _weapon: hierarch_gun
       _barrels: 1
-      _damage: 40
+      _damage: 25
       _rateScale: 1
       _exit: 1
       _exitValue: 0.8
       _next: 0
+      _escapeHealth: 0
+      _escapeTo: 0
     - _phase: 2
       _weapon: hierarch_gun
       _barrels: 2
-      _damage: 40
+      _damage: 25
       _rateScale: 1
       _exit: 1
       _exitValue: 0.6
       _next: 0
+      _escapeHealth: 0
+      _escapeTo: 0
     - _phase: 3
       _weapon: hierarch_gun_burst
       _barrels: 1
-      _damage: 40
+      _damage: 25
       _rateScale: 1
       _exit: 1
       _exitValue: 0.4
       _next: 0
+      _escapeHealth: 0
+      _escapeTo: 0
     - _phase: 4
       _weapon: hierarch_gun
       _barrels: 2
-      _damage: 40
-      _rateScale: 0.8
+      _damage: 25
+      _rateScale: 1
       _exit: 3
       _exitValue: 1
       _next: 5
+      _escapeHealth: 0.25
+      _escapeTo: 6
     - _phase: 5
-      _weapon: hierarch_gun_burst_fast
+      _weapon: hierarch_gun_burst
       _barrels: 1
-      _damage: 40
+      _damage: 25
       _rateScale: 1
       _exit: 3
       _exitValue: 2
       _next: 4
+      _escapeHealth: 0.25
+      _escapeTo: 6
+    - _phase: 6
+      _weapon: hierarch_gun
+      _barrels: 2
+      _damage: 25
+      _rateScale: 0.8
+      _exit: 3
+      _exitValue: 1
+      _next: 7
+      _escapeHealth: 0
+      _escapeTo: 0
+    - _phase: 7
+      _weapon: hierarch_gun_burst_fast
+      _barrels: 1
+      _damage: 25
+      _rateScale: 1
+      _exit: 3
+      _exitValue: 2
+      _next: 6
+      _escapeHealth: 0
+      _escapeTo: 0
   - _id: magister
     _title: "\u041C\u0430\u0433\u0438\u0441\u0442\u0440"
     _kind: 1
@@ -284,6 +353,9 @@ MonoBehaviour:
     _intro: 'MAGISTER GUARDS THE STAR GATE.
 
       GET READY TO FIGHT THE BOSS!'
+    _specialEvery: 0
+    _specialWeapon: 
+    _specialBarrels: 0
     _phases: []
   - _id: overlord
     _title: "\u0412\u043B\u0430\u0434\u044B\u043A\u0430"
@@ -303,6 +375,9 @@ MonoBehaviour:
     _intro: 'OVERLORD GUARDS THE STAR GATE.
 
       GET READY TO FIGHT THE BOSS!'
+    _specialEvery: 0
+    _specialWeapon: 
+    _specialBarrels: 0
     _phases: []
   - _id: archon
     _title: "\u0410\u0440\u0445\u043E\u043D\u0442"
@@ -322,6 +397,9 @@ MonoBehaviour:
     _intro: 'ARCHON GUARDS THE STAR GATE.
 
       GET READY TO FIGHT THE BOSS!'
+    _specialEvery: 0
+    _specialWeapon: 
+    _specialBarrels: 0
     _phases: []
   - _id: titan
     _title: "\u0422\u0438\u0442\u0430\u043D"
@@ -341,6 +419,9 @@ MonoBehaviour:
     _intro: 'TITAN BLOCKS YOUR WAY.
 
       GET READY TO FIGHT THE BOSS!'
+    _specialEvery: 0
+    _specialWeapon: 
+    _specialBarrels: 0
     _phases: []
   - _id: emperor
     _title: "\u0418\u043C\u043F\u0435\u0440\u0430\u0442\u043E\u0440"
@@ -360,4 +441,7 @@ MonoBehaviour:
     _intro: 'THE EMPEROR AWAITS YOU.
 
       GET READY TO FIGHT THE BOSS!'
+    _specialEvery: 0
+    _specialWeapon: 
+    _specialBarrels: 0
     _phases: []

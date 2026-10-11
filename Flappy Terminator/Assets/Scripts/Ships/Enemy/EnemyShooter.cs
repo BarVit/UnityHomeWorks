@@ -13,6 +13,9 @@ public class EnemyShooter : MonoBehaviour
     private ShotLoop _hitLoop;
     private int _ammoLayer;
     private WeaponDelivery _delivery;
+    private WeaponDelivery _special;
+    private int _specialEvery;
+    private int _shots;
     private bool _isShooting;
 
     public event Action Fired;
@@ -31,8 +34,9 @@ public class EnemyShooter : MonoBehaviour
             return;
 
         _delivery.Tick(Time.deltaTime);
+        _special?.Tick(Time.deltaTime);
 
-        if (_isShooting && _delivery.Fire())
+        if (_isShooting && TryShoot())
             Fired?.Invoke();
     }
 
@@ -46,6 +50,20 @@ public class EnemyShooter : MonoBehaviour
         Arm(armament, context, _delivery == null ? 0f : _delivery.NextShotIn);
     }
 
+    public void ArmSpecial(EnemyArmament armament, int every, EnemyContext context)
+    {
+        _special?.Dispose();
+        _special = null;
+        _specialEvery = 0;
+        _shots = 0;
+
+        if (armament == null || every <= 0)
+            return;
+
+        _special = WeaponFactory.Create(armament.Weapon, CreateContext(armament, context));
+        _specialEvery = every;
+    }
+
     public void StartShoot()
     {
         _isShooting = true;
@@ -56,18 +74,40 @@ public class EnemyShooter : MonoBehaviour
         _isShooting = false;
     }
 
+    private bool TryShoot()
+    {
+        if (_special != null && (_shots + 1) % _specialEvery == 0)
+        {
+            if (_delivery.PassTurn() == false)
+                return false;
+
+            _special.FireOutOfTurn();
+        }
+        else if (_delivery.Fire() == false)
+        {
+            return false;
+        }
+
+        _shots++;
+
+        return true;
+    }
+
     private void Arm(EnemyArmament armament, EnemyContext context, float cooldownLeft)
     {
-        WeaponContext weapon = new WeaponContext(_mounts, armament.Barrels, context.Pools,
-            new ShotAudio(_shotAudioSource, context.Camera), context.HitAudio, context.TargetLayers,
-            _ammoLayer, context.Camera, default, _loop, _hitLoop, armament.Damage,
-            rateScale: armament.RateScale);
-
         if (_delivery != null)
             _delivery.Dispose();
 
-        _delivery = WeaponFactory.Create(armament.Weapon, weapon);
+        _delivery = WeaponFactory.Create(armament.Weapon, CreateContext(armament, context));
         _delivery.ContinueCooldown(cooldownLeft);
+    }
+
+    private WeaponContext CreateContext(EnemyArmament armament, EnemyContext context)
+    {
+        return new WeaponContext(_mounts, armament.Barrels, context.Pools,
+            new ShotAudio(_shotAudioSource, context.Camera), context.HitAudio, context.TargetLayers,
+            _ammoLayer, context.Camera, default, _loop, _hitLoop, armament.Damage,
+            rateScale: armament.RateScale);
     }
 
     private AudioSource CreateLoopSource()

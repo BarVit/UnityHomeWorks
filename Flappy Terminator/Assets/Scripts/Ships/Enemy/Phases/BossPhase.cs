@@ -4,9 +4,13 @@ public class BossPhase
 
     private readonly PhaseExitKind _exit;
     private readonly float _exitValue;
+    private readonly float _escapeHealth;
 
-    public BossPhase(EnemyArmament armament, PhaseExitKind exit, float exitValue, int next)
+    public BossPhase(EnemyArmament armament, PhaseExitKind exit, float exitValue, int next, float escapeHealth,
+        int escapeTo)
     {
+        _escapeHealth = escapeHealth;
+        EscapeTo = escapeTo;
         Armament = armament;
         Next = next;
         _exit = exit;
@@ -16,6 +20,13 @@ public class BossPhase
     public EnemyArmament Armament { get; private set; }
 
     public int Next { get; private set; }
+
+    public int EscapeTo { get; private set; }
+
+    public bool ShouldEscape(float healthShare)
+    {
+        return _escapeHealth > 0f && healthShare <= _escapeHealth;
+    }
 
     public PhaseExit CreateExit()
     {

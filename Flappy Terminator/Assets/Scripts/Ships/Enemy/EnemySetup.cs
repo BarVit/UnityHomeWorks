@@ -7,8 +7,11 @@ public class EnemySetup
 
     private EnemySetup(EnemyShip prefab, string shipId, int tier, int health, int bodyDamage,
         EnemyArmament armament, MovementProfile movement, int scale, Color tint, SpriteSkin skin,
-        int rewardMoney, int rewardXp, IReadOnlyList<BossPhase> phases)
+        int rewardMoney, int rewardXp, IReadOnlyList<BossPhase> phases, EnemyArmament special = null,
+        int specialEvery = 0)
     {
+        Special = special;
+        SpecialEvery = specialEvery;
         Prefab = prefab;
         ShipId = shipId;
         Tier = tier;
@@ -50,6 +53,10 @@ public class EnemySetup
 
     public IReadOnlyList<BossPhase> Phases { get; private set; }
 
+    public EnemyArmament Special { get; private set; }
+
+    public int SpecialEvery { get; private set; }
+
     public static EnemySetup ForEnemy(EnemyRow enemy, WeaponRow weapon)
     {
         return new EnemySetup(enemy.Prefab, enemy.Type, enemy.Tier, enemy.Health, enemy.BodyDamage,
@@ -62,7 +69,15 @@ public class EnemySetup
         return new EnemySetup(boss.Prefab, boss.Id, 0, boss.Health, boss.BodyDamage,
             new EnemyArmament(weapons.GetRow(boss.Weapon), boss.Barrels, boss.Damage, 1f), boss.Movement,
             boss.Scale, boss.Tint, null, boss.RewardMoney, boss.RewardXp,
-            CreatePhases(boss.Phases, weapons));
+            CreatePhases(boss.Phases, weapons), CreateSpecial(boss, weapons), boss.SpecialEvery);
+    }
+
+    private static EnemyArmament CreateSpecial(BossRow boss, WeaponTable weapons)
+    {
+        if (boss.SpecialEvery <= 0)
+            return null;
+
+        return new EnemyArmament(weapons.GetRow(boss.SpecialWeapon), boss.SpecialBarrels, boss.Damage, 1f);
     }
 
     private static List<BossPhase> CreatePhases(IReadOnlyList<BossPhaseRow> rows, WeaponTable weapons)
@@ -75,7 +90,8 @@ public class EnemySetup
             EnemyArmament armament = new EnemyArmament(weapons.GetRow(row.Weapon), row.Barrels, row.Damage,
                 row.RateScale);
 
-            phases.Add(new BossPhase(armament, row.Exit, row.ExitValue, GetNextPhase(row, i, rows.Count)));
+            phases.Add(new BossPhase(armament, row.Exit, row.ExitValue, GetNextPhase(row, i, rows.Count),
+                row.EscapeHealth, row.EscapeTo - 1));
         }
 
         return phases;

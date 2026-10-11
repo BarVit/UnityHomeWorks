@@ -11,9 +11,20 @@ public static class FireSpread
             case FirePattern.Wings:
                 return Wing(rank, barrels, wingAngle);
 
+            case FirePattern.Fan:
+                return Fan(rank, barrels, wingAngle);
+
             default:
                 return 0f;
         }
+    }
+
+    private static float Fan(int rank, int barrels, float edgeAngle)
+    {
+        if (barrels < 2)
+            return 0f;
+
+        return Mathf.Lerp(-edgeAngle, edgeAngle, rank / (float)(barrels - 1));
     }
 
     private static float Wing(int rank, int barrels, float wingAngle)
