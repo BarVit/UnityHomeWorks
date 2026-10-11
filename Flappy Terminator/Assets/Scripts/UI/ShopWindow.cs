@@ -9,8 +9,6 @@ public class ShopWindow : MonoBehaviour
 
     private const string EquipText = "EQUIP";
     private const string EquippedText = "EQUIPPED";
-    private const string InstallText = "INSTALL";
-    private const string InstalledText = "INSTALLED";
     private const string NoSlotText = "NO FREE SLOT";
 
     [SerializeField] private GameObject _panel;
@@ -127,9 +125,9 @@ public class ShopWindow : MonoBehaviour
             if (_modules.Owns(row.Id) == false)
                 _cards[i].ShowPrice(row.Id, row.Icon, title, details, row.Price, _modules.CanBuy(row.Id));
             else if (_modules.IsInstalled(row.Id))
-                _cards[i].ShowAction(row.Id, row.Icon, title, details, InstalledText, false, true);
+                _cards[i].ShowAction(row.Id, row.Icon, title, details, EquippedText, false, true);
             else if (_modules.CanInstall(row.Id))
-                _cards[i].ShowAction(row.Id, row.Icon, title, details, InstallText, true, false);
+                _cards[i].ShowAction(row.Id, row.Icon, title, details, EquipText, true, false);
             else
                 _cards[i].ShowAction(row.Id, row.Icon, title, details, NoSlotText, false, false);
         }
@@ -156,17 +154,17 @@ public class ShopWindow : MonoBehaviour
     {
         if (_tab == WeaponsTab)
         {
-            if (_hangar.OwnsWeapon(card.Id))
-                _hangar.TrySelectWeapon(card.Id);
-            else
+            if (_hangar.OwnsWeapon(card.Id) == false)
                 _hangar.TryBuyWeapon(card.Id);
+            else if (_hangar.TrySelectWeapon(card.Id))
+                Close();
 
             return;
         }
 
-        if (_modules.Owns(card.Id))
-            _modules.TryInstall(card.Id);
-        else
+        if (_modules.Owns(card.Id) == false)
             _modules.TryBuy(card.Id);
+        else if (_modules.TryInstall(card.Id))
+            Close();
     }
 }

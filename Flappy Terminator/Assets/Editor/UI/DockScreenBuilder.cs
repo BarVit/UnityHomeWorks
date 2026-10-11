@@ -204,9 +204,7 @@ namespace UiContent
             AddDivider(modulePage);
 
             RectTransform modulePanel = Stretch("Module", modulePage);
-            Image moduleIcon = AddImage(Place("Module Icon", modulePanel, new Vector2(0.5f, 0.5f), new Vector2(-250f, 34f), new Vector2(52f, 52f)), null);
-            moduleIcon.preserveAspect = true;
-            TMP_Text moduleTitle = AddText(Place("Module Title", modulePanel, new Vector2(0.5f, 0.5f), new Vector2(-40f, 34f), new Vector2(330f, 44f)),
+            TMP_Text moduleTitle = AddText(Place("Module Title", modulePanel, new Vector2(0.5f, 0.5f), new Vector2(-65f, 34f), new Vector2(330f, 44f)),
                 "", 30, TextAlignmentOptions.Left, Color.white);
             Button remove = AddButton(modulePanel, "Remove Button", "REMOVE", new Vector2(0.5f, 0.5f), new Vector2(222f, 34f), new Vector2(140f, 46f), 20);
             UpgradeRowView[] moduleRows = AddUpgradeRows(modulePanel, UpgradeRowCount, -22f);
@@ -242,7 +240,6 @@ namespace UiContent
             SetArray(so.FindProperty("_upgrades"), weaponRows);
             SetArray(so.FindProperty("_moduleSlots"), moduleSlots);
             so.FindProperty("_modulePanel").objectReferenceValue = modulePanel.gameObject;
-            so.FindProperty("_moduleIcon").objectReferenceValue = moduleIcon;
             so.FindProperty("_moduleTitle").objectReferenceValue = moduleTitle;
             so.FindProperty("_removeModuleButton").objectReferenceValue = remove;
             SetArray(so.FindProperty("_moduleUpgrades"), moduleRows);

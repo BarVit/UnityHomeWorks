@@ -39,7 +39,6 @@ public class DockScreen : MonoBehaviour
     [SerializeField] private UpgradeRowView[] _upgrades;
     [SerializeField] private SlotView[] _moduleSlots;
     [SerializeField] private GameObject _modulePanel;
-    [SerializeField] private Image _moduleIcon;
     [SerializeField] private TMP_Text _moduleTitle;
     [SerializeField] private Button _removeModuleButton;
     [SerializeField] private UpgradeRowView[] _moduleUpgrades;
@@ -313,7 +312,6 @@ public class DockScreen : MonoBehaviour
         if (module == null)
             return;
 
-        _moduleIcon.sprite = module.Icon;
         _moduleTitle.text = UiText.Title(module.Id);
         _moduleStats = _modules.GetUpgradeStats(module.Id);
 

@@ -81,7 +81,7 @@ public class Hangar : MonoBehaviour
         if (CanBuyWeapon(weaponId) == false || _economy.TrySpend(_weapons.GetRow(weaponId).Price) == false)
             return false;
 
-        Ship.SelectWeapon(weaponId);
+        Ship.AddWeapon(weaponId);
         Commit();
 
         return true;

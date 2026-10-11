@@ -87,7 +87,6 @@ public class ModuleRack : MonoBehaviour
             return false;
 
         Ship.AddModule(moduleId);
-        Install(moduleId);
         Commit();
 
         return true;
