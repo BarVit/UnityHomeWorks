@@ -86,7 +86,7 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
         ShipId = setup.ShipId;
         Tier = setup.Tier;
         BodyDamage = setup.BodyDamage;
-        Reward = new Reward(setup.Health, setup.RewardMoney);
+        Reward = new Reward(setup.RewardXp, setup.RewardMoney);
 
         transform.localScale = Vector3.one * setup.Scale;
 

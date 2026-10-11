@@ -7,7 +7,7 @@ public class EnemySetup
 
     private EnemySetup(EnemyShip prefab, string shipId, int tier, int health, int bodyDamage,
         EnemyArmament armament, MovementProfile movement, int scale, Color tint, SpriteSkin skin,
-        int rewardMoney, IReadOnlyList<BossPhase> phases)
+        int rewardMoney, int rewardXp, IReadOnlyList<BossPhase> phases)
     {
         Prefab = prefab;
         ShipId = shipId;
@@ -20,6 +20,7 @@ public class EnemySetup
         Tint = tint;
         Skin = skin;
         RewardMoney = rewardMoney;
+        RewardXp = rewardXp;
         Phases = phases;
     }
 
@@ -45,20 +46,23 @@ public class EnemySetup
 
     public int RewardMoney { get; private set; }
 
+    public int RewardXp { get; private set; }
+
     public IReadOnlyList<BossPhase> Phases { get; private set; }
 
     public static EnemySetup ForEnemy(EnemyRow enemy, WeaponRow weapon)
     {
         return new EnemySetup(enemy.Prefab, enemy.Type, enemy.Tier, enemy.Health, enemy.BodyDamage,
             new EnemyArmament(weapon, enemy.Barrels, enemy.Damage, 1f), enemy.Movement, 1, Color.white, enemy.Skin,
-            enemy.RewardMoney, NoPhases);
+            enemy.RewardMoney, enemy.RewardXp, NoPhases);
     }
 
     public static EnemySetup ForBoss(BossRow boss, WeaponTable weapons)
     {
         return new EnemySetup(boss.Prefab, boss.Id, 0, boss.Health, boss.BodyDamage,
             new EnemyArmament(weapons.GetRow(boss.Weapon), boss.Barrels, boss.Damage, 1f), boss.Movement,
-            boss.Scale, boss.Tint, null, boss.RewardMoney, CreatePhases(boss.Phases, weapons));
+            boss.Scale, boss.Tint, null, boss.RewardMoney, boss.RewardXp,
+            CreatePhases(boss.Phases, weapons));
     }
 
     private static List<BossPhase> CreatePhases(IReadOnlyList<BossPhaseRow> rows, WeaponTable weapons)

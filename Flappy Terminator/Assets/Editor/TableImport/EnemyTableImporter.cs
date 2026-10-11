@@ -11,7 +11,7 @@ namespace TableImport
         private static readonly string[] Columns =
         {
             "id", "type", "title", "tier", "prefab", "body_damage", "from_location", "health", "weapon",
-            "barrels", "damage", "movement", "skin", "reward_money"
+            "barrels", "damage", "movement", "skin", "reward_money", "reward_xp"
         };
 
         public static EnemyTable Import(LocationTable locations, WeaponTable weapons, TableLog log)
@@ -65,7 +65,8 @@ namespace TableImport
                     reader.ReadInt("damage", 1, 10000),
                     reader.ReadAsset<MovementProfile>("movement", true),
                     reader.ReadAsset<SpriteSkin>("skin", false),
-                    reader.ReadInt("reward_money", 0, 1000000)));
+                    reader.ReadInt("reward_money", 0, 1000000),
+                    reader.ReadInt("reward_xp", 0, 1000000)));
             }
 
             EnemyTable table = GeneratedAsset.LoadOrCreate<EnemyTable>(AssetPath);

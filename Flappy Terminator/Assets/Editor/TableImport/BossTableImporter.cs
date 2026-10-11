@@ -11,7 +11,7 @@ namespace TableImport
         private static readonly string[] Columns =
         {
             "id", "title", "kind", "prefab", "prototype", "health", "weapon", "barrels", "damage",
-            "body_damage", "scale", "tint", "movement", "reward_money"
+            "body_damage", "scale", "tint", "movement", "reward_money", "reward_xp"
         };
 
         public static BossTable Import(EnemyTable enemies, WeaponTable weapons, TableLog log)
@@ -65,6 +65,7 @@ namespace TableImport
                     reader.ReadColor("tint"),
                     reader.ReadAsset<MovementProfile>("movement", true),
                     reader.ReadInt("reward_money", 0, 1000000),
+                    reader.ReadInt("reward_xp", 0, 1000000),
                     phases.TryGetValue(id, out BossPhaseRow[] bossPhases) ? bossPhases : new BossPhaseRow[0]));
             }
 
