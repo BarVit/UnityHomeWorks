@@ -13,8 +13,8 @@ namespace EnemyContent
         private const int OutlineLevel = 36;
         private const int LightLevel = 185;
 
-        private static readonly Color Blue = new Color(0.45f, 0.68f, 1f);
-        private static readonly Color DarkBlue = new Color(0.3f, 0.42f, 0.85f);
+        private static readonly Color Blue = new Color(0.55f, 0.76f, 1f);
+        private static readonly Color DarkBlue = new Color(0.36f, 0.5f, 0.95f);
         private static readonly Color Violet = new Color(0.8f, 0.5f, 1f);
         private static readonly Color DarkViolet = new Color(0.55f, 0.25f, 0.8f);
 
