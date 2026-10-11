@@ -78,7 +78,7 @@ MonoBehaviour:
     _prototype: hunter_1
     _health: 400
     _weapon: punisher_1_gun
-    _barrels: 1
+    _barrels: 2
     _damage: 14
     _bodyDamage: 15
     _scale: 2
