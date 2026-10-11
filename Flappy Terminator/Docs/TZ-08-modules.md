@@ -57,8 +57,9 @@
 
 Объект `Energy Shield` добавлен в префаб `Player Ship` сборщиком (`Tools/UI/Build Dock Screen`).
 
-**Иконка.** Сейчас стоит моя временная, `Sprites/UI/Dock/Energy Shield Icon.png`: щит из сот с
-молнией. Промпт для генерации своей (замените файл тем же именем, 128 × 128 или крупнее):
+**Иконка** `Sprites/UI/Dock/Energy Shield Icon.png` — сгенерирована пользователем по промпту ниже
+(11.10.2026, «Неоновый щит с молнией», 1254 × 1254): прозрачные поля обрезаны до 1010 × 1010,
+уменьшено до 256 × 256. До неё стояла моя временная. Промпт:
 
 > Game UI icon for a sci-fi spaceship shooter: an "energy shield" module. A heraldic shield shape made
 > of glowing hexagonal energy cells, bright cyan to electric blue gradient (#35D9FF to #0F5FA8), a small
@@ -83,4 +84,3 @@
 ## Не сделано
 
 - Остальные модули из плана (ЭМП, магнитное поле, ремонт).
-- Иконка энергощита — временная, до генерации по промпту.
