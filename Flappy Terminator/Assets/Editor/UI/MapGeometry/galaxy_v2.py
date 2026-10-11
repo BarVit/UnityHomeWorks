@@ -204,7 +204,7 @@ for _ in range(6500):
     x, y = pt(r, random.uniform(0, 2 * math.pi))
     parts.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{random.choice([0.4,0.5,0.6,0.8])}" fill="{random.choice(["#e8ecff","#fff2dc","#d6e0ff"])}" opacity="{random.uniform(0.25,0.75):.2f}"/>')
 
-glow, stars, nebulae, dust = [], [], [], []
+glow, stars, nebulae = [], [], []
 
 
 def draw_arm(offset, r_from, r_to, weight, steps, width_from, width_to):
@@ -230,11 +230,6 @@ def draw_arm(offset, r_from, r_to, weight, steps, width_from, width_to):
             glow.append(f'<circle cx="{cx_:.1f}" cy="{cy_:.1f}" r="12" fill="#cfe0ff" opacity="0.18" filter="url(#blur6)"/>')
         if random.random() < 0.07 * weight:
             nebulae.append(f'<ellipse cx="{x + g(width*0.5):.1f}" cy="{y + g(width*0.5):.1f}" rx="{random.uniform(6,14):.1f}" ry="{random.uniform(4,9):.1f}" fill="{random.choice(["#ff5fa8","#ff7ab8","#e04f9a"])}" opacity="{random.uniform(0.35,0.7):.2f}" filter="url(#blur2)"/>')
-    pts = []
-    for i in range(60):
-        r = r_from + (r_to - r_from) * i / 59
-        pts.append('%.1f,%.1f' % pt(r, spiral(offset, r) - 0.09))
-    dust.append(f'<polyline points="{" ".join(pts)}" fill="none" stroke="#1a0e10" stroke-width="{6 * weight:.1f}" opacity="{0.6 * weight:.2f}" filter="url(#blur2)"/>')
 
 
 for _, _, offset in ARMS:
@@ -250,7 +245,6 @@ draw_arm(ORION_OFFSET, R_FORK - 25, RING - 40, 0.8, 200, 10, 22)
 parts.append('<g filter="url(#blur14)">' + ''.join(glow) + '</g>')
 parts.append(''.join(nebulae))
 parts += stars
-parts += dust
 
 parts.append(f'<ellipse cx="{CX}" cy="{CY}" rx="120" ry="95" fill="url(#bulge)" opacity="0.45" filter="url(#blur14)"/>')
 parts.append(f'<ellipse cx="{CX}" cy="{CY}" rx="125" ry="34" fill="url(#bulge)" transform="rotate({math.degrees(BAR):.0f} {CX} {CY})" filter="url(#blur6)"/>')
