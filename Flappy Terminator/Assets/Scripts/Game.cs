@@ -37,7 +37,6 @@ public class Game : MonoBehaviour
         _screens.TestResetRequested += StartTest;
         _screens.ResumeRequested += Resume;
         _screens.RestartFromPauseRequested += RestartFromPause;
-        _screens.RestartRequested += RestartRun;
         _screens.PlayRequested += PlayFromDock;
         _screens.LocationPlayRequested += PlayLocation;
         _screens.ResultClosed += ShowClearedDock;
@@ -65,7 +64,6 @@ public class Game : MonoBehaviour
         _screens.TestResetRequested -= StartTest;
         _screens.ResumeRequested -= Resume;
         _screens.RestartFromPauseRequested -= RestartFromPause;
-        _screens.RestartRequested -= RestartRun;
         _screens.PlayRequested -= PlayFromDock;
         _screens.LocationPlayRequested -= PlayLocation;
         _screens.ResultClosed -= ShowClearedDock;
