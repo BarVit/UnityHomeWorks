@@ -243,7 +243,9 @@ draw_arm(ARMS[3][2] + math.radians(30), 150, 410, 0.45, 150, 8, 18)
 draw_arm(ORION_OFFSET, R_FORK - 25, RING - 40, 0.8, 200, 10, 22)
 
 parts.append('<g filter="url(#blur14)">' + ''.join(glow) + '</g>')
-parts.append(''.join(nebulae))
+# every second pink cloud only (halved 11.10.2026); the rest of the random draw stays as it was
+parts.append(''.join(nebulae[::2]))
+print('pink clouds', len(nebulae), '->', len(nebulae[::2]))
 parts += stars
 
 parts.append(f'<ellipse cx="{CX}" cy="{CY}" rx="120" ry="95" fill="url(#bulge)" opacity="0.45" filter="url(#blur14)"/>')
