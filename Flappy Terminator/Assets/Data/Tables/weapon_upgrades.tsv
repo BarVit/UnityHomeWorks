@@ -13,15 +13,15 @@ weapon	stat	level	bonus	price
 	CritChance	5	10	1500
 	CritDamage	0	2	0
 impulse_laser	Damage	0	0	0
-impulse_laser	Damage	1	1	300
-impulse_laser	Damage	2	1	600
-impulse_laser	Damage	3	1	900
-impulse_laser	Damage	4	1	1200
-impulse_laser	Damage	5	1	1500
+impulse_laser	Damage	1	1	3000
+impulse_laser	Damage	2	1	5000
+impulse_laser	Damage	3	1	7000
+impulse_laser	Damage	4	1	9000
+impulse_laser	Damage	5	1	11000
 impulse_laser	CritChance	0	0	0
 impulse_laser	HeatReduction	0	0	0
-impulse_laser	HeatReduction	1	10	300
-impulse_laser	HeatReduction	2	10	600
-impulse_laser	HeatReduction	3	10	900
-impulse_laser	HeatReduction	4	10	1200
-impulse_laser	HeatReduction	5	10	1500
+impulse_laser	HeatReduction	1	10	3000
+impulse_laser	HeatReduction	2	10	6000
+impulse_laser	HeatReduction	3	10	12000
+impulse_laser	HeatReduction	4	10	18000
+impulse_laser	HeatReduction	5	10	24000
