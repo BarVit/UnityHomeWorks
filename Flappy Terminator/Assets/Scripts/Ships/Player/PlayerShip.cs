@@ -91,6 +91,8 @@ public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
         _playerMover.ReturnToStart();
     }
 
+    public bool IsVulnerable => true;
+
     public void TakeDamage(int damage)
     {
         ApplyDamage(damage, false);

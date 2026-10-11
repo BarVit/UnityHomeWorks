@@ -3,7 +3,7 @@ using UnityEngine;
 public class TorpedoDelivery : ProjectileDelivery
 {
     private readonly Collider2D[] _near = new Collider2D[8];
-    private readonly RaycastHit2D[] _ahead = new RaycastHit2D[1];
+    private readonly RaycastHit2D[] _ahead = new RaycastHit2D[8];
 
     private SpawnPool<BlastWave> _blastPool;
     private float _deltaTime;
@@ -67,8 +67,17 @@ public class TorpedoDelivery : ProjectileDelivery
         if (IsOnCourse(torpedo.transform, warhead))
             return;
 
-        if (Physics2D.OverlapCircle(sensor, Row.Area, Context.TargetFilter, _near) > 0)
-            warhead.StartFuse();
+        int count = Physics2D.OverlapCircle(sensor, Row.Area, Context.TargetFilter, _near);
+
+        for (int i = 0; i < count; i++)
+        {
+            if (IsOpenTarget(_near[i]))
+            {
+                warhead.StartFuse();
+
+                return;
+            }
+        }
     }
 
     private void OnStruck(Ammo torpedo)
@@ -88,7 +97,15 @@ public class TorpedoDelivery : ProjectileDelivery
 
     private bool SeesTarget(Vector2 origin, Vector2 course)
     {
-        return Physics2D.Raycast(origin, course, Context.TargetFilter, _ahead, Row.Area) > 0;
+        int count = Physics2D.Raycast(origin, course, Context.TargetFilter, _ahead, Row.Area);
+
+        for (int i = 0; i < count; i++)
+        {
+            if (IsOpenTarget(_ahead[i].collider))
+                return true;
+        }
+
+        return false;
     }
 
     private void Blast(TorpedoWarhead warhead, int barrel)

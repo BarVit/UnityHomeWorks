@@ -20,6 +20,7 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
     private EnemyContext _context;
     private BossPhaseRunner _phases;
     private bool _isDead;
+    private bool _isHoldingFire;
 
     public int BodyDamage { get; private set; }
 
@@ -32,6 +33,8 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
     public EnemySetup Setup { get; private set; }
 
     public bool IsDead => _isDead;
+
+    public bool IsVulnerable => IsShown();
 
     public int Phase => _phases == null ? BossPhaseRunner.NoPhase : _phases.Current;
 
@@ -71,6 +74,12 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
     {
         _phases?.Tick(Time.deltaTime);
 
+        if (_isHoldingFire && HasEntered())
+        {
+            _isHoldingFire = false;
+            _shooter.StartShoot();
+        }
+
         if (transform.position.x + _exitMargin < ScreenArea.GetLeftEdge(_camera))
             Remove();
     }
@@ -99,7 +108,7 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
         _health.Init(setup.Health);
         Arm(setup);
         _mover.Fly(setup.Movement);
-        _shooter.StartShoot();
+        _isHoldingFire = true;
     }
 
     public void OnSpawn()
@@ -123,7 +132,7 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
     public void TakeDamage(int damage)
     {
-        if (IsShown() == false)
+        if (IsVulnerable == false)
             return;
 
         _health.TakeDamage(damage);
@@ -166,6 +175,13 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
     private void OnAmmoHit(Ammo ammo)
     {
         TakeDamage(ammo.Damage);
+    }
+
+    private bool HasEntered()
+    {
+        Vector3 centre = _body == null ? transform.position : _body.bounds.center;
+
+        return ScreenArea.Contains(_camera, centre);
     }
 
     private bool IsShown()

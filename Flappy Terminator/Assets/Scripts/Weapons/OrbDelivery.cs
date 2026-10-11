@@ -134,10 +134,9 @@ public class OrbDelivery : ProjectileDelivery
 
         for (int i = 0; i < count; i++)
         {
-            if (_touched[i].TryGetComponent(out IDamageable damageable) == false)
-                damageable = _touched[i].GetComponentInParent<IDamageable>();
+            IDamageable damageable = FindDamageable(_touched[i]);
 
-            if (damageable == null)
+            if (damageable == null || damageable.IsVulnerable == false)
                 continue;
 
             float distance = Vector2.Distance(centre, _touched[i].transform.position);

@@ -71,6 +71,21 @@ public abstract class WeaponDelivery
 
     private int BaseDamage => _context.Damage > 0 ? _context.Damage : _row.Damage;
 
+    protected static IDamageable FindDamageable(Collider2D collider)
+    {
+        if (collider.TryGetComponent(out IDamageable damageable) == false)
+            damageable = collider.GetComponentInParent<IDamageable>();
+
+        return damageable;
+    }
+
+    protected static bool IsOpenTarget(Collider2D collider)
+    {
+        IDamageable damageable = FindDamageable(collider);
+
+        return damageable == null || damageable.IsVulnerable;
+    }
+
     protected int GetDamage(int barrel)
     {
         return BaseDamage + _context.GetBoost(barrel).DamageBonus;

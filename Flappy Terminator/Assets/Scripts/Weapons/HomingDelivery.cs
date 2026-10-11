@@ -43,6 +43,9 @@ public class HomingDelivery : ProjectileDelivery
 
         for (int i = 0; i < count; i++)
         {
+            if (IsOpenTarget(_candidates[i]) == false)
+                continue;
+
             float distance = ((Vector2)(_candidates[i].transform.position - from)).sqrMagnitude;
 
             if (distance >= nearestDistance)

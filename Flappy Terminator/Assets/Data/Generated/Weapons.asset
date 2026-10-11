@@ -318,7 +318,7 @@ MonoBehaviour:
     _rate: 2.25
     _magazine: 0
     _reloadTime: 0
-    _projectileSpeed: 8
+    _projectileSpeed: 6
     _barrelsMax: 4
     _firePattern: 2
     _sideAngle: 16
@@ -351,7 +351,7 @@ MonoBehaviour:
     _rate: 2.25
     _magazine: 0
     _reloadTime: 0
-    _projectileSpeed: 8
+    _projectileSpeed: 6
     _barrelsMax: 4
     _firePattern: 2
     _sideAngle: 16
@@ -384,7 +384,7 @@ MonoBehaviour:
     _rate: 2.25
     _magazine: 0
     _reloadTime: 0
-    _projectileSpeed: 8
+    _projectileSpeed: 6
     _barrelsMax: 4
     _firePattern: 2
     _sideAngle: 16
@@ -816,7 +816,7 @@ MonoBehaviour:
     _rate: 2.25
     _magazine: 0
     _reloadTime: 0
-    _projectileSpeed: 8
+    _projectileSpeed: 6
     _barrelsMax: 4
     _firePattern: 2
     _sideAngle: 16
@@ -849,7 +849,7 @@ MonoBehaviour:
     _rate: 2.25
     _magazine: 0
     _reloadTime: 0
-    _projectileSpeed: 8
+    _projectileSpeed: 6
     _barrelsMax: 4
     _firePattern: 2
     _sideAngle: 16
@@ -1150,7 +1150,7 @@ MonoBehaviour:
     _rate: 2.25
     _magazine: 0
     _reloadTime: 0
-    _projectileSpeed: 8
+    _projectileSpeed: 6
     _barrelsMax: 4
     _firePattern: 2
     _sideAngle: 16

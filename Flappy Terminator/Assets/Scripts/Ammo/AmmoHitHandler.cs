@@ -5,7 +5,14 @@ public class AmmoHitHandler : MonoBehaviour
 {
     [SerializeField] private LayerMask _ammoLayers;
 
+    private IDamageable _owner;
+
     public event Action<Ammo> HitDetected;
+
+    private void Awake()
+    {
+        _owner = GetComponentInParent<IDamageable>();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -16,6 +23,9 @@ public class AmmoHitHandler : MonoBehaviour
             return;
 
         if (ammo.IsPersistent)
+            return;
+
+        if (_owner != null && _owner.IsVulnerable == false)
             return;
 
         if (Contains(ammo.gameObject.layer) == false)

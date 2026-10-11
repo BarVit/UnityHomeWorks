@@ -116,7 +116,7 @@ public class BeamDelivery : WeaponDelivery
 
             IDamageable damageable = FindDamageable(hit.collider);
 
-            if (damageable != null && IsStruck(damageable, struck))
+            if (damageable != null && (damageable.IsVulnerable == false || IsStruck(damageable, struck)))
                 continue;
 
             Strike(hit, damageable, rotation, far, barrel);
@@ -136,14 +136,6 @@ public class BeamDelivery : WeaponDelivery
 
         if (struck == 0 && open < reach)
             NoteWorldHit(end, rotation);
-    }
-
-    private IDamageable FindDamageable(Collider2D collider)
-    {
-        if (collider.TryGetComponent(out IDamageable damageable) == false)
-            damageable = collider.GetComponentInParent<IDamageable>();
-
-        return damageable;
     }
 
     private bool IsStruck(IDamageable damageable, int struck)
