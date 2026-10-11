@@ -43,7 +43,7 @@ public class EnemyShooter : MonoBehaviour
 
     public void Rearm(EnemyArmament armament, EnemyContext context)
     {
-        Arm(armament, context, _delivery == null ? 0f : _delivery.CooldownLeft);
+        Arm(armament, context, _delivery == null ? 0f : _delivery.NextShotIn);
     }
 
     public void StartShoot()

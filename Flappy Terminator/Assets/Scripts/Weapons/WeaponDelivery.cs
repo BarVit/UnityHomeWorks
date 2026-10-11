@@ -43,6 +43,8 @@ public abstract class WeaponDelivery
 
     public float CooldownLeft => Mathf.Max(0f, _cooldownLeft);
 
+    public float NextShotIn => Mathf.Max(CooldownLeft, _reloadLeft);
+
     public bool HasHeat => _row.HeatPerShot > 0f;
 
     public bool HasMagazine => _row.Magazine > 0;

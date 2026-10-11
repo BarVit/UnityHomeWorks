@@ -225,7 +225,47 @@ MonoBehaviour:
     _intro: 'HIERARCH GUARDS THE STAR GATE.
 
       GET READY TO FIGHT THE BOSS!'
-    _phases: []
+    _phases:
+    - _phase: 1
+      _weapon: hierarch_gun
+      _barrels: 1
+      _damage: 40
+      _rateScale: 1
+      _exit: 1
+      _exitValue: 0.8
+      _next: 0
+    - _phase: 2
+      _weapon: hierarch_gun
+      _barrels: 2
+      _damage: 40
+      _rateScale: 1
+      _exit: 1
+      _exitValue: 0.6
+      _next: 0
+    - _phase: 3
+      _weapon: hierarch_gun_burst
+      _barrels: 1
+      _damage: 40
+      _rateScale: 1
+      _exit: 1
+      _exitValue: 0.4
+      _next: 0
+    - _phase: 4
+      _weapon: hierarch_gun
+      _barrels: 2
+      _damage: 40
+      _rateScale: 0.8
+      _exit: 3
+      _exitValue: 1
+      _next: 5
+    - _phase: 5
+      _weapon: hierarch_gun_burst_fast
+      _barrels: 1
+      _damage: 40
+      _rateScale: 1
+      _exit: 3
+      _exitValue: 2
+      _next: 4
   - _id: magister
     _title: "\u041C\u0430\u0433\u0438\u0441\u0442\u0440"
     _kind: 1
