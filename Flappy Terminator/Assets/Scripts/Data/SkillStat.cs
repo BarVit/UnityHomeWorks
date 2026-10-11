@@ -1,4 +1,5 @@
 public enum SkillStat
 {
-    Health
+    Health,
+    Cooldown
 }

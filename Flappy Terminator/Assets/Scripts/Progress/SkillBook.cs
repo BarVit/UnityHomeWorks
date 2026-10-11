@@ -5,6 +5,7 @@ using UnityEngine;
 public class SkillBook : MonoBehaviour
 {
     private const int NoPrice = -1;
+    private const float PercentShare = 0.01f;
 
     [SerializeField] private Economy _economy;
     [SerializeField] private SkillTable _skills;
@@ -44,6 +45,11 @@ public class SkillBook : MonoBehaviour
         LevelRow<SkillStat> next = _skills.GetRow(SkillTable.Everyone, skill, GetLevel(skill) + 1);
 
         return next == null ? NoPrice : next.Price;
+    }
+
+    public float GetRateScale(int levelShift = 0)
+    {
+        return 1f / (1f + GetValue(SkillStat.Cooldown, levelShift) * PercentShare);
     }
 
     public bool CanUpgrade(SkillStat skill)

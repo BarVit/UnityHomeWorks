@@ -108,11 +108,6 @@ public class Hangar : MonoBehaviour
         return _weapons.GetRow(WeaponId);
     }
 
-    public bool IsWeaponWide(UpgradeStat stat)
-    {
-        return stat == UpgradeStat.Cooldown;
-    }
-
     public bool IsUnlocked(int slot)
     {
         return slot <= Loadout.BarrelCount;
@@ -149,7 +144,7 @@ public class Hangar : MonoBehaviour
 
     public int GetLevel(int slot, UpgradeStat stat)
     {
-        return IsWeaponWide(stat) ? Loadout.WeaponLevels.Get(stat.ToString()) : GetBarrel(slot).GetLevel(stat);
+        return GetBarrel(slot).GetLevel(stat);
     }
 
     public int GetMaxLevel(UpgradeStat stat)
@@ -186,34 +181,21 @@ public class Hangar : MonoBehaviour
         if (CanUpgrade(slot, stat) == false || _economy.TrySpend(GetUpgradePrice(slot, stat)) == false)
             return false;
 
-        if (IsWeaponWide(stat))
-            Loadout.WeaponLevels.Raise(stat.ToString());
-        else
-            GetBarrel(slot).Raise(stat);
+        GetBarrel(slot).Raise(stat);
 
         Commit();
 
         return true;
     }
 
-    public void Equip(PlayerShooter shooter)
+    public void Equip(PlayerShooter shooter, float rateScale)
     {
         WeaponBoost[] boosts = new WeaponBoost[Loadout.BarrelCount];
 
         for (int i = 0; i < boosts.Length; i++)
             boosts[i] = GetBoost(i + FirstSlot);
 
-        shooter.Equip(WeaponId, boosts, GetRateScale());
-    }
-
-    private float GetRateScale()
-    {
-        WeaponRow row = _weapons.GetRow(WeaponId);
-
-        if (row == null || row.Rate <= 0f)
-            return 1f;
-
-        return Mathf.Max(0f, row.Rate + GetValue(FirstSlot, UpgradeStat.Cooldown)) / row.Rate;
+        shooter.Equip(WeaponId, boosts, rateScale);
     }
 
     private WeaponBoost GetBoost(int slot)

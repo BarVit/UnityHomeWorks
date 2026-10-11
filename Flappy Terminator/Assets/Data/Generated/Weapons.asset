@@ -18,7 +18,7 @@ MonoBehaviour:
     _owner: 0
     _delivery: 0
     _damage: 10
-    _rate: 0.5
+    _rate: 0.6
     _magazine: 0
     _reloadTime: 0
     _projectileSpeed: 18

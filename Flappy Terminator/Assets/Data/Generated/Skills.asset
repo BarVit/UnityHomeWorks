@@ -22,99 +22,204 @@ MonoBehaviour:
     _stat: 0
     _level: 1
     _bonus: 10
-    _price: 10
+    _price: 1
   - _owner: 
     _stat: 0
     _level: 2
     _bonus: 10
-    _price: 16
+    _price: 2
   - _owner: 
     _stat: 0
     _level: 3
     _bonus: 10
-    _price: 26
+    _price: 3
   - _owner: 
     _stat: 0
     _level: 4
     _bonus: 10
-    _price: 43
+    _price: 4
   - _owner: 
     _stat: 0
     _level: 5
     _bonus: 10
-    _price: 70
+    _price: 7
   - _owner: 
     _stat: 0
     _level: 6
     _bonus: 10
-    _price: 110
+    _price: 11
   - _owner: 
     _stat: 0
     _level: 7
     _bonus: 10
-    _price: 180
+    _price: 18
   - _owner: 
     _stat: 0
     _level: 8
     _bonus: 10
-    _price: 300
+    _price: 30
   - _owner: 
     _stat: 0
     _level: 9
     _bonus: 10
-    _price: 480
+    _price: 48
   - _owner: 
     _stat: 0
     _level: 10
     _bonus: 10
-    _price: 790
+    _price: 79
   - _owner: 
     _stat: 0
     _level: 11
     _bonus: 10
-    _price: 1300
+    _price: 130
   - _owner: 
     _stat: 0
     _level: 12
     _bonus: 10
-    _price: 2100
+    _price: 210
   - _owner: 
     _stat: 0
     _level: 13
     _bonus: 10
-    _price: 3400
+    _price: 340
   - _owner: 
     _stat: 0
     _level: 14
     _bonus: 10
-    _price: 5500
+    _price: 550
   - _owner: 
     _stat: 0
     _level: 15
     _bonus: 10
-    _price: 8900
+    _price: 890
   - _owner: 
     _stat: 0
     _level: 16
     _bonus: 10
-    _price: 14000
+    _price: 1400
   - _owner: 
     _stat: 0
     _level: 17
     _bonus: 10
-    _price: 23000
+    _price: 2300
   - _owner: 
     _stat: 0
     _level: 18
     _bonus: 10
-    _price: 38000
+    _price: 3800
   - _owner: 
     _stat: 0
     _level: 19
     _bonus: 10
-    _price: 62000
+    _price: 6200
   - _owner: 
     _stat: 0
     _level: 20
     _bonus: 10
-    _price: 100000
+    _price: 10000
+  - _owner: 
+    _stat: 1
+    _level: 0
+    _bonus: 0
+    _price: 0
+  - _owner: 
+    _stat: 1
+    _level: 1
+    _bonus: 10
+    _price: 1
+  - _owner: 
+    _stat: 1
+    _level: 2
+    _bonus: 10
+    _price: 2
+  - _owner: 
+    _stat: 1
+    _level: 3
+    _bonus: 10
+    _price: 3
+  - _owner: 
+    _stat: 1
+    _level: 4
+    _bonus: 10
+    _price: 4
+  - _owner: 
+    _stat: 1
+    _level: 5
+    _bonus: 10
+    _price: 7
+  - _owner: 
+    _stat: 1
+    _level: 6
+    _bonus: 10
+    _price: 11
+  - _owner: 
+    _stat: 1
+    _level: 7
+    _bonus: 10
+    _price: 18
+  - _owner: 
+    _stat: 1
+    _level: 8
+    _bonus: 10
+    _price: 30
+  - _owner: 
+    _stat: 1
+    _level: 9
+    _bonus: 10
+    _price: 48
+  - _owner: 
+    _stat: 1
+    _level: 10
+    _bonus: 10
+    _price: 79
+  - _owner: 
+    _stat: 1
+    _level: 11
+    _bonus: 10
+    _price: 130
+  - _owner: 
+    _stat: 1
+    _level: 12
+    _bonus: 10
+    _price: 210
+  - _owner: 
+    _stat: 1
+    _level: 13
+    _bonus: 10
+    _price: 340
+  - _owner: 
+    _stat: 1
+    _level: 14
+    _bonus: 10
+    _price: 550
+  - _owner: 
+    _stat: 1
+    _level: 15
+    _bonus: 10
+    _price: 890
+  - _owner: 
+    _stat: 1
+    _level: 16
+    _bonus: 10
+    _price: 1400
+  - _owner: 
+    _stat: 1
+    _level: 17
+    _bonus: 10
+    _price: 2300
+  - _owner: 
+    _stat: 1
+    _level: 18
+    _bonus: 10
+    _price: 3800
+  - _owner: 
+    _stat: 1
+    _level: 19
+    _bonus: 10
+    _price: 6200
+  - _owner: 
+    _stat: 1
+    _level: 20
+    _bonus: 10
+    _price: 10000

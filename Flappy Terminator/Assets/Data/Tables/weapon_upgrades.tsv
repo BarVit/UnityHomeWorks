@@ -12,9 +12,3 @@ weapon	stat	level	bonus	price
 	CritChance	4	10	1200
 	CritChance	5	10	1500
 	CritDamage	0	2	0
-cannon	Cooldown	0	0	0
-cannon	Cooldown	1	-0.05	300
-cannon	Cooldown	2	-0.05	600
-cannon	Cooldown	3	-0.05	900
-cannon	Cooldown	4	-0.05	1200
-cannon	Cooldown	5	-0.05	1500

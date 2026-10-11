@@ -330,7 +330,7 @@ public class Game : MonoBehaviour
 
     private void EquipShip()
     {
-        _hangar.Equip(_playerShip.Shooter);
+        _hangar.Equip(_playerShip.Shooter, _skills.GetRateScale());
         _moduleRack.Equip(_battleModules);
         _skills.Equip(_playerShip);
     }
