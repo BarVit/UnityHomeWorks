@@ -36,7 +36,7 @@ MonoBehaviour:
   - _id: loc_01_03
     _system: sys_01
     _order: 3
-    _levels: 3
+    _levels: 2
     _borderTheme: 
     _flightMode: 0
     _firstWaveSize: 3
