@@ -253,7 +253,7 @@ public class DockScreen : MonoBehaviour
         string now = FormatWeapon(row, stat, _hangar.GetValue(_selectedSlot, stat));
         string value = price < 0 ? now : now + Arrow + FormatWeapon(row, stat, _hangar.GetValue(_selectedSlot, stat, 1));
 
-        return new UpgradeRowData(GetWeaponIcon(stat), GetWeaponTitle(stat), GetWeaponHint(stat), value, level,
+        return new UpgradeRowData(GetWeaponIcon(stat), GetWeaponTitle(stat), GetWeaponHint(stat, price), value, level,
             _hangar.GetMaxLevel(stat), price, _hangar.CanUpgrade(_selectedSlot, stat), _coinIcon);
     }
 
@@ -285,12 +285,14 @@ public class DockScreen : MonoBehaviour
         }
     }
 
-    private string GetWeaponHint(UpgradeStat stat)
+    private string GetWeaponHint(UpgradeStat stat, int price)
     {
         switch (stat)
         {
             case UpgradeStat.Damage:
-                return "+" + _hangar.GetStep(stat) + " PER LEVEL";
+                return price < 0 ? MaxLevelHint
+                    : "+" + Mathf.RoundToInt(_hangar.GetValue(_selectedSlot, stat, 1) - _hangar.GetValue(_selectedSlot, stat))
+                    + " NEXT LEVEL";
             case UpgradeStat.HeatReduction:
                 return "-" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
             default:

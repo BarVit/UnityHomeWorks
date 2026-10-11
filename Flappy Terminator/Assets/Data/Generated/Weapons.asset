@@ -85,7 +85,7 @@ MonoBehaviour:
     _title: "\u0420\u0430\u043A\u0435\u0442\u043D\u0438\u0446\u0430"
     _owner: 0
     _delivery: 0
-    _damage: 20
+    _damage: 30
     _rate: 0.75
     _magazine: 0
     _reloadTime: 0
