@@ -12,7 +12,9 @@ public class MapScreen : MonoBehaviour
     private const string DemoOnly = "NOT AVAILABLE IN DEMO";
     private const string PlayText = "PLAY";
     private const string ReplayText = "REPLAY";
-    private const int NoSelection = -1;
+    private const string NoSelection = null;
+    private const float BranchDistance = 230f;
+    private const float ImageWidth = 1920f;
     private const float RouteWidth = 4f;
     private const float Dash = 14f;
     private const float Gap = 10f;
@@ -40,6 +42,10 @@ public class MapScreen : MonoBehaviour
     [SerializeField] private UiPolyline _routeDone;
     [SerializeField] private UiPolyline _routeRest;
     [SerializeField] private LocationPositions[] _locationPositions;
+    [SerializeField] private MapNode[] _branchNodes;
+    [SerializeField] private UiPolyline[] _branchLinks;
+    [SerializeField] private Vector2 _starCentre = new Vector2(0.5f, 0.4907f);
+    [SerializeField] private Color _branchColor = new Color(0.7f, 0.62f, 1f);
     [SerializeField] private TMP_Text _title;
     [SerializeField] private TMP_Text _info;
     [SerializeField] private Button _backButton;
@@ -53,9 +59,10 @@ public class MapScreen : MonoBehaviour
 
     private readonly List<LocationRow> _route = new List<LocationRow>();
     private readonly List<SystemRow> _systemRoute = new List<SystemRow>();
+    private readonly List<LocationRow> _shownBranches = new List<LocationRow>();
     private int _currentLocation;
     private int _openedSystem = -1;
-    private int _selected = NoSelection;
+    private string _selected = NoSelection;
     private GameObject _lastView;
     private bool _canPlay;
 
@@ -83,6 +90,9 @@ public class MapScreen : MonoBehaviour
 
         foreach (MapNode node in _locationNodes)
             node.Clicked += OnLocationClicked;
+
+        foreach (MapNode node in _branchNodes)
+            node.Clicked += OnBranchClicked;
     }
 
     private void OnDisable()
@@ -104,6 +114,9 @@ public class MapScreen : MonoBehaviour
 
         foreach (MapNode node in _locationNodes)
             node.Clicked -= OnLocationClicked;
+
+        foreach (MapNode node in _branchNodes)
+            node.Clicked -= OnBranchClicked;
     }
 
     public void Show(bool canPlay)
@@ -159,7 +172,7 @@ public class MapScreen : MonoBehaviour
 
         foreach (LocationRow location in _locations.Rows)
         {
-            if (location.System == systemId && location.Id != _testLocationId)
+            if (location.System == systemId && location.Id != _testLocationId && location.IsBranch == false)
                 found.Add(location);
         }
 
@@ -233,6 +246,64 @@ public class MapScreen : MonoBehaviour
         Array.Copy(positions, route, count);
         ShowRoute(_routeDone, _routeRest, route, Mathf.Clamp(_currentLocation - first, -1, count - 1),
             _currentLocation - first >= count);
+        ShowBranches(locations, route);
+    }
+
+    private void ShowBranches(List<LocationRow> locations, Vector2[] positions)
+    {
+        _shownBranches.Clear();
+
+        for (int i = 0; i < positions.Length; i++)
+        {
+            foreach (LocationRow branch in _locations.GetBranches(locations[i].Id))
+            {
+                if (_shownBranches.Count >= _branchNodes.Length)
+                    break;
+
+                ShowBranch(_shownBranches.Count, branch, positions[i]);
+                _shownBranches.Add(branch);
+            }
+        }
+
+        for (int i = _shownBranches.Count; i < _branchNodes.Length; i++)
+        {
+            _branchNodes[i].gameObject.SetActive(false);
+            _branchLinks[i].gameObject.SetActive(false);
+        }
+    }
+
+    private void ShowBranch(int index, LocationRow branch, Vector2 parent)
+    {
+        Vector2 position = GetBranchPosition(parent);
+        RectTransform node = (RectTransform)_branchNodes[index].transform;
+
+        _branchNodes[index].gameObject.SetActive(true);
+        node.anchorMin = node.anchorMax = new Vector2(position.x, 1f - position.y);
+        node.anchoredPosition = Vector2.zero;
+        _branchNodes[index].Show(index, branch.Title, GetBranchState(branch), _branchColor);
+        _branchNodes[index].SetStars(_economy.GetStars(branch.Id));
+
+        UiPolyline link = _branchLinks[index];
+
+        link.gameObject.SetActive(true);
+        link.color = new Color(_branchColor.r, _branchColor.g, _branchColor.b, _restRouteColor.a);
+        link.SetStyle(RouteWidth * 0.75f, Dash * 0.6f, Gap * 0.6f, 0f);
+        link.SetPoints(new List<Vector2> { parent, position });
+    }
+
+    private Vector2 GetBranchPosition(Vector2 parent)
+    {
+        float side = parent.x < _starCentre.x ? -1f : 1f;
+
+        return parent + new Vector2(side * BranchDistance / ImageWidth, 0f);
+    }
+
+    private MapNodeState GetBranchState(LocationRow branch)
+    {
+        if (_economy.IsLocationCompleted(branch.Id))
+            return MapNodeState.Completed;
+
+        return _economy.IsLocationCompleted(branch.BranchOf) ? MapNodeState.Current : MapNodeState.Locked;
     }
 
     private void ShowRoute(UiPolyline done, UiPolyline rest, Vector2[] points, int reached, bool isAllDone)
@@ -358,20 +429,37 @@ public class MapScreen : MonoBehaviour
             : node.State == MapNodeState.Current ? "NEXT" : "LOCKED";
 
         _info.text = "LOCATION " + GetLabel(node.Index) + "     " + location.Levels + " LEVELS     " + state;
-        Select(canSelect ? node.Index : NoSelection);
+        Select(canSelect ? location.Id : NoSelection);
     }
 
-    private void Select(int index)
+    private void OnBranchClicked(MapNode node)
     {
-        _selected = index;
+        LocationRow branch = _shownBranches[node.Index];
+        LocationRow parent = _locations.GetRow(branch.BranchOf);
+        bool canSelect = node.State != MapNodeState.Locked && _waves.HasLocation(branch.Id);
+        string state = node.State == MapNodeState.Completed ? "COMPLETED"
+            : node.State == MapNodeState.Current ? "OPEN" : "LOCKED UNTIL " + GetLabel(_route.IndexOf(parent)) + " IS CLEARED";
+        string levels = branch.Levels == 1 ? " LEVEL     " : " LEVELS     ";
+
+        _info.text = branch.Title + "     " + branch.Levels + levels + state;
+        Select(canSelect ? branch.Id : NoSelection);
+    }
+
+    private void Select(string locationId)
+    {
+        _selected = locationId;
 
         foreach (MapNode node in _locationNodes)
-            node.SetSelected(node.gameObject.activeSelf && node.Index == index && index != NoSelection);
+            node.SetSelected(node.gameObject.activeSelf && locationId != NoSelection && _route[node.Index].Id == locationId);
 
-        bool isReplay = index != NoSelection && index < _currentLocation;
+        for (int i = 0; i < _branchNodes.Length; i++)
+            _branchNodes[i].SetSelected(i < _shownBranches.Count && _branchNodes[i].gameObject.activeSelf
+                && _shownBranches[i].Id == locationId);
+
+        bool isReplay = locationId != NoSelection && _economy.IsLocationCompleted(locationId);
 
         _playLabel.text = isReplay ? ReplayText : PlayText;
-        _playButton.gameObject.SetActive(_canPlay || index != NoSelection);
+        _playButton.gameObject.SetActive(_canPlay || locationId != NoSelection);
     }
 
     private void OnMenuClicked()
@@ -389,7 +477,7 @@ public class MapScreen : MonoBehaviour
         if (_selected == NoSelection)
             PlayRequested?.Invoke();
         else
-            LocationPlayRequested?.Invoke(_route[_selected].Id);
+            LocationPlayRequested?.Invoke(_selected);
     }
 
 #if UNITY_EDITOR

@@ -26,13 +26,36 @@ public class LocationTable : ScriptableObject
         if (_rows == null)
             return null;
 
+        if (location.IsBranch)
+        {
+            LocationRow parent = GetRow(location.BranchOf);
+
+            return parent == null ? null : GetNext(parent);
+        }
+
         foreach (LocationRow row in _rows)
         {
-            if (row.System == location.System && row.Order == location.Order + 1)
+            if (row.IsBranch == false && row.System == location.System && row.Order == location.Order + 1)
                 return row;
         }
 
         return null;
+    }
+
+    public List<LocationRow> GetBranches(string parentId)
+    {
+        List<LocationRow> branches = new List<LocationRow>();
+
+        if (_rows == null)
+            return branches;
+
+        foreach (LocationRow row in _rows)
+        {
+            if (row.BranchOf == parentId)
+                branches.Add(row);
+        }
+
+        return branches;
     }
 
 #if UNITY_EDITOR

@@ -11,7 +11,7 @@ namespace TableImport
         private static readonly string[] Columns =
         {
             "id", "system", "order", "levels", "border_theme", "flight_mode",
-            "first_wave_size", "wave_size_growth"
+            "first_wave_size", "wave_size_growth", "title", "branch_of"
         };
 
         public static LocationTable Import(SystemTable systems, TableLog log)
@@ -48,14 +48,37 @@ namespace TableImport
                     reader.ReadOptionalText("border_theme"),
                     reader.ReadEnum<FlightMode>("flight_mode"),
                     reader.ReadInt("first_wave_size", 1, 99),
-                    reader.ReadInt("wave_size_growth", 0, 99)));
+                    reader.ReadInt("wave_size_growth", 0, 99),
+                    reader.ReadOptionalText("title"),
+                    reader.ReadOptionalText("branch_of")));
             }
+
+            CheckBranches(rows, log);
 
             LocationTable table = GeneratedAsset.LoadOrCreate<LocationTable>(AssetPath);
             table.Fill(rows.ToArray());
             EditorUtility.SetDirty(table);
 
             return table;
+        }
+
+        private static void CheckBranches(List<LocationRow> rows, TableLog log)
+        {
+            foreach (LocationRow row in rows)
+            {
+                if (row.IsBranch == false)
+                    continue;
+
+                LocationRow parent = rows.Find(other => other.Id == row.BranchOf);
+
+                if (parent == null)
+                    log.Add(SourcePath, 0, row.Id + ": branch_of " + row.BranchOf + " — нет такой локации");
+                else if (parent.IsBranch || parent.System != row.System)
+                    log.Add(SourcePath, 0, row.Id + ": ответвление должно идти от основной локации той же системы");
+
+                if (string.IsNullOrEmpty(row.Title))
+                    log.Add(SourcePath, 0, row.Id + ": у ответвления нужно название в столбце title");
+            }
         }
     }
 }

@@ -33,6 +33,7 @@ namespace UiContent
         private const float Aspect = 16f / 9f;
         private const int SystemCount = 5;
         private const int LocationNodeCount = 10;
+        private const int BranchNodeCount = 3;
         private const float SystemNodeSize = 84f;
         private const float LocationNodeSize = 56f;
         private const int LocationStarCount = 3;
@@ -144,7 +145,7 @@ namespace UiContent
             RectTransform armView = BuildArm(viewport, systems, out MapNode[] systemNodes, out UiPolyline armDone,
                 out UiPolyline armRest);
             RectTransform systemView = BuildSystemView(viewport, out Image systemBackground, out MapNode[] locationNodes,
-                out UiPolyline routeDone, out UiPolyline routeRest);
+                out UiPolyline routeDone, out UiPolyline routeRest, out MapNode[] branchNodes, out UiPolyline[] branchLinks);
 
             Button back = DockScreenBuilder.AddButton(panel, "Back Button", "BACK", new Vector2(0f, 1f), new Vector2(110f, -54f),
                 new Vector2(170f, 64f), 28);
@@ -185,6 +186,8 @@ namespace UiContent
             SetArray(so.FindProperty("_locationNodes"), locationNodes);
             so.FindProperty("_routeDone").objectReferenceValue = routeDone;
             so.FindProperty("_routeRest").objectReferenceValue = routeRest;
+            SetArray(so.FindProperty("_branchNodes"), branchNodes);
+            SetArray(so.FindProperty("_branchLinks"), branchLinks);
             so.FindProperty("_title").objectReferenceValue = title;
             so.FindProperty("_info").objectReferenceValue = info;
             so.FindProperty("_backButton").objectReferenceValue = back;
@@ -306,7 +309,7 @@ namespace UiContent
         }
 
         private static RectTransform BuildSystemView(RectTransform viewport, out Image background, out MapNode[] nodes,
-            out UiPolyline done, out UiPolyline rest)
+            out UiPolyline done, out UiPolyline rest, out MapNode[] branches, out UiPolyline[] links)
         {
             RectTransform view = DockScreenBuilder.Stretch("System", viewport);
             background = DockScreenBuilder.AddImage(view, Art("System 1 Map"));
@@ -314,10 +317,20 @@ namespace UiContent
             rest = DockScreenBuilder.Stretch("Route Rest", view).gameObject.AddGraphic<UiPolyline>();
             done = DockScreenBuilder.Stretch("Route Done", view).gameObject.AddGraphic<UiPolyline>();
 
+            links = new UiPolyline[BranchNodeCount];
+
+            for (int i = 0; i < BranchNodeCount; i++)
+                links[i] = DockScreenBuilder.Stretch("Branch Link " + (i + 1), view).gameObject.AddGraphic<UiPolyline>();
+
             nodes = new MapNode[LocationNodeCount];
 
             for (int i = 0; i < LocationNodeCount; i++)
                 nodes[i] = AddNode(view, "Location " + (i + 1), LocationNodeSize, 22, LocationStarCount);
+
+            branches = new MapNode[BranchNodeCount];
+
+            for (int i = 0; i < BranchNodeCount; i++)
+                branches[i] = AddNode(view, "Branch " + (i + 1), LocationNodeSize, 18, LocationStarCount);
 
             return view;
         }
