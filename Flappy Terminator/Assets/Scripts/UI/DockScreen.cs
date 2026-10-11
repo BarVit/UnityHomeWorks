@@ -370,11 +370,19 @@ public class DockScreen : MonoBehaviour
         string now = FormatSkill(skill, 0);
         string value = price < 0 ? now : now + Arrow + FormatSkill(skill, 1);
         bool isHull = skill == SkillStat.Health;
-        string hint = isHull ? "+" + _skills.GetStep(skill) + " HEALTH PER LEVEL"
+        string hint = isHull ? GetHullHint(skill, price)
             : "+" + _skills.GetStep(skill) + PercentSign + " FIRE RATE PER LEVEL";
 
         return new UpgradeRowData(isHull ? _healthIcon : _cooldownIcon, isHull ? "HULL" : "COOLDOWN", hint, value,
             _skills.GetLevel(skill), _skills.GetMaxLevel(skill), price, _skills.CanUpgrade(skill), _xpIcon);
+    }
+
+    private string GetHullHint(SkillStat skill, int price)
+    {
+        if (price < 0)
+            return MaxLevelHint;
+
+        return "+" + Mathf.RoundToInt(_skills.GetValue(skill, 1) - _skills.GetValue(skill)) + " HEALTH NEXT LEVEL";
     }
 
     private string FormatSkill(SkillStat skill, int levelShift)
