@@ -195,6 +195,43 @@ MonoBehaviour:
     - punisher_1
     _interval: 0
     _intervalMax: 0
+  - _location: loc_01_05
+    _level: 1
+    _order: 1
+    _count: 60
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_01_05
+    _level: 2
+    _order: 1
+    _count: 10
+    _mode: 1
+    _enemies:
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+  - _location: loc_01_05
+    _level: 3
+    _order: 1
+    _count: 12
+    _mode: 0
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+  - _location: loc_01_05
+    _level: 3
+    _order: 2
+    _count: 1
+    _mode: 2
+    _enemies:
+    - hierarch
+    _interval: 0
+    _intervalMax: 0
   - _location: gate_ashen_void
     _level: 1
     _order: 1
