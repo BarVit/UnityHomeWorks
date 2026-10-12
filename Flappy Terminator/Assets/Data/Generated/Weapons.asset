@@ -134,8 +134,8 @@ MonoBehaviour:
     _turnRate: 90
     _aimTime: 0
     _area: 0
-    _price: 19000
-    _unlockAfter: 
+    _price: 25000
+    _unlockAfter: loc_03_03
     _projectile: {fileID: 4581286917286831887, guid: 3fffa4739d43f4c039a9ff680207e691, type: 3}
     _beam: {fileID: 0}
     _assets:
@@ -168,8 +168,8 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
-    _price: 52000
-    _unlockAfter: 
+    _price: 50000
+    _unlockAfter: loc_03_06
     _projectile: {fileID: 0}
     _beam: {fileID: 8352859674081126688, guid: 515114a3f4dd148ce90a8b6800a6074c, type: 3}
     _assets:
