@@ -92,22 +92,22 @@ MonoBehaviour:
     _stat: 0
     _level: 2
     _bonus: 1
-    _price: 2500
+    _price: 2250
   - _owner: impulse_laser
     _stat: 0
     _level: 3
     _bonus: 1
-    _price: 3500
+    _price: 3000
   - _owner: impulse_laser
     _stat: 0
     _level: 4
     _bonus: 1
-    _price: 4500
+    _price: 4000
   - _owner: impulse_laser
     _stat: 0
     _level: 5
     _bonus: 1
-    _price: 5500
+    _price: 5000
   - _owner: impulse_laser
     _stat: 1
     _level: 0
@@ -122,27 +122,27 @@ MonoBehaviour:
     _stat: 3
     _level: 1
     _bonus: 10
-    _price: 1500
+    _price: 1000
   - _owner: impulse_laser
     _stat: 3
     _level: 2
     _bonus: 10
-    _price: 2500
+    _price: 1500
   - _owner: impulse_laser
     _stat: 3
     _level: 3
     _bonus: 10
-    _price: 3500
+    _price: 2000
   - _owner: impulse_laser
     _stat: 3
     _level: 4
     _bonus: 10
-    _price: 4500
+    _price: 2500
   - _owner: impulse_laser
     _stat: 3
     _level: 5
     _bonus: 10
-    _price: 5500
+    _price: 3000
   - _owner: rocket
     _stat: 0
     _level: 0

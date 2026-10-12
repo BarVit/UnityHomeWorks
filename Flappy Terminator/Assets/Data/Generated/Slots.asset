@@ -30,22 +30,22 @@ MonoBehaviour:
     _weapon: 
     _gun: 
   - _slot: 3
-    _price: 8000
+    _price: 7500
     _weapon: 
     _gun: cannon
   - _slot: 4
-    _price: 20000
+    _price: 15000
     _weapon: 
     _gun: cannon
   - _slot: 2
-    _price: 4000
+    _price: 6000
     _weapon: 
     _gun: impulse_laser
   - _slot: 3
-    _price: 16000
+    _price: 12000
     _weapon: 
     _gun: impulse_laser
   - _slot: 4
-    _price: 32000
+    _price: 24000
     _weapon: 
     _gun: impulse_laser
