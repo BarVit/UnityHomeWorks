@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e46e9b32f144f02b6cb50ab63ed6c8, type: 3}
   m_Name: Hover Guard
   m_EditorClassIdentifier: Assembly-CSharp::HoverProfile
-  _minSpeed: 0.5
+  _minSpeed: 1
   _maxSpeed: 3
-  _minFirstStopShare: 0.1
-  _maxFirstStopShare: 0.333
+  _minFirstStopShare: 0.3
+  _maxFirstStopShare: 0.6
   _stopStep: 0.333
   _stopCount: 1
   _stopChance: 1
-  _minHold: 30
-  _maxHold: 30
+  _minHold: 20
+  _maxHold: 20
