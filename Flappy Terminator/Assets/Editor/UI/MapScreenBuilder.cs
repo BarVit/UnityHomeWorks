@@ -43,6 +43,7 @@ namespace UiContent
         private const float SelectionScale = 1.6f;
         private const float GateSize = 110f;
         private const float VoidGateSize = 132f;
+        private const float VoidHaloPulse = 1.3f / 3f;
         private const string VoidArt = "Ashen Void Map";
         private const string WavesAsset = "Assets/Data/Generated/Waves.asset";
 
@@ -415,6 +416,7 @@ namespace UiContent
             so.FindProperty("_frame").objectReferenceValue = frame;
             so.FindProperty("_frameSpinSpeed").floatValue = 7f;
             so.FindProperty("_halo").objectReferenceValue = haloImage;
+            so.FindProperty("_haloPulseSpeed").floatValue = VoidHaloPulse;
             so.FindProperty("_lockedColor").colorValue = new Color(0.32f, 0.3f, 0.36f, 0.9f);
             so.ApplyModifiedPropertiesWithoutUndo();
 
