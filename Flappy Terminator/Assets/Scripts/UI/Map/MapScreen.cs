@@ -394,8 +394,7 @@ public class MapScreen : MonoBehaviour
 
     private void ShowGate(int system, List<LocationRow> locations, Vector2[] route)
     {
-        bool exists = system + 1 < _systemRoute.Count && system < _gatePositions.Length
-            && _gatePositions[system] != Vector2.zero && route.Length > 0;
+        bool exists = system < _gatePositions.Length && _gatePositions[system] != Vector2.zero && route.Length > 0;
 
         _starGate.gameObject.SetActive(exists);
         _gateLink.gameObject.SetActive(exists);
@@ -651,18 +650,22 @@ public class MapScreen : MonoBehaviour
     private void OnGateClicked()
     {
         int next = _openedSystem + 1;
+        bool hasNext = next < _systemRoute.Count;
 
         if (_starGate.IsOpen)
         {
-            ShowSystem(next);
+            if (hasNext)
+                ShowSystem(next);
+            else
+                _toast.Show(DemoOnly);
 
             return;
         }
 
         int last = GetFirstLocation(_openedSystem) + GetLocations(_systemRoute[_openedSystem].Id).Count - 1;
+        string target = hasNext ? " TO " + SystemTitle + _systemRoute[next].Order : string.Empty;
 
-        _info.text = GateText + " TO " + SystemTitle + _systemRoute[next].Order + "     LOCKED UNTIL " + GetLabel(last)
-            + " IS CLEARED";
+        _info.text = GateText + target + "     LOCKED UNTIL " + GetLabel(last) + " IS CLEARED";
         Select(NoSelection);
     }
 

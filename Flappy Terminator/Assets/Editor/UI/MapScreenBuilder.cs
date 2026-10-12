@@ -42,6 +42,7 @@ namespace UiContent
         private const float BorderWidth = 2.5f;
         private const float SelectionScale = 1.6f;
         private const float GateSize = 110f;
+        private const float VoidGateSize = 132f;
         private const string VoidArt = "Ashen Void Map";
         private const string WavesAsset = "Assets/Data/Generated/Waves.asset";
 
@@ -51,7 +52,6 @@ namespace UiContent
         private static readonly Color VoidLabel = new Color(0.7f, 0.62f, 1f);
         private static readonly Color BorderColor = new Color(0.21f, 0.85f, 1f, 0.55f);
         private static readonly Color SelectionColor = new Color(1f, 1f, 1f, 0.9f);
-        private static readonly Color VoidVortex = new Color(0.78f, 0.55f, 1f);
 
         [Serializable]
         private class Point
@@ -371,7 +371,7 @@ namespace UiContent
             gateLink = DockScreenBuilder.Stretch("Gate Link", view).gameObject.AddGraphic<UiPolyline>();
             gate = AddGate(view, "Star Gate", Color.white);
             voidLink = DockScreenBuilder.Stretch("Void Link", view).gameObject.AddGraphic<UiPolyline>();
-            voidGate = AddGate(view, "Void Gate", VoidVortex);
+            voidGate = AddVoidGate(view);
 
             nodes = new MapNode[LocationNodeCount];
 
@@ -384,6 +384,41 @@ namespace UiContent
                 branches[i] = AddNode(view, "Branch " + (i + 1), LocationNodeSize, 18, LocationStarCount);
 
             return view;
+        }
+
+        private static StarGateView AddVoidGate(RectTransform parent)
+        {
+            RectTransform root = DockScreenBuilder.Place("Void Gate", parent, new Vector2(0.5f, 0.5f), Vector2.zero,
+                new Vector2(VoidGateSize, VoidGateSize));
+            RectTransform halo = DockScreenBuilder.Place("Halo", root, new Vector2(0.5f, 0.5f), Vector2.zero,
+                new Vector2(VoidGateSize * 1.35f, VoidGateSize * 1.35f));
+            Image haloImage = DockScreenBuilder.AddImage(halo, Art("Void Gate Halo"));
+            RectTransform rift = DockScreenBuilder.Stretch("Rift", root);
+            DockScreenBuilder.AddImage(rift, Art("Void Gate Rift"));
+            RectTransform frame = DockScreenBuilder.Stretch("Frame", root);
+            Image frameImage = DockScreenBuilder.AddImage(frame, Art("Void Gate Frame"));
+            frameImage.raycastTarget = true;
+            RectTransform lockRect = DockScreenBuilder.Place("Lock", root, new Vector2(0.5f, 0.5f), Vector2.zero,
+                new Vector2(GateSize * 0.32f, GateSize * 0.32f));
+            DockScreenBuilder.AddImage(lockRect, DockScreenBuilder.Art("Lock Icon"));
+            TMP_Text label = DockScreenBuilder.AddText(DockScreenBuilder.Place("Label", root, new Vector2(0.5f, 0f),
+                new Vector2(0f, -8f), new Vector2(260f, 30f)), "", 22, TextAlignmentOptions.Center, Color.white);
+            label.fontStyle = FontStyles.Bold;
+
+            StarGateView gate = root.gameObject.AddComponent<StarGateView>();
+            SerializedObject so = new SerializedObject(gate);
+            so.FindProperty("_ring").objectReferenceValue = frameImage;
+            so.FindProperty("_vortex").objectReferenceValue = rift;
+            so.FindProperty("_lock").objectReferenceValue = lockRect.gameObject;
+            so.FindProperty("_label").objectReferenceValue = label;
+            so.FindProperty("_spinSpeed").floatValue = -28f;
+            so.FindProperty("_frame").objectReferenceValue = frame;
+            so.FindProperty("_frameSpinSpeed").floatValue = 7f;
+            so.FindProperty("_halo").objectReferenceValue = haloImage;
+            so.FindProperty("_lockedColor").colorValue = new Color(0.32f, 0.3f, 0.36f, 0.9f);
+            so.ApplyModifiedPropertiesWithoutUndo();
+
+            return gate;
         }
 
         private static StarGateView AddGate(RectTransform parent, string name, Color vortexTint)
@@ -506,6 +541,9 @@ namespace UiContent
             Prepare("Star Gate", TextureImporterCompression.Uncompressed);
             Prepare("Star Gate Vortex", TextureImporterCompression.Uncompressed);
             Prepare(VoidArt, TextureImporterCompression.Compressed);
+            Prepare("Void Gate Rift", TextureImporterCompression.Uncompressed);
+            Prepare("Void Gate Frame", TextureImporterCompression.Uncompressed);
+            Prepare("Void Gate Halo", TextureImporterCompression.Uncompressed);
         }
 
         private static void Prepare(string name, TextureImporterCompression compression)
