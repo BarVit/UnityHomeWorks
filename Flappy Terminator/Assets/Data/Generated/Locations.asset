@@ -192,7 +192,7 @@ MonoBehaviour:
   - _id: loc_03_05
     _system: sys_03
     _order: 5
-    _levels: 3
+    _levels: 5
     _borderTheme: 
     _flightMode: 0
     _firstWaveSize: 4
@@ -291,7 +291,7 @@ MonoBehaviour:
   - _id: loc_04_05
     _system: sys_04
     _order: 5
-    _levels: 3
+    _levels: 5
     _borderTheme: 
     _flightMode: 0
     _firstWaveSize: 5
@@ -357,7 +357,7 @@ MonoBehaviour:
   - _id: loc_05_05
     _system: sys_05
     _order: 5
-    _levels: 3
+    _levels: 5
     _borderTheme: 
     _flightMode: 0
     _firstWaveSize: 5
@@ -428,28 +428,28 @@ MonoBehaviour:
     _flightMode: 0
     _firstWaveSize: 3
     _waveSizeGrowth: 3
-    _title: ASHEN VOID I
+    _title: ASHFALL
     _branchOf: loc_03_07
     _void: ashen_void
   - _id: void_ashen_2
     _system: sys_03
     _order: 2
-    _levels: 1
+    _levels: 2
     _borderTheme: 
     _flightMode: 0
     _firstWaveSize: 3
     _waveSizeGrowth: 3
-    _title: ASHEN VOID II
+    _title: IRON CINDERS
     _branchOf: loc_03_07
     _void: ashen_void
   - _id: void_ashen_3
     _system: sys_03
     _order: 3
-    _levels: 1
+    _levels: 2
     _borderTheme: 
     _flightMode: 0
     _firstWaveSize: 3
     _waveSizeGrowth: 3
-    _title: ASHEN VOID III
+    _title: SMOLDER DRIFT
     _branchOf: loc_03_07
     _void: ashen_void
