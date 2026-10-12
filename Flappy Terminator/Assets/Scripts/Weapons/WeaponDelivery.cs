@@ -150,16 +150,22 @@ public abstract class WeaponDelivery
         return true;
     }
 
-    public bool PassTurn()
+    public bool IsAttackStart => HasMagazine == false || _shotsLeft == _row.Magazine;
+
+    public int PassAttack()
     {
         if (IsReady == false)
-            return false;
+            return 0;
+
+        int shots = HasMagazine ? _shotsLeft : 1;
 
         _cooldownLeft = Cooldown;
         Warm();
-        Spend();
 
-        return true;
+        for (int shot = 0; shot < shots; shot++)
+            Spend();
+
+        return shots;
     }
 
     public void FireOutOfTurn()

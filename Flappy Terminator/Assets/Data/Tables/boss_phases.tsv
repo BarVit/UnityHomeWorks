@@ -6,6 +6,6 @@ hierarch	1	hierarch_gun	1	25	1	Health	0.8	0	0	0
 hierarch	2	hierarch_gun	2	25	1	Health	0.6	0	0	0
 hierarch	3	hierarch_gun_burst	1	25	1	Health	0.4	0	0	0
 hierarch	4	hierarch_gun	2	25	1	Shots	1	5	0.25	6
-hierarch	5	hierarch_gun_burst	1	25	1	Shots	2	4	0.25	6
+hierarch	5	hierarch_gun_burst	1	25	1	Shots	3	4	0.25	6
 hierarch	6	hierarch_gun	2	25	0.8	Shots	1	7	0	0
-hierarch	7	hierarch_gun_burst_fast	1	25	1	Shots	2	6	0	0
+hierarch	7	hierarch_gun_burst_fast	1	25	1	Shots	3	6	0	0

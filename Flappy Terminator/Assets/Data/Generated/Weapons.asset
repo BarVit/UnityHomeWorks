@@ -1212,12 +1212,12 @@ MonoBehaviour:
       _overheatSound: {fileID: 0}
   - _id: hierarch_gun_burst
     _title: "\u0418\u0435\u0440\u0430\u0440\u0445 \u2014 \u0440\u0430\u043A\u0435\u0442\u043D\u0438\u0446\u0430,
-      \u0434\u0432\u0435 \u043F\u043E\u0434\u0440\u044F\u0434"
+      \u0442\u0440\u0438 \u043F\u043E\u0434\u0440\u044F\u0434"
     _owner: 1
     _delivery: 0
     _damage: 35
-    _rate: 0.2
-    _magazine: 2
+    _rate: 0.3
+    _magazine: 3
     _reloadTime: 2.25
     _projectileSpeed: 6
     _barrelsMax: 4
@@ -1247,13 +1247,13 @@ MonoBehaviour:
       _overheatSound: {fileID: 0}
   - _id: hierarch_gun_burst_fast
     _title: "\u0418\u0435\u0440\u0430\u0440\u0445 \u2014 \u0440\u0430\u043A\u0435\u0442\u043D\u0438\u0446\u0430,
-      \u0434\u0432\u0435 \u043F\u043E\u0434\u0440\u044F\u0434, \u043A\u0443\u043B\u0434\u0430\u0443\u043D
+      \u0442\u0440\u0438 \u043F\u043E\u0434\u0440\u044F\u0434, \u043A\u0443\u043B\u0434\u0430\u0443\u043D
       \u221220%"
     _owner: 1
     _delivery: 0
     _damage: 35
-    _rate: 0.2
-    _magazine: 2
+    _rate: 0.3
+    _magazine: 3
     _reloadTime: 1.8
     _projectileSpeed: 6
     _barrelsMax: 4

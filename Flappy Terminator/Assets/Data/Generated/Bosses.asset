@@ -311,7 +311,7 @@ MonoBehaviour:
       _damage: 25
       _rateScale: 1
       _exit: 3
-      _exitValue: 2
+      _exitValue: 3
       _next: 4
       _escapeHealth: 0.25
       _escapeTo: 6
@@ -331,7 +331,7 @@ MonoBehaviour:
       _damage: 25
       _rateScale: 1
       _exit: 3
-      _exitValue: 2
+      _exitValue: 3
       _next: 6
       _escapeHealth: 0
       _escapeTo: 0

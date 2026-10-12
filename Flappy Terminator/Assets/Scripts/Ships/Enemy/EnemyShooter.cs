@@ -15,7 +15,7 @@ public class EnemyShooter : MonoBehaviour
     private WeaponDelivery _delivery;
     private WeaponDelivery _special;
     private int _specialEvery;
-    private int _shots;
+    private int _attacks;
     private bool _isShooting;
 
     public event Action Fired;
@@ -36,7 +36,9 @@ public class EnemyShooter : MonoBehaviour
         _delivery.Tick(Time.deltaTime);
         _special?.Tick(Time.deltaTime);
 
-        if (_isShooting && TryShoot())
+        int shots = _isShooting ? TryShoot() : 0;
+
+        for (int shot = 0; shot < shots; shot++)
             Fired?.Invoke();
     }
 
@@ -55,7 +57,7 @@ public class EnemyShooter : MonoBehaviour
         _special?.Dispose();
         _special = null;
         _specialEvery = 0;
-        _shots = 0;
+        _attacks = 0;
 
         if (armament == null || every <= 0)
             return;
@@ -74,23 +76,30 @@ public class EnemyShooter : MonoBehaviour
         _isShooting = false;
     }
 
-    private bool TryShoot()
+    private int TryShoot()
     {
-        if (_special != null && (_shots + 1) % _specialEvery == 0)
+        bool isAttackStart = _delivery.IsAttackStart;
+
+        if (_special != null && isAttackStart && (_attacks + 1) % _specialEvery == 0)
         {
-            if (_delivery.PassTurn() == false)
-                return false;
+            int shots = _delivery.PassAttack();
+
+            if (shots == 0)
+                return 0;
 
             _special.FireOutOfTurn();
-        }
-        else if (_delivery.Fire() == false)
-        {
-            return false;
+            _attacks++;
+
+            return shots;
         }
 
-        _shots++;
+        if (_delivery.Fire() == false)
+            return 0;
 
-        return true;
+        if (isAttackStart)
+            _attacks++;
+
+        return 1;
     }
 
     private void Arm(EnemyArmament armament, EnemyContext context, float cooldownLeft)
