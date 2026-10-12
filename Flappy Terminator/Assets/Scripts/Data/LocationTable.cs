@@ -42,6 +42,29 @@ public class LocationTable : ScriptableObject
         return null;
     }
 
+    public bool IsVoid(string voidId)
+    {
+        return GetVoid(voidId).Count > 0;
+    }
+
+    public List<LocationRow> GetVoid(string voidId)
+    {
+        List<LocationRow> found = new List<LocationRow>();
+
+        if (_rows == null || string.IsNullOrEmpty(voidId))
+            return found;
+
+        foreach (LocationRow row in _rows)
+        {
+            if (row.Void == voidId)
+                found.Add(row);
+        }
+
+        found.Sort((left, right) => left.Order.CompareTo(right.Order));
+
+        return found;
+    }
+
     public List<LocationRow> GetBranches(string parentId)
     {
         List<LocationRow> branches = new List<LocationRow>();

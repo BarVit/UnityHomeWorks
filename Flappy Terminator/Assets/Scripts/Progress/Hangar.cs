@@ -34,9 +34,30 @@ public class Hangar : MonoBehaviour
 
     private WeaponLoadout Loadout => Ship.GetLoadout(WeaponId);
 
+    private readonly List<string> _granted = new List<string>();
+
+    private void OnEnable()
+    {
+        _economy.LocationCleared += Grant;
+    }
+
+    private void OnDisable()
+    {
+        _economy.LocationCleared -= Grant;
+    }
+
     private void Start()
     {
         StartNewSession();
+    }
+
+    public List<string> TakeGranted()
+    {
+        List<string> granted = new List<string>(_granted);
+
+        _granted.Clear();
+
+        return granted;
     }
 
     public void StartNewSession()
@@ -86,7 +107,7 @@ public class Hangar : MonoBehaviour
         if (_economy.IsTestSession || OwnsWeapon(weaponId))
             return true;
 
-        return string.IsNullOrEmpty(row.UnlockAfter) == false && _economy.IsLocationCompleted(row.UnlockAfter);
+        return _economy.IsRequirementMet(row.UnlockAfter);
     }
 
     public bool TryBuyWeapon(string weaponId)
@@ -230,8 +251,26 @@ public class Hangar : MonoBehaviour
         return Loadout.GetBarrel(slot - FirstSlot);
     }
 
+    private void Grant(string locationId)
+    {
+        int before = _granted.Count;
+
+        foreach (WeaponRow row in _weapons.Rows)
+        {
+            if (row.GrantedAfter != locationId || OwnsWeapon(row.Id))
+                continue;
+
+            Ship.AddWeapon(row.Id);
+            _granted.Add(row.Id);
+        }
+
+        if (_granted.Count > before)
+            Commit();
+    }
+
     private void Begin(string weaponId, Reward grant, bool isTest)
     {
+        _granted.Clear();
         _economy.StartNewSession(isTest);
         _economy.Grant(grant);
         Ship.SelectWeapon(weaponId);

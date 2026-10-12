@@ -42,6 +42,7 @@ namespace UiContent
         private const float BorderWidth = 2.5f;
         private const float SelectionScale = 1.6f;
         private const float GateSize = 110f;
+        private const string VoidArt = "Ashen Void Map";
         private const string WavesAsset = "Assets/Data/Generated/Waves.asset";
 
         private static readonly Color Cyan = new Color(0.21f, 0.85f, 1f);
@@ -50,6 +51,7 @@ namespace UiContent
         private static readonly Color VoidLabel = new Color(0.7f, 0.62f, 1f);
         private static readonly Color BorderColor = new Color(0.21f, 0.85f, 1f, 0.55f);
         private static readonly Color SelectionColor = new Color(1f, 1f, 1f, 0.9f);
+        private static readonly Color VoidVortex = new Color(0.78f, 0.55f, 1f);
 
         [Serializable]
         private class Point
@@ -107,6 +109,16 @@ namespace UiContent
         }
 
         [Serializable]
+        private class VoidPoint
+        {
+            public string id;
+            public string title;
+            public Point system;
+            public Point arm;
+            public Point[] locations;
+        }
+
+        [Serializable]
         private class GatePoint
         {
             public string system;
@@ -120,6 +132,7 @@ namespace UiContent
             public StarSystem[] systems;
             public BranchPoint[] branches;
             public GatePoint[] gates;
+            public VoidPoint[] voids;
         }
 
         [MenuItem("Tools/UI/Build Map Screen")]
@@ -165,7 +178,7 @@ namespace UiContent
                 out UiPolyline armRest, out MapNode[] armBranchNodes);
             RectTransform systemView = BuildSystemView(viewport, out Image systemBackground, out MapNode[] locationNodes,
                 out UiPolyline routeDone, out UiPolyline routeRest, out MapNode[] branchNodes, out UiPolyline[] branchLinks,
-                out StarGateView starGate, out UiPolyline gateLink);
+                out StarGateView starGate, out UiPolyline gateLink, out StarGateView voidGate, out UiPolyline voidLink);
 
             Button back = DockScreenBuilder.AddButton(panel, "Back Button", "BACK", new Vector2(0f, 1f), new Vector2(110f, -54f),
                 new Vector2(170f, 64f), 28);
@@ -211,6 +224,8 @@ namespace UiContent
             SetArray(so.FindProperty("_armBranchNodes"), armBranchNodes);
             so.FindProperty("_starGate").objectReferenceValue = starGate;
             so.FindProperty("_gateLink").objectReferenceValue = gateLink;
+            so.FindProperty("_voidGate").objectReferenceValue = voidGate;
+            so.FindProperty("_voidLink").objectReferenceValue = voidLink;
             so.FindProperty("_backLabel").objectReferenceValue = back.GetComponentInChildren<TMP_Text>();
             so.FindProperty("_title").objectReferenceValue = title;
             so.FindProperty("_info").objectReferenceValue = info;
@@ -223,7 +238,8 @@ namespace UiContent
             so.ApplyModifiedPropertiesWithoutUndo();
 
             screen.Configure(GetSystemPositions(systems), GetSystemSprites(), GetStarColors(systems),
-                GetLocationPositions(systems), GetBranchPlacements(systems), GetGatePositions(systems));
+                GetLocationPositions(systems), GetBranchPlacements(systems), GetGatePositions(systems),
+                GetVoidPlacements(systems), Art(VoidArt));
             EditorUtility.SetDirty(screen);
 
             WireNavigation(dock, screen);
@@ -339,7 +355,7 @@ namespace UiContent
 
         private static RectTransform BuildSystemView(RectTransform viewport, out Image background, out MapNode[] nodes,
             out UiPolyline done, out UiPolyline rest, out MapNode[] branches, out UiPolyline[] links, out StarGateView gate,
-            out UiPolyline gateLink)
+            out UiPolyline gateLink, out StarGateView voidGate, out UiPolyline voidLink)
         {
             RectTransform view = DockScreenBuilder.Stretch("System", viewport);
             background = DockScreenBuilder.AddImage(view, Art("System 1 Map"));
@@ -353,7 +369,9 @@ namespace UiContent
                 links[i] = DockScreenBuilder.Stretch("Branch Link " + (i + 1), view).gameObject.AddGraphic<UiPolyline>();
 
             gateLink = DockScreenBuilder.Stretch("Gate Link", view).gameObject.AddGraphic<UiPolyline>();
-            gate = AddGate(view);
+            gate = AddGate(view, "Star Gate", Color.white);
+            voidLink = DockScreenBuilder.Stretch("Void Link", view).gameObject.AddGraphic<UiPolyline>();
+            voidGate = AddGate(view, "Void Gate", VoidVortex);
 
             nodes = new MapNode[LocationNodeCount];
 
@@ -368,12 +386,12 @@ namespace UiContent
             return view;
         }
 
-        private static StarGateView AddGate(RectTransform parent)
+        private static StarGateView AddGate(RectTransform parent, string name, Color vortexTint)
         {
-            RectTransform root = DockScreenBuilder.Place("Star Gate", parent, new Vector2(0.5f, 0.5f), Vector2.zero,
+            RectTransform root = DockScreenBuilder.Place(name, parent, new Vector2(0.5f, 0.5f), Vector2.zero,
                 new Vector2(GateSize, GateSize));
             RectTransform vortex = DockScreenBuilder.Stretch("Vortex", root);
-            DockScreenBuilder.AddImage(vortex, Art("Star Gate Vortex"));
+            DockScreenBuilder.AddImage(vortex, Art("Star Gate Vortex")).color = vortexTint;
             Image ring = DockScreenBuilder.AddImage(DockScreenBuilder.Stretch("Ring", root), Art("Star Gate"));
             ring.raycastTarget = true;
             RectTransform lockRect = DockScreenBuilder.Place("Lock", root, new Vector2(0.5f, 0.5f), Vector2.zero,
@@ -487,6 +505,7 @@ namespace UiContent
             Prepare("Map Node Core", TextureImporterCompression.Uncompressed);
             Prepare("Star Gate", TextureImporterCompression.Uncompressed);
             Prepare("Star Gate Vortex", TextureImporterCompression.Uncompressed);
+            Prepare(VoidArt, TextureImporterCompression.Compressed);
         }
 
         private static void Prepare(string name, TextureImporterCompression compression)
@@ -550,6 +569,24 @@ namespace UiContent
             }
 
             return positions;
+        }
+
+        private static VoidPlacement[] GetVoidPlacements(Systems systems)
+        {
+            if (systems.voids == null)
+                return new VoidPlacement[0];
+
+            VoidPlacement[] placements = new VoidPlacement[systems.voids.Length];
+
+            for (int i = 0; i < placements.Length; i++)
+            {
+                VoidPoint point = systems.voids[i];
+
+                placements[i] = new VoidPlacement(point.id, point.title, ToVectorOrZero(point.system),
+                    ToVectorOrZero(point.arm), ToVectors(point.locations).ToArray());
+            }
+
+            return placements;
         }
 
         private static BranchPlacement[] GetBranchPlacements(Systems systems)

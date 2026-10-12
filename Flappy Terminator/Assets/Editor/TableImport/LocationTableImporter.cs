@@ -11,7 +11,7 @@ namespace TableImport
         private static readonly string[] Columns =
         {
             "id", "system", "order", "levels", "border_theme", "flight_mode",
-            "first_wave_size", "wave_size_growth", "title", "branch_of"
+            "first_wave_size", "wave_size_growth", "title", "branch_of", "void"
         };
 
         public static LocationTable Import(SystemTable systems, TableLog log)
@@ -50,7 +50,8 @@ namespace TableImport
                     reader.ReadInt("first_wave_size", 1, 99),
                     reader.ReadInt("wave_size_growth", 0, 99),
                     reader.ReadOptionalText("title"),
-                    reader.ReadOptionalText("branch_of")));
+                    reader.ReadOptionalText("branch_of"),
+                    reader.ReadOptionalText("void")));
             }
 
             CheckBranches(rows, log);
@@ -66,6 +67,9 @@ namespace TableImport
         {
             foreach (LocationRow row in rows)
             {
+                if (row.IsInVoid && row.IsBranch == false)
+                    log.Add(SourcePath, 0, row.Id + ": локация пустоты открывается вратами — нужен branch_of");
+
                 if (row.IsBranch == false)
                     continue;
 
@@ -75,6 +79,9 @@ namespace TableImport
                     log.Add(SourcePath, 0, row.Id + ": branch_of " + row.BranchOf + " — нет такой локации");
                 else if (parent.IsBranch || parent.System != row.System)
                     log.Add(SourcePath, 0, row.Id + ": ответвление должно идти от основной локации той же системы");
+
+                if (row.IsInVoid && rows.Exists(other => other.Void == row.Void && other.BranchOf != row.BranchOf))
+                    log.Add(SourcePath, 0, row.Id + ": локации одной пустоты должны отходить от одной локации (branch_of)");
 
                 if (string.IsNullOrEmpty(row.Title))
                     log.Add(SourcePath, 0, row.Id + ": у ответвления нужно название в столбце title");

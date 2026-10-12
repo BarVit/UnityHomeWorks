@@ -199,9 +199,11 @@
    ]
   }
  ],
- "branches": [
+ "branches": [],
+ "voids": [
   {
-   "id": "gate_ashen_void",
+   "id": "ashen_void",
+   "title": "ASHEN VOID GATE",
    "system": {
     "x": 0.875,
     "y": 0.243
@@ -209,7 +211,21 @@
    "arm": {
     "x": 0.786,
     "y": 0.767
-   }
+   },
+   "locations": [
+    {
+     "x": 0.3,
+     "y": 0.6
+    },
+    {
+     "x": 0.5,
+     "y": 0.36
+    },
+    {
+     "x": 0.7,
+     "y": 0.62
+    }
+   ]
   }
  ],
  "gates": [

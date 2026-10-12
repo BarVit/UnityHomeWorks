@@ -101,7 +101,7 @@ public class ShopWindow : MonoBehaviour
             string details = "DAMAGE " + row.Damage;
 
             if (_hangar.IsWeaponOpen(row.Id) == false)
-                _cards[i].ShowAction(row.Id, icon, title, details, GetLockText(row.UnlockAfter), false, false);
+                _cards[i].ShowAction(row.Id, icon, title, details, GetLockText(GetRequirement(row)), false, false);
             else if (_hangar.OwnsWeapon(row.Id) == false)
                 _cards[i].ShowPrice(row.Id, icon, title, details, row.Price, _hangar.CanBuyWeapon(row.Id));
             else if (row.Id == _hangar.WeaponId)
@@ -141,9 +141,20 @@ public class ShopWindow : MonoBehaviour
         }
     }
 
-    private string GetLockText(string locationId)
+    private string GetRequirement(WeaponRow row)
     {
-        LocationRow location = string.IsNullOrEmpty(locationId) ? null : _locations.GetRow(locationId);
+        return string.IsNullOrEmpty(row.UnlockAfter) ? row.GrantedAfter : row.UnlockAfter;
+    }
+
+    private string GetLockText(string requirement)
+    {
+        if (string.IsNullOrEmpty(requirement))
+            return LockedText;
+
+        if (_locations.IsVoid(requirement))
+            return ClearText + UiText.Title(requirement);
+
+        LocationRow location = _locations.GetRow(requirement);
 
         if (location == null)
             return LockedText;

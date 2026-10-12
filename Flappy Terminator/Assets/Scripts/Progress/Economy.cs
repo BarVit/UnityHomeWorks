@@ -27,6 +27,7 @@ public class Economy : MonoBehaviour
 
     public event Action Changed;
     public event Action SessionStarted;
+    public event Action<string> LocationCleared;
 
     private void OnEnable()
     {
@@ -88,8 +89,26 @@ public class Economy : MonoBehaviour
         Changed?.Invoke();
     }
 
+    public bool IsRequirementMet(string requirement)
+    {
+        if (string.IsNullOrEmpty(requirement))
+            return false;
+
+        if (_runner.Locations.GetRow(requirement) != null)
+            return IsLocationCompleted(requirement);
+
+        foreach (LocationRow location in _runner.Locations.GetVoid(requirement))
+        {
+            if (IsLocationCompleted(location.Id))
+                return true;
+        }
+
+        return false;
+    }
+
     private void Complete(string locationId, int stars)
     {
         _data.Galaxy.Complete(locationId, stars);
+        LocationCleared?.Invoke(locationId);
     }
 }

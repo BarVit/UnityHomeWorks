@@ -91,7 +91,7 @@ public class ModuleRack : MonoBehaviour
         if (_economy.IsTestSession || Owns(moduleId))
             return true;
 
-        return string.IsNullOrEmpty(row.UnlockAfter) == false && _economy.IsLocationCompleted(row.UnlockAfter);
+        return _economy.IsRequirementMet(row.UnlockAfter);
     }
 
     public bool TryBuy(string moduleId)

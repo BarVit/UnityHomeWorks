@@ -25,6 +25,7 @@ public class WeaponRow
     [SerializeField] private float _area;
     [SerializeField] private int _price;
     [SerializeField] private string _unlockAfter;
+    [SerializeField] private string _grantedAfter;
     [SerializeField] private Ammo _projectile;
     [SerializeField] private BeamFlash _beam;
     [SerializeField] private WeaponAssets _assets;
@@ -32,7 +33,7 @@ public class WeaponRow
     public WeaponRow(string id, string title, WeaponOwner owner, DeliveryKind delivery, int damage, float rate,
         int magazine, float reloadTime, float projectileSpeed, int barrelsMax, FirePattern firePattern, float sideAngle, float heatPerShot,
         float cooldownRate, float unlockHeat, float tickInterval, float turnRate, float aimTime, float area, int price,
-        string unlockAfter, Ammo projectile, BeamFlash beam, WeaponAssets assets)
+        string unlockAfter, string grantedAfter, Ammo projectile, BeamFlash beam, WeaponAssets assets)
     {
         _id = id;
         _title = title;
@@ -55,6 +56,7 @@ public class WeaponRow
         _area = area;
         _price = price;
         _unlockAfter = unlockAfter;
+        _grantedAfter = grantedAfter;
         _projectile = projectile;
         _beam = beam;
         _assets = assets;
@@ -101,6 +103,8 @@ public class WeaponRow
     public int Price => _price;
 
     public string UnlockAfter => _unlockAfter;
+
+    public string GrantedAfter => _grantedAfter;
 
     public Ammo Projectile => _projectile;
 

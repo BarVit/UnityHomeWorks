@@ -21,6 +21,8 @@ public class DockScreen : MonoBehaviour
     private const string ClearedStatus = "LOCATION CLEARED";
     private const string DestroyedStatus = "SHIP DESTROYED";
     private const string TestStatus = "TEST HANGAR";
+    private const string ReceivedSeparator = "   ·   ";
+    private const string ReceivedCaption = " RECEIVED";
     private const string SpentCaption = "SPENT\n";
     private const string CoinsCaption = " COINS\n";
     private const string XpCaption = " XP";
@@ -148,7 +150,7 @@ public class DockScreen : MonoBehaviour
         _earned.SetActive(reason != DockReason.TestStart);
         _earnedXp.Show(earned.Xp);
         _earnedMoney.Show(earned.Money);
-        _status.text = GetStatus(reason);
+        _status.text = GetStatus(reason) + GetReceived();
         _playButton.gameObject.SetActive(canPlay);
         _selectedSlot = Hangar.FirstSlot;
         _shop.Close();
@@ -439,6 +441,16 @@ public class DockScreen : MonoBehaviour
         float rate = row == null ? 0f : row.Rate;
 
         return (rate * _skills.GetRateScale(skill.Weapon, levelShift)).ToString("0.00") + Seconds;
+    }
+
+    private string GetReceived()
+    {
+        string received = string.Empty;
+
+        foreach (string weaponId in _hangar.TakeGranted())
+            received += ReceivedSeparator + UiText.Title(weaponId) + ReceivedCaption;
+
+        return received;
     }
 
     private string GetStatus(DockReason reason)

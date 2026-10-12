@@ -14,10 +14,12 @@ public class LocationRow
     [SerializeField] private int _waveSizeGrowth;
     [SerializeField] private string _title;
     [SerializeField] private string _branchOf;
+    [SerializeField] private string _void;
 
     public LocationRow(string id, string system, int order, int levels, string borderTheme,
-        FlightMode flightMode, int firstWaveSize, int waveSizeGrowth, string title, string branchOf)
+        FlightMode flightMode, int firstWaveSize, int waveSizeGrowth, string title, string branchOf, string voidId)
     {
+        _void = voidId;
         _id = id;
         _system = system;
         _order = order;
@@ -51,4 +53,8 @@ public class LocationRow
     public string BranchOf => _branchOf;
 
     public bool IsBranch => string.IsNullOrEmpty(_branchOf) == false;
+
+    public string Void => _void;
+
+    public bool IsInVoid => string.IsNullOrEmpty(_void) == false;
 }

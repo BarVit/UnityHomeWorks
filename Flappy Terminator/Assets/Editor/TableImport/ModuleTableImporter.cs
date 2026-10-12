@@ -58,8 +58,9 @@ namespace TableImport
         {
             string unlockAfter = reader.ReadOptionalText("unlock_after");
 
-            if (unlockAfter.Length > 0 && locations != null && locations.GetRow(unlockAfter) == null)
-                reader.Fail("unlock_after: нет локации " + unlockAfter + " в " + LocationTableImporter.SourcePath);
+            if (unlockAfter.Length > 0 && locations != null && locations.GetRow(unlockAfter) == null
+                && locations.IsVoid(unlockAfter) == false)
+                reader.Fail("unlock_after: нет локации или пустоты " + unlockAfter + " в " + LocationTableImporter.SourcePath);
 
             return unlockAfter;
         }

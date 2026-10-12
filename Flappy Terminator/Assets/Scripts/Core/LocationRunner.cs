@@ -17,6 +17,8 @@ public class LocationRunner : MonoBehaviour
 
     public string LocationId => _locationId;
 
+    public LocationTable Locations => _locations;
+
     public FlightMode FlightMode => _location.FlightMode;
 
     public int Level => _run.Level;

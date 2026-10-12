@@ -13,7 +13,7 @@ namespace TableImport
         {
             "id", "title", "owner", "delivery", "damage", "rate", "magazine", "reload_time", "projectile_speed", "barrels_max",
             "fire_pattern", "side_angle", "heat_per_shot", "cooldown_rate", "unlock_heat", "tick_interval", "turn_rate", "aim_time",
-            "area", "price", "unlock_after", "projectile", "beam",
+            "area", "price", "unlock_after", "granted_after", "projectile", "beam",
             "icon", "projectile_sprite", "projectile_animation", "shot_effect",
             "hit_target_effect", "hit_world_effect",
             "shot_sound", "hit_target_sound", "hit_world_sound", "overheat_sound"
@@ -43,6 +43,7 @@ namespace TableImport
                 WeaponOwner owner = reader.ReadEnum<WeaponOwner>("owner");
                 DeliveryKind delivery = reader.ReadEnum<DeliveryKind>("delivery");
                 string unlockAfter = reader.ReadOptionalText("unlock_after");
+                string grantedAfter = reader.ReadOptionalText("granted_after");
                 bool needsProjectile = delivery != DeliveryKind.Beam && delivery != DeliveryKind.ContinuousBeam;
 
                 rows.Add(new WeaponRow(
@@ -67,6 +68,7 @@ namespace TableImport
                     reader.ReadFloat("area", 0f, 20f),
                     reader.ReadInt("price", 0, 1000000),
                     unlockAfter,
+                    grantedAfter,
                     reader.ReadPrefab<Ammo>("projectile", needsProjectile),
                     reader.ReadPrefab<BeamFlash>("beam", needsProjectile == false),
                     new WeaponAssets(
@@ -81,7 +83,11 @@ namespace TableImport
                         reader.ReadAsset<AudioClip>("hit_world_sound", false),
                         reader.ReadAsset<AudioClip>("overheat_sound", false))));
 
-                CheckUnlock(locations, owner, unlockAfter, reader);
+                CheckUnlock(locations, owner, unlockAfter, "unlock_after", reader);
+                CheckUnlock(locations, owner, grantedAfter, "granted_after", reader);
+
+                if (unlockAfter.Length > 0 && grantedAfter.Length > 0)
+                    reader.Fail("granted_after: пушка либо покупается после локации, либо выдаётся — не оба сразу");
             }
 
             WeaponTable table = GeneratedAsset.LoadOrCreate<WeaponTable>(AssetPath);
@@ -91,15 +97,16 @@ namespace TableImport
             return table;
         }
 
-        private static void CheckUnlock(LocationTable locations, WeaponOwner owner, string unlockAfter, RowReader reader)
+        private static void CheckUnlock(LocationTable locations, WeaponOwner owner, string requirement, string column,
+            RowReader reader)
         {
-            if (unlockAfter.Length == 0)
+            if (requirement.Length == 0)
                 return;
 
             if (owner != WeaponOwner.Player)
-                reader.Fail("unlock_after: открывать покупку можно только пушкам игрока");
-            else if (locations != null && locations.GetRow(unlockAfter) == null)
-                reader.Fail("unlock_after: нет локации " + unlockAfter + " в " + LocationTableImporter.SourcePath);
+                reader.Fail(column + ": условие по локации бывает только у пушек игрока");
+            else if (locations != null && locations.GetRow(requirement) == null && locations.IsVoid(requirement) == false)
+                reader.Fail(column + ": нет локации или пустоты " + requirement + " в " + LocationTableImporter.SourcePath);
         }
     }
 }

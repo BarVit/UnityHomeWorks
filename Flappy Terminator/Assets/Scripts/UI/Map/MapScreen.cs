@@ -15,6 +15,7 @@ public class MapScreen : MonoBehaviour
     private const string ToArmText = "ARM";
     private const string ToGalaxyText = "GALAXY";
     private const string GateText = "STAR GATE";
+    private const string ToSystemText = "SYSTEM";
     private const string NoSelection = null;
     private const float BranchDistance = 230f;
     private const float ImageWidth = 1920f;
@@ -51,6 +52,10 @@ public class MapScreen : MonoBehaviour
     [SerializeField] private StarGateView _starGate;
     [SerializeField] private UiPolyline _gateLink;
     [SerializeField] private Vector2[] _gatePositions;
+    [SerializeField] private StarGateView _voidGate;
+    [SerializeField] private UiPolyline _voidLink;
+    [SerializeField] private VoidPlacement[] _voidPlacements;
+    [SerializeField] private Sprite _voidSprite;
     [SerializeField] private Vector2 _starCentre = new Vector2(0.5f, 0.4907f);
     [SerializeField] private Color _branchColor = new Color(0.7f, 0.62f, 1f);
     [SerializeField] private TMP_Text _title;
@@ -68,11 +73,13 @@ public class MapScreen : MonoBehaviour
     private readonly List<LocationRow> _route = new List<LocationRow>();
     private readonly List<SystemRow> _systemRoute = new List<SystemRow>();
     private readonly List<LocationRow> _shownBranches = new List<LocationRow>();
-    private readonly List<LocationRow> _shownArmBranches = new List<LocationRow>();
+    private readonly List<VoidPlacement> _shownArmVoids = new List<VoidPlacement>();
     private int _currentLocation;
     private int _openedSystem = -1;
     private string _selected = NoSelection;
     private GameObject _lastView;
+    private string _openedVoid;
+    private VoidPlacement _shownVoid;
     private bool _canPlay;
 
     public event Action MenuRequested;
@@ -107,6 +114,7 @@ public class MapScreen : MonoBehaviour
             node.Clicked += OnBranchClicked;
 
         _starGate.Clicked += OnGateClicked;
+        _voidGate.Clicked += OnVoidGateClicked;
     }
 
     private void OnDisable()
@@ -136,6 +144,7 @@ public class MapScreen : MonoBehaviour
             node.Clicked -= OnBranchClicked;
 
         _starGate.Clicked -= OnGateClicked;
+        _voidGate.Clicked -= OnVoidGateClicked;
     }
 
     public void Show(bool canPlay)
@@ -150,6 +159,8 @@ public class MapScreen : MonoBehaviour
             ShowGalaxy();
         else if (_lastView == _armView)
             ShowArm();
+        else if (_lastView == _systemView && _openedVoid != null)
+            ShowVoid(_openedVoid);
         else
             ShowSystem(_lastView == _systemView ? _openedSystem : GetCurrentSystem());
     }
@@ -203,16 +214,19 @@ public class MapScreen : MonoBehaviour
     private void ForgetView()
     {
         _lastView = null;
+        _openedVoid = null;
     }
 
     private void ShowGalaxy()
     {
+        _openedVoid = null;
         Open(_galaxyView, GalaxyTitle, false);
         _galaxyOverlay.HideNow();
     }
 
     private void ShowArm()
     {
+        _openedVoid = null;
         Open(_armView, ArmTitle, true);
 
         int currentSystem = GetSystemIndex(_currentLocation);
@@ -229,39 +243,119 @@ public class MapScreen : MonoBehaviour
 
         ShowRoute(_armDone, _armRest, _systemPositions, Mathf.Min(currentSystem, _systemPositions.Length - 1),
             currentSystem >= _systemPositions.Length);
-        ShowArmBranches();
+        ShowArmVoids();
     }
 
-    private void ShowArmBranches()
+    private void ShowArmVoids()
     {
-        _shownArmBranches.Clear();
+        _shownArmVoids.Clear();
 
-        foreach (BranchPlacement placement in _branchPlacements)
+        foreach (VoidPlacement placement in _voidPlacements)
         {
-            LocationRow branch = _locations.GetRow(placement.Id);
-
-            if (branch == null || placement.Arm == Vector2.zero || _shownArmBranches.Count >= _armBranchNodes.Length)
+            if (placement.Arm == Vector2.zero || _locations.IsVoid(placement.Id) == false
+                || _shownArmVoids.Count >= _armBranchNodes.Length)
                 continue;
 
-            int index = _shownArmBranches.Count;
+            int index = _shownArmVoids.Count;
             MapNode node = _armBranchNodes[index];
             RectTransform rect = (RectTransform)node.transform;
 
             node.gameObject.SetActive(true);
             rect.anchorMin = rect.anchorMax = new Vector2(placement.Arm.x, 1f - placement.Arm.y);
             rect.anchoredPosition = Vector2.zero;
-            node.Show(index, branch.Title, GetBranchState(branch), _branchColor);
-            node.SetStars(_economy.GetStars(branch.Id));
-            _shownArmBranches.Add(branch);
+            node.Show(index, placement.Title, IsVoidOpen(placement.Id) ? MapNodeState.Open : MapNodeState.Locked,
+                _branchColor);
+            _shownArmVoids.Add(placement);
         }
 
-        for (int i = _shownArmBranches.Count; i < _armBranchNodes.Length; i++)
+        for (int i = _shownArmVoids.Count; i < _armBranchNodes.Length; i++)
             _armBranchNodes[i].gameObject.SetActive(false);
+    }
+
+    private bool IsVoidOpen(string voidId)
+    {
+        List<LocationRow> locations = _locations.GetVoid(voidId);
+
+        return _economy.IsTestSession || (locations.Count > 0 && _economy.IsLocationCompleted(locations[0].BranchOf));
+    }
+
+    private void ShowVoid(string voidId)
+    {
+        VoidPlacement placement = Array.Find(_voidPlacements, item => item.Id == voidId);
+        List<LocationRow> locations = _locations.GetVoid(voidId);
+
+        Select(NoSelection);
+        Open(_systemView, UiText.Title(voidId), true);
+        _openedVoid = voidId;
+        _backLabel.text = ToSystemText;
+        _systemBackground.sprite = _voidSprite;
+
+        foreach (MapNode node in _locationNodes)
+            node.gameObject.SetActive(false);
+
+        _routeDone.SetPoints(new List<Vector2>());
+        _routeRest.SetPoints(new List<Vector2>());
+        _starGate.gameObject.SetActive(false);
+        _gateLink.gameObject.SetActive(false);
+        _voidGate.gameObject.SetActive(false);
+        _voidLink.gameObject.SetActive(false);
+        _shownBranches.Clear();
+
+        for (int i = 0; i < _branchNodes.Length; i++)
+        {
+            bool exists = placement != null && i < locations.Count && i < placement.Locations.Length;
+
+            _branchNodes[i].gameObject.SetActive(exists);
+            _branchLinks[i].gameObject.SetActive(false);
+
+            if (exists == false)
+                continue;
+
+            RectTransform rect = (RectTransform)_branchNodes[i].transform;
+            Vector2 position = placement.Locations[i];
+
+            rect.anchorMin = rect.anchorMax = new Vector2(position.x, 1f - position.y);
+            rect.anchoredPosition = Vector2.zero;
+            _branchNodes[i].Show(i, locations[i].Title, GetBranchState(locations[i]), _branchColor);
+            _branchNodes[i].SetStars(_economy.GetStars(locations[i].Id));
+            _shownBranches.Add(locations[i]);
+        }
+    }
+
+    private void ShowVoidGate(List<LocationRow> locations, Vector2[] route)
+    {
+        _shownVoid = null;
+
+        foreach (VoidPlacement placement in _voidPlacements)
+        {
+            List<LocationRow> inVoid = _locations.GetVoid(placement.Id);
+            int parent = inVoid.Count == 0 ? -1 : locations.FindIndex(location => location.Id == inVoid[0].BranchOf);
+
+            if (parent < 0 || parent >= route.Length || placement.System == Vector2.zero)
+                continue;
+
+            bool isOpen = IsVoidOpen(placement.Id);
+            RectTransform rect = (RectTransform)_voidGate.transform;
+
+            _shownVoid = placement;
+            rect.anchorMin = rect.anchorMax = new Vector2(placement.System.x, 1f - placement.System.y);
+            rect.anchoredPosition = Vector2.zero;
+            _voidGate.Show(placement.Title, isOpen);
+            _voidLink.color = new Color(_branchColor.r, _branchColor.g, _branchColor.b, isOpen ? 1f : _restRouteColor.a);
+            _voidLink.SetStyle(RouteWidth * 0.75f, Dash * 0.6f, Gap * 0.6f, isOpen ? DashSpeed : 0f);
+            _voidLink.SetPoints(new List<Vector2> { route[parent], placement.System });
+
+            break;
+        }
+
+        _voidGate.gameObject.SetActive(_shownVoid != null);
+        _voidLink.gameObject.SetActive(_shownVoid != null);
     }
 
     private void ShowSystem(int index)
     {
         _openedSystem = index;
+        _openedVoid = null;
         Select(NoSelection);
         Open(_systemView, SystemTitle + _systemRoute[index].Order, true);
         _systemBackground.sprite = _systemSprites[index];
@@ -295,6 +389,7 @@ public class MapScreen : MonoBehaviour
             _currentLocation - first >= count);
         ShowBranches(locations, route);
         ShowGate(index, locations, route);
+        ShowVoidGate(locations, route);
     }
 
     private void ShowGate(int system, List<LocationRow> locations, Vector2[] route)
@@ -328,6 +423,9 @@ public class MapScreen : MonoBehaviour
         {
             foreach (LocationRow branch in _locations.GetBranches(locations[i].Id))
             {
+                if (branch.IsInVoid)
+                    continue;
+
                 if (_shownBranches.Count >= _branchNodes.Length)
                     break;
 
@@ -483,7 +581,9 @@ public class MapScreen : MonoBehaviour
 
     private void Back()
     {
-        if (_systemView.activeSelf)
+        if (_openedVoid != null)
+            ShowSystem(_openedSystem);
+        else if (_systemView.activeSelf)
             ShowArm();
         else
             ShowGalaxy();
@@ -521,8 +621,14 @@ public class MapScreen : MonoBehaviour
 
     private void OnBranchClicked(MapNode node)
     {
-        bool isOnArm = Array.IndexOf(_armBranchNodes, node) >= 0;
-        LocationRow branch = isOnArm ? _shownArmBranches[node.Index] : _shownBranches[node.Index];
+        if (Array.IndexOf(_armBranchNodes, node) >= 0)
+        {
+            OnVoidEntered(_shownArmVoids[node.Index]);
+
+            return;
+        }
+
+        LocationRow branch = _shownBranches[node.Index];
         LocationRow parent = _locations.GetRow(branch.BranchOf);
         bool canSelect = node.State != MapNodeState.Locked && _waves.HasLocation(branch.Id);
         string state = node.State == MapNodeState.Completed ? "COMPLETED"
@@ -560,6 +666,30 @@ public class MapScreen : MonoBehaviour
         Select(NoSelection);
     }
 
+    private void OnVoidGateClicked()
+    {
+        if (_shownVoid != null)
+            OnVoidEntered(_shownVoid);
+    }
+
+    private void OnVoidEntered(VoidPlacement placement)
+    {
+        List<LocationRow> locations = _locations.GetVoid(placement.Id);
+
+        if (IsVoidOpen(placement.Id) == false)
+        {
+            LocationRow parent = _locations.GetRow(locations[0].BranchOf);
+
+            _info.text = placement.Title + "     LOCKED UNTIL " + GetLabel(_route.IndexOf(parent)) + " IS CLEARED";
+            Select(NoSelection);
+
+            return;
+        }
+
+        _openedSystem = _systemRoute.FindIndex(system => system.Id == locations[0].System);
+        ShowVoid(placement.Id);
+    }
+
     private void Select(string locationId)
     {
         _selected = locationId;
@@ -571,9 +701,6 @@ public class MapScreen : MonoBehaviour
             _branchNodes[i].SetSelected(i < _shownBranches.Count && _branchNodes[i].gameObject.activeSelf
                 && _shownBranches[i].Id == locationId);
 
-        for (int i = 0; i < _armBranchNodes.Length; i++)
-            _armBranchNodes[i].SetSelected(i < _shownArmBranches.Count && _armBranchNodes[i].gameObject.activeSelf
-                && _shownArmBranches[i].Id == locationId);
 
         bool isReplay = locationId != NoSelection && _economy.IsLocationCompleted(locationId);
 
@@ -601,8 +728,11 @@ public class MapScreen : MonoBehaviour
 
 #if UNITY_EDITOR
     public void Configure(Vector2[] systemPositions, Sprite[] systemSprites, Color[] starColors,
-        LocationPositions[] locationPositions, BranchPlacement[] branchPlacements, Vector2[] gatePositions)
+        LocationPositions[] locationPositions, BranchPlacement[] branchPlacements, Vector2[] gatePositions,
+        VoidPlacement[] voidPlacements, Sprite voidSprite)
     {
+        _voidPlacements = voidPlacements;
+        _voidSprite = voidSprite;
         _branchPlacements = branchPlacements;
         _gatePositions = gatePositions;
         _systemPositions = systemPositions;
