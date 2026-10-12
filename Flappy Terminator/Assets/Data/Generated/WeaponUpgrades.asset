@@ -106,7 +106,7 @@ MonoBehaviour:
   - _owner: impulse_laser
     _stat: 0
     _level: 5
-    _bonus: 1
+    _bonus: 2
     _price: 5000
   - _owner: impulse_laser
     _stat: 1

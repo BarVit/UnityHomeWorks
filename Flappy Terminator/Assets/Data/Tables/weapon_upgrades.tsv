@@ -17,7 +17,7 @@ impulse_laser	Damage	1	1	1500
 impulse_laser	Damage	2	1	2250
 impulse_laser	Damage	3	1	3000
 impulse_laser	Damage	4	1	4000
-impulse_laser	Damage	5	1	5000
+impulse_laser	Damage	5	2	5000
 impulse_laser	CritChance	0	0	0
 impulse_laser	HeatReduction	0	0	0
 impulse_laser	HeatReduction	1	10	1000
