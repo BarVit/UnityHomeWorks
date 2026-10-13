@@ -68,7 +68,7 @@ MonoBehaviour:
     _aimTime: 0
     _area: 0
     _price: 60000
-    _unlockAfter: loc_04_01
+    _unlockAfter: loc_04_03
     _grantedAfter: 
     _projectile: {fileID: 8728678904558988455, guid: 79b82508bda244037beb9d377f23f950, type: 3}
     _beam: {fileID: 0}
