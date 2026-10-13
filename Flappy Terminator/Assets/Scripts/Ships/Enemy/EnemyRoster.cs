@@ -51,9 +51,11 @@ public class EnemyRoster
 
     private bool IsOpen(string fromLocation, LocationRow current)
     {
-        LocationRow from = _locations.GetRow(fromLocation);
+        LocationRow from = GetRoutePoint(_locations.GetRow(fromLocation));
 
-        if (from == null)
+        current = GetRoutePoint(current);
+
+        if (from == null || current == null)
             return false;
 
         int fromSystem = GetSystemOrder(from.System);
@@ -63,6 +65,14 @@ public class EnemyRoster
             return fromSystem < currentSystem;
 
         return from.Order <= current.Order;
+    }
+
+    private LocationRow GetRoutePoint(LocationRow location)
+    {
+        if (location == null || location.IsBranch == false)
+            return location;
+
+        return _locations.GetRow(location.BranchOf);
     }
 
     private int GetSystemOrder(string systemId)
