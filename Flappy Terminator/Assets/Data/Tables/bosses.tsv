@@ -8,7 +8,7 @@ berserker_2	Берсерк II	MiniBoss	loc_03_04	Enemy 3	reaper_2	5000	berserker
 tormentor_1	Терзатель I	MiniBoss	loc_03_07	Enemy 4	phantom_1	3000	tormentor_1_gun	2	28	25	2	FFFFFF	Boss Up And Down	1250	250		0		0
 tormentor_2	Терзатель II	MiniBoss	loc_05_02	Enemy 4	phantom_2	10000	tormentor_2_gun	2	28	25	2	FF9A8A	Boss Up And Down	2000	350		0		0
 ripper_1	Потрошитель I	MiniBoss	loc_04_03	Enemy 5	executioner_1	20000	ripper_1_gun	1	100	30	2	FFFFFF	Boss Up And Down	3000	600		0		0
-ripper_2	Потрошитель II	MiniBoss	loc_05_05	Enemy 5	executioner_2	50000	ripper_2_gun	1	80	30	2	FF9A8A	Boss Up And Down	4800	750		0		0
+ripper_2	Потрошитель II	MiniBoss	loc_05_04	Enemy 5	executioner_2	50000	ripper_2_gun	1	80	30	2	FF9A8A	Boss Up And Down	4800	750		0		0
 hierarch	Иерарх	Boss	loc_01_05	Boss 1	marauder_2	1200	hierarch_gun	1	25	10	2	FFFFFF	Boss Up And Down	3125	625	HIERARCH GUARDS THE STAR GATE.\nGET READY TO FIGHT THE BOSS!	5	hierarch_gun_fan	3
 magister	Магистр	Boss	loc_02_07	Boss 2	punisher_2	10000	magister_gun	2	28	15	2	FFFFFF	Boss Up And Down	5000	1000	MAGISTER GUARDS THE STAR GATE.\nGET READY TO FIGHT THE BOSS!	0		0
 overlord	Владыка	Boss	loc_03_09	Boss 3	berserker_2	30000	overlord_gun	1	80	20	2	FFFFFF	Boss Up And Down	6250	1250	OVERLORD GUARDS THE STAR GATE.\nGET READY TO FIGHT THE BOSS!	0		0

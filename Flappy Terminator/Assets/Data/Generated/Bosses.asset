@@ -235,7 +235,7 @@ MonoBehaviour:
   - _id: ripper_2
     _title: "\u041F\u043E\u0442\u0440\u043E\u0448\u0438\u0442\u0435\u043B\u044C II"
     _kind: 0
-    _location: loc_05_05
+    _location: loc_05_04
     _prefab: {fileID: 748883696485598149, guid: 8971cd4b3ded249faa09c9c5dd064fbe, type: 3}
     _prototype: executioner_2
     _health: 50000
