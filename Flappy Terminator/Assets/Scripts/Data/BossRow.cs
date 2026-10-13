@@ -8,6 +8,7 @@ public class BossRow
     [SerializeField] private string _id;
     [SerializeField] private string _title;
     [SerializeField] private BossKind _kind;
+    [SerializeField] private string _location;
     [SerializeField] private EnemyShip _prefab;
     [SerializeField] private string _prototype;
     [SerializeField] private int _health;
@@ -26,10 +27,10 @@ public class BossRow
     [SerializeField] private int _specialBarrels;
     [SerializeField] private BossPhaseRow[] _phases;
 
-    public BossRow(string id, string title, BossKind kind, EnemyShip prefab, string prototype, int health,
-        string weapon, int barrels, int damage, int bodyDamage, int scale, Color tint, MovementProfile movement,
-        int rewardMoney, int rewardXp, string intro, int specialEvery, string specialWeapon, int specialBarrels,
-        BossPhaseRow[] phases)
+    public BossRow(string id, string title, BossKind kind, string location, EnemyShip prefab, string prototype,
+        int health, string weapon, int barrels, int damage, int bodyDamage, int scale, Color tint,
+        MovementProfile movement, int rewardMoney, int rewardXp, string intro, int specialEvery, string specialWeapon,
+        int specialBarrels, BossPhaseRow[] phases)
     {
         _specialEvery = specialEvery;
         _specialWeapon = specialWeapon;
@@ -37,6 +38,7 @@ public class BossRow
         _id = id;
         _title = title;
         _kind = kind;
+        _location = location;
         _prefab = prefab;
         _prototype = prototype;
         _health = health;
@@ -58,6 +60,8 @@ public class BossRow
     public string Title => _title;
 
     public BossKind Kind => _kind;
+
+    public string Location => _location;
 
     public EnemyShip Prefab => _prefab;
 

@@ -42,7 +42,7 @@ namespace TableImport
                     reader.Fail("у локации " + location + " на уровне " + level + " уже есть группа " + order);
 
                 CheckLocation(locations, location, level, reader);
-                CheckEnemies(enemies, bosses, mode, count, list, reader);
+                CheckEnemies(enemies, bosses, location, mode, count, list, reader);
 
                 float interval = reader.ReadFloat("interval", 0f, 60f);
                 float intervalMax = reader.ReadFloat("interval_max", 0f, 60f);
@@ -83,16 +83,25 @@ namespace TableImport
                 reader.Fail("level: " + level + " больше, чем уровней у " + location + " (" + row.Levels + ")");
         }
 
-        private static void CheckEnemies(EnemyTable enemies, BossTable bosses, WaveMode mode, int count,
-            string[] list, RowReader reader)
+        private static void CheckBoss(BossRow boss, string id, string location, RowReader reader)
+        {
+            if (boss == null)
+                reader.Fail("enemies: нет босса с id " + id + " в " + BossTableImporter.SourcePath);
+            else if (boss.Location != location)
+                reader.Fail("enemies: босс " + id + " стоит в " + location + ", а в " + BossTableImporter.SourcePath
+                    + " у него location «" + boss.Location + "»");
+        }
+
+        private static void CheckEnemies(EnemyTable enemies, BossTable bosses, string location, WaveMode mode,
+            int count, string[] list, RowReader reader)
         {
             if (mode == WaveMode.Boss)
             {
                 if (count != 1 || list.Length != 1)
                     reader.Fail("Boss: нужен ровно один босс и count 1");
 
-                if (bosses != null && bosses.GetRow(list[0]) == null)
-                    reader.Fail("enemies: нет босса с id " + list[0] + " в " + BossTableImporter.SourcePath);
+                if (bosses != null)
+                    CheckBoss(bosses.GetRow(list[0]), list[0], location, reader);
 
                 return;
             }

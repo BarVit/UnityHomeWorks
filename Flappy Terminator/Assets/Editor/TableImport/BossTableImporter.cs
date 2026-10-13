@@ -12,12 +12,12 @@ namespace TableImport
 
         private static readonly string[] Columns =
         {
-            "id", "title", "kind", "prefab", "prototype", "health", "weapon", "barrels", "damage",
+            "id", "title", "kind", "location", "prefab", "prototype", "health", "weapon", "barrels", "damage",
             "body_damage", "scale", "tint", "movement", "reward_money", "reward_xp", "intro",
             "special_every", "special_weapon", "special_barrels"
         };
 
-        public static BossTable Import(EnemyTable enemies, WeaponTable weapons, TableLog log)
+        public static BossTable Import(LocationTable locations, EnemyTable enemies, WeaponTable weapons, TableLog log)
         {
             TsvDocument document = TsvReader.Read(SourcePath, log);
 
@@ -52,9 +52,11 @@ namespace TableImport
 
                 BossKind kind = reader.ReadEnum<BossKind>("kind");
                 string intro = reader.ReadOptionalText("intro").Replace(LineBreakMark, "\n");
+                string location = reader.ReadOptionalText("location");
 
                 CheckPrototype(enemies, ids, prototype, reader);
                 CheckIntro(kind, intro, reader);
+                CheckLocation(locations, location, reader);
 
                 int specialEvery = reader.ReadInt("special_every", 0, 100);
                 string specialWeapon = reader.ReadOptionalText("special_weapon");
@@ -67,6 +69,7 @@ namespace TableImport
                     id,
                     reader.ReadText("title"),
                     kind,
+                    location,
                     reader.ReadPrefab<EnemyShip>("prefab", true),
                     prototype,
                     reader.ReadInt("health", 1, 1000000000),
@@ -132,6 +135,15 @@ namespace TableImport
                 reader.Fail("special_weapon, special_barrels: у особой атаки нужны оружие и стволы");
             else
                 CheckWeapon(weapons, weapon, barrels, reader);
+        }
+
+        private static void CheckLocation(LocationTable locations, string location, RowReader reader)
+        {
+            if (locations == null || location.Length == 0)
+                return;
+
+            if (locations.GetRow(location) == null)
+                reader.Fail("location: нет локации с id " + location + " в " + LocationTableImporter.SourcePath);
         }
 
         private static void CheckIntro(BossKind kind, string intro, RowReader reader)
