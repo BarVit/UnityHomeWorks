@@ -19,8 +19,6 @@ MonoBehaviour:
     _levels: 2
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 3
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -30,8 +28,6 @@ MonoBehaviour:
     _levels: 2
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 3
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -41,8 +37,6 @@ MonoBehaviour:
     _levels: 2
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 3
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -52,8 +46,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 3
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -63,8 +55,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 3
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -74,8 +64,6 @@ MonoBehaviour:
     _levels: 1
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 4
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -85,8 +73,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 4
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -96,8 +82,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 4
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -107,8 +91,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 4
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -118,8 +100,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 4
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -129,8 +109,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 4
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -140,8 +118,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 4
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -151,8 +127,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 4
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -162,8 +136,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 4
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -173,8 +145,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 4
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -184,8 +154,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 4
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -195,8 +163,6 @@ MonoBehaviour:
     _levels: 5
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 4
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -206,8 +172,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 4
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -217,8 +181,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 4
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -228,8 +190,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 4
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -239,8 +199,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 4
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -250,8 +208,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 5
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -261,8 +217,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 5
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -272,8 +226,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 5
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -283,8 +235,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 5
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -294,8 +244,6 @@ MonoBehaviour:
     _levels: 5
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 5
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -305,8 +253,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 5
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -316,8 +262,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 5
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -327,8 +271,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 5
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -338,8 +280,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 5
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -349,8 +289,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 5
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -360,8 +298,6 @@ MonoBehaviour:
     _levels: 5
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 5
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -371,8 +307,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 5
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -382,8 +316,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 5
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -393,8 +325,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 5
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -404,8 +334,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 5
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -415,8 +343,6 @@ MonoBehaviour:
     _levels: 3
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 5
-    _waveSizeGrowth: 3
     _title: 
     _branchOf: 
     _void: 
@@ -426,8 +352,6 @@ MonoBehaviour:
     _levels: 1
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 3
-    _waveSizeGrowth: 3
     _title: ASHFALL
     _branchOf: loc_03_07
     _void: ashen_void
@@ -437,8 +361,6 @@ MonoBehaviour:
     _levels: 2
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 3
-    _waveSizeGrowth: 3
     _title: IRON CINDERS
     _branchOf: loc_03_07
     _void: ashen_void
@@ -448,8 +370,6 @@ MonoBehaviour:
     _levels: 2
     _borderTheme: 
     _flightMode: 0
-    _firstWaveSize: 3
-    _waveSizeGrowth: 3
     _title: SMOLDER DRIFT
     _branchOf: loc_03_07
     _void: ashen_void

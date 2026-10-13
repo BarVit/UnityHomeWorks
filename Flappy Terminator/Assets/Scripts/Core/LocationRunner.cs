@@ -35,8 +35,6 @@ public class LocationRunner : MonoBehaviour
 
     public Reward LocationReward => _run.BankedReward + _run.PendingReward;
 
-    public int WaveSize => GetWaveSize(_run.Level);
-
     public event Action<int> LevelChanged;
     public event Action<Reward> LevelBanked;
     public event Action<Reward> RewardChanged;
@@ -74,11 +72,6 @@ public class LocationRunner : MonoBehaviour
         _run.Restart();
         LevelChanged?.Invoke(_run.Level);
         RewardChanged?.Invoke(LocationReward);
-    }
-
-    public int GetWaveSize(int level)
-    {
-        return _location.FirstWaveSize + (level - 1) * _location.WaveSizeGrowth;
     }
 
     public void PlayLocation(string locationId)
@@ -147,7 +140,7 @@ public class LocationRunner : MonoBehaviour
     {
         LocationRow next = _locations.GetNext(_location);
 
-        if (next == null || _waves.HasLocation(next.Id) == false)
+        if (next == null || _waves.IsPlayable(next) == false)
             return null;
 
         return next;

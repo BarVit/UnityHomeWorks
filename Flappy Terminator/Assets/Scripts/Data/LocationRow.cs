@@ -10,14 +10,12 @@ public class LocationRow
     [SerializeField] private int _levels;
     [SerializeField] private string _borderTheme;
     [SerializeField] private FlightMode _flightMode;
-    [SerializeField] private int _firstWaveSize;
-    [SerializeField] private int _waveSizeGrowth;
     [SerializeField] private string _title;
     [SerializeField] private string _branchOf;
     [SerializeField] private string _void;
 
     public LocationRow(string id, string system, int order, int levels, string borderTheme,
-        FlightMode flightMode, int firstWaveSize, int waveSizeGrowth, string title, string branchOf, string voidId)
+        FlightMode flightMode, string title, string branchOf, string voidId)
     {
         _void = voidId;
         _id = id;
@@ -26,8 +24,6 @@ public class LocationRow
         _levels = levels;
         _borderTheme = borderTheme;
         _flightMode = flightMode;
-        _firstWaveSize = firstWaveSize;
-        _waveSizeGrowth = waveSizeGrowth;
         _title = title;
         _branchOf = branchOf;
     }
@@ -43,10 +39,6 @@ public class LocationRow
     public string BorderTheme => _borderTheme;
 
     public FlightMode FlightMode => _flightMode;
-
-    public int FirstWaveSize => _firstWaveSize;
-
-    public int WaveSizeGrowth => _waveSizeGrowth;
 
     public string Title => _title;
 

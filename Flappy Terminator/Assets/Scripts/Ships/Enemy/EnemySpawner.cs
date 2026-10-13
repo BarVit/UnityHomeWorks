@@ -9,15 +9,12 @@ public class EnemySpawner : MonoBehaviour
     [FormerlySerializedAs("_enemyTiers")]
     [SerializeField] private EnemyTable _enemies;
     [SerializeField] private WeaponTable _weapons;
-    [SerializeField] private LocationTable _locations;
-    [SerializeField] private SystemTable _systems;
     [SerializeField] private BossTable _bosses;
     [SerializeField] private WaveTable _waves;
     [SerializeField] private ExplosionAnimation _explosionPrefab;
     [SerializeField] private EnemyDeadBody _deadBodyPrefab;
     [SerializeField] private AudioSource _hitAudioSource;
     [SerializeField] private LayerMask _targetLayers;
-    [SerializeField] private float _spawnDelay;
     [SerializeField] private float _spawnMargin = 1f;
     [SerializeField] private float _minSpawnPositionY = -3f;
     [SerializeField] private float _maxSpawnPositionY = 3f;
@@ -30,7 +27,6 @@ public class EnemySpawner : MonoBehaviour
 
     private Camera _camera;
     private EnemyContext _context;
-    private EnemyRoster _roster;
     private LevelPlanner _planner;
     private Action<EnemyShip> _created;
     private Coroutine _spawning;
@@ -48,16 +44,16 @@ public class EnemySpawner : MonoBehaviour
         _created = OnEnemyCreated;
         _context = new EnemyContext(_pools, _explosionPrefab, _deadBodyPrefab,
             new ShotAudio(_hitAudioSource, _camera), _targetLayers, _camera);
-        _roster = new EnemyRoster(_enemies, _weapons, _locations, _systems);
-        _planner = new LevelPlanner(_enemies, _weapons, _bosses, _waves, _roster);
+        _planner = new LevelPlanner(_enemies, _weapons, _bosses, _waves);
     }
 
-    public void StartLevel(string locationId, int level, int fallbackSize)
+    public void StartLevel(string locationId, int level)
     {
-        Open(locationId);
+        _shipPools.Clear();
+        _ammoPools.Clear();
         ClearField();
 
-        List<PlannedSpawn> plan = _planner.Plan(locationId, level, fallbackSize, _spawnDelay);
+        List<PlannedSpawn> plan = _planner.Plan(locationId, level);
 
         foreach (PlannedSpawn spawn in plan)
             CollectPools(spawn.Setup);
@@ -68,14 +64,12 @@ public class EnemySpawner : MonoBehaviour
         _spawning = StartCoroutine(Spawn(plan));
     }
 
-    public int CountPlanned(string locationId, int levels, Func<int, int> fallbackSize)
+    public int CountPlanned(string locationId, int levels)
     {
-        Open(locationId);
-
         int count = 0;
 
         for (int level = 1; level <= levels; level++)
-            count += _planner.Plan(locationId, level, fallbackSize(level), _spawnDelay).Count;
+            count += _planner.Plan(locationId, level).Count;
 
         return count;
     }
@@ -123,17 +117,6 @@ public class EnemySpawner : MonoBehaviour
     {
         EndWave();
         _pools.ReleaseAll();
-    }
-
-    private void Open(string locationId)
-    {
-        _roster.Open(locationId);
-
-        _shipPools.Clear();
-        _ammoPools.Clear();
-
-        foreach (EnemySetup setup in _roster.Available)
-            CollectPools(setup);
     }
 
     private void CollectPools(EnemySetup setup)

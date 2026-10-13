@@ -609,7 +609,7 @@ public class MapScreen : MonoBehaviour
     private void OnLocationClicked(MapNode node)
     {
         LocationRow location = _route[node.Index];
-        bool canSelect = node.State != MapNodeState.Locked && _waves.HasLocation(location.Id);
+        bool canSelect = node.State != MapNodeState.Locked && _waves.IsPlayable(location);
         string state = node.State == MapNodeState.Completed ? "COMPLETED"
             : node.State == MapNodeState.Current ? "NEXT"
             : node.State == MapNodeState.Open ? GetOpenCaption(location) : "LOCKED";
@@ -629,7 +629,7 @@ public class MapScreen : MonoBehaviour
 
         LocationRow branch = _shownBranches[node.Index];
         LocationRow parent = _locations.GetRow(branch.BranchOf);
-        bool canSelect = node.State != MapNodeState.Locked && _waves.HasLocation(branch.Id);
+        bool canSelect = node.State != MapNodeState.Locked && _waves.IsPlayable(branch);
         string state = node.State == MapNodeState.Completed ? "COMPLETED"
             : node.State == MapNodeState.Current || node.State == MapNodeState.Open ? GetOpenCaption(branch)
             : "LOCKED UNTIL " + GetLabel(_route.IndexOf(parent)) + " IS CLEARED";
@@ -639,7 +639,7 @@ public class MapScreen : MonoBehaviour
 
     private string GetOpenCaption(LocationRow location)
     {
-        return _waves.HasLocation(location.Id) ? "OPEN" : "NO WAVES YET";
+        return _waves.IsPlayable(location) ? "OPEN" : "NO WAVES YET";
     }
 
     private string GetLevelsWord(LocationRow location)

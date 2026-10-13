@@ -39,6 +39,17 @@ public class WaveTable : ScriptableObject
         return false;
     }
 
+    public bool IsPlayable(LocationRow location)
+    {
+        for (int level = 1; level <= location.Levels; level++)
+        {
+            if (GetLevel(location.Id, level).Count == 0)
+                return false;
+        }
+
+        return true;
+    }
+
 #if UNITY_EDITOR
     public void Fill(WaveRow[] rows)
     {

@@ -228,14 +228,14 @@ public class Game : MonoBehaviour
         _battleModules.ResetForLevel();
         _playerShip.Restart();
         TrackLevel();
-        _enemySpawner.StartLevel(_runner.LocationId, _runner.Level, _runner.WaveSize);
+        _enemySpawner.StartLevel(_runner.LocationId, _runner.Level);
         _asteroidSpawner.StartSpawn();
     }
 
     private void TrackLevel()
     {
         if (_runner.Level == 1)
-            _stats.BeginLocation(_enemySpawner.CountPlanned(_runner.LocationId, _runner.LevelCount, _runner.GetWaveSize));
+            _stats.BeginLocation(_enemySpawner.CountPlanned(_runner.LocationId, _runner.LevelCount));
 
         _stats.BeginLevel();
     }

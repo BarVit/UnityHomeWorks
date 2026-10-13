@@ -156,7 +156,7 @@ namespace TableImport
             if (reward.RandomLevels.Count == 0)
                 return "";
 
-            return "уровни " + string.Join(", ", reward.RandomLevels) + " без строк в waves.tsv — случайные враги, не посчитаны";
+            return "уровни " + string.Join(", ", reward.RandomLevels) + " без строк в waves.tsv — локация недоступна в игре";
         }
 
         private static string Format(float value)
