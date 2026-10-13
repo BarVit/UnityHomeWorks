@@ -1,16 +1,16 @@
 id	type	title	tier	prefab	body_damage	from_location	health	weapon	base_weapon	barrels	damage	movement	skin	reward_money	reward_xp
 warden_1	enemy_warden	Страж I	1	Enemy 1	10	loc_01_01	10	warden_1_gun	rocket	1	10	Forward		70	10
 warden_2	enemy_warden	Страж II	2	Enemy 1	15	loc_01_01	14	warden_2_gun	rocket	2	8	Hover	Warden II	110	14
-warden_3	enemy_warden	Страж III	3	Enemy 1	20	loc_01_04	45	warden_3_gun	rocket	3	12	Hover Guard	Warden III	200	40
+warden_3	enemy_warden	Страж III	3	Enemy 1	20	loc_01_04	45	warden_3_gun	cannon	3	12	Hover Guard	Warden III	200	40
 hunter_1	enemy_hunter	Охотник I	1	Enemy 2	15	loc_01_02	20	hunter_1_gun	impulse_laser	1	2	Forward		100	20
 hunter_2	enemy_hunter	Охотник II	2	Enemy 2	25	loc_01_04	50	hunter_2_gun	impulse_laser	2	3	Forward Leap	Hunter II	160	32
-hunter_3	enemy_hunter	Охотник III	3	Enemy 2	35	void_ashen_3	120	hunter_3_gun	beam_laser	1	20	Up And Down	Hunter III	300	60
-reaper_1	enemy_reaper	Жнец I	1	Enemy 3	40	void_ashen_1	100	reaper_1_gun	homing	1	30	Drift		150	30
-reaper_2	enemy_reaper	Жнец II	2	Enemy 3	50	void_ashen_3	150	reaper_2_gun	homing	1	40	Drift Retreat		240	50
-reaper_3	enemy_reaper	Жнец III	3	Enemy 3	60	void_ashen_2	400	reaper_3_gun	homing	2	30	Drift Retreat		500	80
-phantom_1	enemy_phantom	Призрак I	1	Enemy 4	100	void_ashen_2	200	phantom_1_gun	cannon	2	50	Forward Leap		250	40
-phantom_2	enemy_phantom	Призрак II	2	Enemy 4	120	void_ashen_2	300	phantom_2_gun	cannon	2	75	Ellipse		350	60
-phantom_3	enemy_phantom	Призрак III	3	Enemy 4	160	void_ashen_2	600	phantom_3_gun	cannon	3	80	Ellipse		800	90
-executioner_1	enemy_executioner	Палач I	1	Enemy 5	300		500	executioner_1_gun	railgun	1	300	Hover Guard		500	120
-executioner_2	enemy_executioner	Палач II	2	Enemy 5	400		1200	executioner_2_gun	torpedo	1	500	Up And Down		800	150
-executioner_3	enemy_executioner	Палач III	3	Enemy 5	500		4000	executioner_3_gun	plasma	3	200	Up And Down		1400	200
+hunter_3	enemy_hunter	Охотник III	3	Enemy 2	35	loc_02_04	120	hunter_3_gun	beam_laser	1	20	Up And Down	Hunter III	300	60
+reaper_1	enemy_reaper	Жнец I	1	Enemy 3	40	loc_02_01	60	reaper_1_gun	homing	1	20	Drift		150	30
+reaper_2	enemy_reaper	Жнец II	2	Enemy 3	50	loc_03_01	100	reaper_2_gun	homing	2	20	Drift Retreat		240	50
+reaper_3	enemy_reaper	Жнец III	3	Enemy 3	60	loc_04_02	250	reaper_3_gun	torpedo	1	80	Drift Retreat		500	80
+phantom_1	enemy_phantom	Призрак I	1	Enemy 4	50	loc_03_03	120	phantom_1_gun	cannon	2	40	Forward Leap		250	40
+phantom_2	enemy_phantom	Призрак II	2	Enemy 4	60	loc_03_07	180	phantom_2_gun	rocket	2	60	Ellipse		350	60
+phantom_3	enemy_phantom	Призрак III	3	Enemy 4	70	loc_05_01	500	phantom_3_gun	plasma	3	50	Ellipse		800	90
+executioner_1	enemy_executioner	Палач I	1	Enemy 5	100	loc_04_05	250	executioner_1_gun	railgun	1	200	Hover Guard		500	120
+executioner_2	enemy_executioner	Палач II	2	Enemy 5	120	loc_05_04	800	executioner_2_gun	torpedo	1	250	Up And Down		800	150
+executioner_3	enemy_executioner	Палач III	3	Enemy 5	150	loc_05_06	2000	executioner_3_gun	plasma	3	150	Up And Down		1400	200
