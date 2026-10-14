@@ -6,7 +6,14 @@
     <title>{{{ PRODUCT_NAME }}} v{{{ PRODUCT_VERSION }}}</title>
     <style>
       html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #05090f; }
+      #frame { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 100vw; height: 56.25vw; }
       #unity-canvas { display: block; width: 100%; height: 100%; background: #05090f; outline: none; }
+      #rotate { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; padding: 24px;
+        background: #05090f; color: #9fdcf0; font: 18px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif; text-align: center; }
+      #rotate.shown { display: flex; }
+      #rotate-icon { display: block; margin: 0 auto 16px; font-size: 48px; transform: rotate(90deg); }
+      #debug { position: absolute; left: 4px; bottom: 4px; display: none; padding: 4px 6px; background: rgba(0, 0, 0, 0.7);
+        color: #7fffa0; font: 11px/1.3 monospace; white-space: pre; pointer-events: none; }
       #loading { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(60vw, 420px);
         color: #9fdcf0; font: 18px/1.4 -apple-system, "Segoe UI", Roboto, sans-serif; text-align: center; }
       #bar { margin-top: 14px; height: 8px; border: 1px solid #35d9ff; border-radius: 4px; overflow: hidden; }
@@ -16,11 +23,50 @@
     </style>
   </head>
   <body>
-    <canvas id="unity-canvas" tabindex="-1"></canvas>
+    <div id="frame"><canvas id="unity-canvas" tabindex="-1"></canvas></div>
     <div id="loading">{{{ PRODUCT_NAME }}} v{{{ PRODUCT_VERSION }}}<div id="bar"><div id="fill"></div></div></div>
     <div id="warning"></div>
+    <div id="rotate"><div><span id="rotate-icon">&#128241;</span>Rotate your phone to landscape</div></div>
+    <div id="debug"></div>
     <script>
       var canvas = document.querySelector("#unity-canvas");
+      var frame = document.querySelector("#frame");
+      var rotate = document.querySelector("#rotate");
+      var aspect = 16 / 9;
+
+      // The game is laid out for 1280x720: keep the canvas 16:9 and letterbox the rest.
+      function fit() {
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+
+        if (width / height > aspect)
+          width = height * aspect;
+        else
+          height = width / aspect;
+
+        frame.style.width = Math.floor(width) + "px";
+        frame.style.height = Math.floor(height) + "px";
+
+        var isTouch = window.matchMedia("(pointer: coarse)").matches;
+
+        rotate.classList.toggle("shown", isTouch && window.innerHeight > window.innerWidth);
+      }
+
+      fit();
+      window.addEventListener("resize", fit);
+      window.addEventListener("orientationchange", fit);
+
+      // ?debug shows the canvas and drawing-buffer sizes, to check on a phone that nothing is cropped.
+      if (/[?&]debug\b/.test(location.search)) {
+        var debug = document.querySelector("#debug");
+        debug.style.display = "block";
+        setInterval(function () {
+          var gl = canvas.getContext("webgl2") || canvas.getContext("webgl");
+          debug.textContent = "window " + window.innerWidth + "x" + window.innerHeight + "  dpr " + window.devicePixelRatio
+            + "\ncss " + canvas.clientWidth + "x" + canvas.clientHeight + "  canvas " + canvas.width + "x" + canvas.height
+            + "\nbuffer " + (gl ? gl.drawingBufferWidth + "x" + gl.drawingBufferHeight : "-");
+        }, 500);
+      }
 
       function showBanner(msg, type) {
         var banner = document.querySelector("#warning");
@@ -55,6 +101,8 @@
         productName: {{{ JSON.stringify(PRODUCT_NAME) }}},
         productVersion: {{{ JSON.stringify(PRODUCT_VERSION) }}},
         showBanner: showBanner,
+        // Phones report a pixel ratio of 3 and more; a canvas that large is slow and may be clipped by the browser.
+        devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
       };
 
       var script = document.createElement("script");
