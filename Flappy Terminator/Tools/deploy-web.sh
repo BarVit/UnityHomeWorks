@@ -7,7 +7,7 @@
 
 set -euo pipefail
 
-SERVER="root@147.45.246.87"
+SERVER="deploy@147.45.246.87"
 RELEASES="/srv/ft/releases"
 LIVE_LINK="/var/www/q-c.space/ft"
 URL="https://q-c.space/ft/"
