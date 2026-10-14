@@ -42,6 +42,7 @@ public class Game : MonoBehaviour
         _screens.ResultClosed += ShowClearedDock;
         _input.PauseToggled += TogglePause;
         _input.Shot += SkipCutscene;
+        _input.Tapped += SkipCutscene;
         _cheatCode.Entered += WinLevelInstantly;
     }
 
@@ -69,6 +70,7 @@ public class Game : MonoBehaviour
         _screens.ResultClosed -= ShowClearedDock;
         _input.PauseToggled -= TogglePause;
         _input.Shot -= SkipCutscene;
+        _input.Tapped -= SkipCutscene;
         _cheatCode.Entered -= WinLevelInstantly;
     }
 

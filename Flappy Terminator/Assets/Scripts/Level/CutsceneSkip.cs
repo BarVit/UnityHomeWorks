@@ -1,8 +1,11 @@
+using TMPro;
 using UnityEngine;
 
 public class CutsceneSkip : MonoBehaviour
 {
     [SerializeField] private GameObject _hint;
+    [SerializeField] private TMP_Text _hintText;
+    [SerializeField] private string _touchHint = "TAP TO SKIP";
     [SerializeField] private float _delay = 1f;
 
     private bool _isRunning;
@@ -10,6 +13,12 @@ public class CutsceneSkip : MonoBehaviour
     private float _startTime;
 
     public bool CanSkip => _isRunning && Time.frameCount > _startFrame && Time.time >= _startTime + _delay;
+
+    private void Awake()
+    {
+        if (Application.isMobilePlatform)
+            _hintText.text = _touchHint;
+    }
 
     private void Update()
     {

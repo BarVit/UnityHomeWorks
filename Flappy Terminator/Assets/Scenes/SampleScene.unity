@@ -40535,7 +40535,12 @@ MonoBehaviour:
   _downButton: {fileID: 1834425288}
   _fireButton: {fileID: 1312285600}
   _pauseButton: {fileID: 584725132}
+  _fireNeighbours:
+  - {fileID: 481448925}
+  - {fileID: 1744696885}
+  - {fileID: 704980004}
   _showOnDesktop: 1
+  _mobileScale: 1.5
 --- !u!114 &940566753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40628,6 +40633,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CutsceneSkip
   _hint: {fileID: 771100001}
+  _hintText: {fileID: 771100004}
+  _touchHint: TAP TO SKIP
   _delay: 1
 --- !u!114 &940566759
 MonoBehaviour:
@@ -44585,8 +44592,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemies: {fileID: 11400000, guid: 9d06dab4078b142298f26f917f16c63e, type: 2}
   _weapons: {fileID: 11400000, guid: 05ad97f9a8c8d4ad79ac3a7dc03292af, type: 2}
-  _locations: {fileID: 11400000, guid: 246bc4d3c22f04566aa6c50ff882939a, type: 2}
-  _systems: {fileID: 11400000, guid: 9db94dcb590bd4dac8102f0527fd6d64, type: 2}
   _bosses: {fileID: 11400000, guid: 0ea68633e714c4c22a0c40191a6216f5, type: 2}
   _waves: {fileID: 11400000, guid: 3156c31306984471d8eb9d528c826fe5, type: 2}
   _explosionPrefab: {fileID: -350056195610788462, guid: c71dd8c77ccf64446a437e4437b230ec, type: 3}
@@ -44595,7 +44600,6 @@ MonoBehaviour:
   _targetLayers:
     serializedVersion: 2
     m_Bits: 64
-  _spawnDelay: 3
   _spawnMargin: 1
   _minSpawnPositionY: -3
   _maxSpawnPositionY: 3

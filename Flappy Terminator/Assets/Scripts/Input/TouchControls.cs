@@ -10,7 +10,9 @@ public class TouchControls : MonoBehaviour
     [SerializeField] private Button _downButton;
     [SerializeField] private HoldButton _fireButton;
     [SerializeField] private Button _pauseButton;
+    [SerializeField] private RectTransform[] _fireNeighbours;
     [SerializeField] private bool _showOnDesktop = true;
+    [SerializeField] private float _mobileScale = 1.5f;
 
     private void OnEnable()
     {
@@ -26,6 +28,9 @@ public class TouchControls : MonoBehaviour
     {
         _panel.SetActive(Application.isMobilePlatform || _showOnDesktop);
         _downButton.gameObject.SetActive(HasDownControl());
+
+        if (Application.isMobilePlatform)
+            EnlargeForFingers();
     }
 
     private void OnDisable()
@@ -36,6 +41,24 @@ public class TouchControls : MonoBehaviour
         _fireButton.Pressed -= _input.Shoot;
         _fireButton.Released -= _input.ReleaseFire;
         _pauseButton.onClick.RemoveListener(_input.TogglePause);
+    }
+
+    private void EnlargeForFingers()
+    {
+        Enlarge(_upButton.transform);
+        Enlarge(_downButton.transform);
+        Enlarge(_fireButton.transform);
+
+        foreach (RectTransform neighbour in _fireNeighbours)
+            neighbour.anchoredPosition *= _mobileScale;
+    }
+
+    private void Enlarge(Transform button)
+    {
+        RectTransform rect = (RectTransform)button;
+
+        rect.localScale *= _mobileScale;
+        rect.anchoredPosition *= _mobileScale;
     }
 
     private bool HasDownControl()

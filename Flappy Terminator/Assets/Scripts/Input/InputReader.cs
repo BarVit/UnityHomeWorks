@@ -16,6 +16,7 @@ public class InputReader : MonoBehaviour
 
     public event Action Jumped;
     public event Action Shot;
+    public event Action Tapped;
     public event Action Descended;
     public event Action PauseToggled;
     public event Action<int> ModuleActivated;
@@ -24,6 +25,9 @@ public class InputReader : MonoBehaviour
     {
         if (_isFireConsumed && IsFireDown == false)
             _isFireConsumed = false;
+
+        if (WasScreenTapped())
+            Tapped?.Invoke();
 
         Keyboard keyboard = Keyboard.current;
 
@@ -87,6 +91,15 @@ public class InputReader : MonoBehaviour
     }
 
     private bool IsFireDown => _isFireHeld || IsKeyHeld(_shootKey);
+
+    private bool WasScreenTapped()
+    {
+        Touchscreen touchscreen = Touchscreen.current;
+        Mouse mouse = Mouse.current;
+
+        return (touchscreen != null && touchscreen.primaryTouch.press.wasPressedThisFrame)
+            || (mouse != null && mouse.leftButton.wasPressedThisFrame);
+    }
 
     private bool IsKeyHeld(Key key)
     {
