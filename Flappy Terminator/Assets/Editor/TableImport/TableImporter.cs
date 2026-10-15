@@ -32,8 +32,8 @@ namespace TableImport
                 EnemyTable enemies = EnemyTableImporter.Import(locations, weapons, log);
                 BossTable bosses = BossTableImporter.Import(locations, enemies, weapons, log);
                 WaveTable waves = WaveTableImporter.Import(locations, enemies, bosses, log);
-                SlotTableImporter.Import(weapons, log);
-                UpgradeTableImporter.Import(weapons, log);
+                SlotTable slots = SlotTableImporter.Import(weapons, log);
+                UpgradeTable upgrades = UpgradeTableImporter.Import(weapons, log);
                 ModuleTable modules = ModuleTableImporter.Import(locations, log);
                 ModuleTableImporter.ImportUpgrades(modules, log);
                 SlotTableImporter.ImportModuleSlots(log);
@@ -47,6 +47,7 @@ namespace TableImport
                 }
 
                 LocationRewardReport.Write(systems, locations, waves, enemies, bosses);
+                WeaponFullPriceReport.Write(systems, locations, weapons, slots, upgrades);
                 AssetDatabase.SaveAssets();
 
                 return true;

@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Text;
-using UnityEditor;
 using UnityEngine;
 
 namespace TableImport
@@ -10,9 +8,6 @@ namespace TableImport
     public static class LocationRewardReport
     {
         public const string ReportPath = "Assets/Data/Reports/location_rewards.tsv";
-
-        private const string Separator = "\t";
-        private const string LineEnd = "\r\n";
 
         private static readonly string[] Columns =
         {
@@ -23,7 +18,7 @@ namespace TableImport
         public static void Write(SystemTable systems, LocationTable locations, WaveTable waves, EnemyTable enemies,
             BossTable bosses)
         {
-            StringBuilder text = new StringBuilder(string.Join(Separator, Columns)).Append(LineEnd);
+            StringBuilder text = new StringBuilder(string.Join(ReportFile.Separator, Columns)).Append(ReportFile.LineEnd);
             List<SystemRow> systemRoute = new List<SystemRow>(systems.Rows);
             float routeMoney = 0f;
             float routeXp = 0f;
@@ -52,7 +47,7 @@ namespace TableImport
                 }
             }
 
-            Save(text.ToString());
+            ReportFile.Save(ReportPath, text.ToString());
         }
 
         private static List<LocationRow> GetRoute(LocationTable locations, string systemId)
@@ -148,7 +143,7 @@ namespace TableImport
                 routeMoney, routeXp, GetNote(reward)
             };
 
-            text.Append(string.Join(Separator, cells)).Append(LineEnd);
+            text.Append(string.Join(ReportFile.Separator, cells)).Append(ReportFile.LineEnd);
         }
 
         private static string GetNote(LocationReward reward)
@@ -162,20 +157,6 @@ namespace TableImport
         private static string Format(float value)
         {
             return Mathf.RoundToInt(value).ToString(CultureInfo.InvariantCulture);
-        }
-
-        private static void Save(string text)
-        {
-            string folder = Path.GetDirectoryName(ReportPath);
-
-            if (Directory.Exists(folder) == false)
-                Directory.CreateDirectory(folder);
-
-            if (File.Exists(ReportPath) && File.ReadAllText(ReportPath, Encoding.Unicode) == text)
-                return;
-
-            File.WriteAllText(ReportPath, text, new UnicodeEncoding(false, true));
-            AssetDatabase.ImportAsset(ReportPath);
         }
 
         private class LocationReward
