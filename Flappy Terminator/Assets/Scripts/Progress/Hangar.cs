@@ -243,7 +243,8 @@ public class Hangar : MonoBehaviour
             Mathf.RoundToInt(GetValue(slot, UpgradeStat.Damage)),
             GetValue(slot, UpgradeStat.CritChance) * PercentShare,
             GetValue(slot, UpgradeStat.CritDamage),
-            GetValue(slot, UpgradeStat.HeatReduction) * PercentShare);
+            GetValue(slot, UpgradeStat.HeatReduction) * PercentShare,
+            GetValue(slot, UpgradeStat.DoubleShot) * PercentShare);
     }
 
     private BarrelUpgrades GetBarrel(int slot)

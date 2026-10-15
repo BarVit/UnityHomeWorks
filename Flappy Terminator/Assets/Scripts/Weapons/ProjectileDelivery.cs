@@ -33,6 +33,11 @@ public class ProjectileDelivery : WeaponDelivery
             Launch(barrel);
     }
 
+    protected override void FireAgain(int barrel)
+    {
+        Launch(barrel);
+    }
+
     protected virtual Ammo Launch(int barrel)
     {
         Ammo ammo = Spawn(barrel);

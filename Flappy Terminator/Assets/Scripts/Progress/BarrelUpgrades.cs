@@ -8,6 +8,7 @@ public class BarrelUpgrades
     [SerializeField] private int _critChance;
     [SerializeField] private int _critDamage;
     [SerializeField] private int _heatReduction;
+    [SerializeField] private int _doubleShot;
 
     public int GetLevel(UpgradeStat stat)
     {
@@ -21,6 +22,8 @@ public class BarrelUpgrades
                 return _critDamage;
             case UpgradeStat.HeatReduction:
                 return _heatReduction;
+            case UpgradeStat.DoubleShot:
+                return _doubleShot;
             default:
                 throw new ArgumentOutOfRangeException(nameof(stat), stat, null);
         }
@@ -41,6 +44,9 @@ public class BarrelUpgrades
                 break;
             case UpgradeStat.HeatReduction:
                 _heatReduction++;
+                break;
+            case UpgradeStat.DoubleShot:
+                _doubleShot++;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(stat), stat, null);

@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class WeaponDelivery
 {
     private const float MaxHeat = 100f;
     private const float CritMarkInterval = 0.25f;
+    private const float DoubleShotDelay = 0.1f;
 
     private readonly WeaponRow _row;
     private readonly WeaponContext _context;
@@ -12,6 +14,8 @@ public abstract class WeaponDelivery
 
     private readonly SpawnPool<ExplosionAnimation> _shotPool;
     private readonly SpawnPool<CritMark> _critPool;
+    private readonly List<int> _repeatBarrels = new List<int>();
+    private readonly List<float> _repeatDelays = new List<float>();
 
     private float _cooldownLeft;
     private float _heat;
@@ -145,6 +149,7 @@ public abstract class WeaponDelivery
         _cooldownLeft = Cooldown;
         Warm();
         OnFire();
+        RollDoubleShots();
         Spend();
 
         return true;
@@ -185,6 +190,7 @@ public abstract class WeaponDelivery
 
         Cool(deltaTime);
         Reload(deltaTime);
+        TickDoubleShots(deltaTime);
         OnTick(deltaTime);
     }
 
@@ -258,6 +264,35 @@ public abstract class WeaponDelivery
             _shotsLeft = _row.Magazine;
     }
 
+    private void RollDoubleShots()
+    {
+        for (int barrel = 0; barrel < _barrels; barrel++)
+        {
+            if (_context.GetBoost(barrel).RollDoubleShot() == false)
+                continue;
+
+            _repeatBarrels.Add(barrel);
+            _repeatDelays.Add(DoubleShotDelay);
+        }
+    }
+
+    private void TickDoubleShots(float deltaTime)
+    {
+        for (int i = _repeatDelays.Count - 1; i >= 0; i--)
+        {
+            _repeatDelays[i] -= deltaTime;
+
+            if (_repeatDelays[i] > 0f)
+                continue;
+
+            int barrel = _repeatBarrels[i];
+
+            _repeatBarrels.RemoveAt(i);
+            _repeatDelays.RemoveAt(i);
+            FireAgain(barrel);
+        }
+    }
+
     private void Warm()
     {
         if (HasHeat == false)
@@ -289,6 +324,10 @@ public abstract class WeaponDelivery
     }
 
     protected abstract void OnFire();
+
+    protected virtual void FireAgain(int barrel)
+    {
+    }
 
     protected virtual void OnTick(float deltaTime)
     {

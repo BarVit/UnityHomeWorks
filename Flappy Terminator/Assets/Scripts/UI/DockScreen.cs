@@ -58,6 +58,7 @@ public class DockScreen : MonoBehaviour
     [SerializeField] private Sprite _xpIcon;
     [SerializeField] private Sprite _damageIcon;
     [SerializeField] private Sprite _critIcon;
+    [SerializeField] private Sprite _doubleShotIcon;
     [SerializeField] private Sprite _cooldownIcon;
     [SerializeField] private Sprite _healthIcon;
     [SerializeField] private ShopWindow _shop;
@@ -266,6 +267,7 @@ public class DockScreen : MonoBehaviour
             case UpgradeStat.Damage:
                 return (row.Damage + Mathf.RoundToInt(value)).ToString();
             case UpgradeStat.CritChance:
+            case UpgradeStat.DoubleShot:
                 return Mathf.RoundToInt(value) + PercentSign;
             case UpgradeStat.HeatReduction:
                 return Mathf.RoundToInt(100f - value) + PercentSign;
@@ -282,6 +284,8 @@ public class DockScreen : MonoBehaviour
                 return "DAMAGE";
             case UpgradeStat.HeatReduction:
                 return "HEAT PER SHOT";
+            case UpgradeStat.DoubleShot:
+                return "DOUBLE SHOT";
             default:
                 return "CRIT CHANCE";
         }
@@ -297,6 +301,8 @@ public class DockScreen : MonoBehaviour
                     + " NEXT LEVEL";
             case UpgradeStat.HeatReduction:
                 return "-" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
+            case UpgradeStat.DoubleShot:
+                return "CHANCE OF A SECOND BULLET";
             default:
                 return "CRIT HIT DEALS x" + _hangar.GetValue(_selectedSlot, UpgradeStat.CritDamage);
         }
@@ -310,6 +316,8 @@ public class DockScreen : MonoBehaviour
                 return _damageIcon;
             case UpgradeStat.HeatReduction:
                 return _cooldownIcon;
+            case UpgradeStat.DoubleShot:
+                return _doubleShotIcon;
             default:
                 return _critIcon;
         }
