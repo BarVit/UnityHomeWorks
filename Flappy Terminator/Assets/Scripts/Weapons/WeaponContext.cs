@@ -7,7 +7,8 @@ public class WeaponContext
     public WeaponContext(Transform[] mounts, int barrels, PoolRegistry pools, ShotAudio audio,
         ShotAudio hitAudio, LayerMask targetLayers, int ammoLayer, Camera camera, LayerMask worldLayers = default,
         ShotLoop loop = null, ShotLoop hitLoop = null, int damage = 0,
-        WeaponBoost[] boosts = null, CritMark critMark = null, ShotTally tally = null, float rateScale = 1f)
+        WeaponBoost[] boosts = null, CritMark critMark = null, ShotTally tally = null, float rateScale = 1f,
+        ParticleSystem burnFlame = null)
     {
         Mounts = mounts;
         Barrels = barrels;
@@ -24,6 +25,7 @@ public class WeaponContext
         CritMark = critMark;
         Tally = tally;
         RateScale = rateScale;
+        BurnFlame = burnFlame;
 
         ContactFilter2D filter = new ContactFilter2D();
 
@@ -76,4 +78,6 @@ public class WeaponContext
     public ShotTally Tally { get; private set; }
 
     public float RateScale { get; private set; }
+
+    public ParticleSystem BurnFlame { get; private set; }
 }

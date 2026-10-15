@@ -59,6 +59,8 @@ public class DockScreen : MonoBehaviour
     [SerializeField] private Sprite _damageIcon;
     [SerializeField] private Sprite _critIcon;
     [SerializeField] private Sprite _doubleShotIcon;
+    [SerializeField] private Sprite _speedIcon;
+    [SerializeField] private Sprite _napalmIcon;
     [SerializeField] private Sprite _cooldownIcon;
     [SerializeField] private Sprite _healthIcon;
     [SerializeField] private ShopWindow _shop;
@@ -268,7 +270,10 @@ public class DockScreen : MonoBehaviour
                 return (row.Damage + Mathf.RoundToInt(value)).ToString();
             case UpgradeStat.CritChance:
             case UpgradeStat.DoubleShot:
+            case UpgradeStat.Napalm:
                 return Mathf.RoundToInt(value) + PercentSign;
+            case UpgradeStat.ProjectileSpeed:
+                return Mathf.RoundToInt(100f + value) + PercentSign;
             case UpgradeStat.HeatReduction:
                 return Mathf.RoundToInt(100f - value) + PercentSign;
             default:
@@ -286,6 +291,10 @@ public class DockScreen : MonoBehaviour
                 return "HEAT PER SHOT";
             case UpgradeStat.DoubleShot:
                 return "DOUBLE SHOT";
+            case UpgradeStat.ProjectileSpeed:
+                return "FLIGHT SPEED";
+            case UpgradeStat.Napalm:
+                return "NAPALM";
             default:
                 return "CRIT CHANCE";
         }
@@ -303,6 +312,10 @@ public class DockScreen : MonoBehaviour
                 return "-" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
             case UpgradeStat.DoubleShot:
                 return "CHANCE OF A SECOND BULLET";
+            case UpgradeStat.ProjectileSpeed:
+                return "+" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
+            case UpgradeStat.Napalm:
+                return "OF ROCKET DAMAGE AS 1.2 S BURN";
             default:
                 return "CRIT HIT DEALS x" + _hangar.GetValue(_selectedSlot, UpgradeStat.CritDamage);
         }
@@ -318,6 +331,10 @@ public class DockScreen : MonoBehaviour
                 return _cooldownIcon;
             case UpgradeStat.DoubleShot:
                 return _doubleShotIcon;
+            case UpgradeStat.ProjectileSpeed:
+                return _speedIcon;
+            case UpgradeStat.Napalm:
+                return _napalmIcon;
             default:
                 return _critIcon;
         }

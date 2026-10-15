@@ -60,7 +60,7 @@ public class ProjectileDelivery : WeaponDelivery
         ammo.MarkBarrel(barrel);
         CountFired();
         ammo.SetDamage(RollDamage(barrel, out bool isCrit), isCrit);
-        ammo.Fly(ProjectileSpeed);
+        ammo.Fly(ProjectileSpeed * Context.GetBoost(barrel).SpeedScale);
         ammo.Struck += OnStruck;
 
         return ammo;
@@ -81,6 +81,9 @@ public class ProjectileDelivery : WeaponDelivery
         if (isTarget && ammo.IsCrit)
             ShowCrit(ammo.transform.position, ammo.Damage);
 
+        if (isTarget)
+            Ignite(ammo);
+
         Sound sound = isTarget ? ammo.HitSound : ammo.WorldHitSound;
 
         if (sound.Clip == null || Time.time <= _hitSoundUntil)
@@ -88,6 +91,14 @@ public class ProjectileDelivery : WeaponDelivery
 
         _hitSoundUntil = Time.time + GetHitSoundInterval(sound);
         Context.HitAudio.Play(sound, ammo.transform.position);
+    }
+
+    private void Ignite(Ammo ammo)
+    {
+        float share = Context.GetBoost(ammo.Barrel).NapalmShare;
+
+        if (share > 0f && Context.BurnFlame != null)
+            Burning.Ignite(ammo.StruckObject, ammo.Damage * share, Context.BurnFlame);
     }
 
     private bool IsTarget(GameObject struck)

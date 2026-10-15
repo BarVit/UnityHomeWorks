@@ -17,6 +17,7 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private LayerMask _targetLayers;
     [SerializeField] private LayerMask _worldLayers;
     [SerializeField] private CritMark _critMark;
+    [SerializeField] private ParticleSystem _burnFlame;
 
     private readonly PoolRegistry _pools = new PoolRegistry("Player Weapon");
     private readonly ShotTally _tally = new ShotTally();
@@ -108,7 +109,7 @@ public class PlayerShooter : MonoBehaviour
             new ShotAudio(_shotAudioSource, camera), new ShotAudio(_hitAudioSource, camera),
             _targetLayers, LayerMask.NameToLayer(AmmoLayerName), camera, _worldLayers, new ShotLoop(_loopAudioSource),
             new ShotLoop(_hitLoopAudioSource), boosts: boosts, critMark: _critMark,
-            tally: _tally, rateScale: rateScale);
+            tally: _tally, rateScale: rateScale, burnFlame: _burnFlame);
 
         _equippedId = weaponId;
         _delivery = WeaponFactory.Create(row, context);

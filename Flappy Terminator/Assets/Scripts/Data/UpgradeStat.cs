@@ -4,5 +4,7 @@ public enum UpgradeStat
     CritChance,
     CritDamage,
     HeatReduction,
-    DoubleShot
+    DoubleShot,
+    ProjectileSpeed,
+    Napalm
 }

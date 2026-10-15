@@ -3,8 +3,10 @@ using UnityEngine;
 public readonly struct WeaponBoost
 {
     public WeaponBoost(int damageBonus, float critChance, float critMultiplier, float heatReduction,
-        float doubleShotChance)
+        float doubleShotChance, float speedBonus, float napalmShare)
     {
+        SpeedBonus = speedBonus;
+        NapalmShare = napalmShare;
         DoubleShotChance = doubleShotChance;
         HeatReduction = heatReduction;
         DamageBonus = damageBonus;
@@ -21,6 +23,12 @@ public readonly struct WeaponBoost
     public float HeatReduction { get; }
 
     public float DoubleShotChance { get; }
+
+    public float SpeedBonus { get; }
+
+    public float NapalmShare { get; }
+
+    public float SpeedScale => 1f + SpeedBonus;
 
     public float HeatScale => 1f - Mathf.Clamp01(HeatReduction);
 
