@@ -66,7 +66,7 @@ MonoBehaviour:
   - _id: loc_02_01
     _system: sys_02
     _order: 1
-    _levels: 1
+    _levels: 2
     _boss: 
     _borderTheme: 
     _flightMode: 0
@@ -76,7 +76,7 @@ MonoBehaviour:
   - _id: loc_02_02
     _system: sys_02
     _order: 2
-    _levels: 3
+    _levels: 2
     _boss: berserker_1
     _borderTheme: 
     _flightMode: 0
@@ -86,7 +86,7 @@ MonoBehaviour:
   - _id: loc_02_03
     _system: sys_02
     _order: 3
-    _levels: 3
+    _levels: 4
     _boss: 
     _borderTheme: 
     _flightMode: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
   - _id: loc_02_05
     _system: sys_02
     _order: 5
-    _levels: 3
+    _levels: 4
     _boss: 
     _borderTheme: 
     _flightMode: 0
@@ -116,7 +116,7 @@ MonoBehaviour:
   - _id: loc_02_06
     _system: sys_02
     _order: 6
-    _levels: 3
+    _levels: 5
     _boss: 
     _borderTheme: 
     _flightMode: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
   - _id: loc_02_07
     _system: sys_02
     _order: 7
-    _levels: 3
+    _levels: 2
     _boss: magister
     _borderTheme: 
     _flightMode: 0
@@ -146,7 +146,7 @@ MonoBehaviour:
   - _id: loc_03_02
     _system: sys_03
     _order: 2
-    _levels: 3
+    _levels: 4
     _boss: 
     _borderTheme: 
     _flightMode: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
   - _id: loc_03_03
     _system: sys_03
     _order: 3
-    _levels: 3
+    _levels: 5
     _boss: 
     _borderTheme: 
     _flightMode: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
   - _id: loc_03_04
     _system: sys_03
     _order: 4
-    _levels: 3
+    _levels: 1
     _boss: berserker_2
     _borderTheme: 
     _flightMode: 0
@@ -196,7 +196,7 @@ MonoBehaviour:
   - _id: loc_03_07
     _system: sys_03
     _order: 7
-    _levels: 3
+    _levels: 4
     _boss: tormentor_1
     _borderTheme: 
     _flightMode: 0
@@ -216,7 +216,7 @@ MonoBehaviour:
   - _id: loc_03_09
     _system: sys_03
     _order: 9
-    _levels: 3
+    _levels: 2
     _boss: overlord
     _borderTheme: 
     _flightMode: 0
@@ -236,7 +236,7 @@ MonoBehaviour:
   - _id: loc_04_02
     _system: sys_04
     _order: 2
-    _levels: 3
+    _levels: 4
     _boss: 
     _borderTheme: 
     _flightMode: 0
@@ -246,7 +246,7 @@ MonoBehaviour:
   - _id: loc_04_03
     _system: sys_04
     _order: 3
-    _levels: 3
+    _levels: 5
     _boss: ripper_1
     _borderTheme: 
     _flightMode: 0
@@ -256,7 +256,7 @@ MonoBehaviour:
   - _id: loc_04_04
     _system: sys_04
     _order: 4
-    _levels: 3
+    _levels: 5
     _boss: 
     _borderTheme: 
     _flightMode: 0
@@ -286,7 +286,7 @@ MonoBehaviour:
   - _id: loc_05_01
     _system: sys_05
     _order: 1
-    _levels: 3
+    _levels: 1
     _boss: 
     _borderTheme: 
     _flightMode: 0
@@ -296,7 +296,7 @@ MonoBehaviour:
   - _id: loc_05_02
     _system: sys_05
     _order: 2
-    _levels: 3
+    _levels: 2
     _boss: tormentor_2
     _borderTheme: 
     _flightMode: 0
@@ -306,7 +306,7 @@ MonoBehaviour:
   - _id: loc_05_03
     _system: sys_05
     _order: 3
-    _levels: 3
+    _levels: 4
     _boss: 
     _borderTheme: 
     _flightMode: 0
@@ -336,7 +336,7 @@ MonoBehaviour:
   - _id: loc_05_06
     _system: sys_05
     _order: 6
-    _levels: 3
+    _levels: 2
     _boss: 
     _borderTheme: 
     _flightMode: 0
@@ -346,7 +346,7 @@ MonoBehaviour:
   - _id: loc_05_07
     _system: sys_05
     _order: 7
-    _levels: 3
+    _levels: 5
     _boss: emperor
     _borderTheme: 
     _flightMode: 0
@@ -366,7 +366,7 @@ MonoBehaviour:
   - _id: loc_05_09
     _system: sys_05
     _order: 9
-    _levels: 3
+    _levels: 5
     _boss: 
     _borderTheme: 
     _flightMode: 0
@@ -376,7 +376,7 @@ MonoBehaviour:
   - _id: loc_05_10
     _system: sys_05
     _order: 10
-    _levels: 3
+    _levels: 5
     _boss: titan
     _borderTheme: 
     _flightMode: 0
@@ -396,7 +396,7 @@ MonoBehaviour:
   - _id: void_ashen_2
     _system: sys_03
     _order: 2
-    _levels: 2
+    _levels: 3
     _boss: 
     _borderTheme: 
     _flightMode: 0
@@ -406,7 +406,7 @@ MonoBehaviour:
   - _id: void_ashen_3
     _system: sys_03
     _order: 3
-    _levels: 2
+    _levels: 5
     _boss: 
     _borderTheme: 
     _flightMode: 0
