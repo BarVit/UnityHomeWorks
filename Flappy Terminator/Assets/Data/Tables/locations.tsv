@@ -1,41 +1,41 @@
-id	system	order	levels	border_theme	flight_mode	title	branch_of	void
-loc_01_01	sys_01	1	2		Normal			
-loc_01_02	sys_01	2	2		Normal			
-loc_01_03	sys_01	3	2		Normal			
-loc_01_04	sys_01	4	3		Normal			
-loc_01_05	sys_01	5	3		Normal			
-loc_02_01	sys_02	1	1		Normal			
-loc_02_02	sys_02	2	3		Normal			
-loc_02_03	sys_02	3	3		Normal			
-loc_02_04	sys_02	4	3		Normal			
-loc_02_05	sys_02	5	3		Normal			
-loc_02_06	sys_02	6	3		Normal			
-loc_02_07	sys_02	7	3		Normal			
-loc_03_01	sys_03	1	3		Normal			
-loc_03_02	sys_03	2	3		Normal			
-loc_03_03	sys_03	3	3		Normal			
-loc_03_04	sys_03	4	3		Normal			
-loc_03_05	sys_03	5	5		Normal			
-loc_03_06	sys_03	6	3		Normal			
-loc_03_07	sys_03	7	3		Normal			
-loc_03_08	sys_03	8	3		Normal			
-loc_03_09	sys_03	9	3		Normal			
-loc_04_01	sys_04	1	3		Normal			
-loc_04_02	sys_04	2	3		Normal			
-loc_04_03	sys_04	3	3		Normal			
-loc_04_04	sys_04	4	3		Normal			
-loc_04_05	sys_04	5	5		Normal			
-loc_04_06	sys_04	6	3		Normal			
-loc_05_01	sys_05	1	3		Normal			
-loc_05_02	sys_05	2	3		Normal			
-loc_05_03	sys_05	3	3		Normal			
-loc_05_04	sys_05	4	3		Normal			
-loc_05_05	sys_05	5	5		Normal			
-loc_05_06	sys_05	6	3		Normal			
-loc_05_07	sys_05	7	3		Normal			
-loc_05_08	sys_05	8	3		Normal			
-loc_05_09	sys_05	9	3		Normal			
-loc_05_10	sys_05	10	3		Normal			
-void_ashen_1	sys_03	1	1		Normal	ASHFALL	loc_03_07	ashen_void
-void_ashen_2	sys_03	2	2		Normal	IRON CINDERS	loc_03_07	ashen_void
-void_ashen_3	sys_03	3	2		Normal	SMOLDER DRIFT	loc_03_07	ashen_void
+id	system	order	levels	boss	border_theme	flight_mode	title	branch_of	void
+loc_01_01	sys_01	1	2			Normal			
+loc_01_02	sys_01	2	2	marauder_1		Normal			
+loc_01_03	sys_01	3	2			Normal			
+loc_01_04	sys_01	4	3	punisher_1		Normal			
+loc_01_05	sys_01	5	3	hierarch		Normal			
+loc_02_01	sys_02	1	1			Normal			
+loc_02_02	sys_02	2	3	berserker_1		Normal			
+loc_02_03	sys_02	3	3			Normal			
+loc_02_04	sys_02	4	3	marauder_2		Normal			
+loc_02_05	sys_02	5	3			Normal			
+loc_02_06	sys_02	6	3			Normal			
+loc_02_07	sys_02	7	3	magister		Normal			
+loc_03_01	sys_03	1	3	punisher_2		Normal			
+loc_03_02	sys_03	2	3			Normal			
+loc_03_03	sys_03	3	3			Normal			
+loc_03_04	sys_03	4	3	berserker_2		Normal			
+loc_03_05	sys_03	5	5			Normal			
+loc_03_06	sys_03	6	3			Normal			
+loc_03_07	sys_03	7	3	tormentor_1		Normal			
+loc_03_08	sys_03	8	3			Normal			
+loc_03_09	sys_03	9	3	overlord		Normal			
+loc_04_01	sys_04	1	3			Normal			
+loc_04_02	sys_04	2	3			Normal			
+loc_04_03	sys_04	3	3	ripper_1		Normal			
+loc_04_04	sys_04	4	3			Normal			
+loc_04_05	sys_04	5	5			Normal			
+loc_04_06	sys_04	6	3	archon		Normal			
+loc_05_01	sys_05	1	3			Normal			
+loc_05_02	sys_05	2	3	tormentor_2		Normal			
+loc_05_03	sys_05	3	3			Normal			
+loc_05_04	sys_05	4	3	ripper_2		Normal			
+loc_05_05	sys_05	5	5			Normal			
+loc_05_06	sys_05	6	3			Normal			
+loc_05_07	sys_05	7	3	emperor		Normal			
+loc_05_08	sys_05	8	3			Normal			
+loc_05_09	sys_05	9	3			Normal			
+loc_05_10	sys_05	10	3	titan		Normal			
+void_ashen_1	sys_03	1	1			Normal	ASHFALL	loc_03_07	ashen_void
+void_ashen_2	sys_03	2	2			Normal	IRON CINDERS	loc_03_07	ashen_void
+void_ashen_3	sys_03	3	2			Normal	SMOLDER DRIFT	loc_03_07	ashen_void

@@ -17,6 +17,7 @@ MonoBehaviour:
     _system: sys_01
     _order: 1
     _levels: 2
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -26,6 +27,7 @@ MonoBehaviour:
     _system: sys_01
     _order: 2
     _levels: 2
+    _boss: marauder_1
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -35,6 +37,7 @@ MonoBehaviour:
     _system: sys_01
     _order: 3
     _levels: 2
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -44,6 +47,7 @@ MonoBehaviour:
     _system: sys_01
     _order: 4
     _levels: 3
+    _boss: punisher_1
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -53,6 +57,7 @@ MonoBehaviour:
     _system: sys_01
     _order: 5
     _levels: 3
+    _boss: hierarch
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -62,6 +67,7 @@ MonoBehaviour:
     _system: sys_02
     _order: 1
     _levels: 1
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -71,6 +77,7 @@ MonoBehaviour:
     _system: sys_02
     _order: 2
     _levels: 3
+    _boss: berserker_1
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -80,6 +87,7 @@ MonoBehaviour:
     _system: sys_02
     _order: 3
     _levels: 3
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -89,6 +97,7 @@ MonoBehaviour:
     _system: sys_02
     _order: 4
     _levels: 3
+    _boss: marauder_2
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -98,6 +107,7 @@ MonoBehaviour:
     _system: sys_02
     _order: 5
     _levels: 3
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -107,6 +117,7 @@ MonoBehaviour:
     _system: sys_02
     _order: 6
     _levels: 3
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -116,6 +127,7 @@ MonoBehaviour:
     _system: sys_02
     _order: 7
     _levels: 3
+    _boss: magister
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -125,6 +137,7 @@ MonoBehaviour:
     _system: sys_03
     _order: 1
     _levels: 3
+    _boss: punisher_2
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -134,6 +147,7 @@ MonoBehaviour:
     _system: sys_03
     _order: 2
     _levels: 3
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -143,6 +157,7 @@ MonoBehaviour:
     _system: sys_03
     _order: 3
     _levels: 3
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -152,6 +167,7 @@ MonoBehaviour:
     _system: sys_03
     _order: 4
     _levels: 3
+    _boss: berserker_2
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -161,6 +177,7 @@ MonoBehaviour:
     _system: sys_03
     _order: 5
     _levels: 5
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -170,6 +187,7 @@ MonoBehaviour:
     _system: sys_03
     _order: 6
     _levels: 3
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -179,6 +197,7 @@ MonoBehaviour:
     _system: sys_03
     _order: 7
     _levels: 3
+    _boss: tormentor_1
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -188,6 +207,7 @@ MonoBehaviour:
     _system: sys_03
     _order: 8
     _levels: 3
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -197,6 +217,7 @@ MonoBehaviour:
     _system: sys_03
     _order: 9
     _levels: 3
+    _boss: overlord
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -206,6 +227,7 @@ MonoBehaviour:
     _system: sys_04
     _order: 1
     _levels: 3
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -215,6 +237,7 @@ MonoBehaviour:
     _system: sys_04
     _order: 2
     _levels: 3
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -224,6 +247,7 @@ MonoBehaviour:
     _system: sys_04
     _order: 3
     _levels: 3
+    _boss: ripper_1
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -233,6 +257,7 @@ MonoBehaviour:
     _system: sys_04
     _order: 4
     _levels: 3
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -242,6 +267,7 @@ MonoBehaviour:
     _system: sys_04
     _order: 5
     _levels: 5
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -251,6 +277,7 @@ MonoBehaviour:
     _system: sys_04
     _order: 6
     _levels: 3
+    _boss: archon
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -260,6 +287,7 @@ MonoBehaviour:
     _system: sys_05
     _order: 1
     _levels: 3
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -269,6 +297,7 @@ MonoBehaviour:
     _system: sys_05
     _order: 2
     _levels: 3
+    _boss: tormentor_2
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -278,6 +307,7 @@ MonoBehaviour:
     _system: sys_05
     _order: 3
     _levels: 3
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -287,6 +317,7 @@ MonoBehaviour:
     _system: sys_05
     _order: 4
     _levels: 3
+    _boss: ripper_2
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -296,6 +327,7 @@ MonoBehaviour:
     _system: sys_05
     _order: 5
     _levels: 5
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -305,6 +337,7 @@ MonoBehaviour:
     _system: sys_05
     _order: 6
     _levels: 3
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -314,6 +347,7 @@ MonoBehaviour:
     _system: sys_05
     _order: 7
     _levels: 3
+    _boss: emperor
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -323,6 +357,7 @@ MonoBehaviour:
     _system: sys_05
     _order: 8
     _levels: 3
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -332,6 +367,7 @@ MonoBehaviour:
     _system: sys_05
     _order: 9
     _levels: 3
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -341,6 +377,7 @@ MonoBehaviour:
     _system: sys_05
     _order: 10
     _levels: 3
+    _boss: titan
     _borderTheme: 
     _flightMode: 0
     _title: 
@@ -350,6 +387,7 @@ MonoBehaviour:
     _system: sys_03
     _order: 1
     _levels: 1
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: ASHFALL
@@ -359,6 +397,7 @@ MonoBehaviour:
     _system: sys_03
     _order: 2
     _levels: 2
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: IRON CINDERS
@@ -368,6 +407,7 @@ MonoBehaviour:
     _system: sys_03
     _order: 3
     _levels: 2
+    _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: SMOLDER DRIFT

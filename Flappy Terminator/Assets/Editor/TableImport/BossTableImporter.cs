@@ -89,6 +89,8 @@ namespace TableImport
                     phases.TryGetValue(id, out BossPhaseRow[] bossPhases) ? bossPhases : new BossPhaseRow[0]));
             }
 
+            CheckPlacement(locations, rows, log);
+
             BossTable table = GeneratedAsset.LoadOrCreate<BossTable>(AssetPath);
             table.Fill(rows.ToArray());
             EditorUtility.SetDirty(table);
@@ -144,6 +146,36 @@ namespace TableImport
 
             if (locations.GetRow(location) == null)
                 reader.Fail("location: нет локации с id " + location + " в " + LocationTableImporter.SourcePath);
+        }
+
+        private static void CheckPlacement(LocationTable locations, List<BossRow> bosses, TableLog log)
+        {
+            if (locations == null)
+                return;
+
+            foreach (BossRow boss in bosses)
+            {
+                LocationRow location = locations.GetRow(boss.Location);
+
+                if (location != null && location.Boss != boss.Id)
+                    log.Add(SourcePath, 0, boss.Id + ": location " + boss.Location + ", а в "
+                        + LocationTableImporter.SourcePath + " у этой локации boss «" + location.Boss + "»");
+            }
+
+            foreach (LocationRow location in locations.Rows)
+            {
+                if (string.IsNullOrEmpty(location.Boss))
+                    continue;
+
+                BossRow boss = bosses.Find(row => row.Id == location.Boss);
+
+                if (boss == null)
+                    log.Add(LocationTableImporter.SourcePath, 0,
+                        location.Id + ": boss " + location.Boss + " — нет такого босса в " + SourcePath);
+                else if (boss.Location != location.Id)
+                    log.Add(LocationTableImporter.SourcePath, 0, location.Id + ": boss " + location.Boss + ", а в "
+                        + SourcePath + " у него location «" + boss.Location + "»");
+            }
         }
 
         private static void CheckIntro(BossKind kind, string intro, RowReader reader)

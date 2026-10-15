@@ -8,13 +8,14 @@ public class LocationRow
     [SerializeField] private string _system;
     [SerializeField] private int _order;
     [SerializeField] private int _levels;
+    [SerializeField] private string _boss;
     [SerializeField] private string _borderTheme;
     [SerializeField] private FlightMode _flightMode;
     [SerializeField] private string _title;
     [SerializeField] private string _branchOf;
     [SerializeField] private string _void;
 
-    public LocationRow(string id, string system, int order, int levels, string borderTheme,
+    public LocationRow(string id, string system, int order, int levels, string boss, string borderTheme,
         FlightMode flightMode, string title, string branchOf, string voidId)
     {
         _void = voidId;
@@ -22,6 +23,7 @@ public class LocationRow
         _system = system;
         _order = order;
         _levels = levels;
+        _boss = boss;
         _borderTheme = borderTheme;
         _flightMode = flightMode;
         _title = title;
@@ -35,6 +37,8 @@ public class LocationRow
     public int Order => _order;
 
     public int Levels => _levels;
+
+    public string Boss => _boss;
 
     public string BorderTheme => _borderTheme;
 

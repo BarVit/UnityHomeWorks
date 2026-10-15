@@ -10,7 +10,7 @@ namespace TableImport
 
         private static readonly string[] Columns =
         {
-            "id", "system", "order", "levels", "border_theme", "flight_mode", "title", "branch_of", "void"
+            "id", "system", "order", "levels", "boss", "border_theme", "flight_mode", "title", "branch_of", "void"
         };
 
         public static LocationTable Import(SystemTable systems, TableLog log)
@@ -44,6 +44,7 @@ namespace TableImport
                     system,
                     reader.ReadInt("order", 1, 99),
                     reader.ReadInt("levels", 1, 20),
+                    reader.ReadOptionalText("boss"),
                     reader.ReadOptionalText("border_theme"),
                     reader.ReadEnum<FlightMode>("flight_mode"),
                     reader.ReadOptionalText("title"),
