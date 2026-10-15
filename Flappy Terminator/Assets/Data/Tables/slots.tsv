@@ -8,3 +8,6 @@ cannon	4	15000
 impulse_laser	2	6000	
 impulse_laser	3	12000	
 impulse_laser	4	24000	
+rocket	2	10000	
+rocket	3	20000	
+rocket	4	40000	

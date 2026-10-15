@@ -49,3 +49,15 @@ MonoBehaviour:
     _price: 24000
     _weapon: 
     _gun: impulse_laser
+  - _slot: 2
+    _price: 10000
+    _weapon: 
+    _gun: rocket
+  - _slot: 3
+    _price: 20000
+    _weapon: 
+    _gun: rocket
+  - _slot: 4
+    _price: 40000
+    _weapon: 
+    _gun: rocket
