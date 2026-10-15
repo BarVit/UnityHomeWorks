@@ -152,27 +152,27 @@ MonoBehaviour:
     _stat: 0
     _level: 1
     _bonus: 10
-    _price: 5000
+    _price: 3750
   - _owner: rocket
     _stat: 0
     _level: 2
     _bonus: 15
-    _price: 7500
+    _price: 5625
   - _owner: rocket
     _stat: 0
     _level: 3
     _bonus: 20
-    _price: 10000
+    _price: 7500
   - _owner: rocket
     _stat: 0
     _level: 4
     _bonus: 20
-    _price: 12500
+    _price: 9375
   - _owner: rocket
     _stat: 0
     _level: 5
     _bonus: 25
-    _price: 15000
+    _price: 11250
   - _owner: rocket
     _stat: 1
     _level: 0
@@ -187,27 +187,27 @@ MonoBehaviour:
     _stat: 5
     _level: 1
     _bonus: 5
-    _price: 4000
+    _price: 3000
   - _owner: rocket
     _stat: 5
     _level: 2
     _bonus: 5
-    _price: 6000
+    _price: 4500
   - _owner: rocket
     _stat: 5
     _level: 3
     _bonus: 5
-    _price: 8000
+    _price: 6000
   - _owner: rocket
     _stat: 5
     _level: 4
     _bonus: 5
-    _price: 10000
+    _price: 7500
   - _owner: rocket
     _stat: 5
     _level: 5
     _bonus: 5
-    _price: 12000
+    _price: 9000
   - _owner: rocket
     _stat: 6
     _level: 0
@@ -217,27 +217,27 @@ MonoBehaviour:
     _stat: 6
     _level: 1
     _bonus: 20
-    _price: 3000
+    _price: 2250
   - _owner: rocket
     _stat: 6
     _level: 2
     _bonus: 20
-    _price: 6000
+    _price: 4500
   - _owner: rocket
     _stat: 6
     _level: 3
     _bonus: 20
-    _price: 9000
+    _price: 6750
   - _owner: rocket
     _stat: 6
     _level: 4
     _bonus: 20
-    _price: 12000
+    _price: 9000
   - _owner: rocket
     _stat: 6
     _level: 5
     _bonus: 20
-    _price: 15000
+    _price: 11250
   - _owner: cannon
     _stat: 1
     _level: 0
