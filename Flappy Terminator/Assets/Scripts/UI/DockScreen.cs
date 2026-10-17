@@ -65,6 +65,7 @@ public class DockScreen : MonoBehaviour
     [SerializeField] private Sprite _napalmIcon;
     [SerializeField] private Sprite _turnIcon;
     [SerializeField] private Sprite _reloadIcon;
+    [SerializeField] private Sprite _shieldSkillIcon;
     [SerializeField] private Sprite _cooldownIcon;
     [SerializeField] private Sprite _healthIcon;
     [SerializeField] private ShopWindow _shop;
@@ -470,10 +471,7 @@ public class DockScreen : MonoBehaviour
         int price = _skills.GetPrice(skill);
         string now = FormatSkill(skill, 0);
         string value = price < 0 ? now : now + Arrow + FormatSkill(skill, 1);
-        bool isHull = skill.Stat == SkillStat.Health;
-        string hint = isHull ? GetHullHint(skill, price) : GetCooldownHint(skill, price);
-
-        return new UpgradeRowData(GetSkillIcon(skill), GetSkillTitle(skill), hint, value,
+        return new UpgradeRowData(GetSkillIcon(skill), GetSkillTitle(skill), GetSkillHint(skill, price), value,
             _skills.GetLevel(skill), _skills.GetMaxLevel(skill), price, _skills.CanUpgrade(skill), _xpIcon);
     }
 
@@ -485,6 +483,8 @@ public class DockScreen : MonoBehaviour
                 return "HULL";
             case SkillStat.MagazineReload:
                 return UiText.Title(skill.Weapon) + " RELOAD";
+            case SkillStat.ShieldMastery:
+                return "SHIELD MASTERY";
             default:
                 return UiText.Title(skill.Weapon) + " COOLDOWN";
         }
@@ -498,8 +498,26 @@ public class DockScreen : MonoBehaviour
                 return _healthIcon;
             case SkillStat.MagazineReload:
                 return _reloadIcon;
+            case SkillStat.ShieldMastery:
+                return _shieldSkillIcon;
             default:
                 return _cooldownIcon;
+        }
+    }
+
+    private string GetSkillHint(SkillKey skill, int price)
+    {
+        if (price < 0)
+            return MaxLevelHint;
+
+        switch (skill.Stat)
+        {
+            case SkillStat.Health:
+                return GetHullHint(skill, price);
+            case SkillStat.ShieldMastery:
+                return "+" + _skills.GetStep(skill) + PercentSign + " SHIELD PER LEVEL";
+            default:
+                return GetCooldownHint(skill, price);
         }
     }
 
@@ -523,6 +541,9 @@ public class DockScreen : MonoBehaviour
     {
         if (skill.Stat == SkillStat.Health)
             return (_skills.BaseHealth + Mathf.RoundToInt(_skills.GetValue(skill, levelShift))).ToString();
+
+        if (skill.Stat == SkillStat.ShieldMastery)
+            return "+" + Mathf.RoundToInt(_skills.GetValue(skill, levelShift)) + PercentSign;
 
         if (skill.Stat == SkillStat.MagazineReload)
             return _skills.GetReloadTime(skill.Weapon, levelShift).ToString("0.00") + Seconds;

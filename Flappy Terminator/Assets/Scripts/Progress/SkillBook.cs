@@ -7,6 +7,7 @@ public class SkillBook : MonoBehaviour
     private const int NoPrice = -1;
     private const float MinCooldown = 0.01f;
     private const float MinReloadTime = 0.1f;
+    private const float PercentShare = 0.01f;
 
     [SerializeField] private Economy _economy;
     [SerializeField] private SkillTable _skills;
@@ -81,6 +82,11 @@ public class SkillBook : MonoBehaviour
         WeaponRow weapon = _weapons.GetRow(weaponId);
 
         return weapon == null ? 0f : Mathf.Max(MinReloadTime, weapon.ReloadTime + GetReloadShift(weaponId, levelShift));
+    }
+
+    public float GetShieldScale(int levelShift = 0)
+    {
+        return 1f + GetValue(new SkillKey(SkillStat.ShieldMastery, SkillTable.Everyone), levelShift) * PercentShare;
     }
 
     public bool CanUpgrade(SkillKey skill)

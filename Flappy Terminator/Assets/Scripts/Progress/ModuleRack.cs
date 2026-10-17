@@ -200,7 +200,7 @@ public class ModuleRack : MonoBehaviour
         return _shieldIcons[GetShieldLevel(module.Id)];
     }
 
-    public void Equip(BattleModules battle)
+    public void Equip(BattleModules battle, float shieldScale)
     {
         ModuleSpec?[] specs = new ModuleSpec?[SlotCount];
 
@@ -209,9 +209,12 @@ public class ModuleRack : MonoBehaviour
             ModuleRow row = GetInstalled(slot);
 
             if (row != null)
-                specs[slot - FirstSlot] = new ModuleSpec(row.Kind, GetIcon(row),
-                    Mathf.RoundToInt(GetValue(row.Id, ModuleStat.Capacity)), GetValue(row.Id, ModuleStat.Cooldown),
-                    GetShieldLevel(row.Id));
+            {
+                int capacity = Mathf.RoundToInt(GetValue(row.Id, ModuleStat.Capacity) * shieldScale);
+
+                specs[slot - FirstSlot] = new ModuleSpec(row.Kind, GetIcon(row), capacity,
+                    GetValue(row.Id, ModuleStat.Cooldown), GetShieldLevel(row.Id));
+            }
         }
 
         battle.Load(specs);

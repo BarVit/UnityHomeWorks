@@ -277,6 +277,7 @@ namespace UiContent
             so.FindProperty("_napalmIcon").objectReferenceValue = Art("Napalm Icon");
             so.FindProperty("_turnIcon").objectReferenceValue = Art("Turn Icon");
             so.FindProperty("_reloadIcon").objectReferenceValue = Art("Reload Icon");
+            so.FindProperty("_shieldSkillIcon").objectReferenceValue = Art("Energy Shield Icon");
             so.FindProperty("_cooldownIcon").objectReferenceValue = Art("Cooldown Icon");
             so.FindProperty("_healthIcon").objectReferenceValue = Art("Health Icon");
             so.FindProperty("_shop").objectReferenceValue = shop;
