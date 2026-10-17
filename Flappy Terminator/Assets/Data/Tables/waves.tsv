@@ -22,7 +22,13 @@ loc_01_05	1	1	60	Sequence	warden_1	1	1
 loc_01_05	2	1	10	Sequence	hunter_2	2	3
 loc_01_05	3	1	12	Random	warden_3,hunter_2	2	3
 loc_01_05	3	2	1	Boss	hierarch	0	0
-loc_02_01	1	1	30	Random	warden_3,hunter_2	2	2
+loc_02_01	1	1	5	Sequence	reaper_1	3	3
+loc_02_01	1	2	20	Random	warden_1,warden_2	1	1
+loc_02_01	1	3	5	Sequence	reaper_1	3	3
+loc_02_01	2	1	10	Random	warden_3,hunter_2	1	3
+loc_02_01	2	2	3	Sequence	reaper_1	2	2
+loc_02_01	2	3	5	Sequence	hunter_2	2	2
+loc_02_01	2	4	2	Sequence	reaper_1	0	0
 void_ashen_1	1	1	45	Random	warden_1,warden_2,hunter_1	1	3
 void_ashen_1	1	2	2	Sequence	reaper_1	3	3
 void_ashen_1	1	3	3	Sequence	hunter_2	3	3
