@@ -277,8 +277,6 @@ public class DockScreen : MonoBehaviour
             case UpgradeStat.ProjectileSpeed:
             case UpgradeStat.TurnRate:
                 return Mathf.RoundToInt(100f + value) + PercentSign;
-            case UpgradeStat.MagazineReload:
-                return Mathf.RoundToInt(100f - value) + PercentSign;
             case UpgradeStat.HeatReduction:
                 return Mathf.RoundToInt(100f - value) + PercentSign;
             default:
@@ -302,8 +300,6 @@ public class DockScreen : MonoBehaviour
                 return "NAPALM";
             case UpgradeStat.TurnRate:
                 return "TURN RATE";
-            case UpgradeStat.MagazineReload:
-                return "RELOAD TIME";
             default:
                 return "CRIT CHANCE";
         }
@@ -327,8 +323,6 @@ public class DockScreen : MonoBehaviour
                 return "OF ROCKET DAMAGE AS 1.2 S BURN";
             case UpgradeStat.TurnRate:
                 return "+" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
-            case UpgradeStat.MagazineReload:
-                return "-" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
             default:
                 return "CRIT HIT DEALS x" + _hangar.GetValue(_selectedSlot, UpgradeStat.CritDamage);
         }
@@ -350,8 +344,6 @@ public class DockScreen : MonoBehaviour
                 return _napalmIcon;
             case UpgradeStat.TurnRate:
                 return _turnIcon;
-            case UpgradeStat.MagazineReload:
-                return _reloadIcon;
             default:
                 return _critIcon;
         }
@@ -452,10 +444,35 @@ public class DockScreen : MonoBehaviour
         string value = price < 0 ? now : now + Arrow + FormatSkill(skill, 1);
         bool isHull = skill.Stat == SkillStat.Health;
         string hint = isHull ? GetHullHint(skill, price) : GetCooldownHint(skill, price);
-        string title = isHull ? "HULL" : UiText.Title(skill.Weapon) + " COOLDOWN";
 
-        return new UpgradeRowData(isHull ? _healthIcon : _cooldownIcon, title, hint, value,
+        return new UpgradeRowData(GetSkillIcon(skill), GetSkillTitle(skill), hint, value,
             _skills.GetLevel(skill), _skills.GetMaxLevel(skill), price, _skills.CanUpgrade(skill), _xpIcon);
+    }
+
+    private string GetSkillTitle(SkillKey skill)
+    {
+        switch (skill.Stat)
+        {
+            case SkillStat.Health:
+                return "HULL";
+            case SkillStat.MagazineReload:
+                return UiText.Title(skill.Weapon) + " RELOAD";
+            default:
+                return UiText.Title(skill.Weapon) + " COOLDOWN";
+        }
+    }
+
+    private Sprite GetSkillIcon(SkillKey skill)
+    {
+        switch (skill.Stat)
+        {
+            case SkillStat.Health:
+                return _healthIcon;
+            case SkillStat.MagazineReload:
+                return _reloadIcon;
+            default:
+                return _cooldownIcon;
+        }
     }
 
     private string GetCooldownHint(SkillKey skill, int price)
@@ -463,7 +480,7 @@ public class DockScreen : MonoBehaviour
         if (price < 0)
             return MaxLevelHint;
 
-        return _skills.GetStep(skill).ToString("0.00") + Seconds + " PER LEVEL";
+        return _skills.GetStep(skill).ToString("0.###") + Seconds + " PER LEVEL";
     }
 
     private string GetHullHint(SkillKey skill, int price)
@@ -478,6 +495,9 @@ public class DockScreen : MonoBehaviour
     {
         if (skill.Stat == SkillStat.Health)
             return (_skills.BaseHealth + Mathf.RoundToInt(_skills.GetValue(skill, levelShift))).ToString();
+
+        if (skill.Stat == SkillStat.MagazineReload)
+            return _skills.GetReloadTime(skill.Weapon, levelShift).ToString("0.00") + Seconds;
 
         WeaponRow row = _hangar.GetWeapon(skill.Weapon);
         float rate = row == null ? 0f : row.Rate;

@@ -322,7 +322,9 @@ public class Game : MonoBehaviour
 
     private void EquipShip()
     {
-        _hangar.Equip(_playerShip.Shooter, _skills.GetRateScale(_hangar.WeaponId));
+        string weaponId = _hangar.WeaponId;
+
+        _hangar.Equip(_playerShip.Shooter, _skills.GetRateScale(weaponId), _skills.GetReloadShift(weaponId));
         _moduleRack.Equip(_battleModules);
         _skills.Equip(_playerShip);
     }

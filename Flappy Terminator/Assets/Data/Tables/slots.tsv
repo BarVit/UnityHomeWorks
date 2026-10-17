@@ -11,3 +11,6 @@ impulse_laser	4	24000
 rocket	2	10000	
 rocket	3	20000	
 rocket	4	40000	
+homing	2	15000	
+homing	3	30000	
+homing	4	60000	

@@ -12,7 +12,6 @@ public class BarrelUpgrades
     [SerializeField] private int _projectileSpeed;
     [SerializeField] private int _napalm;
     [SerializeField] private int _turnRate;
-    [SerializeField] private int _magazineReload;
 
     public int GetLevel(UpgradeStat stat)
     {
@@ -34,8 +33,6 @@ public class BarrelUpgrades
                 return _napalm;
             case UpgradeStat.TurnRate:
                 return _turnRate;
-            case UpgradeStat.MagazineReload:
-                return _magazineReload;
             default:
                 throw new ArgumentOutOfRangeException(nameof(stat), stat, null);
         }
@@ -68,9 +65,6 @@ public class BarrelUpgrades
                 break;
             case UpgradeStat.TurnRate:
                 _turnRate++;
-                break;
-            case UpgradeStat.MagazineReload:
-                _magazineReload++;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(stat), stat, null);

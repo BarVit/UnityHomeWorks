@@ -6,6 +6,7 @@ public abstract class WeaponDelivery
     private const float MaxHeat = 100f;
     private const float CritMarkInterval = 0.25f;
     private const float DoubleShotDelay = 0.1f;
+    private const float MinReloadTime = 0.1f;
 
     private readonly WeaponRow _row;
     private readonly WeaponContext _context;
@@ -31,7 +32,7 @@ public abstract class WeaponDelivery
         _context = context;
         _barrels = Mathf.Clamp(context.Barrels, 1, Mathf.Min(row.BarrelsMax, context.Mounts.Length));
         _ranks = RankByHeight();
-        _reloadTime = row.ReloadTime * GetReloadScale();
+        _reloadTime = Mathf.Max(MinReloadTime, row.ReloadTime + context.ReloadShift);
         _shotsLeft = row.Magazine;
 
         if (row.Assets != null && row.Assets.ShotEffect != null)
@@ -264,16 +265,6 @@ public abstract class WeaponDelivery
 
         if (_reloadLeft <= 0f)
             _shotsLeft = _row.Magazine;
-    }
-
-    private float GetReloadScale()
-    {
-        float scale = 0f;
-
-        for (int barrel = 0; barrel < _barrels; barrel++)
-            scale += _context.GetBoost(barrel).ReloadScale;
-
-        return scale / _barrels;
     }
 
     private void RollDoubleShots()
