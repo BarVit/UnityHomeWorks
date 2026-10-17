@@ -5,7 +5,7 @@ public abstract class WeaponDelivery
 {
     private const float MaxHeat = 100f;
     private const float CritMarkInterval = 0.25f;
-    private const float DoubleShotDelay = 0.1f;
+    private const float DoubleShotDelay = 0.07f;
     private const float MinReloadTime = 0.1f;
 
     private readonly WeaponRow _row;
