@@ -27,6 +27,7 @@ public class Game : MonoBehaviour
     private bool _isDeathSkipped;
     private DockReason _dockReason;
     private Reward _dockEarned;
+    private string _queuedLocationId;
 
     private void OnEnable()
     {
@@ -134,6 +135,7 @@ public class Game : MonoBehaviour
 
     private void StartGame()
     {
+        _queuedLocationId = null;
         _runner.StartGame();
         _hangar.StartNewSession();
         EquipShip();
@@ -143,6 +145,7 @@ public class Game : MonoBehaviour
 
     private void StartTest()
     {
+        _queuedLocationId = null;
         _hangar.StartTestSession(_playerShip.Shooter.TestWeaponId);
         _dockReason = DockReason.TestStart;
         _screens.CanResumeSession = false;
@@ -151,6 +154,7 @@ public class Game : MonoBehaviour
 
     private void PlayLocation(string locationId)
     {
+        _queuedLocationId = null;
         _runner.PlayLocation(locationId);
         EquipShip();
 
@@ -163,9 +167,12 @@ public class Game : MonoBehaviour
             _runner.StartGame();
         else if (_dockReason == DockReason.Destroyed)
             _runner.RetryLocation();
+        else if (_queuedLocationId != null)
+            _runner.PlayLocation(_queuedLocationId);
         else
             _runner.StartNextLocation();
 
+        _queuedLocationId = null;
         EquipShip();
 
         StartLevel();
@@ -290,19 +297,15 @@ public class Game : MonoBehaviour
         _isRunning = false;
         _asteroidSpawner.StopSpawn();
         ClearBattlefield();
-
-        if (nextLocationId != null)
-        {
-            PlayLocation(nextLocationId);
-
-            return;
-        }
-
         _playerShip.ReturnToStart();
+
+        bool canPlay = nextLocationId != null;
+
+        _queuedLocationId = nextLocationId;
         _dockReason = DockReason.Cleared;
         _dockEarned = earned;
-        _screens.CanResumeSession = false;
-        _screens.ShowDock(earned, false, DockReason.Cleared);
+        _screens.CanResumeSession = canPlay;
+        _screens.ShowDock(earned, canPlay, DockReason.Cleared);
     }
 
     private IEnumerator ShowDeathScreen()
