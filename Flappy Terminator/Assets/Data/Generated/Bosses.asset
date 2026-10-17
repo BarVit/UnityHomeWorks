@@ -129,7 +129,7 @@ MonoBehaviour:
     _location: loc_02_02
     _prefab: {fileID: 748883696485598149, guid: 79fee06f008d942e7baa168b610dd793, type: 3}
     _prototype: reaper_1
-    _health: 800
+    _health: 1200
     _weapon: berserker_1_gun
     _barrels: 1
     _bodyDamage: 20
