@@ -80,7 +80,7 @@ public abstract class WeaponDelivery
 
     private int BaseDamage => _context.Damage > 0 ? _context.Damage : _row.Damage;
 
-    protected static IDamageable FindDamageable(Collider2D collider)
+    public static IDamageable FindDamageable(Collider2D collider)
     {
         if (collider.TryGetComponent(out IDamageable damageable) == false)
             damageable = collider.GetComponentInParent<IDamageable>();
@@ -88,7 +88,7 @@ public abstract class WeaponDelivery
         return damageable;
     }
 
-    protected static bool IsOpenTarget(Collider2D collider)
+    public static bool IsOpenTarget(Collider2D collider)
     {
         IDamageable damageable = FindDamageable(collider);
 
