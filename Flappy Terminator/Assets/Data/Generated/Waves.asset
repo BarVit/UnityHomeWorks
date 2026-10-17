@@ -415,3 +415,1146 @@ MonoBehaviour:
     - phantom_1
     _interval: 3
     _intervalMax: 3
+  - _location: loc_02_02
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_02_02
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_02_02
+    _level: 2
+    _order: 2
+    _count: 1
+    _mode: 2
+    _enemies:
+    - berserker_1
+    _interval: 0
+    _intervalMax: 0
+  - _location: loc_02_03
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_02_03
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_02_03
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_02_03
+    _level: 4
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_02_04
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_02_04
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_02_04
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_02_04
+    _level: 3
+    _order: 2
+    _count: 1
+    _mode: 2
+    _enemies:
+    - marauder_2
+    _interval: 0
+    _intervalMax: 0
+  - _location: loc_02_05
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_02_05
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_02_05
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_02_05
+    _level: 4
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_02_06
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_02_06
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_02_06
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_02_06
+    _level: 4
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_02_06
+    _level: 5
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_02_07
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_02_07
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_02_07
+    _level: 2
+    _order: 2
+    _count: 1
+    _mode: 2
+    _enemies:
+    - magister
+    _interval: 0
+    _intervalMax: 0
+  - _location: loc_03_01
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_01
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_01
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_01
+    _level: 3
+    _order: 2
+    _count: 1
+    _mode: 2
+    _enemies:
+    - punisher_2
+    _interval: 0
+    _intervalMax: 0
+  - _location: loc_03_02
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_02
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_02
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_02
+    _level: 4
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_03
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_03
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_03
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_03
+    _level: 4
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_03
+    _level: 5
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_04
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_04
+    _level: 1
+    _order: 2
+    _count: 1
+    _mode: 2
+    _enemies:
+    - berserker_2
+    _interval: 0
+    _intervalMax: 0
+  - _location: loc_03_05
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_05
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_05
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_05
+    _level: 4
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_05
+    _level: 5
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_06
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_06
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_06
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_07
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_07
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_07
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_07
+    _level: 4
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_07
+    _level: 4
+    _order: 2
+    _count: 1
+    _mode: 2
+    _enemies:
+    - tormentor_1
+    _interval: 0
+    _intervalMax: 0
+  - _location: void_ashen_2
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: void_ashen_3
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: void_ashen_3
+    _level: 4
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: void_ashen_3
+    _level: 5
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_08
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_08
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_08
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_09
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_09
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_03_09
+    _level: 2
+    _order: 2
+    _count: 1
+    _mode: 2
+    _enemies:
+    - overlord
+    _interval: 0
+    _intervalMax: 0
+  - _location: loc_04_01
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_01
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_01
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_02
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_02
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_02
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_02
+    _level: 4
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_03
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_03
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_03
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_03
+    _level: 4
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_03
+    _level: 5
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_03
+    _level: 5
+    _order: 2
+    _count: 1
+    _mode: 2
+    _enemies:
+    - ripper_1
+    _interval: 0
+    _intervalMax: 0
+  - _location: loc_04_04
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_04
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_04
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_04
+    _level: 4
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_04
+    _level: 5
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_05
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_05
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_05
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_05
+    _level: 4
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_05
+    _level: 5
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_06
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_06
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_06
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_04_06
+    _level: 3
+    _order: 2
+    _count: 1
+    _mode: 2
+    _enemies:
+    - archon
+    _interval: 0
+    _intervalMax: 0
+  - _location: loc_05_01
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_02
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_02
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_02
+    _level: 2
+    _order: 2
+    _count: 1
+    _mode: 2
+    _enemies:
+    - tormentor_2
+    _interval: 0
+    _intervalMax: 0
+  - _location: loc_05_03
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_03
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_03
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_03
+    _level: 4
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_04
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_04
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_04
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_04
+    _level: 3
+    _order: 2
+    _count: 1
+    _mode: 2
+    _enemies:
+    - ripper_2
+    _interval: 0
+    _intervalMax: 0
+  - _location: loc_05_05
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_05
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_05
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_05
+    _level: 4
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_05
+    _level: 5
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_06
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_06
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_07
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_07
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_07
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_07
+    _level: 4
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_07
+    _level: 5
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_07
+    _level: 5
+    _order: 2
+    _count: 1
+    _mode: 2
+    _enemies:
+    - emperor
+    _interval: 0
+    _intervalMax: 0
+  - _location: loc_05_08
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_08
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_08
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_09
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_09
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_09
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_09
+    _level: 4
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_09
+    _level: 5
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_10
+    _level: 1
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_10
+    _level: 2
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_10
+    _level: 3
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_10
+    _level: 4
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_10
+    _level: 5
+    _order: 1
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_1
+    _interval: 1
+    _intervalMax: 1
+  - _location: loc_05_10
+    _level: 5
+    _order: 2
+    _count: 1
+    _mode: 2
+    _enemies:
+    - titan
+    _interval: 0
+    _intervalMax: 0
