@@ -124,7 +124,7 @@ namespace UiContent
                          "Speed Icon", "Napalm Icon", "Turn Icon", "Reload Icon", "White Square" })
                 Prepare(name, 0);
 
-            for (int level = 1; level <= ShieldColors.MaxLevel; level++)
+            for (int level = 0; level <= ShieldColors.MaxLevel; level++)
                 Prepare(ShieldIconName + level, 0);
         }
 
@@ -304,10 +304,10 @@ namespace UiContent
 
         private static void SetShieldIcons(ModuleRack modules)
         {
-            Object[] icons = new Object[ShieldColors.MaxLevel];
+            Object[] icons = new Object[ShieldColors.MaxLevel + 1];
 
-            for (int level = 1; level <= ShieldColors.MaxLevel; level++)
-                icons[level - 1] = Art(ShieldIconName + level);
+            for (int level = 0; level <= ShieldColors.MaxLevel; level++)
+                icons[level] = Art(ShieldIconName + level);
 
             SerializedObject so = new SerializedObject(modules);
             SetArray(so.FindProperty("_shieldIcons"), icons);

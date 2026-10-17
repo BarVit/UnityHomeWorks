@@ -189,15 +189,15 @@ public class ModuleRack : MonoBehaviour
 
     public int GetShieldLevel(string moduleId)
     {
-        return Mathf.Min(ShieldColors.MaxLevel, GetLevel(moduleId, ModuleStat.Capacity) + 1);
+        return Mathf.Min(ShieldColors.MaxLevel, GetLevel(moduleId, ModuleStat.Capacity));
     }
 
     public Sprite GetIcon(ModuleRow module)
     {
-        if (module.Kind != ModuleKind.Shield || _shieldIcons == null || _shieldIcons.Length < ShieldColors.MaxLevel)
+        if (module.Kind != ModuleKind.Shield || _shieldIcons == null || _shieldIcons.Length <= ShieldColors.MaxLevel)
             return module.Icon;
 
-        return _shieldIcons[GetShieldLevel(module.Id) - 1];
+        return _shieldIcons[GetShieldLevel(module.Id)];
     }
 
     public void Equip(BattleModules battle)
