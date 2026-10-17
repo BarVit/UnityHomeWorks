@@ -246,7 +246,9 @@ public class Hangar : MonoBehaviour
             GetValue(slot, UpgradeStat.HeatReduction) * PercentShare,
             GetValue(slot, UpgradeStat.DoubleShot) * PercentShare,
             GetValue(slot, UpgradeStat.ProjectileSpeed) * PercentShare,
-            GetValue(slot, UpgradeStat.Napalm) * PercentShare);
+            GetValue(slot, UpgradeStat.Napalm) * PercentShare,
+            GetValue(slot, UpgradeStat.TurnRate) * PercentShare,
+            GetValue(slot, UpgradeStat.MagazineReload) * PercentShare);
     }
 
     private BarrelUpgrades GetBarrel(int slot)

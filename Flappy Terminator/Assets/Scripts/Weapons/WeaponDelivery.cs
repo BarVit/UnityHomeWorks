@@ -11,6 +11,7 @@ public abstract class WeaponDelivery
     private readonly WeaponContext _context;
     private readonly int _barrels;
     private readonly int[] _ranks;
+    private readonly float _reloadTime;
 
     private readonly SpawnPool<ExplosionAnimation> _shotPool;
     private readonly SpawnPool<CritMark> _critPool;
@@ -30,6 +31,7 @@ public abstract class WeaponDelivery
         _context = context;
         _barrels = Mathf.Clamp(context.Barrels, 1, Mathf.Min(row.BarrelsMax, context.Mounts.Length));
         _ranks = RankByHeight();
+        _reloadTime = row.ReloadTime * GetReloadScale();
         _shotsLeft = row.Magazine;
 
         if (row.Assets != null && row.Assets.ShotEffect != null)
@@ -58,7 +60,7 @@ public abstract class WeaponDelivery
     public int MagazineSize => _row.Magazine;
 
     public virtual float Readiness => _reloadLeft > 0f
-        ? 1f - Mathf.Clamp01(_reloadLeft / _row.ReloadTime)
+        ? 1f - Mathf.Clamp01(_reloadLeft / _reloadTime)
         : (HasHeat
             ? 1f - Mathf.Clamp01(_heat / MaxHeat)
             : (Cooldown <= 0f ? 1f : 1f - Mathf.Clamp01(_cooldownLeft / Cooldown)));
@@ -247,7 +249,7 @@ public abstract class WeaponDelivery
         if (_shotsLeft > 0)
             return;
 
-        _reloadLeft = _row.ReloadTime;
+        _reloadLeft = _reloadTime;
 
         if (_reloadLeft <= 0f)
             _shotsLeft = _row.Magazine;
@@ -262,6 +264,16 @@ public abstract class WeaponDelivery
 
         if (_reloadLeft <= 0f)
             _shotsLeft = _row.Magazine;
+    }
+
+    private float GetReloadScale()
+    {
+        float scale = 0f;
+
+        for (int barrel = 0; barrel < _barrels; barrel++)
+            scale += _context.GetBoost(barrel).ReloadScale;
+
+        return scale / _barrels;
     }
 
     private void RollDoubleShots()

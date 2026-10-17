@@ -6,5 +6,7 @@ public enum UpgradeStat
     HeatReduction,
     DoubleShot,
     ProjectileSpeed,
-    Napalm
+    Napalm,
+    TurnRate,
+    MagazineReload
 }

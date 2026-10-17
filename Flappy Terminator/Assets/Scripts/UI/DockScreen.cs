@@ -61,6 +61,8 @@ public class DockScreen : MonoBehaviour
     [SerializeField] private Sprite _doubleShotIcon;
     [SerializeField] private Sprite _speedIcon;
     [SerializeField] private Sprite _napalmIcon;
+    [SerializeField] private Sprite _turnIcon;
+    [SerializeField] private Sprite _reloadIcon;
     [SerializeField] private Sprite _cooldownIcon;
     [SerializeField] private Sprite _healthIcon;
     [SerializeField] private ShopWindow _shop;
@@ -273,7 +275,10 @@ public class DockScreen : MonoBehaviour
             case UpgradeStat.Napalm:
                 return Mathf.RoundToInt(value) + PercentSign;
             case UpgradeStat.ProjectileSpeed:
+            case UpgradeStat.TurnRate:
                 return Mathf.RoundToInt(100f + value) + PercentSign;
+            case UpgradeStat.MagazineReload:
+                return Mathf.RoundToInt(100f - value) + PercentSign;
             case UpgradeStat.HeatReduction:
                 return Mathf.RoundToInt(100f - value) + PercentSign;
             default:
@@ -295,6 +300,10 @@ public class DockScreen : MonoBehaviour
                 return "FLIGHT SPEED";
             case UpgradeStat.Napalm:
                 return "NAPALM";
+            case UpgradeStat.TurnRate:
+                return "TURN RATE";
+            case UpgradeStat.MagazineReload:
+                return "RELOAD TIME";
             default:
                 return "CRIT CHANCE";
         }
@@ -316,6 +325,10 @@ public class DockScreen : MonoBehaviour
                 return "+" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
             case UpgradeStat.Napalm:
                 return "OF ROCKET DAMAGE AS 1.2 S BURN";
+            case UpgradeStat.TurnRate:
+                return "+" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
+            case UpgradeStat.MagazineReload:
+                return "-" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
             default:
                 return "CRIT HIT DEALS x" + _hangar.GetValue(_selectedSlot, UpgradeStat.CritDamage);
         }
@@ -335,6 +348,10 @@ public class DockScreen : MonoBehaviour
                 return _speedIcon;
             case UpgradeStat.Napalm:
                 return _napalmIcon;
+            case UpgradeStat.TurnRate:
+                return _turnIcon;
+            case UpgradeStat.MagazineReload:
+                return _reloadIcon;
             default:
                 return _critIcon;
         }

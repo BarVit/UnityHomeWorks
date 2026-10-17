@@ -29,7 +29,7 @@ public class HomingDelivery : ProjectileDelivery
 
         float wanted = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         float current = ammo.transform.eulerAngles.z;
-        float turned = Mathf.MoveTowardsAngle(current, wanted, Row.TurnRate * deltaTime);
+        float turned = Mathf.MoveTowardsAngle(current, wanted, Row.TurnRate * Context.GetBoost(ammo.Barrel).TurnScale * deltaTime);
 
         ammo.transform.rotation = Quaternion.Euler(0f, 0f, turned);
         ammo.Fly(ProjectileSpeed);

@@ -116,7 +116,7 @@ namespace UiContent
 
             foreach (string name in new[] { "Coin Icon", "XP Icon", "Lock Icon", "Damage Icon", "Crit Icon", "Upgrade Pip",
                          "Energy Shield Icon", "Health Icon", "Cooldown Icon", "Double Shot Icon",
-                         "Speed Icon", "Napalm Icon", "White Square" })
+                         "Speed Icon", "Napalm Icon", "Turn Icon", "Reload Icon", "White Square" })
                 Prepare(name, 0);
         }
 
@@ -265,6 +265,8 @@ namespace UiContent
             so.FindProperty("_doubleShotIcon").objectReferenceValue = Art("Double Shot Icon");
             so.FindProperty("_speedIcon").objectReferenceValue = Art("Speed Icon");
             so.FindProperty("_napalmIcon").objectReferenceValue = Art("Napalm Icon");
+            so.FindProperty("_turnIcon").objectReferenceValue = Art("Turn Icon");
+            so.FindProperty("_reloadIcon").objectReferenceValue = Art("Reload Icon");
             so.FindProperty("_cooldownIcon").objectReferenceValue = Art("Cooldown Icon");
             so.FindProperty("_healthIcon").objectReferenceValue = Art("Health Icon");
             so.FindProperty("_shop").objectReferenceValue = shop;
