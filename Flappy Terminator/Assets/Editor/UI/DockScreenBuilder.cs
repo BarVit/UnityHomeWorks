@@ -31,6 +31,9 @@ namespace UiContent
         private const int UpgradeRowCount = 3;
         private const int SkillRowCount = 4;
         private const float RowStep = 74f;
+        private const float SkillListY = -15f;
+        private const float SkillListWidth = 624f;
+        private const float ScrollbarWidth = 6f;
         private const int PipCount = 5;
         private const float ShipScale = 6f;
 
@@ -224,7 +227,7 @@ namespace UiContent
 
             AddText(Place("Header", skillPage, new Vector2(0.5f, 0.5f), new Vector2(0f, 150f), new Vector2(580f, 34f)),
                 "PILOT SKILLS ARE PAID WITH XP", 22, TextAlignmentOptions.Center, Muted);
-            UpgradeRowView[] skillRows = AddUpgradeRows(skillPage, SkillRowCount, 96f);
+            UpgradeRowView[] skillRows = AddSkillList(skillPage, out RectTransform skillContent);
 
             Button menu = AddButton(root, "Menu Button", "MENU", new Vector2(0f, 0f), new Vector2(150f, 62f), new Vector2(220f, 76f), 32);
             AddMapButton(root);
@@ -258,6 +261,8 @@ namespace UiContent
             SetArray(so.FindProperty("_moduleUpgrades"), moduleRows);
             so.FindProperty("_moduleHint").objectReferenceValue = moduleHint;
             SetArray(so.FindProperty("_skillRows"), skillRows);
+            so.FindProperty("_skillContent").objectReferenceValue = skillContent;
+            so.FindProperty("_skillRowStep").floatValue = RowStep;
             so.FindProperty("_coinIcon").objectReferenceValue = Art("Coin Icon");
             so.FindProperty("_xpIcon").objectReferenceValue = Art("XP Icon");
             so.FindProperty("_damageIcon").objectReferenceValue = Art("Damage Icon");
@@ -290,6 +295,66 @@ namespace UiContent
                 rows[i] = AddUpgradeRow(parent, "Row " + (i + 1), top - i * RowStep);
 
             return rows;
+        }
+
+        private static UpgradeRowView[] AddSkillList(RectTransform page, out RectTransform content)
+        {
+            RectTransform viewport = Place("Skill List", page, new Vector2(0.5f, 0.5f), new Vector2(0f, SkillListY),
+                new Vector2(SkillListWidth, SkillRowCount * RowStep));
+            viewport.gameObject.AddComponent<RectMask2D>();
+            AddImage(viewport, null).color = Color.clear;
+
+            content = Create("Content", viewport);
+            content.anchorMin = new Vector2(0f, 1f);
+            content.anchorMax = new Vector2(1f, 1f);
+            content.pivot = new Vector2(0.5f, 1f);
+            content.anchoredPosition = Vector2.zero;
+            content.sizeDelta = new Vector2(0f, SkillRowCount * RowStep);
+
+            ScrollRect scroll = viewport.gameObject.AddComponent<ScrollRect>();
+            scroll.content = content;
+            scroll.viewport = viewport;
+            scroll.horizontal = false;
+            scroll.movementType = ScrollRect.MovementType.Clamped;
+            scroll.scrollSensitivity = 30f;
+            scroll.verticalScrollbar = AddScrollbar(viewport);
+            scroll.verticalScrollbarVisibility = ScrollRect.ScrollbarVisibility.AutoHide;
+
+            UpgradeRowView[] rows = new UpgradeRowView[SkillRowCount];
+
+            for (int i = 0; i < SkillRowCount; i++)
+            {
+                rows[i] = AddUpgradeRow(content, "Row " + (i + 1), 0f);
+                RectTransform row = (RectTransform)rows[i].transform;
+                row.anchorMin = new Vector2(0.5f, 1f);
+                row.anchorMax = new Vector2(0.5f, 1f);
+                row.anchoredPosition = new Vector2(-ScrollbarWidth, -RowStep * (i + 0.5f));
+            }
+
+            return rows;
+        }
+
+        private static Scrollbar AddScrollbar(RectTransform viewport)
+        {
+            RectTransform track = Create("Scrollbar", viewport);
+            track.anchorMin = new Vector2(1f, 0f);
+            track.anchorMax = Vector2.one;
+            track.pivot = new Vector2(1f, 0.5f);
+            track.offsetMin = new Vector2(-ScrollbarWidth, 0f);
+            track.offsetMax = Vector2.zero;
+            AddImage(track, null).color = new Color(Cyan.r, Cyan.g, Cyan.b, 0.15f);
+
+            RectTransform area = Stretch("Sliding Area", track);
+            RectTransform handle = Stretch("Handle", area);
+            Image handleImage = AddImage(handle, null);
+            handleImage.color = new Color(Cyan.r, Cyan.g, Cyan.b, 0.8f);
+
+            Scrollbar scrollbar = track.gameObject.AddComponent<Scrollbar>();
+            scrollbar.handleRect = handle;
+            scrollbar.targetGraphic = handleImage;
+            scrollbar.direction = Scrollbar.Direction.BottomToTop;
+
+            return scrollbar;
         }
 
         internal static void BuildHud(LocationRunner runner)

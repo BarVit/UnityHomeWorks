@@ -54,6 +54,8 @@ public class DockScreen : MonoBehaviour
     [SerializeField] private UpgradeRowView[] _moduleUpgrades;
     [SerializeField] private TMP_Text _moduleHint;
     [SerializeField] private UpgradeRowView[] _skillRows;
+    [SerializeField] private RectTransform _skillContent;
+    [SerializeField] private float _skillRowStep = 74f;
     [SerializeField] private Sprite _coinIcon;
     [SerializeField] private Sprite _xpIcon;
     [SerializeField] private Sprite _damageIcon;
@@ -78,6 +80,7 @@ public class DockScreen : MonoBehaviour
     private List<UpgradeStat> _weaponStats = new List<UpgradeStat>();
     private List<ModuleStat> _moduleStats = new List<ModuleStat>();
     private List<SkillKey> _skillStats = new List<SkillKey>();
+    private readonly List<UpgradeRowView> _skillRowList = new List<UpgradeRowView>();
 
     public bool CanPlay => _playButton.gameObject.activeSelf;
 
@@ -85,6 +88,11 @@ public class DockScreen : MonoBehaviour
     public event Action MapRequested;
     public event Action PlayRequested;
     public event Action ResetRequested;
+
+    private void Awake()
+    {
+        _skillRowList.AddRange(_skillRows);
+    }
 
     private void OnEnable()
     {
@@ -114,7 +122,7 @@ public class DockScreen : MonoBehaviour
         foreach (UpgradeRowView upgrade in _moduleUpgrades)
             upgrade.Requested += OnModuleUpgradeRequested;
 
-        foreach (UpgradeRowView skill in _skillRows)
+        foreach (UpgradeRowView skill in _skillRowList)
             skill.Requested += OnSkillRequested;
     }
 
@@ -146,7 +154,7 @@ public class DockScreen : MonoBehaviour
         foreach (UpgradeRowView upgrade in _moduleUpgrades)
             upgrade.Requested -= OnModuleUpgradeRequested;
 
-        foreach (UpgradeRowView skill in _skillRows)
+        foreach (UpgradeRowView skill in _skillRowList)
             skill.Requested -= OnSkillRequested;
     }
 
@@ -427,13 +435,33 @@ public class DockScreen : MonoBehaviour
     private void ShowSkillPage()
     {
         _skillStats = _skills.GetSkills();
+        AddSkillRows(_skillStats.Count);
 
-        for (int i = 0; i < _skillRows.Length; i++)
+        for (int i = 0; i < _skillRowList.Count; i++)
         {
             if (i < _skillStats.Count)
-                _skillRows[i].Show(GetSkillRow(_skillStats[i]));
+                _skillRowList[i].Show(GetSkillRow(_skillStats[i]));
             else
-                _skillRows[i].Hide();
+                _skillRowList[i].Hide();
+        }
+
+        _skillContent.sizeDelta = new Vector2(_skillContent.sizeDelta.x, _skillStats.Count * _skillRowStep);
+    }
+
+    private void AddSkillRows(int count)
+    {
+        UpgradeRowView first = _skillRowList[0];
+        Vector2 firstPosition = ((RectTransform)first.transform).anchoredPosition;
+
+        while (_skillRowList.Count < count)
+        {
+            UpgradeRowView row = Instantiate(first, _skillContent);
+            float offset = _skillRowStep * _skillRowList.Count;
+
+            row.name = "Row " + (_skillRowList.Count + 1);
+            ((RectTransform)row.transform).anchoredPosition = firstPosition + Vector2.down * offset;
+            row.Requested += OnSkillRequested;
+            _skillRowList.Add(row);
         }
     }
 
@@ -594,7 +622,7 @@ public class DockScreen : MonoBehaviour
 
     private void OnSkillRequested(UpgradeRowView row)
     {
-        int index = Array.IndexOf(_skillRows, row);
+        int index = _skillRowList.IndexOf(row);
 
         if (index >= 0 && index < _skillStats.Count)
             _skills.TryUpgrade(_skillStats[index]);
