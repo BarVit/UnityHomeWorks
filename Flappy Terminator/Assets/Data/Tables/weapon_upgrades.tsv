@@ -69,6 +69,7 @@ cannon	CritChance	2	15	600
 cannon	CritChance	3	15	900
 cannon	CritChance	4	15	1200
 cannon	CritChance	5	15	1500
+cannon	CritDamage	0	1.5	0
 cannon	DoubleShot	0	0	0
 cannon	DoubleShot	1	10	150
 cannon	DoubleShot	2	10	600

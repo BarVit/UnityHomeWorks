@@ -364,6 +364,11 @@ MonoBehaviour:
     _bonus: 15
     _price: 1500
   - _owner: cannon
+    _stat: 2
+    _level: 0
+    _bonus: 1.5
+    _price: 0
+  - _owner: cannon
     _stat: 4
     _level: 0
     _bonus: 0
