@@ -10,6 +10,7 @@ namespace TableImport
         public const string ReportPath = "Assets/Data/Reports/weapons_full_price.tsv";
 
         private const int MaxBarrels = 4;
+        private const int ComfortLevel = 4;
         private const int RouteStep = 10;
         private const int SystemStep = 1000;
         private const int BranchShift = 5;
@@ -67,7 +68,7 @@ namespace TableImport
             foreach (UpgradeStat stat in stats)
                 columns.Add(ToSnakeCase(stat.ToString()));
 
-            columns.AddRange(new[] { "per_barrel", "all_barrels", "total", "note" });
+            columns.AddRange(new[] { "per_barrel", "all_barrels", "all_barrels_lvl" + ComfortLevel, "total", "note" });
 
             return columns;
         }
@@ -78,6 +79,7 @@ namespace TableImport
             int barrels = Math.Min(MaxBarrels, row.BarrelsMax);
             int total = row.Price;
             int perBarrel = 0;
+            int perBarrelToComfort = 0;
             List<string> cells = new List<string>
             {
                 row.Id, row.Title, GetUnlock(row), Format(barrels), Format(row.Price)
@@ -99,26 +101,29 @@ namespace TableImport
 
             foreach (UpgradeStat stat in stats)
             {
-                int price = GetFullPrice(upgrades, row.Id, stat);
+                int price = GetPrice(upgrades, row.Id, stat, upgrades.GetMaxLevel(row.Id, stat));
 
                 perBarrel += price;
+                perBarrelToComfort += GetPrice(upgrades, row.Id, stat, ComfortLevel);
                 cells.Add(price > 0 ? Format(price) : "");
             }
 
             total += perBarrel * barrels;
             cells.AddRange(new[]
             {
-                Format(perBarrel), Format(perBarrel * barrels), Format(total), GetNote(row, barrels, upgrades)
+                Format(perBarrel), Format(perBarrel * barrels), Format(perBarrelToComfort * barrels), Format(total),
+                GetNote(row, barrels, upgrades)
             });
 
             return cells;
         }
 
-        private static int GetFullPrice(UpgradeTable upgrades, string weaponId, UpgradeStat stat)
+        private static int GetPrice(UpgradeTable upgrades, string weaponId, UpgradeStat stat, int toLevel)
         {
             int price = 0;
+            int lastLevel = Math.Min(toLevel, upgrades.GetMaxLevel(weaponId, stat));
 
-            for (int level = 1; level <= upgrades.GetMaxLevel(weaponId, stat); level++)
+            for (int level = 1; level <= lastLevel; level++)
                 price += upgrades.GetRow(weaponId, stat, level).Price;
 
             return price;
@@ -145,7 +150,7 @@ namespace TableImport
             if (HasOwnUpgrades(row.Id, upgrades) == false)
                 notes.Add("своих апгрейдов нет — посчитаны общие");
 
-            return string.Join("; ", notes);
+            return string.Join(", ", notes);
         }
 
         private static bool HasOwnUpgrades(string weaponId, UpgradeTable upgrades)
