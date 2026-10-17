@@ -16,4 +16,9 @@ public readonly struct Reward
     {
         return new Reward(left.Xp + right.Xp, left.Money + right.Money);
     }
+
+    public static Reward operator -(Reward left, Reward right)
+    {
+        return new Reward(left.Xp - right.Xp, left.Money - right.Money);
+    }
 }

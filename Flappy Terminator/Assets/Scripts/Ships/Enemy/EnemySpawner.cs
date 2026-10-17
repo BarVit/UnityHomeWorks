@@ -74,6 +74,19 @@ public class EnemySpawner : MonoBehaviour
         return count;
     }
 
+    public Reward CountReward(string locationId, int levels)
+    {
+        Reward reward = default;
+
+        for (int level = 1; level <= levels; level++)
+        {
+            foreach (PlannedSpawn spawn in _planner.Plan(locationId, level))
+                reward += new Reward(spawn.Setup.RewardXp, spawn.Setup.RewardMoney);
+        }
+
+        return reward;
+    }
+
     public void FinishWave()
     {
         EndWave();

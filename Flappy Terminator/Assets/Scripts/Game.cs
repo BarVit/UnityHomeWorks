@@ -5,6 +5,8 @@ public class Game : MonoBehaviour
 {
     [SerializeField] private InputReader _input;
     [SerializeField] private CheatCodeReader _cheatCode;
+    [SerializeField] private CheatCodeReader _systemCheatCode;
+    [SerializeField] private SystemSkip _systemSkip;
     [SerializeField] private PlayerShip _playerShip;
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private AsteroidSpawner _asteroidSpawner;
@@ -44,6 +46,7 @@ public class Game : MonoBehaviour
         _input.Shot += SkipCutscene;
         _input.Tapped += SkipCutscene;
         _cheatCode.Entered += WinLevelInstantly;
+        _systemCheatCode.Entered += CompleteSystemInstantly;
     }
 
     private void Start()
@@ -72,6 +75,7 @@ public class Game : MonoBehaviour
         _input.Shot -= SkipCutscene;
         _input.Tapped -= SkipCutscene;
         _cheatCode.Entered -= WinLevelInstantly;
+        _systemCheatCode.Entered -= CompleteSystemInstantly;
     }
 
     private void SkipCutscene()
@@ -273,6 +277,32 @@ public class Game : MonoBehaviour
         _stats.ForgiveLevel();
         _playerShip.Shooter.ReleaseAll();
         _enemySpawner.DefeatAll();
+    }
+
+    private void CompleteSystemInstantly()
+    {
+        if (_isRunning == false || _isLevelOver || _pause.IsPaused)
+            return;
+
+        Reward earned = _systemSkip.Complete(_runner.LocationId, _runner.BankedReward, out string nextLocationId);
+
+        _runner.DropPendingReward();
+        _isRunning = false;
+        _asteroidSpawner.StopSpawn();
+        ClearBattlefield();
+
+        if (nextLocationId != null)
+        {
+            PlayLocation(nextLocationId);
+
+            return;
+        }
+
+        _playerShip.ReturnToStart();
+        _dockReason = DockReason.Cleared;
+        _dockEarned = earned;
+        _screens.CanResumeSession = false;
+        _screens.ShowDock(earned, false, DockReason.Cleared);
     }
 
     private IEnumerator ShowDeathScreen()

@@ -1174,7 +1174,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -5379,6 +5379,8 @@ GameObject:
   - component: {fileID: 940566760}
   - component: {fileID: 940566759}
   - component: {fileID: 940566761}
+  - component: {fileID: 940566763}
+  - component: {fileID: 940566762}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -20671,7 +20673,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -25101,7 +25103,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -33946,6 +33948,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _input: {fileID: 661464565}
   _cheatCode: {fileID: 940566757}
+  _systemCheatCode: {fileID: 940566763}
+  _systemSkip: {fileID: 940566762}
   _playerShip: {fileID: 92249140}
   _enemySpawner: {fileID: 1078558388}
   _asteroidSpawner: {fileID: 2000842824}
@@ -38556,6 +38560,37 @@ MonoBehaviour:
   _input: {fileID: 661464565}
   _ship: {fileID: 92249140}
   _shield: {fileID: 2935624913016190950}
+--- !u!114 &940566762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165193575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b59ba82f9bd9442d6a40e5713769b39b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SystemSkip
+  _economy: {fileID: 940566754}
+  _locations: {fileID: 11400000, guid: 246bc4d3c22f04566aa6c50ff882939a, type: 2}
+  _systems: {fileID: 11400000, guid: 9db94dcb590bd4dac8102f0527fd6d64, type: 2}
+  _waves: {fileID: 11400000, guid: 3156c31306984471d8eb9d528c826fe5, type: 2}
+  _enemySpawner: {fileID: 1078558388}
+--- !u!114 &940566763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165193575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b49d9baecc61f48949a81290cca503c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheatCodeReader
+  _code: 1a0000001a0000001e000000
+  _maxInterval: 0.2
 --- !u!222 &943413463
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -41774,7 +41809,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -48275,7 +48310,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2

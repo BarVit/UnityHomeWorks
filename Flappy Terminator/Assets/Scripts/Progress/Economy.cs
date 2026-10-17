@@ -32,13 +32,13 @@ public class Economy : MonoBehaviour
     private void OnEnable()
     {
         _runner.LevelBanked += Grant;
-        _runner.LocationCompleted += Complete;
+        _runner.LocationCompleted += CompleteLocation;
     }
 
     private void OnDisable()
     {
         _runner.LevelBanked -= Grant;
-        _runner.LocationCompleted -= Complete;
+        _runner.LocationCompleted -= CompleteLocation;
     }
 
     public bool IsLocationCompleted(string locationId)
@@ -106,7 +106,7 @@ public class Economy : MonoBehaviour
         return false;
     }
 
-    private void Complete(string locationId, int stars)
+    public void CompleteLocation(string locationId, int stars)
     {
         _data.Galaxy.Complete(locationId, stars);
         LocationCleared?.Invoke(locationId);
