@@ -18,7 +18,8 @@ namespace TableImport
         public static void Write(SystemTable systems, LocationTable locations, WaveTable waves, EnemyTable enemies,
             BossTable bosses)
         {
-            StringBuilder text = new StringBuilder(string.Join(ReportFile.Separator, Columns)).Append(ReportFile.LineEnd);
+            StringBuilder text = new StringBuilder(string.Join(ReportFile.Separator, Columns))
+                .Append(ReportFile.LineEnd);
             List<SystemRow> systemRoute = new List<SystemRow>(systems.Rows);
             float routeMoney = 0f;
             float routeXp = 0f;
@@ -95,14 +96,17 @@ namespace TableImport
                 return;
             }
 
+            Reward shield = row.ShieldReward;
+
             if (row.Mode == WaveMode.Sequence)
             {
                 for (int i = 0; i < row.Count; i++)
                 {
                     EnemyRow enemy = enemies.GetRow(row.Enemies[i % row.Enemies.Length]);
+                    int enemyMoney = enemy.RewardMoney + shield.Money;
+                    int enemyXp = enemy.RewardXp + shield.Xp;
 
-                    reward.Add(enemy.RewardMoney, enemy.RewardMoney, enemy.RewardMoney, enemy.RewardXp, enemy.RewardXp,
-                        enemy.RewardXp);
+                    reward.Add(enemyMoney, enemyMoney, enemyMoney, enemyXp, enemyXp, enemyXp);
                 }
 
                 return;
@@ -118,13 +122,15 @@ namespace TableImport
             foreach (string id in row.Enemies)
             {
                 EnemyRow enemy = enemies.GetRow(id);
+                int enemyMoney = enemy.RewardMoney + shield.Money;
+                int enemyXp = enemy.RewardXp + shield.Xp;
 
-                money += enemy.RewardMoney;
-                xp += enemy.RewardXp;
-                moneyMin = Mathf.Min(moneyMin, enemy.RewardMoney);
-                moneyMax = Mathf.Max(moneyMax, enemy.RewardMoney);
-                xpMin = Mathf.Min(xpMin, enemy.RewardXp);
-                xpMax = Mathf.Max(xpMax, enemy.RewardXp);
+                money += enemyMoney;
+                xp += enemyXp;
+                moneyMin = Mathf.Min(moneyMin, enemyMoney);
+                moneyMax = Mathf.Max(moneyMax, enemyMoney);
+                xpMin = Mathf.Min(xpMin, enemyXp);
+                xpMax = Mathf.Max(xpMax, enemyXp);
             }
 
             for (int i = 0; i < row.Count; i++)

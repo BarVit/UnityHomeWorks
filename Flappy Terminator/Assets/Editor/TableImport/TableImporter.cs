@@ -32,7 +32,7 @@ namespace TableImport
                 WeaponTable weapons = WeaponTableImporter.Import(locations, log);
                 EnemyTable enemies = EnemyTableImporter.Import(locations, weapons, log);
                 BossTable bosses = BossTableImporter.Import(locations, enemies, weapons, log);
-                Dictionary<int, int> shields = EnemyShieldTableImporter.Read(log);
+                Dictionary<int, ShieldLevel> shields = EnemyShieldTableImporter.Read(log);
                 WaveTable waves = WaveTableImporter.Import(locations, enemies, bosses, shields, log);
                 SlotTable slots = SlotTableImporter.Import(weapons, log);
                 UpgradeTable upgrades = UpgradeTableImporter.Import(weapons, log);

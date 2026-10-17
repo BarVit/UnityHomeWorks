@@ -1,6 +1,6 @@
-level	capacity
-1	10
-2	15
-3	25
-4	40
-5	60
+level	capacity	reward_money	reward_xp
+1	10	50	10
+2	15	100	20
+3	25	200	30
+4	40	350	40
+5	60	600	50

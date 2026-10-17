@@ -35,6 +35,7 @@ public class EnemySpawner : MonoBehaviour
     private int _released;
 
     public event Action<EnemyShip> EnemyDied;
+    public event Action<EnemyShip> ShieldBroken;
     public event Action WaveCleared;
     public event Action<string, float> BossAnnounced;
 
@@ -81,7 +82,7 @@ public class EnemySpawner : MonoBehaviour
         for (int level = 1; level <= levels; level++)
         {
             foreach (PlannedSpawn spawn in _planner.Plan(locationId, level))
-                reward += new Reward(spawn.Setup.RewardXp, spawn.Setup.RewardMoney);
+                reward += new Reward(spawn.Setup.RewardXp, spawn.Setup.RewardMoney) + spawn.Setup.ShieldReward;
         }
 
         return reward;
@@ -169,12 +170,18 @@ public class EnemySpawner : MonoBehaviour
     {
         ship.Init(_context);
         ship.Died += OnEnemyDied;
+        ship.ShieldBroken += OnShieldBroken;
         ship.Retired += OnEnemyRetired;
     }
 
     private void OnEnemyDied(EnemyShip ship)
     {
         EnemyDied?.Invoke(ship);
+    }
+
+    private void OnShieldBroken(EnemyShip ship)
+    {
+        ShieldBroken?.Invoke(ship);
     }
 
     private void OnEnemyRetired(EnemyShip ship)

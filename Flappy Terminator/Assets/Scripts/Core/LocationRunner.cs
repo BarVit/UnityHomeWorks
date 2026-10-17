@@ -48,11 +48,13 @@ public class LocationRunner : MonoBehaviour
     private void OnEnable()
     {
         _enemySpawner.EnemyDied += OnEnemyDied;
+        _enemySpawner.ShieldBroken += OnShieldBroken;
     }
 
     private void OnDisable()
     {
         _enemySpawner.EnemyDied -= OnEnemyDied;
+        _enemySpawner.ShieldBroken -= OnShieldBroken;
     }
 
     public void StartGame()
@@ -149,6 +151,12 @@ public class LocationRunner : MonoBehaviour
     private void OnEnemyDied(EnemyShip ship)
     {
         _run.AddReward(ship.Reward);
+        RewardChanged?.Invoke(LocationReward);
+    }
+
+    private void OnShieldBroken(EnemyShip ship)
+    {
+        _run.AddReward(ship.Setup.ShieldReward);
         RewardChanged?.Invoke(LocationReward);
     }
 }

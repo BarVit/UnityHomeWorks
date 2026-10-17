@@ -43,8 +43,7 @@ public class LevelPlanner
                 ? row.Enemies[i % row.Enemies.Length]
                 : row.Enemies[Random.Range(0, row.Enemies.Length)];
 
-            plan.Add(new PlannedSpawn(CreateEnemy(enemyId, row.ShieldCapacity), GetInterval(row), false,
-                PlannedSpawn.NoAnnouncement));
+            plan.Add(new PlannedSpawn(CreateEnemy(enemyId, row), GetInterval(row), false, PlannedSpawn.NoAnnouncement));
         }
     }
 
@@ -53,10 +52,10 @@ public class LevelPlanner
         return row.IntervalMax > row.Interval ? Random.Range(row.Interval, row.IntervalMax) : row.Interval;
     }
 
-    private EnemySetup CreateEnemy(string enemyId, int shieldCapacity)
+    private EnemySetup CreateEnemy(string enemyId, WaveRow row)
     {
         EnemyRow enemy = _enemies.GetRow(enemyId);
 
-        return EnemySetup.ForEnemy(enemy, _weapons.GetRow(enemy.Weapon), shieldCapacity);
+        return EnemySetup.ForEnemy(enemy, _weapons.GetRow(enemy.Weapon), row.ShieldCapacity, row.ShieldReward);
     }
 }

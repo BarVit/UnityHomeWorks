@@ -43,6 +43,7 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
     public event Action<IPoolable> Released;
     public event Action<EnemyShip> Died;
     public event Action<EnemyShip> Retired;
+    public event Action<EnemyShip> ShieldBroken;
 
     private void Awake()
     {
@@ -62,6 +63,9 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
         if (_shieldHitHandler != null)
             _shieldHitHandler.HitDetected += OnAmmoHit;
+
+        if (_shield != null)
+            _shield.Broken += OnShieldBroken;
     }
 
     private void OnDisable()
@@ -71,6 +75,9 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
         if (_shieldHitHandler != null)
             _shieldHitHandler.HitDetected -= OnAmmoHit;
+
+        if (_shield != null)
+            _shield.Broken -= OnShieldBroken;
     }
 
     private void LateUpdate()
@@ -174,6 +181,11 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
         Released?.Invoke(this);
         Died?.Invoke(this);
+    }
+
+    private void OnShieldBroken()
+    {
+        ShieldBroken?.Invoke(this);
     }
 
     private void RaiseShield(int capacity)
