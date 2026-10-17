@@ -116,8 +116,8 @@ MonoBehaviour:
     _damage: 20
     _movement: {fileID: 11400000, guid: ba870c54da02f4aabaab2e7fc7f400c6, type: 2}
     _skin: {fileID: 0}
-    _rewardMoney: 150
-    _rewardXp: 30
+    _rewardMoney: 250
+    _rewardXp: 50
   - _id: reaper_2
     _type: enemy_reaper
     _title: "\u0416\u043D\u0435\u0446 II"
