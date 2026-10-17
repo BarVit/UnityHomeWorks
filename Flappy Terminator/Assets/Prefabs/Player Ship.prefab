@@ -530,7 +530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf01a0690bcf45218acb92767fdbf08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tapForce: 2
+  _tapForce: 2.5
   _maxVerticalSpeed: 3
   _rotationSpeed: 1
   _minRotationZ: -45
