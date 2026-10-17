@@ -581,10 +581,10 @@ MonoBehaviour:
     _owner: 1
     _delivery: 1
     _damage: 25
-    _rate: 1.8
-    _magazine: 10
+    _rate: 2.5
+    _magazine: 3
     _reloadTime: 5
-    _projectileSpeed: 7
+    _projectileSpeed: 6
     _barrelsMax: 4
     _firePattern: 2
     _sideAngle: 45
@@ -592,7 +592,7 @@ MonoBehaviour:
     _cooldownRate: 0
     _unlockHeat: 0
     _tickInterval: 0
-    _turnRate: 90
+    _turnRate: 60
     _aimTime: 0
     _area: 0
     _price: 0
