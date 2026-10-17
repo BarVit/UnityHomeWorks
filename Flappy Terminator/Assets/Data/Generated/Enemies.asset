@@ -113,7 +113,7 @@ MonoBehaviour:
     _health: 60
     _weapon: reaper_1_gun
     _barrels: 1
-    _damage: 20
+    _damage: 14
     _movement: {fileID: 11400000, guid: ba870c54da02f4aabaab2e7fc7f400c6, type: 2}
     _skin: {fileID: 0}
     _rewardMoney: 250
