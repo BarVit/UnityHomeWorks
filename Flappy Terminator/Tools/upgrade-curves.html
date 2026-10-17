@@ -1,0 +1,395 @@
+<title>Кривые цен прокачки</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: dock-style control column beside one big chart; the per-level price table runs underneath. */
+:root {
+  --bg: #0b1420;
+  --panel: #111e2e;
+  --panel-2: #16263a;
+  --line: #24384f;
+  --fg: #dce8f2;
+  --muted: #8399ad;
+  --accent: #35d9ff;
+  --accent-ink: #04202b;
+  --bar: #2b5577;
+  --compare: #e8a33c;
+  --font-display: "Exo 2", "Segoe UI", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #eef3f7; --panel: #ffffff; --panel-2: #f3f7fa; --line: #d2dde6; --fg: #142231; --muted: #5d7183;
+    --accent: #0a8fb3; --accent-ink: #ffffff; --bar: #b9d3e3; --compare: #b8700c; color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #eef3f7; --panel: #ffffff; --panel-2: #f3f7fa; --line: #d2dde6; --fg: #142231; --muted: #5d7183;
+  --accent: #0a8fb3; --accent-ink: #ffffff; --bar: #b9d3e3; --compare: #b8700c; color-scheme: light;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg); font: 15px/1.5 var(--font-body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 40px;
+}
+.wrap { max-width: 1180px; margin: 0 auto; display: grid; gap: 18px; }
+header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; }
+h1 { font: 700 26px/1.15 var(--font-display); letter-spacing: 0.02em; margin: 0; text-wrap: balance; }
+.sub { color: var(--muted); margin: 4px 0 0; max-width: 62ch; }
+.label { font: 500 11px/1.2 var(--font-body); text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+.grid { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 18px; align-items: start; }
+@media (max-width: 860px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px; min-width: 0; }
+.controls { display: grid; gap: 16px; }
+.field { display: grid; gap: 6px; }
+select, input[type="number"] {
+  font: 500 15px var(--font-body); color: var(--fg); background: var(--panel-2); border: 1px solid var(--line);
+  border-radius: 6px; padding: 7px 9px; width: 100%;
+}
+input[type="number"] { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+select:focus-visible, input:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; }
+.seg button {
+  font: 500 13px/1.2 var(--font-body); color: var(--muted); background: var(--panel-2); border: 0; padding: 9px 6px; cursor: pointer;
+}
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.hint { color: var(--muted); font-size: 13px; margin: 0; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.check { display: flex; gap: 8px; align-items: center; font-size: 14px; cursor: pointer; }
+.check input { accent-color: var(--accent); width: 16px; height: 16px; }
+.chart-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 8px; }
+.totals { display: flex; flex-wrap: wrap; gap: 6px 22px; }
+.total b { display: block; font: 700 22px/1.2 var(--font-display); font-variant-numeric: tabular-nums; }
+.total .delta { font: 500 12px var(--font-mono); }
+.up { color: var(--compare); }
+.down { color: var(--accent); }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--muted); }
+.legend i { display: inline-block; width: 18px; height: 10px; vertical-align: middle; margin-right: 6px; border-radius: 2px; }
+svg { width: 100%; height: auto; display: block; }
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+th, td { padding: 8px 10px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+thead th { font: 500 11px var(--font-body); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+td.num { font-family: var(--font-mono); font-size: 14px; }
+td .was { display: block; font-size: 11px; color: var(--muted); }
+td input[type="number"] { width: 96px; padding: 5px 7px; font-size: 14px; }
+tr.sum td { font-weight: 600; border-bottom: 0; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 14px; }
+.btn {
+  font: 600 14px var(--font-body); background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 6px;
+  padding: 9px 14px; cursor: pointer;
+}
+.btn.ghost { background: transparent; color: var(--fg); border: 1px solid var(--line); }
+#tsv { width: 100%; min-height: 110px; font: 13px/1.45 var(--font-mono); color: var(--fg); background: var(--panel-2);
+  border: 1px solid var(--line); border-radius: 6px; padding: 10px; margin-top: 10px; }
+.status { color: var(--muted); font-size: 13px; }
+@media (prefers-reduced-motion: no-preference) { .seg button { transition: background 0.15s, color 0.15s; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Кривые цен прокачки</h1>
+      <p class="sub">Цены уровней 1–5 строятся по форме кривой между ценой 1-го и 5-го уровня каждого улучшения. Пунктир — цены, которые сейчас стоят в weapon_upgrades.tsv.</p>
+    </div>
+    <div class="field" style="min-width: 220px">
+      <label class="label" for="weapon">Пушка</label>
+      <select id="weapon"></select>
+    </div>
+  </header>
+
+  <div class="grid">
+    <section class="panel controls" aria-label="Настройки кривой">
+      <div class="field">
+        <span class="label">Форма кривой</span>
+        <div class="seg" role="group" aria-label="Форма кривой">
+          <button type="button" data-curve="linear">Линейная</button>
+          <button type="button" data-curve="power">Степенная</button>
+          <button type="button" data-curve="exp">Экспонента</button>
+        </div>
+        <p class="hint" id="curveHint"></p>
+      </div>
+      <div class="field" id="powerField">
+        <label class="label" for="power">Степень</label>
+        <input type="number" id="power" min="1" max="6" step="0.1" value="2">
+      </div>
+
+      <div class="field">
+        <span class="label">Что на графике</span>
+        <div class="seg" role="group" aria-label="Что на графике">
+          <button type="button" data-scope="one">Одна пушка</button>
+          <button type="button" data-scope="set">Полный набор</button>
+        </div>
+        <p class="hint" id="scopeHint"></p>
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label class="label" for="barrels">Стволов в наборе</label>
+          <input type="number" id="barrels" min="1" max="4" step="1">
+        </div>
+        <div class="field">
+          <label class="label" for="round">Округлять до</label>
+          <select id="round">
+            <option value="1">1</option><option value="10">10</option><option value="50">50</option>
+            <option value="100">100</option><option value="250">250</option><option value="500">500</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="label">Открытие</span>
+        <div class="row2">
+          <div class="field"><label class="hint" for="open1">Пушка (1-й ствол)</label><input type="number" id="open1" min="0" step="100"></div>
+          <div class="field"><label class="hint" for="open2">2-й ствол</label><input type="number" id="open2" min="0" step="100"></div>
+          <div class="field"><label class="hint" for="open3">3-й ствол</label><input type="number" id="open3" min="0" step="100"></div>
+          <div class="field"><label class="hint" for="open4">4-й ствол</label><input type="number" id="open4" min="0" step="100"></div>
+        </div>
+      </div>
+
+      <label class="check"><input type="checkbox" id="compare" checked> Показывать текущие цены</label>
+      <button type="button" class="btn ghost" id="reset">Вернуть цены из таблицы</button>
+    </section>
+
+    <section class="panel" aria-label="График">
+      <div class="chart-head">
+        <div class="totals" id="totals"></div>
+        <div class="legend">
+          <span><i style="background: var(--bar)"></i>цена уровня</span>
+          <span><i style="background: var(--accent); height: 3px"></i>накопительно</span>
+          <span id="legendCompare"><i style="background: var(--compare); height: 3px"></i>сейчас, накопительно</span>
+        </div>
+      </div>
+      <svg id="chart" viewBox="0 0 760 400" role="img" aria-label="Цена прокачки по уровням"></svg>
+    </section>
+  </div>
+
+  <section class="panel" aria-label="Цены по уровням">
+    <div class="label" style="margin-bottom: 8px">Цены по уровням, за один ствол</div>
+    <div class="table-wrap"><table id="table"></table></div>
+    <div class="actions">
+      <button type="button" class="btn" id="copy">Скопировать строки для weapon_upgrades.tsv</button>
+      <span class="status" id="copyStatus"></span>
+    </div>
+    <textarea id="tsv" readonly aria-label="Строки для weapon_upgrades.tsv"></textarea>
+  </section>
+</div>
+
+<script>
+const WEAPONS = [{"id": "cannon", "title": "Пушка", "price": 0, "barrelsMax": 4, "slots": [1200, 7500, 15000], "upgrades": [{"stat": "Damage", "name": "Урон", "prices": [300, 600, 900, 1200, 1500], "bonus": ["2", "2", "2", "2", "2"], "own": false}, {"stat": "CritChance", "name": "Шанс крита", "prices": [150, 600, 900, 1200, 1500], "bonus": ["15", "15", "15", "15", "15"], "own": true}, {"stat": "DoubleShot", "name": "Двойной выстрел", "prices": [150, 600, 900, 1200, 1500], "bonus": ["10", "10", "10", "10", "10"], "own": true}]}, {"id": "impulse_laser", "title": "Импульсный лазер", "price": 6000, "barrelsMax": 4, "slots": [6000, 12000, 24000], "upgrades": [{"stat": "Damage", "name": "Урон", "prices": [1500, 2250, 3000, 4000, 5000], "bonus": ["1", "1", "1", "1", "2"], "own": true}, {"stat": "HeatReduction", "name": "Нагрев за выстрел", "prices": [1000, 1500, 2000, 2500, 3000], "bonus": ["10", "10", "10", "10", "10"], "own": true}]}, {"id": "rocket", "title": "Ракетница", "price": 15000, "barrelsMax": 4, "slots": [10000, 20000, 40000], "upgrades": [{"stat": "Damage", "name": "Урон", "prices": [3750, 5625, 7500, 9375, 11250], "bonus": ["10", "15", "20", "20", "25"], "own": true}, {"stat": "ProjectileSpeed", "name": "Скорость полёта", "prices": [3000, 4500, 6000, 7500, 9000], "bonus": ["5", "5", "5", "5", "5"], "own": true}, {"stat": "Napalm", "name": "Напалм", "prices": [2250, 4500, 6750, 9000, 11250], "bonus": ["20", "20", "20", "20", "20"], "own": true}]}, {"id": "homing", "title": "Самонаводящиеся", "price": 25000, "barrelsMax": 4, "slots": [1200, 4000, 8000], "upgrades": [{"stat": "Damage", "name": "Урон", "prices": [300, 600, 900, 1200, 1500], "bonus": ["2", "2", "2", "2", "2"], "own": false}, {"stat": "CritChance", "name": "Шанс крита", "prices": [150, 600, 900, 1200, 1500], "bonus": ["10", "10", "10", "10", "10"], "own": false}]}, {"id": "railgun", "title": "Рельсотрон", "price": 50000, "barrelsMax": 3, "slots": [1200, 4000, 8000], "upgrades": [{"stat": "Damage", "name": "Урон", "prices": [300, 600, 900, 1200, 1500], "bonus": ["2", "2", "2", "2", "2"], "own": false}, {"stat": "CritChance", "name": "Шанс крита", "prices": [150, 600, 900, 1200, 1500], "bonus": ["10", "10", "10", "10", "10"], "own": false}]}, {"id": "beam_laser", "title": "Лучевой лазер", "price": 80000, "barrelsMax": 1, "slots": [1200, 4000, 8000], "upgrades": [{"stat": "Damage", "name": "Урон", "prices": [300, 600, 900, 1200, 1500], "bonus": ["2", "2", "2", "2", "2"], "own": false}, {"stat": "CritChance", "name": "Шанс крита", "prices": [150, 600, 900, 1200, 1500], "bonus": ["10", "10", "10", "10", "10"], "own": false}]}, {"id": "plasma", "title": "Плазма", "price": 60000, "barrelsMax": 4, "slots": [1200, 4000, 8000], "upgrades": [{"stat": "Damage", "name": "Урон", "prices": [300, 600, 900, 1200, 1500], "bonus": ["2", "2", "2", "2", "2"], "own": false}, {"stat": "CritChance", "name": "Шанс крита", "prices": [150, 600, 900, 1200, 1500], "bonus": ["10", "10", "10", "10", "10"], "own": false}]}, {"id": "torpedo", "title": "Торпеды", "price": 120000, "barrelsMax": 2, "slots": [1200, 4000, 8000], "upgrades": [{"stat": "Damage", "name": "Урон", "prices": [300, 600, 900, 1200, 1500], "bonus": ["2", "2", "2", "2", "2"], "own": false}, {"stat": "CritChance", "name": "Шанс крита", "prices": [150, 600, 900, 1200, 1500], "bonus": ["10", "10", "10", "10", "10"], "own": false}]}, {"id": "plasma_orb", "title": "Плазменный шар", "price": 0, "barrelsMax": 1, "slots": [1200, 4000, 8000], "upgrades": [{"stat": "Damage", "name": "Урон", "prices": [300, 600, 900, 1200, 1500], "bonus": ["2", "2", "2", "2", "2"], "own": false}, {"stat": "CritChance", "name": "Шанс крита", "prices": [150, 600, 900, 1200, 1500], "bonus": ["10", "10", "10", "10", "10"], "own": false}]}];
+const LEVELS = 5;
+const STORE_KEY = "upgrade-curves-v1";
+const $ = (id) => document.getElementById(id);
+
+const state = loadState() || { weapon: "rocket", curve: "power", power: 2, scope: "one", round: 50, compare: true, edits: {} };
+
+function loadState() {
+  try { return JSON.parse(localStorage.getItem(STORE_KEY)); } catch (e) { return null; }
+}
+function saveState() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) { /* storage unavailable: keep working in memory */ }
+}
+
+function weapon() { return WEAPONS.find((w) => w.id === state.weapon) || WEAPONS[0]; }
+
+function edits() {
+  const w = weapon();
+  if (!state.edits[w.id]) {
+    state.edits[w.id] = {
+      barrels: Math.min(4, w.barrelsMax),
+      open: [w.price, ...w.slots],
+      ends: w.upgrades.map((u) => [u.prices[0], u.prices[LEVELS - 1]]),
+    };
+  }
+  return state.edits[w.id];
+}
+
+function curvePrice(first, last, level) {
+  const t = (level - 1) / (LEVELS - 1);
+  if (state.curve === "linear") return first + (last - first) * t;
+  if (state.curve === "power") return first + (last - first) * Math.pow(t, Math.max(0.1, state.power || 1));
+  if (first <= 0 || last <= 0) return first + (last - first) * t;
+  return first * Math.pow(last / first, t);
+}
+
+function roundTo(value) {
+  const step = Number(state.round) || 1;
+  return Math.max(0, Math.round(value / step) * step);
+}
+
+function levelPrices(index) {
+  const [first, last] = edits().ends[index];
+  return Array.from({ length: LEVELS }, (_, i) => roundTo(curvePrice(first, last, i + 1)));
+}
+
+function openCost(open, barrels) {
+  return open.slice(0, barrels).reduce((a, b) => a + (Number(b) || 0), 0);
+}
+
+// Per-level price of the whole gun (all upgrades), for the computed and the current table prices.
+function series(pricesOf, open) {
+  const w = weapon();
+  const e = edits();
+  const perLevel = Array.from({ length: LEVELS }, (_, i) => w.upgrades.reduce((sum, u, k) => sum + pricesOf(u, k)[i], 0));
+  const many = state.scope === "set" ? e.barrels : 1;
+  const bars = [state.scope === "set" ? openCost(open, e.barrels) : 0, ...perLevel.map((p) => p * many)];
+  const cumulative = [];
+  bars.reduce((sum, b, i) => (cumulative[i] = sum + b), 0);
+  return { bars, cumulative };
+}
+
+const fmt = new Intl.NumberFormat("ru-RU");
+function short(v) {
+  if (v >= 1e6) return (v / 1e6).toLocaleString("ru-RU", { maximumFractionDigits: 2 }) + " млн";
+  if (v >= 1e3) return (v / 1e3).toLocaleString("ru-RU", { maximumFractionDigits: 1 }) + " тыс";
+  return fmt.format(v);
+}
+function niceMax(v) {
+  if (v <= 0) return 1;
+  const p = Math.pow(10, Math.floor(Math.log10(v)));
+  for (const m of [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10]) if (m * p >= v) return m * p;
+  return 10 * p;
+}
+
+function drawChart(now, was) {
+  const svg = $("chart");
+  const W = 760, H = 400, L = 78, R = 24, T = 26, B = 46;
+  const peak = Math.max(...now.cumulative, ...(state.compare ? was.cumulative : [0]));
+  const top = niceMax(peak);
+  const x = (i) => L + (i + 0.5) * (W - L - R) / (LEVELS + 1);
+  const y = (v) => T + (H - T - B) * (1 - v / top);
+  const band = (W - L - R) / (LEVELS + 1);
+  let out = "";
+  for (let k = 0; k <= 5; k++) {
+    const v = top * k / 5;
+    out += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/>`;
+    out += `<text x="${L - 10}" y="${y(v) + 4}" text-anchor="end" fill="var(--muted)" font-size="12" font-family="var(--font-mono)">${short(v)}</text>`;
+  }
+  now.bars.forEach((v, i) => {
+    const h = Math.max(0, y(0) - y(v));
+    out += `<rect x="${x(i) - band * 0.3}" y="${y(v)}" width="${band * 0.6}" height="${h}" rx="3" fill="var(--bar)"/>`;
+    out += `<text x="${x(i)}" y="${H - B + 20}" text-anchor="middle" fill="var(--fg)" font-size="13" font-family="var(--font-body)">${i === 0 ? (state.scope === "set" ? "открытие" : "0") : "ур. " + i}</text>`;
+  });
+  out += `<text x="${(L + W - R) / 2}" y="${H - 6}" text-anchor="middle" fill="var(--muted)" font-size="11" letter-spacing="1.2">УРОВЕНЬ УЛУЧШЕНИЙ</text>`;
+  const path = (vals) => vals.map((v, i) => `${i ? "L" : "M"}${x(i)},${y(v)}`).join(" ");
+  if (state.compare) {
+    out += `<path d="${path(was.cumulative)}" fill="none" stroke="var(--compare)" stroke-width="2" stroke-dasharray="6 5"/>`;
+  }
+  out += `<path d="${path(now.cumulative)}" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linejoin="round"/>`;
+  now.cumulative.forEach((v, i) => {
+    out += `<circle cx="${x(i)}" cy="${y(v)}" r="4.5" fill="var(--bg)" stroke="var(--accent)" stroke-width="2.5"/>`;
+    out += `<text x="${x(i)}" y="${y(v) - 11}" text-anchor="middle" fill="var(--fg)" font-size="12" font-family="var(--font-mono)">${short(v)}</text>`;
+  });
+  svg.innerHTML = out;
+}
+
+function drawTotals(now, was) {
+  const last = now.cumulative[LEVELS];
+  const before = was.cumulative[LEVELS];
+  const diff = last - before;
+  const pct = before ? Math.round(diff / before * 100) : 0;
+  const what = state.scope === "set" ? `Набор: открытие + ${edits().barrels} ств. × все улучшения` : "Одна пушка: все улучшения до 5 ур.";
+  $("totals").innerHTML =
+    `<div class="total"><span class="label">${what}</span><b>${fmt.format(last)}</b>` +
+    (diff === 0 ? `<span class="delta">как сейчас</span>` :
+      `<span class="delta ${diff > 0 ? "up" : "down"}">${diff > 0 ? "+" : "−"}${fmt.format(Math.abs(diff))} (${diff > 0 ? "+" : "−"}${Math.abs(pct)}%) к текущим ${fmt.format(before)}</span>`) +
+    `</div>`;
+}
+
+function drawTable() {
+  const w = weapon();
+  const e = edits();
+  let html = `<thead><tr><th>Улучшение</th><th>Цена 1 ур.</th><th>Цена 5 ур.</th>` +
+    Array.from({ length: LEVELS }, (_, i) => `<th>Ур. ${i + 1}</th>`).join("") + `<th>Всего</th></tr></thead><tbody>`;
+  const sums = Array(LEVELS).fill(0);
+  w.upgrades.forEach((u, k) => {
+    const prices = levelPrices(k);
+    prices.forEach((p, i) => (sums[i] += p));
+    html += `<tr><td>${u.name}${u.own ? "" : ' <span class="hint">(общие)</span>'}</td>` +
+      `<td><input type="number" min="0" step="50" id="first-${k}" value="${e.ends[k][0]}" aria-label="${u.name}: цена 1-го уровня"></td>` +
+      `<td><input type="number" min="0" step="50" id="last-${k}" value="${e.ends[k][1]}" aria-label="${u.name}: цена 5-го уровня"></td>` +
+      prices.map((p, i) => `<td class="num">${fmt.format(p)}${p !== u.prices[i] ? `<span class="was">было ${fmt.format(u.prices[i])}</span>` : ""}</td>`).join("") +
+      `<td class="num">${fmt.format(prices.reduce((a, b) => a + b, 0))}</td></tr>`;
+  });
+  html += `<tr class="sum"><td>Все улучшения</td><td></td><td></td>` + sums.map((s) => `<td class="num">${fmt.format(s)}</td>`).join("") +
+    `<td class="num">${fmt.format(sums.reduce((a, b) => a + b, 0))}</td></tr></tbody>`;
+  $("table").innerHTML = html;
+  w.upgrades.forEach((u, k) => {
+    $("first-" + k).addEventListener("change", (ev) => { e.ends[k][0] = Math.max(0, Number(ev.target.value) || 0); render(); });
+    $("last-" + k).addEventListener("change", (ev) => { e.ends[k][1] = Math.max(0, Number(ev.target.value) || 0); render(); });
+  });
+  $("tsv").value = w.upgrades.map((u, k) => levelPrices(k).map((p, i) => [w.id, u.stat, i + 1, u.bonus[i], p].join("\t")).join("\n")).join("\n");
+}
+
+function curveHint() {
+  if (state.curve === "linear") return "Цена растёт на одну и ту же сумму с каждым уровнем.";
+  if (state.curve === "power") return "Цена = 1-й ур. + разница × t^степень. Степень 2 — квадратичная, 1,3–1,7 — плавнее, 3 — круче.";
+  const growth = edits().ends.map(([a, b]) => (a > 0 && b > 0 ? Math.round((Math.pow(b / a, 1 / (LEVELS - 1)) - 1) * 100) : null))
+    .filter((g) => g !== null);
+  const range = growth.length ? (Math.min(...growth) === Math.max(...growth) ? `+${growth[0]}%` : `+${Math.min(...growth)}…${Math.max(...growth)}%`) : "—";
+  return `Каждый уровень дороже предыдущего на один и тот же процент: сейчас ${range} за уровень.`;
+}
+
+function render() {
+  const w = weapon();
+  const e = edits();
+  document.querySelectorAll("[data-curve]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.curve === state.curve)));
+  document.querySelectorAll("[data-scope]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.scope === state.scope)));
+  $("powerField").hidden = state.curve !== "power";
+  $("power").value = state.power;
+  $("round").value = String(state.round);
+  $("compare").checked = state.compare;
+  $("legendCompare").hidden = !state.compare;
+  $("barrels").value = e.barrels;
+  $("barrels").max = Math.min(4, w.barrelsMax);
+  e.open.forEach((v, i) => { $("open" + (i + 1)).value = v; $("open" + (i + 1)).disabled = i >= e.barrels; });
+  $("curveHint").textContent = curveHint();
+  $("scopeHint").textContent = state.scope === "set"
+    ? `Открытие пушки и стволов 2–${e.barrels} плюс все улучшения на каждом из ${e.barrels} стволов.`
+    : "Только улучшения одного ствола, без цены открытия.";
+  const now = series((u, k) => levelPrices(k), e.open);
+  const was = series((u) => u.prices, [w.price, ...w.slots]);
+  drawChart(now, was);
+  drawTotals(now, was);
+  drawTable();
+  saveState();
+}
+
+WEAPONS.forEach((w) => {
+  const o = document.createElement("option");
+  o.value = w.id;
+  o.textContent = w.title + (w.upgrades.some((u) => u.own) ? "" : " — улучшения общие");
+  $("weapon").appendChild(o);
+});
+$("weapon").value = weapon().id;
+$("weapon").addEventListener("change", (ev) => { state.weapon = ev.target.value; render(); });
+document.querySelectorAll("[data-curve]").forEach((b) => b.addEventListener("click", () => { state.curve = b.dataset.curve; render(); }));
+document.querySelectorAll("[data-scope]").forEach((b) => b.addEventListener("click", () => { state.scope = b.dataset.scope; render(); }));
+$("power").addEventListener("input", (ev) => { const v = Number(ev.target.value); if (v > 0) { state.power = v; render(); } });
+$("round").addEventListener("change", (ev) => { state.round = Number(ev.target.value); render(); });
+$("compare").addEventListener("change", (ev) => { state.compare = ev.target.checked; render(); });
+$("barrels").addEventListener("change", (ev) => {
+  edits().barrels = Math.min(Math.min(4, weapon().barrelsMax), Math.max(1, Math.round(Number(ev.target.value) || 1)));
+  render();
+});
+[1, 2, 3, 4].forEach((n) => $("open" + n).addEventListener("change", (ev) => { edits().open[n - 1] = Math.max(0, Number(ev.target.value) || 0); render(); }));
+$("reset").addEventListener("click", () => { delete state.edits[weapon().id]; render(); });
+$("copy").addEventListener("click", () => {
+  const text = $("tsv").value;
+  const done = (msg) => { $("copyStatus").textContent = msg; };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => done("Скопировано: вставь вместо строк этой пушки."), () => { $("tsv").select(); done("Выделено — нажми Cmd+C."); });
+  } else {
+    $("tsv").select();
+    done("Выделено — нажми Cmd+C.");
+  }
+});
+render();
+</script>
