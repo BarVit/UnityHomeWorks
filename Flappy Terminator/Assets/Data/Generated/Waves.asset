@@ -235,7 +235,7 @@ MonoBehaviour:
   - _location: loc_02_01
     _level: 1
     _order: 1
-    _count: 5
+    _count: 4
     _mode: 1
     _enemies:
     - reaper_1
@@ -254,7 +254,7 @@ MonoBehaviour:
   - _location: loc_02_01
     _level: 1
     _order: 3
-    _count: 5
+    _count: 4
     _mode: 1
     _enemies:
     - reaper_1

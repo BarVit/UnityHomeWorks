@@ -50,7 +50,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 760552f2b84714314ac77afd244877e5, type: 3}
     _bodyDamage: 20
     _fromLocation: loc_01_04
-    _health: 45
+    _health: 55
     _weapon: warden_3_gun
     _barrels: 3
     _damage: 12
@@ -113,7 +113,7 @@ MonoBehaviour:
     _health: 60
     _weapon: reaper_1_gun
     _barrels: 1
-    _damage: 14
+    _damage: 9
     _movement: {fileID: 11400000, guid: ba870c54da02f4aabaab2e7fc7f400c6, type: 2}
     _skin: {fileID: 0}
     _rewardMoney: 250
