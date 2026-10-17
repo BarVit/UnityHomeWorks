@@ -14,7 +14,6 @@ public class BossRow
     [SerializeField] private int _health;
     [SerializeField] private string _weapon;
     [SerializeField] private int _barrels;
-    [SerializeField] private int _damage;
     [SerializeField] private int _bodyDamage;
     [SerializeField] private int _scale;
     [SerializeField] private Color _tint;
@@ -28,7 +27,7 @@ public class BossRow
     [SerializeField] private BossPhaseRow[] _phases;
 
     public BossRow(string id, string title, BossKind kind, string location, EnemyShip prefab, string prototype,
-        int health, string weapon, int barrels, int damage, int bodyDamage, int scale, Color tint,
+        int health, string weapon, int barrels, int bodyDamage, int scale, Color tint,
         MovementProfile movement, int rewardMoney, int rewardXp, string intro, int specialEvery, string specialWeapon,
         int specialBarrels, BossPhaseRow[] phases)
     {
@@ -44,7 +43,6 @@ public class BossRow
         _health = health;
         _weapon = weapon;
         _barrels = barrels;
-        _damage = damage;
         _bodyDamage = bodyDamage;
         _scale = scale;
         _tint = tint;
@@ -72,8 +70,6 @@ public class BossRow
     public string Weapon => _weapon;
 
     public int Barrels => _barrels;
-
-    public int Damage => _damage;
 
     public int BodyDamage => _bodyDamage;
 

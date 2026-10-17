@@ -44,8 +44,11 @@ namespace EnemyContent
         {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField(row.Title, GUILayout.Width(140));
+            WeaponRow weapon = weapons.GetRow(row.Weapon);
+            string damage = weapon == null ? "?" : weapon.Damage.ToString();
+
             EditorGUILayout.LabelField(row.Health + " HP, " + row.Weapon + " ×" + row.Barrels + ", урон "
-                + row.Damage + (row.Phases.Count > 0 ? ", фаз " + row.Phases.Count : ""));
+                + damage + (row.Phases.Count > 0 ? ", фаз " + row.Phases.Count : ""));
 
             GUI.enabled = Application.isPlaying;
 

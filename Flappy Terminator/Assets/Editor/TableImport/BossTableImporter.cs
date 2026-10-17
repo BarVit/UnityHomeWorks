@@ -12,7 +12,7 @@ namespace TableImport
 
         private static readonly string[] Columns =
         {
-            "id", "title", "kind", "location", "prefab", "prototype", "health", "weapon", "barrels", "damage",
+            "id", "title", "kind", "location", "prefab", "prototype", "health", "weapon", "barrels",
             "body_damage", "scale", "tint", "movement", "reward_money", "reward_xp", "intro",
             "special_every", "special_weapon", "special_barrels"
         };
@@ -75,7 +75,6 @@ namespace TableImport
                     reader.ReadInt("health", 1, 1000000000),
                     weapon,
                     barrels,
-                    reader.ReadInt("damage", 1, 100000),
                     reader.ReadInt("body_damage", 0, 100000),
                     reader.ReadInt("scale", 1, 10),
                     reader.ReadColor("tint"),

@@ -78,9 +78,14 @@ public class EnemySetup
     public static EnemySetup ForBoss(BossRow boss, WeaponTable weapons)
     {
         return new EnemySetup(boss.Prefab, boss.Id, 0, boss.Health, boss.BodyDamage,
-            new EnemyArmament(weapons.GetRow(boss.Weapon), boss.Barrels, boss.Damage, 1f), boss.Movement,
+            CreateArmament(weapons.GetRow(boss.Weapon), boss.Barrels), boss.Movement,
             boss.Scale, boss.Tint, null, boss.RewardMoney, boss.RewardXp,
             CreatePhases(boss.Phases, weapons), CreateSpecial(boss, weapons), boss.SpecialEvery);
+    }
+
+    private static EnemyArmament CreateArmament(WeaponRow weapon, int barrels)
+    {
+        return new EnemyArmament(weapon, barrels, weapon.Damage, 1f);
     }
 
     private static EnemyArmament CreateSpecial(BossRow boss, WeaponTable weapons)
@@ -88,7 +93,7 @@ public class EnemySetup
         if (boss.SpecialEvery <= 0)
             return null;
 
-        return new EnemyArmament(weapons.GetRow(boss.SpecialWeapon), boss.SpecialBarrels, boss.Damage, 1f);
+        return CreateArmament(weapons.GetRow(boss.SpecialWeapon), boss.SpecialBarrels);
     }
 
     private static List<BossPhase> CreatePhases(IReadOnlyList<BossPhaseRow> rows, WeaponTable weapons)
