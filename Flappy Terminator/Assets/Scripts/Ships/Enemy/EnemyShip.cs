@@ -7,6 +7,8 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
     private const float VisiblePixels = 2f;
 
     [SerializeField] private AmmoHitHandler _ammoHitHandler;
+    [SerializeField] private EnergyShield _shield;
+    [SerializeField] private AmmoHitHandler _shieldHitHandler;
     [SerializeField] private float _exitMargin = 1f;
 
     private Camera _camera;
@@ -57,12 +59,18 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
     {
         _ammoHitHandler.HitDetected += OnAmmoHit;
         _health.Died += Die;
+
+        if (_shieldHitHandler != null)
+            _shieldHitHandler.HitDetected += OnAmmoHit;
     }
 
     private void OnDisable()
     {
         _ammoHitHandler.HitDetected -= OnAmmoHit;
         _health.Died -= Die;
+
+        if (_shieldHitHandler != null)
+            _shieldHitHandler.HitDetected -= OnAmmoHit;
     }
 
     private void LateUpdate()
@@ -106,6 +114,7 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
         _skin.Wear(_skinAsset);
 
         _health.Init(setup.Health);
+        RaiseShield(setup.ShieldCapacity);
         Arm(setup);
         _mover.Fly(setup.Movement);
         _isHoldingFire = true;
@@ -122,6 +131,10 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
         _phases = null;
         _shooter.StopShoot();
         _mover.Stop();
+
+        if (_shield != null)
+            _shield.Drop();
+
         Retired?.Invoke(this);
     }
 
@@ -135,7 +148,11 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
         if (IsVulnerable == false)
             return;
 
-        _health.TakeDamage(damage);
+        if (_shield != null)
+            damage = _shield.Absorb(damage);
+
+        if (damage > 0)
+            _health.TakeDamage(damage);
     }
 
     public void Die()
@@ -157,6 +174,17 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
         Released?.Invoke(this);
         Died?.Invoke(this);
+    }
+
+    private void RaiseShield(int capacity)
+    {
+        if (_shield == null)
+            return;
+
+        if (capacity > 0)
+            _shield.Raise(capacity);
+        else
+            _shield.Drop();
     }
 
     private void Arm(EnemySetup setup)

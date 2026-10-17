@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -31,7 +32,8 @@ namespace TableImport
                 WeaponTable weapons = WeaponTableImporter.Import(locations, log);
                 EnemyTable enemies = EnemyTableImporter.Import(locations, weapons, log);
                 BossTable bosses = BossTableImporter.Import(locations, enemies, weapons, log);
-                WaveTable waves = WaveTableImporter.Import(locations, enemies, bosses, log);
+                Dictionary<int, int> shields = EnemyShieldTableImporter.Read(log);
+                WaveTable waves = WaveTableImporter.Import(locations, enemies, bosses, shields, log);
                 SlotTable slots = SlotTableImporter.Import(weapons, log);
                 UpgradeTable upgrades = UpgradeTableImporter.Import(weapons, log);
                 ModuleTable modules = ModuleTableImporter.Import(locations, log);

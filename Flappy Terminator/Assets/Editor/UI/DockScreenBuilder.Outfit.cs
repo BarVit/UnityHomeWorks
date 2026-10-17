@@ -1,3 +1,4 @@
+using ShipContent;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -11,13 +12,9 @@ namespace UiContent
         private const string ModuleBarName = "Module Bar";
         private const string AnnouncementName = "Boss Announcement";
         private const string OutlineMaterial = "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Outline.mat";
-        private const string ShieldName = "Energy Shield";
         private const string PlayerPrefab = "Assets/Prefabs/Player Ship.prefab";
-        private const string BubbleSprite = "Assets/Sprites/VFX/Energy Shield Bubble.png";
         private const int ShopCardCount = 10;
         private const int ShopColumns = 5;
-        private const float ShieldSizeShare = 1.16f;
-        private const float BubbleRingShare = 116f / 128f;
 
         private static readonly Color TabIdle = new Color(0.45f, 0.55f, 0.66f, 0.9f);
         private static readonly Color Shade = new Color(0f, 0.02f, 0.05f, 0.72f);
@@ -233,46 +230,9 @@ namespace UiContent
             try
             {
                 PlayerShip ship = prefab.GetComponent<PlayerShip>();
-                Transform old = prefab.transform.Find(ShieldName);
-
-                if (old != null)
-                    Object.DestroyImmediate(old.gameObject);
-
                 SpriteRenderer body = (SpriteRenderer)new SerializedObject(ship).FindProperty("_shipSprite").objectReferenceValue;
-                Sprite bubbleSprite = AssetDatabase.LoadAssetAtPath<Sprite>(BubbleSprite);
-
-                GameObject holder = new GameObject(ShieldName);
-                holder.transform.SetParent(prefab.transform, false);
-                holder.transform.localPosition = prefab.transform.InverseTransformPoint(body.bounds.center);
-
-                GameObject bubbleObject = new GameObject("Bubble");
-                bubbleObject.transform.SetParent(holder.transform, false);
-                SpriteRenderer bubble = bubbleObject.AddComponent<SpriteRenderer>();
-                bubble.sprite = bubbleSprite;
-                bubble.sortingLayerID = body.sortingLayerID;
-                bubble.sortingOrder = body.sortingOrder + 1;
-
-                float size = Mathf.Max(body.bounds.size.x, body.bounds.size.y) * ShieldSizeShare;
-                float scale = size / (bubbleSprite.bounds.size.x * prefab.transform.lossyScale.x);
-                bubbleObject.transform.localScale = Vector3.one * scale;
-
-                holder.layer = body.gameObject.layer;
-                CircleCollider2D circle = holder.AddComponent<CircleCollider2D>();
-                circle.isTrigger = true;
-                circle.radius = bubbleSprite.bounds.extents.x * BubbleRingShare * scale;
-                circle.enabled = false;
-
-                AmmoHitHandler bodyHits = body.GetComponent<AmmoHitHandler>();
-                AmmoHitHandler shieldHits = holder.AddComponent<AmmoHitHandler>();
-                SerializedObject hitsSo = new SerializedObject(shieldHits);
-                hitsSo.FindProperty("_ammoLayers").intValue = new SerializedObject(bodyHits).FindProperty("_ammoLayers").intValue;
-                hitsSo.ApplyModifiedPropertiesWithoutUndo();
-
-                EnergyShield shield = holder.AddComponent<EnergyShield>();
-                SerializedObject shieldSo = new SerializedObject(shield);
-                shieldSo.FindProperty("_bubble").objectReferenceValue = bubble;
-                shieldSo.FindProperty("_collider").objectReferenceValue = circle;
-                shieldSo.ApplyModifiedPropertiesWithoutUndo();
+                EnergyShield shield = ShieldRig.Attach(prefab, body, body.GetComponent<AmmoHitHandler>(),
+                    out AmmoHitHandler shieldHits);
 
                 SerializedObject shipSo = new SerializedObject(ship);
                 shipSo.FindProperty("_shield").objectReferenceValue = shield;
@@ -286,7 +246,7 @@ namespace UiContent
                 PrefabUtility.UnloadPrefabContents(prefab);
             }
 
-            return sceneShip.transform.Find(ShieldName).GetComponent<EnergyShield>();
+            return sceneShip.transform.Find(ShieldRig.ShieldName).GetComponent<EnergyShield>();
         }
     }
 }

@@ -8,8 +8,9 @@ public class EnemySetup
     private EnemySetup(EnemyShip prefab, string shipId, int tier, int health, int bodyDamage,
         EnemyArmament armament, MovementProfile movement, int scale, Color tint, SpriteSkin skin,
         int rewardMoney, int rewardXp, IReadOnlyList<BossPhase> phases, EnemyArmament special = null,
-        int specialEvery = 0)
+        int specialEvery = 0, int shieldCapacity = 0)
     {
+        ShieldCapacity = shieldCapacity;
         Special = special;
         SpecialEvery = specialEvery;
         Prefab = prefab;
@@ -57,11 +58,13 @@ public class EnemySetup
 
     public int SpecialEvery { get; private set; }
 
-    public static EnemySetup ForEnemy(EnemyRow enemy, WeaponRow weapon)
+    public int ShieldCapacity { get; private set; }
+
+    public static EnemySetup ForEnemy(EnemyRow enemy, WeaponRow weapon, int shieldCapacity = 0)
     {
         return new EnemySetup(enemy.Prefab, enemy.Type, enemy.Tier, enemy.Health, enemy.BodyDamage,
             new EnemyArmament(weapon, enemy.Barrels, enemy.Damage, 1f), enemy.Movement, 1, Color.white, enemy.Skin,
-            enemy.RewardMoney, enemy.RewardXp, NoPhases);
+            enemy.RewardMoney, enemy.RewardXp, NoPhases, shieldCapacity: shieldCapacity);
     }
 
     public static EnemySetup ForBoss(BossRow boss, WeaponTable weapons)

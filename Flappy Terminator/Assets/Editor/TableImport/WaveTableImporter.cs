@@ -12,10 +12,11 @@ namespace TableImport
 
         private static readonly string[] Columns =
         {
-            "location", "level", "order", "count", "mode", "enemies", "interval", "interval_max"
+            "location", "level", "order", "count", "mode", "enemies", "interval", "interval_max", "shield"
         };
 
-        public static WaveTable Import(LocationTable locations, EnemyTable enemies, BossTable bosses, TableLog log)
+        public static WaveTable Import(LocationTable locations, EnemyTable enemies, BossTable bosses,
+            Dictionary<int, int> shields, TableLog log)
         {
             TsvDocument document = TsvReader.Read(SourcePath, log);
 
@@ -50,7 +51,9 @@ namespace TableImport
                 if (intervalMax < interval)
                     reader.Fail("interval_max: " + intervalMax + " меньше interval " + interval);
 
-                rows.Add(new WaveRow(location, level, order, count, mode, list, interval, intervalMax));
+                int shield = ReadShield(reader, mode, shields);
+
+                rows.Add(new WaveRow(location, level, order, count, mode, list, interval, intervalMax, shield));
             }
 
             WaveTable table = GeneratedAsset.LoadOrCreate<WaveTable>(AssetPath);
@@ -58,6 +61,28 @@ namespace TableImport
             EditorUtility.SetDirty(table);
 
             return table;
+        }
+
+        private static int ReadShield(RowReader reader, WaveMode mode, Dictionary<int, int> shields)
+        {
+            if (reader.ReadOptionalText("shield").Length == 0)
+                return 0;
+
+            int level = reader.ReadInt("shield", 1, 100);
+
+            if (mode == WaveMode.Boss)
+            {
+                reader.Fail("shield: боссам щит не ставится, оставьте пустым");
+
+                return 0;
+            }
+
+            if (shields.TryGetValue(level, out int capacity))
+                return capacity;
+
+            reader.Fail("shield: нет уровня " + level + " в " + EnemyShieldTableImporter.SourcePath);
+
+            return 0;
         }
 
         private static string[] Split(string text)
