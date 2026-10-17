@@ -5,7 +5,6 @@ public class EnergyShield : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _bubble;
     [SerializeField] private Collider2D _collider;
-    [SerializeField] private Color _color = new Color(0.35f, 0.88f, 1f);
     [SerializeField] private float _raiseDuration = 0.2f;
     [SerializeField] private float _breakDuration = 0.5f;
     [SerializeField] private float _flashDuration = 0.15f;
@@ -16,6 +15,7 @@ public class EnergyShield : MonoBehaviour
     [SerializeField] private float _breakScale = 1.6f;
 
     private Vector3 _baseScale;
+    private Color _color;
     private int _capacity;
     private int _left;
     private float _shownFor;
@@ -43,8 +43,9 @@ public class EnergyShield : MonoBehaviour
             ShowBreak();
     }
 
-    public void Raise(int capacity)
+    public void Raise(int capacity, int level)
     {
+        _color = ShieldColors.Get(level);
         _capacity = Mathf.Max(1, capacity);
         _left = _capacity;
         _shownFor = 0f;

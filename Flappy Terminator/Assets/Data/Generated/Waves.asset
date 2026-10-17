@@ -22,6 +22,7 @@ MonoBehaviour:
     - warden_1
     _interval: 3
     _intervalMax: 3
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -34,6 +35,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 3
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -46,6 +48,7 @@ MonoBehaviour:
     - warden_2
     _interval: 3
     _intervalMax: 3
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -59,6 +62,7 @@ MonoBehaviour:
     - warden_2
     _interval: 2
     _intervalMax: 3
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -73,6 +77,7 @@ MonoBehaviour:
     - hunter_1
     _interval: 3
     _intervalMax: 4
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -88,6 +93,7 @@ MonoBehaviour:
     - hunter_1
     _interval: 2
     _intervalMax: 4
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -100,6 +106,7 @@ MonoBehaviour:
     - marauder_1
     _interval: 0
     _intervalMax: 0
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -112,6 +119,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -124,6 +132,7 @@ MonoBehaviour:
     - warden_2
     _interval: 2
     _intervalMax: 2
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -136,6 +145,7 @@ MonoBehaviour:
     - hunter_1
     _interval: 2
     _intervalMax: 3
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -149,6 +159,7 @@ MonoBehaviour:
     - warden_2
     _interval: 0
     _intervalMax: 3
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -162,6 +173,7 @@ MonoBehaviour:
     - hunter_1
     _interval: 2
     _intervalMax: 3
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -174,6 +186,7 @@ MonoBehaviour:
     - hunter_1
     _interval: 2
     _intervalMax: 3
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -187,6 +200,7 @@ MonoBehaviour:
     - hunter_2
     _interval: 2
     _intervalMax: 2
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -199,6 +213,7 @@ MonoBehaviour:
     - warden_3
     _interval: 3
     _intervalMax: 3
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -211,6 +226,7 @@ MonoBehaviour:
     - hunter_2
     _interval: 3
     _intervalMax: 3
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -225,6 +241,7 @@ MonoBehaviour:
     - hunter_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -237,6 +254,7 @@ MonoBehaviour:
     - hunter_2
     _interval: 2
     _intervalMax: 2
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -249,6 +267,7 @@ MonoBehaviour:
     - punisher_1
     _interval: 0
     _intervalMax: 0
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -261,6 +280,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -273,6 +293,7 @@ MonoBehaviour:
     - hunter_2
     _interval: 2
     _intervalMax: 3
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -286,6 +307,7 @@ MonoBehaviour:
     - hunter_2
     _interval: 2
     _intervalMax: 3
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -298,6 +320,7 @@ MonoBehaviour:
     - hierarch
     _interval: 0
     _intervalMax: 0
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -310,6 +333,7 @@ MonoBehaviour:
     - reaper_1
     _interval: 3
     _intervalMax: 3
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -323,6 +347,7 @@ MonoBehaviour:
     - warden_2
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -335,6 +360,7 @@ MonoBehaviour:
     - reaper_1
     _interval: 3
     _intervalMax: 3
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -348,6 +374,7 @@ MonoBehaviour:
     - hunter_2
     _interval: 1
     _intervalMax: 3
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -360,6 +387,7 @@ MonoBehaviour:
     - reaper_1
     _interval: 2
     _intervalMax: 2
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -372,6 +400,7 @@ MonoBehaviour:
     - hunter_2
     _interval: 2
     _intervalMax: 2
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -384,6 +413,7 @@ MonoBehaviour:
     - reaper_1
     _interval: 0
     _intervalMax: 0
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -398,6 +428,7 @@ MonoBehaviour:
     - hunter_1
     _interval: 1
     _intervalMax: 3
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -410,6 +441,7 @@ MonoBehaviour:
     - reaper_1
     _interval: 3
     _intervalMax: 3
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -422,6 +454,7 @@ MonoBehaviour:
     - hunter_2
     _interval: 3
     _intervalMax: 3
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -434,6 +467,7 @@ MonoBehaviour:
     - warden_3
     _interval: 3
     _intervalMax: 3
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -447,6 +481,7 @@ MonoBehaviour:
     - reaper_3
     _interval: 3
     _intervalMax: 4
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -459,6 +494,7 @@ MonoBehaviour:
     - phantom_2
     _interval: 4
     _intervalMax: 4
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -472,6 +508,7 @@ MonoBehaviour:
     - phantom_2
     _interval: 3
     _intervalMax: 4
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -484,6 +521,7 @@ MonoBehaviour:
     - phantom_3
     _interval: 5
     _intervalMax: 5
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -498,6 +536,7 @@ MonoBehaviour:
     - hunter_2
     _interval: 1
     _intervalMax: 2
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -511,6 +550,7 @@ MonoBehaviour:
     - reaper_2
     _interval: 2
     _intervalMax: 3
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -526,6 +566,7 @@ MonoBehaviour:
     - reaper_1
     _interval: 1
     _intervalMax: 2
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -538,6 +579,7 @@ MonoBehaviour:
     - phantom_1
     _interval: 3
     _intervalMax: 3
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -550,6 +592,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -562,6 +605,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -574,6 +618,7 @@ MonoBehaviour:
     - berserker_1
     _interval: 0
     _intervalMax: 0
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -586,6 +631,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -598,6 +644,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -610,6 +657,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -622,6 +670,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -634,6 +683,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -646,6 +696,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -658,6 +709,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -670,6 +722,7 @@ MonoBehaviour:
     - marauder_2
     _interval: 0
     _intervalMax: 0
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -682,6 +735,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -694,6 +748,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -706,6 +761,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -718,6 +774,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -730,6 +787,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -742,6 +800,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -754,6 +813,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -766,6 +826,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -778,6 +839,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -790,6 +852,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -802,6 +865,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -814,6 +878,7 @@ MonoBehaviour:
     - magister
     _interval: 0
     _intervalMax: 0
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -826,6 +891,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -838,6 +904,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -850,6 +917,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -862,6 +930,7 @@ MonoBehaviour:
     - punisher_2
     _interval: 0
     _intervalMax: 0
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -874,6 +943,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -886,6 +956,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -898,6 +969,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -910,6 +982,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -922,6 +995,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -934,6 +1008,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -946,6 +1021,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -958,6 +1034,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -970,6 +1047,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -982,6 +1060,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -994,6 +1073,7 @@ MonoBehaviour:
     - berserker_2
     _interval: 0
     _intervalMax: 0
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1006,6 +1086,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1018,6 +1099,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1030,6 +1112,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1042,6 +1125,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1054,6 +1138,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1066,6 +1151,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1078,6 +1164,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1090,6 +1177,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1102,6 +1190,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1114,6 +1203,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1126,6 +1216,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1138,6 +1229,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1150,6 +1242,7 @@ MonoBehaviour:
     - tormentor_1
     _interval: 0
     _intervalMax: 0
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1162,6 +1255,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1174,6 +1268,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1186,6 +1281,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1198,6 +1294,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1210,6 +1307,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1222,6 +1320,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1234,6 +1333,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1246,6 +1346,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1258,6 +1359,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1270,6 +1372,7 @@ MonoBehaviour:
     - overlord
     _interval: 0
     _intervalMax: 0
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1282,6 +1385,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1294,6 +1398,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1306,6 +1411,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1318,6 +1424,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1330,6 +1437,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1342,6 +1450,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1354,6 +1463,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1366,6 +1476,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1378,6 +1489,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1390,6 +1502,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1402,6 +1515,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1414,6 +1528,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1426,6 +1541,7 @@ MonoBehaviour:
     - ripper_1
     _interval: 0
     _intervalMax: 0
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1438,6 +1554,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1450,6 +1567,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1462,6 +1580,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1474,6 +1593,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1486,6 +1606,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1498,6 +1619,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1510,6 +1632,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1522,6 +1645,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1534,6 +1658,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1546,6 +1671,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1558,6 +1684,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1570,6 +1697,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1582,6 +1710,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1594,6 +1723,7 @@ MonoBehaviour:
     - archon
     _interval: 0
     _intervalMax: 0
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1606,6 +1736,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1618,6 +1749,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1630,6 +1762,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1642,6 +1775,7 @@ MonoBehaviour:
     - tormentor_2
     _interval: 0
     _intervalMax: 0
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1654,6 +1788,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1666,6 +1801,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1678,6 +1814,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1690,6 +1827,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1702,6 +1840,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1714,6 +1853,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1726,6 +1866,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1738,6 +1879,7 @@ MonoBehaviour:
     - ripper_2
     _interval: 0
     _intervalMax: 0
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1750,6 +1892,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1762,6 +1905,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1774,6 +1918,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1786,6 +1931,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1798,6 +1944,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1810,6 +1957,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1822,6 +1970,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1834,6 +1983,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1846,6 +1996,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1858,6 +2009,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1870,6 +2022,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1882,6 +2035,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1894,6 +2048,7 @@ MonoBehaviour:
     - emperor
     _interval: 0
     _intervalMax: 0
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1906,6 +2061,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1918,6 +2074,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1930,6 +2087,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1942,6 +2100,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1954,6 +2113,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1966,6 +2126,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1978,6 +2139,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -1990,6 +2152,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -2002,6 +2165,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -2014,6 +2178,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -2026,6 +2191,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -2038,6 +2204,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -2050,6 +2217,7 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
@@ -2062,6 +2230,7 @@ MonoBehaviour:
     - titan
     _interval: 0
     _intervalMax: 0
+    _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0

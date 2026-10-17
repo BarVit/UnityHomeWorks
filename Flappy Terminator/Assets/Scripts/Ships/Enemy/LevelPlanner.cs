@@ -56,6 +56,7 @@ public class LevelPlanner
     {
         EnemyRow enemy = _enemies.GetRow(enemyId);
 
-        return EnemySetup.ForEnemy(enemy, _weapons.GetRow(enemy.Weapon), row.ShieldCapacity, row.ShieldReward);
+        return EnemySetup.ForEnemy(enemy, _weapons.GetRow(enemy.Weapon), row.ShieldCapacity, row.ShieldReward,
+            row.ShieldLevel);
     }
 }

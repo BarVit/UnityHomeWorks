@@ -54,7 +54,7 @@ namespace TableImport
                 ShieldLevel shield = ReadShield(reader, mode, shields);
 
                 rows.Add(new WaveRow(location, level, order, count, mode, list, interval, intervalMax,
-                    shield.Capacity, shield.Reward));
+                    shield.Level, shield.Capacity, shield.Reward));
             }
 
             WaveTable table = GeneratedAsset.LoadOrCreate<WaveTable>(AssetPath);

@@ -12,6 +12,7 @@ public class ModuleRack : MonoBehaviour
     [SerializeField] private ModuleTable _modules;
     [SerializeField] private ModuleUpgradeTable _upgrades;
     [SerializeField] private SlotTable _slots;
+    [SerializeField] private Sprite[] _shieldIcons;
 
     public event Action Changed;
 
@@ -186,6 +187,19 @@ public class ModuleRack : MonoBehaviour
         return true;
     }
 
+    public int GetShieldLevel(string moduleId)
+    {
+        return Mathf.Min(ShieldColors.MaxLevel, GetLevel(moduleId, ModuleStat.Capacity) + 1);
+    }
+
+    public Sprite GetIcon(ModuleRow module)
+    {
+        if (module.Kind != ModuleKind.Shield || _shieldIcons == null || _shieldIcons.Length < ShieldColors.MaxLevel)
+            return module.Icon;
+
+        return _shieldIcons[GetShieldLevel(module.Id) - 1];
+    }
+
     public void Equip(BattleModules battle)
     {
         ModuleSpec?[] specs = new ModuleSpec?[SlotCount];
@@ -195,8 +209,9 @@ public class ModuleRack : MonoBehaviour
             ModuleRow row = GetInstalled(slot);
 
             if (row != null)
-                specs[slot - FirstSlot] = new ModuleSpec(row.Kind, row.Icon,
-                    Mathf.RoundToInt(GetValue(row.Id, ModuleStat.Capacity)), GetValue(row.Id, ModuleStat.Cooldown));
+                specs[slot - FirstSlot] = new ModuleSpec(row.Kind, GetIcon(row),
+                    Mathf.RoundToInt(GetValue(row.Id, ModuleStat.Capacity)), GetValue(row.Id, ModuleStat.Cooldown),
+                    GetShieldLevel(row.Id));
         }
 
         battle.Load(specs);

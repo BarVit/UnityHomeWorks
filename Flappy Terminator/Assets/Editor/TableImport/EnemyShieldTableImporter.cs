@@ -20,8 +20,7 @@ namespace TableImport
             {
                 RowReader reader = new RowReader(document, raw, log);
                 int level = reader.ReadInt("level", 1, 100);
-                ShieldLevel shield = new ShieldLevel(
-                    reader.ReadInt("capacity", 1, 1000000),
+                ShieldLevel shield = new ShieldLevel(level, reader.ReadInt("capacity", 1, 1000000),
                     new Reward(reader.ReadInt("reward_xp", 0, 1000000), reader.ReadInt("reward_money", 0, 1000000)));
 
                 if (levels.ContainsKey(level))

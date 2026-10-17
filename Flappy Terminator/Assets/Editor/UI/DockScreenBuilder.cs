@@ -31,6 +31,7 @@ namespace UiContent
         private const int UpgradeRowCount = 3;
         private const int SkillRowCount = 4;
         private const float RowStep = 74f;
+        private const string ShieldIconName = "Energy Shield Icon ";
         private const float SkillListY = -15f;
         private const float SkillListWidth = 624f;
         private const float ScrollbarWidth = 6f;
@@ -80,6 +81,7 @@ namespace UiContent
             Set(modules, "_modules", AssetDatabase.LoadAssetAtPath<ModuleTable>(ModulesAsset));
             Set(modules, "_upgrades", AssetDatabase.LoadAssetAtPath<ModuleUpgradeTable>(ModuleUpgradesAsset));
             Set(modules, "_slots", AssetDatabase.LoadAssetAtPath<SlotTable>(ModuleSlotsAsset));
+            SetShieldIcons(modules);
 
             PlayerShip playerShip = Object.FindAnyObjectByType<PlayerShip>(FindObjectsInactive.Include);
             SkillBook skills = GetOrAdd<SkillBook>(economy.gameObject);
@@ -121,6 +123,9 @@ namespace UiContent
                          "Energy Shield Icon", "Health Icon", "Cooldown Icon", "Double Shot Icon",
                          "Speed Icon", "Napalm Icon", "Turn Icon", "Reload Icon", "White Square" })
                 Prepare(name, 0);
+
+            for (int level = 1; level <= ShieldColors.MaxLevel; level++)
+                Prepare(ShieldIconName + level, 0);
         }
 
         private static void Prepare(string name, int border)
@@ -295,6 +300,18 @@ namespace UiContent
                 rows[i] = AddUpgradeRow(parent, "Row " + (i + 1), top - i * RowStep);
 
             return rows;
+        }
+
+        private static void SetShieldIcons(ModuleRack modules)
+        {
+            Object[] icons = new Object[ShieldColors.MaxLevel];
+
+            for (int level = 1; level <= ShieldColors.MaxLevel; level++)
+                icons[level - 1] = Art(ShieldIconName + level);
+
+            SerializedObject so = new SerializedObject(modules);
+            SetArray(so.FindProperty("_shieldIcons"), icons);
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         private static UpgradeRowView[] AddSkillList(RectTransform page, out RectTransform content)

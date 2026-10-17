@@ -121,7 +121,7 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
         _skin.Wear(_skinAsset);
 
         _health.Init(setup.Health);
-        RaiseShield(setup.ShieldCapacity);
+        RaiseShield(setup.ShieldCapacity, setup.ShieldLevel);
         Arm(setup);
         _mover.Fly(setup.Movement);
         _isHoldingFire = true;
@@ -188,13 +188,13 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
         ShieldBroken?.Invoke(this);
     }
 
-    private void RaiseShield(int capacity)
+    private void RaiseShield(int capacity, int level)
     {
         if (_shield == null)
             return;
 
         if (capacity > 0)
-            _shield.Raise(capacity);
+            _shield.Raise(capacity, level);
         else
             _shield.Drop();
     }

@@ -89,7 +89,7 @@ public class BattleModules : MonoBehaviour
         {
             case ModuleKind.Shield:
                 _shieldSlot = slot;
-                _shield.Raise(spec.Value.Capacity);
+                _shield.Raise(spec.Value.Capacity, spec.Value.Level);
                 break;
         }
 

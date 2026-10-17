@@ -2,8 +2,9 @@ using UnityEngine;
 
 public readonly struct ModuleSpec
 {
-    public ModuleSpec(ModuleKind kind, Sprite icon, int capacity, float cooldown)
+    public ModuleSpec(ModuleKind kind, Sprite icon, int capacity, float cooldown, int level)
     {
+        Level = level;
         Kind = kind;
         Icon = icon;
         Capacity = capacity;
@@ -17,4 +18,6 @@ public readonly struct ModuleSpec
     public int Capacity { get; }
 
     public float Cooldown { get; }
+
+    public int Level { get; }
 }

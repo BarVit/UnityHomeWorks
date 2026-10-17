@@ -409,7 +409,7 @@ public class DockScreen : MonoBehaviour
         if (module == null)
             slot.ShowEmpty(EmptyCaption, isSelected);
         else
-            slot.ShowWeapon(module.Icon, UiText.Title(module.Id), isSelected);
+            slot.ShowWeapon(_modules.GetIcon(module), UiText.Title(module.Id), isSelected);
     }
 
     private UpgradeRowData GetModuleRow(ModuleRow module, ModuleStat stat)
@@ -421,7 +421,7 @@ public class DockScreen : MonoBehaviour
         string title = stat == ModuleStat.Capacity ? "SHIELD CAPACITY" : "COOLDOWN";
         string hint = price < 0 ? MaxLevelHint
             : (step > 0f ? "+" : "") + step + (stat == ModuleStat.Cooldown ? Seconds : "") + " NEXT LEVEL";
-        Sprite icon = stat == ModuleStat.Capacity ? module.Icon : _cooldownIcon;
+        Sprite icon = stat == ModuleStat.Capacity ? _modules.GetIcon(module) : _cooldownIcon;
 
         return new UpgradeRowData(icon, title, hint, value, _modules.GetLevel(module.Id, stat),
             _modules.GetMaxLevel(module.Id, stat), price, _modules.CanUpgrade(module.Id, stat), _coinIcon);
