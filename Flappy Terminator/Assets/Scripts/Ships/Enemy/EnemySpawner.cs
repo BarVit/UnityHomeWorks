@@ -6,6 +6,8 @@ using UnityEngine.Serialization;
 
 public class EnemySpawner : MonoBehaviour
 {
+    private const float EmptyFieldDelay = 0.5f;
+
     [FormerlySerializedAs("_enemyTiers")]
     [SerializeField] private EnemyTable _enemies;
     [SerializeField] private WeaponTable _weapons;
@@ -219,7 +221,12 @@ public class EnemySpawner : MonoBehaviour
             _released = i + 1;
 
             for (float left = spawn.Interval; left > 0f; left -= Time.deltaTime)
+            {
+                if (_wave.RetiredCount >= _released)
+                    left = Mathf.Min(left, EmptyFieldDelay);
+
                 yield return null;
+            }
         }
 
         _spawning = null;
