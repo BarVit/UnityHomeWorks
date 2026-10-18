@@ -76,8 +76,8 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 0.6039216, b: 0.5411765, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
-    _rewardMoney: 2400
-    _rewardXp: 800
+    _rewardMoney: 5400
+    _rewardXp: 1800
     _intro: 
     _specialEvery: 0
     _specialWeapon: 
