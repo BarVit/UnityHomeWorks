@@ -341,7 +341,7 @@ MonoBehaviour:
     _location: loc_02_07
     _prefab: {fileID: 748883696485598149, guid: ba18fc5dc9df349c9a3317347b8941d8, type: 3}
     _prototype: punisher_2
-    _health: 10000
+    _health: 6000
     _weapon: magister_gun
     _barrels: 2
     _bodyDamage: 15
