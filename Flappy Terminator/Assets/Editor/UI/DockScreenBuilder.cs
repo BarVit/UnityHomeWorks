@@ -242,7 +242,7 @@ namespace UiContent
             AddMapButton(root);
             Button play = AddButton(root, "Play Button", "PLAY", new Vector2(1f, 0f), new Vector2(-190f, 62f), new Vector2(300f, 96f), 40);
 
-            ShopWindow shop = BuildShop(root, hangar, modules, economy);
+            ShopWindow shop = BuildShop(root, hangar, modules, skills, economy);
 
             so.FindProperty("_hangar").objectReferenceValue = hangar;
             so.FindProperty("_modules").objectReferenceValue = modules;

@@ -46,7 +46,8 @@ namespace UiContent
             return tab;
         }
 
-        private static ShopWindow BuildShop(RectTransform root, Hangar hangar, ModuleRack modules, Economy economy)
+        private static ShopWindow BuildShop(RectTransform root, Hangar hangar, ModuleRack modules, SkillBook skills,
+            Economy economy)
         {
             RectTransform shade = Stretch(ShopName, root);
             Image blocker = AddImage(shade, null);
@@ -84,6 +85,7 @@ namespace UiContent
             so.FindProperty("_panel").objectReferenceValue = shade.gameObject;
             so.FindProperty("_hangar").objectReferenceValue = hangar;
             so.FindProperty("_modules").objectReferenceValue = modules;
+            so.FindProperty("_skills").objectReferenceValue = skills;
             so.FindProperty("_economy").objectReferenceValue = economy;
             so.FindProperty("_locations").objectReferenceValue = AssetDatabase.LoadAssetAtPath<LocationTable>(LocationsAsset);
             so.FindProperty("_systems").objectReferenceValue = AssetDatabase.LoadAssetAtPath<SystemTable>(SystemsAsset);

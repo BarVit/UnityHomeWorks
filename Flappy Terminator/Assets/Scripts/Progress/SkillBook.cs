@@ -95,6 +95,19 @@ public class SkillBook : MonoBehaviour
         return 1f + GetValue(new SkillKey(SkillStat.RepairMastery, SkillTable.Everyone), levelShift) * PercentShare;
     }
 
+    public float GetModuleScale(ModuleStat stat, int levelShift = 0)
+    {
+        switch (stat)
+        {
+            case ModuleStat.Capacity:
+                return GetShieldScale(levelShift);
+            case ModuleStat.Repair:
+                return GetRepairScale(levelShift);
+            default:
+                return 1f;
+        }
+    }
+
     public bool IsOpen(SkillKey skill)
     {
         return skill.Stat != SkillStat.RepairMastery || _modules.IsKindOpen(ModuleKind.RepairDrone);

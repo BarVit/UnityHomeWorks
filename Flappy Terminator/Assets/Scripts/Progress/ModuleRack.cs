@@ -173,6 +173,13 @@ public class ModuleRack : MonoBehaviour
         return _upgrades.GetValue(moduleId, stat, GetLevel(moduleId, stat) + levelShift);
     }
 
+    public float GetFinalValue(string moduleId, ModuleStat stat, float scale, int levelShift = 0)
+    {
+        float value = GetValue(moduleId, stat, levelShift);
+
+        return stat == ModuleStat.Cooldown ? value : Mathf.RoundToInt(value * scale);
+    }
+
     public int GetUpgradePrice(string moduleId, ModuleStat stat)
     {
         LevelRow<ModuleStat> next = _upgrades.GetRow(moduleId, stat, GetLevel(moduleId, stat) + 1);
@@ -221,11 +228,11 @@ public class ModuleRack : MonoBehaviour
 
             if (row != null)
             {
-                int capacity = Mathf.RoundToInt(GetValue(row.Id, ModuleStat.Capacity) * shieldScale);
+                int capacity = Mathf.RoundToInt(GetFinalValue(row.Id, ModuleStat.Capacity, shieldScale));
+                int repair = Mathf.RoundToInt(GetFinalValue(row.Id, ModuleStat.Repair, repairScale));
 
                 specs[slot - FirstSlot] = new ModuleSpec(row.Kind, GetIcon(row), capacity,
-                    GetValue(row.Id, ModuleStat.Cooldown), GetShieldLevel(row.Id),
-                    Mathf.RoundToInt(GetValue(row.Id, ModuleStat.Repair) * repairScale));
+                    GetValue(row.Id, ModuleStat.Cooldown), GetShieldLevel(row.Id), repair);
             }
         }
 

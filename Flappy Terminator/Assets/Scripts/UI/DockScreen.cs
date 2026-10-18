@@ -417,9 +417,12 @@ public class DockScreen : MonoBehaviour
     private UpgradeRowData GetModuleRow(ModuleRow module, ModuleStat stat)
     {
         int price = _modules.GetUpgradePrice(module.Id, stat);
-        string now = FormatModule(stat, _modules.GetValue(module.Id, stat));
-        string value = price < 0 ? now : now + Arrow + FormatModule(stat, _modules.GetValue(module.Id, stat, 1));
-        float step = _modules.GetValue(module.Id, stat, 1) - _modules.GetValue(module.Id, stat);
+        float scale = _skills.GetModuleScale(stat);
+        float current = _modules.GetFinalValue(module.Id, stat, scale);
+        float next = _modules.GetFinalValue(module.Id, stat, scale, 1);
+        string now = FormatModule(stat, current);
+        string value = price < 0 ? now : now + Arrow + FormatModule(stat, next);
+        float step = next - current;
         string title = GetModuleStatTitle(stat);
         string hint = price < 0 ? MaxLevelHint
             : (step > 0f ? "+" : "") + step + (stat == ModuleStat.Cooldown ? Seconds : "") + " NEXT LEVEL";

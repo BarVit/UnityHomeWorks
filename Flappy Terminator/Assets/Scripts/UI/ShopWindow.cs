@@ -16,6 +16,7 @@ public class ShopWindow : MonoBehaviour
     [SerializeField] private GameObject _panel;
     [SerializeField] private Hangar _hangar;
     [SerializeField] private ModuleRack _modules;
+    [SerializeField] private SkillBook _skills;
     [SerializeField] private Economy _economy;
     [SerializeField] private LocationTable _locations;
     [SerializeField] private SystemTable _systems;
@@ -167,14 +168,19 @@ public class ShopWindow : MonoBehaviour
         return ClearText + (system == null ? location.Id : system.Order + "-" + location.Order);
     }
 
+    private float GetFinalValue(ModuleRow row, ModuleStat stat)
+    {
+        return _modules.GetFinalValue(row.Id, stat, _skills.GetModuleScale(stat));
+    }
+
     private string GetModuleDetails(ModuleRow row)
     {
         switch (row.Kind)
         {
             case ModuleKind.Shield:
-                return "ABSORBS " + Mathf.RoundToInt(_modules.GetValue(row.Id, ModuleStat.Capacity));
+                return "ABSORBS " + GetFinalValue(row, ModuleStat.Capacity);
             case ModuleKind.RepairDrone:
-                return "REPAIRS " + Mathf.RoundToInt(_modules.GetValue(row.Id, ModuleStat.Repair)) + " HP";
+                return "REPAIRS " + GetFinalValue(row, ModuleStat.Repair) + " HP";
             default:
                 return row.Description;
         }
