@@ -10,7 +10,7 @@ tormentor_2	Терзатель II	MiniBoss	loc_05_02	Enemy 4	phantom_2	10000	tor
 ripper_1	Потрошитель I	MiniBoss	loc_04_03	Enemy 5	executioner_1	20000	ripper_1_gun	1	30	2	FFFFFF	Boss Up And Down	30000	10000		0		0
 ripper_2	Потрошитель II	MiniBoss	loc_05_04	Enemy 5	executioner_2	50000	ripper_2_gun	1	30	2	FF9A8A	Boss Up And Down	60000	20000		0		0
 hierarch	Иерарх	Boss	loc_01_05	Boss 1	marauder_2	1200	hierarch_gun	1	10	2	FFFFFF	Boss Up And Down	3000	1000	HIERARCH GUARDS THE STAR GATE.\nGET READY TO FIGHT THE BOSS!	5	hierarch_gun_fan	3
-magister	Магистр	Boss	loc_02_07	Boss 2	punisher_2	6000	magister_gun	2	15	2	FFFFFF	Boss Up And Down	7500	2500	MAGISTER GUARDS THE STAR GATE.\nGET READY TO FIGHT THE BOSS!	0		0
+magister	Магистр	Boss	loc_02_07	Boss 2	punisher_2	4000	magister_gun	2	15	2	FFFFFF	Boss Up And Down	7500	2500	MAGISTER GUARDS THE STAR GATE.\nGET READY TO FIGHT THE BOSS!	0		0
 overlord	Владыка	Boss	loc_03_09	Boss 3	berserker_2	30000	overlord_gun	1	20	2	FFFFFF	Boss Up And Down	18000	6000	OVERLORD GUARDS THE STAR GATE.\nGET READY TO FIGHT THE BOSS!	0		0
 archon	Архонт	Boss	loc_04_06	Boss 4	tormentor_2	100000	archon_gun	2	25	2	FFFFFF	Boss Up And Down	45000	15000	ARCHON GUARDS THE STAR GATE.\nGET READY TO FIGHT THE BOSS!	0		0
 titan	Титан	Boss	loc_05_10	Boss 5	ripper_2	500000	titan_gun	1	30	2	FFFFFF	Boss Up And Down	300000	100000	TITAN BLOCKS YOUR WAY.\nGET READY TO FIGHT THE BOSS!	0		0

@@ -337,102 +337,102 @@ MonoBehaviour:
     _stat: 1
     _level: 1
     _bonus: -0.02
-    _price: 20
+    _price: 50
   - _owner: rocket
     _stat: 1
     _level: 2
     _bonus: -0.02
-    _price: 28
+    _price: 70
   - _owner: rocket
     _stat: 1
     _level: 3
     _bonus: -0.02
-    _price: 38
+    _price: 95
   - _owner: rocket
     _stat: 1
     _level: 4
     _bonus: -0.02
-    _price: 53
+    _price: 133
   - _owner: rocket
     _stat: 1
     _level: 5
     _bonus: -0.02
-    _price: 74
+    _price: 185
   - _owner: rocket
     _stat: 1
     _level: 6
     _bonus: -0.02
-    _price: 100
+    _price: 250
   - _owner: rocket
     _stat: 1
     _level: 7
     _bonus: -0.02
-    _price: 140
+    _price: 350
   - _owner: rocket
     _stat: 1
     _level: 8
     _bonus: -0.02
-    _price: 200
+    _price: 500
   - _owner: rocket
     _stat: 1
     _level: 9
     _bonus: -0.02
-    _price: 270
+    _price: 675
   - _owner: rocket
     _stat: 1
     _level: 10
     _bonus: -0.02
-    _price: 380
+    _price: 950
   - _owner: rocket
     _stat: 1
     _level: 11
     _bonus: -0.02
-    _price: 530
+    _price: 1325
   - _owner: rocket
     _stat: 1
     _level: 12
     _bonus: -0.02
-    _price: 730
+    _price: 1825
   - _owner: rocket
     _stat: 1
     _level: 13
     _bonus: -0.02
-    _price: 1000
+    _price: 2500
   - _owner: rocket
     _stat: 1
     _level: 14
     _bonus: -0.02
-    _price: 1400
+    _price: 3500
   - _owner: rocket
     _stat: 1
     _level: 15
     _bonus: -0.02
-    _price: 1900
+    _price: 4750
   - _owner: rocket
     _stat: 1
     _level: 16
     _bonus: -0.02
-    _price: 2700
+    _price: 6750
   - _owner: rocket
     _stat: 1
     _level: 17
     _bonus: -0.02
-    _price: 3700
+    _price: 9250
   - _owner: rocket
     _stat: 1
     _level: 18
     _bonus: -0.02
-    _price: 5200
+    _price: 13000
   - _owner: rocket
     _stat: 1
     _level: 19
     _bonus: -0.02
-    _price: 7200
+    _price: 18000
   - _owner: rocket
     _stat: 1
     _level: 20
     _bonus: -0.02
-    _price: 10000
+    _price: 25000
   - _owner: homing
     _stat: 2
     _level: 0
