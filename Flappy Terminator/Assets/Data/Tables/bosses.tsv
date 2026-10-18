@@ -1,5 +1,5 @@
 id	title	kind	location	prefab	prototype	health	weapon	barrels	body_damage	scale	tint	movement	reward_money	reward_xp	intro	special_every	special_weapon	special_barrels
-marauder_1	Мародёр I	MiniBoss	loc_01_02	Enemy 1	warden_1	200	marauder_1_gun	1	10	2	FFFFFF	Boss Up And Down	500	100		0		0
+marauder_1	Мародёр I	MiniBoss	loc_01_02	Enemy 1	warden_1	200	marauder_1_gun	1	10	2	FFFFFF	Boss Up And Down	1000	200		0		0
 marauder_2	Мародёр II	MiniBoss	loc_02_04	Enemy 1	warden_2	500	marauder_2_gun	1	10	2	FF9A8A	Boss Up And Down	800	125		0		0
 punisher_1	Каратель I	MiniBoss	loc_01_04	Enemy 2	hunter_1	400	punisher_1_gun	1	15	2	FFFFFF	Boss Up And Down	625	125		0		0
 punisher_2	Каратель II	MiniBoss	loc_03_01	Enemy 2	hunter_2	1000	punisher_2_gun	2	15	2	FF9A8A	Boss Up And Down	1000	200		0		0
@@ -9,7 +9,7 @@ tormentor_1	Терзатель I	MiniBoss	loc_03_07	Enemy 4	phantom_1	3000	torme
 tormentor_2	Терзатель II	MiniBoss	loc_05_02	Enemy 4	phantom_2	10000	tormentor_2_gun	2	25	2	FF9A8A	Boss Up And Down	2000	350		0		0
 ripper_1	Потрошитель I	MiniBoss	loc_04_03	Enemy 5	executioner_1	20000	ripper_1_gun	1	30	2	FFFFFF	Boss Up And Down	3000	600		0		0
 ripper_2	Потрошитель II	MiniBoss	loc_05_04	Enemy 5	executioner_2	50000	ripper_2_gun	1	30	2	FF9A8A	Boss Up And Down	4800	750		0		0
-hierarch	Иерарх	Boss	loc_01_05	Boss 1	marauder_2	1200	hierarch_gun	1	10	2	FFFFFF	Boss Up And Down	3125	625	HIERARCH GUARDS THE STAR GATE.\nGET READY TO FIGHT THE BOSS!	5	hierarch_gun_fan	3
+hierarch	Иерарх	Boss	loc_01_05	Boss 1	marauder_2	1200	hierarch_gun	1	10	2	FFFFFF	Boss Up And Down	5000	1000	HIERARCH GUARDS THE STAR GATE.\nGET READY TO FIGHT THE BOSS!	5	hierarch_gun_fan	3
 magister	Магистр	Boss	loc_02_07	Boss 2	punisher_2	10000	magister_gun	2	15	2	FFFFFF	Boss Up And Down	5000	1000	MAGISTER GUARDS THE STAR GATE.\nGET READY TO FIGHT THE BOSS!	0		0
 overlord	Владыка	Boss	loc_03_09	Boss 3	berserker_2	30000	overlord_gun	1	20	2	FFFFFF	Boss Up And Down	6250	1250	OVERLORD GUARDS THE STAR GATE.\nGET READY TO FIGHT THE BOSS!	0		0
 archon	Архонт	Boss	loc_04_06	Boss 4	tormentor_2	100000	archon_gun	2	25	2	FFFFFF	Boss Up And Down	8750	1750	ARCHON GUARDS THE STAR GATE.\nGET READY TO FIGHT THE BOSS!	0		0

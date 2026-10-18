@@ -26,8 +26,8 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
-    _rewardMoney: 500
-    _rewardXp: 100
+    _rewardMoney: 1000
+    _rewardXp: 200
     _intro: 
     _specialEvery: 0
     _specialWeapon: 
@@ -256,8 +256,8 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
-    _rewardMoney: 3125
-    _rewardXp: 625
+    _rewardMoney: 5000
+    _rewardXp: 1000
     _intro: 'HIERARCH GUARDS THE STAR GATE.
 
       GET READY TO FIGHT THE BOSS!'
