@@ -35,7 +35,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 760552f2b84714314ac77afd244877e5, type: 3}
     _bodyDamage: 15
     _fromLocation: loc_01_01
-    _health: 14
+    _health: 16
     _weapon: warden_2_gun
     _barrels: 2
     _damage: 8
@@ -65,7 +65,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 16686150d903a469bad63cb034411710, type: 3}
     _bodyDamage: 15
     _fromLocation: loc_01_02
-    _health: 20
+    _health: 24
     _weapon: hunter_1_gun
     _barrels: 1
     _damage: 2
@@ -80,7 +80,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 16686150d903a469bad63cb034411710, type: 3}
     _bodyDamage: 25
     _fromLocation: loc_01_04
-    _health: 50
+    _health: 60
     _weapon: hunter_2_gun
     _barrels: 2
     _damage: 3
@@ -128,7 +128,7 @@ MonoBehaviour:
     _health: 100
     _weapon: reaper_2_gun
     _barrels: 2
-    _damage: 20
+    _damage: 12
     _movement: {fileID: 11400000, guid: ec44c4c943f5c4325963d3017c8e51d1, type: 2}
     _skin: {fileID: 0}
     _rewardMoney: 240

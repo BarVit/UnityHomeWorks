@@ -557,7 +557,7 @@ MonoBehaviour:
     _cooldownRate: 0
     _unlockHeat: 0
     _tickInterval: 0
-    _turnRate: 20
+    _turnRate: 16
     _aimTime: 0
     _area: 0
     _price: 0
@@ -592,7 +592,7 @@ MonoBehaviour:
     _cooldownRate: 0
     _unlockHeat: 0
     _tickInterval: 0
-    _turnRate: 20
+    _turnRate: 16
     _aimTime: 0
     _area: 0
     _price: 0
@@ -1014,7 +1014,7 @@ MonoBehaviour:
     _cooldownRate: 0
     _unlockHeat: 0
     _tickInterval: 0
-    _turnRate: 20
+    _turnRate: 16
     _aimTime: 0
     _area: 0
     _price: 0
@@ -1049,7 +1049,7 @@ MonoBehaviour:
     _cooldownRate: 0
     _unlockHeat: 0
     _tickInterval: 0
-    _turnRate: 20
+    _turnRate: 16
     _aimTime: 0
     _area: 0
     _price: 0
@@ -1406,7 +1406,7 @@ MonoBehaviour:
     _cooldownRate: 0
     _unlockHeat: 0
     _tickInterval: 0
-    _turnRate: 20
+    _turnRate: 16
     _aimTime: 0
     _area: 0
     _price: 0
