@@ -80,7 +80,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 16686150d903a469bad63cb034411710, type: 3}
     _bodyDamage: 25
     _fromLocation: loc_01_04
-    _health: 65
+    _health: 70
     _weapon: hunter_2_gun
     _barrels: 2
     _damage: 3
@@ -95,7 +95,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 16686150d903a469bad63cb034411710, type: 3}
     _bodyDamage: 35
     _fromLocation: loc_02_05
-    _health: 150
+    _health: 180
     _weapon: hunter_3_gun
     _barrels: 1
     _damage: 50
