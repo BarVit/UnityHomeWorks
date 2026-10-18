@@ -1,5 +1,5 @@
 weapon	title	unlock	barrels	weapon_price	slot_2	slot_3	slot_4	damage	crit_chance	heat_reduction	double_shot	projectile_speed	napalm	turn_rate	per_barrel	all_barrels	all_barrels_lvl4	total	note
-cannon	Пушка	start	4	0	1200	7500	15000	4500	4350		4350				13200	52800	34800	76500	
+cannon	Пушка	start	4	0	1200	7500	15000	5200	4350		4350				13900	55600	33200	79300	
 impulse_laser	Импульсный лазер	loc_01_04	4	6000	6000	12000	24000	15750		10000					25750	103000	71000	151000	
 rocket	Ракетница	loc_02_04	4	15000	10000	20000	40000	37500				30000	33750		101250	405000	279000	490000	
 homing	Самонаводящиеся	loc_03_03	4	25000	15000	30000	60000	75000					67500	60000	202500	810000	558000	940000	
