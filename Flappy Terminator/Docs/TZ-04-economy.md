@@ -11,6 +11,13 @@
 > С того же дня **сохранения на диск нет**: прокачка живёт одну игровую сессию, START
 > начинает её заново. Разделы ниже о `SaveStorage` и JSON — история.
 
+> **Где числа.** Награды в ТЗ не повторяются, они живут в таблицах: за врага — столбцы
+> `reward_money` и `reward_xp` в [`enemies.tsv`](../Assets/Data/Tables/enemies.tsv) и
+> [`bosses.tsv`](../Assets/Data/Tables/bosses.tsv), за сбитый щит врага — те же столбцы в
+> [`enemy_shields.tsv`](../Assets/Data/Tables/enemy_shields.tsv). Суммы по локациям и маршруту —
+> отчёт [`location_rewards.tsv`](../Assets/Data/Reports/location_rewards.tsv) (`money`, `xp`,
+> `route_money`, `route_xp`); полная цена пушек — [`weapons_full_price.tsv`](../Assets/Data/Reports/weapons_full_price.tsv).
+
 > **11.10.2026:** уровни пилота и корабля убраны (решение пользователя). Опыт стал валютой для
 > скиллов ([ТЗ-09](TZ-09-skills.md)), `progression.tsv` и его код удалены. Разделы ниже про
 > кривые опыта и уровни — история.
