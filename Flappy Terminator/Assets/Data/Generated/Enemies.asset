@@ -57,7 +57,7 @@ MonoBehaviour:
     _movement: {fileID: 11400000, guid: da73c4fdab4c54894b366a2a1f80dbc9, type: 2}
     _skin: {fileID: 11400000, guid: 27b03022958b842d094826d4c6078463, type: 2}
     _rewardMoney: 300
-    _rewardXp: 75
+    _rewardXp: 60
   - _id: hunter_1
     _type: enemy_hunter
     _title: "\u041E\u0445\u043E\u0442\u043D\u0438\u043A I"
