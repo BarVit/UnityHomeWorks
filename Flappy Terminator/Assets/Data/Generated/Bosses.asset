@@ -76,8 +76,8 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 0.6039216, b: 0.5411765, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
-    _rewardMoney: 800
-    _rewardXp: 267
+    _rewardMoney: 2400
+    _rewardXp: 800
     _intro: 
     _specialEvery: 0
     _specialWeapon: 
@@ -96,8 +96,8 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
-    _rewardMoney: 625
-    _rewardXp: 208
+    _rewardMoney: 1800
+    _rewardXp: 600
     _intro: 
     _specialEvery: 0
     _specialWeapon: 
@@ -116,8 +116,8 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 0.6039216, b: 0.5411765, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
-    _rewardMoney: 1000
-    _rewardXp: 333
+    _rewardMoney: 6000
+    _rewardXp: 2000
     _intro: 
     _specialEvery: 0
     _specialWeapon: 
@@ -136,8 +136,8 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
-    _rewardMoney: 750
-    _rewardXp: 250
+    _rewardMoney: 4500
+    _rewardXp: 1500
     _intro: 
     _specialEvery: 0
     _specialWeapon: 
@@ -156,8 +156,8 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 0.6039216, b: 0.5411765, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
-    _rewardMoney: 1200
-    _rewardXp: 400
+    _rewardMoney: 9000
+    _rewardXp: 3000
     _intro: 
     _specialEvery: 0
     _specialWeapon: 
@@ -176,8 +176,8 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
-    _rewardMoney: 1250
-    _rewardXp: 417
+    _rewardMoney: 15000
+    _rewardXp: 5000
     _intro: 
     _specialEvery: 0
     _specialWeapon: 
@@ -196,8 +196,8 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 0.6039216, b: 0.5411765, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
-    _rewardMoney: 2000
-    _rewardXp: 667
+    _rewardMoney: 45000
+    _rewardXp: 15000
     _intro: 
     _specialEvery: 0
     _specialWeapon: 
@@ -216,8 +216,8 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
-    _rewardMoney: 3000
-    _rewardXp: 1000
+    _rewardMoney: 30000
+    _rewardXp: 10000
     _intro: 
     _specialEvery: 0
     _specialWeapon: 
@@ -236,8 +236,8 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 0.6039216, b: 0.5411765, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
-    _rewardMoney: 4800
-    _rewardXp: 1600
+    _rewardMoney: 60000
+    _rewardXp: 20000
     _intro: 
     _specialEvery: 0
     _specialWeapon: 
@@ -348,8 +348,8 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
-    _rewardMoney: 5000
-    _rewardXp: 1667
+    _rewardMoney: 7500
+    _rewardXp: 2500
     _intro: 'MAGISTER GUARDS THE STAR GATE.
 
       GET READY TO FIGHT THE BOSS!'
@@ -370,8 +370,8 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
-    _rewardMoney: 6250
-    _rewardXp: 2083
+    _rewardMoney: 18000
+    _rewardXp: 6000
     _intro: 'OVERLORD GUARDS THE STAR GATE.
 
       GET READY TO FIGHT THE BOSS!'
@@ -392,8 +392,8 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
-    _rewardMoney: 8750
-    _rewardXp: 2917
+    _rewardMoney: 45000
+    _rewardXp: 15000
     _intro: 'ARCHON GUARDS THE STAR GATE.
 
       GET READY TO FIGHT THE BOSS!'
@@ -414,8 +414,8 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
-    _rewardMoney: 18750
-    _rewardXp: 6250
+    _rewardMoney: 300000
+    _rewardXp: 100000
     _intro: 'TITAN BLOCKS YOUR WAY.
 
       GET READY TO FIGHT THE BOSS!'
@@ -436,8 +436,8 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
-    _rewardMoney: 18750
-    _rewardXp: 6250
+    _rewardMoney: 150000
+    _rewardXp: 50000
     _intro: 'THE EMPEROR AWAITS YOU.
 
       GET READY TO FIGHT THE BOSS!'
