@@ -95,6 +95,17 @@ public class ModuleRack : MonoBehaviour
         return _economy.IsRequirementMet(row.UnlockAfter);
     }
 
+    public bool IsKindOpen(ModuleKind kind)
+    {
+        foreach (ModuleRow row in _modules.Rows)
+        {
+            if (row.Kind == kind && IsOpen(row.Id))
+                return true;
+        }
+
+        return false;
+    }
+
     public bool TryBuy(string moduleId)
     {
         if (CanBuy(moduleId) == false || _economy.TrySpend(_modules.GetRow(moduleId).Price) == false)
@@ -200,7 +211,7 @@ public class ModuleRack : MonoBehaviour
         return _shieldIcons[GetShieldLevel(module.Id)];
     }
 
-    public void Equip(BattleModules battle, float shieldScale)
+    public void Equip(BattleModules battle, float shieldScale, float repairScale)
     {
         ModuleSpec?[] specs = new ModuleSpec?[SlotCount];
 
@@ -214,7 +225,7 @@ public class ModuleRack : MonoBehaviour
 
                 specs[slot - FirstSlot] = new ModuleSpec(row.Kind, GetIcon(row), capacity,
                     GetValue(row.Id, ModuleStat.Cooldown), GetShieldLevel(row.Id),
-                    Mathf.RoundToInt(GetValue(row.Id, ModuleStat.Repair)));
+                    Mathf.RoundToInt(GetValue(row.Id, ModuleStat.Repair) * repairScale));
             }
         }
 

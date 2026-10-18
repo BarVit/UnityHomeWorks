@@ -3,5 +3,6 @@ public enum SkillStat
     Health,
     Cooldown,
     MagazineReload,
-    ShieldMastery
+    ShieldMastery,
+    RepairMastery
 }

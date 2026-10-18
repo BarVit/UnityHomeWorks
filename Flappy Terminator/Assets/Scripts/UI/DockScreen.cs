@@ -512,6 +512,8 @@ public class DockScreen : MonoBehaviour
                 return UiText.Title(skill.Weapon) + " RELOAD";
             case SkillStat.ShieldMastery:
                 return "SHIELD MASTERY";
+            case SkillStat.RepairMastery:
+                return "REPAIR MASTERY";
             default:
                 return UiText.Title(skill.Weapon) + " COOLDOWN";
         }
@@ -527,6 +529,8 @@ public class DockScreen : MonoBehaviour
                 return _reloadIcon;
             case SkillStat.ShieldMastery:
                 return _shieldSkillIcon;
+            case SkillStat.RepairMastery:
+                return _repairIcon;
             default:
                 return _cooldownIcon;
         }
@@ -543,6 +547,8 @@ public class DockScreen : MonoBehaviour
                 return GetHullHint(skill, price);
             case SkillStat.ShieldMastery:
                 return "+" + _skills.GetStep(skill) + PercentSign + " SHIELD PER LEVEL";
+            case SkillStat.RepairMastery:
+                return "+" + _skills.GetStep(skill) + PercentSign + " REPAIR PER LEVEL";
             default:
                 return GetCooldownHint(skill, price);
         }
@@ -569,7 +575,7 @@ public class DockScreen : MonoBehaviour
         if (skill.Stat == SkillStat.Health)
             return (_skills.BaseHealth + Mathf.RoundToInt(_skills.GetValue(skill, levelShift))).ToString();
 
-        if (skill.Stat == SkillStat.ShieldMastery)
+        if (skill.Stat == SkillStat.ShieldMastery || skill.Stat == SkillStat.RepairMastery)
             return "+" + Mathf.RoundToInt(_skills.GetValue(skill, levelShift)) + PercentSign;
 
         if (skill.Stat == SkillStat.MagazineReload)

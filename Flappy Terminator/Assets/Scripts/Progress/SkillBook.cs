@@ -13,6 +13,7 @@ public class SkillBook : MonoBehaviour
     [SerializeField] private SkillTable _skills;
     [SerializeField] private WeaponTable _weapons;
     [SerializeField] private PlayerShip _ship;
+    [SerializeField] private ModuleRack _modules;
 
     public event Action Changed;
 
@@ -31,7 +32,7 @@ public class SkillBook : MonoBehaviour
         {
             SkillKey skill = new SkillKey(row.Stat, row.Owner);
 
-            if (row.Level > 0 && skills.Contains(skill) == false)
+            if (row.Level > 0 && skills.Contains(skill) == false && IsOpen(skill))
                 skills.Add(skill);
         }
 
@@ -89,11 +90,21 @@ public class SkillBook : MonoBehaviour
         return 1f + GetValue(new SkillKey(SkillStat.ShieldMastery, SkillTable.Everyone), levelShift) * PercentShare;
     }
 
+    public float GetRepairScale(int levelShift = 0)
+    {
+        return 1f + GetValue(new SkillKey(SkillStat.RepairMastery, SkillTable.Everyone), levelShift) * PercentShare;
+    }
+
+    public bool IsOpen(SkillKey skill)
+    {
+        return skill.Stat != SkillStat.RepairMastery || _modules.IsKindOpen(ModuleKind.RepairDrone);
+    }
+
     public bool CanUpgrade(SkillKey skill)
     {
         int price = GetPrice(skill);
 
-        return price != NoPrice && _economy.Xp >= price;
+        return IsOpen(skill) && price != NoPrice && _economy.Xp >= price;
     }
 
     public bool TryUpgrade(SkillKey skill)
