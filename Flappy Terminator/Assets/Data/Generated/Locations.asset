@@ -93,7 +93,7 @@ MonoBehaviour:
   - _id: loc_02_03
     _system: sys_02
     _order: 3
-    _levels: 4
+    _levels: 3
     _boss: 
     _borderTheme: 
     _flightMode: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
   - _id: loc_02_05
     _system: sys_02
     _order: 5
-    _levels: 4
+    _levels: 3
     _boss: 
     _borderTheme: 
     _flightMode: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
   - _id: loc_02_06
     _system: sys_02
     _order: 6
-    _levels: 5
+    _levels: 4
     _boss: 
     _borderTheme: 
     _flightMode: 0
