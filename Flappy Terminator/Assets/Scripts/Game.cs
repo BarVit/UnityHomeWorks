@@ -20,8 +20,12 @@ public class Game : MonoBehaviour
     [SerializeField] private ScreenNavigator _screens;
     [SerializeField] private PauseController _pause;
     [SerializeField] private LocationRunner _runner;
+    [SerializeField] private float _skippedDeathSoundFade = 0.5f;
+
+    private readonly BattleSoundFade _soundFade = new BattleSoundFade();
 
     private Coroutine _gameOverCountdown;
+    private Coroutine _soundFading;
     private bool _isLevelOver;
     private bool _isRunning;
     private bool _isDeathSkipped;
@@ -233,6 +237,7 @@ public class Game : MonoBehaviour
     private void StartLevel()
     {
         StopGameOverCountdown();
+        StopSoundFade();
         _warpJump.Stop();
 
         _isLevelOver = false;
@@ -322,6 +327,9 @@ public class Game : MonoBehaviour
         _gameOverCountdown = null;
         _isRunning = false;
 
+        if (_isDeathSkipped)
+            FadeBattleSounds();
+
         _runner.BankLevel();
         ShowDock(DockReason.Destroyed);
     }
@@ -360,6 +368,22 @@ public class Game : MonoBehaviour
         _hangar.Equip(_playerShip.Shooter, _skills.GetRateScale(weaponId), _skills.GetReloadShift(weaponId));
         _moduleRack.Equip(_battleModules, _skills.GetShieldScale());
         _skills.Equip(_playerShip);
+    }
+
+    private void FadeBattleSounds()
+    {
+        StopSoundFade();
+        _soundFading = StartCoroutine(_soundFade.Fade(_skippedDeathSoundFade));
+    }
+
+    private void StopSoundFade()
+    {
+        if (_soundFading == null)
+            return;
+
+        StopCoroutine(_soundFading);
+        _soundFading = null;
+        _soundFade.Finish();
     }
 
     private void StopGameOverCountdown()
