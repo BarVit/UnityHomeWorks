@@ -78,6 +78,7 @@ namespace TableImport
         {
             int barrels = Math.Min(MaxBarrels, row.BarrelsMax);
             int total = row.Price;
+            int slotsPrice = 0;
             int perBarrel = 0;
             int perBarrelToComfort = 0;
             List<string> cells = new List<string>
@@ -95,7 +96,7 @@ namespace TableImport
 
                 int price = slots.GetRow(row.Id, slot).Price;
 
-                total += price;
+                slotsPrice += price;
                 cells.Add(Format(price));
             }
 
@@ -108,10 +109,11 @@ namespace TableImport
                 cells.Add(price > 0 ? Format(price) : "");
             }
 
-            total += perBarrel * barrels;
+            total += slotsPrice + perBarrel * barrels;
             cells.AddRange(new[]
             {
-                Format(perBarrel), Format(perBarrel * barrels), Format(perBarrelToComfort * barrels), Format(total),
+                Format(perBarrel), Format(perBarrel * barrels), Format(slotsPrice + perBarrelToComfort * barrels),
+                Format(total),
                 GetNote(row, barrels, upgrades)
             });
 
