@@ -536,7 +536,7 @@ MonoBehaviour:
   _rotationSpeed: 1
   _minRotationZ: -45
   _maxRotationZ: 45
-  _startPosition: {x: -6, y: 0}
+  _startPosition: {x: -7, y: 0}
   _softStartDuration: 0.5
   _aimSpeed: 180
 --- !u!114 &8330222878791513292
