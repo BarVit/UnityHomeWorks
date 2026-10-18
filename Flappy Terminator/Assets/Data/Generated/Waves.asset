@@ -206,10 +206,11 @@ MonoBehaviour:
   - _location: loc_01_04
     _level: 2
     _order: 1
-    _count: 5
+    _count: 10
     _mode: 1
     _enemies:
-    - warden_3
+    - warden_2
+    - hunter_1
     _interval: 3
     _intervalMax: 3
     _shieldLevel: 0
@@ -260,10 +261,11 @@ MonoBehaviour:
   - _location: loc_01_04
     _level: 3
     _order: 3
-    _count: 5
+    _count: 10
     _mode: 1
     _enemies:
-    - warden_3
+    - warden_2
+    - hunter_1
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 0
@@ -313,10 +315,11 @@ MonoBehaviour:
   - _location: loc_01_05
     _level: 3
     _order: 1
-    _count: 10
+    _count: 15
     _mode: 1
     _enemies:
-    - warden_3
+    - warden_2
+    - hunter_1
     - hunter_2
     _interval: 2
     _intervalMax: 3

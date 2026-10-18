@@ -49,7 +49,7 @@ MonoBehaviour:
     _tier: 3
     _prefab: {fileID: 748883696485598149, guid: 760552f2b84714314ac77afd244877e5, type: 3}
     _bodyDamage: 20
-    _fromLocation: loc_01_04
+    _fromLocation: loc_02_01
     _health: 55
     _weapon: warden_3_gun
     _barrels: 2
