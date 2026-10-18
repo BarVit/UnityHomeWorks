@@ -2,6 +2,7 @@ using TMPro;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 
 namespace UiContent
@@ -31,6 +32,7 @@ namespace UiContent
         private const int UpgradeRowCount = 3;
         private const int SkillRowCount = 4;
         private const float RowStep = 74f;
+        private const float DefaultWheelDeltaPerTick = 6f;
         private const string ShieldIconName = "Energy Shield Icon ";
         private const float SkillListY = -15f;
         private const float SkillListWidth = 624f;
@@ -325,7 +327,9 @@ namespace UiContent
             RectTransform viewport = Place("Skill List", page, new Vector2(0.5f, 0.5f), new Vector2(0f, SkillListY),
                 new Vector2(SkillListWidth, SkillRowCount * RowStep));
             viewport.gameObject.AddComponent<RectMask2D>();
-            AddImage(viewport, null).color = Color.clear;
+            Image hitArea = AddImage(viewport, null);
+            hitArea.color = Color.clear;
+            hitArea.raycastTarget = true;
 
             content = Create("Content", viewport);
             content.anchorMin = new Vector2(0f, 1f);
@@ -339,7 +343,7 @@ namespace UiContent
             scroll.viewport = viewport;
             scroll.horizontal = false;
             scroll.movementType = ScrollRect.MovementType.Clamped;
-            scroll.scrollSensitivity = 30f;
+            scroll.scrollSensitivity = RowStep / GetWheelDeltaPerTick();
             scroll.verticalScrollbar = AddScrollbar(viewport);
             scroll.verticalScrollbarVisibility = ScrollRect.ScrollbarVisibility.AutoHide;
 
@@ -357,6 +361,13 @@ namespace UiContent
             return rows;
         }
 
+        private static float GetWheelDeltaPerTick()
+        {
+            InputSystemUIInputModule module = Object.FindAnyObjectByType<InputSystemUIInputModule>(FindObjectsInactive.Include);
+
+            return module == null || module.scrollDeltaPerTick <= 0f ? DefaultWheelDeltaPerTick : module.scrollDeltaPerTick;
+        }
+
         private static Scrollbar AddScrollbar(RectTransform viewport)
         {
             RectTransform track = Create("Scrollbar", viewport);
@@ -365,12 +376,15 @@ namespace UiContent
             track.pivot = new Vector2(1f, 0.5f);
             track.offsetMin = new Vector2(-ScrollbarWidth, 0f);
             track.offsetMax = Vector2.zero;
-            AddImage(track, null).color = new Color(Cyan.r, Cyan.g, Cyan.b, 0.15f);
+            Image trackImage = AddImage(track, null);
+            trackImage.color = new Color(Cyan.r, Cyan.g, Cyan.b, 0.15f);
+            trackImage.raycastTarget = true;
 
             RectTransform area = Stretch("Sliding Area", track);
             RectTransform handle = Stretch("Handle", area);
             Image handleImage = AddImage(handle, null);
             handleImage.color = new Color(Cyan.r, Cyan.g, Cyan.b, 0.8f);
+            handleImage.raycastTarget = true;
 
             Scrollbar scrollbar = track.gameObject.AddComponent<Scrollbar>();
             scrollbar.handleRect = handle;
