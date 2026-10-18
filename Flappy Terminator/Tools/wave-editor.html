@@ -46,7 +46,17 @@ aside { border-right: 1px solid var(--line); background: var(--panel); overflow:
 main { padding: 14px 18px 60px; overflow: auto; }
 
 .sys { border-bottom: 1px solid var(--line); }
-.sys-head { display: flex; justify-content: space-between; gap: 8px; padding: 9px 12px 5px; font-weight: 600; }
+.sys-head { display: flex; justify-content: space-between; gap: 8px; padding: 9px 12px 5px; font-weight: 600;
+  width: 100%; text-align: left; border: 0; border-radius: 0; background: none; }
+.sys-head:hover { background: var(--chip); }
+.sys-head.sel { background: var(--accent-soft); }
+.sys-head .meta { font-weight: 400; color: var(--muted); font-size: 11px; }
+button.link { border: 0; background: none; padding: 0; color: var(--accent); cursor: pointer; }
+button.link:hover { text-decoration: underline; }
+table.types td.per { color: var(--muted); font-size: 11px; }
+tr.sub td { background: var(--chip); font-weight: 600; }
+tr.total td { font-weight: 700; border-top: 2px solid var(--line); }
+tr.gone td { color: var(--muted); text-decoration: line-through; }
 .sys-head .sum { font-weight: 600; font-variant-numeric: tabular-nums; }
 .loc { display: grid; grid-template-columns: 54px 1fr auto; gap: 6px; align-items: baseline; width: 100%; text-align: left;
   border: 0; border-radius: 0; background: none; padding: 4px 12px; font-variant-numeric: tabular-nums; }
@@ -497,6 +507,66 @@ function groupSum(row, C) {
   return sum;
 }
 
+// expected number of each kind of enemy in a group and what they bring; random groups split the count evenly, as the report does
+function tallyGroup(row, C, types) {
+  const count = toInt(row.count);
+  const mode = MODES.find(name => name.toLowerCase() === String(row.mode).toLowerCase());
+  const ids = splitIds(row.enemies);
+  const add = (key, kind, title, n, money, xp) => {
+    const type = types[key] ||= { key, kind, title, n: 0, money: 0, xp: 0, unitMoney: money, unitXp: xp, random: false };
+    type.n += n;
+    type.money += n * money;
+    type.xp += n * xp;
+    return type;
+  };
+
+  if (isNaN(count) || count < 1 || !mode)
+    return;
+
+  if (mode === 'Boss') {
+    const boss = C.bosses[ids[0]];
+
+    if (boss)
+      add(boss.id, boss.kind === 'Boss' ? 'boss' : 'miniboss', boss.title, 1, boss.money, boss.xp);
+
+    return;
+  }
+
+  if (mode === 'Sequence') {
+    for (let i = 0; i < count; i++) {
+      const enemy = C.enemies[ids[i % ids.length]];
+
+      if (enemy)
+        add(enemy.id, 'enemy', enemy.title, 1, enemy.money, enemy.xp);
+    }
+  } else {
+    for (const id of ids) {
+      const enemy = C.enemies[id];
+
+      if (enemy)
+        add(enemy.id, 'enemy', enemy.title, count / ids.length, enemy.money, enemy.xp).random = true;
+    }
+  }
+
+  const shield = C.shields[toInt(row.shield)];
+
+  if (shield)
+    add('shield:' + shield.level, 'shield', 'Сбитый щит, уровень ' + shield.level, count, shield.money, shield.xp);
+}
+
+function mergeTypes(target, source, label) {
+  for (const type of Object.values(source)) {
+    const merged = target[type.key] ||= Object.assign({}, type, { n: 0, money: 0, xp: 0, random: false, per: {} });
+    merged.n += type.n;
+    merged.money += type.money;
+    merged.xp += type.xp;
+    merged.random = merged.random || type.random;
+    merged.per[label] = (merged.per[label] || 0) + type.n;
+  }
+
+  return target;
+}
+
 function sortedGroups(rows, locationId, level) {
   return rows.map((row, index) => ({ row, index }))
     .filter(item => item.row.location === locationId && toInt(item.row.level) === level)
@@ -525,6 +595,7 @@ function computeAll(waveRows, locationRows) {
   for (const location of Object.values(C.locations)) {
     const levels = [];
     const total = emptySum();
+    const types = {};
     let hasRows = false;
     let missing = [];
     let errors = 0;
@@ -535,6 +606,7 @@ function computeAll(waveRows, locationRows) {
 
       for (const group of groups) {
         group.sum = groupSum(group.row, C);
+        tallyGroup(group.row, C, types);
         group.errors = rowErrors.get(group.index) || [];
         errors += group.errors.length;
         addSum(sum, group.sum);
@@ -558,7 +630,7 @@ function computeAll(waveRows, locationRows) {
       hasRows = true;
     }
 
-    perLocation[location.id] = { location, levels, total, hasRows, missing, errors, outside,
+    perLocation[location.id] = { location, levels, total, types, hasRows, missing, errors, outside,
       playable: hasRows && missing.length === 0 };
   }
 
@@ -578,6 +650,9 @@ function computeAll(waveRows, locationRows) {
     const route = Object.values(C.locations).filter(l => l.system === system.id && !l.branchOf).sort((a, b) => a.order - b.order);
     const sum = emptySum();
     const branchSum = emptySum();
+    const types = {};
+    const branchTypes = {};
+    const branches = [];
 
     for (const location of route) {
       const reward = perLocation[location.id];
@@ -588,15 +663,20 @@ function computeAll(waveRows, locationRows) {
         reward.routeMoney = routeMoney;
         reward.routeXp = routeXp;
         addSum(sum, reward.total);
+        mergeTypes(types, reward.types, C.labels[location.id]);
       }
 
       for (const branch of C.branches[location.id] || []) {
-        if (perLocation[branch.id].hasRows)
+        branches.push(branch);
+
+        if (perLocation[branch.id].hasRows) {
           addSum(branchSum, perLocation[branch.id].total);
+          mergeTypes(branchTypes, perLocation[branch.id].types, C.labels[branch.id]);
+        }
       }
     }
 
-    systems.push({ system, route, sum, branchSum, routeMoney, routeXp });
+    systems.push({ system, route, branches, sum, branchSum, types, branchTypes, routeMoney, routeXp });
   }
 
   return { C, perLocation, systems, rowErrors, errorCount, orphans };
@@ -873,7 +953,9 @@ function render() {
 
   S.view = now;
 
-  if (!S.sel || !now.C.locations[S.sel])
+  const selectedSystem = String(S.sel).startsWith('sys:') && now.systems.some(s => 'sys:' + s.system.id === S.sel);
+
+  if (!S.sel || (!selectedSystem && !now.C.locations[S.sel]))
     S.sel = now.systems[0]?.route[0]?.id || Object.keys(now.C.locations)[0];
 
   store('sel', S.sel);
@@ -936,9 +1018,12 @@ function renderTree(now, before) {
   for (const entry of now.systems) {
     const was = before.systems.find(s => s.system.id === entry.system.id) || { sum: emptySum(), branchSum: emptySum() };
 
-    html += '<div class="sys"><div class="sys-head"><span>' + esc(entry.system.title) + '</span><span class="sum">' +
+    const id = 'sys:' + entry.system.id;
+
+    html += '<div class="sys"><button class="sys-head' + (S.sel === id ? ' sel' : '') + '" data-act="sel" data-id="' + esc(id) +
+      '" title="Сводка системы: враги и награды по видам"><span>' + esc(entry.system.title) + ' <span class="meta">· ' + entry.sum.n + ' врагов</span></span><span class="sum">' +
       fmt(entry.sum.money) + deltaHtml(entry.sum.money, was.sum.money) + ' · ' + fmt(entry.sum.xp) + ' XP' + deltaHtml(entry.sum.xp, was.sum.xp) +
-      '</span></div>';
+      '</span></button>';
 
     for (const location of entry.route) {
       const reward = now.perLocation[location.id];
@@ -1017,7 +1102,163 @@ function card(title, now, before, extra) {
   return '<div class="card"><div class="k">' + title + '</div><div class="v">' + fmt(now) + deltaHtml(now, before) + '</div>' + (extra || '') + '</div>';
 }
 
+function errorsBox(now, skipLocation) {
+  const elsewhere = [];
+
+  for (const [index, errors] of now.rowErrors) {
+    const row = S.t.waves.rows[index];
+
+    if (row.location !== skipLocation)
+      elsewhere.push(esc((now.C.labels[row.location] || row.location) + ', уровень ' + row.level + ', группа ' + row.order + ': ' + errors.map(e => e.text).join('; ')));
+  }
+
+  if (!elsewhere.length)
+    return '';
+
+  return '<div class="errors-box">' + (skipLocation ? 'Ошибки в других локациях' : 'Ошибки в таблице') +
+    ' — Unity не импортирует таблицу, пока они есть:<ul><li>' + elsewhere.slice(0, 12).join('</li><li>') + '</li></ul>' +
+    (elsewhere.length > 12 ? 'и ещё ' + (elsewhere.length - 12) : '') + '</div>';
+}
+
+function typeOrder(C) {
+  const order = {};
+  let i = 0;
+
+  for (const id of Object.keys(C.enemies))
+    order[id] = i++;
+
+  for (const level of Object.keys(C.shields))
+    order['shield:' + level] = 1000 + +level;
+
+  i = 2000;
+
+  for (const id of Object.keys(C.bosses))
+    order[id] = i++;
+
+  return order;
+}
+
+function countText(n) {
+  return Math.abs(n - Math.round(n)) < 1e-6 ? fmt(n) : '≈ ' + n.toLocaleString('ru-RU', { maximumFractionDigits: 1 });
+}
+
+function typesTable(types, typesBefore, C) {
+  const order = typeOrder(C);
+  const all = Object.assign({}, types);
+
+  for (const [key, type] of Object.entries(typesBefore || {})) {
+    if (!all[key])
+      all[key] = Object.assign({}, type, { n: 0, money: 0, xp: 0, per: {} });
+  }
+
+  const list = Object.values(all).sort((a, b) => (order[a.key] ?? 9999) - (order[b.key] ?? 9999));
+  const total = list.reduce((s, t) => ({ n: s.n + t.n, money: s.money + t.money, xp: s.xp + t.xp }), { n: 0, money: 0, xp: 0 });
+  const totalBefore = Object.values(typesBefore || {}).reduce((s, t) => ({ n: s.n + t.n, money: s.money + t.money, xp: s.xp + t.xp }), { n: 0, money: 0, xp: 0 });
+  const share = money => (total.money ? (money / total.money * 100 < 1 && money > 0 ? '<1 %' : Math.round(money / total.money * 100) + ' %') : '');
+  const groups = [
+    ['Рядовые', t => t.kind === 'enemy'],
+    ['Сбитые щиты', t => t.kind === 'shield'],
+    ['Мини-боссы и боссы', t => t.kind === 'miniboss' || t.kind === 'boss'],
+  ];
+  let body = '';
+
+  for (const [title, match] of groups) {
+    const items = list.filter(match);
+
+    if (!items.length)
+      continue;
+
+    const sub = items.reduce((s, t) => ({ n: s.n + t.n, money: s.money + t.money, xp: s.xp + t.xp }), { n: 0, money: 0, xp: 0 });
+    const subBefore = items.reduce((s, t) => {
+      const b = typesBefore?.[t.key];
+      return b ? { n: s.n + b.n, money: s.money + b.money, xp: s.xp + b.xp } : s;
+    }, { n: 0, money: 0, xp: 0 });
+
+    for (const t of items) {
+      const b = typesBefore?.[t.key] || { n: 0, money: 0, xp: 0 };
+      const per = Object.entries(t.per || {}).map(([label, n]) => esc(label) + ': ' + countText(n)).join(' · ');
+      const kind = t.kind === 'boss' ? ' <span class="names"><span class="boss">босс</span></span>' : (t.kind === 'miniboss' ? ' <span class="names"><span class="boss">мини-босс</span></span>' : '');
+
+      body += '<tr' + (t.n ? '' : ' class="gone"') + '><td>' + esc(t.title) + kind + (t.random ? ' <span class="range" title="Часть врагов — из случайных групп: число среднее">~</span>' : '') + '</td>' +
+        '<td class="n">' + countText(t.n) + deltaHtml(t.n, b.n) + '</td>' +
+        '<td class="n">' + fmt(t.unitMoney) + ' / ' + fmt(t.unitXp) + '</td>' +
+        '<td class="n">' + fmt(t.money) + deltaHtml(t.money, b.money) + '</td>' +
+        '<td class="n">' + fmt(t.xp) + deltaHtml(t.xp, b.xp) + '</td>' +
+        '<td class="n">' + share(t.money) + '</td>' +
+        '<td class="per">' + (per || '—') + '</td></tr>';
+    }
+
+    body += '<tr class="sub"><td>' + title + '</td><td class="n">' + countText(sub.n) + deltaHtml(sub.n, subBefore.n) + '</td><td></td>' +
+      '<td class="n">' + fmt(sub.money) + deltaHtml(sub.money, subBefore.money) + '</td><td class="n">' + fmt(sub.xp) + deltaHtml(sub.xp, subBefore.xp) + '</td>' +
+      '<td class="n">' + share(sub.money) + '</td><td></td></tr>';
+  }
+
+  body += '<tr class="total"><td>Итого</td><td class="n">' + countText(total.n) + deltaHtml(total.n, totalBefore.n) + '</td><td></td>' +
+    '<td class="n">' + fmt(total.money) + deltaHtml(total.money, totalBefore.money) + '</td><td class="n">' + fmt(total.xp) + deltaHtml(total.xp, totalBefore.xp) + '</td>' +
+    '<td class="n">' + (total.money ? '100 %' : '') + '</td><td></td></tr>';
+
+  return '<table class="types"><thead><tr><th>Враг</th><th style="text-align:right">Сколько</th><th style="text-align:right">За одного, монеты / опыт</th>' +
+    '<th style="text-align:right">Монеты</th><th style="text-align:right">Опыт</th><th style="text-align:right">Доля монет</th><th>По локациям</th></tr></thead><tbody>' +
+    body + '</tbody></table>';
+}
+
+function locationsTable(locations, now, before, withRoute) {
+  const rows = locations.map(location => {
+    const reward = now.perLocation[location.id];
+    const was = before.perLocation[location.id] || reward;
+
+    return '<tr><td><button class="link" data-act="sel" data-id="' + esc(location.id) + '">' + esc(now.C.labels[location.id]) + '</button></td>' +
+      '<td class="n">' + location.levels + '</td>' +
+      '<td class="n">' + (reward.hasRows ? fmt(reward.total.n) + deltaHtml(reward.total.n, was.total.n) : '—') + '</td>' +
+      '<td class="n">' + (reward.hasRows ? fmt(reward.total.money) + deltaHtml(reward.total.money, was.total.money) : '—') + '</td>' +
+      '<td class="n">' + (reward.hasRows ? fmt(reward.total.xp) + deltaHtml(reward.total.xp, was.total.xp) : '—') + '</td>' +
+      (withRoute ? '<td class="n">' + (reward.hasRows ? fmt(reward.routeMoney) + ' · ' + fmt(reward.routeXp) + ' XP' : '—') + '</td>' : '') + '</tr>';
+  }).join('');
+
+  return '<table><thead><tr><th>Локация</th><th style="text-align:right">Уровней</th><th style="text-align:right">Врагов</th>' +
+    '<th style="text-align:right">Монеты</th><th style="text-align:right">Опыт</th>' + (withRoute ? '<th style="text-align:right">С начала игры</th>' : '') +
+    '</tr></thead><tbody>' + rows + '</tbody></table>';
+}
+
+function renderSystem(now, before) {
+  const entry = now.systems.find(s => 'sys:' + s.system.id === S.sel);
+  const was = before.systems.find(s => s.system.id === entry.system.id) || { sum: emptySum(), types: {}, branchTypes: {}, branchSum: emptySum() };
+  const withRows = entry.route.filter(l => now.perLocation[l.id].hasRows).length;
+  const regular = Object.values(entry.types).filter(t => t.kind === 'enemy').reduce((s, t) => s + t.n, 0);
+  const regularBefore = Object.values(was.types).filter(t => t.kind === 'enemy').reduce((s, t) => s + t.n, 0);
+  let html = errorsBox(now, null);
+
+  html += '<div class="loc-head"><div><h2>' + esc(entry.system.title) + '<small>' + esc(entry.system.id) + '</small></h2>' +
+    '<div class="sub">Локаций с волнами: ' + withRows + ' из ' + entry.route.length + ' · ветки в сумму системы не входят</div></div></div>';
+
+  html += '<div class="cards">' +
+    card('Врагов в системе', entry.sum.n, was.sum.n, '<div class="r">рядовых ' + countText(regular) + ' · боссов ' + entry.sum.bosses + '</div>') +
+    card('Монеты за систему', entry.sum.money, was.sum.money, rangeHtml(entry.sum, 'money')) +
+    card('Опыт за систему', entry.sum.xp, was.sum.xp, rangeHtml(entry.sum, 'xp')) +
+    card('Монеты с начала игры', entry.routeMoney, was.routeMoney ?? entry.routeMoney, '<div class="r">опыт ' + fmt(entry.routeXp) + '</div>') +
+    '</div>';
+
+  html += '<section class="level"><header><b>Враги по видам</b><span class="nums">' + countText(regular) + deltaHtml(regular, regularBefore) +
+    ' рядовых · ' + entry.sum.bosses + ' боссов</span></header>' + typesTable(entry.types, was.types, now.C) + '</section>';
+
+  html += '<section class="level"><header><b>По локациям</b></header>' + locationsTable(entry.route, now, before, true) + '</section>';
+
+  if (entry.branchSum.n) {
+    html += '<section class="level"><header><b>Ветки системы</b><span class="nums">в сумму системы не входят · ' + fmt(entry.branchSum.n) + ' врагов · ' +
+      fmt(entry.branchSum.money) + ' монет · ' + fmt(entry.branchSum.xp) + ' XP</span></header>' +
+      typesTable(entry.branchTypes, was.branchTypes, now.C) + locationsTable(entry.branches, now, before, false) + '</section>';
+  }
+
+  html += '<p class="note">Монеты и опыт — убийства и сбитые щиты, без бонусов; Δ — разница с сохранённой версией. ' +
+    '«~» — часть врагов этого вида выходит из случайных групп: их число и награда — среднее (группа делится поровну между видами из списка), в игре выпадает по-разному.</p>';
+
+  $('#main').innerHTML = html;
+}
+
 function renderMain(now, before) {
+  if (String(S.sel).startsWith('sys:'))
+    return renderSystem(now, before);
+
   const C = now.C;
   const reward = now.perLocation[S.sel];
 
@@ -1032,25 +1273,12 @@ function renderMain(now, before) {
   const systemWas = before.systems.find(s => s.system.id === system?.system.id);
   const boss = location.boss ? C.bosses[location.boss] : null;
   const parent = location.branchOf ? C.locations[location.branchOf] : null;
-  let html = '';
-
-  if (now.orphans.length || now.errorCount) {
-    const elsewhere = [];
-
-    for (const [index, errors] of now.rowErrors) {
-      const row = S.t.waves.rows[index];
-
-      if (row.location !== S.sel)
-        elsewhere.push(esc((C.labels[row.location] || row.location) + ', уровень ' + row.level + ', группа ' + row.order + ': ' + errors.map(e => e.text).join('; ')));
-    }
-
-    if (elsewhere.length)
-      html += '<div class="errors-box">Ошибки в других локациях — Unity не импортирует таблицу, пока они есть:<ul><li>' + elsewhere.slice(0, 12).join('</li><li>') + '</li></ul>' +
-        (elsewhere.length > 12 ? 'и ещё ' + (elsewhere.length - 12) : '') + '</div>';
-  }
+  let html = errorsBox(now, S.sel);
 
   html += '<div class="loc-head"><div><h2>' + esc(C.labels[location.id]) + '<small>' + esc(location.id) + '</small></h2>' +
-    '<div class="sub">' + esc(system?.system.title || location.system) + (parent ? ' · ветка от ' + esc(C.labels[parent.id]) : '') +
+    '<div class="sub">' + esc(system?.system.title || location.system) +
+    (system ? ' (<button class="link" data-act="sel" data-id="sys:' + esc(system.system.id) + '">сводка системы</button>)' : '') +
+    (parent ? ' · ветка от ' + esc(C.labels[parent.id]) : '') +
     (boss ? ' · босс локации: ' + esc(boss.title) + ' (' + esc(boss.id) + ')' : '') + '</div></div>' +
     '<div>Уровней: <button class="icon" data-act="lv-" title="Убрать последний уровень">−</button> <b>' + location.levels +
     '</b> <button class="icon" data-act="lv+" title="Добавить уровень">+</button></div></div>';
