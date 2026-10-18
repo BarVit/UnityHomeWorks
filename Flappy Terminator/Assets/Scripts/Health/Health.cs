@@ -26,6 +26,15 @@ public class Health : MonoBehaviour
         Init();
     }
 
+    public void Heal(int amount)
+    {
+        if (amount <= 0 || Value == 0 || Value == MaxValue)
+            return;
+
+        Value = Mathf.Min(MaxValue, Value + amount);
+        Changed?.Invoke(Value);
+    }
+
     public void TakeDamage(int damage)
     {
         if (damage <= 0 || Value == 0)

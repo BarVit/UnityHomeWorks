@@ -73,3 +73,38 @@ MonoBehaviour:
     _level: 5
     _bonus: -1
     _price: 9000
+  - _owner: repair_drone
+    _stat: 2
+    _level: 0
+    _bonus: 15
+    _price: 0
+  - _owner: repair_drone
+    _stat: 2
+    _level: 1
+    _bonus: 5
+    _price: 5000
+  - _owner: repair_drone
+    _stat: 2
+    _level: 2
+    _bonus: 10
+    _price: 7500
+  - _owner: repair_drone
+    _stat: 2
+    _level: 3
+    _bonus: 10
+    _price: 10000
+  - _owner: repair_drone
+    _stat: 2
+    _level: 4
+    _bonus: 10
+    _price: 15000
+  - _owner: repair_drone
+    _stat: 2
+    _level: 5
+    _bonus: 20
+    _price: 22000
+  - _owner: repair_drone
+    _stat: 1
+    _level: 0
+    _bonus: 12
+    _price: 0

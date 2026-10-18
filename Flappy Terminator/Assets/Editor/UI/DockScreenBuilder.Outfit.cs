@@ -223,6 +223,26 @@ namespace UiContent
             return view;
         }
 
+        private static ShipRepair BuildRepair(PlayerShip sceneShip)
+        {
+            GameObject prefab = PrefabUtility.LoadPrefabContents(PlayerPrefab);
+
+            try
+            {
+                PlayerShip ship = prefab.GetComponent<PlayerShip>();
+                SpriteRenderer body = (SpriteRenderer)new SerializedObject(ship).FindProperty("_shipSprite").objectReferenceValue;
+
+                RepairRig.Attach(prefab, body, prefab.GetComponent<Health>());
+                PrefabUtility.SaveAsPrefabAsset(prefab, PlayerPrefab);
+            }
+            finally
+            {
+                PrefabUtility.UnloadPrefabContents(prefab);
+            }
+
+            return sceneShip.transform.Find(RepairRig.RepairName).GetComponent<ShipRepair>();
+        }
+
         private static EnergyShield BuildShield(PlayerShip sceneShip)
         {
             GameObject prefab = PrefabUtility.LoadPrefabContents(PlayerPrefab);

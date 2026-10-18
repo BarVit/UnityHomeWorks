@@ -68,6 +68,7 @@ public class DockScreen : MonoBehaviour
     [SerializeField] private Sprite _shieldSkillIcon;
     [SerializeField] private Sprite _cooldownIcon;
     [SerializeField] private Sprite _healthIcon;
+    [SerializeField] private Sprite _repairIcon;
     [SerializeField] private ShopWindow _shop;
     [SerializeField] private Button _shopButton;
     [SerializeField] private Button _menuButton;
@@ -419,13 +420,39 @@ public class DockScreen : MonoBehaviour
         string now = FormatModule(stat, _modules.GetValue(module.Id, stat));
         string value = price < 0 ? now : now + Arrow + FormatModule(stat, _modules.GetValue(module.Id, stat, 1));
         float step = _modules.GetValue(module.Id, stat, 1) - _modules.GetValue(module.Id, stat);
-        string title = stat == ModuleStat.Capacity ? "SHIELD CAPACITY" : "COOLDOWN";
+        string title = GetModuleStatTitle(stat);
         string hint = price < 0 ? MaxLevelHint
             : (step > 0f ? "+" : "") + step + (stat == ModuleStat.Cooldown ? Seconds : "") + " NEXT LEVEL";
-        Sprite icon = stat == ModuleStat.Capacity ? _modules.GetIcon(module) : _cooldownIcon;
+        Sprite icon = GetModuleStatIcon(module, stat);
 
         return new UpgradeRowData(icon, title, hint, value, _modules.GetLevel(module.Id, stat),
             _modules.GetMaxLevel(module.Id, stat), price, _modules.CanUpgrade(module.Id, stat), _coinIcon);
+    }
+
+    private string GetModuleStatTitle(ModuleStat stat)
+    {
+        switch (stat)
+        {
+            case ModuleStat.Capacity:
+                return "SHIELD CAPACITY";
+            case ModuleStat.Repair:
+                return "REPAIR";
+            default:
+                return "COOLDOWN";
+        }
+    }
+
+    private Sprite GetModuleStatIcon(ModuleRow module, ModuleStat stat)
+    {
+        switch (stat)
+        {
+            case ModuleStat.Capacity:
+                return _modules.GetIcon(module);
+            case ModuleStat.Repair:
+                return _repairIcon;
+            default:
+                return _cooldownIcon;
+        }
     }
 
     private string FormatModule(ModuleStat stat, float value)

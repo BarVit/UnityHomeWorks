@@ -11,3 +11,10 @@ energy_shield	Cooldown	2	-1	1500
 energy_shield	Cooldown	3	-1	3000
 energy_shield	Cooldown	4	-1	6000
 energy_shield	Cooldown	5	-1	9000
+repair_drone	Repair	0	15	0
+repair_drone	Repair	1	5	5000
+repair_drone	Repair	2	10	7500
+repair_drone	Repair	3	10	10000
+repair_drone	Repair	4	10	15000
+repair_drone	Repair	5	20	22000
+repair_drone	Cooldown	0	12	0

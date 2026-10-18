@@ -128,6 +128,114 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1264825286514263537}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1665069938959234584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6224519507292280647}
+  - component: {fileID: 1898171545736947154}
+  - component: {fileID: 1955503329505653926}
+  - component: {fileID: 5147649834286990409}
+  m_Layer: 6
+  m_Name: Energy Shield
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6224519507292280647
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665069938959234584}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2797992493381753798}
+  m_Father: {fileID: 4591410997553302837}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1898171545736947154
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665069938959234584}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.79895014
+--- !u!114 &1955503329505653926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665069938959234584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfa614011e7f740be990b8fb2c10dfc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AmmoHitHandler
+  _ammoLayers:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!114 &5147649834286990409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665069938959234584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4986ace15ff5b4e1cbdaa111953d6f82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnergyShield
+  _bubble: {fileID: 5423381533246036361}
+  _collider: {fileID: 1898171545736947154}
+  _raiseDuration: 0.2
+  _breakDuration: 0.5
+  _flashDuration: 0.15
+  _pulseSpeed: 3
+  _pulseAmount: 0.04
+  _minAlpha: 0.35
+  _maxAlpha: 0.9
+  _breakScale: 1.6
 --- !u!1 &2580702674209804097
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,7 +362,7 @@ Transform:
   - {fileID: 6883312255209010571}
   m_Father: {fileID: 4553086573173472957}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3964564247400316045
+--- !u!1 &4169164183652280613
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -262,8 +370,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7797186529496949377}
-  - component: {fileID: 5369771209015114175}
+  - component: {fileID: 2797992493381753798}
+  - component: {fileID: 5423381533246036361}
   m_Layer: 0
   m_Name: Bubble
   m_TagString: Untagged
@@ -271,29 +379,29 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7797186529496949377
+--- !u!4 &2797992493381753798
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3964564247400316045}
+  m_GameObject: {fileID: 4169164183652280613}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.68875015, y: 0.68875015, z: 0.68875015}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1138516080310552591}
+  m_Father: {fileID: 6224519507292280647}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5369771209015114175
+--- !u!212 &5423381533246036361
 SpriteRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3964564247400316045}
+  m_GameObject: {fileID: 4169164183652280613}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -391,7 +499,8 @@ Transform:
   - {fileID: 7917310512439759139}
   - {fileID: 8305098014945860838}
   - {fileID: 4553086573173472957}
-  - {fileID: 1138516080310552591}
+  - {fileID: 6224519507292280647}
+  - {fileID: 6286241381041677246}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &2638179971147453657
@@ -583,13 +692,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ammoHitHandler: {fileID: 307056008311267323}
-  _shieldHitHandler: {fileID: 3083757229994765050}
+  _shieldHitHandler: {fileID: 1955503329505653926}
   _playerCollisionHandler: {fileID: 3094829726805730626}
   _bodyCollider: {fileID: 3170934345470343946}
   _shipSprite: {fileID: 796812979710454581}
   _explosion: {fileID: 7711000000000000102}
   _deathCutsceneDuration: 7.5
-  _shield: {fileID: 7458413641350436790}
+  _shield: {fileID: 5147649834286990409}
 --- !u!114 &3369771758799880655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1245,6 +1354,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7900449787531056683}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4885706498058541067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6286241381041677246}
+  - component: {fileID: 5051550443220592149}
+  m_Layer: 0
+  m_Name: Repair Drone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6286241381041677246
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4885706498058541067}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4591410997553302837}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5051550443220592149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4885706498058541067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d93346b48982b4ea888b8818cfcd3574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShipRepair
+  _health: {fileID: 3369771758799880655}
+  _body: {fileID: 796812979710454581}
+  _outlineMaterial: {fileID: 2100000, guid: 0a0701f09bea34c0ca312cf18cbaf6bb, type: 2}
+  _duration: 2
+  _thicknessPixels: 1.5
+  _color: {r: 0.3, g: 1, b: 0.45, a: 1}
+  _flickerRate: 6
+  _minAlpha: 0.3
+  _maxAlpha: 1
 --- !u!1 &5228342212049464518
 GameObject:
   m_ObjectHideFlags: 0
@@ -1338,114 +1500,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7900449787531056683}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7494006940734691224
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1138516080310552591}
-  - component: {fileID: 2409349370693327006}
-  - component: {fileID: 3083757229994765050}
-  - component: {fileID: 7458413641350436790}
-  m_Layer: 6
-  m_Name: Energy Shield
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1138516080310552591
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7494006940734691224}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7797186529496949377}
-  m_Father: {fileID: 4591410997553302837}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &2409349370693327006
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7494006940734691224}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.79895014
---- !u!114 &3083757229994765050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7494006940734691224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfa614011e7f740be990b8fb2c10dfc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AmmoHitHandler
-  _ammoLayers:
-    serializedVersion: 2
-    m_Bits: 512
---- !u!114 &7458413641350436790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7494006940734691224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4986ace15ff5b4e1cbdaa111953d6f82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnergyShield
-  _bubble: {fileID: 5369771209015114175}
-  _collider: {fileID: 2409349370693327006}
-  _raiseDuration: 0.2
-  _breakDuration: 0.5
-  _flashDuration: 0.15
-  _pulseSpeed: 3
-  _pulseAmount: 0.04
-  _minAlpha: 0.35
-  _maxAlpha: 0.9
-  _breakScale: 1.6
 --- !u!1 &7955230647390436470
 GameObject:
   m_ObjectHideFlags: 0

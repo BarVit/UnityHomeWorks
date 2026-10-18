@@ -91,10 +91,12 @@ namespace UiContent
             Set(skills, "_ship", playerShip);
 
             EnergyShield shield = BuildShield(playerShip);
+            ShipRepair repair = BuildRepair(playerShip);
             BattleModules battle = GetOrAdd<BattleModules>(game.gameObject);
             Set(battle, "_input", Object.FindAnyObjectByType<InputReader>(FindObjectsInactive.Include));
             Set(battle, "_ship", playerShip);
             Set(battle, "_shield", shield);
+            Set(battle, "_repair", repair);
 
             Set(game, "_moduleRack", modules);
             Set(game, "_skills", skills);
@@ -121,7 +123,8 @@ namespace UiContent
 
             foreach (string name in new[] { "Coin Icon", "XP Icon", "Lock Icon", "Damage Icon", "Crit Icon", "Upgrade Pip",
                          "Energy Shield Icon", "Health Icon", "Cooldown Icon", "Double Shot Icon",
-                         "Speed Icon", "Napalm Icon", "Turn Icon", "Reload Icon", "White Square" })
+                         "Speed Icon", "Napalm Icon", "Turn Icon", "Reload Icon", "White Square",
+                         "Repair Drone Icon", "Repair Icon" })
                 Prepare(name, 0);
 
             for (int level = 0; level <= ShieldColors.MaxLevel; level++)
@@ -280,6 +283,7 @@ namespace UiContent
             so.FindProperty("_shieldSkillIcon").objectReferenceValue = Art("Energy Shield Icon");
             so.FindProperty("_cooldownIcon").objectReferenceValue = Art("Cooldown Icon");
             so.FindProperty("_healthIcon").objectReferenceValue = Art("Health Icon");
+            so.FindProperty("_repairIcon").objectReferenceValue = Art("Repair Icon");
             so.FindProperty("_shop").objectReferenceValue = shop;
             so.FindProperty("_shopButton").objectReferenceValue = shopButton;
             so.FindProperty("_menuButton").objectReferenceValue = menu;

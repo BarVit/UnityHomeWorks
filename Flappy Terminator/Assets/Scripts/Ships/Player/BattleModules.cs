@@ -8,10 +8,12 @@ public class BattleModules : MonoBehaviour
     [SerializeField] private InputReader _input;
     [SerializeField] private PlayerShip _ship;
     [SerializeField] private EnergyShield _shield;
+    [SerializeField] private ShipRepair _repair;
 
     private ModuleSpec?[] _specs = new ModuleSpec?[0];
     private float[] _cooldownLeft = new float[0];
     private int _shieldSlot = NoSlot;
+    private int _repairSlot = NoSlot;
 
     public int Count => _specs.Length;
 
@@ -21,12 +23,14 @@ public class BattleModules : MonoBehaviour
     {
         _input.ModuleActivated += Activate;
         _shield.Broken += OnShieldBroken;
+        _repair.Finished += OnRepairFinished;
     }
 
     private void OnDisable()
     {
         _input.ModuleActivated -= Activate;
         _shield.Broken -= OnShieldBroken;
+        _repair.Finished -= OnRepairFinished;
     }
 
     private void Update()
@@ -50,6 +54,8 @@ public class BattleModules : MonoBehaviour
     {
         _shield.Drop();
         _shieldSlot = NoSlot;
+        _repair.Stop();
+        _repairSlot = NoSlot;
 
         for (int i = 0; i < _cooldownLeft.Length; i++)
             _cooldownLeft[i] = 0f;
@@ -62,6 +68,9 @@ public class BattleModules : MonoBehaviour
 
     public bool IsActive(int slot)
     {
+        if (slot == _repairSlot)
+            return _repair.IsRepairing;
+
         return slot == _shieldSlot && _shield.IsUp;
     }
 
@@ -91,8 +100,29 @@ public class BattleModules : MonoBehaviour
                 _shieldSlot = slot;
                 _shield.Raise(spec.Value.Capacity, spec.Value.Level);
                 break;
+            case ModuleKind.RepairDrone:
+                if (_repair.CanRepair == false)
+                    return;
+
+                _repairSlot = slot;
+                _repair.Begin(spec.Value.Repair);
+                break;
         }
 
+        Changed?.Invoke();
+    }
+
+    private void OnRepairFinished()
+    {
+        if (_repairSlot == NoSlot)
+            return;
+
+        ModuleSpec? spec = GetSpec(_repairSlot);
+
+        if (spec != null)
+            _cooldownLeft[_repairSlot] = spec.Value.Cooldown;
+
+        _repairSlot = NoSlot;
         Changed?.Invoke();
     }
 

@@ -1,5 +1,6 @@
 public enum ModuleStat
 {
     Capacity,
-    Cooldown
+    Cooldown,
+    Repair
 }

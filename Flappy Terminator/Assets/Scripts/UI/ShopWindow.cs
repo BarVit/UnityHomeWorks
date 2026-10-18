@@ -173,6 +173,8 @@ public class ShopWindow : MonoBehaviour
         {
             case ModuleKind.Shield:
                 return "ABSORBS " + Mathf.RoundToInt(_modules.GetValue(row.Id, ModuleStat.Capacity));
+            case ModuleKind.RepairDrone:
+                return "REPAIRS " + Mathf.RoundToInt(_modules.GetValue(row.Id, ModuleStat.Repair)) + " HP";
             default:
                 return row.Description;
         }

@@ -213,7 +213,8 @@ public class ModuleRack : MonoBehaviour
                 int capacity = Mathf.RoundToInt(GetValue(row.Id, ModuleStat.Capacity) * shieldScale);
 
                 specs[slot - FirstSlot] = new ModuleSpec(row.Kind, GetIcon(row), capacity,
-                    GetValue(row.Id, ModuleStat.Cooldown), GetShieldLevel(row.Id));
+                    GetValue(row.Id, ModuleStat.Cooldown), GetShieldLevel(row.Id),
+                    Mathf.RoundToInt(GetValue(row.Id, ModuleStat.Repair)));
             }
         }
 
