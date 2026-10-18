@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyShooter : MonoBehaviour
 {
     private const string AmmoLayerName = "EnemyAmmo";
+    private const string LayoutPrefix = "Layout ";
 
     [SerializeField] private Transform _mountRoot;
     [SerializeField] private AudioSource _shotAudioSource;
@@ -22,7 +24,7 @@ public class EnemyShooter : MonoBehaviour
 
     private void Awake()
     {
-        _mounts = CollectMounts();
+        _mounts = CollectMounts(_mountRoot);
         _loop = new ShotLoop(CreateLoopSource());
         _hitLoop = new ShotLoop(CreateLoopSource());
         _ammoLayer = LayerMask.NameToLayer(AmmoLayerName);
@@ -113,7 +115,7 @@ public class EnemyShooter : MonoBehaviour
 
     private WeaponContext CreateContext(EnemyArmament armament, EnemyContext context)
     {
-        return new WeaponContext(_mounts, armament.Barrels, context.Pools,
+        return new WeaponContext(GetMounts(armament.Barrels), armament.Barrels, context.Pools,
             new ShotAudio(_shotAudioSource, context.Camera), context.HitAudio, context.TargetLayers,
             _ammoLayer, context.Camera, default, _loop, _hitLoop, armament.Damage,
             rateScale: armament.RateScale);
@@ -130,13 +132,23 @@ public class EnemyShooter : MonoBehaviour
         return source;
     }
 
-    private Transform[] CollectMounts()
+    private Transform[] GetMounts(int barrels)
     {
-        Transform[] mounts = new Transform[_mountRoot.childCount];
+        Transform layout = _mountRoot.Find(LayoutPrefix + barrels);
 
-        for (int i = 0; i < mounts.Length; i++)
-            mounts[i] = _mountRoot.GetChild(i);
+        return layout == null ? _mounts : CollectMounts(layout);
+    }
 
-        return mounts;
+    private static Transform[] CollectMounts(Transform parent)
+    {
+        List<Transform> mounts = new List<Transform>();
+
+        foreach (Transform child in parent)
+        {
+            if (child.name.StartsWith(LayoutPrefix) == false)
+                mounts.Add(child);
+        }
+
+        return mounts.ToArray();
     }
 }

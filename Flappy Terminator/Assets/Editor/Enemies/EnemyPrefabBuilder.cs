@@ -25,6 +25,16 @@ namespace EnemyContent
             new Vector3(-0.85f, 0f, 0f)
         };
 
+        private const string FourBarrelLayout = "Layout 4";
+
+        private static readonly Vector3[] FourBarrelPositions =
+        {
+            new Vector3(-0.6f, 0.06f, 0f),
+            new Vector3(-0.6f, -0.06f, 0f),
+            new Vector3(-0.5f, 0.32f, 0f),
+            new Vector3(-0.5f, -0.32f, 0f)
+        };
+
         [MenuItem("Tools/Enemies/Build Prefabs")]
         public static void Build()
         {
@@ -213,6 +223,8 @@ namespace EnemyContent
                 mount.localRotation = Quaternion.Euler(0f, 0f, 180f);
             }
 
+            SetLayout(mounts, FourBarrelLayout, FourBarrelPositions, stretch);
+
             EnemyShooter shooter = root.GetComponent<EnemyShooter>();
 
             if (shooter == null)
@@ -222,6 +234,33 @@ namespace EnemyContent
 
             serialized.FindProperty("_mountRoot").objectReferenceValue = mounts;
             serialized.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        private static void SetLayout(Transform mounts, string name, Vector3[] positions, Vector2 stretch)
+        {
+            Transform layout = mounts.Find(name);
+
+            if (layout == null)
+            {
+                layout = new GameObject(name).transform;
+                layout.SetParent(mounts, false);
+            }
+
+            layout.SetAsLastSibling();
+            layout.localPosition = Vector3.zero;
+            layout.localRotation = Quaternion.identity;
+
+            for (int i = layout.childCount; i < positions.Length; i++)
+                new GameObject("Mount " + (i + 1)).transform.SetParent(layout, false);
+
+            for (int i = 0; i < positions.Length; i++)
+            {
+                Transform mount = layout.GetChild(i);
+
+                mount.name = "Mount " + (i + 1);
+                mount.localPosition = Vector3.Scale(positions[i], new Vector3(stretch.x, stretch.y, 1f));
+                mount.localRotation = Quaternion.Euler(0f, 0f, 180f);
+            }
         }
 
         private static Transform GetMountRoot(Transform root)
