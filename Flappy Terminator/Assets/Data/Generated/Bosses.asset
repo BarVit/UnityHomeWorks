@@ -69,7 +69,7 @@ MonoBehaviour:
     _location: loc_02_04
     _prefab: {fileID: 748883696485598149, guid: 760552f2b84714314ac77afd244877e5, type: 3}
     _prototype: warden_2
-    _health: 2000
+    _health: 1500
     _weapon: marauder_2_gun
     _barrels: 4
     _bodyDamage: 10
