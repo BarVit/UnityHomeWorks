@@ -11,6 +11,7 @@ public class ScreenNavigator : MonoBehaviour
     [SerializeField] private DockScreen _dockScreen;
     [SerializeField] private MapScreen _mapScreen;
     [SerializeField] private LocationResultScreen _resultScreen;
+    [SerializeField] private GameObject _menuBackdrop;
 
     private bool _isSettingsFromPause;
 
@@ -77,6 +78,7 @@ public class ScreenNavigator : MonoBehaviour
         _mapScreen.Hide();
         _resultScreen.Hide();
         _settingsScreen.Hide();
+        _menuBackdrop.SetActive(true);
         _startScreen.Show(CanResumeSession);
     }
 
@@ -116,6 +118,7 @@ public class ScreenNavigator : MonoBehaviour
     public void HideOverlays()
     {
         IsSettingsOpen = false;
+        _menuBackdrop.SetActive(false);
         _dockScreen.Hide();
         _mapScreen.Hide();
         _resultScreen.Hide();
@@ -164,20 +167,26 @@ public class ScreenNavigator : MonoBehaviour
 
     private void OnStartRequested()
     {
-        _startScreen.Hide();
+        LeaveStart();
         StartRequested?.Invoke();
     }
 
     private void OnSessionResumeRequested()
     {
-        _startScreen.Hide();
+        LeaveStart();
         SessionResumeRequested?.Invoke();
     }
 
     private void OnStartTestRequested()
     {
-        _startScreen.Hide();
+        LeaveStart();
         StartTestRequested?.Invoke();
+    }
+
+    private void LeaveStart()
+    {
+        _startScreen.Hide();
+        _menuBackdrop.SetActive(false);
     }
 
     private void OnTestResetRequested()
