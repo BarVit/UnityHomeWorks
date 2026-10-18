@@ -77,7 +77,7 @@ MonoBehaviour:
     _tint: {r: 1, g: 0.6039216, b: 0.5411765, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
     _rewardMoney: 800
-    _rewardXp: 125
+    _rewardXp: 160
     _intro: 
     _specialEvery: 0
     _specialWeapon: 
@@ -157,7 +157,7 @@ MonoBehaviour:
     _tint: {r: 1, g: 0.6039216, b: 0.5411765, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
     _rewardMoney: 1200
-    _rewardXp: 250
+    _rewardXp: 240
     _intro: 
     _specialEvery: 0
     _specialWeapon: 
@@ -197,7 +197,7 @@ MonoBehaviour:
     _tint: {r: 1, g: 0.6039216, b: 0.5411765, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
     _rewardMoney: 2000
-    _rewardXp: 350
+    _rewardXp: 400
     _intro: 
     _specialEvery: 0
     _specialWeapon: 
@@ -237,7 +237,7 @@ MonoBehaviour:
     _tint: {r: 1, g: 0.6039216, b: 0.5411765, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
     _rewardMoney: 4800
-    _rewardXp: 750
+    _rewardXp: 960
     _intro: 
     _specialEvery: 0
     _specialWeapon: 
