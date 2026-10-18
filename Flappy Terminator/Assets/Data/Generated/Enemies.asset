@@ -94,7 +94,7 @@ MonoBehaviour:
     _tier: 3
     _prefab: {fileID: 748883696485598149, guid: 16686150d903a469bad63cb034411710, type: 3}
     _bodyDamage: 35
-    _fromLocation: loc_02_04
+    _fromLocation: loc_02_05
     _health: 140
     _weapon: hunter_3_gun
     _barrels: 1
@@ -109,7 +109,7 @@ MonoBehaviour:
     _tier: 1
     _prefab: {fileID: 748883696485598149, guid: 79fee06f008d942e7baa168b610dd793, type: 3}
     _bodyDamage: 40
-    _fromLocation: loc_02_01
+    _fromLocation: loc_02_03
     _health: 80
     _weapon: reaper_1_gun
     _barrels: 1
