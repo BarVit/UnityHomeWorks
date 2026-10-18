@@ -7,7 +7,12 @@ public class ContinuousBeamDelivery : BeamDelivery
     private static readonly Color WarmColor = new Color(1f, 0.92f, 0.2f);
     private static readonly Color HotColor = new Color(1f, 0.2f, 0.12f);
 
+    private const float ContinuousGapShare = 5f;
+
     private readonly Dictionary<IDamageable, float> _owed = new Dictionary<IDamageable, float>();
+
+    private float _lastFireTime = float.NegativeInfinity;
+    private float _strikeTime;
 
     public ContinuousBeamDelivery(WeaponRow row, WeaponContext context) : base(row, context)
     {
@@ -17,6 +22,10 @@ public class ContinuousBeamDelivery : BeamDelivery
 
     protected override void OnFire()
     {
+        float elapsed = Time.time - _lastFireTime;
+
+        _strikeTime = elapsed <= Row.Rate * ContinuousGapShare ? elapsed : Row.Rate;
+        _lastFireTime = Time.time;
         ForgetTarget();
         ForgetHits();
 
@@ -30,7 +39,7 @@ public class ContinuousBeamDelivery : BeamDelivery
     {
         _owed.TryGetValue(damageable, out float owed);
 
-        owed += RollDamage(GetDamage(barrel) * Row.Rate, barrel, out isCrit);
+        owed += RollDamage(GetDamage(barrel) * _strikeTime, barrel, out isCrit);
 
         int whole = Mathf.FloorToInt(owed);
 

@@ -141,8 +141,8 @@ MonoBehaviour:
   - _owner: impulse_laser
     _stat: 3
     _level: 5
-    _bonus: 10
-    _price: 3000
+    _bonus: 20
+    _price: 6000
   - _owner: rocket
     _stat: 0
     _level: 0

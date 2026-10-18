@@ -511,14 +511,14 @@ MonoBehaviour:
     _owner: 1
     _delivery: 3
     _damage: 20
-    _rate: 0.15
+    _rate: 0.05
     _magazine: 0
     _reloadTime: 0
     _projectileSpeed: 0
     _barrelsMax: 1
     _firePattern: 0
     _sideAngle: 0
-    _heatPerShot: 12
+    _heatPerShot: 4
     _cooldownRate: 40
     _unlockHeat: 0
     _tickInterval: 0
