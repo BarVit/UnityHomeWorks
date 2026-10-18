@@ -11,6 +11,8 @@ namespace TableImport
 
         private const int MaxBarrels = 4;
         private const int ComfortLevel = 4;
+        private const int EarlyBarrels = 3;
+        private const int EarlyLevel = 3;
         private const int RouteStep = 10;
         private const int SystemStep = 1000;
         private const int BranchShift = 5;
@@ -68,7 +70,11 @@ namespace TableImport
             foreach (UpgradeStat stat in stats)
                 columns.Add(ToSnakeCase(stat.ToString()));
 
-            columns.AddRange(new[] { "per_barrel", "all_barrels", "all_barrels_lvl" + ComfortLevel, "total", "note" });
+            columns.AddRange(new[]
+            {
+                "per_barrel", "all_barrels", "barrels" + EarlyBarrels + "_lvl" + EarlyLevel, "all_barrels_lvl" + ComfortLevel,
+                "total", "note"
+            });
 
             return columns;
         }
@@ -80,7 +86,6 @@ namespace TableImport
             int total = row.Price;
             int slotsPrice = 0;
             int perBarrel = 0;
-            int perBarrelToComfort = 0;
             List<string> cells = new List<string>
             {
                 row.Id, row.Title, GetUnlock(row), Format(barrels), Format(row.Price)
@@ -105,19 +110,34 @@ namespace TableImport
                 int price = GetPrice(upgrades, row.Id, stat, upgrades.GetMaxLevel(row.Id, stat));
 
                 perBarrel += price;
-                perBarrelToComfort += GetPrice(upgrades, row.Id, stat, ComfortLevel);
                 cells.Add(price > 0 ? Format(price) : "");
             }
 
             total += slotsPrice + perBarrel * barrels;
             cells.AddRange(new[]
             {
-                Format(perBarrel), Format(perBarrel * barrels), Format(slotsPrice + perBarrelToComfort * barrels),
-                Format(total),
+                Format(perBarrel), Format(perBarrel * barrels),
+                Format(GetSetPrice(row, Math.Min(EarlyBarrels, barrels), EarlyLevel, stats, slots, upgrades)),
+                Format(GetSetPrice(row, barrels, ComfortLevel, stats, slots, upgrades)), Format(total),
                 GetNote(row, barrels, upgrades)
             });
 
             return cells;
+        }
+
+        private static int GetSetPrice(WeaponRow row, int barrels, int level, List<UpgradeStat> stats, SlotTable slots,
+            UpgradeTable upgrades)
+        {
+            int price = row.Price;
+            int perBarrel = 0;
+
+            for (int slot = Hangar.FirstSlot + 1; slot <= barrels; slot++)
+                price += slots.GetRow(row.Id, slot).Price;
+
+            foreach (UpgradeStat stat in stats)
+                perBarrel += GetPrice(upgrades, row.Id, stat, level);
+
+            return price + perBarrel * barrels;
         }
 
         private static int GetPrice(UpgradeTable upgrades, string weaponId, UpgradeStat stat, int toLevel)
