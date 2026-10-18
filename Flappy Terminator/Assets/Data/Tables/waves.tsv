@@ -1,6 +1,6 @@
 location	level	order	count	mode	enemies	interval	interval_max	shield
 loc_01_01	1	1	5	Sequence	warden_1	3	3	
-loc_01_01	2	1	6	Sequence	warden_1	1	3	
+loc_01_01	2	1	5	Sequence	warden_1	1	3	
 loc_01_01	2	2	2	Sequence	warden_2	3	4	
 loc_01_02	1	1	6	Sequence	warden_1,warden_2	2	3	
 loc_01_02	1	2	6	Sequence	warden_1,hunter_1,hunter_1	3	4	

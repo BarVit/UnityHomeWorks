@@ -56,8 +56,8 @@ MonoBehaviour:
     _damage: 12
     _movement: {fileID: 11400000, guid: da73c4fdab4c54894b366a2a1f80dbc9, type: 2}
     _skin: {fileID: 11400000, guid: 27b03022958b842d094826d4c6078463, type: 2}
-    _rewardMoney: 200
-    _rewardXp: 40
+    _rewardMoney: 300
+    _rewardXp: 75
   - _id: hunter_1
     _type: enemy_hunter
     _title: "\u041E\u0445\u043E\u0442\u043D\u0438\u043A I"
@@ -71,8 +71,8 @@ MonoBehaviour:
     _damage: 2
     _movement: {fileID: 11400000, guid: 655d5bb0ee80e4eebb110e514052792d, type: 2}
     _skin: {fileID: 0}
-    _rewardMoney: 100
-    _rewardXp: 20
+    _rewardMoney: 200
+    _rewardXp: 40
   - _id: hunter_2
     _type: enemy_hunter
     _title: "\u041E\u0445\u043E\u0442\u043D\u0438\u043A II"
@@ -86,8 +86,8 @@ MonoBehaviour:
     _damage: 3
     _movement: {fileID: 11400000, guid: 90d8dd41b80474e9aa9bb1f27035f75b, type: 2}
     _skin: {fileID: 11400000, guid: 73974f1c9c7984038985c1ca4b66acef, type: 2}
-    _rewardMoney: 160
-    _rewardXp: 32
+    _rewardMoney: 260
+    _rewardXp: 52
   - _id: hunter_3
     _type: enemy_hunter
     _title: "\u041E\u0445\u043E\u0442\u043D\u0438\u043A III"
@@ -101,8 +101,8 @@ MonoBehaviour:
     _damage: 20
     _movement: {fileID: 11400000, guid: 272ca042f1216401da0ac9cec62c4ca8, type: 2}
     _skin: {fileID: 11400000, guid: 682698fbd8e3d44e8ae6a4dcd16a0390, type: 2}
-    _rewardMoney: 300
-    _rewardXp: 60
+    _rewardMoney: 480
+    _rewardXp: 96
   - _id: reaper_1
     _type: enemy_reaper
     _title: "\u0416\u043D\u0435\u0446 I"
@@ -116,8 +116,8 @@ MonoBehaviour:
     _damage: 9
     _movement: {fileID: 11400000, guid: ba870c54da02f4aabaab2e7fc7f400c6, type: 2}
     _skin: {fileID: 0}
-    _rewardMoney: 250
-    _rewardXp: 50
+    _rewardMoney: 450
+    _rewardXp: 90
   - _id: reaper_2
     _type: enemy_reaper
     _title: "\u0416\u043D\u0435\u0446 II"
