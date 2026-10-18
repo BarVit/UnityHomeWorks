@@ -23,6 +23,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_01_02
     _system: sys_01
     _order: 2
@@ -33,6 +34,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_01_03
     _system: sys_01
     _order: 3
@@ -43,6 +45,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_01_04
     _system: sys_01
     _order: 4
@@ -53,6 +56,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_01_05
     _system: sys_01
     _order: 5
@@ -63,6 +67,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_02_01
     _system: sys_02
     _order: 1
@@ -73,6 +78,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 11300
   - _id: loc_02_02
     _system: sys_02
     _order: 2
@@ -83,6 +89,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 18000
   - _id: loc_02_03
     _system: sys_02
     _order: 3
@@ -93,6 +100,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 18000
   - _id: loc_02_04
     _system: sys_02
     _order: 4
@@ -103,6 +111,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 27000
   - _id: loc_02_05
     _system: sys_02
     _order: 5
@@ -113,6 +122,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 25000
   - _id: loc_02_06
     _system: sys_02
     _order: 6
@@ -123,6 +133,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 32000
   - _id: loc_02_07
     _system: sys_02
     _order: 7
@@ -133,6 +144,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 24000
   - _id: loc_03_01
     _system: sys_03
     _order: 1
@@ -143,6 +155,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_03_02
     _system: sys_03
     _order: 2
@@ -153,6 +166,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_03_03
     _system: sys_03
     _order: 3
@@ -163,6 +177,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_03_04
     _system: sys_03
     _order: 4
@@ -173,6 +188,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_03_05
     _system: sys_03
     _order: 5
@@ -183,6 +199,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_03_06
     _system: sys_03
     _order: 6
@@ -193,6 +210,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_03_07
     _system: sys_03
     _order: 7
@@ -203,6 +221,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_03_08
     _system: sys_03
     _order: 8
@@ -213,6 +232,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_03_09
     _system: sys_03
     _order: 9
@@ -223,6 +243,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_04_01
     _system: sys_04
     _order: 1
@@ -233,6 +254,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_04_02
     _system: sys_04
     _order: 2
@@ -243,6 +265,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_04_03
     _system: sys_04
     _order: 3
@@ -253,6 +276,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_04_04
     _system: sys_04
     _order: 4
@@ -263,6 +287,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_04_05
     _system: sys_04
     _order: 5
@@ -273,6 +298,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_04_06
     _system: sys_04
     _order: 6
@@ -283,6 +309,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_05_01
     _system: sys_05
     _order: 1
@@ -293,6 +320,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_05_02
     _system: sys_05
     _order: 2
@@ -303,6 +331,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_05_03
     _system: sys_05
     _order: 3
@@ -313,6 +342,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_05_04
     _system: sys_05
     _order: 4
@@ -323,6 +353,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_05_05
     _system: sys_05
     _order: 5
@@ -333,6 +364,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_05_06
     _system: sys_05
     _order: 6
@@ -343,6 +375,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_05_07
     _system: sys_05
     _order: 7
@@ -353,6 +386,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_05_08
     _system: sys_05
     _order: 8
@@ -363,6 +397,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_05_09
     _system: sys_05
     _order: 9
@@ -373,6 +408,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: loc_05_10
     _system: sys_05
     _order: 10
@@ -383,6 +419,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
+    _rewardTarget: 0
   - _id: void_ashen_1
     _system: sys_03
     _order: 1
@@ -393,6 +430,7 @@ MonoBehaviour:
     _title: ASHFALL
     _branchOf: loc_03_07
     _void: ashen_void
+    _rewardTarget: 0
   - _id: void_ashen_2
     _system: sys_03
     _order: 2
@@ -403,6 +441,7 @@ MonoBehaviour:
     _title: IRON CINDERS
     _branchOf: loc_03_07
     _void: ashen_void
+    _rewardTarget: 0
   - _id: void_ashen_3
     _system: sys_03
     _order: 3
@@ -413,3 +452,4 @@ MonoBehaviour:
     _title: SMOLDER DRIFT
     _branchOf: loc_03_07
     _void: ashen_void
+    _rewardTarget: 0

@@ -14,11 +14,13 @@ public class LocationRow
     [SerializeField] private string _title;
     [SerializeField] private string _branchOf;
     [SerializeField] private string _void;
+    [SerializeField] private int _rewardTarget;
 
     public LocationRow(string id, string system, int order, int levels, string boss, string borderTheme,
-        FlightMode flightMode, string title, string branchOf, string voidId)
+        FlightMode flightMode, string title, string branchOf, string voidId, int rewardTarget)
     {
         _void = voidId;
+        _rewardTarget = rewardTarget;
         _id = id;
         _system = system;
         _order = order;
@@ -53,4 +55,6 @@ public class LocationRow
     public string Void => _void;
 
     public bool IsInVoid => string.IsNullOrEmpty(_void) == false;
+
+    public int RewardTarget => _rewardTarget;
 }

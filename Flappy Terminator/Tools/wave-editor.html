@@ -57,6 +57,9 @@ table.types td.per { color: var(--muted); font-size: 11px; }
 tr.sub td { background: var(--chip); font-weight: 600; }
 tr.total td { font-weight: 700; border-top: 2px solid var(--line); }
 tr.gone td { color: var(--muted); text-decoration: line-through; }
+.target { font-size: 11px; font-variant-numeric: tabular-nums; }
+.target.under { color: var(--bad); } .target.over { color: var(--accent); } .target.ok { color: var(--good); }
+input.target-input { width: 90px; text-align: right; }
 .sys-head .sum { font-weight: 600; font-variant-numeric: tabular-nums; }
 .loc { display: grid; grid-template-columns: 54px 1fr auto; gap: 6px; align-items: baseline; width: 100%; text-align: left;
   border: 0; border-radius: 0; background: none; padding: 4px 12px; font-variant-numeric: tabular-nums; }
@@ -308,7 +311,7 @@ function buildContext(locationRows) {
       continue;
 
     locations[row.id] = { id: row.id, row, system: row.system, order: toInt(row.order) || 0, levels: toInt(row.levels) || 0,
-      boss: row.boss || '', title: row.title || '', branchOf: row.branch_of || '' };
+      boss: row.boss || '', title: row.title || '', branchOf: row.branch_of || '', target: toInt(row.reward_target) || 0 };
   }
 
   for (const location of Object.values(locations)) {
@@ -922,6 +925,22 @@ function changeMode(row, mode, C) {
 
 // ---------- rendering ----------
 
+// how far the location's or system's reward is from the user's target (reward_target in locations.tsv); within 5% counts as on target
+function targetHtml(money, target, short) {
+  if (!target)
+    return '';
+
+  const gap = roundHalfEven(money) - target;
+  const state = Math.abs(gap) <= target * 0.05 ? 'ok' : (gap < 0 ? 'under' : 'over');
+  const text = gap < 0 ? 'не хватает ' + fmt(-gap) : (gap > 0 ? 'сверху ' + fmt(gap) : 'ровно');
+
+  return '<div class="target ' + state + '">' + (short ? '' : 'цель ' + fmt(target) + ' · ') + text + ' (' + Math.round(money / target * 100) + ' %)</div>';
+}
+
+function systemTarget(entry) {
+  return entry.route.reduce((sum, location) => sum + location.target, 0);
+}
+
 function deltaHtml(now, before) {
   const diff = roundHalfEven(now) - roundHalfEven(before);
 
@@ -1005,7 +1024,8 @@ function treeItem(location, reward, rewardBefore, C, branch) {
     : '—';
   const label = branch ? '' : '<span class="lbl">' + esc(C.labels[location.id]) + '</span>';
   const name = branch ? '<span class="lbl">' + esc(location.title || location.id) + '</span>' : '<span class="meta">' + reward.total.n + ' врагов · ' + location.levels + ' ур.</span>';
-  const route = !branch && reward.hasRows ? '<div class="route">Σ ' + fmt(reward.routeMoney) + ' · ' + fmt(reward.routeXp) + ' XP</div>' : '';
+  const route = (!branch && reward.hasRows ? '<div class="route">Σ ' + fmt(reward.routeMoney) + ' · ' + fmt(reward.routeXp) + ' XP</div>' : '') +
+    targetHtml(reward.total.money, location.target, false);
 
   return '<button class="loc' + (branch ? ' branch' : '') + (reward.hasRows ? '' : ' empty') + (S.sel === location.id ? ' sel' : '') +
     '" data-act="sel" data-id="' + esc(location.id) + '" title="' + esc(location.id + ' — ' + title) + '">' + label +
@@ -1023,7 +1043,7 @@ function renderTree(now, before) {
     html += '<div class="sys"><button class="sys-head' + (S.sel === id ? ' sel' : '') + '" data-act="sel" data-id="' + esc(id) +
       '" title="Сводка системы: враги и награды по видам"><span>' + esc(entry.system.title) + ' <span class="meta">· ' + entry.sum.n + ' врагов</span></span><span class="sum">' +
       fmt(entry.sum.money) + deltaHtml(entry.sum.money, was.sum.money) + ' · ' + fmt(entry.sum.xp) + ' XP' + deltaHtml(entry.sum.xp, was.sum.xp) +
-      '</span></button>';
+      targetHtml(entry.sum.money, systemTarget(entry), false) + '</span></button>';
 
     for (const location of entry.route) {
       const reward = now.perLocation[location.id];
@@ -1212,11 +1232,14 @@ function locationsTable(locations, now, before, withRoute) {
       '<td class="n">' + (reward.hasRows ? fmt(reward.total.n) + deltaHtml(reward.total.n, was.total.n) : '—') + '</td>' +
       '<td class="n">' + (reward.hasRows ? fmt(reward.total.money) + deltaHtml(reward.total.money, was.total.money) : '—') + '</td>' +
       '<td class="n">' + (reward.hasRows ? fmt(reward.total.xp) + deltaHtml(reward.total.xp, was.total.xp) : '—') + '</td>' +
+      '<td class="n">' + (location.target ? fmt(location.target) : '—') + '</td>' +
+      '<td class="n">' + (location.target ? targetHtml(reward.total.money, location.target, true) : '') + '</td>' +
       (withRoute ? '<td class="n">' + (reward.hasRows ? fmt(reward.routeMoney) + ' · ' + fmt(reward.routeXp) + ' XP' : '—') + '</td>' : '') + '</tr>';
   }).join('');
 
   return '<table><thead><tr><th>Локация</th><th style="text-align:right">Уровней</th><th style="text-align:right">Врагов</th>' +
-    '<th style="text-align:right">Монеты</th><th style="text-align:right">Опыт</th>' + (withRoute ? '<th style="text-align:right">С начала игры</th>' : '') +
+    '<th style="text-align:right">Монеты</th><th style="text-align:right">Опыт</th><th style="text-align:right">Ориентир</th><th style="text-align:right">До ориентира</th>' +
+    (withRoute ? '<th style="text-align:right">С начала игры</th>' : '') +
     '</tr></thead><tbody>' + rows + '</tbody></table>';
 }
 
@@ -1233,7 +1256,7 @@ function renderSystem(now, before) {
 
   html += '<div class="cards">' +
     card('Врагов в системе', entry.sum.n, was.sum.n, '<div class="r">рядовых ' + countText(regular) + ' · боссов ' + entry.sum.bosses + '</div>') +
-    card('Монеты за систему', entry.sum.money, was.sum.money, rangeHtml(entry.sum, 'money')) +
+    card('Монеты за систему', entry.sum.money, was.sum.money, rangeHtml(entry.sum, 'money') + targetHtml(entry.sum.money, systemTarget(entry), false)) +
     card('Опыт за систему', entry.sum.xp, was.sum.xp, rangeHtml(entry.sum, 'xp')) +
     card('Монеты с начала игры', entry.routeMoney, was.routeMoney ?? entry.routeMoney, '<div class="r">опыт ' + fmt(entry.routeXp) + '</div>') +
     '</div>';
@@ -1281,10 +1304,13 @@ function renderMain(now, before) {
     (parent ? ' · ветка от ' + esc(C.labels[parent.id]) : '') +
     (boss ? ' · босс локации: ' + esc(boss.title) + ' (' + esc(boss.id) + ')' : '') + '</div></div>' +
     '<div>Уровней: <button class="icon" data-act="lv-" title="Убрать последний уровень">−</button> <b>' + location.levels +
-    '</b> <button class="icon" data-act="lv+" title="Добавить уровень">+</button></div></div>';
+    '</b> <button class="icon" data-act="lv+" title="Добавить уровень">+</button></div>' +
+    (S.t.locations.header.includes('reward_target') ? '<div>Ориентир, монет: <input class="target-input' +
+      (location.row.reward_target && isNaN(toInt(location.row.reward_target)) ? ' bad-input' : '') + '" data-loc-field="reward_target" data-key="loc:reward_target" value="' +
+      esc(location.row.reward_target) + '" inputmode="numeric" placeholder="нет"></div>' : '') + '</div>';
 
   html += '<div class="cards">' +
-    card('Монеты за локацию', reward.total.money, was.total.money, rangeHtml(reward.total, 'money')) +
+    card('Монеты за локацию', reward.total.money, was.total.money, rangeHtml(reward.total, 'money') + targetHtml(reward.total.money, location.target, false)) +
     card('Опыт за локацию', reward.total.xp, was.total.xp, rangeHtml(reward.total, 'xp')) +
     card('Врагов', reward.total.n, was.total.n) +
     (system ? card('Монеты · ' + esc(system.system.title), system.sum.money, systemWas?.sum.money ?? system.sum.money) +
@@ -1554,6 +1580,15 @@ document.addEventListener('click', event => {
 
 document.addEventListener('input', event => {
   const target = event.target;
+
+  if (target.dataset.locField) {
+    const row = S.t.locations.rows.find(r => r.id === S.sel);
+
+    if (row)
+      mutate(() => setField(row, target.dataset.locField, target.value.trim()), target.dataset.key + ':' + S.sel);
+
+    return;
+  }
 
   if (!target.dataset.f || target.dataset.i == null)
     return;

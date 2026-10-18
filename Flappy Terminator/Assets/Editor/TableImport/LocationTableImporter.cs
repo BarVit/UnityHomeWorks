@@ -10,8 +10,11 @@ namespace TableImport
 
         private static readonly string[] Columns =
         {
-            "id", "system", "order", "levels", "boss", "border_theme", "flight_mode", "title", "branch_of", "void"
+            "id", "system", "order", "levels", "boss", "border_theme", "flight_mode", "title", "branch_of", "void",
+            "reward_target"
         };
+
+        private const int MaxRewardTarget = 100000000;
 
         public static LocationTable Import(SystemTable systems, TableLog log)
         {
@@ -49,7 +52,8 @@ namespace TableImport
                     reader.ReadEnum<FlightMode>("flight_mode"),
                     reader.ReadOptionalText("title"),
                     reader.ReadOptionalText("branch_of"),
-                    reader.ReadOptionalText("void")));
+                    reader.ReadOptionalText("void"),
+                    ReadRewardTarget(reader)));
             }
 
             CheckBranches(rows, log);
@@ -59,6 +63,14 @@ namespace TableImport
             EditorUtility.SetDirty(table);
 
             return table;
+        }
+
+        private static int ReadRewardTarget(RowReader reader)
+        {
+            if (reader.ReadOptionalText("reward_target").Length == 0)
+                return 0;
+
+            return reader.ReadInt("reward_target", 0, MaxRewardTarget);
         }
 
         private static void CheckBranches(List<LocationRow> rows, TableLog log)

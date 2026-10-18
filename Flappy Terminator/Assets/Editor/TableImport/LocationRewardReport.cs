@@ -12,7 +12,7 @@ namespace TableImport
         private static readonly string[] Columns =
         {
             "location", "label", "levels", "enemies", "money", "xp", "money_min", "money_max", "xp_min", "xp_max",
-            "route_money", "route_xp", "note"
+            "route_money", "route_xp", "target_money", "to_target", "note"
         };
 
         public static void Write(SystemTable systems, LocationTable locations, WaveTable waves, EnemyTable enemies,
@@ -146,10 +146,20 @@ namespace TableImport
                 reward.Enemies.ToString(CultureInfo.InvariantCulture), Format(reward.Money), Format(reward.Xp),
                 reward.MoneyMin.ToString(CultureInfo.InvariantCulture), reward.MoneyMax.ToString(CultureInfo.InvariantCulture),
                 reward.XpMin.ToString(CultureInfo.InvariantCulture), reward.XpMax.ToString(CultureInfo.InvariantCulture),
-                routeMoney, routeXp, GetNote(reward)
+                routeMoney, routeXp, GetTarget(location), GetGap(location, reward), GetNote(reward)
             };
 
             text.Append(string.Join(ReportFile.Separator, cells)).Append(ReportFile.LineEnd);
+        }
+
+        private static string GetTarget(LocationRow location)
+        {
+            return location.RewardTarget > 0 ? location.RewardTarget.ToString(CultureInfo.InvariantCulture) : "";
+        }
+
+        private static string GetGap(LocationRow location, LocationReward reward)
+        {
+            return location.RewardTarget > 0 ? Format(reward.Money - location.RewardTarget) : "";
         }
 
         private static string GetNote(LocationReward reward)
