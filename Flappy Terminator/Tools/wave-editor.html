@@ -1,0 +1,1406 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Редактор волн</title>
+<style>
+:root {
+  --bg: #f4f5f7; --panel: #ffffff; --line: #dfe2e7; --text: #1d2129; --muted: #6b7280;
+  --accent: #2563eb; --accent-soft: #e8efff; --good: #15803d; --bad: #c2410c; --error: #b91c1c;
+  --error-soft: #fdecec; --warn-soft: #fff6e0; --input: #ffffff; --chip: #eef0f3; --boss: #7c3aed;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15171c; --panel: #1d2027; --line: #2e323b; --text: #e6e8ec; --muted: #9aa1ad;
+    --accent: #6ea0ff; --accent-soft: #24304a; --good: #4ade80; --bad: #fb923c; --error: #f87171;
+    --error-soft: #3a1f22; --warn-soft: #3a3320; --input: #15171c; --chip: #2a2e37; --boss: #b794ff;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--bg); color: var(--text); font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+button, input, select { font: inherit; color: inherit; }
+button { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+button:hover:not(:disabled) { border-color: var(--accent); }
+button:disabled { opacity: .45; cursor: default; }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+button.icon { padding: 2px 7px; }
+input, select { background: var(--input); border: 1px solid var(--line); border-radius: 5px; padding: 3px 5px; }
+input:focus, select:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+input.num { width: 56px; text-align: right; }
+input.ids { width: 100%; min-width: 120px; }
+select.add-enemy { width: 36px; padding: 3px 2px; }
+select.mode { width: 118px; }
+.bad-input { border-color: var(--error) !important; background: var(--error-soft); }
+
+header.top { position: sticky; top: 0; z-index: 5; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+  padding: 8px 14px; background: var(--panel); border-bottom: 1px solid var(--line); }
+header.top h1 { font-size: 15px; margin: 0 10px 0 0; }
+#status { color: var(--muted); margin-right: auto; }
+#status .dirty { color: var(--bad); font-weight: 600; }
+#status .errors { color: var(--error); font-weight: 600; }
+
+#app { display: grid; grid-template-columns: minmax(250px, 330px) minmax(0, 1fr); min-height: calc(100% - 46px); }
+aside { border-right: 1px solid var(--line); background: var(--panel); overflow: auto; max-height: calc(100vh - 46px); position: sticky; top: 46px; }
+main { padding: 14px 18px 60px; overflow: auto; }
+
+.sys { border-bottom: 1px solid var(--line); }
+.sys-head { display: flex; justify-content: space-between; gap: 8px; padding: 9px 12px 5px; font-weight: 600; }
+.sys-head .sum { font-weight: 600; font-variant-numeric: tabular-nums; }
+.loc { display: grid; grid-template-columns: 54px 1fr auto; gap: 6px; align-items: baseline; width: 100%; text-align: left;
+  border: 0; border-radius: 0; background: none; padding: 4px 12px; font-variant-numeric: tabular-nums; }
+.loc:hover { background: var(--chip); }
+.loc.sel { background: var(--accent-soft); }
+.loc.branch { padding-left: 26px; grid-template-columns: 1fr auto; }
+.loc .lbl { font-weight: 600; }
+.loc .nums { text-align: right; white-space: nowrap; }
+.loc .meta { color: var(--muted); font-size: 11px; }
+.loc.empty .lbl, .loc.empty .nums { color: var(--muted); font-weight: 400; }
+.dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 4px; vertical-align: 1px; }
+.dot.ok { background: var(--good); } .dot.err { background: var(--error); } .dot.off { background: var(--line); } .dot.warn { background: var(--bad); }
+.route { color: var(--muted); font-size: 11px; }
+
+.delta { font-size: 11px; margin-left: 4px; }
+.delta.up { color: var(--good); } .delta.down { color: var(--bad); }
+
+.loc-head { display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: flex-end; margin-bottom: 12px; }
+.loc-head h2 { margin: 0; font-size: 20px; }
+.loc-head h2 small { color: var(--muted); font-weight: 400; font-size: 13px; margin-left: 6px; }
+.loc-head .sub { color: var(--muted); }
+.cards { display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0 16px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; min-width: 130px; }
+.card .k { color: var(--muted); font-size: 11px; }
+.card .v { font-size: 17px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.card .r { color: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+
+.level { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; margin-bottom: 14px; overflow-x: auto; }
+.level > header { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center; padding: 8px 12px; border-bottom: 1px solid var(--line); }
+.level > header b { font-size: 14px; }
+.level > header .nums { color: var(--muted); font-variant-numeric: tabular-nums; }
+.level > header .grow { flex: 1; }
+.level.missing { border-color: var(--bad); }
+table { width: 100%; border-collapse: collapse; }
+th { text-align: left; color: var(--muted); font-weight: 500; font-size: 11px; padding: 5px 6px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 5px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+td.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.order { white-space: nowrap; color: var(--muted); }
+.names { color: var(--muted); font-size: 11px; margin-top: 2px; }
+.names .unknown { color: var(--error); font-weight: 600; }
+.names .boss { color: var(--boss); }
+.range { color: var(--muted); font-size: 11px; }
+tr.err-row td { background: var(--error-soft); color: var(--error); font-size: 12px; padding: 3px 8px; }
+.row-tools { white-space: nowrap; text-align: right; }
+.pause { white-space: nowrap; }
+.empty-level { padding: 10px 12px; color: var(--bad); }
+.note { color: var(--muted); font-size: 12px; margin: 4px 0 14px; }
+.errors-box { background: var(--error-soft); color: var(--error); border-radius: 8px; padding: 8px 12px; margin-bottom: 14px; }
+.errors-box ul { margin: 4px 0 0 18px; padding: 0; }
+
+.start { max-width: 640px; margin: 50px auto; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 22px 26px; }
+.start h2 { margin-top: 0; }
+.start code { background: var(--chip); border-radius: 4px; padding: 1px 4px; }
+.toast { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: var(--text); color: var(--bg);
+  padding: 8px 14px; border-radius: 8px; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 10; }
+.toast.show { opacity: .95; }
+
+@media (max-width: 860px) {
+  #app { grid-template-columns: 1fr; }
+  aside { position: static; max-height: 300px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .level { overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Редактор волн</h1>
+  <span id="status">Таблицы не загружены</span>
+  <button id="btn-open" data-act="open">Открыть папку проекта</button>
+  <button id="btn-reconnect" data-act="reconnect" hidden></button>
+  <label id="lbl-files" hidden><button data-act="pick-files">Загрузить .tsv</button>
+    <input id="file-input" type="file" accept=".tsv" multiple hidden></label>
+  <button data-act="reload" id="btn-reload" disabled title="Перечитать таблицы с диска">Перечитать</button>
+  <button data-act="undo" id="btn-undo" disabled title="⌘Z">Отменить</button>
+  <button data-act="redo" id="btn-redo" disabled title="⇧⌘Z">Вернуть</button>
+  <button data-act="save" id="btn-save" class="primary" disabled title="⌘S">Сохранить</button>
+</header>
+<div id="app" hidden>
+  <aside id="tree"></aside>
+  <main id="main"></main>
+</div>
+<div id="start" class="start">
+  <h2>Как начать</h2>
+  <p>Нажмите «Открыть папку проекта» и выберите папку <code>Flappy Terminator</code>
+    (или сразу <code>Assets/Data/Tables</code>). Страница прочитает <code>waves</code>, <code>locations</code>,
+    <code>enemies</code>, <code>bosses</code>, <code>enemy_shields</code> и <code>systems</code>.</p>
+  <p>Правки состава волн и числа уровней видны сразу вместе с наградами за уровень, локацию, систему и маршрут.
+    «Сохранить» записывает <code>waves.tsv</code> (и <code>locations.tsv</code>, если менялось число уровней)
+    в том же формате UTF-16. Unity импортирует таблицы сама, когда её окно получит фокус.</p>
+  <p class="note">Нужен Chrome или Edge: доступ к папке есть только у них. В другом браузере можно загрузить
+    шесть .tsv кнопкой «Загрузить .tsv», а сохранение скачает файлы — их надо положить в
+    <code>Assets/Data/Tables</code> вручную.</p>
+  <p class="note">Награды считаются как в отчёте <code>Assets/Data/Reports/location_rewards.tsv</code>: убийства плюс
+    сбитые щиты, без бонусов за точность и «без урона»; у случайных групп — среднее и разброс.</p>
+</div>
+<div id="toast" class="toast"></div>
+<datalist id="enemy-ids"></datalist>
+
+<script>
+'use strict';
+
+const NAMES = ['waves', 'locations', 'enemies', 'bosses', 'enemy_shields', 'systems'];
+const EDITABLE = ['waves', 'locations'];
+const MODES = ['Sequence', 'Random', 'Boss'];
+const MODE_TITLES = { Sequence: 'По очереди', Random: 'Случайно', Boss: 'Босс' };
+const DB_NAME = 'wave-editor';
+
+const S = {
+  t: null,
+  base: null,
+  savedText: {},
+  dir: null,
+  files: {},
+  mtime: {},
+  fsMode: false,
+  sel: null,
+  undo: [],
+  redo: [],
+  lastKey: null,
+  lastTime: 0,
+};
+
+const $ = (selector, root = document) => root.querySelector(selector);
+const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const fmt = value => Math.round(value).toLocaleString('ru-RU');
+
+function store(key, value) {
+  try { localStorage.setItem('wave-editor:' + key, value); } catch (e) { /* storage may be blocked */ }
+}
+
+function recall(key) {
+  try { return localStorage.getItem('wave-editor:' + key); } catch (e) { return null; }
+}
+
+function toast(text) {
+  const element = $('#toast');
+  element.textContent = text;
+  element.classList.add('show');
+  clearTimeout(toast.timer);
+  toast.timer = setTimeout(() => element.classList.remove('show'), 3200);
+}
+
+// ---------- TSV: read and write byte-for-byte ----------
+
+function decode(buffer) {
+  const bytes = new Uint8Array(buffer);
+
+  if (bytes[0] === 0xFF && bytes[1] === 0xFE)
+    return { text: new TextDecoder('utf-16le').decode(bytes.subarray(2)), enc: 'utf16le' };
+
+  if (bytes[0] === 0xEF && bytes[1] === 0xBB && bytes[2] === 0xBF)
+    return { text: new TextDecoder('utf-8').decode(bytes.subarray(3)), enc: 'utf8bom' };
+
+  return { text: new TextDecoder('utf-8').decode(bytes), enc: 'utf8' };
+}
+
+function encode(text, enc) {
+  if (enc === 'utf16le') {
+    const bytes = new Uint8Array(2 + text.length * 2);
+    bytes[0] = 0xFF;
+    bytes[1] = 0xFE;
+
+    for (let i = 0; i < text.length; i++) {
+      const code = text.charCodeAt(i);
+      bytes[2 + i * 2] = code & 255;
+      bytes[3 + i * 2] = code >> 8;
+    }
+
+    return bytes;
+  }
+
+  const body = new TextEncoder().encode(text);
+
+  if (enc !== 'utf8bom')
+    return body;
+
+  const bytes = new Uint8Array(body.length + 3);
+  bytes.set([0xEF, 0xBB, 0xBF]);
+  bytes.set(body, 3);
+
+  return bytes;
+}
+
+function parseTsv(buffer) {
+  const { text, enc } = decode(buffer);
+  const eol = text.includes('\r\n') ? '\r\n' : '\n';
+  const trailing = text.endsWith('\n');
+  const lines = text.split(/\r?\n/);
+
+  if (trailing)
+    lines.pop();
+
+  const headerRaw = lines[0] ?? '';
+  const header = headerRaw.split('\t').map(name => name.trim());
+  const rows = lines.slice(1).map(line => {
+    const cells = line.split('\t');
+    const row = { _raw: line };
+    header.forEach((name, i) => { row[name] = (cells[i] ?? '').trim(); });
+    return row;
+  });
+
+  return { header, headerRaw, rows, eol, trailing, enc };
+}
+
+function serializeText(table) {
+  const lines = [table.headerRaw];
+
+  for (const row of table.rows)
+    lines.push(row._raw != null ? row._raw : table.header.map(name => row[name] ?? '').join('\t'));
+
+  return lines.join(table.eol) + (table.trailing ? table.eol : '');
+}
+
+// ---------- lookups ----------
+
+const toInt = text => (/^-?\d+$/.test(String(text).trim()) ? parseInt(text, 10) : NaN);
+const toFloat = text => (/^-?\d+(\.\d+)?$/.test(String(text).trim()) ? parseFloat(text) : NaN);
+const splitIds = text => String(text ?? '').split(',').map(part => part.trim());
+
+function buildContext(locationRows) {
+  const t = S.t;
+  const enemies = {};
+  const bosses = {};
+  const shields = {};
+  const locations = {};
+  const branches = {};
+
+  for (const row of t.enemies.rows) {
+    if (row.id)
+      enemies[row.id] = { id: row.id, title: row.title || row.id, money: toInt(row.reward_money) || 0, xp: toInt(row.reward_xp) || 0 };
+  }
+
+  for (const row of t.bosses.rows) {
+    if (row.id)
+      bosses[row.id] = { id: row.id, title: row.title || row.id, kind: row.kind, location: row.location || '',
+        money: toInt(row.reward_money) || 0, xp: toInt(row.reward_xp) || 0 };
+  }
+
+  for (const row of t.enemy_shields.rows) {
+    const level = toInt(row.level);
+
+    if (!isNaN(level))
+      shields[level] = { level, capacity: toInt(row.capacity) || 0, money: toInt(row.reward_money) || 0, xp: toInt(row.reward_xp) || 0 };
+  }
+
+  for (const row of locationRows) {
+    if (!row.id)
+      continue;
+
+    locations[row.id] = { id: row.id, row, system: row.system, order: toInt(row.order) || 0, levels: toInt(row.levels) || 0,
+      boss: row.boss || '', title: row.title || '', branchOf: row.branch_of || '' };
+  }
+
+  for (const location of Object.values(locations)) {
+    if (location.branchOf)
+      (branches[location.branchOf] ||= []).push(location);
+  }
+
+  for (const list of Object.values(branches))
+    list.sort((a, b) => a.order - b.order);
+
+  const systems = t.systems.rows.filter(row => row.id)
+    .map(row => ({ id: row.id, title: row.title || row.id, order: toInt(row.order) || 0 }))
+    .sort((a, b) => a.order - b.order);
+
+  const labels = {};
+
+  for (const system of systems) {
+    for (const location of Object.values(locations)) {
+      if (location.system === system.id && !location.branchOf)
+        labels[location.id] = system.order + '-' + location.order;
+    }
+  }
+
+  for (const location of Object.values(locations)) {
+    if (location.branchOf)
+      labels[location.id] = location.title || location.id;
+  }
+
+  return { enemies, bosses, shields, locations, branches, systems, labels };
+}
+
+// ---------- rewards and checks (same rules as LocationRewardReport and WaveTableImporter) ----------
+
+function roundHalfEven(value) {
+  const floor = Math.floor(value);
+  const diff = value - floor;
+
+  if (Math.abs(diff - 0.5) < 1e-6)
+    return floor % 2 === 0 ? floor : floor + 1;
+
+  return Math.round(value);
+}
+
+function emptySum() {
+  return { n: 0, money: 0, xp: 0, mmin: 0, mmax: 0, xmin: 0, xmax: 0, time: 0, bosses: 0 };
+}
+
+function addSum(target, source) {
+  for (const key of Object.keys(target))
+    target[key] += source[key];
+
+  return target;
+}
+
+function addEnemy(sum, money, mmin, mmax, xp, xmin, xmax) {
+  sum.n++;
+  sum.money += money;
+  sum.mmin += mmin;
+  sum.mmax += mmax;
+  sum.xp += xp;
+  sum.xmin += xmin;
+  sum.xmax += xmax;
+}
+
+function checkRow(row, C, keys) {
+  const errors = [];
+  const fail = (field, text) => errors.push({ field, text });
+  const location = C.locations[row.location];
+  const level = toInt(row.level);
+  const order = toInt(row.order);
+  const count = toInt(row.count);
+  const mode = MODES.find(name => name.toLowerCase() === String(row.mode).toLowerCase());
+  const ids = splitIds(row.enemies);
+
+  if (!row.location)
+    fail('location', 'location: пусто');
+  else if (!location)
+    fail('location', 'location: нет локации с id ' + row.location + ' в locations.tsv');
+
+  if (isNaN(level) || level < 1 || level > 20)
+    fail('level', 'level: «' + row.level + '» — нужно целое от 1 до 20');
+  else if (location && level > location.levels)
+    fail('level', 'level: ' + level + ' больше, чем уровней у ' + row.location + ' (' + location.levels + ')');
+
+  if (isNaN(order) || order < 1 || order > 99)
+    fail('order', 'order: «' + row.order + '» — нужно целое от 1 до 99');
+  else if (keys) {
+    const key = row.location + ' ' + level + ' ' + order;
+
+    if (keys.has(key))
+      fail('order', 'у локации ' + row.location + ' на уровне ' + level + ' уже есть группа ' + order);
+
+    keys.add(key);
+  }
+
+  if (isNaN(count) || count < 1 || count > 1000)
+    fail('count', 'count: «' + row.count + '» — нужно целое от 1 до 1000');
+
+  if (!mode)
+    fail('mode', 'mode: «' + row.mode + '» не одно из ' + MODES.join(', '));
+
+  if (mode === 'Boss') {
+    if (count !== 1 || ids.length !== 1)
+      fail('count', 'Boss: нужен ровно один босс и count 1');
+
+    const boss = C.bosses[ids[0]];
+
+    if (!boss)
+      fail('enemies', 'enemies: нет босса с id ' + ids[0] + ' в bosses.tsv');
+    else if (boss.location !== row.location)
+      fail('enemies', 'enemies: босс ' + ids[0] + ' стоит в ' + row.location + ', а в bosses.tsv у него location «' + boss.location + '»');
+  } else if (mode) {
+    for (const id of ids) {
+      if (!C.enemies[id])
+        fail('enemies', 'enemies: нет врага с id «' + id + '» в enemies.tsv');
+    }
+  }
+
+  for (const field of ['interval', 'interval_max']) {
+    const text = String(row[field]);
+
+    if (text.includes(','))
+      fail(field, field + ': «' + text + '» — десятичная запятая; в таблице нужна точка');
+    else if (isNaN(toFloat(text)) || toFloat(text) < 0 || toFloat(text) > 60)
+      fail(field, field + ': «' + text + '» — нужно число от 0 до 60');
+  }
+
+  if (toFloat(row.interval_max) < toFloat(row.interval))
+    fail('interval_max', 'interval_max: ' + row.interval_max + ' меньше interval ' + row.interval);
+
+  if (String(row.shield).length > 0) {
+    const shield = toInt(row.shield);
+
+    if (mode === 'Boss')
+      fail('shield', 'shield: боссам щит не ставится, оставьте пустым');
+    else if (isNaN(shield) || !C.shields[shield])
+      fail('shield', 'shield: нет уровня «' + row.shield + '» в enemy_shields.tsv');
+  }
+
+  return errors;
+}
+
+function groupSum(row, C) {
+  const sum = emptySum();
+  const count = toInt(row.count);
+  const mode = MODES.find(name => name.toLowerCase() === String(row.mode).toLowerCase());
+  const ids = splitIds(row.enemies);
+
+  if (isNaN(count) || count < 1 || !mode)
+    return sum;
+
+  if (mode === 'Boss') {
+    const boss = C.bosses[ids[0]];
+
+    if (boss)
+      addEnemy(sum, boss.money, boss.money, boss.money, boss.xp, boss.xp, boss.xp);
+
+    sum.bosses = 1;
+    return sum;
+  }
+
+  const shield = C.shields[toInt(row.shield)];
+  const shieldMoney = shield ? shield.money : 0;
+  const shieldXp = shield ? shield.xp : 0;
+  const pause = (toFloat(row.interval) + toFloat(row.interval_max)) / 2;
+
+  sum.time = isNaN(pause) ? 0 : count * pause;
+
+  if (mode === 'Sequence') {
+    for (let i = 0; i < count; i++) {
+      const enemy = C.enemies[ids[i % ids.length]];
+
+      if (enemy) {
+        const money = enemy.money + shieldMoney;
+        const xp = enemy.xp + shieldXp;
+        addEnemy(sum, money, money, money, xp, xp, xp);
+      }
+    }
+
+    return sum;
+  }
+
+  const known = ids.map(id => C.enemies[id]).filter(Boolean);
+
+  if (known.length === 0)
+    return sum;
+
+  const moneys = known.map(enemy => enemy.money + shieldMoney);
+  const xps = known.map(enemy => enemy.xp + shieldXp);
+  const money = moneys.reduce((a, b) => a + b, 0) / ids.length;
+  const xp = xps.reduce((a, b) => a + b, 0) / ids.length;
+
+  for (let i = 0; i < count; i++)
+    addEnemy(sum, money, Math.min(...moneys), Math.max(...moneys), xp, Math.min(...xps), Math.max(...xps));
+
+  return sum;
+}
+
+function sortedGroups(rows, locationId, level) {
+  return rows.map((row, index) => ({ row, index }))
+    .filter(item => item.row.location === locationId && toInt(item.row.level) === level)
+    .sort((a, b) => (toInt(a.row.order) || 0) - (toInt(b.row.order) || 0));
+}
+
+function computeAll(waveRows, locationRows) {
+  const C = buildContext(locationRows);
+  const keys = new Set();
+  const rowErrors = new Map();
+  const perLocation = {};
+  let errorCount = 0;
+
+  waveRows.forEach((row, index) => {
+    if (row._raw === '' && !row.location)
+      return;
+
+    const errors = checkRow(row, C, keys);
+
+    if (errors.length) {
+      rowErrors.set(index, errors);
+      errorCount += errors.length;
+    }
+  });
+
+  for (const location of Object.values(C.locations)) {
+    const levels = [];
+    const total = emptySum();
+    let hasRows = false;
+    let missing = [];
+    let errors = 0;
+
+    for (let level = 1; level <= location.levels; level++) {
+      const groups = sortedGroups(waveRows, location.id, level);
+      const sum = emptySum();
+
+      for (const group of groups) {
+        group.sum = groupSum(group.row, C);
+        group.errors = rowErrors.get(group.index) || [];
+        errors += group.errors.length;
+        addSum(sum, group.sum);
+      }
+
+      if (groups.length)
+        hasRows = true;
+      else
+        missing.push(level);
+
+      levels.push({ level, groups, sum });
+      addSum(total, sum);
+    }
+
+    const outside = waveRows.map((row, index) => ({ row, index }))
+      .filter(item => item.row.location === location.id && !(toInt(item.row.level) >= 1 && toInt(item.row.level) <= location.levels));
+
+    for (const item of outside) {
+      item.errors = rowErrors.get(item.index) || [];
+      errors += item.errors.length;
+      hasRows = true;
+    }
+
+    perLocation[location.id] = { location, levels, total, hasRows, missing, errors, outside,
+      playable: hasRows && missing.length === 0 };
+  }
+
+  const orphans = [];
+
+  waveRows.forEach((row, index) => {
+    if (row.location && !C.locations[row.location])
+      orphans.push({ index, row, errors: rowErrors.get(index) || [] });
+  });
+
+  // route totals, as the report counts them: systems by order, main locations by order, only those with rows
+  let routeMoney = 0;
+  let routeXp = 0;
+  const systems = [];
+
+  for (const system of C.systems) {
+    const route = Object.values(C.locations).filter(l => l.system === system.id && !l.branchOf).sort((a, b) => a.order - b.order);
+    const sum = emptySum();
+    const branchSum = emptySum();
+
+    for (const location of route) {
+      const reward = perLocation[location.id];
+
+      if (reward.hasRows) {
+        routeMoney += reward.total.money;
+        routeXp += reward.total.xp;
+        reward.routeMoney = routeMoney;
+        reward.routeXp = routeXp;
+        addSum(sum, reward.total);
+      }
+
+      for (const branch of C.branches[location.id] || []) {
+        if (perLocation[branch.id].hasRows)
+          addSum(branchSum, perLocation[branch.id].total);
+      }
+    }
+
+    systems.push({ system, route, sum, branchSum, routeMoney, routeXp });
+  }
+
+  return { C, perLocation, systems, rowErrors, errorCount, orphans };
+}
+
+// the same rows as Assets/Data/Reports/location_rewards.tsv — used to check this page against the report
+function reportRows() {
+  const result = computeAll(S.t.waves.rows, S.t.locations.rows);
+  const lines = [];
+  const line = (location, label, reward, route) => [location.id, label, location.levels, reward.total.n,
+    roundHalfEven(reward.total.money), roundHalfEven(reward.total.xp), reward.total.mmin, reward.total.mmax,
+    reward.total.xmin, reward.total.xmax, route ? roundHalfEven(reward.routeMoney) : '', route ? roundHalfEven(reward.routeXp) : ''];
+
+  for (const system of result.systems) {
+    for (const location of system.route) {
+      const reward = result.perLocation[location.id];
+
+      if (reward.hasRows)
+        lines.push(line(location, result.C.labels[location.id], reward, true));
+
+      for (const branch of result.C.branches[location.id] || []) {
+        if (result.perLocation[branch.id].hasRows)
+          lines.push(line(branch, branch.title, result.perLocation[branch.id], false));
+      }
+    }
+  }
+
+  return lines;
+}
+
+// ---------- editing ----------
+
+function snapshot() {
+  return JSON.stringify({ waves: S.t.waves.rows, locations: S.t.locations.rows });
+}
+
+function restore(text) {
+  const data = JSON.parse(text);
+  S.t.waves.rows = data.waves;
+  S.t.locations.rows = data.locations;
+}
+
+function mutate(change, key) {
+  const now = Date.now();
+
+  if (!(key && key === S.lastKey && now - S.lastTime < 1500)) {
+    S.undo.push(snapshot());
+
+    if (S.undo.length > 200)
+      S.undo.shift();
+  }
+
+  S.lastKey = key || null;
+  S.lastTime = now;
+  S.redo = [];
+  change();
+  render();
+}
+
+function undo() {
+  if (!S.undo.length)
+    return;
+
+  S.redo.push(snapshot());
+  restore(S.undo.pop());
+  S.lastKey = null;
+  render();
+}
+
+function redo() {
+  if (!S.redo.length)
+    return;
+
+  S.undo.push(snapshot());
+  restore(S.redo.pop());
+  S.lastKey = null;
+  render();
+}
+
+function setField(row, field, value) {
+  row[field] = value;
+  row._raw = null;
+}
+
+function newRow(fields) {
+  const row = { _raw: null };
+
+  for (const name of S.t.waves.header)
+    row[name] = '';
+
+  return Object.assign(row, fields);
+}
+
+function insertIndex(locationId, level, afterIndex) {
+  const rows = S.t.waves.rows;
+
+  if (afterIndex != null)
+    return afterIndex + 1;
+
+  let last = -1;
+  let firstLater = -1;
+
+  rows.forEach((row, index) => {
+    if (row.location !== locationId)
+      return;
+
+    if (toInt(row.level) <= level)
+      last = index;
+    else if (firstLater < 0)
+      firstLater = index;
+  });
+
+  if (last >= 0)
+    return last + 1;
+
+  if (firstLater >= 0)
+    return firstLater;
+
+  let end = rows.length;
+
+  while (end > 0 && rows[end - 1]._raw === '' && !rows[end - 1].location)
+    end--;
+
+  return end;
+}
+
+function renumber(locationId, level) {
+  sortedGroups(S.t.waves.rows, locationId, level).forEach((group, i) => {
+    if (String(i + 1) !== group.row.order)
+      setField(group.row, 'order', String(i + 1));
+  });
+}
+
+function addGroup(locationId, level) {
+  mutate(() => {
+    const groups = sortedGroups(S.t.waves.rows, locationId, level).filter(g => g.row.mode !== 'Boss');
+    const last = groups[groups.length - 1];
+    const all = sortedGroups(S.t.waves.rows, locationId, level);
+    const bossGroup = all.find(g => g.row.mode === 'Boss');
+    const row = newRow({ location: locationId, level: String(level), order: String(all.length + 1), count: '5', mode: 'Sequence',
+      enemies: last ? last.row.enemies : 'warden_1', interval: last ? last.row.interval : '2', interval_max: last ? last.row.interval_max : '2', shield: '' });
+
+    S.t.waves.rows.splice(insertIndex(locationId, level), 0, row);
+
+    if (bossGroup) {
+      // a new group goes before the boss, who closes the level
+      setField(row, 'order', bossGroup.row.order);
+      setField(bossGroup.row, 'order', String(all.length + 1));
+    }
+
+    renumber(locationId, level);
+  });
+}
+
+function duplicateGroup(index) {
+  mutate(() => {
+    const source = S.t.waves.rows[index];
+    const level = toInt(source.level);
+    const order = toInt(source.order);
+
+    for (const group of sortedGroups(S.t.waves.rows, source.location, level)) {
+      if (toInt(group.row.order) > order)
+        setField(group.row, 'order', String(toInt(group.row.order) + 1));
+    }
+
+    const copy = newRow({});
+    for (const name of S.t.waves.header)
+      copy[name] = source[name];
+    copy.order = String(order + 1);
+
+    S.t.waves.rows.splice(index + 1, 0, copy);
+    renumber(source.location, level);
+  });
+}
+
+function moveGroup(index, step) {
+  const row = S.t.waves.rows[index];
+  const groups = sortedGroups(S.t.waves.rows, row.location, toInt(row.level));
+  const at = groups.findIndex(g => g.index === index);
+  const other = groups[at + step];
+
+  if (!other)
+    return;
+
+  mutate(() => {
+    const order = row.order;
+    setField(row, 'order', other.row.order);
+    setField(other.row, 'order', order);
+  });
+}
+
+function deleteGroup(index) {
+  mutate(() => {
+    const row = S.t.waves.rows[index];
+    S.t.waves.rows.splice(index, 1);
+    renumber(row.location, toInt(row.level));
+  });
+}
+
+function changeLevels(locationId, step) {
+  const location = S.t.locations.rows.find(row => row.id === locationId);
+  const levels = toInt(location.levels) || 0;
+  const next = levels + step;
+
+  if (next < 1 || next > 20)
+    return;
+
+  if (step < 0) {
+    const doomed = S.t.waves.rows.filter(row => row.location === locationId && toInt(row.level) === levels);
+
+    if (doomed.length && !confirm('На уровне ' + levels + ' групп: ' + doomed.length + '. Удалить уровень вместе с ними?'))
+      return;
+  }
+
+  mutate(() => {
+    if (step < 0)
+      S.t.waves.rows = S.t.waves.rows.filter(row => !(row.location === locationId && toInt(row.level) === levels));
+
+    setField(location, 'levels', String(next));
+  });
+}
+
+function changeMode(row, mode, C) {
+  mutate(() => {
+    if (mode === 'Boss') {
+      const own = C.locations[row.location]?.boss;
+      const boss = own && C.bosses[own] ? own : (Object.values(C.bosses).find(b => b.location === row.location)?.id || '');
+      setField(row, 'enemies', boss);
+      setField(row, 'count', '1');
+      setField(row, 'interval', '0');
+      setField(row, 'interval_max', '0');
+      setField(row, 'shield', '');
+    } else if (row.mode === 'Boss') {
+      setField(row, 'enemies', 'warden_1');
+      setField(row, 'count', '5');
+      setField(row, 'interval', '2');
+      setField(row, 'interval_max', '2');
+    }
+
+    setField(row, 'mode', mode);
+  });
+}
+
+// ---------- rendering ----------
+
+function deltaHtml(now, before) {
+  const diff = roundHalfEven(now) - roundHalfEven(before);
+
+  if (!diff)
+    return '';
+
+  return '<span class="delta ' + (diff > 0 ? 'up' : 'down') + '">' + (diff > 0 ? '+' : '−') + fmt(Math.abs(diff)) + '</span>';
+}
+
+function rangeHtml(sum, kind) {
+  const min = kind === 'money' ? sum.mmin : sum.xmin;
+  const max = kind === 'money' ? sum.mmax : sum.xmax;
+
+  return min !== max ? '<div class="range">' + fmt(min) + '–' + fmt(max) + '</div>' : '';
+}
+
+function timeText(seconds) {
+  const total = Math.round(seconds);
+  return Math.floor(total / 60) + ':' + String(total % 60).padStart(2, '0');
+}
+
+function dirtyNames() {
+  return EDITABLE.filter(name => serializeText(S.t[name]) !== S.savedText[name]);
+}
+
+function render() {
+  const now = computeAll(S.t.waves.rows, S.t.locations.rows);
+  const before = computeAll(S.base.waves, S.base.locations);
+
+  S.view = now;
+
+  if (!S.sel || !now.C.locations[S.sel])
+    S.sel = now.systems[0]?.route[0]?.id || Object.keys(now.C.locations)[0];
+
+  store('sel', S.sel);
+
+  const focus = document.activeElement?.dataset?.key;
+  const caret = document.activeElement?.selectionStart;
+
+  renderStatus(now);
+  renderTree(now, before);
+  renderMain(now, before);
+  renderDatalist(now.C);
+
+  if (focus) {
+    const element = document.querySelector('[data-key="' + focus + '"]');
+
+    if (element) {
+      element.focus();
+
+      try { if (caret != null) element.setSelectionRange(caret, caret); } catch (e) { /* number inputs have no caret */ }
+    }
+  }
+}
+
+function renderStatus(now) {
+  const dirty = dirtyNames();
+  const parts = [];
+
+  parts.push(S.fsMode ? 'Папка: ' + esc(S.dir.name) : 'Файлы загружены вручную');
+  parts.push(dirty.length ? '<span class="dirty">не сохранено: ' + dirty.map(n => n + '.tsv').join(', ') + '</span>' : 'всё сохранено');
+
+  if (now.errorCount)
+    parts.push('<span class="errors">ошибок: ' + now.errorCount + '</span>');
+
+  $('#status').innerHTML = parts.join(' · ');
+  $('#btn-save').disabled = !dirty.length;
+  $('#btn-undo').disabled = !S.undo.length;
+  $('#btn-redo').disabled = !S.redo.length;
+  $('#btn-reload').disabled = !S.t;
+  document.title = (dirty.length ? '● ' : '') + 'Редактор волн';
+}
+
+function treeItem(location, reward, rewardBefore, C, branch) {
+  const status = reward.errors ? 'err' : (!reward.hasRows ? 'off' : (reward.playable ? 'ok' : 'warn'));
+  const title = reward.errors ? 'есть ошибки' : (!reward.hasRows ? 'нет волн' : (reward.playable ? 'играбельна' : 'уровни без групп: ' + reward.missing.join(', ')));
+  const nums = reward.hasRows
+    ? fmt(reward.total.money) + deltaHtml(reward.total.money, rewardBefore.total.money) + ' · ' + fmt(reward.total.xp) + ' XP' + deltaHtml(reward.total.xp, rewardBefore.total.xp)
+    : '—';
+  const label = branch ? '' : '<span class="lbl">' + esc(C.labels[location.id]) + '</span>';
+  const name = branch ? '<span class="lbl">' + esc(location.title || location.id) + '</span>' : '<span class="meta">' + reward.total.n + ' врагов · ' + location.levels + ' ур.</span>';
+  const route = !branch && reward.hasRows ? '<div class="route">Σ ' + fmt(reward.routeMoney) + ' · ' + fmt(reward.routeXp) + ' XP</div>' : '';
+
+  return '<button class="loc' + (branch ? ' branch' : '') + (reward.hasRows ? '' : ' empty') + (S.sel === location.id ? ' sel' : '') +
+    '" data-act="sel" data-id="' + esc(location.id) + '" title="' + esc(location.id + ' — ' + title) + '">' + label +
+    '<span><span class="dot ' + status + '"></span>' + name + '</span><span class="nums">' + nums + route + '</span></button>';
+}
+
+function renderTree(now, before) {
+  let html = '';
+
+  for (const entry of now.systems) {
+    const was = before.systems.find(s => s.system.id === entry.system.id) || { sum: emptySum(), branchSum: emptySum() };
+
+    html += '<div class="sys"><div class="sys-head"><span>' + esc(entry.system.title) + '</span><span class="sum">' +
+      fmt(entry.sum.money) + deltaHtml(entry.sum.money, was.sum.money) + ' · ' + fmt(entry.sum.xp) + ' XP' + deltaHtml(entry.sum.xp, was.sum.xp) +
+      '</span></div>';
+
+    for (const location of entry.route) {
+      const reward = now.perLocation[location.id];
+      html += treeItem(location, reward, before.perLocation[location.id] || reward, now.C, false);
+
+      for (const branch of now.C.branches[location.id] || [])
+        html += treeItem(branch, now.perLocation[branch.id], before.perLocation[branch.id] || now.perLocation[branch.id], now.C, true);
+    }
+
+    if (entry.branchSum.n)
+      html += '<div class="route" style="padding:2px 12px 8px">Ветки системы: ' + fmt(entry.branchSum.money) + ' · ' + fmt(entry.branchSum.xp) + ' XP (не входят в сумму)</div>';
+
+    html += '</div>';
+  }
+
+  $('#tree').innerHTML = html;
+}
+
+function idsField(row, index, C, errorFields) {
+  if (row.mode === 'Boss') {
+    const options = Object.values(C.bosses).map(boss =>
+      '<option value="' + esc(boss.id) + '"' + (boss.id === row.enemies ? ' selected' : '') + '>' + esc(boss.title) + ' (' + esc(boss.id) + ')' +
+      (boss.location && boss.location !== row.location ? ' — стоит в ' + esc(boss.location) : '') + '</option>').join('');
+    const missing = C.bosses[row.enemies] ? '' : '<option value="' + esc(row.enemies) + '" selected>' + esc(row.enemies || '—') + '</option>';
+
+    return '<select data-act="boss" data-i="' + index + '" data-key="' + index + ':enemies"' + (errorFields.has('enemies') ? ' class="bad-input"' : '') + '>' + missing + options + '</select>' +
+      '<div class="names"><span class="boss">' + esc(C.bosses[row.enemies]?.kind === 'Boss' ? 'босс' : 'мини-босс') + '</span></div>';
+  }
+
+  const names = splitIds(row.enemies).map(id => C.enemies[id] ? esc(C.enemies[id].title) : '<span class="unknown">' + esc(id || '?') + '</span>').join(' · ');
+  const add = '<select class="add-enemy" data-act="add-enemy" data-i="' + index + '" title="Добавить врага в список"><option value="">+</option>' +
+    Object.values(C.enemies).map(e => '<option value="' + esc(e.id) + '">' + esc(e.title) + ' — ' + e.money + ' / ' + e.xp + '</option>').join('') + '</select>';
+
+  return '<div style="display:flex;gap:4px"><input class="ids' + (errorFields.has('enemies') ? ' bad-input' : '') + '" list="enemy-ids" data-f="enemies" data-i="' + index +
+    '" data-key="' + index + ':enemies" value="' + esc(row.enemies) + '" spellcheck="false">' + add + '</div><div class="names">' + names + '</div>';
+}
+
+function groupRow(group, C, location) {
+  const row = group.row;
+  const index = group.index;
+  const fields = new Set(group.errors.map(e => e.field));
+  const bad = field => (fields.has(field) ? ' bad-input' : '');
+  const isBoss = row.mode === 'Boss';
+  const shieldOptions = '<option value="">—</option>' + Object.values(C.shields).map(s =>
+    '<option value="' + s.level + '"' + (String(s.level) === row.shield ? ' selected' : '') + '>' + s.level + ' (' + s.capacity + ')</option>').join('') +
+    (row.shield && !C.shields[toInt(row.shield)] ? '<option value="' + esc(row.shield) + '" selected>' + esc(row.shield) + '?</option>' : '');
+  const modes = MODES.map(mode => '<option value="' + mode + '"' + (mode === row.mode ? ' selected' : '') + '>' + MODE_TITLES[mode] + '</option>').join('') +
+    (MODES.includes(row.mode) ? '' : '<option selected>' + esc(row.mode) + '</option>');
+
+  let html = '<tr>' +
+    '<td class="order">' + esc(row.order) + '</td>' +
+    '<td><select data-act="mode" data-i="' + index + '" data-key="' + index + ':mode" class="mode' + bad('mode') + '">' + modes + '</select></td>' +
+    '<td>' + idsField(row, index, C, fields) + '</td>' +
+    '<td>' + (isBoss ? '<span class="range">1</span>' : '<input class="num' + bad('count') + '" type="number" min="1" max="1000" data-f="count" data-i="' + index + '" data-key="' + index + ':count" value="' + esc(row.count) + '">') + '</td>' +
+    '<td class="pause">' + (isBoss ? '<span class="range">ждёт пустое поле</span>' :
+      '<input class="num' + bad('interval') + '" data-f="interval" data-i="' + index + '" data-key="' + index + ':interval" value="' + esc(row.interval) + '" inputmode="decimal"> – ' +
+      '<input class="num' + bad('interval_max') + '" data-f="interval_max" data-i="' + index + '" data-key="' + index + ':interval_max" value="' + esc(row.interval_max) + '" inputmode="decimal">') + '</td>' +
+    '<td>' + (isBoss ? '' : '<select data-act="shield" data-i="' + index + '" data-key="' + index + ':shield" class="' + bad('shield') + '">' + shieldOptions + '</select>') + '</td>' +
+    '<td class="n">' + fmt(group.sum.money) + rangeHtml(group.sum, 'money') + '</td>' +
+    '<td class="n">' + fmt(group.sum.xp) + rangeHtml(group.sum, 'xp') + '</td>' +
+    '<td class="n">' + (isBoss ? 'бой' : timeText(group.sum.time)) + '</td>' +
+    '<td class="row-tools">' +
+      '<button class="icon" data-act="up" data-i="' + index + '" title="Выше">↑</button>' +
+      '<button class="icon" data-act="down" data-i="' + index + '" title="Ниже">↓</button>' +
+      '<button class="icon" data-act="dup" data-i="' + index + '" title="Копия группы">⧉</button>' +
+      '<button class="icon" data-act="del" data-i="' + index + '" title="Удалить группу">✕</button>' +
+    '</td></tr>';
+
+  if (group.errors.length)
+    html += '<tr class="err-row"><td colspan="10">' + group.errors.map(e => esc(e.text)).join('<br>') + '</td></tr>';
+
+  return html;
+}
+
+function card(title, now, before, extra) {
+  return '<div class="card"><div class="k">' + title + '</div><div class="v">' + fmt(now) + deltaHtml(now, before) + '</div>' + (extra || '') + '</div>';
+}
+
+function renderMain(now, before) {
+  const C = now.C;
+  const reward = now.perLocation[S.sel];
+
+  if (!reward) {
+    $('#main').innerHTML = '<p>Нет локаций в locations.tsv.</p>';
+    return;
+  }
+
+  const location = reward.location;
+  const was = before.perLocation[S.sel] || reward;
+  const system = now.systems.find(s => s.system.id === location.system || s.route.some(l => l.id === location.branchOf));
+  const systemWas = before.systems.find(s => s.system.id === system?.system.id);
+  const boss = location.boss ? C.bosses[location.boss] : null;
+  const parent = location.branchOf ? C.locations[location.branchOf] : null;
+  let html = '';
+
+  if (now.orphans.length || now.errorCount) {
+    const elsewhere = [];
+
+    for (const [index, errors] of now.rowErrors) {
+      const row = S.t.waves.rows[index];
+
+      if (row.location !== S.sel)
+        elsewhere.push(esc((C.labels[row.location] || row.location) + ', уровень ' + row.level + ', группа ' + row.order + ': ' + errors.map(e => e.text).join('; ')));
+    }
+
+    if (elsewhere.length)
+      html += '<div class="errors-box">Ошибки в других локациях — Unity не импортирует таблицу, пока они есть:<ul><li>' + elsewhere.slice(0, 12).join('</li><li>') + '</li></ul>' +
+        (elsewhere.length > 12 ? 'и ещё ' + (elsewhere.length - 12) : '') + '</div>';
+  }
+
+  html += '<div class="loc-head"><div><h2>' + esc(C.labels[location.id]) + '<small>' + esc(location.id) + '</small></h2>' +
+    '<div class="sub">' + esc(system?.system.title || location.system) + (parent ? ' · ветка от ' + esc(C.labels[parent.id]) : '') +
+    (boss ? ' · босс локации: ' + esc(boss.title) + ' (' + esc(boss.id) + ')' : '') + '</div></div>' +
+    '<div>Уровней: <button class="icon" data-act="lv-" title="Убрать последний уровень">−</button> <b>' + location.levels +
+    '</b> <button class="icon" data-act="lv+" title="Добавить уровень">+</button></div></div>';
+
+  html += '<div class="cards">' +
+    card('Монеты за локацию', reward.total.money, was.total.money, rangeHtml(reward.total, 'money')) +
+    card('Опыт за локацию', reward.total.xp, was.total.xp, rangeHtml(reward.total, 'xp')) +
+    card('Врагов', reward.total.n, was.total.n) +
+    (system ? card('Монеты · ' + esc(system.system.title), system.sum.money, systemWas?.sum.money ?? system.sum.money) +
+      card('Опыт · ' + esc(system.system.title), system.sum.xp, systemWas?.sum.xp ?? system.sum.xp) : '') +
+    (reward.routeMoney != null && reward.hasRows ? card('Монеты с начала игры', reward.routeMoney, was.routeMoney ?? reward.routeMoney, '<div class="r">опыт ' + fmt(reward.routeXp) + '</div>') : '') +
+    '</div>';
+
+  if (!reward.hasRows)
+    html += '<p class="note">У локации нет волн — в игре она закрыта («NO WAVES YET»). Добавьте группы на каждый уровень.</p>';
+  else if (reward.missing.length)
+    html += '<p class="note" style="color:var(--bad)">Уровни без групп: ' + reward.missing.join(', ') + ' — пока они пустые, локация в игре недоступна.</p>';
+
+  for (const level of reward.levels) {
+    html += '<section class="level' + (level.groups.length ? '' : ' missing') + '"><header><b>Уровень ' + level.level + '</b>' +
+      '<span class="nums">' + level.sum.n + ' врагов · ' + fmt(level.sum.money) + ' монет · ' + fmt(level.sum.xp) + ' XP · ≈ ' + timeText(level.sum.time) +
+      (level.sum.bosses ? ' + бой с боссом' : '') + '</span><span class="grow"></span>' +
+      '<button data-act="add" data-level="' + level.level + '">+ группа</button></header>';
+
+    if (level.groups.length) {
+      html += '<table><thead><tr><th>#</th><th>Режим</th><th>Враги</th><th>Кол-во</th><th>Пауза, с</th><th>Щит</th>' +
+        '<th style="text-align:right">Монеты</th><th style="text-align:right">Опыт</th><th style="text-align:right">≈ время</th><th></th></tr></thead><tbody>' +
+        level.groups.map(group => groupRow(group, C, location)).join('') + '</tbody></table>';
+    } else {
+      html += '<div class="empty-level">Нет групп — локация в игре недоступна, пока уровень пустой.</div>';
+    }
+
+    html += '</section>';
+  }
+
+  if (reward.outside.length) {
+    html += '<section class="level missing"><header><b>Строки за пределами уровней</b><span class="nums">в waves.tsv есть группы с level больше ' + location.levels + '</span></header><table><tbody>' +
+      reward.outside.map(item => { item.sum = groupSum(item.row, C); return groupRow(item, C, location); }).join('') + '</tbody></table></section>';
+  }
+
+  html += '<p class="note">≈ время — сумма пауз по таймеру (середина между interval и interval_max), без ускорения на пустом экране и без боя с боссом. ' +
+    'Монеты и опыт — убийства и сбитые щиты, без бонусов; Δ — разница с сохранённой версией.</p>';
+
+  $('#main').innerHTML = html;
+}
+
+function renderDatalist(C) {
+  const list = $('#enemy-ids');
+
+  if (list.dataset.ready)
+    return;
+
+  list.innerHTML = Object.values(C.enemies).map(e => '<option value="' + esc(e.id) + '">' + esc(e.title) + '</option>').join('');
+  list.dataset.ready = '1';
+}
+
+// ---------- loading and saving ----------
+
+function init(buffers) {
+  const tables = {};
+
+  for (const name of NAMES) {
+    if (!buffers[name])
+      throw new Error('Нет файла ' + name + '.tsv');
+
+    tables[name] = parseTsv(buffers[name]);
+  }
+
+  const columns = ['location', 'level', 'order', 'count', 'mode', 'enemies', 'interval', 'interval_max', 'shield'];
+  const missing = columns.filter(c => !tables.waves.header.includes(c));
+
+  if (missing.length)
+    throw new Error('В waves.tsv нет столбцов: ' + missing.join(', '));
+
+  S.t = tables;
+
+  for (const name of EDITABLE)
+    S.savedText[name] = serializeText(tables[name]);
+
+  S.base = JSON.parse(JSON.stringify({ waves: tables.waves.rows, locations: tables.locations.rows }));
+  S.undo = [];
+  S.redo = [];
+  S.sel = S.sel || recall('sel');
+  $('#start').hidden = true;
+  $('#app').hidden = false;
+  $('#enemy-ids').dataset.ready = '';
+  render();
+}
+
+async function resolveTables(dir) {
+  const tryPath = async (root, parts) => {
+    let handle = root;
+
+    for (const part of parts)
+      handle = await handle.getDirectoryHandle(part);
+
+    await handle.getFileHandle('waves.tsv');
+    return handle;
+  };
+
+  for (const parts of [[], ['Assets', 'Data', 'Tables'], ['Data', 'Tables'], ['Tables'], ['Flappy Terminator', 'Assets', 'Data', 'Tables']]) {
+    try { return await tryPath(dir, parts); } catch (e) { /* try the next layout */ }
+  }
+
+  throw new Error('В папке «' + dir.name + '» не нашлось Assets/Data/Tables/waves.tsv');
+}
+
+async function loadFromDir(dir) {
+  const tables = await resolveTables(dir);
+  const buffers = {};
+
+  for (const name of NAMES) {
+    const handle = await tables.getFileHandle(name + '.tsv');
+    const file = await handle.getFile();
+    S.files[name] = handle;
+    S.mtime[name] = file.lastModified;
+    buffers[name] = await file.arrayBuffer();
+  }
+
+  S.dir = dir;
+  S.fsMode = true;
+  init(buffers);
+  toast('Таблицы загружены из «' + dir.name + '»');
+}
+
+function idb(mode, action) {
+  return new Promise((resolve, reject) => {
+    const open = indexedDB.open(DB_NAME, 1);
+    open.onupgradeneeded = () => open.result.createObjectStore('handles');
+    open.onerror = () => reject(open.error);
+    open.onsuccess = () => {
+      const request = action(open.result.transaction('handles', mode).objectStore('handles'));
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    };
+  });
+}
+
+async function openFolder() {
+  try {
+    const dir = await window.showDirectoryPicker({ id: 'flappy-tables', mode: 'readwrite' });
+    await loadFromDir(dir);
+
+    try { await idb('readwrite', s => s.put(dir, 'root')); } catch (e) { /* remembering is a convenience */ }
+  } catch (e) {
+    if (e.name !== 'AbortError')
+      alert(e.message);
+  }
+}
+
+async function reconnect() {
+  try {
+    const dir = await idb('readonly', s => s.get('root'));
+
+    if (!dir)
+      return openFolder();
+
+    if ((await dir.requestPermission({ mode: 'readwrite' })) !== 'granted')
+      return;
+
+    await loadFromDir(dir);
+  } catch (e) {
+    alert(e.message);
+  }
+}
+
+async function reload() {
+  if (dirtyNames().length && !confirm('Есть несохранённые правки. Перечитать таблицы с диска и потерять их?'))
+    return;
+
+  if (S.fsMode)
+    await loadFromDir(S.dir);
+  else
+    $('#file-input').click();
+}
+
+async function save() {
+  const dirty = dirtyNames();
+
+  if (!dirty.length)
+    return;
+
+  if (S.view.errorCount && !confirm('Есть ошибки (' + S.view.errorCount + ') — Unity откажется импортировать waves.tsv, пока их не исправить. Сохранить всё равно?'))
+    return;
+
+  if (!S.fsMode) {
+    for (const name of dirty) {
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(new Blob([encode(serializeText(S.t[name]), S.t[name].enc)], { type: 'text/tab-separated-values' }));
+      link.download = name + '.tsv';
+      link.click();
+      setTimeout(() => URL.revokeObjectURL(link.href), 2000);
+      S.savedText[name] = serializeText(S.t[name]);
+    }
+
+    S.base = JSON.parse(JSON.stringify({ waves: S.t.waves.rows, locations: S.t.locations.rows }));
+    render();
+    toast('Скачано: ' + dirty.map(n => n + '.tsv').join(', ') + ' — положите в Assets/Data/Tables');
+    return;
+  }
+
+  try {
+    for (const name of dirty) {
+      const handle = S.files[name];
+      const onDisk = await handle.getFile();
+
+      if (onDisk.lastModified !== S.mtime[name] &&
+          !confirm(name + '.tsv изменён на диске после загрузки (например, в Excel). Перезаписать его версией из редактора?'))
+        return;
+
+      const writable = await handle.createWritable();
+      await writable.write(encode(serializeText(S.t[name]), S.t[name].enc));
+      await writable.close();
+      S.mtime[name] = (await handle.getFile()).lastModified;
+      S.savedText[name] = serializeText(S.t[name]);
+    }
+
+    S.base = JSON.parse(JSON.stringify({ waves: S.t.waves.rows, locations: S.t.locations.rows }));
+    render();
+    toast('Сохранено: ' + dirty.map(n => n + '.tsv').join(', ') + '. Unity импортирует, когда получит фокус');
+  } catch (e) {
+    alert('Не удалось сохранить: ' + e.message);
+  }
+}
+
+async function loadPickedFiles(fileList) {
+  const buffers = {};
+
+  for (const file of fileList) {
+    const name = file.name.replace(/\.tsv$/i, '');
+
+    if (NAMES.includes(name))
+      buffers[name] = await file.arrayBuffer();
+  }
+
+  try {
+    S.fsMode = false;
+    init(buffers);
+  } catch (e) {
+    alert(e.message + '. Выберите все шесть файлов: ' + NAMES.map(n => n + '.tsv').join(', '));
+  }
+}
+
+// ---------- events ----------
+
+document.addEventListener('click', event => {
+  const target = event.target.closest('[data-act]');
+
+  if (!target || target.tagName === 'SELECT')
+    return;
+
+  const act = target.dataset.act;
+  const index = target.dataset.i != null ? +target.dataset.i : null;
+
+  switch (act) {
+    case 'open': return openFolder();
+    case 'reconnect': return reconnect();
+    case 'pick-files': return $('#file-input').click();
+    case 'reload': return reload();
+    case 'save': return save();
+    case 'undo': return undo();
+    case 'redo': return redo();
+    case 'sel': S.sel = target.dataset.id; S.lastKey = null; render(); $('#main').scrollTop = 0; window.scrollTo(0, 0); return;
+    case 'add': return addGroup(S.sel, +target.dataset.level);
+    case 'dup': return duplicateGroup(index);
+    case 'del': return deleteGroup(index);
+    case 'up': return moveGroup(index, -1);
+    case 'down': return moveGroup(index, 1);
+    case 'lv+': return changeLevels(S.sel, 1);
+    case 'lv-': return changeLevels(S.sel, -1);
+  }
+});
+
+document.addEventListener('input', event => {
+  const target = event.target;
+
+  if (!target.dataset.f || target.dataset.i == null)
+    return;
+
+  const row = S.t.waves.rows[+target.dataset.i];
+  mutate(() => setField(row, target.dataset.f, target.value.trim()), target.dataset.key);
+});
+
+document.addEventListener('change', event => {
+  const target = event.target;
+
+  if (target.id === 'file-input')
+    return loadPickedFiles(target.files);
+
+  if (target.tagName !== 'SELECT' || target.dataset.i == null)
+    return;
+
+  const row = S.t.waves.rows[+target.dataset.i];
+  const C = S.view.C;
+
+  switch (target.dataset.act) {
+    case 'mode': return changeMode(row, target.value, C);
+    case 'boss': return mutate(() => setField(row, 'enemies', target.value));
+    case 'shield': return mutate(() => setField(row, 'shield', target.value));
+    case 'add-enemy':
+      if (target.value)
+        mutate(() => setField(row, 'enemies', row.enemies ? row.enemies + ',' + target.value : target.value));
+  }
+});
+
+document.addEventListener('keydown', event => {
+  if (!S.t || !(event.metaKey || event.ctrlKey))
+    return;
+
+  const key = event.key.toLowerCase();
+
+  if (key === 's') {
+    event.preventDefault();
+    save();
+  } else if (key === 'z') {
+    event.preventDefault();
+    event.shiftKey ? redo() : undo();
+  }
+});
+
+window.addEventListener('beforeunload', event => {
+  if (S.t && dirtyNames().length) {
+    event.preventDefault();
+    event.returnValue = '';
+  }
+});
+
+(async function start() {
+  if (!('showDirectoryPicker' in window)) {
+    $('#btn-open').hidden = true;
+    $('#lbl-files').hidden = false;
+    return;
+  }
+
+  $('#lbl-files').hidden = false;
+
+  try {
+    const dir = await idb('readonly', s => s.get('root'));
+
+    if (dir) {
+      const button = $('#btn-reconnect');
+      button.textContent = 'Открыть «' + dir.name + '»';
+      button.hidden = false;
+      button.classList.add('primary');
+    }
+  } catch (e) { /* no remembered folder */ }
+})();
+
+// hook for checking this page against the report and the files on disk
+window.WaveEditor = { init, reportRows, serialize: name => encode(serializeText(S.t[name]), S.t[name].enc), state: S, addGroup, changeLevels, mutate, setField };
+</script>
+</body>
+</html>
