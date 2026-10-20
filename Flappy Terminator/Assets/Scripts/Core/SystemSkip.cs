@@ -35,6 +35,17 @@ public class SystemSkip : MonoBehaviour
         return earned;
     }
 
+    public Reward CompleteLocation(string locationId, Reward alreadyBanked)
+    {
+        LocationRow location = _locations.GetRow(locationId);
+        Reward earned = _enemySpawner.CountReward(location.Id, location.Levels) - alreadyBanked;
+
+        _economy.CompleteLocation(location.Id, MaxStars);
+        _economy.Grant(earned);
+
+        return earned;
+    }
+
     private string FindNextSystemStart(string systemId)
     {
         SystemRow system = _systems.GetRow(systemId);

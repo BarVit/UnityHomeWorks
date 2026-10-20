@@ -6,6 +6,7 @@ public class Game : MonoBehaviour
     [SerializeField] private InputReader _input;
     [SerializeField] private CheatCodeReader _cheatCode;
     [SerializeField] private CheatCodeReader _systemCheatCode;
+    [SerializeField] private CheatCodeReader _locationCheatCode;
     [SerializeField] private SystemSkip _systemSkip;
     [SerializeField] private PlayerShip _playerShip;
     [SerializeField] private EnemySpawner _enemySpawner;
@@ -52,6 +53,7 @@ public class Game : MonoBehaviour
         _input.Tapped += SkipCutscene;
         _cheatCode.Entered += WinLevelInstantly;
         _systemCheatCode.Entered += CompleteSystemInstantly;
+        _locationCheatCode.Entered += CompleteLocationInstantly;
     }
 
     private void Start()
@@ -81,6 +83,7 @@ public class Game : MonoBehaviour
         _input.Tapped -= SkipCutscene;
         _cheatCode.Entered -= WinLevelInstantly;
         _systemCheatCode.Entered -= CompleteSystemInstantly;
+        _locationCheatCode.Entered -= CompleteLocationInstantly;
     }
 
     private void SkipCutscene()
@@ -298,15 +301,28 @@ public class Game : MonoBehaviour
 
         Reward earned = _systemSkip.Complete(_runner.LocationId, _runner.BankedReward, out string nextLocationId);
 
+        LeaveToDock(earned, nextLocationId != null, nextLocationId);
+    }
+
+    private void CompleteLocationInstantly()
+    {
+        if (_isRunning == false || _isLevelOver || _pause.IsPaused)
+            return;
+
+        Reward earned = _systemSkip.CompleteLocation(_runner.LocationId, _runner.BankedReward);
+
+        LeaveToDock(earned, _runner.HasNextLocation, null);
+    }
+
+    private void LeaveToDock(Reward earned, bool canPlay, string queuedLocationId)
+    {
         _runner.DropPendingReward();
         _isRunning = false;
         _asteroidSpawner.StopSpawn();
         ClearBattlefield();
         _playerShip.ReturnToStart();
 
-        bool canPlay = nextLocationId != null;
-
-        _queuedLocationId = nextLocationId;
+        _queuedLocationId = queuedLocationId;
         _dockReason = DockReason.Cleared;
         _dockEarned = earned;
         _screens.CanResumeSession = canPlay;
