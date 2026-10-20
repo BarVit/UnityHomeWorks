@@ -438,6 +438,20 @@ MonoBehaviour:
     _shieldCapacity: 0
     _shieldRewardMoney: 0
     _shieldRewardXp: 0
+  - _location: loc_02_01
+    _level: 2
+    _order: 6
+    _count: 4
+    _mode: 1
+    _enemies:
+    - hunter_2
+    - hunter_1
+    _interval: 0
+    _intervalMax: 0
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
   - _location: void_ashen_1
     _level: 1
     _order: 1
