@@ -1259,7 +1259,7 @@ MonoBehaviour:
   - _location: loc_02_06
     _level: 1
     _order: 2
-    _count: 3
+    _count: 4
     _mode: 1
     _enemies:
     - warden_2
@@ -1452,10 +1452,10 @@ MonoBehaviour:
     - warden_3
     _interval: 2
     _intervalMax: 2
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
+    _shieldLevel: 1
+    _shieldCapacity: 15
+    _shieldRewardMoney: 50
+    _shieldRewardXp: 10
   - _location: loc_02_06
     _level: 4
     _order: 1
@@ -1504,14 +1504,14 @@ MonoBehaviour:
     - warden_3
     _interval: 2
     _intervalMax: 2
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
+    _shieldLevel: 2
+    _shieldCapacity: 25
+    _shieldRewardMoney: 100
+    _shieldRewardXp: 20
   - _location: loc_02_07
     _level: 1
     _order: 2
-    _count: 1
+    _count: 3
     _mode: 1
     _enemies:
     - warden_2
