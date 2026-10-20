@@ -426,21 +426,6 @@ MonoBehaviour:
   - _location: loc_02_01
     _level: 2
     _order: 4
-    _count: 3
-    _mode: 1
-    _enemies:
-    - hunter_1
-    - hunter_2
-    - hunter_1
-    _interval: 2
-    _intervalMax: 2
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-  - _location: loc_02_01
-    _level: 2
-    _order: 5
     _count: 4
     _mode: 1
     _enemies:
@@ -641,7 +626,7 @@ MonoBehaviour:
     - warden_2
     - hunter_1
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -653,8 +638,8 @@ MonoBehaviour:
     _mode: 1
     _enemies:
     - hunter_2
-    _interval: 3
-    _intervalMax: 3
+    _interval: 2
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -684,7 +669,7 @@ MonoBehaviour:
     - warden_3
     - hunter_1
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -699,7 +684,7 @@ MonoBehaviour:
     - hunter_2
     - hunter_1
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -712,7 +697,7 @@ MonoBehaviour:
     _enemies:
     - hunter_2
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -780,8 +765,8 @@ MonoBehaviour:
     _mode: 1
     _enemies:
     - warden_2
-    _interval: 2
-    _intervalMax: 3
+    _interval: 1
+    _intervalMax: 2
     _shieldLevel: 1
     _shieldCapacity: 15
     _shieldRewardMoney: 50
@@ -794,7 +779,7 @@ MonoBehaviour:
     _enemies:
     - warden_1
     _interval: 1
-    _intervalMax: 2
+    _intervalMax: 1
     _shieldLevel: 1
     _shieldCapacity: 15
     _shieldRewardMoney: 50
@@ -847,7 +832,7 @@ MonoBehaviour:
     _enemies:
     - warden_3
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -863,7 +848,7 @@ MonoBehaviour:
     - hunter_2
     - warden_3
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -948,7 +933,7 @@ MonoBehaviour:
     - warden_3
     - hunter_1
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -961,7 +946,7 @@ MonoBehaviour:
     _enemies:
     - warden_2
     _interval: 1
-    _intervalMax: 2
+    _intervalMax: 1
     _shieldLevel: 1
     _shieldCapacity: 15
     _shieldRewardMoney: 50
@@ -974,7 +959,7 @@ MonoBehaviour:
     _enemies:
     - warden_3
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -1000,7 +985,7 @@ MonoBehaviour:
     _enemies:
     - hunter_1
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 2
     _shieldCapacity: 25
     _shieldRewardMoney: 100
@@ -1043,7 +1028,7 @@ MonoBehaviour:
     _enemies:
     - warden_3
     - hunter_2
-    _interval: 3
+    _interval: 2
     _intervalMax: 3
     _shieldLevel: 0
     _shieldCapacity: 0
@@ -1118,7 +1103,7 @@ MonoBehaviour:
     _mode: 1
     _enemies:
     - hunter_2
-    _interval: 3
+    _interval: 2
     _intervalMax: 3
     _shieldLevel: 0
     _shieldCapacity: 0
@@ -1132,7 +1117,7 @@ MonoBehaviour:
     _enemies:
     - warden_3
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -1151,7 +1136,7 @@ MonoBehaviour:
     - hunter_2
     - reaper_1
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -1164,7 +1149,7 @@ MonoBehaviour:
     _enemies:
     - hunter_2
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -1180,7 +1165,7 @@ MonoBehaviour:
     - hunter_3
     - reaper_1
     - reaper_1
-    _interval: 3
+    _interval: 2
     _intervalMax: 3
     _shieldLevel: 0
     _shieldCapacity: 0
@@ -1223,7 +1208,7 @@ MonoBehaviour:
     _enemies:
     - warden_3
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -1266,10 +1251,10 @@ MonoBehaviour:
     - hunter_1
     _interval: 1
     _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
+    _shieldLevel: 3
+    _shieldCapacity: 40
+    _shieldRewardMoney: 200
+    _shieldRewardXp: 30
   - _location: loc_02_06
     _level: 1
     _order: 3
@@ -1284,10 +1269,10 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
+    _shieldLevel: 1
+    _shieldCapacity: 15
+    _shieldRewardMoney: 50
+    _shieldRewardXp: 10
   - _location: loc_02_06
     _level: 2
     _order: 1
@@ -1295,7 +1280,7 @@ MonoBehaviour:
     _mode: 1
     _enemies:
     - reaper_1
-    _interval: 3
+    _interval: 2
     _intervalMax: 3
     _shieldLevel: 0
     _shieldCapacity: 0
@@ -1316,7 +1301,7 @@ MonoBehaviour:
     - warden_3
     - hunter_3
     _interval: 3
-    _intervalMax: 4
+    _intervalMax: 3
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -1343,7 +1328,7 @@ MonoBehaviour:
     - warden_2
     - hunter_1
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 3
     _shieldCapacity: 40
     _shieldRewardMoney: 200
@@ -1404,7 +1389,7 @@ MonoBehaviour:
     - warden_2
     - hunter_1
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 3
     _shieldCapacity: 40
     _shieldRewardMoney: 200
@@ -1451,7 +1436,7 @@ MonoBehaviour:
     _enemies:
     - warden_3
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -1463,7 +1448,7 @@ MonoBehaviour:
     _mode: 1
     _enemies:
     - hunter_2
-    _interval: 3
+    _interval: 2
     _intervalMax: 3
     _shieldLevel: 0
     _shieldCapacity: 0
@@ -1490,7 +1475,7 @@ MonoBehaviour:
     - hunter_3
     - reaper_1
     _interval: 3
-    _intervalMax: 4
+    _intervalMax: 3
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -1502,8 +1487,8 @@ MonoBehaviour:
     _mode: 1
     _enemies:
     - warden_3
-    _interval: 3
-    _intervalMax: 3
+    _interval: 2
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -1557,7 +1542,7 @@ MonoBehaviour:
     _mode: 1
     _enemies:
     - hunter_2
-    _interval: 3
+    _interval: 2
     _intervalMax: 3
     _shieldLevel: 0
     _shieldCapacity: 0
