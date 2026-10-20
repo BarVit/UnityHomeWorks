@@ -343,21 +343,7 @@ MonoBehaviour:
   - _location: loc_02_01
     _level: 1
     _order: 1
-    _count: 8
-    _mode: 1
-    _enemies:
-    - hunter_2
-    - hunter_1
-    _interval: 3
-    _intervalMax: 3
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-  - _location: loc_02_01
-    _level: 1
-    _order: 2
-    _count: 20
+    _count: 22
     _mode: 0
     _enemies:
     - warden_1
@@ -370,7 +356,7 @@ MonoBehaviour:
     _shieldRewardXp: 0
   - _location: loc_02_01
     _level: 1
-    _order: 3
+    _order: 2
     _count: 8
     _mode: 1
     _enemies:
@@ -385,7 +371,7 @@ MonoBehaviour:
   - _location: loc_02_01
     _level: 2
     _order: 1
-    _count: 10
+    _count: 12
     _mode: 0
     _enemies:
     - warden_3
@@ -412,7 +398,7 @@ MonoBehaviour:
     _shieldRewardXp: 0
   - _location: loc_02_01
     _level: 2
-    _order: 3
+    _order: 4
     _count: 5
     _mode: 1
     _enemies:
@@ -425,8 +411,8 @@ MonoBehaviour:
     _shieldRewardXp: 0
   - _location: loc_02_01
     _level: 2
-    _order: 4
-    _count: 3
+    _order: 5
+    _count: 6
     _mode: 1
     _enemies:
     - hunter_1
@@ -440,14 +426,14 @@ MonoBehaviour:
     _shieldRewardXp: 0
   - _location: loc_02_01
     _level: 2
-    _order: 5
-    _count: 4
+    _order: 3
+    _count: 14
     _mode: 1
     _enemies:
-    - hunter_2
-    - hunter_1
-    _interval: 0
-    _intervalMax: 0
+    - warden_1
+    - warden_2
+    _interval: 1
+    _intervalMax: 1
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -1452,10 +1438,10 @@ MonoBehaviour:
     - warden_3
     _interval: 2
     _intervalMax: 2
-    _shieldLevel: 1
-    _shieldCapacity: 15
-    _shieldRewardMoney: 50
-    _shieldRewardXp: 10
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
   - _location: loc_02_06
     _level: 4
     _order: 1
