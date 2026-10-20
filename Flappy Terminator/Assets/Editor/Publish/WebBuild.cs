@@ -13,9 +13,22 @@ namespace BuildTools
         private const string Template = "PROJECT:Flappy Full Window";
         private const int ScreenWidth = 1280;
         private const int ScreenHeight = 720;
+        private const int MinorPart = 1;
+        private const int PatchPart = 2;
 
         [MenuItem("Tools/Build/Web")]
         public static void Build()
+        {
+            Build(PatchPart);
+        }
+
+        [MenuItem("Tools/Build/Web (New Minor Version)")]
+        public static void BuildMinor()
+        {
+            Build(MinorPart);
+        }
+
+        private static void Build(int raisedPart)
         {
             ConfigurePlayer();
 
@@ -23,7 +36,7 @@ namespace BuildTools
                 EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.WebGL, BuildTarget.WebGL);
 
             string previous = PlayerSettings.bundleVersion;
-            string version = RaiseVersion();
+            string version = RaiseVersion(raisedPart);
             string path = Path.Combine(OutputRoot, "v" + version);
 
             BuildPlayerOptions options = new BuildPlayerOptions
@@ -69,11 +82,15 @@ namespace BuildTools
             AssetDatabase.SaveAssets();
         }
 
-        private static string RaiseVersion()
+        private static string RaiseVersion(int raisedPart)
         {
             string[] parts = PlayerSettings.bundleVersion.Split('.');
 
-            parts[2] = (int.Parse(parts[2]) + 1).ToString();
+            parts[raisedPart] = (int.Parse(parts[raisedPart]) + 1).ToString();
+
+            for (int part = raisedPart + 1; part < parts.Length; part++)
+                parts[part] = "0";
+
             PlayerSettings.bundleVersion = string.Join(".", parts);
             AssetDatabase.SaveAssets();
 
