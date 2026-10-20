@@ -426,6 +426,21 @@ MonoBehaviour:
   - _location: loc_02_01
     _level: 2
     _order: 4
+    _count: 3
+    _mode: 1
+    _enemies:
+    - hunter_1
+    - hunter_2
+    - hunter_1
+    _interval: 2
+    _intervalMax: 2
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+  - _location: loc_02_01
+    _level: 2
+    _order: 5
     _count: 4
     _mode: 1
     _enemies:
