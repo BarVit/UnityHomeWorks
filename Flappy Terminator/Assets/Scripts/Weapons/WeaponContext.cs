@@ -8,7 +8,7 @@ public class WeaponContext
         ShotAudio hitAudio, LayerMask targetLayers, int ammoLayer, Camera camera, LayerMask worldLayers = default,
         ShotLoop loop = null, ShotLoop hitLoop = null, int damage = 0,
         WeaponBoost[] boosts = null, CritMark critMark = null, ShotTally tally = null, float rateScale = 1f,
-        ParticleSystem burnFlame = null, float reloadShift = 0f)
+        ParticleSystem burnFlame = null, float reloadShift = 0f, int magazineBonus = 0)
     {
         Mounts = mounts;
         Barrels = barrels;
@@ -27,6 +27,7 @@ public class WeaponContext
         RateScale = rateScale;
         BurnFlame = burnFlame;
         ReloadShift = reloadShift;
+        MagazineBonus = magazineBonus;
 
         ContactFilter2D filter = new ContactFilter2D();
 
@@ -83,4 +84,6 @@ public class WeaponContext
     public ParticleSystem BurnFlame { get; private set; }
 
     public float ReloadShift { get; private set; }
+
+    public int MagazineBonus { get; private set; }
 }

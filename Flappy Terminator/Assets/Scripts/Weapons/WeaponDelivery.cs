@@ -13,6 +13,7 @@ public abstract class WeaponDelivery
     private readonly int _barrels;
     private readonly int[] _ranks;
     private readonly float _reloadTime;
+    private readonly int _magazine;
 
     private readonly SpawnPool<ExplosionAnimation> _shotPool;
     private readonly SpawnPool<CritMark> _critPool;
@@ -33,7 +34,8 @@ public abstract class WeaponDelivery
         _barrels = Mathf.Clamp(context.Barrels, 1, Mathf.Min(row.BarrelsMax, context.Mounts.Length));
         _ranks = RankByHeight();
         _reloadTime = Mathf.Max(MinReloadTime, row.ReloadTime + context.ReloadShift);
-        _shotsLeft = row.Magazine;
+        _magazine = row.Magazine > 0 ? Mathf.Max(1, row.Magazine + context.MagazineBonus) : 0;
+        _shotsLeft = _magazine;
 
         if (row.Assets != null && row.Assets.ShotEffect != null)
             _shotPool = context.Pools.GetPool(row.Assets.ShotEffect);
@@ -54,11 +56,11 @@ public abstract class WeaponDelivery
 
     public bool HasHeat => _row.HeatPerShot > 0f;
 
-    public bool HasMagazine => _row.Magazine > 0;
+    public bool HasMagazine => _magazine > 0;
 
     public int ShotsLeft => _shotsLeft;
 
-    public int MagazineSize => _row.Magazine;
+    public int MagazineSize => _magazine;
 
     public virtual float Readiness => _reloadLeft > 0f
         ? 1f - Mathf.Clamp01(_reloadLeft / _reloadTime)
@@ -158,7 +160,7 @@ public abstract class WeaponDelivery
         return true;
     }
 
-    public bool IsAttackStart => HasMagazine == false || _shotsLeft == _row.Magazine;
+    public bool IsAttackStart => HasMagazine == false || _shotsLeft == _magazine;
 
     public int PassAttack()
     {
@@ -253,7 +255,7 @@ public abstract class WeaponDelivery
         _reloadLeft = _reloadTime;
 
         if (_reloadLeft <= 0f)
-            _shotsLeft = _row.Magazine;
+            _shotsLeft = _magazine;
     }
 
     private void Reload(float deltaTime)
@@ -264,7 +266,7 @@ public abstract class WeaponDelivery
         _reloadLeft -= deltaTime;
 
         if (_reloadLeft <= 0f)
-            _shotsLeft = _row.Magazine;
+            _shotsLeft = _magazine;
     }
 
     private void RollDoubleShots()

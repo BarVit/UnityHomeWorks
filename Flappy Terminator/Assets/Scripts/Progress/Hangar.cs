@@ -227,14 +227,14 @@ public class Hangar : MonoBehaviour
         return true;
     }
 
-    public void Equip(PlayerShooter shooter, float rateScale, float reloadShift)
+    public void Equip(PlayerShooter shooter, float rateScale, float reloadShift, int magazineBonus)
     {
         WeaponBoost[] boosts = new WeaponBoost[Loadout.BarrelCount];
 
         for (int i = 0; i < boosts.Length; i++)
             boosts[i] = GetBoost(i + FirstSlot);
 
-        shooter.Equip(WeaponId, boosts, rateScale, reloadShift);
+        shooter.Equip(WeaponId, boosts, rateScale, reloadShift, magazineBonus);
     }
 
     private WeaponBoost GetBoost(int slot)

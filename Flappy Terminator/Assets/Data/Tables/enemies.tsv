@@ -6,11 +6,11 @@ hunter_1	enemy_hunter	Охотник I	1	Enemy 2	15	loc_01_02	24	hunter_1_gun	im
 hunter_2	enemy_hunter	Охотник II	2	Enemy 2	25	loc_01_04	70	hunter_2_gun	impulse_laser	2	3	Forward Leap	Hunter II	280	56
 hunter_3	enemy_hunter	Охотник III	3	Enemy 2	35	loc_02_05	180	hunter_3_gun	beam_laser	1	50	Up And Down	Hunter III	520	104
 reaper_1	enemy_reaper	Жнец I	1	Enemy 3	40	loc_02_03	80	reaper_1_gun	homing	1	9	Drift		450	90
-reaper_2	enemy_reaper	Жнец II	2	Enemy 3	50	loc_03_01	100	reaper_2_gun	homing	2	12	Drift Retreat		240	48
-reaper_3	enemy_reaper	Жнец III	3	Enemy 3	60	loc_04_02	250	reaper_3_gun	torpedo	1	80	Drift Retreat		500	100
-phantom_1	enemy_phantom	Призрак I	1	Enemy 4	50	loc_03_03	120	phantom_1_gun	cannon	2	40	Forward Leap		250	50
-phantom_2	enemy_phantom	Призрак II	2	Enemy 4	60	loc_03_07	180	phantom_2_gun	rocket	2	60	Ellipse		350	70
-phantom_3	enemy_phantom	Призрак III	3	Enemy 4	70	loc_05_01	500	phantom_3_gun	plasma	3	50	Ellipse		800	160
-executioner_1	enemy_executioner	Палач I	1	Enemy 5	100	loc_04_05	250	executioner_1_gun	railgun	1	200	Hover Guard		500	100
-executioner_2	enemy_executioner	Палач II	2	Enemy 5	120	loc_05_04	800	executioner_2_gun	torpedo	1	250	Up And Down		800	160
-executioner_3	enemy_executioner	Палач III	3	Enemy 5	150	loc_05_06	2000	executioner_3_gun	plasma	3	150	Up And Down		1400	280
+reaper_2	enemy_reaper	Жнец II	2	Enemy 3	50	loc_03_01	300	reaper_2_gun	rocket	2	30	Drift Retreat		600	120
+reaper_3	enemy_reaper	Жнец III	3	Enemy 3	60	loc_04_02	600	reaper_3_gun	torpedo	1	120	Drift Retreat		1200	240
+phantom_1	enemy_phantom	Призрак I	1	Enemy 4	50	loc_03_03	500	phantom_1_gun	cannon	2	40	Forward Leap		800	160
+phantom_2	enemy_phantom	Призрак II	2	Enemy 4	60	loc_03_07	800	phantom_2_gun	rocket	2	60	Ellipse		1200	240
+phantom_3	enemy_phantom	Призрак III	3	Enemy 4	70	loc_05_01	1500	phantom_3_gun	plasma	3	50	Ellipse		1600	320
+executioner_1	enemy_executioner	Палач I	1	Enemy 5	100	loc_04_05	1200	executioner_1_gun	railgun	1	400	Up And Down		2000	400
+executioner_2	enemy_executioner	Палач II	2	Enemy 5	120	loc_05_04	2500	executioner_2_gun	torpedo	1	300	Up And Down		3000	600
+executioner_3	enemy_executioner	Палач III	3	Enemy 5	150	loc_05_06	6000	executioner_3_gun	plasma	3	150	Ellipse		5000	1000

@@ -125,14 +125,14 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 79fee06f008d942e7baa168b610dd793, type: 3}
     _bodyDamage: 50
     _fromLocation: loc_03_01
-    _health: 100
+    _health: 300
     _weapon: reaper_2_gun
     _barrels: 2
-    _damage: 12
+    _damage: 30
     _movement: {fileID: 11400000, guid: ec44c4c943f5c4325963d3017c8e51d1, type: 2}
     _skin: {fileID: 0}
-    _rewardMoney: 240
-    _rewardXp: 48
+    _rewardMoney: 600
+    _rewardXp: 120
   - _id: reaper_3
     _type: enemy_reaper
     _title: "\u0416\u043D\u0435\u0446 III"
@@ -140,14 +140,14 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 79fee06f008d942e7baa168b610dd793, type: 3}
     _bodyDamage: 60
     _fromLocation: loc_04_02
-    _health: 250
+    _health: 600
     _weapon: reaper_3_gun
     _barrels: 1
-    _damage: 80
+    _damage: 120
     _movement: {fileID: 11400000, guid: ec44c4c943f5c4325963d3017c8e51d1, type: 2}
     _skin: {fileID: 0}
-    _rewardMoney: 500
-    _rewardXp: 100
+    _rewardMoney: 1200
+    _rewardXp: 240
   - _id: phantom_1
     _type: enemy_phantom
     _title: "\u041F\u0440\u0438\u0437\u0440\u0430\u043A I"
@@ -155,14 +155,14 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 18235c16a5303461787f966b277db17c, type: 3}
     _bodyDamage: 50
     _fromLocation: loc_03_03
-    _health: 120
+    _health: 500
     _weapon: phantom_1_gun
     _barrels: 2
     _damage: 40
     _movement: {fileID: 11400000, guid: 90d8dd41b80474e9aa9bb1f27035f75b, type: 2}
     _skin: {fileID: 0}
-    _rewardMoney: 250
-    _rewardXp: 50
+    _rewardMoney: 800
+    _rewardXp: 160
   - _id: phantom_2
     _type: enemy_phantom
     _title: "\u041F\u0440\u0438\u0437\u0440\u0430\u043A II"
@@ -170,14 +170,14 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 18235c16a5303461787f966b277db17c, type: 3}
     _bodyDamage: 60
     _fromLocation: loc_03_07
-    _health: 180
+    _health: 800
     _weapon: phantom_2_gun
     _barrels: 2
     _damage: 60
     _movement: {fileID: 11400000, guid: 34cf25f610b76417aa1d0bdfc23682c0, type: 2}
     _skin: {fileID: 0}
-    _rewardMoney: 350
-    _rewardXp: 70
+    _rewardMoney: 1200
+    _rewardXp: 240
   - _id: phantom_3
     _type: enemy_phantom
     _title: "\u041F\u0440\u0438\u0437\u0440\u0430\u043A III"
@@ -185,14 +185,14 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 18235c16a5303461787f966b277db17c, type: 3}
     _bodyDamage: 70
     _fromLocation: loc_05_01
-    _health: 500
+    _health: 1500
     _weapon: phantom_3_gun
     _barrels: 3
     _damage: 50
     _movement: {fileID: 11400000, guid: 34cf25f610b76417aa1d0bdfc23682c0, type: 2}
     _skin: {fileID: 0}
-    _rewardMoney: 800
-    _rewardXp: 160
+    _rewardMoney: 1600
+    _rewardXp: 320
   - _id: executioner_1
     _type: enemy_executioner
     _title: "\u041F\u0430\u043B\u0430\u0447 I"
@@ -200,14 +200,14 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 8971cd4b3ded249faa09c9c5dd064fbe, type: 3}
     _bodyDamage: 100
     _fromLocation: loc_04_05
-    _health: 250
+    _health: 1200
     _weapon: executioner_1_gun
     _barrels: 1
-    _damage: 200
-    _movement: {fileID: 11400000, guid: da73c4fdab4c54894b366a2a1f80dbc9, type: 2}
+    _damage: 400
+    _movement: {fileID: 11400000, guid: 272ca042f1216401da0ac9cec62c4ca8, type: 2}
     _skin: {fileID: 0}
-    _rewardMoney: 500
-    _rewardXp: 100
+    _rewardMoney: 2000
+    _rewardXp: 400
   - _id: executioner_2
     _type: enemy_executioner
     _title: "\u041F\u0430\u043B\u0430\u0447 II"
@@ -215,14 +215,14 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 8971cd4b3ded249faa09c9c5dd064fbe, type: 3}
     _bodyDamage: 120
     _fromLocation: loc_05_04
-    _health: 800
+    _health: 2500
     _weapon: executioner_2_gun
     _barrels: 1
-    _damage: 250
+    _damage: 300
     _movement: {fileID: 11400000, guid: 272ca042f1216401da0ac9cec62c4ca8, type: 2}
     _skin: {fileID: 0}
-    _rewardMoney: 800
-    _rewardXp: 160
+    _rewardMoney: 3000
+    _rewardXp: 600
   - _id: executioner_3
     _type: enemy_executioner
     _title: "\u041F\u0430\u043B\u0430\u0447 III"
@@ -230,11 +230,11 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 8971cd4b3ded249faa09c9c5dd064fbe, type: 3}
     _bodyDamage: 150
     _fromLocation: loc_05_06
-    _health: 2000
+    _health: 6000
     _weapon: executioner_3_gun
     _barrels: 3
     _damage: 150
-    _movement: {fileID: 11400000, guid: 272ca042f1216401da0ac9cec62c4ca8, type: 2}
+    _movement: {fileID: 11400000, guid: 34cf25f610b76417aa1d0bdfc23682c0, type: 2}
     _skin: {fileID: 0}
-    _rewardMoney: 1400
-    _rewardXp: 280
+    _rewardMoney: 5000
+    _rewardXp: 1000

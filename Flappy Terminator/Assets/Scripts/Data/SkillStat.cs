@@ -4,5 +4,6 @@ public enum SkillStat
     Cooldown,
     MagazineReload,
     ShieldMastery,
-    RepairMastery
+    RepairMastery,
+    MagazineSize
 }

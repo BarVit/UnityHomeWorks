@@ -85,6 +85,18 @@ public class SkillBook : MonoBehaviour
         return weapon == null ? 0f : Mathf.Max(MinReloadTime, weapon.ReloadTime + GetReloadShift(weaponId, levelShift));
     }
 
+    public int GetMagazineBonus(string weaponId, int levelShift = 0)
+    {
+        return Mathf.RoundToInt(GetValue(new SkillKey(SkillStat.MagazineSize, weaponId), levelShift));
+    }
+
+    public int GetMagazineSize(string weaponId, int levelShift = 0)
+    {
+        WeaponRow weapon = _weapons.GetRow(weaponId);
+
+        return weapon == null ? 0 : weapon.Magazine + GetMagazineBonus(weaponId, levelShift);
+    }
+
     public float GetShieldScale(int levelShift = 0)
     {
         return 1f + GetValue(new SkillKey(SkillStat.ShieldMastery, SkillTable.Everyone), levelShift) * PercentShare;

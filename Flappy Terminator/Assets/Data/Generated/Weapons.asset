@@ -122,10 +122,10 @@ MonoBehaviour:
     _title: "\u0421\u0430\u043C\u043E\u043D\u0430\u0432\u043E\u0434\u044F\u0449\u0438\u0435\u0441\u044F"
     _owner: 0
     _delivery: 1
-    _damage: 20
-    _rate: 0.6
-    _magazine: 10
-    _reloadTime: 6.5
+    _damage: 30
+    _rate: 0.85
+    _magazine: 4
+    _reloadTime: 8
     _projectileSpeed: 7
     _barrelsMax: 4
     _firePattern: 2
@@ -137,7 +137,7 @@ MonoBehaviour:
     _turnRate: 90
     _aimTime: 0
     _area: 0
-    _price: 25000
+    _price: 22500
     _unlockAfter: loc_03_03
     _grantedAfter: 
     _projectile: {fileID: 4581286917286831887, guid: 3fffa4739d43f4c039a9ff680207e691, type: 3}
@@ -577,9 +577,9 @@ MonoBehaviour:
       _hitWorldSound: {fileID: 8300000, guid: 073af4467d10246c190d3a3a29c9d2f4, type: 3}
       _overheatSound: {fileID: 0}
   - _id: reaper_2_gun
-    _title: "\u0416\u043D\u0435\u0446 II \u2014 \u0441\u0430\u043C\u043E\u043D\u0430\u0432\u043E\u0434\u044F\u0449\u0438\u0435\u0441\u044F"
+    _title: "\u0416\u043D\u0435\u0446 II \u2014 \u0440\u0430\u043A\u0435\u0442\u043D\u0438\u0446\u0430"
     _owner: 1
-    _delivery: 1
+    _delivery: 0
     _damage: 25
     _rate: 2.5
     _magazine: 3
@@ -592,7 +592,7 @@ MonoBehaviour:
     _cooldownRate: 0
     _unlockHeat: 0
     _tickInterval: 0
-    _turnRate: 16
+    _turnRate: 0
     _aimTime: 0
     _area: 0
     _price: 0

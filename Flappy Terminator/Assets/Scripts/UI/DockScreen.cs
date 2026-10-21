@@ -65,6 +65,7 @@ public class DockScreen : MonoBehaviour
     [SerializeField] private Sprite _napalmIcon;
     [SerializeField] private Sprite _turnIcon;
     [SerializeField] private Sprite _reloadIcon;
+    [SerializeField] private Sprite _magazineIcon;
     [SerializeField] private Sprite _shieldSkillIcon;
     [SerializeField] private Sprite _cooldownIcon;
     [SerializeField] private Sprite _healthIcon;
@@ -513,6 +514,8 @@ public class DockScreen : MonoBehaviour
                 return "HULL";
             case SkillStat.MagazineReload:
                 return UiText.Title(skill.Weapon) + " RELOAD";
+            case SkillStat.MagazineSize:
+                return UiText.Title(skill.Weapon) + " MAGAZINE";
             case SkillStat.ShieldMastery:
                 return "SHIELD MASTERY";
             case SkillStat.RepairMastery:
@@ -530,6 +533,8 @@ public class DockScreen : MonoBehaviour
                 return _healthIcon;
             case SkillStat.MagazineReload:
                 return _reloadIcon;
+            case SkillStat.MagazineSize:
+                return _magazineIcon;
             case SkillStat.ShieldMastery:
                 return _shieldSkillIcon;
             case SkillStat.RepairMastery:
@@ -552,6 +557,8 @@ public class DockScreen : MonoBehaviour
                 return "+" + _skills.GetStep(skill) + PercentSign + " SHIELD PER LEVEL";
             case SkillStat.RepairMastery:
                 return "+" + _skills.GetStep(skill) + PercentSign + " REPAIR PER LEVEL";
+            case SkillStat.MagazineSize:
+                return "+" + _skills.GetStep(skill) + " SHOTS PER LEVEL";
             default:
                 return GetCooldownHint(skill, price);
         }
@@ -580,6 +587,9 @@ public class DockScreen : MonoBehaviour
 
         if (skill.Stat == SkillStat.ShieldMastery || skill.Stat == SkillStat.RepairMastery)
             return "+" + Mathf.RoundToInt(_skills.GetValue(skill, levelShift)) + PercentSign;
+
+        if (skill.Stat == SkillStat.MagazineSize)
+            return _skills.GetMagazineSize(skill.Weapon, levelShift).ToString();
 
         if (skill.Stat == SkillStat.MagazineReload)
             return _skills.GetReloadTime(skill.Weapon, levelShift).ToString("0.00") + Seconds;
