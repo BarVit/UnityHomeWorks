@@ -97,6 +97,18 @@ public class SkillBook : MonoBehaviour
         return weapon == null ? 0 : weapon.Magazine + GetMagazineBonus(weaponId, levelShift);
     }
 
+    public float GetSpeedShift(string weaponId, int levelShift = 0)
+    {
+        return GetValue(new SkillKey(SkillStat.FlightSpeed, weaponId), levelShift);
+    }
+
+    public float GetFlightSpeed(string weaponId, int levelShift = 0)
+    {
+        WeaponRow weapon = _weapons.GetRow(weaponId);
+
+        return weapon == null ? 0f : weapon.ProjectileSpeed + GetSpeedShift(weaponId, levelShift);
+    }
+
     public float GetShieldScale(int levelShift = 0)
     {
         return 1f + GetValue(new SkillKey(SkillStat.ShieldMastery, SkillTable.Everyone), levelShift) * PercentShare;

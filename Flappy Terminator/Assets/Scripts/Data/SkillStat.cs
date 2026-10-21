@@ -5,5 +5,6 @@ public enum SkillStat
     MagazineReload,
     ShieldMastery,
     RepairMastery,
-    MagazineSize
+    MagazineSize,
+    FlightSpeed
 }

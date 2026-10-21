@@ -14,6 +14,7 @@ public abstract class WeaponDelivery
     private readonly int[] _ranks;
     private readonly float _reloadTime;
     private readonly int _magazine;
+    private readonly float _projectileSpeed;
 
     private readonly SpawnPool<ExplosionAnimation> _shotPool;
     private readonly SpawnPool<CritMark> _critPool;
@@ -36,6 +37,7 @@ public abstract class WeaponDelivery
         _reloadTime = Mathf.Max(MinReloadTime, row.ReloadTime + context.ReloadShift);
         _magazine = row.Magazine > 0 ? Mathf.Max(1, row.Magazine + context.MagazineBonus) : 0;
         _shotsLeft = _magazine;
+        _projectileSpeed = row.ProjectileSpeed + context.SpeedShift;
 
         if (row.Assets != null && row.Assets.ShotEffect != null)
             _shotPool = context.Pools.GetPool(row.Assets.ShotEffect);
@@ -76,7 +78,7 @@ public abstract class WeaponDelivery
 
     protected float HeatShare => Mathf.Clamp01(_heat / MaxHeat);
 
-    protected float ProjectileSpeed => _row.ProjectileSpeed;
+    protected float ProjectileSpeed => _projectileSpeed;
 
     private float Cooldown => _row.Rate * _context.RateScale;
 

@@ -516,6 +516,8 @@ public class DockScreen : MonoBehaviour
                 return UiText.Title(skill.Weapon) + " RELOAD";
             case SkillStat.MagazineSize:
                 return UiText.Title(skill.Weapon) + " MAGAZINE";
+            case SkillStat.FlightSpeed:
+                return UiText.Title(skill.Weapon) + " FLIGHT SPEED";
             case SkillStat.ShieldMastery:
                 return "SHIELD MASTERY";
             case SkillStat.RepairMastery:
@@ -535,6 +537,8 @@ public class DockScreen : MonoBehaviour
                 return _reloadIcon;
             case SkillStat.MagazineSize:
                 return _magazineIcon;
+            case SkillStat.FlightSpeed:
+                return _speedIcon;
             case SkillStat.ShieldMastery:
                 return _shieldSkillIcon;
             case SkillStat.RepairMastery:
@@ -559,6 +563,8 @@ public class DockScreen : MonoBehaviour
                 return "+" + _skills.GetStep(skill) + PercentSign + " REPAIR PER LEVEL";
             case SkillStat.MagazineSize:
                 return "+" + _skills.GetStep(skill) + " SHOTS PER LEVEL";
+            case SkillStat.FlightSpeed:
+                return "+" + _skills.GetStep(skill).ToString("0.###") + " SPEED PER LEVEL";
             default:
                 return GetCooldownHint(skill, price);
         }
@@ -587,6 +593,9 @@ public class DockScreen : MonoBehaviour
 
         if (skill.Stat == SkillStat.ShieldMastery || skill.Stat == SkillStat.RepairMastery)
             return "+" + Mathf.RoundToInt(_skills.GetValue(skill, levelShift)) + PercentSign;
+
+        if (skill.Stat == SkillStat.FlightSpeed)
+            return _skills.GetFlightSpeed(skill.Weapon, levelShift).ToString("0.0");
 
         if (skill.Stat == SkillStat.MagazineSize)
             return _skills.GetMagazineSize(skill.Weapon, levelShift).ToString();

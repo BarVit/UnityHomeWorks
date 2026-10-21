@@ -382,7 +382,7 @@ public class Game : MonoBehaviour
         string weaponId = _hangar.WeaponId;
 
         _hangar.Equip(_playerShip.Shooter, _skills.GetRateScale(weaponId), _skills.GetReloadShift(weaponId),
-            _skills.GetMagazineBonus(weaponId));
+            _skills.GetMagazineBonus(weaponId), _skills.GetSpeedShift(weaponId));
         _moduleRack.Equip(_battleModules, _skills.GetModuleScale(ModuleStat.Capacity),
             _skills.GetModuleScale(ModuleStat.Repair));
         _skills.Equip(_playerShip);
