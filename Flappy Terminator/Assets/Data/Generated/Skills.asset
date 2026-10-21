@@ -442,102 +442,102 @@ MonoBehaviour:
     _stat: 1
     _level: 1
     _bonus: -0.02
-    _price: 53
+    _price: 38
   - _owner: homing
     _stat: 1
     _level: 2
     _bonus: -0.02
-    _price: 74
+    _price: 53
   - _owner: homing
     _stat: 1
     _level: 3
     _bonus: -0.02
-    _price: 100
+    _price: 72
   - _owner: homing
     _stat: 1
     _level: 4
     _bonus: -0.02
-    _price: 140
+    _price: 100
   - _owner: homing
     _stat: 1
     _level: 5
     _bonus: -0.02
-    _price: 195
+    _price: 139
   - _owner: homing
     _stat: 1
     _level: 6
     _bonus: -0.02
-    _price: 263
+    _price: 188
   - _owner: homing
     _stat: 1
     _level: 7
     _bonus: -0.02
-    _price: 368
+    _price: 263
   - _owner: homing
     _stat: 1
     _level: 8
     _bonus: -0.02
-    _price: 525
+    _price: 375
   - _owner: homing
     _stat: 1
     _level: 9
     _bonus: -0.02
-    _price: 709
+    _price: 507
   - _owner: homing
     _stat: 1
     _level: 10
     _bonus: -0.02
-    _price: 997
+    _price: 713
   - _owner: homing
     _stat: 1
     _level: 11
     _bonus: -0.02
-    _price: 1392
+    _price: 994
   - _owner: homing
     _stat: 1
     _level: 12
     _bonus: -0.02
-    _price: 1917
+    _price: 1369
   - _owner: homing
     _stat: 1
     _level: 13
     _bonus: -0.02
-    _price: 2625
+    _price: 1875
   - _owner: homing
     _stat: 1
     _level: 14
     _bonus: -0.02
-    _price: 3675
+    _price: 2625
   - _owner: homing
     _stat: 1
     _level: 15
     _bonus: -0.02
-    _price: 4988
+    _price: 3563
   - _owner: homing
     _stat: 1
     _level: 16
     _bonus: -0.02
-    _price: 7088
+    _price: 5063
   - _owner: homing
     _stat: 1
     _level: 17
     _bonus: -0.02
-    _price: 9713
+    _price: 6938
   - _owner: homing
     _stat: 1
     _level: 18
     _bonus: -0.02
-    _price: 13650
+    _price: 9750
   - _owner: homing
     _stat: 1
     _level: 19
     _bonus: -0.02
-    _price: 18900
+    _price: 13500
   - _owner: homing
     _stat: 1
     _level: 20
     _bonus: -0.02
-    _price: 26250
+    _price: 18750
   - _owner: homing
     _stat: 2
     _level: 0
@@ -547,102 +547,102 @@ MonoBehaviour:
     _stat: 2
     _level: 1
     _bonus: -0.2
-    _price: 53
+    _price: 38
   - _owner: homing
     _stat: 2
     _level: 2
     _bonus: -0.2
-    _price: 74
+    _price: 53
   - _owner: homing
     _stat: 2
     _level: 3
     _bonus: -0.2
-    _price: 100
+    _price: 72
   - _owner: homing
     _stat: 2
     _level: 4
     _bonus: -0.2
-    _price: 140
+    _price: 100
   - _owner: homing
     _stat: 2
     _level: 5
     _bonus: -0.2
-    _price: 195
+    _price: 139
   - _owner: homing
     _stat: 2
     _level: 6
     _bonus: -0.2
-    _price: 263
+    _price: 188
   - _owner: homing
     _stat: 2
     _level: 7
     _bonus: -0.2
-    _price: 368
+    _price: 263
   - _owner: homing
     _stat: 2
     _level: 8
     _bonus: -0.2
-    _price: 525
+    _price: 375
   - _owner: homing
     _stat: 2
     _level: 9
     _bonus: -0.2
-    _price: 709
+    _price: 507
   - _owner: homing
     _stat: 2
     _level: 10
     _bonus: -0.2
-    _price: 997
+    _price: 713
   - _owner: homing
     _stat: 2
     _level: 11
     _bonus: -0.2
-    _price: 1392
+    _price: 994
   - _owner: homing
     _stat: 2
     _level: 12
     _bonus: -0.2
-    _price: 1917
+    _price: 1369
   - _owner: homing
     _stat: 2
     _level: 13
     _bonus: -0.2
-    _price: 2625
+    _price: 1875
   - _owner: homing
     _stat: 2
     _level: 14
     _bonus: -0.2
-    _price: 3675
+    _price: 2625
   - _owner: homing
     _stat: 2
     _level: 15
     _bonus: -0.2
-    _price: 4988
+    _price: 3563
   - _owner: homing
     _stat: 2
     _level: 16
     _bonus: -0.2
-    _price: 7088
+    _price: 5063
   - _owner: homing
     _stat: 2
     _level: 17
     _bonus: -0.2
-    _price: 9713
+    _price: 6938
   - _owner: homing
     _stat: 2
     _level: 18
     _bonus: -0.2
-    _price: 13650
+    _price: 9750
   - _owner: homing
     _stat: 2
     _level: 19
     _bonus: -0.2
-    _price: 18900
+    _price: 13500
   - _owner: homing
     _stat: 2
     _level: 20
     _bonus: -0.2
-    _price: 26250
+    _price: 18750
   - _owner: homing
     _stat: 5
     _level: 0
@@ -652,32 +652,32 @@ MonoBehaviour:
     _stat: 5
     _level: 1
     _bonus: 1
-    _price: 3500
+    _price: 2500
   - _owner: homing
     _stat: 5
     _level: 2
     _bonus: 1
-    _price: 7000
+    _price: 5000
   - _owner: homing
     _stat: 5
     _level: 3
     _bonus: 1
-    _price: 10500
+    _price: 7500
   - _owner: homing
     _stat: 5
     _level: 4
     _bonus: 1
-    _price: 14000
+    _price: 10000
   - _owner: homing
     _stat: 5
     _level: 5
     _bonus: 1
-    _price: 17500
+    _price: 12500
   - _owner: homing
     _stat: 5
     _level: 6
     _bonus: 1
-    _price: 21000
+    _price: 15000
   - _owner: homing
     _stat: 6
     _level: 0
