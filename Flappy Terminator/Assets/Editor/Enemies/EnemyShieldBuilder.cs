@@ -8,6 +8,7 @@ namespace EnemyContent
     {
         private const string Folder = "Assets/Prefabs/Enemies/";
         private const int ShipCount = 5;
+        private const float ShieldSizeScale = 1.1f;
 
         [MenuItem("Tools/Enemies/Build Shields")]
         public static void Build()
@@ -30,7 +31,8 @@ namespace EnemyContent
                 AmmoHitHandler bodyHits = (AmmoHitHandler)shipSo.FindProperty("_ammoHitHandler").objectReferenceValue;
                 SpriteRenderer body = root.GetComponentInChildren<SpriteRenderer>(true);
 
-                EnergyShield shield = ShieldRig.Attach(root, body, bodyHits, out AmmoHitHandler shieldHits);
+                EnergyShield shield = ShieldRig.Attach(root, body, bodyHits, out AmmoHitHandler shieldHits,
+                    ShieldSizeScale);
 
                 shipSo.FindProperty("_shield").objectReferenceValue = shield;
                 shipSo.FindProperty("_shieldHitHandler").objectReferenceValue = shieldHits;

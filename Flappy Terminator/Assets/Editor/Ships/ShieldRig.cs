@@ -12,7 +12,7 @@ namespace ShipContent
         private const float BubbleRingShare = 116f / 128f;
 
         public static EnergyShield Attach(GameObject root, SpriteRenderer body, AmmoHitHandler bodyHits,
-            out AmmoHitHandler shieldHits)
+            out AmmoHitHandler shieldHits, float sizeScale = 1f)
         {
             Transform old = root.transform.Find(ShieldName);
 
@@ -32,7 +32,7 @@ namespace ShipContent
             bubble.sortingLayerID = body.sortingLayerID;
             bubble.sortingOrder = body.sortingOrder + 1;
 
-            float size = Mathf.Max(body.bounds.size.x, body.bounds.size.y) * ShieldSizeShare;
+            float size = Mathf.Max(body.bounds.size.x, body.bounds.size.y) * ShieldSizeShare * sizeScale;
             float scale = size / (bubbleSprite.bounds.size.x * root.transform.lossyScale.x);
             bubbleObject.transform.localScale = Vector3.one * scale;
 
