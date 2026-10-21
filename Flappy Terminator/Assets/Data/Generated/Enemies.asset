@@ -161,8 +161,8 @@ MonoBehaviour:
     _damage: 40
     _movement: {fileID: 11400000, guid: 90d8dd41b80474e9aa9bb1f27035f75b, type: 2}
     _skin: {fileID: 0}
-    _rewardMoney: 800
-    _rewardXp: 160
+    _rewardMoney: 600
+    _rewardXp: 120
   - _id: phantom_2
     _type: enemy_phantom
     _title: "\u041F\u0440\u0438\u0437\u0440\u0430\u043A II"
@@ -176,8 +176,8 @@ MonoBehaviour:
     _damage: 60
     _movement: {fileID: 11400000, guid: 34cf25f610b76417aa1d0bdfc23682c0, type: 2}
     _skin: {fileID: 0}
-    _rewardMoney: 1200
-    _rewardXp: 240
+    _rewardMoney: 1000
+    _rewardXp: 200
   - _id: phantom_3
     _type: enemy_phantom
     _title: "\u041F\u0440\u0438\u0437\u0440\u0430\u043A III"
