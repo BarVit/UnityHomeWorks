@@ -442,6 +442,17 @@ function checkRow(row, C, keys) {
   if (toFloat(row.interval_max) < toFloat(row.interval))
     fail('interval_max', 'interval_max: ' + row.interval_max + ' меньше interval ' + row.interval);
 
+  if (String(row.batch ?? '').length > 0) {
+    const match = /^\s*(\d+)\s*(?:-\s*(\d+)\s*)?$/.exec(String(row.batch));
+    const min = match ? +match[1] : NaN;
+    const max = match ? +(match[2] ?? match[1]) : NaN;
+
+    if (mode === 'Boss')
+      fail('batch', 'batch: босс выходит один, оставьте пустым');
+    else if (!match || min < 1 || max < min || max > 10)
+      fail('batch', 'batch: «' + row.batch + '» — нужно число или диапазон вида 2-3, от 1 до 10');
+  }
+
   if (String(row.shield).length > 0) {
     const shield = toInt(row.shield);
 
@@ -452,6 +463,18 @@ function checkRow(row, C, keys) {
   }
 
   return errors;
+}
+
+function batchAverage(text) {
+  const match = /^\s*(\d+)\s*(?:-\s*(\d+)\s*)?$/.exec(String(text ?? ''));
+
+  if (!match)
+    return 1;
+
+  const min = Math.max(1, +match[1]);
+  const max = Math.max(min, +(match[2] ?? match[1]));
+
+  return (min + max) / 2;
 }
 
 function groupSum(row, C) {
@@ -478,7 +501,7 @@ function groupSum(row, C) {
   const shieldXp = shield ? shield.xp : 0;
   const pause = (toFloat(row.interval) + toFloat(row.interval_max)) / 2;
 
-  sum.time = isNaN(pause) ? 0 : count * pause;
+  sum.time = isNaN(pause) ? 0 : Math.ceil(count / batchAverage(row.batch)) * pause;
 
   if (mode === 'Sequence') {
     for (let i = 0; i < count; i++) {
@@ -820,7 +843,7 @@ function addGroup(locationId, level) {
     const all = sortedGroups(S.t.waves.rows, locationId, level);
     const bossGroup = all.find(g => g.row.mode === 'Boss');
     const row = newRow({ location: locationId, level: String(level), order: String(all.length + 1), count: '5', mode: 'Sequence',
-      enemies: last ? last.row.enemies : 'warden_1', interval: last ? last.row.interval : '2', interval_max: last ? last.row.interval_max : '2', shield: '' });
+      enemies: last ? last.row.enemies : 'warden_1', interval: last ? last.row.interval : '2', interval_max: last ? last.row.interval_max : '2', shield: '', batch: last ? last.row.batch ?? '' : '' });
 
     S.t.waves.rows.splice(insertIndex(locationId, level), 0, row);
 
@@ -912,6 +935,7 @@ function changeMode(row, mode, C) {
       setField(row, 'interval', '0');
       setField(row, 'interval_max', '0');
       setField(row, 'shield', '');
+      setField(row, 'batch', '');
     } else if (row.mode === 'Boss') {
       setField(row, 'enemies', 'warden_1');
       setField(row, 'count', '5');
@@ -1101,6 +1125,7 @@ function groupRow(group, C, location) {
     '<td class="pause">' + (isBoss ? '<span class="range">ждёт пустое поле</span>' :
       '<input class="num' + bad('interval') + '" data-f="interval" data-i="' + index + '" data-key="' + index + ':interval" value="' + esc(row.interval) + '" inputmode="decimal"> – ' +
       '<input class="num' + bad('interval_max') + '" data-f="interval_max" data-i="' + index + '" data-key="' + index + ':interval_max" value="' + esc(row.interval_max) + '" inputmode="decimal">') + '</td>' +
+    '<td>' + (isBoss ? '' : '<input class="num' + bad('batch') + '" data-f="batch" data-i="' + index + '" data-key="' + index + ':batch" value="' + esc(row.batch ?? '') + '" placeholder="1" title="Сколько врагов выходит за раз: число или диапазон 2-3; пусто — по одному">') + '</td>' +
     '<td>' + (isBoss ? '' : '<select data-act="shield" data-i="' + index + '" data-key="' + index + ':shield" class="' + bad('shield') + '">' + shieldOptions + '</select>') + '</td>' +
     '<td class="n">' + fmt(group.sum.money) + rangeHtml(group.sum, 'money') + '</td>' +
     '<td class="n">' + fmt(group.sum.xp) + rangeHtml(group.sum, 'xp') + '</td>' +
@@ -1113,7 +1138,7 @@ function groupRow(group, C, location) {
     '</td></tr>';
 
   if (group.errors.length)
-    html += '<tr class="err-row"><td colspan="10">' + group.errors.map(e => esc(e.text)).join('<br>') + '</td></tr>';
+    html += '<tr class="err-row"><td colspan="11">' + group.errors.map(e => esc(e.text)).join('<br>') + '</td></tr>';
 
   return html;
 }
@@ -1330,7 +1355,7 @@ function renderMain(now, before) {
       '<button data-act="add" data-level="' + level.level + '">+ группа</button></header>';
 
     if (level.groups.length) {
-      html += '<table><thead><tr><th>#</th><th>Режим</th><th>Враги</th><th>Кол-во</th><th>Пауза, с</th><th>Щит</th>' +
+      html += '<table><thead><tr><th>#</th><th>Режим</th><th>Враги</th><th>Кол-во</th><th>Пауза, с</th><th title="Сколько врагов выходит за раз">Пачка</th><th>Щит</th>' +
         '<th style="text-align:right">Монеты</th><th style="text-align:right">Опыт</th><th style="text-align:right">≈ время</th><th></th></tr></thead><tbody>' +
         level.groups.map(group => groupRow(group, C, location)).join('') + '</tbody></table>';
     } else {
@@ -1373,7 +1398,7 @@ function init(buffers) {
     tables[name] = parseTsv(buffers[name]);
   }
 
-  const columns = ['location', 'level', 'order', 'count', 'mode', 'enemies', 'interval', 'interval_max', 'shield'];
+  const columns = ['location', 'level', 'order', 'count', 'mode', 'enemies', 'interval', 'interval_max', 'shield', 'batch'];
   const missing = columns.filter(c => !tables.waves.header.includes(c));
 
   if (missing.length)

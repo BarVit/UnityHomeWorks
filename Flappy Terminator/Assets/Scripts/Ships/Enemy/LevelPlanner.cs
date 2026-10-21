@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class LevelPlanner
@@ -37,13 +38,30 @@ public class LevelPlanner
             return;
         }
 
+        int batchSize = 0;
+        int batchLeft = 0;
+        int slotShift = 0;
+
         for (int i = 0; i < row.Count; i++)
         {
+            if (batchLeft == 0)
+            {
+                batchSize = Mathf.Min(Random.Range(row.BatchMin, row.BatchMax + 1), row.Count - i);
+                batchLeft = batchSize;
+                slotShift = Random.Range(0, batchSize);
+            }
+
             string enemyId = row.Mode == WaveMode.Sequence
                 ? row.Enemies[i % row.Enemies.Length]
                 : row.Enemies[Random.Range(0, row.Enemies.Length)];
+            int slot = (batchSize - batchLeft + slotShift) % batchSize;
 
-            plan.Add(new PlannedSpawn(CreateEnemy(enemyId, row), GetInterval(row), false, PlannedSpawn.NoAnnouncement));
+            batchLeft--;
+
+            float interval = batchLeft > 0 ? 0f : GetInterval(row);
+
+            plan.Add(new PlannedSpawn(CreateEnemy(enemyId, row), interval, false, PlannedSpawn.NoAnnouncement, slot,
+                batchSize));
         }
     }
 

@@ -20,6 +20,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float _spawnMargin = 1f;
     [SerializeField] private float _minSpawnPositionY = -3f;
     [SerializeField] private float _maxSpawnPositionY = 3f;
+    [SerializeField] private float _batchStagger = 0.6f;
+    [SerializeField, Range(0f, 0.45f)] private float _batchBandPadding = 0.2f;
     [SerializeField] private float _announcementDuration = 2f;
 
     private readonly PoolRegistry _pools = new PoolRegistry("Enemies");
@@ -217,7 +219,7 @@ public class EnemySpawner : MonoBehaviour
                     yield return null;
             }
 
-            Release(spawn.Setup);
+            Release(spawn.Setup, spawn.BatchSlot, spawn.BatchSize);
             _released = i + 1;
 
             for (float left = spawn.Interval; left > 0f; left -= Time.deltaTime)
@@ -238,14 +240,26 @@ public class EnemySpawner : MonoBehaviour
         Release(setup);
     }
 
-    private EnemyShip Release(EnemySetup setup)
+    private EnemyShip Release(EnemySetup setup, int batchSlot = 0, int batchSize = 1)
     {
         SpawnPool<EnemyShip> pool = _pools.GetPool(setup.Prefab, _created);
-        EnemyShip ship = pool.Get(
-            setup.Movement.GetSpawnPoint(_camera, _spawnMargin, _minSpawnPositionY, _maxSpawnPositionY));
+        EnemyShip ship = pool.Get(GetSpawnPoint(setup, batchSlot, batchSize));
 
         ship.Launch(setup);
 
         return ship;
+    }
+
+    private Vector2 GetSpawnPoint(EnemySetup setup, int batchSlot, int batchSize)
+    {
+        if (batchSize <= 1)
+            return setup.Movement.GetSpawnPoint(_camera, _spawnMargin, _minSpawnPositionY, _maxSpawnPositionY);
+
+        float band = (_maxSpawnPositionY - _minSpawnPositionY) / batchSize;
+        float bandMin = _minSpawnPositionY + band * batchSlot;
+        Vector2 point = setup.Movement.GetSpawnPoint(_camera, _spawnMargin, bandMin + band * _batchBandPadding,
+            bandMin + band * (1f - _batchBandPadding));
+
+        return point + Vector2.right * (_batchStagger * batchSlot);
     }
 }

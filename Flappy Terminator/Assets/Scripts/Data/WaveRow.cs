@@ -16,9 +16,12 @@ public class WaveRow
     [SerializeField] private int _shieldCapacity;
     [SerializeField] private int _shieldRewardMoney;
     [SerializeField] private int _shieldRewardXp;
+    [SerializeField] private int _batchMin = 1;
+    [SerializeField] private int _batchMax = 1;
 
     public WaveRow(string location, int level, int order, int count, WaveMode mode, string[] enemies,
-        float interval, float intervalMax, int shieldLevel, int shieldCapacity, Reward shieldReward)
+        float interval, float intervalMax, int shieldLevel, int shieldCapacity, Reward shieldReward, int batchMin,
+        int batchMax)
     {
         _shieldLevel = shieldLevel;
         _shieldCapacity = shieldCapacity;
@@ -32,6 +35,8 @@ public class WaveRow
         _enemies = enemies;
         _interval = interval;
         _intervalMax = intervalMax;
+        _batchMin = batchMin;
+        _batchMax = batchMax;
     }
 
     public string Location => _location;
@@ -55,4 +60,8 @@ public class WaveRow
     public float Interval => _interval;
 
     public float IntervalMax => _intervalMax;
+
+    public int BatchMin => _batchMin;
+
+    public int BatchMax => _batchMax;
 }

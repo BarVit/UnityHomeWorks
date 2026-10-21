@@ -9,10 +9,12 @@ namespace TableImport
         public const string AssetPath = "Assets/Data/Generated/Waves.asset";
 
         private const char ListSeparator = ',';
+        private const char RangeSeparator = '-';
+        private const int MaxBatch = 10;
 
         private static readonly string[] Columns =
         {
-            "location", "level", "order", "count", "mode", "enemies", "interval", "interval_max", "shield"
+            "location", "level", "order", "count", "mode", "enemies", "interval", "interval_max", "shield", "batch"
         };
 
         public static WaveTable Import(LocationTable locations, EnemyTable enemies, BossTable bosses,
@@ -52,9 +54,10 @@ namespace TableImport
                     reader.Fail("interval_max: " + intervalMax + " меньше interval " + interval);
 
                 ShieldLevel shield = ReadShield(reader, mode, shields);
+                ReadBatch(reader, mode, out int batchMin, out int batchMax);
 
                 rows.Add(new WaveRow(location, level, order, count, mode, list, interval, intervalMax,
-                    shield.Level, shield.Capacity, shield.Reward));
+                    shield.Level, shield.Capacity, shield.Reward, batchMin, batchMax));
             }
 
             WaveTable table = GeneratedAsset.LoadOrCreate<WaveTable>(AssetPath);
@@ -84,6 +87,34 @@ namespace TableImport
             reader.Fail("shield: нет уровня " + level + " в " + EnemyShieldTableImporter.SourcePath);
 
             return default;
+        }
+
+        private static void ReadBatch(RowReader reader, WaveMode mode, out int min, out int max)
+        {
+            min = 1;
+            max = 1;
+            string text = reader.ReadOptionalText("batch");
+
+            if (text.Length == 0)
+                return;
+
+            if (mode == WaveMode.Boss)
+            {
+                reader.Fail("batch: босс выходит один, оставьте пустым");
+
+                return;
+            }
+
+            string[] parts = text.Split(RangeSeparator);
+            bool isRead = parts.Length <= 2 && int.TryParse(parts[0].Trim(), out min)
+                && int.TryParse(parts[parts.Length - 1].Trim(), out max);
+
+            if (isRead && min >= 1 && max >= min && max <= MaxBatch)
+                return;
+
+            reader.Fail("batch: «" + text + "» — нужно число или диапазон вида 2-3, от 1 до " + MaxBatch);
+            min = 1;
+            max = 1;
         }
 
         private static string[] Split(string text)
