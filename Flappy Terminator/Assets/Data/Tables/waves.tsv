@@ -119,11 +119,9 @@ loc_03_02	3	1	1	Sequence	warden_1	1	1
 loc_03_02	4	1	1	Sequence	warden_1	1	1	
 loc_03_03	1	1	1	Sequence	warden_1	1	1	
 loc_03_03	2	1	1	Sequence	warden_1	1	1	
-loc_03_03	3	1	1	Sequence	warden_1	1	1	
-loc_03_03	4	1	1	Sequence	warden_1	1	1	
-loc_03_03	5	1	1	Sequence	warden_1	1	1	
 loc_03_04	1	1	1	Sequence	warden_1	1	1	
-loc_03_04	1	2	1	Boss	berserker_2	0	0	
+loc_03_04	2	1	1	Sequence	warden_1	1	1	
+loc_03_04	2	2	1	Boss	berserker_2	0	0	
 loc_03_05	1	1	1	Sequence	warden_1	1	1	
 loc_03_05	2	1	1	Sequence	warden_1	1	1	
 loc_03_05	3	1	1	Sequence	warden_1	1	1	
@@ -146,7 +144,8 @@ loc_03_08	2	1	1	Sequence	warden_1	1	1
 loc_03_08	3	1	1	Sequence	warden_1	1	1	
 loc_03_09	1	1	1	Sequence	warden_1	1	1	
 loc_03_09	2	1	1	Sequence	warden_1	1	1	
-loc_03_09	2	2	1	Boss	overlord	0	0	
+loc_03_09	3	1	1	Sequence	warden_1	1	1	
+loc_03_09	3	2	1	Boss	overlord	0	0	
 loc_04_01	1	1	1	Sequence	warden_1	1	1	
 loc_04_01	2	1	1	Sequence	warden_1	1	1	
 loc_04_01	3	1	1	Sequence	warden_1	1	1	

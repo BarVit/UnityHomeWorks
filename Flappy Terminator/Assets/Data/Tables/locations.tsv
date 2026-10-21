@@ -13,13 +13,13 @@ loc_02_06	sys_02	6	4			Normal				34120
 loc_02_07	sys_02	7	2	magister		Normal				24090
 loc_03_01	sys_03	1	3	punisher_2		Normal				50000
 loc_03_02	sys_03	2	4			Normal				56000
-loc_03_03	sys_03	3	5			Normal				66000
-loc_03_04	sys_03	4	1	berserker_2		Normal				30000
+loc_03_03	sys_03	3	2			Normal				66000
+loc_03_04	sys_03	4	2	berserker_2		Normal				30000
 loc_03_05	sys_03	5	5			Normal				130000
 loc_03_06	sys_03	6	3			Normal				62000
 loc_03_07	sys_03	7	4	tormentor_1		Normal				80000
 loc_03_08	sys_03	8	3			Normal				70000
-loc_03_09	sys_03	9	2	overlord		Normal				56000
+loc_03_09	sys_03	9	3	overlord		Normal				56000
 loc_04_01	sys_04	1	3			Normal				
 loc_04_02	sys_04	2	4			Normal				
 loc_04_03	sys_04	3	5	ripper_1		Normal				

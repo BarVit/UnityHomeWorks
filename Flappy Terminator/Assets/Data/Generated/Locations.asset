@@ -170,7 +170,7 @@ MonoBehaviour:
   - _id: loc_03_03
     _system: sys_03
     _order: 3
-    _levels: 5
+    _levels: 2
     _boss: 
     _borderTheme: 
     _flightMode: 0
@@ -181,7 +181,7 @@ MonoBehaviour:
   - _id: loc_03_04
     _system: sys_03
     _order: 4
-    _levels: 1
+    _levels: 2
     _boss: berserker_2
     _borderTheme: 
     _flightMode: 0
@@ -236,7 +236,7 @@ MonoBehaviour:
   - _id: loc_03_09
     _system: sys_03
     _order: 9
-    _levels: 2
+    _levels: 3
     _boss: overlord
     _borderTheme: 
     _flightMode: 0
