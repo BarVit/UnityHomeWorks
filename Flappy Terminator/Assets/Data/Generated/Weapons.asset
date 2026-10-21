@@ -651,10 +651,10 @@ MonoBehaviour:
     _owner: 1
     _delivery: 0
     _damage: 7
-    _rate: 1.2
+    _rate: 1.5
     _magazine: 0
     _reloadTime: 0
-    _projectileSpeed: 18
+    _projectileSpeed: 14
     _barrelsMax: 4
     _firePattern: 2
     _sideAngle: 8
