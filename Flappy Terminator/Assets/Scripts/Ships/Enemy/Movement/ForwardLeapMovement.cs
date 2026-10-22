@@ -26,7 +26,7 @@ public class ForwardLeapMovement : EnemyMovement
 
             _isLeaping = false;
             _isLeapSpent = true;
-            MoveForward();
+            Move(Forward * _profile.AfterLeapSpeed);
 
             return;
         }

@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b3acaba914d5485d89c354fa48fc1fc, type: 3}
   m_Name: Up And Down
   m_EditorClassIdentifier: Assembly-CSharp::UpDownProfile
-  _minSpeed: 0.5
-  _maxSpeed: 2
+  _minSpeed: 1
+  _maxSpeed: 1
   _entryShare: 0.25
-  _duration: 30
-  _edgeMargin: 1
+  _duration: 20
+  _edgeMargin: 1.5
+  _bodyGapShare: 0

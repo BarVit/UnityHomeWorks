@@ -18,3 +18,4 @@ MonoBehaviour:
   _minLeapStartShare: 0.2
   _maxLeapStartShare: 0.2
   _leapShare: 0.4
+  _afterLeapSpeed: 0.75

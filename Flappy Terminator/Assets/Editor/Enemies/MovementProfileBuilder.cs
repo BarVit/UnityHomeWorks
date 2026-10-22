@@ -37,6 +37,7 @@ namespace EnemyContent
                 profile.FindProperty("_minLeapStartShare").floatValue = 0.2f;
                 profile.FindProperty("_maxLeapStartShare").floatValue = 0.2f;
                 profile.FindProperty("_leapShare").floatValue = 0.4f;
+                profile.FindProperty("_afterLeapSpeed").floatValue = 0.75f;
             });
             Create<DriftRetreatProfile>("Drift Retreat", profile =>
             {
@@ -47,10 +48,10 @@ namespace EnemyContent
             });
             Create<UpDownProfile>("Up And Down", profile =>
             {
-                SetSpeed(profile, 0.5f, 2f);
+                SetSpeed(profile, 1f, 1f);
                 profile.FindProperty("_entryShare").floatValue = 0.25f;
-                profile.FindProperty("_duration").floatValue = 30f;
-                profile.FindProperty("_edgeMargin").floatValue = 1f;
+                profile.FindProperty("_duration").floatValue = 20f;
+                profile.FindProperty("_edgeMargin").floatValue = 1.5f;
             });
             Create<UpDownProfile>("Boss Up And Down", profile =>
             {
