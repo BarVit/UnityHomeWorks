@@ -38,6 +38,8 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
     public int CurrentHealth => _health.Value;
 
+    public string LogName => ShipId == null ? name : ShipId.Replace("enemy_", string.Empty) + Tier;
+
     public bool IsVulnerable => IsShown();
 
     public int Phase => _phases == null ? BossPhaseRunner.NoPhase : _phases.Current;
@@ -154,14 +156,27 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
     public void TakeDamage(int damage)
     {
+        string source = DamageLog.TakeSource();
+        int before = _health.Value;
+
         if (IsVulnerable == false)
+        {
+            DamageLog.Hit("ignored", source, LogName, GetInstanceID(), damage, 0, 0, before, before, _health.MaxValue,
+                "not on screen");
+
             return;
+        }
+
+        int dealt = damage;
 
         if (_shield != null)
-            damage = _shield.Absorb(damage);
+            dealt = _shield.Absorb(damage);
 
-        if (damage > 0)
-            _health.TakeDamage(damage);
+        if (dealt > 0)
+            _health.TakeDamage(dealt);
+
+        DamageLog.Hit(_health.Value == 0 && before > 0 ? "kill" : "hit", source, LogName, GetInstanceID(), damage,
+            damage - Mathf.Max(0, dealt), before - _health.Value, before, _health.Value, _health.MaxValue);
     }
 
     public void Die()
@@ -218,6 +233,7 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
     private void OnAmmoHit(Ammo ammo)
     {
+        DamageLog.SetSource(ammo.Source + (ammo.IsCrit ? " crit" : string.Empty));
         TakeDamage(ammo.Damage);
     }
 

@@ -7,6 +7,7 @@ public class Game : MonoBehaviour
     [SerializeField] private CheatCodeReader _cheatCode;
     [SerializeField] private CheatCodeReader _systemCheatCode;
     [SerializeField] private CheatCodeReader _locationCheatCode;
+    [SerializeField] private CheatCodeReader _logCheatCode;
     [SerializeField] private SystemSkip _systemSkip;
     [SerializeField] private PlayerShip _playerShip;
     [SerializeField] private EnemySpawner _enemySpawner;
@@ -54,6 +55,7 @@ public class Game : MonoBehaviour
         _cheatCode.Entered += WinLevelInstantly;
         _systemCheatCode.Entered += CompleteSystemInstantly;
         _locationCheatCode.Entered += CompleteLocationInstantly;
+        _logCheatCode.Entered += DamageLog.Save;
     }
 
     private void Start()
@@ -84,6 +86,7 @@ public class Game : MonoBehaviour
         _cheatCode.Entered -= WinLevelInstantly;
         _systemCheatCode.Entered -= CompleteSystemInstantly;
         _locationCheatCode.Entered -= CompleteLocationInstantly;
+        _logCheatCode.Entered -= DamageLog.Save;
     }
 
     private void SkipCutscene()
@@ -248,6 +251,7 @@ public class Game : MonoBehaviour
         _screens.HideOverlays();
         _battleModules.ResetForLevel();
         _playerShip.Restart();
+        DamageLog.BeginLevel(_runner.LocationId, _runner.Level);
         TrackLevel();
         _enemySpawner.StartLevel(_runner.LocationId, _runner.Level);
         _asteroidSpawner.StartSpawn();

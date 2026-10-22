@@ -158,6 +158,7 @@ public class BeamDelivery : WeaponDelivery
         {
             int damage = GetStrikeDamage(damageable, barrel, out bool isCrit);
 
+            DamageLog.SetSource(Row.Id + "#" + barrel + (isCrit ? " crit" : string.Empty));
             damageable.TakeDamage(damage);
 
             if (isCrit)

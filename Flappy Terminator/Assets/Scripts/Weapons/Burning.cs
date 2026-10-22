@@ -5,6 +5,7 @@ public class Burning : MonoBehaviour
 {
     private const float Duration = 1.2f;
     private const float TickInterval = 0.2f;
+    private const float RoundingNoise = 0.01f;
 
     private readonly List<float> _damagePerSecond = new List<float>();
     private readonly List<float> _timeLeft = new List<float>();
@@ -60,7 +61,12 @@ public class Burning : MonoBehaviour
 
         if (_timeLeft.Count == 0)
         {
-            Deal(Mathf.RoundToInt(_pendingDamage));
+            int rest = Mathf.RoundToInt(_pendingDamage);
+
+            if (Mathf.Abs(_pendingDamage - rest) > RoundingNoise)
+                DamageLog.Burn("burn_rounding", TargetName, TargetRef, _pendingDamage - rest);
+
+            Deal(rest);
             Extinguish();
 
             return;
@@ -75,6 +81,10 @@ public class Burning : MonoBehaviour
 
     private void OnDisable()
     {
+        if (_timeLeft.Count > 0)
+            DamageLog.Burn("burn_dropped", TargetName, TargetRef, _pendingDamage,
+                "target disabled with " + _timeLeft.Count + " burns");
+
         _timeLeft.Clear();
         _damagePerSecond.Clear();
         Extinguish();
@@ -87,6 +97,7 @@ public class Burning : MonoBehaviour
 
         _damagePerSecond.Add(damage / Duration);
         _timeLeft.Add(Duration);
+        DamageLog.Burn("burn_add", TargetName, TargetRef, damage, "burns " + _timeLeft.Count);
 
         if (_flame == null)
             _flame = Instantiate(flamePrefab, transform);
@@ -103,8 +114,19 @@ public class Burning : MonoBehaviour
         _pendingDamage -= damage;
 
         if (_target != null && _target.IsVulnerable)
+        {
+            DamageLog.SetSource(DamageLog.Napalm);
             _target.TakeDamage(damage);
+        }
+        else
+        {
+            DamageLog.Burn("burn_lost", TargetName, TargetRef, damage, "target not vulnerable");
+        }
     }
+
+    private string TargetName => _target is EnemyShip ship ? ship.LogName : name;
+
+    private int TargetRef => _target is Component target ? target.GetInstanceID() : 0;
 
     private void Extinguish()
     {

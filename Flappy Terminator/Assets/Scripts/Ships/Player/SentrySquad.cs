@@ -157,6 +157,7 @@ public class SentrySquad : MonoBehaviour
         if (damage > 0)
         {
             _owedDamage[drone] -= damage;
+            DamageLog.SetSource(DamageLog.Sentry + "#" + drone);
             target.TakeDamage(damage);
         }
 

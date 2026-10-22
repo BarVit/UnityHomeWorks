@@ -101,7 +101,10 @@ public class BlastWave : MonoBehaviour, IPoolable
                 damageable = _touched[i].GetComponentInParent<IDamageable>();
 
             if (damageable != null && damageable.IsVulnerable && _damaged.Add(damageable))
+            {
+                DamageLog.SetSource(name);
                 damageable.TakeDamage(_damage);
+            }
         }
     }
 }

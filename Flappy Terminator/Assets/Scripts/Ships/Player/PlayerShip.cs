@@ -114,16 +114,17 @@ public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
 
     private void ApplyDamage(int damage, bool isEnvironment)
     {
-        damage = _shield.Absorb(damage);
-
-        if (damage <= 0)
-            return;
-
+        string source = DamageLog.TakeSource();
         int before = _health.Value;
+        int dealt = _shield.Absorb(damage);
 
-        _health.TakeDamage(damage);
+        if (dealt > 0)
+            _health.TakeDamage(dealt);
 
         int lost = before - _health.Value;
+
+        DamageLog.Hit(_health.Value == 0 && before > 0 ? "player_killed" : "player_hit", source, "player", 0, damage,
+            damage - Mathf.Max(0, dealt), lost, before, _health.Value, _health.MaxValue);
 
         if (lost > 0)
             Damaged?.Invoke(lost, isEnvironment);
@@ -131,11 +132,13 @@ public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
 
     private void OnAmmoHit(Ammo ammo)
     {
+        DamageLog.SetSource(ammo.Source);
         TakeDamage(ammo.Damage);
     }
 
     private void OnAsteroidBumped(Asteroid asteroid)
     {
+        DamageLog.SetSource(DamageLog.Asteroid);
         ApplyDamage(asteroid.Damage, true);
 
         if (_isDead)
@@ -147,6 +150,7 @@ public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
 
     private void OnEnemyBumped(EnemyShip enemyShip)
     {
+        DamageLog.SetSource(enemyShip.LogName + " body");
         ApplyDamage(enemyShip.BodyDamage, true);
 
         if (_isDead)
@@ -188,7 +192,10 @@ public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
     public void Remove()
     {
         if (_isDead == false)
+        {
+            DamageLog.SetSource(DamageLog.Boundary);
             ApplyDamage(_health.Value, true);
+        }
 
         Die();
     }

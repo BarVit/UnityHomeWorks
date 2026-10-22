@@ -109,7 +109,10 @@ public class OrbDelivery : ProjectileDelivery
         int whole = Mathf.FloorToInt(owed);
 
         if (whole > 0)
+        {
+            DamageLog.SetSource(Row.Id + "#" + barrel);
             damageable.TakeDamage(whole);
+        }
 
         _owed[damageable] = owed - whole;
     }

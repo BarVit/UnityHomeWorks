@@ -6367,6 +6367,7 @@ GameObject:
   - component: {fileID: 940566763}
   - component: {fileID: 940566762}
   - component: {fileID: 940566764}
+  - component: {fileID: 940566765}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -35441,6 +35442,7 @@ MonoBehaviour:
   _cheatCode: {fileID: 940566757}
   _systemCheatCode: {fileID: 940566763}
   _locationCheatCode: {fileID: 940566764}
+  _logCheatCode: {fileID: 940566765}
   _systemSkip: {fileID: 940566762}
   _playerShip: {fileID: 92249140}
   _enemySpawner: {fileID: 1078558388}
@@ -40155,6 +40157,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheatCodeReader
   _code: 190000001e000000
+  _maxInterval: 0.2
+--- !u!114 &940566765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165193575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b49d9baecc61f48949a81290cca503c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheatCodeReader
+  _code: 1a00000015000000
   _maxInterval: 0.2
 --- !u!1 &940714175
 GameObject:

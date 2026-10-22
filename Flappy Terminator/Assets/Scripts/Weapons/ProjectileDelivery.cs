@@ -58,6 +58,7 @@ public class ProjectileDelivery : WeaponDelivery
         ammo.gameObject.layer = Context.AmmoLayer;
         ammo.Init(_hitEffectPool);
         ammo.MarkBarrel(barrel);
+        ammo.MarkSource(Row.Id + "#" + barrel);
         CountFired();
         ammo.SetDamage(RollDamage(barrel, out bool isCrit), isCrit);
         ammo.Fly(ProjectileSpeed * Context.GetBoost(barrel).SpeedScale);

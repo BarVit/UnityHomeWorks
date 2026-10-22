@@ -29,6 +29,8 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
 
     public int Barrel { get; private set; }
 
+    public string Source { get; private set; }
+
     public bool HasScored { get; private set; }
 
     public bool IsArmed { get; private set; }
@@ -91,6 +93,11 @@ public class Ammo : MonoBehaviour, IPoolable, IRemoveable
     public void MarkBarrel(int barrel)
     {
         Barrel = barrel;
+    }
+
+    public void MarkSource(string source)
+    {
+        Source = source;
     }
 
     public void SetDamage(int damage, bool isCrit = false)
