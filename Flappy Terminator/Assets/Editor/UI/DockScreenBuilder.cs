@@ -92,6 +92,7 @@ namespace UiContent
             Set(skills, "_skills", AssetDatabase.LoadAssetAtPath<SkillTable>(SkillsAsset));
             Set(skills, "_ship", playerShip);
             Set(skills, "_modules", modules);
+            Set(skills, "_hangar", hangar);
 
             EnergyShield shield = BuildShield(playerShip);
             ShipRepair repair = BuildRepair(playerShip);

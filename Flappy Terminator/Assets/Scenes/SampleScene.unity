@@ -41456,6 +41456,7 @@ MonoBehaviour:
   _weapons: {fileID: 11400000, guid: 05ad97f9a8c8d4ad79ac3a7dc03292af, type: 2}
   _ship: {fileID: 92249140}
   _modules: {fileID: 940566760}
+  _hangar: {fileID: 940566755}
 --- !u!114 &940566760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46181,6 +46182,8 @@ MonoBehaviour:
   _spawnMargin: 1
   _minSpawnPositionY: -3
   _maxSpawnPositionY: 3
+  _batchStagger: 0.6
+  _batchBandPadding: 0.2
   _announcementDuration: 2
 --- !u!1 &1079041038
 GameObject:

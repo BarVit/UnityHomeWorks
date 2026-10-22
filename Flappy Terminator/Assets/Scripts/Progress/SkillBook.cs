@@ -14,6 +14,7 @@ public class SkillBook : MonoBehaviour
     [SerializeField] private WeaponTable _weapons;
     [SerializeField] private PlayerShip _ship;
     [SerializeField] private ModuleRack _modules;
+    [SerializeField] private Hangar _hangar;
 
     public event Action Changed;
 
@@ -134,7 +135,10 @@ public class SkillBook : MonoBehaviour
 
     public bool IsOpen(SkillKey skill)
     {
-        return skill.Stat != SkillStat.RepairMastery || _modules.IsKindOpen(ModuleKind.RepairDrone);
+        if (skill.Stat == SkillStat.RepairMastery)
+            return _modules.IsKindOpen(ModuleKind.RepairDrone);
+
+        return skill.IsShipWide || _hangar.IsWeaponOpen(skill.Weapon);
     }
 
     public bool CanUpgrade(SkillKey skill)
