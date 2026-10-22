@@ -42,7 +42,7 @@ MonoBehaviour:
     _stat: 0
     _level: 5
     _bonus: 15
-    _price: 25000
+    _price: 15000
   - _owner: energy_shield
     _stat: 1
     _level: 0
@@ -72,7 +72,7 @@ MonoBehaviour:
     _stat: 1
     _level: 5
     _bonus: -1
-    _price: 18000
+    _price: 9000
   - _owner: repair_drone
     _stat: 2
     _level: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
     _stat: 2
     _level: 5
     _bonus: 15
-    _price: 50000
+    _price: 30000
   - _owner: repair_drone
     _stat: 1
     _level: 0
@@ -132,4 +132,4 @@ MonoBehaviour:
     _stat: 1
     _level: 5
     _bonus: -1
-    _price: 36000
+    _price: 18000
