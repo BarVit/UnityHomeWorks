@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010eef62cb1214e1e90208d517edafc0, type: 3}
   m_Name: Forward Leap
   m_EditorClassIdentifier: Assembly-CSharp::ForwardLeapProfile
-  _minSpeed: 2
-  _maxSpeed: 2
+  _minSpeed: 1
+  _maxSpeed: 1
   _leapSpeed: 5
-  _minLeapStartShare: 0.1
-  _maxLeapStartShare: 0.3
-  _leapShare: 0.333
+  _minLeapStartShare: 0.2
+  _maxLeapStartShare: 0.2
+  _leapShare: 0.4
