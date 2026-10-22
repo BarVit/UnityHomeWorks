@@ -22,13 +22,13 @@ namespace EnemyContent
             });
             Create<HoverProfile>("Hover", profile =>
             {
-                SetSpeed(profile, 0.5f, 3f);
-                SetHover(profile, 0.1f, 0.1f, 3, 0.5f, 3f, 5f);
+                SetSpeed(profile, 1f, 3f);
+                SetHover(profile, 0.1f, 0.1f, 0.25f, 3, 0.5f, 5f, 5f);
             });
             Create<HoverProfile>("Hover Guard", profile =>
             {
-                SetSpeed(profile, 0.5f, 3f);
-                SetHover(profile, 0.1f, 0.333f, 1, 1f, 30f, 30f);
+                SetSpeed(profile, 1f, 3f);
+                SetHover(profile, 0.3f, 0.6f, 0.333f, 1, 1f, 20f, 20f);
             });
             Create<ForwardLeapProfile>("Forward Leap", profile =>
             {
@@ -103,12 +103,12 @@ namespace EnemyContent
             profile.FindProperty("_period").floatValue = 2f;
         }
 
-        private static void SetHover(SerializedObject profile, float minFirst, float maxFirst, int count,
+        private static void SetHover(SerializedObject profile, float minFirst, float maxFirst, float step, int count,
             float chance, float minHold, float maxHold)
         {
             profile.FindProperty("_minFirstStopShare").floatValue = minFirst;
             profile.FindProperty("_maxFirstStopShare").floatValue = maxFirst;
-            profile.FindProperty("_stopStep").floatValue = 0.333f;
+            profile.FindProperty("_stopStep").floatValue = step;
             profile.FindProperty("_stopCount").intValue = count;
             profile.FindProperty("_stopChance").floatValue = chance;
             profile.FindProperty("_minHold").floatValue = minHold;
