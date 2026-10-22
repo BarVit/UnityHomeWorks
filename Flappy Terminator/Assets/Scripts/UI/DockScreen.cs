@@ -13,6 +13,7 @@ public class DockScreen : MonoBehaviour
     private const string Arrow = "  >  ";
     private const string PercentSign = "%";
     private const string Seconds = " S";
+    private const string PerSecond = "/S";
     private const string BarrelMark = "  #";
     private const string EmptyCaption = "EMPTY";
     private const string MaxLevelHint = "MAX LEVEL";
@@ -70,6 +71,8 @@ public class DockScreen : MonoBehaviour
     [SerializeField] private Sprite _cooldownIcon;
     [SerializeField] private Sprite _healthIcon;
     [SerializeField] private Sprite _repairIcon;
+    [SerializeField] private Sprite _attackTimeIcon;
+    [SerializeField] private Sprite _lifetimeIcon;
     [SerializeField] private ShopWindow _shop;
     [SerializeField] private Button _shopButton;
     [SerializeField] private Button _menuButton;
@@ -426,7 +429,7 @@ public class DockScreen : MonoBehaviour
         float step = next - current;
         string title = GetModuleStatTitle(stat);
         string hint = price < 0 ? MaxLevelHint
-            : (step > 0f ? "+" : "") + step + (stat == ModuleStat.Cooldown ? Seconds : "") + " NEXT LEVEL";
+            : (step > 0f ? "+" : "") + step.ToString("0.##") + (IsSeconds(stat) ? Seconds : "") + " NEXT LEVEL";
         Sprite icon = GetModuleStatIcon(module, stat);
 
         return new UpgradeRowData(icon, title, hint, value, _modules.GetLevel(module.Id, stat),
@@ -441,6 +444,12 @@ public class DockScreen : MonoBehaviour
                 return "SHIELD CAPACITY";
             case ModuleStat.Repair:
                 return "REPAIR";
+            case ModuleStat.Damage:
+                return "DRONE DAMAGE";
+            case ModuleStat.AttackTime:
+                return "ATTACK TIME";
+            case ModuleStat.Lifetime:
+                return "DRONE LIFETIME";
             default:
                 return "COOLDOWN";
         }
@@ -454,6 +463,12 @@ public class DockScreen : MonoBehaviour
                 return _modules.GetIcon(module);
             case ModuleStat.Repair:
                 return _repairIcon;
+            case ModuleStat.Damage:
+                return _damageIcon;
+            case ModuleStat.AttackTime:
+                return _attackTimeIcon;
+            case ModuleStat.Lifetime:
+                return _lifetimeIcon;
             default:
                 return _cooldownIcon;
         }
@@ -461,7 +476,16 @@ public class DockScreen : MonoBehaviour
 
     private string FormatModule(ModuleStat stat, float value)
     {
-        return stat == ModuleStat.Cooldown ? value + Seconds : Mathf.RoundToInt(value).ToString();
+        if (IsSeconds(stat))
+            return value.ToString("0.#") + Seconds;
+
+        return stat == ModuleStat.Damage ? value.ToString("0.#") + PerSecond : Mathf.RoundToInt(value).ToString();
+    }
+
+    private static bool IsSeconds(ModuleStat stat)
+    {
+        return stat == ModuleStat.Cooldown || stat == ModuleStat.AttackTime || stat == ModuleStat.Lifetime
+            || stat == ModuleStat.Reload;
     }
 
     private void ShowSkillPage()

@@ -36,6 +36,8 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
     public bool IsDead => _isDead;
 
+    public int CurrentHealth => _health.Value;
+
     public bool IsVulnerable => IsShown();
 
     public int Phase => _phases == null ? BossPhaseRunner.NoPhase : _phases.Current;

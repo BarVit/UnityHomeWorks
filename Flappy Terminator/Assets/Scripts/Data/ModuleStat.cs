@@ -2,5 +2,9 @@ public enum ModuleStat
 {
     Capacity,
     Cooldown,
-    Repair
+    Repair,
+    Damage,
+    AttackTime,
+    Lifetime,
+    Reload
 }

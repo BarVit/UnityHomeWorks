@@ -9,11 +9,13 @@ public class BattleModules : MonoBehaviour
     [SerializeField] private PlayerShip _ship;
     [SerializeField] private EnergyShield _shield;
     [SerializeField] private ShipRepair _repair;
+    [SerializeField] private SentrySquad _sentries;
 
     private ModuleSpec?[] _specs = new ModuleSpec?[0];
     private float[] _cooldownLeft = new float[0];
     private int _shieldSlot = NoSlot;
     private int _repairSlot = NoSlot;
+    private int _sentrySlot = NoSlot;
 
     public int Count => _specs.Length;
 
@@ -24,6 +26,7 @@ public class BattleModules : MonoBehaviour
         _input.ModuleActivated += Activate;
         _shield.Broken += OnShieldBroken;
         _repair.Finished += OnRepairFinished;
+        _sentries.Finished += OnSentriesFinished;
     }
 
     private void OnDisable()
@@ -31,6 +34,7 @@ public class BattleModules : MonoBehaviour
         _input.ModuleActivated -= Activate;
         _shield.Broken -= OnShieldBroken;
         _repair.Finished -= OnRepairFinished;
+        _sentries.Finished -= OnSentriesFinished;
     }
 
     private void Update()
@@ -56,6 +60,8 @@ public class BattleModules : MonoBehaviour
         _shieldSlot = NoSlot;
         _repair.Stop();
         _repairSlot = NoSlot;
+        _sentries.Stop();
+        _sentrySlot = NoSlot;
 
         for (int i = 0; i < _cooldownLeft.Length; i++)
             _cooldownLeft[i] = 0f;
@@ -70,6 +76,9 @@ public class BattleModules : MonoBehaviour
     {
         if (slot == _repairSlot)
             return _repair.IsRepairing;
+
+        if (slot == _sentrySlot)
+            return _sentries.IsActive;
 
         return slot == _shieldSlot && _shield.IsUp;
     }
@@ -107,6 +116,10 @@ public class BattleModules : MonoBehaviour
                 _repairSlot = slot;
                 _repair.Begin(spec.Value.Repair);
                 break;
+            case ModuleKind.SentryDrones:
+                _sentrySlot = slot;
+                _sentries.Launch(spec.Value.Sentry);
+                break;
         }
 
         Changed?.Invoke();
@@ -123,6 +136,20 @@ public class BattleModules : MonoBehaviour
             _cooldownLeft[_repairSlot] = spec.Value.Cooldown;
 
         _repairSlot = NoSlot;
+        Changed?.Invoke();
+    }
+
+    private void OnSentriesFinished()
+    {
+        if (_sentrySlot == NoSlot)
+            return;
+
+        ModuleSpec? spec = GetSpec(_sentrySlot);
+
+        if (spec != null)
+            _cooldownLeft[_sentrySlot] = spec.Value.Cooldown;
+
+        _sentrySlot = NoSlot;
         Changed?.Invoke();
     }
 

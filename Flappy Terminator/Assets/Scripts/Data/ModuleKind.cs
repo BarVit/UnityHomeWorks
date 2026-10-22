@@ -1,5 +1,6 @@
 public enum ModuleKind
 {
     Shield,
-    RepairDrone
+    RepairDrone,
+    SentryDrones
 }

@@ -177,7 +177,7 @@ public class ModuleRack : MonoBehaviour
     {
         float value = GetValue(moduleId, stat, levelShift);
 
-        return stat == ModuleStat.Cooldown ? value : Mathf.RoundToInt(value * scale);
+        return IsScaled(stat) ? Mathf.RoundToInt(value * scale) : value;
     }
 
     public int GetUpgradePrice(string moduleId, ModuleStat stat)
@@ -232,11 +232,22 @@ public class ModuleRack : MonoBehaviour
                 int repair = Mathf.RoundToInt(GetFinalValue(row.Id, ModuleStat.Repair, repairScale));
 
                 specs[slot - FirstSlot] = new ModuleSpec(row.Kind, GetIcon(row), capacity,
-                    GetValue(row.Id, ModuleStat.Cooldown), GetShieldLevel(row.Id), repair);
+                    GetValue(row.Id, ModuleStat.Cooldown), GetShieldLevel(row.Id), repair, GetSentry(row.Id));
             }
         }
 
         battle.Load(specs);
+    }
+
+    private SentrySpec GetSentry(string moduleId)
+    {
+        return new SentrySpec(GetValue(moduleId, ModuleStat.Damage), GetValue(moduleId, ModuleStat.AttackTime),
+            GetValue(moduleId, ModuleStat.Lifetime), GetValue(moduleId, ModuleStat.Reload));
+    }
+
+    private static bool IsScaled(ModuleStat stat)
+    {
+        return stat == ModuleStat.Capacity || stat == ModuleStat.Repair;
     }
 
     private void Install(string moduleId)
