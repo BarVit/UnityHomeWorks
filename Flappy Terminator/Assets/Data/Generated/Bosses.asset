@@ -385,7 +385,7 @@ MonoBehaviour:
     _location: loc_04_06
     _prefab: {fileID: 748883696485598149, guid: 1b9af5ded130841f9a7c90f392e9b9dc, type: 3}
     _prototype: tormentor_2
-    _health: 100000
+    _health: 50000
     _weapon: archon_gun
     _barrels: 2
     _bodyDamage: 25

@@ -280,7 +280,7 @@ MonoBehaviour:
   - _id: loc_04_04
     _system: sys_04
     _order: 4
-    _levels: 5
+    _levels: 4
     _boss: 
     _borderTheme: 
     _flightMode: 0
