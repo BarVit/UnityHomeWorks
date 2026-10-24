@@ -1834,21 +1834,6 @@ MonoBehaviour:
     _enemies:
     - hunter_1
     - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
     _interval: 1.5
     _intervalMax: 2.5
     _shieldLevel: 0
@@ -1932,18 +1917,6 @@ MonoBehaviour:
     _enemies:
     - hunter_2
     - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 0
@@ -1995,21 +1968,6 @@ MonoBehaviour:
     _enemies:
     - hunter_1
     - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
     _interval: 1.5
     _intervalMax: 2.5
     _shieldLevel: 0
@@ -2061,15 +2019,6 @@ MonoBehaviour:
     _count: 12
     _mode: 1
     _enemies:
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - hunter_2
-    - warden_3
-    - hunter_2
     - hunter_2
     - warden_3
     - hunter_2
@@ -2139,18 +2088,6 @@ MonoBehaviour:
     _enemies:
     - warden_2
     - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
     _interval: 1.5
     _intervalMax: 2.5
     _shieldLevel: 0
@@ -2183,11 +2120,6 @@ MonoBehaviour:
     _count: 10
     _mode: 1
     _enemies:
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
     - hunter_2
     - warden_3
     - hunter_2
@@ -2259,8 +2191,8 @@ MonoBehaviour:
     _count: 6
     _mode: 1
     _enemies:
-    - hunter_3
     - reaper_2
+    - hunter_3
     - reaper_2
     - reaper_1
     - hunter_3
@@ -2296,19 +2228,6 @@ MonoBehaviour:
     _enemies:
     - hunter_1
     - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
     _interval: 1.5
     _intervalMax: 2.5
     _shieldLevel: 0
@@ -2379,11 +2298,6 @@ MonoBehaviour:
     - hunter_2
     - warden_3
     - hunter_2
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 0
@@ -2435,18 +2349,6 @@ MonoBehaviour:
     _enemies:
     - hunter_1
     - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
     _interval: 1.5
     _intervalMax: 2.5
     _shieldLevel: 0
@@ -2517,11 +2419,6 @@ MonoBehaviour:
     - hunter_2
     - warden_3
     - hunter_2
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 0
@@ -2572,16 +2469,6 @@ MonoBehaviour:
     _count: 12
     _mode: 1
     _enemies:
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
     - warden_2
     - hunter_1
     _interval: 1.5
@@ -2635,11 +2522,6 @@ MonoBehaviour:
     _count: 8
     _mode: 1
     _enemies:
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - hunter_2
-    - warden_3
     - hunter_2
     - warden_3
     - hunter_2
@@ -2713,13 +2595,6 @@ MonoBehaviour:
     _enemies:
     - hunter_1
     - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
     _interval: 1.5
     _intervalMax: 2.5
     _shieldLevel: 0
@@ -2755,11 +2630,6 @@ MonoBehaviour:
     _enemies:
     - hunter_2
     - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 0
@@ -2832,8 +2702,6 @@ MonoBehaviour:
     - hunter_3
     - reaper_2
     - reaper_1
-    - hunter_3
-    - reaper_2
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -2850,23 +2718,6 @@ MonoBehaviour:
     _enemies:
     - warden_2
     - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
     _interval: 1.5
     _intervalMax: 2.5
     _shieldLevel: 0
@@ -2883,14 +2734,8 @@ MonoBehaviour:
     _enemies:
     - phantom_1
     - reaper_2
-    - phantom_1
     - hunter_3
     - phantom_1
-    - reaper_2
-    - phantom_1
-    - reaper_2
-    - phantom_1
-    - hunter_3
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -2967,21 +2812,6 @@ MonoBehaviour:
     - hunter_2
     - warden_3
     - hunter_2
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 0
@@ -2999,12 +2829,7 @@ MonoBehaviour:
     - phantom_1
     - reaper_2
     - phantom_1
-    - phantom_1
-    - reaper_2
     - hunter_3
-    - phantom_1
-    - phantom_1
-    - reaper_2
     - phantom_1
     _interval: 2.5
     _intervalMax: 3.5
@@ -3020,14 +2845,8 @@ MonoBehaviour:
     _count: 10
     _mode: 1
     _enemies:
-    - hunter_3
-    - phantom_1
-    - reaper_2
-    - phantom_1
-    - reaper_2
     - phantom_1
     - hunter_3
-    - phantom_1
     - reaper_2
     - phantom_1
     _interval: 2.5
@@ -3046,20 +2865,6 @@ MonoBehaviour:
     _enemies:
     - warden_2
     - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
     _interval: 1.5
     _intervalMax: 2.5
     _shieldLevel: 0
@@ -3076,15 +2881,6 @@ MonoBehaviour:
     _enemies:
     - phantom_1
     - reaper_2
-    - hunter_3
-    - phantom_1
-    - phantom_1
-    - reaper_2
-    - phantom_1
-    - hunter_3
-    - phantom_1
-    - reaper_2
-    - phantom_1
     - hunter_3
     - phantom_1
     _interval: 2.5
@@ -3122,19 +2918,6 @@ MonoBehaviour:
     - hunter_2
     - warden_3
     - hunter_2
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 0
@@ -3152,16 +2935,9 @@ MonoBehaviour:
     - reaper_2
     - phantom_1
     - reaper_1
-    - phantom_1
-    - reaper_2
-    - phantom_1
     - hunter_3
-    - phantom_1
     - reaper_2
     - phantom_1
-    - hunter_3
-    - phantom_1
-    - reaper_2
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -3182,8 +2958,6 @@ MonoBehaviour:
     - hunter_1
     - hunter_3
     - reaper_1
-    - warden_3
-    - hunter_2
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 4
@@ -3217,18 +2991,7 @@ MonoBehaviour:
     _enemies:
     - phantom_1
     - reaper_2
-    - phantom_1
     - hunter_3
-    - phantom_1
-    - reaper_2
-    - phantom_1
-    - hunter_3
-    - phantom_1
-    - reaper_2
-    - phantom_1
-    - phantom_1
-    - hunter_3
-    - reaper_2
     - phantom_1
     _interval: 2.5
     _intervalMax: 3.5
@@ -3246,11 +3009,6 @@ MonoBehaviour:
     _enemies:
     - hunter_1
     - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
     _interval: 1.5
     _intervalMax: 2.5
     _shieldLevel: 0
@@ -3269,8 +3027,8 @@ MonoBehaviour:
     - reaper_2
     - phantom_1
     - hunter_3
-    - phantom_1
     - reaper_2
+    - phantom_1
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -3341,11 +3099,6 @@ MonoBehaviour:
     - hunter_2
     - warden_3
     - hunter_2
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 0
@@ -3384,9 +3137,6 @@ MonoBehaviour:
     - reaper_2
     - phantom_1
     - hunter_3
-    - phantom_1
-    - reaper_2
-    - phantom_1
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -3401,10 +3151,6 @@ MonoBehaviour:
     _count: 6
     _mode: 1
     _enemies:
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
     - warden_2
     - hunter_1
     _interval: 1.5
@@ -3425,9 +3171,6 @@ MonoBehaviour:
     - reaper_2
     - phantom_1
     - hunter_3
-    - phantom_1
-    - reaper_2
-    - phantom_1
     - reaper_1
     - phantom_1
     _interval: 2.5
@@ -3464,9 +3207,6 @@ MonoBehaviour:
     - hunter_2
     - warden_3
     - hunter_2
-    - hunter_2
-    - warden_3
-    - hunter_2
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 0
@@ -3485,11 +3225,6 @@ MonoBehaviour:
     - phantom_1
     - hunter_3
     - phantom_1
-    - reaper_2
-    - phantom_1
-    - hunter_3
-    - phantom_1
-    - reaper_2
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -3543,10 +3278,7 @@ MonoBehaviour:
     - reaper_1
     - phantom_1
     - reaper_2
-    - phantom_1
     - hunter_3
-    - phantom_1
-    - reaper_2
     - phantom_1
     _interval: 2.5
     _intervalMax: 3.5
@@ -3579,39 +3311,6 @@ MonoBehaviour:
     _enemies:
     - hunter_1
     - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
     _interval: 1.5
     _intervalMax: 2.5
     _shieldLevel: 0
@@ -3668,11 +3367,6 @@ MonoBehaviour:
     - hunter_2
     - hunter_3
     - reaper_1
-    - warden_2
-    - hunter_1
-    - warden_3
-    - hunter_2
-    - hunter_3
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 2
@@ -3705,11 +3399,6 @@ MonoBehaviour:
     _count: 10
     _mode: 1
     _enemies:
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
     - hunter_2
     - warden_3
     - hunter_2
@@ -3767,35 +3456,6 @@ MonoBehaviour:
     _enemies:
     - hunter_1
     - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
     _interval: 1.5
     _intervalMax: 2.5
     _shieldLevel: 0
@@ -3834,15 +3494,6 @@ MonoBehaviour:
     - hunter_2
     - hunter_3
     - reaper_1
-    - warden_2
-    - hunter_1
-    - warden_3
-    - hunter_2
-    - hunter_3
-    - reaper_1
-    - warden_2
-    - hunter_1
-    - warden_3
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 3
@@ -3857,14 +3508,6 @@ MonoBehaviour:
     _count: 11
     _mode: 1
     _enemies:
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
     - hunter_2
     - warden_3
     - hunter_2
@@ -3939,32 +3582,6 @@ MonoBehaviour:
     _enemies:
     - hunter_1
     - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
     _interval: 1.5
     _intervalMax: 2.5
     _shieldLevel: 0
@@ -3999,16 +3616,6 @@ MonoBehaviour:
     _enemies:
     - hunter_2
     - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 0
@@ -4047,18 +3654,6 @@ MonoBehaviour:
     - hunter_2
     - hunter_3
     - reaper_1
-    - warden_2
-    - hunter_1
-    - warden_3
-    - hunter_2
-    - hunter_3
-    - reaper_1
-    - warden_2
-    - hunter_1
-    - warden_3
-    - hunter_2
-    - hunter_3
-    - reaper_1
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 4
@@ -4073,9 +3668,6 @@ MonoBehaviour:
     _count: 6
     _mode: 1
     _enemies:
-    - hunter_3
-    - reaper_2
-    - phantom_1
     - hunter_3
     - reaper_2
     - phantom_1
@@ -4095,27 +3687,6 @@ MonoBehaviour:
     _enemies:
     - hunter_1
     - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
     _interval: 1.5
     _intervalMax: 2.5
     _shieldLevel: 0
@@ -4149,14 +3720,6 @@ MonoBehaviour:
     _count: 11
     _mode: 1
     _enemies:
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
     - hunter_2
     - warden_3
     - hunter_2
@@ -4199,10 +3762,6 @@ MonoBehaviour:
     - hunter_2
     - hunter_3
     - reaper_1
-    - warden_2
-    - hunter_1
-    - warden_3
-    - hunter_2
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 4
@@ -4241,9 +3800,6 @@ MonoBehaviour:
     - hunter_3
     - phantom_1
     - reaper_1
-    - reaper_2
-    - hunter_3
-    - phantom_1
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -4260,23 +3816,6 @@ MonoBehaviour:
     _enemies:
     - hunter_1
     - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
     _interval: 1.5
     _intervalMax: 2.5
     _shieldLevel: 0
@@ -4311,14 +3850,6 @@ MonoBehaviour:
     _count: 11
     _mode: 1
     _enemies:
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
     - hunter_2
     - warden_3
     - hunter_2
@@ -4362,16 +3893,6 @@ MonoBehaviour:
     - hunter_2
     - hunter_3
     - reaper_1
-    - warden_2
-    - hunter_1
-    - warden_3
-    - hunter_2
-    - hunter_3
-    - reaper_1
-    - warden_2
-    - hunter_1
-    - warden_3
-    - hunter_2
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 5
@@ -4389,10 +3910,7 @@ MonoBehaviour:
     - phantom_1
     - reaper_2
     - hunter_3
-    - phantom_1
     - reaper_1
-    - reaper_2
-    - hunter_3
     - phantom_1
     _interval: 2.5
     _intervalMax: 3.5
@@ -4408,11 +3926,6 @@ MonoBehaviour:
     _count: 10
     _mode: 1
     _enemies:
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
     - hunter_1
     - warden_2
     - hunter_1
@@ -4436,8 +3949,8 @@ MonoBehaviour:
     - reaper_2
     - phantom_1
     - hunter_3
-    - phantom_1
     - reaper_2
+    - phantom_1
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -4507,14 +4020,6 @@ MonoBehaviour:
     - hunter_2
     - warden_3
     - hunter_2
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - hunter_2
-    - warden_3
-    - hunter_2
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 0
@@ -4550,12 +4055,9 @@ MonoBehaviour:
     _mode: 1
     _enemies:
     - phantom_1
-    - phantom_1
     - reaper_2
     - phantom_1
     - hunter_3
-    - phantom_1
-    - reaper_2
     - phantom_1
     _interval: 2.5
     _intervalMax: 3.5
@@ -4573,13 +4075,6 @@ MonoBehaviour:
     _enemies:
     - hunter_1
     - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
     _interval: 1.5
     _intervalMax: 2.5
     _shieldLevel: 0
@@ -4598,9 +4093,6 @@ MonoBehaviour:
     - reaper_2
     - phantom_1
     - hunter_3
-    - phantom_1
-    - reaper_2
-    - phantom_1
     - phantom_1
     _interval: 2.5
     _intervalMax: 3.5
@@ -4622,9 +4114,6 @@ MonoBehaviour:
     - hunter_2
     - hunter_3
     - reaper_1
-    - warden_2
-    - hunter_1
-    - warden_3
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 3
@@ -4642,13 +4131,6 @@ MonoBehaviour:
     - hunter_2
     - warden_3
     - hunter_2
-    - hunter_2
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - hunter_2
-    - warden_3
-    - hunter_2
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 0
@@ -4663,14 +4145,10 @@ MonoBehaviour:
     _count: 8
     _mode: 1
     _enemies:
+    - phantom_1
     - reaper_2
     - hunter_3
     - phantom_1
-    - phantom_1
-    - reaper_2
-    - phantom_1
-    - phantom_1
-    - hunter_3
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -4700,13 +4178,10 @@ MonoBehaviour:
     _count: 9
     _mode: 1
     _enemies:
-    - reaper_2
-    - phantom_1
     - phantom_1
     - reaper_2
     - phantom_1
     - hunter_3
-    - phantom_1
     - reaper_2
     - phantom_1
     _interval: 2.5
@@ -4725,11 +4200,6 @@ MonoBehaviour:
     _enemies:
     - hunter_1
     - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
-    - warden_2
-    - hunter_1
     _interval: 1.5
     _intervalMax: 2.5
     _shieldLevel: 0
@@ -4749,11 +4219,6 @@ MonoBehaviour:
     - phantom_1
     - hunter_3
     - phantom_1
-    - reaper_2
-    - phantom_1
-    - phantom_1
-    - reaper_2
-    - phantom_1
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -4771,11 +4236,6 @@ MonoBehaviour:
     - hunter_2
     - warden_3
     - hunter_2
-    - hunter_2
-    - warden_3
-    - hunter_2
-    - warden_3
-    - hunter_2
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 0
@@ -4790,16 +4250,12 @@ MonoBehaviour:
     _count: 10
     _mode: 1
     _enemies:
+    - phantom_1
     - hunter_3
     - phantom_1
     - reaper_2
-    - phantom_1
-    - phantom_1
     - reaper_1
     - phantom_1
-    - reaper_2
-    - phantom_1
-    - hunter_3
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -4854,12 +4310,7 @@ MonoBehaviour:
     - phantom_1
     - reaper_2
     - phantom_1
-    - phantom_1
-    - reaper_2
-    - phantom_1
     - hunter_3
-    - phantom_1
-    - reaper_2
     - phantom_1
     _interval: 2.5
     _intervalMax: 3.5
@@ -5022,9 +4473,6 @@ MonoBehaviour:
     - hunter_2
     - warden_2
     - hunter_3
-    - hunter_1
-    - warden_3
-    - hunter_2
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 3
@@ -5185,10 +4633,8 @@ MonoBehaviour:
     _enemies:
     - phantom_2
     - phantom_1
-    - phantom_2
     - hunter_3
     - reaper_2
-    - phantom_1
     - phantom_2
     _interval: 2.5
     _intervalMax: 3.5
@@ -5210,7 +4656,6 @@ MonoBehaviour:
     - reaper_2
     - phantom_1
     - phantom_2
-    - phantom_1
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -5229,9 +4674,8 @@ MonoBehaviour:
     - reaper_1
     - hunter_3
     - phantom_1
-    - phantom_2
     - reaper_2
-    - phantom_1
+    - phantom_2
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -5284,10 +4728,8 @@ MonoBehaviour:
     _enemies:
     - phantom_2
     - phantom_1
-    - phantom_2
     - hunter_3
     - reaper_2
-    - phantom_1
     - phantom_2
     _interval: 2.5
     _intervalMax: 3.5
@@ -5321,10 +4763,8 @@ MonoBehaviour:
     - phantom_2
     - phantom_1
     - reaper_2
-    - phantom_2
-    - phantom_1
-    - phantom_2
     - hunter_3
+    - phantom_2
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -5362,7 +4802,6 @@ MonoBehaviour:
     - hunter_2
     - hunter_3
     - reaper_1
-    - warden_2
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 2
@@ -5394,8 +4833,6 @@ MonoBehaviour:
     _mode: 1
     _enemies:
     - hunter_2
-    - hunter_2
-    - hunter_2
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 0
@@ -5415,8 +4852,6 @@ MonoBehaviour:
     - phantom_2
     - phantom_1
     - reaper_2
-    - phantom_2
-    - phantom_1
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -5435,9 +4870,7 @@ MonoBehaviour:
     - hunter_3
     - phantom_2
     - phantom_1
-    - phantom_2
     - reaper_2
-    - phantom_1
     - phantom_2
     _interval: 2.5
     _intervalMax: 3.5
@@ -5471,12 +4904,9 @@ MonoBehaviour:
     - phantom_2
     - phantom_1
     - reaper_2
-    - phantom_2
-    - phantom_1
     - hunter_3
     - phantom_2
     - phantom_1
-    - phantom_2
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -5497,10 +4927,6 @@ MonoBehaviour:
     - hunter_2
     - hunter_3
     - reaper_1
-    - warden_2
-    - hunter_1
-    - warden_3
-    - hunter_2
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 3
@@ -5530,15 +4956,12 @@ MonoBehaviour:
     _count: 9
     _mode: 1
     _enemies:
+    - phantom_2
+    - phantom_1
     - reaper_2
-    - phantom_2
-    - phantom_1
-    - phantom_2
-    - phantom_1
     - hunter_3
     - phantom_2
     - phantom_1
-    - phantom_2
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -5569,15 +4992,10 @@ MonoBehaviour:
     _count: 10
     _mode: 1
     _enemies:
+    - phantom_2
     - reaper_2
-    - phantom_2
     - phantom_1
-    - phantom_2
     - hunter_3
-    - phantom_1
-    - phantom_2
-    - reaper_2
-    - phantom_1
     - phantom_2
     _interval: 2.5
     _intervalMax: 3.5
@@ -5596,13 +5014,8 @@ MonoBehaviour:
     - phantom_2
     - phantom_1
     - reaper_2
-    - phantom_2
-    - phantom_1
-    - phantom_2
     - hunter_3
     - phantom_2
-    - phantom_1
-    - reaper_2
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -5635,12 +5048,8 @@ MonoBehaviour:
     - phantom_2
     - phantom_1
     - phantom_2
-    - phantom_1
-    - phantom_2
     - reaper_2
     - hunter_3
-    - phantom_2
-    - phantom_1
     - phantom_2
     _interval: 2.5
     _intervalMax: 3.5
@@ -5662,7 +5071,6 @@ MonoBehaviour:
     - hunter_1
     - hunter_3
     - reaper_1
-    - warden_3
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 4
@@ -5697,13 +5105,7 @@ MonoBehaviour:
     - phantom_1
     - phantom_2
     - reaper_2
-    - phantom_2
-    - phantom_1
     - hunter_3
-    - phantom_2
-    - phantom_1
-    - phantom_2
-    - reaper_2
     - phantom_1
     - phantom_2
     _interval: 2.5
@@ -5724,8 +5126,8 @@ MonoBehaviour:
     - phantom_1
     - phantom_2
     - reaper_2
-    - phantom_2
     - phantom_1
+    - phantom_2
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -5762,9 +5164,6 @@ MonoBehaviour:
     - warden_3
     - hunter_2
     - hunter_3
-    - warden_2
-    - warden_3
-    - hunter_2
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 2
@@ -5800,8 +5199,8 @@ MonoBehaviour:
     - phantom_1
     - phantom_2
     - reaper_2
-    - phantom_2
     - phantom_1
+    - phantom_2
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -5820,8 +5219,6 @@ MonoBehaviour:
     - phantom_1
     - phantom_2
     - reaper_2
-    - phantom_2
-    - phantom_1
     - phantom_2
     _interval: 2.5
     _intervalMax: 3.5
@@ -5843,8 +5240,6 @@ MonoBehaviour:
     - reaper_2
     - phantom_2
     - phantom_1
-    - phantom_2
-    - phantom_1
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -5863,12 +5258,6 @@ MonoBehaviour:
     - hunter_2
     - warden_2
     - hunter_3
-    - warden_3
-    - hunter_2
-    - warden_2
-    - hunter_3
-    - warden_3
-    - hunter_2
     _interval: 2
     _intervalMax: 3
     _shieldLevel: 3
@@ -5885,12 +5274,8 @@ MonoBehaviour:
     _enemies:
     - phantom_2
     - reaper_2
-    - phantom_2
     - phantom_1
     - phantom_2
-    - phantom_1
-    - phantom_2
-    - reaper_2
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -5929,9 +5314,6 @@ MonoBehaviour:
     - phantom_2
     - phantom_1
     - reaper_2
-    - phantom_2
-    - phantom_1
-    - phantom_2
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -5952,10 +5334,6 @@ MonoBehaviour:
     - reaper_2
     - phantom_1
     - phantom_2
-    - phantom_2
-    - phantom_1
-    - phantom_2
-    - phantom_1
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -5972,14 +5350,8 @@ MonoBehaviour:
     _enemies:
     - phantom_2
     - reaper_2
-    - phantom_2
     - phantom_1
     - phantom_2
-    - phantom_2
-    - phantom_1
-    - phantom_2
-    - reaper_2
-    - phantom_1
     _interval: 2.5
     _intervalMax: 3.5
     _shieldLevel: 0
@@ -5994,10 +5366,6 @@ MonoBehaviour:
     _count: 8
     _mode: 1
     _enemies:
-    - warden_3
-    - hunter_2
-    - warden_2
-    - hunter_3
     - warden_3
     - hunter_2
     - warden_2
@@ -6035,14 +5403,9 @@ MonoBehaviour:
     _mode: 1
     _enemies:
     - phantom_2
-    - phantom_2
     - phantom_1
     - phantom_2
-    - phantom_2
-    - phantom_1
     - reaper_2
-    - phantom_2
-    - phantom_1
     - phantom_2
     _interval: 2.5
     _intervalMax: 3.5
