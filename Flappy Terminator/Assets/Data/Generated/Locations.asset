@@ -254,7 +254,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
-    _rewardTarget: 0
+    _rewardTarget: 220000
   - _id: loc_04_02
     _system: sys_04
     _order: 2
@@ -265,7 +265,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
-    _rewardTarget: 0
+    _rewardTarget: 260000
   - _id: loc_04_03
     _system: sys_04
     _order: 3
@@ -276,7 +276,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
-    _rewardTarget: 0
+    _rewardTarget: 320000
   - _id: loc_04_04
     _system: sys_04
     _order: 4
@@ -287,7 +287,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
-    _rewardTarget: 0
+    _rewardTarget: 300000
   - _id: loc_04_05
     _system: sys_04
     _order: 5
@@ -298,7 +298,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
-    _rewardTarget: 0
+    _rewardTarget: 570000
   - _id: loc_04_06
     _system: sys_04
     _order: 6
@@ -309,7 +309,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
-    _rewardTarget: 0
+    _rewardTarget: 330000
   - _id: loc_05_01
     _system: sys_05
     _order: 1
