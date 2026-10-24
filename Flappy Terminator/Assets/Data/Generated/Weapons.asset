@@ -619,7 +619,7 @@ MonoBehaviour:
     _rate: 2.4
     _magazine: 0
     _reloadTime: 0
-    _projectileSpeed: 7
+    _projectileSpeed: 4
     _barrelsMax: 4
     _firePattern: 2
     _sideAngle: 45
@@ -724,7 +724,7 @@ MonoBehaviour:
     _rate: 1.4
     _magazine: 0
     _reloadTime: 0
-    _projectileSpeed: 18
+    _projectileSpeed: 14
     _barrelsMax: 4
     _firePattern: 2
     _sideAngle: 8
