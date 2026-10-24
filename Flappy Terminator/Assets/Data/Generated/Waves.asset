@@ -4904,7 +4904,6 @@ MonoBehaviour:
     - phantom_2
     - phantom_1
     - reaper_2
-    - hunter_3
     - phantom_2
     - phantom_1
     _interval: 2.5
@@ -4959,7 +4958,6 @@ MonoBehaviour:
     - phantom_2
     - phantom_1
     - reaper_2
-    - hunter_3
     - phantom_2
     - phantom_1
     _interval: 2.5
@@ -5105,7 +5103,6 @@ MonoBehaviour:
     - phantom_1
     - phantom_2
     - reaper_2
-    - hunter_3
     - phantom_1
     - phantom_2
     _interval: 2.5
