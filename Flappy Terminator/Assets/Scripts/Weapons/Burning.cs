@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Burning : MonoBehaviour
 {
-    private const float Duration = 1.2f;
+    private const float Duration = 1.5f;
     private const float TickInterval = 0.2f;
     private const float RoundingNoise = 0.01f;
 
