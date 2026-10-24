@@ -3311,8 +3311,8 @@ MonoBehaviour:
     _enemies:
     - hunter_1
     - warden_2
-    _interval: 2
-    _intervalMax: 2
+    _interval: 1
+    _intervalMax: 1
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -3329,7 +3329,7 @@ MonoBehaviour:
     - reaper_2
     - hunter_3
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -3347,8 +3347,8 @@ MonoBehaviour:
     - warden_3
     - hunter_2
     - hunter_3
-    _interval: 2
-    _intervalMax: 3
+    _interval: 1
+    _intervalMax: 2
     _shieldLevel: 1
     _shieldCapacity: 15
     _shieldRewardMoney: 50
@@ -3367,8 +3367,8 @@ MonoBehaviour:
     - hunter_2
     - hunter_3
     - reaper_1
-    _interval: 2
-    _intervalMax: 3
+    _interval: 1
+    _intervalMax: 2
     _shieldLevel: 2
     _shieldCapacity: 25
     _shieldRewardMoney: 100
@@ -3385,8 +3385,8 @@ MonoBehaviour:
     - hunter_1
     - warden_3
     - hunter_2
-    _interval: 2
-    _intervalMax: 3
+    _interval: 1
+    _intervalMax: 2
     _shieldLevel: 3
     _shieldCapacity: 40
     _shieldRewardMoney: 200
@@ -3405,7 +3405,7 @@ MonoBehaviour:
     - warden_3
     - hunter_2
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -3422,7 +3422,7 @@ MonoBehaviour:
     - phantom_1
     - reaper_2
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -3441,7 +3441,7 @@ MonoBehaviour:
     - reaper_2
     - phantom_1
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -3456,8 +3456,8 @@ MonoBehaviour:
     _enemies:
     - hunter_1
     - warden_2
-    _interval: 2
-    _intervalMax: 3
+    _interval: 1
+    _intervalMax: 1
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -3475,7 +3475,7 @@ MonoBehaviour:
     - phantom_1
     - reaper_1
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -3494,8 +3494,8 @@ MonoBehaviour:
     - hunter_2
     - hunter_3
     - reaper_1
-    _interval: 2
-    _intervalMax: 3
+    _interval: 1
+    _intervalMax: 2
     _shieldLevel: 3
     _shieldCapacity: 40
     _shieldRewardMoney: 200
@@ -3511,8 +3511,8 @@ MonoBehaviour:
     - hunter_2
     - warden_3
     - hunter_2
-    _interval: 2
-    _intervalMax: 3
+    _interval: 1
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -3530,7 +3530,7 @@ MonoBehaviour:
     - phantom_1
     - hunter_3
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -3547,8 +3547,8 @@ MonoBehaviour:
     - hunter_1
     - warden_3
     - hunter_2
-    _interval: 2
-    _intervalMax: 3
+    _interval: 1
+    _intervalMax: 1
     _shieldLevel: 4
     _shieldCapacity: 60
     _shieldRewardMoney: 350
@@ -3567,7 +3567,7 @@ MonoBehaviour:
     - reaper_2
     - phantom_1
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -3582,8 +3582,8 @@ MonoBehaviour:
     _enemies:
     - hunter_1
     - warden_2
-    _interval: 2
-    _intervalMax: 2
+    _interval: 1
+    _intervalMax: 1
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -3617,7 +3617,7 @@ MonoBehaviour:
     - hunter_2
     - warden_3
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -3635,7 +3635,7 @@ MonoBehaviour:
     - phantom_1
     - reaper_1
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -3655,7 +3655,7 @@ MonoBehaviour:
     - hunter_3
     - reaper_1
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 4
     _shieldCapacity: 60
     _shieldRewardMoney: 350
@@ -3672,7 +3672,7 @@ MonoBehaviour:
     - reaper_2
     - phantom_1
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -3687,8 +3687,8 @@ MonoBehaviour:
     _enemies:
     - hunter_1
     - warden_2
-    _interval: 2
-    _intervalMax: 2
+    _interval: 1
+    _intervalMax: 1
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -3707,7 +3707,7 @@ MonoBehaviour:
     - reaper_1
     - phantom_1
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -3723,8 +3723,8 @@ MonoBehaviour:
     - hunter_2
     - warden_3
     - hunter_2
-    _interval: 2
-    _intervalMax: 3
+    _interval: 1
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -3743,7 +3743,7 @@ MonoBehaviour:
     - hunter_3
     - phantom_1
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -3763,7 +3763,7 @@ MonoBehaviour:
     - hunter_3
     - reaper_1
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 4
     _shieldCapacity: 60
     _shieldRewardMoney: 350
@@ -3783,7 +3783,7 @@ MonoBehaviour:
     - hunter_3
     - reaper_1
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 5
     _shieldCapacity: 80
     _shieldRewardMoney: 600
@@ -3801,7 +3801,7 @@ MonoBehaviour:
     - phantom_1
     - reaper_1
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -3816,8 +3816,8 @@ MonoBehaviour:
     _enemies:
     - hunter_1
     - warden_2
-    _interval: 2
-    _intervalMax: 2
+    _interval: 1
+    _intervalMax: 1
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -3837,7 +3837,7 @@ MonoBehaviour:
     - hunter_3
     - phantom_1
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -3853,8 +3853,8 @@ MonoBehaviour:
     - hunter_2
     - warden_3
     - hunter_2
-    _interval: 2
-    _intervalMax: 3
+    _interval: 1
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -3894,7 +3894,7 @@ MonoBehaviour:
     - hunter_3
     - reaper_1
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 5
     _shieldCapacity: 80
     _shieldRewardMoney: 600
@@ -3913,7 +3913,7 @@ MonoBehaviour:
     - reaper_1
     - phantom_1
     _interval: 2
-    _intervalMax: 3
+    _intervalMax: 2
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
