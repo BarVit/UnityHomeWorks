@@ -289,8 +289,9 @@ public class DockScreen : MonoBehaviour
             case UpgradeStat.DoubleShot:
             case UpgradeStat.Napalm:
                 return Mathf.RoundToInt(value) + PercentSign;
-            case UpgradeStat.ProjectileSpeed:
+            case UpgradeStat.ProjectileSpeed when row.Id == PlasmaId:
                 return (row.ProjectileSpeed * (1f + value * 0.01f)).ToString("0.#");
+            case UpgradeStat.ProjectileSpeed:
             case UpgradeStat.TurnRate:
                 return Mathf.RoundToInt(100f + value) + PercentSign;
             case UpgradeStat.Stasis:
@@ -337,8 +338,10 @@ public class DockScreen : MonoBehaviour
                 return "-" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
             case UpgradeStat.DoubleShot:
                 return "CHANCE OF A SECOND BULLET";
-            case UpgradeStat.ProjectileSpeed:
+            case UpgradeStat.ProjectileSpeed when _hangar.WeaponId == PlasmaId:
                 return price < 0 ? MaxLevelHint : "FASTER SHOTS";
+            case UpgradeStat.ProjectileSpeed:
+                return "+" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
             case UpgradeStat.Napalm:
                 return "OF ROCKET DAMAGE AS 1.5 S BURN";
             case UpgradeStat.Stasis:
