@@ -40,6 +40,8 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
     public int MaxHealth => _health.MaxValue;
 
+    public bool IsFrozen { get; private set; }
+
     public string LogName => ShipId == null ? name : ShipId.Replace("enemy_", string.Empty) + Tier;
 
     public bool IsVulnerable => IsShown();
@@ -93,6 +95,9 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
     private void Update()
     {
+        if (IsFrozen)
+            return;
+
         _phases?.Tick(Time.deltaTime);
 
         if (_isHoldingFire && HasEntered())
@@ -138,8 +143,35 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
         _isDead = false;
     }
 
+    public void Freeze()
+    {
+        if (IsFrozen || _isDead)
+            return;
+
+        IsFrozen = true;
+        _mover.Freeze();
+        _shooter.Freeze(true);
+
+        if (_animator != null)
+            _animator.speed = 0f;
+    }
+
+    public void Unfreeze()
+    {
+        if (IsFrozen == false)
+            return;
+
+        IsFrozen = false;
+        _mover.Unfreeze();
+        _shooter.Freeze(false);
+
+        if (_animator != null)
+            _animator.speed = 1f;
+    }
+
     public void OnDespawn()
     {
+        Unfreeze();
         _phases?.Stop();
         _phases = null;
         _shooter.StopShoot();

@@ -3,5 +3,6 @@ public enum ModuleKind
     Shield,
     RepairDrone,
     SentryDrones,
-    RepairNanobots
+    RepairNanobots,
+    Emp
 }

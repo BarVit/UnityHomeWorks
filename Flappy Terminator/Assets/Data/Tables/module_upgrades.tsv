@@ -42,3 +42,15 @@ repair_nanobots	Regen	2	5	30000
 repair_nanobots	Regen	3	5	40000
 repair_nanobots	Regen	4	5	50000
 repair_nanobots	Regen	5	5	75000
+emp	Duration	0	3	0
+emp	Duration	1	0.5	25000
+emp	Duration	2	0.5	50000
+emp	Duration	3	0.5	75000
+emp	Duration	4	0.5	100000
+emp	Duration	5	0.5	150000
+emp	Cooldown	0	18	0
+emp	Cooldown	1	-1	25000
+emp	Cooldown	2	-1	50000
+emp	Cooldown	3	-1	75000
+emp	Cooldown	4	-1	100000
+emp	Cooldown	5	-1	150000

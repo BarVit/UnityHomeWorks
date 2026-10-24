@@ -228,3 +228,63 @@ MonoBehaviour:
     _level: 5
     _bonus: 5
     _price: 75000
+  - _owner: emp
+    _stat: 6
+    _level: 0
+    _bonus: 3
+    _price: 0
+  - _owner: emp
+    _stat: 6
+    _level: 1
+    _bonus: 0.5
+    _price: 25000
+  - _owner: emp
+    _stat: 6
+    _level: 2
+    _bonus: 0.5
+    _price: 50000
+  - _owner: emp
+    _stat: 6
+    _level: 3
+    _bonus: 0.5
+    _price: 75000
+  - _owner: emp
+    _stat: 6
+    _level: 4
+    _bonus: 0.5
+    _price: 100000
+  - _owner: emp
+    _stat: 6
+    _level: 5
+    _bonus: 0.5
+    _price: 150000
+  - _owner: emp
+    _stat: 1
+    _level: 0
+    _bonus: 18
+    _price: 0
+  - _owner: emp
+    _stat: 1
+    _level: 1
+    _bonus: -1
+    _price: 25000
+  - _owner: emp
+    _stat: 1
+    _level: 2
+    _bonus: -1
+    _price: 50000
+  - _owner: emp
+    _stat: 1
+    _level: 3
+    _bonus: -1
+    _price: 75000
+  - _owner: emp
+    _stat: 1
+    _level: 4
+    _bonus: -1
+    _price: 100000
+  - _owner: emp
+    _stat: 1
+    _level: 5
+    _bonus: -1
+    _price: 150000

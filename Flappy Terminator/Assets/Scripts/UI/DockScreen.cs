@@ -449,6 +449,8 @@ public class DockScreen : MonoBehaviour
                 return "DRONE LIFETIME";
             case ModuleStat.Regen:
                 return "NANOBOT REPAIR";
+            case ModuleStat.Duration:
+                return "EMP DURATION";
             default:
                 return "COOLDOWN";
         }
@@ -468,6 +470,8 @@ public class DockScreen : MonoBehaviour
                 return _lifetimeIcon;
             case ModuleStat.Regen:
                 return _repairIcon;
+            case ModuleStat.Duration:
+                return _lifetimeIcon;
             default:
                 return _cooldownIcon;
         }
@@ -485,7 +489,7 @@ public class DockScreen : MonoBehaviour
 
     private static bool IsSeconds(ModuleStat stat)
     {
-        return stat == ModuleStat.Cooldown || stat == ModuleStat.Lifetime;
+        return stat == ModuleStat.Cooldown || stat == ModuleStat.Lifetime || stat == ModuleStat.Duration;
     }
 
     private void ShowSkillPage()

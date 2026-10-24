@@ -266,6 +266,27 @@ namespace UiContent
             return sceneShip.transform.Find(SentryRig.SentryName).GetComponent<SentrySquad>();
         }
 
+        private static EmpField BuildEmp(PlayerShip sceneShip)
+        {
+            GameObject prefab = PrefabUtility.LoadPrefabContents(PlayerPrefab);
+
+            try
+            {
+                PlayerShip ship = prefab.GetComponent<PlayerShip>();
+                SpriteRenderer body = (SpriteRenderer)new SerializedObject(ship).FindProperty("_shipSprite").objectReferenceValue;
+                LayerMask enemies = new SerializedObject(sceneShip.GetComponent<PlayerShooter>()).FindProperty("_targetLayers").intValue;
+
+                EmpRig.Attach(prefab, body, enemies);
+                PrefabUtility.SaveAsPrefabAsset(prefab, PlayerPrefab);
+            }
+            finally
+            {
+                PrefabUtility.UnloadPrefabContents(prefab);
+            }
+
+            return sceneShip.transform.Find(EmpRig.EmpName).GetComponent<EmpField>();
+        }
+
         private static EnergyShield BuildShield(PlayerShip sceneShip)
         {
             GameObject prefab = PrefabUtility.LoadPrefabContents(PlayerPrefab);

@@ -37,6 +37,7 @@ public class EnemySpawner : MonoBehaviour
     private Wave _wave;
     private List<PlannedSpawn> _plan;
     private int _released;
+    private bool _isPaused;
 
     public event Action<EnemyShip> EnemyDied;
     public event Action<EnemyShip> ShieldBroken;
@@ -52,8 +53,14 @@ public class EnemySpawner : MonoBehaviour
         _planner = new LevelPlanner(_enemies, _weapons, _bosses, _waves);
     }
 
+    public void Pause(bool isPaused)
+    {
+        _isPaused = isPaused;
+    }
+
     public void StartLevel(string locationId, int level)
     {
+        _isPaused = false;
         _shipPools.Clear();
         _ammoPools.Clear();
         ClearField();
@@ -211,6 +218,9 @@ public class EnemySpawner : MonoBehaviour
             while (spawn.WaitsForClearField && _wave.RetiredCount < i)
                 yield return null;
 
+            while (_isPaused)
+                yield return null;
+
             if (spawn.HasAnnouncement)
             {
                 BossAnnounced?.Invoke(spawn.Announcement, _announcementDuration);
@@ -222,12 +232,17 @@ public class EnemySpawner : MonoBehaviour
             Release(spawn.Setup, spawn.BatchSlot, spawn.BatchSize);
             _released = i + 1;
 
-            for (float left = spawn.Interval; left > 0f; left -= Time.deltaTime)
+            float pause = spawn.Interval;
+
+            while (pause > 0f)
             {
-                if (_wave.RetiredCount >= _released)
-                    left = Mathf.Min(left, EmptyFieldDelay);
+                if (_isPaused == false && _wave.RetiredCount >= _released)
+                    pause = Mathf.Min(pause, EmptyFieldDelay);
 
                 yield return null;
+
+                if (_isPaused == false)
+                    pause -= Time.deltaTime;
             }
         }
 

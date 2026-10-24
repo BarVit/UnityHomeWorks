@@ -19,6 +19,7 @@ public class EnemyShooter : MonoBehaviour
     private int _specialEvery;
     private int _attacks;
     private bool _isShooting;
+    private bool _isFrozen;
 
     public event Action Fired;
 
@@ -32,7 +33,7 @@ public class EnemyShooter : MonoBehaviour
 
     private void Update()
     {
-        if (_delivery == null)
+        if (_delivery == null || _isFrozen)
             return;
 
         _delivery.Tick(Time.deltaTime);
@@ -76,6 +77,12 @@ public class EnemyShooter : MonoBehaviour
     public void StopShoot()
     {
         _isShooting = false;
+        _isFrozen = false;
+    }
+
+    public void Freeze(bool isFrozen)
+    {
+        _isFrozen = isFrozen;
     }
 
     private int TryShoot()

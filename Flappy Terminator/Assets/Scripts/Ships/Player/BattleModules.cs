@@ -10,12 +10,15 @@ public class BattleModules : MonoBehaviour
     [SerializeField] private EnergyShield _shield;
     [SerializeField] private ShipRepair _repair;
     [SerializeField] private SentrySquad _sentries;
+    [SerializeField] private EmpField _emp;
+    [SerializeField] private EnemySpawner _spawner;
 
     private ModuleSpec?[] _specs = new ModuleSpec?[0];
     private float[] _cooldownLeft = new float[0];
     private int _shieldSlot = NoSlot;
     private int _repairSlot = NoSlot;
     private int _sentrySlot = NoSlot;
+    private int _empSlot = NoSlot;
 
     public int Count => _specs.Length;
 
@@ -27,6 +30,7 @@ public class BattleModules : MonoBehaviour
         _shield.Broken += OnShieldBroken;
         _repair.Finished += OnRepairFinished;
         _sentries.Finished += OnSentriesFinished;
+        _emp.Finished += OnEmpFinished;
     }
 
     private void OnDisable()
@@ -35,6 +39,7 @@ public class BattleModules : MonoBehaviour
         _shield.Broken -= OnShieldBroken;
         _repair.Finished -= OnRepairFinished;
         _sentries.Finished -= OnSentriesFinished;
+        _emp.Finished -= OnEmpFinished;
     }
 
     private void Update()
@@ -63,6 +68,9 @@ public class BattleModules : MonoBehaviour
         _repairSlot = NoSlot;
         _sentries.Stop();
         _sentrySlot = NoSlot;
+        _emp.Stop();
+        _spawner.Pause(false);
+        _empSlot = NoSlot;
 
         for (int i = 0; i < _cooldownLeft.Length; i++)
             _cooldownLeft[i] = 0f;
@@ -80,6 +88,9 @@ public class BattleModules : MonoBehaviour
 
         if (slot == _sentrySlot)
             return _sentries.IsActive;
+
+        if (slot == _empSlot)
+            return _emp.IsActive;
 
         if (GetSpec(slot)?.Kind == ModuleKind.RepairNanobots)
             return _repair.IsRegenerating;
@@ -124,6 +135,11 @@ public class BattleModules : MonoBehaviour
                 _sentrySlot = slot;
                 _sentries.Launch(spec.Value.Sentry);
                 break;
+            case ModuleKind.Emp:
+                _empSlot = slot;
+                _spawner.Pause(true);
+                _emp.Launch(spec.Value.Duration);
+                break;
         }
 
         Changed?.Invoke();
@@ -154,6 +170,22 @@ public class BattleModules : MonoBehaviour
         }
 
         return regen;
+    }
+
+    private void OnEmpFinished()
+    {
+        _spawner.Pause(false);
+
+        if (_empSlot == NoSlot)
+            return;
+
+        ModuleSpec? spec = GetSpec(_empSlot);
+
+        if (spec != null)
+            _cooldownLeft[_empSlot] = spec.Value.Cooldown;
+
+        _empSlot = NoSlot;
+        Changed?.Invoke();
     }
 
     private void OnSentriesFinished()

@@ -97,12 +97,15 @@ namespace UiContent
             EnergyShield shield = BuildShield(playerShip);
             ShipRepair repair = BuildRepair(playerShip);
             SentrySquad sentries = BuildSentries(playerShip);
+            EmpField emp = BuildEmp(playerShip);
             BattleModules battle = GetOrAdd<BattleModules>(game.gameObject);
             Set(battle, "_input", Object.FindAnyObjectByType<InputReader>(FindObjectsInactive.Include));
             Set(battle, "_ship", playerShip);
             Set(battle, "_shield", shield);
             Set(battle, "_repair", repair);
             Set(battle, "_sentries", sentries);
+            Set(battle, "_emp", emp);
+            Set(battle, "_spawner", Object.FindAnyObjectByType<EnemySpawner>(FindObjectsInactive.Include));
 
             Set(game, "_moduleRack", modules);
             Set(game, "_skills", skills);
@@ -130,7 +133,7 @@ namespace UiContent
             foreach (string name in new[] { "Coin Icon", "XP Icon", "Lock Icon", "Damage Icon", "Crit Icon", "Upgrade Pip",
                          "Energy Shield Icon", "Health Icon", "Cooldown Icon", "Double Shot Icon",
                          "Speed Icon", "Napalm Icon", "Turn Icon", "Reload Icon", "Magazine Icon", "White Square",
-                         "Repair Drone Icon", "Repair Icon", "Sentry Drones Icon", "Lifetime Icon", "Repair Nanobots Icon" })
+                         "Repair Drone Icon", "Repair Icon", "Sentry Drones Icon", "Lifetime Icon", "Repair Nanobots Icon", "EMP Icon" })
                 Prepare(name, 0);
 
             for (int level = 0; level <= ShieldColors.MaxLevel; level++)
