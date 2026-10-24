@@ -71,13 +71,22 @@ public abstract class LevelTable<TStat> : ScriptableObject where TStat : struct,
     {
         List<TStat> stats = new List<TStat>();
 
-        foreach (TStat stat in (TStat[])Enum.GetValues(typeof(TStat)))
-        {
-            if (GetMaxLevel(owner, stat) > 0)
-                stats.Add(stat);
-        }
+        if (_rows == null)
+            return stats;
+
+        AddInRowOrder(stats, owner, owner);
+        AddInRowOrder(stats, owner, Everyone);
 
         return stats;
+    }
+
+    private void AddInRowOrder(List<TStat> stats, string owner, string rowOwner)
+    {
+        foreach (LevelRow<TStat> row in _rows)
+        {
+            if (row.Owner == rowOwner && stats.Contains(row.Stat) == false && GetMaxLevel(owner, row.Stat) > 0)
+                stats.Add(row.Stat);
+        }
     }
 
     private string Resolve(string owner, TStat stat)

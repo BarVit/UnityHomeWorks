@@ -14,6 +14,7 @@ public class DockScreen : MonoBehaviour
     private const string PercentSign = "%";
     private const string Seconds = " S";
     private const string PerSecond = "/S";
+    private const string PlasmaId = "plasma";
     private const string BarrelMark = "  #";
     private const string EmptyCaption = "EMPTY";
     private const string MaxLevelHint = "MAX LEVEL";
@@ -72,6 +73,7 @@ public class DockScreen : MonoBehaviour
     [SerializeField] private Sprite _healthIcon;
     [SerializeField] private Sprite _repairIcon;
     [SerializeField] private Sprite _lifetimeIcon;
+    [SerializeField] private Sprite _stasisIcon;
     [SerializeField] private ShopWindow _shop;
     [SerializeField] private Button _shopButton;
     [SerializeField] private Button _menuButton;
@@ -288,8 +290,11 @@ public class DockScreen : MonoBehaviour
             case UpgradeStat.Napalm:
                 return Mathf.RoundToInt(value) + PercentSign;
             case UpgradeStat.ProjectileSpeed:
+                return (row.ProjectileSpeed * (1f + value * 0.01f)).ToString("0.#");
             case UpgradeStat.TurnRate:
                 return Mathf.RoundToInt(100f + value) + PercentSign;
+            case UpgradeStat.Stasis:
+                return value.ToString("0.##") + Seconds;
             case UpgradeStat.HeatReduction:
                 return Mathf.RoundToInt(100f - value) + PercentSign;
             default:
@@ -313,6 +318,8 @@ public class DockScreen : MonoBehaviour
                 return "NAPALM";
             case UpgradeStat.TurnRate:
                 return "TURN RATE";
+            case UpgradeStat.Stasis:
+                return "STASIS ON HIT";
             default:
                 return "CRIT CHANCE";
         }
@@ -331,9 +338,11 @@ public class DockScreen : MonoBehaviour
             case UpgradeStat.DoubleShot:
                 return "CHANCE OF A SECOND BULLET";
             case UpgradeStat.ProjectileSpeed:
-                return "+" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
+                return price < 0 ? MaxLevelHint : "FASTER SHOTS";
             case UpgradeStat.Napalm:
-                return "OF ROCKET DAMAGE AS 1.2 S BURN";
+                return "OF ROCKET DAMAGE AS 1.5 S BURN";
+            case UpgradeStat.Stasis:
+                return "A HIT ENEMY STOPS IN AN ENERGY FIELD";
             case UpgradeStat.TurnRate:
                 return "+" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
             default:
@@ -357,6 +366,8 @@ public class DockScreen : MonoBehaviour
                 return _napalmIcon;
             case UpgradeStat.TurnRate:
                 return _turnIcon;
+            case UpgradeStat.Stasis:
+                return _stasisIcon;
             default:
                 return _critIcon;
         }
@@ -553,7 +564,7 @@ public class DockScreen : MonoBehaviour
             case SkillStat.RepairMastery:
                 return "REPAIR MASTERY";
             default:
-                return UiText.Title(skill.Weapon) + " COOLDOWN";
+                return UiText.Title(skill.Weapon) + (skill.Weapon == PlasmaId ? " MASTERY" : " COOLDOWN");
         }
     }
 

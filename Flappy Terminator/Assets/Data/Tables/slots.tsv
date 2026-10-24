@@ -14,3 +14,6 @@ rocket	4	40000
 homing	2	15000	
 homing	3	30000	
 homing	4	60000	
+plasma	2	30000	
+plasma	3	60000	
+plasma	4	120000	

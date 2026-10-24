@@ -17,6 +17,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private EnemyDeadBody _deadBodyPrefab;
     [SerializeField] private AudioSource _hitAudioSource;
     [SerializeField] private LayerMask _targetLayers;
+    [SerializeField] private Sprite _stasisSprite;
     [SerializeField] private float _spawnMargin = 1f;
     [SerializeField] private float _minSpawnPositionY = -3f;
     [SerializeField] private float _maxSpawnPositionY = 3f;
@@ -49,7 +50,7 @@ public class EnemySpawner : MonoBehaviour
         _camera = Camera.main;
         _created = OnEnemyCreated;
         _context = new EnemyContext(_pools, _explosionPrefab, _deadBodyPrefab,
-            new ShotAudio(_hitAudioSource, _camera), _targetLayers, _camera);
+            new ShotAudio(_hitAudioSource, _camera), _targetLayers, _camera, _stasisSprite);
         _planner = new LevelPlanner(_enemies, _weapons, _bosses, _waves);
     }
 

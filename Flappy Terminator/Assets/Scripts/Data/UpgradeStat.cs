@@ -7,5 +7,6 @@ public enum UpgradeStat
     DoubleShot,
     ProjectileSpeed,
     Napalm,
-    TurnRate
+    TurnRate,
+    Stasis
 }

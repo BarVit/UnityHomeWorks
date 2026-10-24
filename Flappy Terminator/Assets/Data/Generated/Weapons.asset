@@ -52,11 +52,11 @@ MonoBehaviour:
     _title: "\u041F\u043B\u0430\u0437\u043C\u0430"
     _owner: 0
     _delivery: 0
-    _damage: 20
-    _rate: 0.25
+    _damage: 150
+    _rate: 0.65
     _magazine: 0
     _reloadTime: 0
-    _projectileSpeed: 12
+    _projectileSpeed: 14
     _barrelsMax: 4
     _firePattern: 2
     _sideAngle: 12

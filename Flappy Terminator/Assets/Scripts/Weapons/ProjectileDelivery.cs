@@ -83,7 +83,10 @@ public class ProjectileDelivery : WeaponDelivery
             ShowCrit(ammo.transform.position, ammo.Damage);
 
         if (isTarget)
+        {
             Ignite(ammo);
+            HoldInStasis(ammo);
+        }
 
         Sound sound = isTarget ? ammo.HitSound : ammo.WorldHitSound;
 
@@ -100,6 +103,14 @@ public class ProjectileDelivery : WeaponDelivery
 
         if (share > 0f && Context.BurnFlame != null)
             Burning.Ignite(ammo.StruckObject, ammo.Damage * share, Context.BurnFlame);
+    }
+
+    private void HoldInStasis(Ammo ammo)
+    {
+        float seconds = Context.GetBoost(ammo.Barrel).StasisSeconds;
+
+        if (seconds > 0f && ammo.StruckObject.GetComponentInParent<EnemyShip>() is EnemyShip ship)
+            ship.Hold(seconds);
     }
 
     private bool IsTarget(GameObject struck)

@@ -5,6 +5,12 @@ using UnityEngine;
 public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 {
     private const float VisiblePixels = 2f;
+    private const int StasisSortingShift = 2;
+    private const float StasisSizeShare = 1.3f;
+    private const float StasisPulseRate = 3f;
+    private const float StasisMinAlpha = 0.3f;
+
+    private static readonly Color StasisColor = new Color(0.7f, 0.45f, 1f, 0.75f);
 
     [SerializeField] private AmmoHitHandler _ammoHitHandler;
     [SerializeField] private EnergyShield _shield;
@@ -22,6 +28,9 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
     private EnemyContext _context;
     private BossPhaseRunner _phases;
     private bool _isDead;
+    private bool _isEmpFrozen;
+    private float _stasisLeft;
+    private SpriteRenderer _stasisField;
     private bool _isHoldingFire;
 
     public int BodyDamage { get; private set; }
@@ -95,6 +104,8 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
     private void Update()
     {
+        TickStasis(Time.deltaTime);
+
         if (IsFrozen)
             return;
 
@@ -145,33 +156,33 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
     public void Freeze()
     {
-        if (IsFrozen || _isDead)
+        if (_isDead)
             return;
 
-        IsFrozen = true;
-        _mover.Freeze();
-        _shooter.Freeze(true);
-
-        if (_animator != null)
-            _animator.speed = 0f;
+        _isEmpFrozen = true;
+        ApplyFreeze();
     }
 
     public void Unfreeze()
     {
-        if (IsFrozen == false)
+        _isEmpFrozen = false;
+        ApplyFreeze();
+    }
+
+    public void Hold(float seconds)
+    {
+        if (_isDead || seconds <= 0f)
             return;
 
-        IsFrozen = false;
-        _mover.Unfreeze();
-        _shooter.Freeze(false);
-
-        if (_animator != null)
-            _animator.speed = 1f;
+        _stasisLeft = Mathf.Max(_stasisLeft, seconds);
+        ApplyFreeze();
     }
 
     public void OnDespawn()
     {
-        Unfreeze();
+        _isEmpFrozen = false;
+        _stasisLeft = 0f;
+        ApplyFreeze();
         _phases?.Stop();
         _phases = null;
         _shooter.StopShoot();
@@ -232,6 +243,92 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
         Released?.Invoke(this);
         Died?.Invoke(this);
+    }
+
+    private void TickStasis(float deltaTime)
+    {
+        if (_stasisLeft <= 0f)
+            return;
+
+        _stasisLeft -= deltaTime;
+
+        if (_stasisLeft <= 0f)
+        {
+            _stasisLeft = 0f;
+            ApplyFreeze();
+
+            return;
+        }
+
+        PulseStasis();
+    }
+
+    private void ApplyFreeze()
+    {
+        bool isFrozen = _isEmpFrozen || _stasisLeft > 0f;
+
+        ShowStasis(_stasisLeft > 0f);
+
+        if (isFrozen == IsFrozen)
+            return;
+
+        IsFrozen = isFrozen;
+
+        if (isFrozen)
+            _mover.Freeze();
+        else
+            _mover.Unfreeze();
+
+        _shooter.Freeze(isFrozen);
+
+        if (_animator != null)
+            _animator.speed = isFrozen ? 0f : 1f;
+    }
+
+    private void ShowStasis(bool isShown)
+    {
+        if (isShown && _stasisField == null)
+            _stasisField = CreateStasisField();
+
+        if (_stasisField == null)
+            return;
+
+        _stasisField.enabled = isShown;
+
+        if (isShown)
+            PulseStasis();
+    }
+
+    private SpriteRenderer CreateStasisField()
+    {
+        if (_context == null || _context.StasisSprite == null || _body == null)
+            return null;
+
+        GameObject field = new GameObject("Stasis Field");
+        field.transform.SetParent(transform, false);
+
+        SpriteRenderer sprite = field.AddComponent<SpriteRenderer>();
+        sprite.sprite = _context.StasisSprite;
+        sprite.sortingLayerID = _body.sortingLayerID;
+        sprite.sortingOrder = _body.sortingOrder + StasisSortingShift;
+
+        return sprite;
+    }
+
+    private void PulseStasis()
+    {
+        if (_stasisField == null || _body == null)
+            return;
+
+        Bounds body = _body.bounds;
+        float size = Mathf.Max(body.size.x, body.size.y) * StasisSizeShare;
+        float spriteSize = Mathf.Max(0.0001f, _stasisField.sprite.bounds.size.x * transform.lossyScale.x);
+        float pulse = 0.5f + 0.5f * Mathf.Sin(Time.time * StasisPulseRate * Mathf.PI * 2f);
+
+        _stasisField.transform.position = body.center;
+        _stasisField.transform.localScale = Vector3.one * (size / spriteSize);
+        _stasisField.color = new Color(StasisColor.r, StasisColor.g, StasisColor.b,
+            Mathf.Lerp(StasisMinAlpha, StasisColor.a, pulse));
     }
 
     private void OnShieldBroken()

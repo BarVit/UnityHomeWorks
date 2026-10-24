@@ -333,6 +333,101 @@ MonoBehaviour:
     _level: 5
     _bonus: 20
     _price: 17000
+  - _owner: plasma
+    _stat: 0
+    _level: 0
+    _bonus: 0
+    _price: 0
+  - _owner: plasma
+    _stat: 0
+    _level: 1
+    _bonus: 50
+    _price: 11000
+  - _owner: plasma
+    _stat: 0
+    _level: 2
+    _bonus: 50
+    _price: 16000
+  - _owner: plasma
+    _stat: 0
+    _level: 3
+    _bonus: 50
+    _price: 22000
+  - _owner: plasma
+    _stat: 0
+    _level: 4
+    _bonus: 100
+    _price: 28000
+  - _owner: plasma
+    _stat: 0
+    _level: 5
+    _bonus: 100
+    _price: 34000
+  - _owner: plasma
+    _stat: 1
+    _level: 0
+    _bonus: 0
+    _price: 0
+  - _owner: plasma
+    _stat: 8
+    _level: 0
+    _bonus: 0.2
+    _price: 0
+  - _owner: plasma
+    _stat: 8
+    _level: 1
+    _bonus: 0.05
+    _price: 9000
+  - _owner: plasma
+    _stat: 8
+    _level: 2
+    _bonus: 0.05
+    _price: 13500
+  - _owner: plasma
+    _stat: 8
+    _level: 3
+    _bonus: 0.1
+    _price: 18000
+  - _owner: plasma
+    _stat: 8
+    _level: 4
+    _bonus: 0.15
+    _price: 22500
+  - _owner: plasma
+    _stat: 8
+    _level: 5
+    _bonus: 0.2
+    _price: 27000
+  - _owner: plasma
+    _stat: 5
+    _level: 0
+    _bonus: 0
+    _price: 0
+  - _owner: plasma
+    _stat: 5
+    _level: 1
+    _bonus: 7.14286
+    _price: 7000
+  - _owner: plasma
+    _stat: 5
+    _level: 2
+    _bonus: 7.14286
+    _price: 13500
+  - _owner: plasma
+    _stat: 5
+    _level: 3
+    _bonus: 7.14286
+    _price: 20000
+  - _owner: plasma
+    _stat: 5
+    _level: 4
+    _bonus: 7.14286
+    _price: 27000
+  - _owner: plasma
+    _stat: 5
+    _level: 5
+    _bonus: 14.2857
+    _price: 34000
   - _owner: cannon
     _stat: 0
     _level: 0

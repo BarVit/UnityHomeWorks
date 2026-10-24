@@ -3,8 +3,10 @@ using UnityEngine;
 public class EnemyContext
 {
     public EnemyContext(PoolRegistry pools, ExplosionAnimation explosionPrefab,
-        EnemyDeadBody deadBodyPrefab, ShotAudio hitAudio, LayerMask targetLayers, Camera camera)
+        EnemyDeadBody deadBodyPrefab, ShotAudio hitAudio, LayerMask targetLayers, Camera camera,
+        Sprite stasisSprite = null)
     {
+        StasisSprite = stasisSprite;
         Pools = pools;
         Explosions = pools.GetPool(explosionPrefab);
         DeadBodies = pools.GetPool(deadBodyPrefab);
@@ -14,6 +16,8 @@ public class EnemyContext
     }
 
     public PoolRegistry Pools { get; private set; }
+
+    public Sprite StasisSprite { get; private set; }
 
     public SpawnPool<ExplosionAnimation> Explosions { get; private set; }
 

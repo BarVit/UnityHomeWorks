@@ -153,6 +153,27 @@ homing	FlightSpeed	17	0.1	3700
 homing	FlightSpeed	18	0.1	5200
 homing	FlightSpeed	19	0.1	7200
 homing	FlightSpeed	20	0.1	10000
+plasma	Cooldown	0	0	0
+plasma	Cooldown	1	-0.02	76
+plasma	Cooldown	2	-0.02	106
+plasma	Cooldown	3	-0.02	144
+plasma	Cooldown	4	-0.02	200
+plasma	Cooldown	5	-0.02	278
+plasma	Cooldown	6	-0.02	376
+plasma	Cooldown	7	-0.02	526
+plasma	Cooldown	8	-0.02	750
+plasma	Cooldown	9	-0.02	1014
+plasma	Cooldown	10	-0.02	1426
+plasma	Cooldown	11	-0.02	1988
+plasma	Cooldown	12	-0.02	2738
+plasma	Cooldown	13	-0.02	3750
+plasma	Cooldown	14	-0.02	5250
+plasma	Cooldown	15	-0.02	7126
+plasma	Cooldown	16	-0.02	10126
+plasma	Cooldown	17	-0.02	13876
+plasma	Cooldown	18	-0.02	19500
+plasma	Cooldown	19	-0.02	27000
+plasma	Cooldown	20	-0.02	37500
 	RepairMastery	0	0	0
 	RepairMastery	1	5	40
 	RepairMastery	2	5	56
