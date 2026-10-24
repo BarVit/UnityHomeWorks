@@ -155,7 +155,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 18235c16a5303461787f966b277db17c, type: 3}
     _bodyDamage: 50
     _fromLocation: loc_03_03
-    _health: 460
+    _health: 480
     _weapon: phantom_1_gun
     _barrels: 2
     _damage: 30
