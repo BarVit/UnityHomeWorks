@@ -312,7 +312,7 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 1.5
-    _price: 120000
+    _price: 250000
     _unlockAfter: loc_05_02
     _grantedAfter: 
     _projectile: {fileID: 4581286917286831887, guid: 39b8feebdbe9d4a6d8c35e7db650cfcd, type: 3}
