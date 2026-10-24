@@ -110,6 +110,17 @@ public class SkillBook : MonoBehaviour
         return weapon == null ? 0f : weapon.ProjectileSpeed + GetSpeedShift(weaponId, levelShift);
     }
 
+    public float GetSentryCooldownShift(int levelShift = 0)
+    {
+        return GetValue(new SkillKey(SkillStat.SentryCooldown, SkillTable.Everyone), levelShift);
+    }
+
+    public float GetSentryCooldown(int levelShift = 0)
+    {
+        return Mathf.Max(MinCooldown,
+            _modules.GetKindValue(ModuleKind.SentryDrones, ModuleStat.Cooldown) + GetSentryCooldownShift(levelShift));
+    }
+
     public float GetShieldScale(int levelShift = 0)
     {
         return 1f + GetValue(new SkillKey(SkillStat.ShieldMastery, SkillTable.Everyone), levelShift) * PercentShare;
@@ -137,6 +148,9 @@ public class SkillBook : MonoBehaviour
     {
         if (skill.Stat == SkillStat.RepairMastery)
             return _modules.IsKindOpen(ModuleKind.RepairDrone);
+
+        if (skill.Stat == SkillStat.SentryCooldown)
+            return _modules.IsKindOpen(ModuleKind.SentryDrones);
 
         return skill.IsShipWide || _hangar.IsWeaponOpen(skill.Weapon);
     }

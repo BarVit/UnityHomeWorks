@@ -4,7 +4,5 @@ public enum ModuleStat
     Cooldown,
     Repair,
     Damage,
-    AttackTime,
-    Lifetime,
-    Reload
+    Lifetime
 }

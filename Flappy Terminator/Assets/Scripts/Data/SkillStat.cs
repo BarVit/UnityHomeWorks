@@ -6,5 +6,6 @@ public enum SkillStat
     ShieldMastery,
     RepairMastery,
     MagazineSize,
-    FlightSpeed
+    FlightSpeed,
+    SentryCooldown
 }

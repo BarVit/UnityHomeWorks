@@ -38,6 +38,8 @@ public class EnemyShip : MonoBehaviour, IPoolable, IRemoveable, IDamageable
 
     public int CurrentHealth => _health.Value;
 
+    public int MaxHealth => _health.MaxValue;
+
     public string LogName => ShipId == null ? name : ShipId.Replace("enemy_", string.Empty) + Tier;
 
     public bool IsVulnerable => IsShown();

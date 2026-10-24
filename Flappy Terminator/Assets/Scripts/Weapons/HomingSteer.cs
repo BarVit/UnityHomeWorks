@@ -11,13 +11,15 @@ public class HomingSteer : MonoBehaviour
     private ContactFilter2D _targets;
     private float _turnRate;
     private float _speed;
+    private Component _locked;
 
-    public static void Guide(Ammo ammo, float turnRate, float speed, ContactFilter2D targets)
+    public static void Guide(Ammo ammo, float turnRate, float speed, ContactFilter2D targets,
+        Component lockedTarget = null)
     {
         if (ammo.TryGetComponent(out HomingSteer steer) == false)
             steer = ammo.gameObject.AddComponent<HomingSteer>();
 
-        steer.Begin(turnRate, speed, targets);
+        steer.Begin(turnRate, speed, targets, lockedTarget);
     }
 
     private void Awake()
@@ -35,7 +37,7 @@ public class HomingSteer : MonoBehaviour
         if (_ammo.IsArmed == false)
             return;
 
-        Transform target = FindTarget(transform.position);
+        Transform target = IsLockAlive() ? _locked.transform : FindTarget(transform.position);
 
         if (target == null)
             return;
@@ -52,12 +54,21 @@ public class HomingSteer : MonoBehaviour
         _ammo.Fly(_speed);
     }
 
-    private void Begin(float turnRate, float speed, ContactFilter2D targets)
+    private void Begin(float turnRate, float speed, ContactFilter2D targets, Component lockedTarget)
     {
         _turnRate = turnRate;
         _speed = speed;
         _targets = targets;
+        _locked = lockedTarget;
         enabled = true;
+    }
+
+    private bool IsLockAlive()
+    {
+        if (_locked == null || _locked.gameObject.activeInHierarchy == false)
+            return false;
+
+        return _locked is IDamageable damageable && damageable.IsVulnerable;
     }
 
     private Transform FindTarget(Vector3 from)

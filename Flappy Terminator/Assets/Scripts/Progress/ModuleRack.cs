@@ -6,6 +6,8 @@ public class ModuleRack : MonoBehaviour
 {
     public const int FirstSlot = 1;
 
+    private const float MinCooldown = 0.1f;
+
     private const int NoPrice = -1;
 
     [SerializeField] private Economy _economy;
@@ -223,7 +225,18 @@ public class ModuleRack : MonoBehaviour
         return _shieldIcons[GetShieldLevel(module.Id)];
     }
 
-    public void Equip(BattleModules battle, float shieldScale, float repairScale)
+    public float GetKindValue(ModuleKind kind, ModuleStat stat)
+    {
+        foreach (ModuleRow row in _modules.Rows)
+        {
+            if (row.Kind == kind)
+                return GetValue(row.Id, stat);
+        }
+
+        return 0f;
+    }
+
+    public void Equip(BattleModules battle, float shieldScale, float repairScale, float sentryCooldownShift)
     {
         ModuleSpec?[] specs = new ModuleSpec?[SlotCount];
 
@@ -236,8 +249,13 @@ public class ModuleRack : MonoBehaviour
                 int capacity = Mathf.RoundToInt(GetFinalValue(row.Id, ModuleStat.Capacity, shieldScale));
                 int repair = Mathf.RoundToInt(GetFinalValue(row.Id, ModuleStat.Repair, repairScale));
 
-                specs[slot - FirstSlot] = new ModuleSpec(row.Kind, GetIcon(row), capacity,
-                    GetValue(row.Id, ModuleStat.Cooldown), GetShieldLevel(row.Id), repair, GetSentry(row.Id));
+                float cooldown = GetValue(row.Id, ModuleStat.Cooldown);
+
+                if (row.Kind == ModuleKind.SentryDrones)
+                    cooldown = Mathf.Max(MinCooldown, cooldown + sentryCooldownShift);
+
+                specs[slot - FirstSlot] = new ModuleSpec(row.Kind, GetIcon(row), capacity, cooldown,
+                    GetShieldLevel(row.Id), repair, GetSentry(row.Id));
             }
         }
 
@@ -246,8 +264,7 @@ public class ModuleRack : MonoBehaviour
 
     private SentrySpec GetSentry(string moduleId)
     {
-        return new SentrySpec(GetValue(moduleId, ModuleStat.Damage), GetValue(moduleId, ModuleStat.AttackTime),
-            GetValue(moduleId, ModuleStat.Lifetime), GetValue(moduleId, ModuleStat.Reload));
+        return new SentrySpec(GetValue(moduleId, ModuleStat.Damage), GetValue(moduleId, ModuleStat.Lifetime));
     }
 
     private static bool IsScaled(ModuleStat stat)

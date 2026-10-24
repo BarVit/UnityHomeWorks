@@ -136,100 +136,65 @@ MonoBehaviour:
   - _owner: sentry_drones
     _stat: 3
     _level: 0
-    _bonus: 5
+    _bonus: 10
     _price: 0
   - _owner: sentry_drones
     _stat: 3
     _level: 1
-    _bonus: 1
+    _bonus: 2
     _price: 4667
   - _owner: sentry_drones
     _stat: 3
     _level: 2
-    _bonus: 1
+    _bonus: 2
     _price: 9333
   - _owner: sentry_drones
     _stat: 3
     _level: 3
-    _bonus: 1
+    _bonus: 2
     _price: 14000
   - _owner: sentry_drones
     _stat: 3
     _level: 4
-    _bonus: 1
+    _bonus: 2
     _price: 18667
   - _owner: sentry_drones
     _stat: 3
     _level: 5
-    _bonus: 1
+    _bonus: 2
     _price: 23333
   - _owner: sentry_drones
     _stat: 4
     _level: 0
-    _bonus: 5
+    _bonus: 6
     _price: 0
   - _owner: sentry_drones
     _stat: 4
     _level: 1
-    _bonus: 0.5
+    _bonus: 1
     _price: 3440
   - _owner: sentry_drones
     _stat: 4
     _level: 2
-    _bonus: 0.5
+    _bonus: 1
     _price: 6880
   - _owner: sentry_drones
     _stat: 4
     _level: 3
-    _bonus: 0.5
+    _bonus: 1
     _price: 10320
   - _owner: sentry_drones
     _stat: 4
     _level: 4
-    _bonus: 0.5
+    _bonus: 1
     _price: 13760
   - _owner: sentry_drones
     _stat: 4
     _level: 5
-    _bonus: 0.5
+    _bonus: 2
     _price: 17200
-  - _owner: sentry_drones
-    _stat: 5
-    _level: 0
-    _bonus: 7.5
-    _price: 0
-  - _owner: sentry_drones
-    _stat: 5
-    _level: 1
-    _bonus: 1.5
-    _price: 3440
-  - _owner: sentry_drones
-    _stat: 5
-    _level: 2
-    _bonus: 1.5
-    _price: 6880
-  - _owner: sentry_drones
-    _stat: 5
-    _level: 3
-    _bonus: 1.5
-    _price: 10320
-  - _owner: sentry_drones
-    _stat: 5
-    _level: 4
-    _bonus: 1.5
-    _price: 13760
-  - _owner: sentry_drones
-    _stat: 5
-    _level: 5
-    _bonus: 1.5
-    _price: 17200
-  - _owner: sentry_drones
-    _stat: 6
-    _level: 0
-    _bonus: 7
-    _price: 0
   - _owner: sentry_drones
     _stat: 1
     _level: 0
-    _bonus: 15
+    _bonus: 8
     _price: 0

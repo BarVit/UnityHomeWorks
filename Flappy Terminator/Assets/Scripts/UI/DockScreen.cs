@@ -71,7 +71,6 @@ public class DockScreen : MonoBehaviour
     [SerializeField] private Sprite _cooldownIcon;
     [SerializeField] private Sprite _healthIcon;
     [SerializeField] private Sprite _repairIcon;
-    [SerializeField] private Sprite _attackTimeIcon;
     [SerializeField] private Sprite _lifetimeIcon;
     [SerializeField] private ShopWindow _shop;
     [SerializeField] private Button _shopButton;
@@ -446,8 +445,6 @@ public class DockScreen : MonoBehaviour
                 return "REPAIR";
             case ModuleStat.Damage:
                 return "DRONE DAMAGE";
-            case ModuleStat.AttackTime:
-                return "ATTACK TIME";
             case ModuleStat.Lifetime:
                 return "DRONE LIFETIME";
             default:
@@ -465,8 +462,6 @@ public class DockScreen : MonoBehaviour
                 return _repairIcon;
             case ModuleStat.Damage:
                 return _damageIcon;
-            case ModuleStat.AttackTime:
-                return _attackTimeIcon;
             case ModuleStat.Lifetime:
                 return _lifetimeIcon;
             default:
@@ -484,8 +479,7 @@ public class DockScreen : MonoBehaviour
 
     private static bool IsSeconds(ModuleStat stat)
     {
-        return stat == ModuleStat.Cooldown || stat == ModuleStat.AttackTime || stat == ModuleStat.Lifetime
-            || stat == ModuleStat.Reload;
+        return stat == ModuleStat.Cooldown || stat == ModuleStat.Lifetime;
     }
 
     private void ShowSkillPage()
@@ -542,6 +536,8 @@ public class DockScreen : MonoBehaviour
                 return UiText.Title(skill.Weapon) + " MAGAZINE";
             case SkillStat.FlightSpeed:
                 return UiText.Title(skill.Weapon) + " FLIGHT SPEED";
+            case SkillStat.SentryCooldown:
+                return "SENTRY DRONES COOLDOWN";
             case SkillStat.ShieldMastery:
                 return "SHIELD MASTERY";
             case SkillStat.RepairMastery:
@@ -617,6 +613,9 @@ public class DockScreen : MonoBehaviour
 
         if (skill.Stat == SkillStat.ShieldMastery || skill.Stat == SkillStat.RepairMastery)
             return "+" + Mathf.RoundToInt(_skills.GetValue(skill, levelShift)) + PercentSign;
+
+        if (skill.Stat == SkillStat.SentryCooldown)
+            return _skills.GetSentryCooldown(levelShift).ToString("0.0") + Seconds;
 
         if (skill.Stat == SkillStat.FlightSpeed)
             return _skills.GetFlightSpeed(skill.Weapon, levelShift).ToString("0.0");

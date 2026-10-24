@@ -174,3 +174,24 @@ homing	FlightSpeed	20	0.1	10000
 	RepairMastery	18	5	10400
 	RepairMastery	19	5	14400
 	RepairMastery	20	5	20000
+	SentryCooldown	0	0	0
+	SentryCooldown	1	-0.2	50
+	SentryCooldown	2	-0.2	70
+	SentryCooldown	3	-0.2	95
+	SentryCooldown	4	-0.2	133
+	SentryCooldown	5	-0.2	185
+	SentryCooldown	6	-0.2	250
+	SentryCooldown	7	-0.2	350
+	SentryCooldown	8	-0.2	500
+	SentryCooldown	9	-0.2	675
+	SentryCooldown	10	-0.2	950
+	SentryCooldown	11	-0.2	1325
+	SentryCooldown	12	-0.2	1825
+	SentryCooldown	13	-0.2	2500
+	SentryCooldown	14	-0.2	3500
+	SentryCooldown	15	-0.2	4750
+	SentryCooldown	16	-0.2	6750
+	SentryCooldown	17	-0.2	9250
+	SentryCooldown	18	-0.2	13000
+	SentryCooldown	19	-0.2	18000
+	SentryCooldown	20	-0.2	25000

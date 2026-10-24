@@ -36,9 +36,8 @@ public class SentrySquad : MonoBehaviour
     private ContactFilter2D _filter;
     private SentrySpec _spec;
     private float _lifeLeft;
-    private float _attackLeft;
-    private float _reloadLeft;
     private float _noseOffset;
+    private EnemyShip _target;
 
     public bool IsActive { get; private set; }
 
@@ -88,8 +87,7 @@ public class SentrySquad : MonoBehaviour
     {
         _spec = spec;
         _lifeLeft = spec.Lifetime;
-        _attackLeft = spec.AttackTime;
-        _reloadLeft = 0f;
+        Forget();
 
         for (int i = 0; i < DroneCount; i++)
         {
@@ -106,29 +104,18 @@ public class SentrySquad : MonoBehaviour
     public void Stop()
     {
         IsActive = false;
+        Forget();
         Show(false);
     }
 
     private void Fire(float deltaTime)
     {
-        if (_reloadLeft > 0f)
-        {
-            _reloadLeft -= deltaTime;
-
-            if (_reloadLeft <= 0f)
-                _attackLeft = _spec.AttackTime;
-
-            return;
-        }
-
-        EnemyShip target = FindTarget();
+        EnemyShip target = GetTarget();
 
         if (target == null)
             return;
 
         float interval = 1f / _shotsPerSecond;
-
-        _attackLeft -= deltaTime;
 
         for (int i = 0; i < DroneCount; i++)
         {
@@ -140,9 +127,6 @@ public class SentrySquad : MonoBehaviour
                 _shotLeft[i] += interval;
             }
         }
-
-        if (_attackLeft <= 0f)
-            _reloadLeft = Mathf.Max(Mathf.Epsilon, _spec.Reload);
     }
 
     private void Shoot(int drone, EnemyShip target, float interval)
@@ -165,28 +149,75 @@ public class SentrySquad : MonoBehaviour
         Spark(point, muzzle);
     }
 
-    private EnemyShip FindTarget()
+    private EnemyShip GetTarget()
+    {
+        if (_target != null && (_target.IsVulnerable == false || IsOnScreen(_target) == false))
+            Forget();
+
+        if (_target == null)
+            Lock(FindWeakest());
+
+        return _target;
+    }
+
+    private EnemyShip FindWeakest()
     {
         Vector2 center = _camera.transform.position;
         Vector2 half = new Vector2(_camera.orthographicSize * _camera.aspect, _camera.orthographicSize);
         int count = Physics2D.OverlapArea(center - half, center + half, _filter, _candidates);
+        Vector2 from = _ship.position;
         EnemyShip best = null;
 
         for (int i = 0; i < count; i++)
         {
             EnemyShip ship = _candidates[i].GetComponentInParent<EnemyShip>();
 
-            if (ship == null || ship == best || ship.IsDead || ship.IsVulnerable == false)
+            if (ship == null || ship == best || ship.IsDead || ship.IsVulnerable == false || IsOnScreen(ship) == false)
                 continue;
 
-            if (ScreenArea.Contains(_camera, ship.transform.position) == false)
-                continue;
-
-            if (best == null || ship.CurrentHealth > best.CurrentHealth)
+            if (best == null || ship.MaxHealth < best.MaxHealth || (ship.MaxHealth == best.MaxHealth
+                && Distance(from, ship) < Distance(from, best)))
                 best = ship;
         }
 
         return best;
+    }
+
+    private bool IsOnScreen(EnemyShip ship)
+    {
+        return ScreenArea.Contains(_camera, ship.transform.position);
+    }
+
+    private static float Distance(Vector2 from, EnemyShip ship)
+    {
+        return ((Vector2)ship.transform.position - from).sqrMagnitude;
+    }
+
+    private void Lock(EnemyShip target)
+    {
+        _target = target;
+
+        if (_target == null)
+            return;
+
+        _target.Died += OnTargetGone;
+        _target.Retired += OnTargetGone;
+    }
+
+    private void Forget()
+    {
+        if (_target == null)
+            return;
+
+        _target.Died -= OnTargetGone;
+        _target.Retired -= OnTargetGone;
+        _target = null;
+    }
+
+    private void OnTargetGone(EnemyShip ship)
+    {
+        if (ship == _target)
+            Forget();
     }
 
     private Vector2 GetHitPoint(Vector2 muzzle, EnemyShip target)

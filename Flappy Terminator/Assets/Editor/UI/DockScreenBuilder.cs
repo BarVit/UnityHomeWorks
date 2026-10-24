@@ -130,7 +130,7 @@ namespace UiContent
             foreach (string name in new[] { "Coin Icon", "XP Icon", "Lock Icon", "Damage Icon", "Crit Icon", "Upgrade Pip",
                          "Energy Shield Icon", "Health Icon", "Cooldown Icon", "Double Shot Icon",
                          "Speed Icon", "Napalm Icon", "Turn Icon", "Reload Icon", "Magazine Icon", "White Square",
-                         "Repair Drone Icon", "Repair Icon", "Sentry Drones Icon", "Attack Time Icon", "Lifetime Icon" })
+                         "Repair Drone Icon", "Repair Icon", "Sentry Drones Icon", "Lifetime Icon" })
                 Prepare(name, 0);
 
             for (int level = 0; level <= ShieldColors.MaxLevel; level++)
@@ -291,7 +291,6 @@ namespace UiContent
             so.FindProperty("_cooldownIcon").objectReferenceValue = Art("Cooldown Icon");
             so.FindProperty("_healthIcon").objectReferenceValue = Art("Health Icon");
             so.FindProperty("_repairIcon").objectReferenceValue = Art("Repair Icon");
-            so.FindProperty("_attackTimeIcon").objectReferenceValue = Art("Attack Time Icon");
             so.FindProperty("_lifetimeIcon").objectReferenceValue = Art("Lifetime Icon");
             so.FindProperty("_shop").objectReferenceValue = shop;
             so.FindProperty("_shopButton").objectReferenceValue = shopButton;
