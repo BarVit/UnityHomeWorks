@@ -40038,7 +40038,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheatCodeReader
   _code: 1d0000001e000000
-  _maxInterval: 0.2
+  _maxInterval: 0.3
 --- !u!114 &940566758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40143,7 +40143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheatCodeReader
   _code: 1a0000001a0000001e000000
-  _maxInterval: 0.2
+  _maxInterval: 0.3
 --- !u!114 &940566764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40157,7 +40157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheatCodeReader
   _code: 190000001e000000
-  _maxInterval: 0.2
+  _maxInterval: 0.3
 --- !u!114 &940566765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40171,7 +40171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheatCodeReader
   _code: 1a00000015000000
-  _maxInterval: 0.2
+  _maxInterval: 0.3
 --- !u!1 &940714175
 GameObject:
   m_ObjectHideFlags: 0

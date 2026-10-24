@@ -6,7 +6,7 @@ using UnityEngine.InputSystem.Controls;
 public class CheatCodeReader : MonoBehaviour
 {
     [SerializeField] private Key[] _code = { Key.O, Key.P };
-    [SerializeField] private float _maxInterval = 0.2f;
+    [SerializeField] private float _maxInterval = 0.3f;
 
     private int _typed;
     private float _lastPressTime;
