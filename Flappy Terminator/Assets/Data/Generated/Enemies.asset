@@ -125,7 +125,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 79fee06f008d942e7baa168b610dd793, type: 3}
     _bodyDamage: 50
     _fromLocation: loc_03_01
-    _health: 250
+    _health: 260
     _weapon: reaper_2_gun
     _barrels: 2
     _damage: 25
@@ -140,7 +140,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 79fee06f008d942e7baa168b610dd793, type: 3}
     _bodyDamage: 60
     _fromLocation: loc_04_02
-    _health: 600
+    _health: 800
     _weapon: reaper_3_gun
     _barrels: 1
     _damage: 120
@@ -155,7 +155,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 18235c16a5303461787f966b277db17c, type: 3}
     _bodyDamage: 50
     _fromLocation: loc_03_03
-    _health: 400
+    _health: 460
     _weapon: phantom_1_gun
     _barrels: 2
     _damage: 30
@@ -170,7 +170,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 18235c16a5303461787f966b277db17c, type: 3}
     _bodyDamage: 60
     _fromLocation: loc_03_07
-    _health: 600
+    _health: 700
     _weapon: phantom_2_gun
     _barrels: 2
     _damage: 45
