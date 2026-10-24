@@ -363,7 +363,7 @@ MonoBehaviour:
     _location: loc_03_09
     _prefab: {fileID: 748883696485598149, guid: 84c1437d9d9ee4198b7c7f20c205dd5d, type: 3}
     _prototype: berserker_2
-    _health: 30000
+    _health: 10000
     _weapon: overlord_gun
     _barrels: 1
     _bodyDamage: 20
