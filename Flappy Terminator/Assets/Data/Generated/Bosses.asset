@@ -216,8 +216,8 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
-    _rewardMoney: 30000
-    _rewardXp: 15000
+    _rewardMoney: 60000
+    _rewardXp: 30000
     _intro: 
     _specialEvery: 0
     _specialWeapon: 
@@ -392,8 +392,8 @@ MonoBehaviour:
     _scale: 2
     _tint: {r: 1, g: 1, b: 1, a: 1}
     _movement: {fileID: 11400000, guid: c2335286b875d4369bda5a2d28eba296, type: 2}
-    _rewardMoney: 45000
-    _rewardXp: 22500
+    _rewardMoney: 90000
+    _rewardXp: 45000
     _intro: 'ARCHON GUARDS THE STAR GATE.
 
       GET READY TO FIGHT THE BOSS!'
