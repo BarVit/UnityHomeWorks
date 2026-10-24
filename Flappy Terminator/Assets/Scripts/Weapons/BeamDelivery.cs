@@ -4,6 +4,8 @@ public class BeamDelivery : WeaponDelivery
 {
     private const float MinSoundInterval = 0.2f;
     private const float TargetMemory = 0.15f;
+    private const float EdgeInset = 0.05f;
+    private const int EdgeSteps = 3;
 
     private readonly SpawnPool<ExplosionAnimation> _hitEffectPool;
     private readonly SpawnPool<BeamFlash> _beamPool;
@@ -13,6 +15,7 @@ public class BeamDelivery : WeaponDelivery
     private readonly IDamageable[] _struck = new IDamageable[16];
     private readonly RaycastHit2D[] _worldHits = new RaycastHit2D[1];
     private readonly RaycastHit2D[] _exitHits = new RaycastHit2D[8];
+    private readonly Collider2D[] _candidates = new Collider2D[32];
     private readonly AimLine[] _sights;
 
     private BeamFlash _soundFlash;
@@ -97,12 +100,21 @@ public class BeamDelivery : WeaponDelivery
             sight.Rest();
 
         float open = GetOpenDistance(from, direction, reach);
+
+        if (TryAutoAim(from, ref direction, open, barrel))
+        {
+            rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+            open = GetOpenDistance(from, direction, reach);
+        }
+
         Vector2 far = from + direction * reach;
         Vector2 end = from + direction * open;
 
         int count = Physics2D.Raycast(from, direction, Context.TargetFilter, _hits, open);
         int struck = 0;
         bool isOnTarget = false;
+        float share = 1f;
+        float pierceShare = Context.GetBoost(barrel).PierceShare;
 
         CountFired();
         Vector2 last = end;
@@ -119,8 +131,12 @@ public class BeamDelivery : WeaponDelivery
             if (damageable != null && (damageable.IsVulnerable == false || IsStruck(damageable, struck)))
                 continue;
 
-            Strike(hit, damageable, rotation, far, barrel);
+            Strike(hit, damageable, rotation, far, barrel, share);
             isOnTarget |= damageable != null;
+
+            if (damageable != null)
+                share *= pierceShare;
+
             _struck[struck] = damageable;
             struck++;
             last = hit.point;
@@ -149,7 +165,8 @@ public class BeamDelivery : WeaponDelivery
         return false;
     }
 
-    private void Strike(RaycastHit2D hit, IDamageable damageable, Quaternion rotation, Vector2 far, int barrel)
+    private void Strike(RaycastHit2D hit, IDamageable damageable, Quaternion rotation, Vector2 far, int barrel,
+        float share)
     {
         if (damageable != null && _piercePool != null)
             ShowPierce(GetExit(hit.collider, hit.point, far), rotation);
@@ -158,11 +175,17 @@ public class BeamDelivery : WeaponDelivery
         {
             int damage = GetStrikeDamage(damageable, barrel, out bool isCrit);
 
-            DamageLog.SetSource(Row.Id + "#" + barrel + (isCrit ? " crit" : string.Empty));
-            damageable.TakeDamage(damage);
+            if (share < 1f)
+                damage = Mathf.RoundToInt(damage * share);
 
-            if (isCrit)
-                ShowStrikeCrit(hit.point, damage);
+            if (damage > 0)
+            {
+                DamageLog.SetSource(Row.Id + "#" + barrel + (isCrit ? " crit" : string.Empty));
+                damageable.TakeDamage(damage);
+
+                if (isCrit)
+                    ShowStrikeCrit(hit.point, damage);
+            }
 
             NoteTargetHit(hit.point);
 
@@ -186,6 +209,86 @@ public class BeamDelivery : WeaponDelivery
     protected virtual void ShowStrikeCrit(Vector2 point, int damage)
     {
         ShowCrit(point, damage);
+    }
+
+    private bool TryAutoAim(Vector2 from, ref Vector2 direction, float open, int barrel)
+    {
+        float limit = Context.GetBoost(barrel).AutoAimDegrees;
+
+        if (limit <= 0f || IsOnTarget(from, direction, open))
+            return false;
+
+        Vector2 center = Context.Camera.transform.position;
+        Vector2 half = new Vector2(Context.Camera.orthographicSize * Context.Camera.aspect,
+            Context.Camera.orthographicSize);
+        int count = Physics2D.OverlapArea(center - half, center + half, Context.TargetFilter, _candidates);
+        float best = limit;
+        bool isFound = false;
+        Vector2 aim = direction;
+
+        for (int i = 0; i < count; i++)
+        {
+            Collider2D candidate = _candidates[i];
+            IDamageable damageable = FindDamageable(candidate);
+
+            if (damageable == null || damageable.IsVulnerable == false)
+                continue;
+
+            Vector2 edge = GetNearestEdge(candidate, from, direction);
+            Vector2 toEdge = edge - from;
+            float angle = Vector2.Angle(direction, toEdge);
+
+            if (angle >= best || Vector2.Dot(toEdge, direction) <= 0f
+                || ScreenArea.Contains(Context.Camera, edge) == false)
+                continue;
+
+            Vector2 inside = Vector2.MoveTowards(edge, candidate.bounds.center, EdgeInset);
+            Vector2 toInside = inside - from;
+
+            if (GetOpenDistance(from, toInside.normalized, toInside.magnitude) < toInside.magnitude)
+                continue;
+
+            best = angle;
+            aim = toInside.normalized;
+            isFound = true;
+        }
+
+        if (isFound)
+            direction = aim;
+
+        return isFound;
+    }
+
+    private bool IsOnTarget(Vector2 from, Vector2 direction, float open)
+    {
+        int count = Physics2D.Raycast(from, direction, Context.TargetFilter, _hits, open);
+
+        for (int i = 0; i < count; i++)
+        {
+            if (ScreenArea.Contains(Context.Camera, _hits[i].point) == false)
+                return false;
+
+            IDamageable damageable = FindDamageable(_hits[i].collider);
+
+            if (damageable != null && damageable.IsVulnerable)
+                return true;
+        }
+
+        return false;
+    }
+
+    private static Vector2 GetNearestEdge(Collider2D candidate, Vector2 from, Vector2 direction)
+    {
+        Vector2 point = candidate.bounds.center;
+
+        for (int step = 0; step < EdgeSteps; step++)
+        {
+            float along = Mathf.Max(0f, Vector2.Dot(point - from, direction));
+
+            point = candidate.ClosestPoint(from + direction * along);
+        }
+
+        return point;
     }
 
     private bool IsAimed()

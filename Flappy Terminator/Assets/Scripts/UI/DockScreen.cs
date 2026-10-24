@@ -14,6 +14,7 @@ public class DockScreen : MonoBehaviour
     private const string PercentSign = "%";
     private const string Seconds = " S";
     private const string PerSecond = "/S";
+    private const string Degrees = "\u00B0";
     private const string PlasmaId = "plasma";
     private const string BarrelMark = "  #";
     private const string EmptyCaption = "EMPTY";
@@ -74,6 +75,8 @@ public class DockScreen : MonoBehaviour
     [SerializeField] private Sprite _repairIcon;
     [SerializeField] private Sprite _lifetimeIcon;
     [SerializeField] private Sprite _stasisIcon;
+    [SerializeField] private Sprite _autoAimIcon;
+    [SerializeField] private Sprite _pierceIcon;
     [SerializeField] private ShopWindow _shop;
     [SerializeField] private Button _shopButton;
     [SerializeField] private Button _menuButton;
@@ -288,7 +291,10 @@ public class DockScreen : MonoBehaviour
             case UpgradeStat.CritChance:
             case UpgradeStat.DoubleShot:
             case UpgradeStat.Napalm:
+            case UpgradeStat.Pierce:
                 return Mathf.RoundToInt(value) + PercentSign;
+            case UpgradeStat.AutoAim:
+                return value.ToString("0.#") + Degrees;
             case UpgradeStat.ProjectileSpeed when row.Id == PlasmaId:
                 return (row.ProjectileSpeed * (1f + value * 0.01f)).ToString("0.#");
             case UpgradeStat.ProjectileSpeed:
@@ -321,6 +327,10 @@ public class DockScreen : MonoBehaviour
                 return "TURN RATE";
             case UpgradeStat.Stasis:
                 return "STASIS ON HIT";
+            case UpgradeStat.AutoAim:
+                return "AUTO AIM";
+            case UpgradeStat.Pierce:
+                return "PIERCING";
             default:
                 return "CRIT CHANCE";
         }
@@ -346,6 +356,10 @@ public class DockScreen : MonoBehaviour
                 return "OF ROCKET DAMAGE AS 1.5 S BURN";
             case UpgradeStat.Stasis:
                 return "A HIT ENEMY STOPS IN AN ENERGY FIELD";
+            case UpgradeStat.AutoAim:
+                return "A NEAR MISS BENDS ONTO THE TARGET";
+            case UpgradeStat.Pierce:
+                return "OF DAMAGE GOES ON TO THE NEXT TARGET";
             case UpgradeStat.TurnRate:
                 return "+" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
             default:
@@ -371,6 +385,10 @@ public class DockScreen : MonoBehaviour
                 return _turnIcon;
             case UpgradeStat.Stasis:
                 return _stasisIcon;
+            case UpgradeStat.AutoAim:
+                return _autoAimIcon;
+            case UpgradeStat.Pierce:
+                return _pierceIcon;
             default:
                 return _critIcon;
         }

@@ -8,5 +8,7 @@ public enum UpgradeStat
     ProjectileSpeed,
     Napalm,
     TurnRate,
-    Stasis
+    Stasis,
+    AutoAim,
+    Pierce
 }

@@ -17,7 +17,7 @@ namespace ShipContent
         private const float PopScale = 3.4f;
         private const float BoltWidth = 0.07f;
         private const float GlowWidth = 0.28f;
-        private const int BehindShips = -2;
+        private const int OverEnemies = 3;
 
         private static readonly Color PopTint = new Color(0.6f, 0.85f, 1f, 1f);
 
@@ -53,7 +53,7 @@ namespace ShipContent
             sprite.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(DomeSprite);
             sprite.sharedMaterial = LoadDomeMaterial();
             sprite.sortingLayerID = body.sortingLayerID;
-            sprite.sortingOrder = body.sortingOrder + BehindShips;
+            sprite.sortingOrder = body.sortingOrder + OverEnemies;
             sprite.enabled = false;
 
             return sprite;
@@ -69,7 +69,7 @@ namespace ShipContent
             line.useWorldSpace = true;
             line.widthMultiplier = BoltWidth;
             line.sortingLayerID = body.sortingLayerID;
-            line.sortingOrder = body.sortingOrder + BehindShips + 1;
+            line.sortingOrder = body.sortingOrder + OverEnemies + 2;
 
             GameObject glow = new GameObject("Glow");
             glow.transform.SetParent(bolt.transform, false);

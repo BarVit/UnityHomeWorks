@@ -3,8 +3,11 @@ using UnityEngine;
 public readonly struct WeaponBoost
 {
     public WeaponBoost(int damageBonus, float critChance, float critMultiplier, float heatReduction,
-        float doubleShotChance, float speedBonus, float napalmShare, float turnBonus, float stasisSeconds = 0f)
+        float doubleShotChance, float speedBonus, float napalmShare, float turnBonus, float stasisSeconds = 0f,
+        float autoAimDegrees = 0f, float pierceShare = 0f)
     {
+        PierceShare = pierceShare;
+        AutoAimDegrees = autoAimDegrees;
         StasisSeconds = stasisSeconds;
         TurnBonus = turnBonus;
         SpeedBonus = speedBonus;
@@ -35,6 +38,10 @@ public readonly struct WeaponBoost
     public float TurnBonus { get; }
 
     public float StasisSeconds { get; }
+
+    public float AutoAimDegrees { get; }
+
+    public float PierceShare { get; }
 
     public float TurnScale => Mathf.Max(0f, 1f + TurnBonus);
 
