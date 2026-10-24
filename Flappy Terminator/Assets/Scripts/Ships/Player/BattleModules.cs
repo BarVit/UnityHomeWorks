@@ -50,6 +50,7 @@ public class BattleModules : MonoBehaviour
     {
         _specs = specs;
         _cooldownLeft = new float[specs.Length];
+        _repair.SetPassiveRate(GetRegen(specs));
         ResetForLevel();
         Changed?.Invoke();
     }
@@ -79,6 +80,9 @@ public class BattleModules : MonoBehaviour
 
         if (slot == _sentrySlot)
             return _sentries.IsActive;
+
+        if (GetSpec(slot)?.Kind == ModuleKind.RepairNanobots)
+            return _repair.IsRegenerating;
 
         return slot == _shieldSlot && _shield.IsUp;
     }
@@ -137,6 +141,19 @@ public class BattleModules : MonoBehaviour
 
         _repairSlot = NoSlot;
         Changed?.Invoke();
+    }
+
+    private static int GetRegen(ModuleSpec?[] specs)
+    {
+        int regen = 0;
+
+        foreach (ModuleSpec? spec in specs)
+        {
+            if (spec != null && spec.Value.Kind == ModuleKind.RepairNanobots)
+                regen += spec.Value.Regen;
+        }
+
+        return regen;
     }
 
     private void OnSentriesFinished()

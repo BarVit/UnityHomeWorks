@@ -34,3 +34,10 @@ MonoBehaviour:
     _icon: {fileID: 21300000, guid: 455496d1c9b1d41a49657605a74e03a7, type: 3}
     _description: TWO DRONES SHOOT THE TOUGHEST TARGET
     _unlockAfter: loc_03_02
+  - _id: repair_nanobots
+    _title: "\u0420\u0435\u043C\u043E\u043D\u0442\u043D\u044B\u0435 \u043D\u0430\u043D\u043E\u0431\u043E\u0442\u044B"
+    _kind: 3
+    _price: 120000
+    _icon: {fileID: 21300000, guid: 35b18d1dec78641e6b694c27c310029b, type: 3}
+    _description: REPAIR THE HULL ALL THE TIME
+    _unlockAfter: loc_04_01

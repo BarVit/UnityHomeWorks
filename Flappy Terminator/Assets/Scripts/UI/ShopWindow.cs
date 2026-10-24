@@ -181,6 +181,8 @@ public class ShopWindow : MonoBehaviour
                 return "ABSORBS " + GetFinalValue(row, ModuleStat.Capacity);
             case ModuleKind.RepairDrone:
                 return "REPAIRS " + GetFinalValue(row, ModuleStat.Repair) + " HP";
+            case ModuleKind.RepairNanobots:
+                return "REPAIRS " + GetFinalValue(row, ModuleStat.Regen) + " HP/S";
             case ModuleKind.SentryDrones:
                 return "2 DRONES, " + GetFinalValue(row, ModuleStat.Damage) + " DMG/S EACH";
             default:

@@ -447,6 +447,8 @@ public class DockScreen : MonoBehaviour
                 return "DRONE DAMAGE";
             case ModuleStat.Lifetime:
                 return "DRONE LIFETIME";
+            case ModuleStat.Regen:
+                return "NANOBOT REPAIR";
             default:
                 return "COOLDOWN";
         }
@@ -464,6 +466,8 @@ public class DockScreen : MonoBehaviour
                 return _damageIcon;
             case ModuleStat.Lifetime:
                 return _lifetimeIcon;
+            case ModuleStat.Regen:
+                return _repairIcon;
             default:
                 return _cooldownIcon;
         }
@@ -474,7 +478,9 @@ public class DockScreen : MonoBehaviour
         if (IsSeconds(stat))
             return value.ToString("0.#") + Seconds;
 
-        return stat == ModuleStat.Damage ? value.ToString("0.#") + PerSecond : Mathf.RoundToInt(value).ToString();
+        return stat == ModuleStat.Damage || stat == ModuleStat.Regen
+            ? value.ToString("0.#") + PerSecond
+            : Mathf.RoundToInt(value).ToString();
     }
 
     private static bool IsSeconds(ModuleStat stat)

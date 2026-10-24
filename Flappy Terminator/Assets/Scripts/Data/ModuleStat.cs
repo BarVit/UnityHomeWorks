@@ -4,5 +4,6 @@ public enum ModuleStat
     Cooldown,
     Repair,
     Damage,
-    Lifetime
+    Lifetime,
+    Regen
 }

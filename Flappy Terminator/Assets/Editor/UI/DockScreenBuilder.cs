@@ -130,7 +130,7 @@ namespace UiContent
             foreach (string name in new[] { "Coin Icon", "XP Icon", "Lock Icon", "Damage Icon", "Crit Icon", "Upgrade Pip",
                          "Energy Shield Icon", "Health Icon", "Cooldown Icon", "Double Shot Icon",
                          "Speed Icon", "Napalm Icon", "Turn Icon", "Reload Icon", "Magazine Icon", "White Square",
-                         "Repair Drone Icon", "Repair Icon", "Sentry Drones Icon", "Lifetime Icon" })
+                         "Repair Drone Icon", "Repair Icon", "Sentry Drones Icon", "Lifetime Icon", "Repair Nanobots Icon" })
                 Prepare(name, 0);
 
             for (int level = 0; level <= ShieldColors.MaxLevel; level++)

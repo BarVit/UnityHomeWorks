@@ -2,5 +2,6 @@ public enum ModuleKind
 {
     Shield,
     RepairDrone,
-    SentryDrones
+    SentryDrones,
+    RepairNanobots
 }

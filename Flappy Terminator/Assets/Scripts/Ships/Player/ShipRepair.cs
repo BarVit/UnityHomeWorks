@@ -15,16 +15,25 @@ public class ShipRepair : MonoBehaviour
     [SerializeField] private float _flickerRate = 6f;
     [SerializeField] private float _minAlpha = 0.3f;
     [SerializeField] private float _maxAlpha = 1f;
+    [SerializeField] private Material _armorMaterial;
+    [SerializeField] private float _armorFadeSpeed = 4f;
 
     private readonly SpriteRenderer[] _outline = new SpriteRenderer[Directions];
 
+    private SpriteRenderer _armor;
+    private float _armorAlpha;
+
     private int _amount;
+    private float _passiveRate;
+    private float _passiveOwed;
     private int _healed;
     private float _elapsed;
 
     public bool IsRepairing { get; private set; }
 
     public bool CanRepair => _health.Value > 0 && _health.Value < _health.MaxValue;
+
+    public bool IsRegenerating => _passiveRate > 0f && CanRepair;
 
     public event Action Finished;
 
@@ -33,11 +42,16 @@ public class ShipRepair : MonoBehaviour
         for (int i = 0; i < Directions; i++)
             _outline[i] = CreateOutline(i);
 
+        if (_armorMaterial != null)
+            _armor = CreateArmor();
+
         Show(false);
     }
 
     private void Update()
     {
+        Regenerate(Time.deltaTime);
+
         if (IsRepairing == false)
             return;
 
@@ -69,6 +83,8 @@ public class ShipRepair : MonoBehaviour
     {
         if (IsRepairing)
             Follow();
+
+        ShowArmor(Time.deltaTime);
     }
 
     public void Begin(int amount)
@@ -81,10 +97,70 @@ public class ShipRepair : MonoBehaviour
         Show(true);
     }
 
+    public void SetPassiveRate(float healthPerSecond)
+    {
+        _passiveRate = Mathf.Max(0f, healthPerSecond);
+        _passiveOwed = 0f;
+    }
+
     public void Stop()
     {
         IsRepairing = false;
         Show(false);
+    }
+
+    private SpriteRenderer CreateArmor()
+    {
+        GameObject copy = new GameObject("Nanobot Armor");
+        copy.transform.SetParent(_body.transform, false);
+        copy.layer = _body.gameObject.layer;
+
+        SpriteRenderer armor = copy.AddComponent<SpriteRenderer>();
+        armor.sharedMaterial = _armorMaterial;
+        armor.sortingLayerID = _body.sortingLayerID;
+        armor.sortingOrder = _body.sortingOrder + 1;
+        armor.enabled = false;
+
+        return armor;
+    }
+
+    private void ShowArmor(float deltaTime)
+    {
+        if (_armor == null)
+            return;
+
+        float target = IsRegenerating && _body.enabled ? 1f : 0f;
+
+        _armorAlpha = Mathf.MoveTowards(_armorAlpha, target, _armorFadeSpeed * deltaTime);
+        _armor.enabled = _armorAlpha > 0f;
+
+        if (_armor.enabled == false)
+            return;
+
+        _armor.sprite = _body.sprite;
+        _armor.flipX = _body.flipX;
+        _armor.flipY = _body.flipY;
+        _armor.color = new Color(1f, 1f, 1f, _armorAlpha);
+    }
+
+    private void Regenerate(float deltaTime)
+    {
+        if (IsRegenerating == false)
+        {
+            _passiveOwed = 0f;
+
+            return;
+        }
+
+        _passiveOwed += _passiveRate * deltaTime;
+
+        int heal = Mathf.FloorToInt(_passiveOwed);
+
+        if (heal <= 0)
+            return;
+
+        _passiveOwed -= heal;
+        _health.Heal(heal);
     }
 
     private SpriteRenderer CreateOutline(int index)

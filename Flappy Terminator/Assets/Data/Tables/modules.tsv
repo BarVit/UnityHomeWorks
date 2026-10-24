@@ -2,3 +2,4 @@ id	title	kind	price	icon	description	unlock_after
 energy_shield	Энергощит	Shield	3000	Energy Shield Icon	ABSORBS DAMAGE UNTIL BROKEN	loc_01_02
 repair_drone	Ремонтный дрон	RepairDrone	10000	Repair Drone Icon	REPAIRS THE HULL OVER 2 S	loc_02_03
 sentry_drones	Охранные дроны	SentryDrones	20000	Sentry Drones Icon	TWO DRONES SHOOT THE TOUGHEST TARGET	loc_03_02
+repair_nanobots	Ремонтные наноботы	RepairNanobots	120000	Repair Nanobots Icon	REPAIR THE HULL ALL THE TIME	loc_04_01

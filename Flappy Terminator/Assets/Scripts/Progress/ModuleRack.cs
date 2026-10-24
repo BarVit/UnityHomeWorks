@@ -248,6 +248,7 @@ public class ModuleRack : MonoBehaviour
             {
                 int capacity = Mathf.RoundToInt(GetFinalValue(row.Id, ModuleStat.Capacity, shieldScale));
                 int repair = Mathf.RoundToInt(GetFinalValue(row.Id, ModuleStat.Repair, repairScale));
+                int regen = Mathf.RoundToInt(GetFinalValue(row.Id, ModuleStat.Regen, repairScale));
 
                 float cooldown = GetValue(row.Id, ModuleStat.Cooldown);
 
@@ -255,7 +256,7 @@ public class ModuleRack : MonoBehaviour
                     cooldown = Mathf.Max(MinCooldown, cooldown + sentryCooldownShift);
 
                 specs[slot - FirstSlot] = new ModuleSpec(row.Kind, GetIcon(row), capacity, cooldown,
-                    GetShieldLevel(row.Id), repair, GetSentry(row.Id));
+                    GetShieldLevel(row.Id), repair, GetSentry(row.Id), regen);
             }
         }
 
@@ -269,7 +270,7 @@ public class ModuleRack : MonoBehaviour
 
     private static bool IsScaled(ModuleStat stat)
     {
-        return stat == ModuleStat.Capacity || stat == ModuleStat.Repair;
+        return stat == ModuleStat.Capacity || stat == ModuleStat.Repair || stat == ModuleStat.Regen;
     }
 
     private void Install(string moduleId)

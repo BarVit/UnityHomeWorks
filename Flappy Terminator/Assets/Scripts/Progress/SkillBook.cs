@@ -138,6 +138,7 @@ public class SkillBook : MonoBehaviour
             case ModuleStat.Capacity:
                 return GetShieldScale(levelShift);
             case ModuleStat.Repair:
+            case ModuleStat.Regen:
                 return GetRepairScale(levelShift);
             default:
                 return 1f;
@@ -147,7 +148,7 @@ public class SkillBook : MonoBehaviour
     public bool IsOpen(SkillKey skill)
     {
         if (skill.Stat == SkillStat.RepairMastery)
-            return _modules.IsKindOpen(ModuleKind.RepairDrone);
+            return _modules.IsKindOpen(ModuleKind.RepairDrone) || _modules.IsKindOpen(ModuleKind.RepairNanobots);
 
         if (skill.Stat == SkillStat.SentryCooldown)
             return _modules.IsKindOpen(ModuleKind.SentryDrones);
