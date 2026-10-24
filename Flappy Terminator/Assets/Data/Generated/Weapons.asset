@@ -227,7 +227,7 @@ MonoBehaviour:
     _title: "\u0418\u043C\u043F\u0443\u043B\u044C\u0441\u043D\u044B\u0439 \u043B\u0430\u0437\u0435\u0440"
     _owner: 0
     _delivery: 5
-    _damage: 9
+    _damage: 8
     _rate: 0.1
     _magazine: 0
     _reloadTime: 0

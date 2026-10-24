@@ -32,12 +32,12 @@ namespace EnemyContent
             });
             Create<ForwardLeapProfile>("Forward Leap", profile =>
             {
-                SetSpeed(profile, 1f, 1f);
+                SetSpeed(profile, 1.5f, 1.5f);
                 profile.FindProperty("_leapSpeed").floatValue = 5f;
                 profile.FindProperty("_minLeapStartShare").floatValue = 0.2f;
                 profile.FindProperty("_maxLeapStartShare").floatValue = 0.2f;
                 profile.FindProperty("_leapShare").floatValue = 0.4f;
-                profile.FindProperty("_afterLeapSpeed").floatValue = 0.75f;
+                profile.FindProperty("_afterLeapSpeed").floatValue = 1.5f;
             });
             Create<DriftRetreatProfile>("Drift Retreat", profile =>
             {

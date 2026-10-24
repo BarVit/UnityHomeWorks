@@ -155,7 +155,12 @@ public class ModuleRack : MonoBehaviour
 
     public List<ModuleStat> GetUpgradeStats(string moduleId)
     {
-        return _upgrades.GetUpgradableStats(moduleId);
+        List<ModuleStat> stats = _upgrades.GetUpgradableStats(moduleId);
+
+        if (stats.Remove(ModuleStat.Cooldown))
+            stats.Add(ModuleStat.Cooldown);
+
+        return stats;
     }
 
     public int GetLevel(string moduleId, ModuleStat stat)
