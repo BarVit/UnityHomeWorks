@@ -113,7 +113,7 @@ MonoBehaviour:
     _health: 80
     _weapon: reaper_1_gun
     _barrels: 1
-    _damage: 9
+    _damage: 11
     _movement: {fileID: 11400000, guid: ba870c54da02f4aabaab2e7fc7f400c6, type: 2}
     _skin: {fileID: 0}
     _rewardMoney: 450
@@ -128,7 +128,7 @@ MonoBehaviour:
     _health: 260
     _weapon: reaper_2_gun
     _barrels: 2
-    _damage: 25
+    _damage: 27
     _movement: {fileID: 11400000, guid: ec44c4c943f5c4325963d3017c8e51d1, type: 2}
     _skin: {fileID: 0}
     _rewardMoney: 600
@@ -158,7 +158,7 @@ MonoBehaviour:
     _health: 480
     _weapon: phantom_1_gun
     _barrels: 2
-    _damage: 30
+    _damage: 35
     _movement: {fileID: 11400000, guid: 90d8dd41b80474e9aa9bb1f27035f75b, type: 2}
     _skin: {fileID: 0}
     _rewardMoney: 600
@@ -173,7 +173,7 @@ MonoBehaviour:
     _health: 700
     _weapon: phantom_2_gun
     _barrels: 2
-    _damage: 45
+    _damage: 50
     _movement: {fileID: 11400000, guid: 34cf25f610b76417aa1d0bdfc23682c0, type: 2}
     _skin: {fileID: 0}
     _rewardMoney: 1000
@@ -188,7 +188,7 @@ MonoBehaviour:
     _health: 1500
     _weapon: phantom_3_gun
     _barrels: 3
-    _damage: 50
+    _damage: 60
     _movement: {fileID: 11400000, guid: 34cf25f610b76417aa1d0bdfc23682c0, type: 2}
     _skin: {fileID: 0}
     _rewardMoney: 1600
