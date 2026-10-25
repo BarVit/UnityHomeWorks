@@ -13,7 +13,7 @@ namespace TableImport
         {
             "id", "title", "owner", "delivery", "damage", "rate", "magazine", "reload_time", "projectile_speed", "barrels_max",
             "fire_pattern", "side_angle", "heat_per_shot", "cooldown_rate", "unlock_heat", "tick_interval", "turn_rate", "aim_time",
-            "area", "price", "unlock_after", "granted_after", "projectile", "beam",
+            "area", "fuse_delay", "blast_radius", "blast_time", "price", "unlock_after", "granted_after", "projectile", "beam",
             "icon", "projectile_sprite", "projectile_animation", "shot_effect",
             "hit_target_effect", "hit_world_effect",
             "shot_sound", "hit_target_sound", "hit_world_sound", "overheat_sound"
@@ -66,6 +66,10 @@ namespace TableImport
                     reader.ReadFloat("turn_rate", 0f, 1000f),
                     reader.ReadFloat("aim_time", 0f, 10f),
                     reader.ReadFloat("area", 0f, 20f),
+                    new BlastSettings(
+                        reader.ReadFloat("fuse_delay", 0f, 10f),
+                        reader.ReadFloat("blast_radius", 0f, 20f),
+                        reader.ReadFloat("blast_time", 0f, 10f)),
                     reader.ReadInt("price", 0, 1000000),
                     unlockAfter,
                     grantedAfter,

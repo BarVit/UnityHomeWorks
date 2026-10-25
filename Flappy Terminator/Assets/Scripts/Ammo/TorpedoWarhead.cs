@@ -26,15 +26,20 @@ public class TorpedoWarhead : MonoBehaviour
 
     public float FarDiameter => _farRadius * 2f;
 
+    public float GetFarDiameter(float radius)
+    {
+        return radius > 0f ? radius * 2f : FarDiameter;
+    }
+
     public Vector2 Centre => GetPoint(_blastNoseShare);
 
     public Vector2 Sensor => GetPoint(_fuseNoseShare);
 
     public bool IsFuseBurning => _fuseLeft > 0f;
 
-    public void StartFuse()
+    public void StartFuse(float delay)
     {
-        _fuseLeft = _fuseDelay;
+        _fuseLeft = delay > 0f ? delay : _fuseDelay;
     }
 
     public void Cancel()

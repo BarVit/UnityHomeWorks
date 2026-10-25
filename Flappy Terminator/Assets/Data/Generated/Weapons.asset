@@ -32,6 +32,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -67,6 +71,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 120000
     _unlockAfter: loc_04_03
     _grantedAfter: 
@@ -102,6 +110,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 15000
     _unlockAfter: loc_02_04
     _grantedAfter: 
@@ -137,6 +149,10 @@ MonoBehaviour:
     _turnRate: 90
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 25000
     _unlockAfter: loc_03_03
     _grantedAfter: 
@@ -172,6 +188,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 50000
     _unlockAfter: loc_03_06
     _grantedAfter: 
@@ -207,6 +227,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 60000
     _unlockAfter: ashen_void
     _grantedAfter: 
@@ -242,6 +266,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 6000
     _unlockAfter: loc_01_04
     _grantedAfter: 
@@ -277,6 +305,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 1.2
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: loc_05_07
@@ -312,6 +344,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 1.5
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 250000
     _unlockAfter: loc_05_02
     _grantedAfter: 
@@ -347,6 +383,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -382,6 +422,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -417,6 +461,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -453,6 +501,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -489,6 +541,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -525,6 +581,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -560,6 +620,10 @@ MonoBehaviour:
     _turnRate: 16
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -595,6 +659,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -629,7 +697,11 @@ MonoBehaviour:
     _tickInterval: 0
     _turnRate: 0
     _aimTime: 0
-    _area: 1.5
+    _area: 0.5
+    _blast:
+      _fuseDelay: 0.2
+      _radius: 0.75
+      _time: 0.1
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -665,6 +737,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -700,6 +776,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -735,6 +815,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -771,6 +855,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -806,6 +894,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 1.5
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -841,6 +933,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -876,6 +972,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -911,6 +1011,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -947,6 +1051,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -983,6 +1091,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -1018,6 +1130,10 @@ MonoBehaviour:
     _turnRate: 16
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -1053,6 +1169,10 @@ MonoBehaviour:
     _turnRate: 16
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -1088,6 +1208,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -1123,6 +1247,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -1159,6 +1287,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 1
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -1195,6 +1327,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 1.5
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -1230,6 +1366,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -1266,6 +1406,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -1303,6 +1447,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -1339,6 +1487,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -1375,6 +1527,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -1410,6 +1566,10 @@ MonoBehaviour:
     _turnRate: 16
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -1445,6 +1605,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 0
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -1480,6 +1644,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 1.5
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
@@ -1515,6 +1683,10 @@ MonoBehaviour:
     _turnRate: 0
     _aimTime: 0
     _area: 1.5
+    _blast:
+      _fuseDelay: 0
+      _radius: 0
+      _time: 0
     _price: 0
     _unlockAfter: 
     _grantedAfter: 

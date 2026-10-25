@@ -73,7 +73,7 @@ public class TorpedoDelivery : ProjectileDelivery
         {
             if (IsOpenTarget(_near[i]))
             {
-                warhead.StartFuse();
+                warhead.StartFuse(Row.Blast.FuseDelay);
 
                 return;
             }
@@ -125,7 +125,9 @@ public class TorpedoDelivery : ProjectileDelivery
 
         int damage = RollDamage(barrel, out bool isCrit);
 
-        wave.Play(warhead.NearDiameter, warhead.FarDiameter, damage, Context.TargetFilter);
+        float far = warhead.GetFarDiameter(Row.Blast.Radius);
+
+        wave.Play(Mathf.Min(warhead.NearDiameter, far), far, damage, Context.TargetFilter, Row.Blast.Time);
 
         if (isCrit)
             ShowCrit(centre, damage);

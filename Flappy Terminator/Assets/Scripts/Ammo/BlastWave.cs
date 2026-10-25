@@ -17,6 +17,7 @@ public class BlastWave : MonoBehaviour, IPoolable
     private float _fromRadius;
     private float _toRadius;
     private float _timeLeft;
+    private float _playTime;
     private int _damage;
 
     public event Action<IPoolable> Released;
@@ -40,7 +41,7 @@ public class BlastWave : MonoBehaviour, IPoolable
             return;
         }
 
-        Grow(1f - _timeLeft / _lifetime);
+        Grow(1f - _timeLeft / _playTime);
     }
 
     public void OnSpawn()
@@ -53,13 +54,14 @@ public class BlastWave : MonoBehaviour, IPoolable
     {
     }
 
-    public void Play(float nearDiameter, float farDiameter, int damage, ContactFilter2D filter)
+    public void Play(float nearDiameter, float farDiameter, int damage, ContactFilter2D filter, float time = 0f)
     {
+        _playTime = time > 0f ? time : _lifetime;
         _fromRadius = nearDiameter * 0.5f;
         _toRadius = farDiameter * 0.5f;
         _damage = damage;
         _filter = filter;
-        _timeLeft = _lifetime;
+        _timeLeft = _playTime;
         _damaged.Clear();
         Grow(0f);
     }
