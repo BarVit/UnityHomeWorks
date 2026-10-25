@@ -9346,12 +9346,57 @@ MonoBehaviour:
   - _location: loc_05_01
     _level: 1
     _order: 1
-    _count: 1
+    _count: 5
     _mode: 1
     _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
+    - predator_1
+    _interval: 3
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_05_01
+    _level: 1
+    _order: 2
+    _count: 5
+    _mode: 1
+    _enemies:
+    - executioner_2
+    _interval: 3
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_05_01
+    _level: 1
+    _order: 3
+    _count: 5
+    _mode: 1
+    _enemies:
+    - executioner_3
+    _interval: 3
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_05_01
+    _level: 1
+    _order: 4
+    _count: 5
+    _mode: 1
+    _enemies:
+    - predator_2
+    _interval: 3
+    _intervalMax: 3
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
