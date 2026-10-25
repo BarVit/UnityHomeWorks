@@ -135,7 +135,7 @@ namespace UiContent
                          "Energy Shield Icon", "Health Icon", "Cooldown Icon", "Double Shot Icon",
                          "Speed Icon", "Napalm Icon", "Turn Icon", "Reload Icon", "Magazine Icon", "White Square",
                          "Repair Drone Icon", "Repair Icon", "Sentry Drones Icon", "Lifetime Icon", "Repair Nanobots Icon", "EMP Icon", "Stasis Icon",
-                         "Auto Aim Icon", "Pierce Icon" })
+                         "Auto Aim Icon", "Pierce Icon", "Blast Radius Icon" })
                 Prepare(name, 0);
 
             for (int level = 0; level <= ShieldColors.MaxLevel; level++)
@@ -303,7 +303,7 @@ namespace UiContent
             so.FindProperty("_stasisIcon").objectReferenceValue = Art("Stasis Icon");
             so.FindProperty("_autoAimIcon").objectReferenceValue = Art("Auto Aim Icon");
             so.FindProperty("_pierceIcon").objectReferenceValue = Art("Pierce Icon");
-            so.FindProperty("_blastIcon").objectReferenceValue = Art("EMP Icon");
+            so.FindProperty("_blastIcon").objectReferenceValue = Art("Blast Radius Icon");
             so.FindProperty("_shop").objectReferenceValue = shop;
             so.FindProperty("_shopButton").objectReferenceValue = shopButton;
             so.FindProperty("_menuButton").objectReferenceValue = menu;
