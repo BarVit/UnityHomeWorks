@@ -15,7 +15,7 @@ public class EmpField : MonoBehaviour
     [SerializeField] private LayerMask _enemyLayers;
     [SerializeField] private LayerMask _enemyAmmoLayers;
     [SerializeField] private float _growTime = 1f;
-    [SerializeField] private float _radiusInScreens = 1f;
+    [SerializeField] private float _radiusInScreens = 0.9f;
     [SerializeField] private float _fadeTime = 0.25f;
     [SerializeField] private float _minBoltDelay = 0.2f;
     [SerializeField] private float _maxBoltDelay = 0.5f;

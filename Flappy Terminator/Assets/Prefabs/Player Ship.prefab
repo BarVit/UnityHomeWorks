@@ -7263,7 +7263,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _growTime: 1
-  _radiusInScreens: 1
+  _radiusInScreens: 0.9
   _fadeTime: 0.25
   _minBoltDelay: 0.2
   _maxBoltDelay: 0.5

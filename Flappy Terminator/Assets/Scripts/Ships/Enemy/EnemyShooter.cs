@@ -33,8 +33,15 @@ public class EnemyShooter : MonoBehaviour
 
     private void Update()
     {
-        if (_delivery == null || _isFrozen)
+        if (_delivery == null)
             return;
+
+        if (_isFrozen)
+        {
+            FadeLoops(Time.deltaTime);
+
+            return;
+        }
 
         _delivery.Tick(Time.deltaTime);
         _special?.Tick(Time.deltaTime);
@@ -83,6 +90,12 @@ public class EnemyShooter : MonoBehaviour
     public void Freeze(bool isFrozen)
     {
         _isFrozen = isFrozen;
+    }
+
+    private void FadeLoops(float deltaTime)
+    {
+        _loop.Tick(deltaTime);
+        _hitLoop.Tick(deltaTime);
     }
 
     private int TryShoot()
