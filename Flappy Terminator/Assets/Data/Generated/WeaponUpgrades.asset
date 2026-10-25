@@ -376,32 +376,32 @@ MonoBehaviour:
   - _owner: railgun
     _stat: 10
     _level: 0
-    _bonus: 0
+    _bonus: 25
     _price: 0
   - _owner: railgun
     _stat: 10
     _level: 1
-    _bonus: 20
+    _bonus: 15
     _price: 5500
   - _owner: railgun
     _stat: 10
     _level: 2
-    _bonus: 20
+    _bonus: 15
     _price: 8000
   - _owner: railgun
     _stat: 10
     _level: 3
-    _bonus: 20
+    _bonus: 15
     _price: 11000
   - _owner: railgun
     _stat: 10
     _level: 4
-    _bonus: 20
+    _bonus: 15
     _price: 14000
   - _owner: railgun
     _stat: 10
     _level: 5
-    _bonus: 20
+    _bonus: 15
     _price: 17000
   - _owner: plasma
     _stat: 0
