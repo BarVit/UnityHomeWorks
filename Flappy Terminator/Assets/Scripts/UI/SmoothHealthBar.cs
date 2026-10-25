@@ -6,12 +6,11 @@ public class SmoothHealthBar : MonoBehaviour
     [SerializeField] private Health _health;
     [SerializeField] private RectTransform _healthFill;
     [SerializeField] private RectTransform _damageFill;
-    [SerializeField] private float _healthFallTime = 0.15f;
     [SerializeField] private float _damageHoldTime = 1f;
     [SerializeField] private float _damageFallTime = 0.35f;
 
-    private Coroutine _healthFalling;
     private Coroutine _damageFalling;
+    private float _damageTarget;
 
     private void OnEnable()
     {
@@ -32,19 +31,19 @@ public class SmoothHealthBar : MonoBehaviour
     {
         float target = GetPart(value);
 
-        StopFalling(ref _healthFalling);
-        _healthFalling = StartCoroutine(Fall(_healthFill, target, _healthFallTime, 0f));
-
-        StopFalling(ref _damageFalling);
+        SetPart(_healthFill, target);
+        _damageTarget = target;
 
         if (target >= GetPart(_damageFill))
         {
+            StopFalling();
             SetPart(_damageFill, target);
 
             return;
         }
 
-        _damageFalling = StartCoroutine(Fall(_damageFill, target, _damageFallTime, _damageHoldTime));
+        if (_damageFalling == null)
+            _damageFalling = StartCoroutine(Chase());
     }
 
     private float GetPart(int value)
@@ -67,36 +66,49 @@ public class SmoothHealthBar : MonoBehaviour
 
     private void SetInstantly(float part)
     {
-        StopFalling(ref _healthFalling);
-        StopFalling(ref _damageFalling);
-
+        StopFalling();
+        _damageTarget = part;
         SetPart(_healthFill, part);
         SetPart(_damageFill, part);
     }
 
-    private void StopFalling(ref Coroutine falling)
+    private void StopFalling()
     {
-        if (falling == null)
+        if (_damageFalling == null)
             return;
 
-        StopCoroutine(falling);
-        falling = null;
+        StopCoroutine(_damageFalling);
+        _damageFalling = null;
     }
 
-    private IEnumerator Fall(RectTransform fill, float target, float time, float delay)
+    private IEnumerator Chase()
     {
-        if (delay > 0f)
-            yield return new WaitForSeconds(delay);
+        if (_damageHoldTime > 0f)
+            yield return new WaitForSeconds(_damageHoldTime);
 
-        float start = GetPart(fill);
+        float fallTime = Mathf.Max(_damageFallTime, Mathf.Epsilon);
+        float speed = 0f;
+        float idle = 0f;
 
-        for (float elapsed = 0f; elapsed < time; elapsed += Time.deltaTime)
+        while (idle <= _damageHoldTime)
         {
-            SetPart(fill, Mathf.Lerp(start, target, elapsed / time));
+            float gap = GetPart(_damageFill) - _damageTarget;
+
+            if (gap <= 0f)
+            {
+                speed = 0f;
+                idle += Time.deltaTime;
+            }
+            else
+            {
+                idle = 0f;
+                speed = Mathf.Max(speed, gap / fallTime);
+                SetPart(_damageFill, Mathf.MoveTowards(GetPart(_damageFill), _damageTarget, speed * Time.deltaTime));
+            }
 
             yield return null;
         }
 
-        SetPart(fill, target);
+        _damageFalling = null;
     }
 }
