@@ -24,12 +24,24 @@ public static class DamageLog
     private static string _location = string.Empty;
     private static int _level;
     private static string _source;
+    private static string _phase = string.Empty;
 
     public static void BeginLevel(string location, int level)
     {
         _location = location;
         _level = level;
         Write("level_start", string.Empty, string.Empty, string.Empty, 0, 0, 0, 0, 0, 0, string.Empty);
+    }
+
+    public static void Event(string eventName, string target = "", int targetRef = 0, string note = "")
+    {
+        Write(eventName, string.Empty, target, targetRef.ToString(CultureInfo.InvariantCulture), 0, 0, 0, 0, 0, 0,
+            note);
+    }
+
+    public static void SetPhase(string phase)
+    {
+        _phase = phase ?? string.Empty;
     }
 
     public static void SetSource(string source)
@@ -93,6 +105,9 @@ public static class DamageLog
     {
         if (Lines.Count >= MaxLines)
             Lines.RemoveRange(0, MaxLines / 2);
+
+        if (_phase.Length > 0)
+            note = note.Length > 0 ? note + " " + _phase : _phase;
 
         Lines.Add(string.Join(Separator, Time.time.ToString("0.000", CultureInfo.InvariantCulture), _location,
             _level.ToString(CultureInfo.InvariantCulture), eventName, source, target, targetRef,

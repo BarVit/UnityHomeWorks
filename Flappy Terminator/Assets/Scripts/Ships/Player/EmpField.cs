@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -70,6 +71,9 @@ public class EmpField : MonoBehaviour
         float radius = GetRadius();
         Vector2 center = _ship.position;
 
+        DamageLog.SetPhase("emp " + _elapsed.ToString("0.00", CultureInfo.InvariantCulture) + "s r "
+            + radius.ToString("0.0", CultureInfo.InvariantCulture));
+
         Place(center, radius);
         FreezeEnemies(center, radius);
         PopAmmo(center, radius);
@@ -84,10 +88,15 @@ public class EmpField : MonoBehaviour
         IsActive = true;
         _dome.enabled = true;
         Place(_ship.position, 0f);
+        DamageLog.Event("emp_start", note: "duration " + _duration.ToString("0.##", CultureInfo.InvariantCulture));
     }
 
     public void Stop()
     {
+        if (IsActive)
+            DamageLog.Event("emp_end", note: "frozen " + _frozen.Count);
+
+        DamageLog.SetPhase(string.Empty);
         IsActive = false;
         _dome.enabled = false;
 
@@ -137,8 +146,12 @@ public class EmpField : MonoBehaviour
         {
             EnemyShip ship = _hits[i].GetComponentInParent<EnemyShip>();
 
-            if (ship != null && ship.IsDead == false && _frozen.Add(ship))
-                ship.Freeze();
+            if (ship == null || ship.IsDead || _frozen.Add(ship) == false)
+                continue;
+
+            ship.Freeze();
+            DamageLog.Event("emp_freeze", ship.LogName, ship.GetInstanceID(), "at "
+                + Vector2.Distance(center, ship.transform.position).ToString("0.0", CultureInfo.InvariantCulture));
         }
     }
 

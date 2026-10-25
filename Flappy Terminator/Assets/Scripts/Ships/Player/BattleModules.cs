@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using UnityEngine;
 
 public class BattleModules : MonoBehaviour
@@ -116,7 +117,13 @@ public class BattleModules : MonoBehaviour
             return;
 
         if (_cooldownLeft[slot] > 0f || IsActive(slot))
+        {
+            if (spec.Value.Kind == ModuleKind.Emp)
+                DamageLog.Event("emp_refused", note: IsActive(slot) ? "active"
+                    : "cooldown " + _cooldownLeft[slot].ToString("0.0", CultureInfo.InvariantCulture));
+
             return;
+        }
 
         switch (spec.Value.Kind)
         {
