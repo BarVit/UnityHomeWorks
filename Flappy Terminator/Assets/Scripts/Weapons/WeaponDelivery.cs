@@ -85,6 +85,8 @@ public abstract class WeaponDelivery
 
     protected float ProjectileSpeed => _projectileSpeed;
 
+    protected virtual bool IsHoldingHeat => false;
+
     private float Cooldown => _row.Rate * _context.RateScale;
 
     private int BaseDamage => _context.Damage > 0 ? _context.Damage : _row.Damage;
@@ -322,7 +324,7 @@ public abstract class WeaponDelivery
 
     private void Cool(float deltaTime)
     {
-        if (_heat <= 0f)
+        if (_heat <= 0f || IsHoldingHeat)
             return;
 
         _heat = Mathf.Max(0f, _heat - _coolingRate * deltaTime);

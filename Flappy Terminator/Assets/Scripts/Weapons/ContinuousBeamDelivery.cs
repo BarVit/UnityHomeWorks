@@ -8,11 +8,13 @@ public class ContinuousBeamDelivery : BeamDelivery
     private static readonly Color HotColor = new Color(1f, 0.2f, 0.12f);
 
     private const float ContinuousGapShare = 5f;
+    private const float FiringGapShare = 1.5f;
 
     private readonly Dictionary<IDamageable, float> _owed = new Dictionary<IDamageable, float>();
 
     private float _lastFireTime = float.NegativeInfinity;
     private float _strikeTime;
+    private float _sinceFire = float.PositiveInfinity;
 
     public ContinuousBeamDelivery(WeaponRow row, WeaponContext context) : base(row, context)
     {
@@ -20,12 +22,16 @@ public class ContinuousBeamDelivery : BeamDelivery
 
     public override Transform LockTarget => Target;
 
+    protected override bool IsHoldingHeat => Row.Owner == WeaponOwner.Player && IsOverheated == false
+        && _sinceFire <= Row.Rate * FiringGapShare;
+
     protected override void OnFire()
     {
         float elapsed = Time.time - _lastFireTime;
 
         _strikeTime = elapsed <= Row.Rate * ContinuousGapShare ? elapsed : Row.Rate;
         _lastFireTime = Time.time;
+        _sinceFire = 0f;
         ForgetTarget();
         ForgetHits();
 
@@ -33,6 +39,12 @@ public class ContinuousBeamDelivery : BeamDelivery
             Shoot(barrel);
 
         HoldLoop();
+    }
+
+    protected override void OnTick(float deltaTime)
+    {
+        base.OnTick(deltaTime);
+        _sinceFire += deltaTime;
     }
 
     protected override int GetStrikeDamage(IDamageable damageable, int barrel, out bool isCrit)
