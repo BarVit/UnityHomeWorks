@@ -348,7 +348,7 @@ MonoBehaviour:
       _fuseDelay: 0
       _radius: 0
       _time: 0
-    _price: 250000
+    _price: 800000
     _unlockAfter: loc_05_02
     _grantedAfter: 
     _projectile: {fileID: 4581286917286831887, guid: 39b8feebdbe9d4a6d8c35e7db650cfcd, type: 3}
