@@ -7647,11 +7647,11 @@ MonoBehaviour:
     _level: 1
     _order: 5
     _count: 2
-    _mode: 3
+    _mode: 1
     _enemies:
     - executioner_1
-    _interval: 1
-    _intervalMax: 2
+    _interval: 5
+    _intervalMax: 5
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -7760,11 +7760,11 @@ MonoBehaviour:
     _level: 1
     _order: 12
     _count: 2
-    _mode: 3
+    _mode: 1
     _enemies:
     - executioner_1
-    _interval: 1
-    _intervalMax: 2
+    _interval: 5
+    _intervalMax: 5
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -7856,11 +7856,11 @@ MonoBehaviour:
     _level: 2
     _order: 5
     _count: 2
-    _mode: 3
+    _mode: 1
     _enemies:
     - executioner_1
-    _interval: 1
-    _intervalMax: 2
+    _interval: 5
+    _intervalMax: 5
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -7969,11 +7969,11 @@ MonoBehaviour:
     _level: 2
     _order: 12
     _count: 2
-    _mode: 3
+    _mode: 1
     _enemies:
     - executioner_1
-    _interval: 1
-    _intervalMax: 2
+    _interval: 5
+    _intervalMax: 5
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -8065,11 +8065,11 @@ MonoBehaviour:
     _level: 3
     _order: 5
     _count: 2
-    _mode: 3
+    _mode: 1
     _enemies:
     - executioner_1
-    _interval: 1
-    _intervalMax: 2
+    _interval: 5
+    _intervalMax: 5
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -8178,11 +8178,11 @@ MonoBehaviour:
     _level: 3
     _order: 12
     _count: 2
-    _mode: 3
+    _mode: 1
     _enemies:
     - executioner_1
-    _interval: 1
-    _intervalMax: 2
+    _interval: 5
+    _intervalMax: 5
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -8274,11 +8274,11 @@ MonoBehaviour:
     _level: 4
     _order: 5
     _count: 1
-    _mode: 3
+    _mode: 1
     _enemies:
     - executioner_1
-    _interval: 1
-    _intervalMax: 2
+    _interval: 5
+    _intervalMax: 5
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
@@ -8387,11 +8387,11 @@ MonoBehaviour:
     _level: 4
     _order: 12
     _count: 2
-    _mode: 3
+    _mode: 1
     _enemies:
     - executioner_1
-    _interval: 1
-    _intervalMax: 2
+    _interval: 5
+    _intervalMax: 5
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0
