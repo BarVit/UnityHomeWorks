@@ -46,10 +46,10 @@ rocket	Napalm	4	20	9000
 rocket	Napalm	5	20	11250
 homing	Damage	0	0	0
 homing	Damage	1	10	5500
-homing	Damage	2	15	8000
+homing	Damage	2	10	8000
 homing	Damage	3	15	11000
-homing	Damage	4	20	14000
-homing	Damage	5	20	17000
+homing	Damage	4	15	14000
+homing	Damage	5	15	17000
 homing	CritChance	0	0	0
 homing	TurnRate	0	-30	0
 homing	TurnRate	1	10	4500
