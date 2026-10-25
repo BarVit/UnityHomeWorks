@@ -792,102 +792,102 @@ MonoBehaviour:
     _stat: 1
     _level: 1
     _bonus: -0.02
-    _price: 76
+    _price: 114
   - _owner: plasma
     _stat: 1
     _level: 2
     _bonus: -0.02
-    _price: 106
+    _price: 159
   - _owner: plasma
     _stat: 1
     _level: 3
     _bonus: -0.02
-    _price: 144
+    _price: 216
   - _owner: plasma
     _stat: 1
     _level: 4
     _bonus: -0.02
-    _price: 200
+    _price: 300
   - _owner: plasma
     _stat: 1
     _level: 5
     _bonus: -0.02
-    _price: 278
+    _price: 417
   - _owner: plasma
     _stat: 1
     _level: 6
     _bonus: -0.02
-    _price: 376
+    _price: 564
   - _owner: plasma
     _stat: 1
     _level: 7
     _bonus: -0.02
-    _price: 526
+    _price: 789
   - _owner: plasma
     _stat: 1
     _level: 8
     _bonus: -0.02
-    _price: 750
+    _price: 1125
   - _owner: plasma
     _stat: 1
     _level: 9
     _bonus: -0.02
-    _price: 1014
+    _price: 1521
   - _owner: plasma
     _stat: 1
     _level: 10
     _bonus: -0.02
-    _price: 1426
+    _price: 2139
   - _owner: plasma
     _stat: 1
     _level: 11
     _bonus: -0.02
-    _price: 1988
+    _price: 2982
   - _owner: plasma
     _stat: 1
     _level: 12
     _bonus: -0.02
-    _price: 2738
+    _price: 4107
   - _owner: plasma
     _stat: 1
     _level: 13
     _bonus: -0.02
-    _price: 3750
+    _price: 5625
   - _owner: plasma
     _stat: 1
     _level: 14
     _bonus: -0.02
-    _price: 5250
+    _price: 7875
   - _owner: plasma
     _stat: 1
     _level: 15
     _bonus: -0.02
-    _price: 7126
+    _price: 10689
   - _owner: plasma
     _stat: 1
     _level: 16
     _bonus: -0.02
-    _price: 10126
+    _price: 15189
   - _owner: plasma
     _stat: 1
     _level: 17
     _bonus: -0.02
-    _price: 13876
+    _price: 20814
   - _owner: plasma
     _stat: 1
     _level: 18
     _bonus: -0.02
-    _price: 19500
+    _price: 29250
   - _owner: plasma
     _stat: 1
     _level: 19
     _bonus: -0.02
-    _price: 27000
+    _price: 40500
   - _owner: plasma
     _stat: 1
     _level: 20
     _bonus: -0.02
-    _price: 37500
+    _price: 56250
   - _owner: 
     _stat: 4
     _level: 0
