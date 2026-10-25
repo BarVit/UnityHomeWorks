@@ -619,7 +619,7 @@ MonoBehaviour:
     _rate: 2.4
     _magazine: 0
     _reloadTime: 0
-    _projectileSpeed: 4
+    _projectileSpeed: 5
     _barrelsMax: 4
     _firePattern: 2
     _sideAngle: 45
