@@ -238,3 +238,33 @@ MonoBehaviour:
     _skin: {fileID: 0}
     _rewardMoney: 5000
     _rewardXp: 1000
+  - _id: predator_1
+    _type: enemy_predator
+    _title: "\u0425\u0438\u0449\u043D\u0438\u043A I"
+    _tier: 1
+    _prefab: {fileID: 748883696485598149, guid: f3ce931cb0aab404e9193adcee789b60, type: 3}
+    _bodyDamage: 110
+    _fromLocation: loc_05_02
+    _health: 2400
+    _weapon: predator_1_gun
+    _barrels: 3
+    _damage: 30
+    _movement: {fileID: 11400000, guid: 90d8dd41b80474e9aa9bb1f27035f75b, type: 2}
+    _skin: {fileID: 0}
+    _rewardMoney: 2200
+    _rewardXp: 440
+  - _id: predator_2
+    _type: enemy_predator
+    _title: "\u0425\u0438\u0449\u043D\u0438\u043A II"
+    _tier: 2
+    _prefab: {fileID: 748883696485598149, guid: f3ce931cb0aab404e9193adcee789b60, type: 3}
+    _bodyDamage: 160
+    _fromLocation: loc_05_08
+    _health: 5400
+    _weapon: predator_2_gun
+    _barrels: 3
+    _damage: 150
+    _movement: {fileID: 11400000, guid: da73c4fdab4c54894b366a2a1f80dbc9, type: 2}
+    _skin: {fileID: 0}
+    _rewardMoney: 6000
+    _rewardXp: 1200

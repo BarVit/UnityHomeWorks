@@ -14,3 +14,5 @@ phantom_3	enemy_phantom	Призрак III	3	Enemy 4	70	loc_05_01	3200	phantom_3
 executioner_1	enemy_executioner	Палач I	1	Enemy 5	100	loc_04_04	2800	executioner_1_gun	beam_laser	1	150	Drift Retreat Wide		2000	400
 executioner_2	enemy_executioner	Палач II	2	Enemy 5	120	loc_05_04	4500	executioner_2_gun	rocket	3	100	Up And Down		3000	600
 executioner_3	enemy_executioner	Палач III	3	Enemy 5	150	loc_05_06	6000	executioner_3_gun	railgun	1	240	Ellipse		5000	1000
+predator_1	enemy_predator	Хищник I	1	Enemy 6	110	loc_05_02	2400	predator_1_gun	impulse_laser	3	30	Forward Leap		2200	440
+predator_2	enemy_predator	Хищник II	2	Enemy 6	160	loc_05_08	5400	predator_2_gun	plasma	3	150	Hover Guard		6000	1200

@@ -15,7 +15,7 @@ namespace EnemyContent
         private const float BaseHalfWidth = 0.405f;
         private const float BaseHalfHeight = 0.39f;
         private const string MountRootName = "Mounts";
-        private const int ShipCount = 5;
+        private const int ShipCount = 6;
 
         private static readonly Vector3[] MountPositions =
         {
@@ -32,6 +32,16 @@ namespace EnemyContent
         private static readonly Vector3[] ExecutionerBeamPositions =
         {
             new Vector3(-0.2f, 0f, 0f)
+        };
+
+        private const string PredatorLayout = "Layout 3";
+        private const int PredatorShip = 6;
+
+        private static readonly Vector3[] PredatorPositions =
+        {
+            new Vector3(-0.42f, 0f, 0f),
+            new Vector3(-0.36f, 0.36f, 0f),
+            new Vector3(-0.36f, -0.36f, 0f)
         };
 
         private static readonly Vector3[] FourBarrelPositions =
@@ -85,12 +95,16 @@ namespace EnemyContent
         [MenuItem("Tools/Enemies/Add Weapon Layouts")]
         public static void AddWeaponLayouts()
         {
-            string path = GetPath(ExecutionerShip);
-            GameObject root = PrefabUtility.LoadPrefabContents(path);
+            foreach (int number in new[] { ExecutionerShip, PredatorShip })
+            {
+                string path = GetPath(number);
+                GameObject root = PrefabUtility.LoadPrefabContents(path);
 
-            AddWeaponLayouts(root, ExecutionerShip);
-            PrefabUtility.SaveAsPrefabAsset(root, path);
-            PrefabUtility.UnloadPrefabContents(root);
+                AddWeaponLayouts(root, number);
+                PrefabUtility.SaveAsPrefabAsset(root, path);
+                PrefabUtility.UnloadPrefabContents(root);
+            }
+
             Debug.Log("Враги: раскладки стволов под оружие на месте");
         }
 
@@ -98,6 +112,9 @@ namespace EnemyContent
         {
             if (number == ExecutionerShip)
                 SetLayout(GetMountRoot(root.transform), ExecutionerBeamLayout, ExecutionerBeamPositions, Vector2.one);
+
+            if (number == PredatorShip)
+                SetLayout(GetMountRoot(root.transform), PredatorLayout, PredatorPositions, Vector2.one);
         }
 
         [MenuItem("Tools/Enemies/Fit Boss Colliders")]

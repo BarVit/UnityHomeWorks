@@ -7,7 +7,7 @@ namespace EnemyContent
     public static class EnemyShieldBuilder
     {
         private const string Folder = "Assets/Prefabs/Enemies/";
-        private const int ShipCount = 5;
+        private const int ShipCount = 6;
         private const float ShieldSizeScale = 1.1f;
         private const float BreakDuration = 0.4f;
 

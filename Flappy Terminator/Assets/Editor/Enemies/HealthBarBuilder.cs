@@ -17,9 +17,10 @@ namespace EnemyContent
         {
             "Assets/Prefabs/Enemies/Enemy 1.prefab", "Assets/Prefabs/Enemies/Enemy 2.prefab",
             "Assets/Prefabs/Enemies/Enemy 3.prefab", "Assets/Prefabs/Enemies/Enemy 4.prefab",
-            "Assets/Prefabs/Enemies/Enemy 5.prefab", "Assets/Prefabs/Bosses/Boss 1.prefab",
-            "Assets/Prefabs/Bosses/Boss 2.prefab", "Assets/Prefabs/Bosses/Boss 3.prefab",
-            "Assets/Prefabs/Bosses/Boss 4.prefab", "Assets/Prefabs/Bosses/Boss 5.prefab"
+            "Assets/Prefabs/Enemies/Enemy 5.prefab", "Assets/Prefabs/Enemies/Enemy 6.prefab",
+            "Assets/Prefabs/Bosses/Boss 1.prefab", "Assets/Prefabs/Bosses/Boss 2.prefab",
+            "Assets/Prefabs/Bosses/Boss 3.prefab", "Assets/Prefabs/Bosses/Boss 4.prefab",
+            "Assets/Prefabs/Bosses/Boss 5.prefab"
         };
 
         [MenuItem("Tools/Enemies/Build Health Bars")]
