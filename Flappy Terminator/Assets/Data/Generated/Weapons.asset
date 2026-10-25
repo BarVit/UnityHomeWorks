@@ -880,13 +880,13 @@ MonoBehaviour:
     _owner: 1
     _delivery: 0
     _damage: 100
-    _rate: 3.6
+    _rate: 2.4
     _magazine: 0
     _reloadTime: 0
     _projectileSpeed: 6
     _barrelsMax: 3
     _firePattern: 2
-    _sideAngle: 8
+    _sideAngle: 7
     _heatPerShot: 0
     _cooldownRate: 0
     _unlockHeat: 0
