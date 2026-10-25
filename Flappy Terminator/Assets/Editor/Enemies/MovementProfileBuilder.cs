@@ -7,6 +7,8 @@ namespace EnemyContent
     public static class MovementProfileBuilder
     {
         private const string Folder = "Assets/Data/Movements";
+        private const float DriftAmplitude = 1.875f;
+        private const float WideDriftAmplitude = 2.4f;
 
         [MenuItem("Tools/Enemies/Create Movement Profiles")]
         public static void Build()
@@ -43,6 +45,13 @@ namespace EnemyContent
             {
                 SetSpeed(profile, 0.5f, 3f);
                 SetDrift(profile);
+                profile.FindProperty("_advanceShare").floatValue = 0.667f;
+                profile.FindProperty("_retreatShare").floatValue = 0.5f;
+            });
+            Create<DriftRetreatProfile>("Drift Retreat Wide", profile =>
+            {
+                SetSpeed(profile, 0.5f, 3f);
+                SetDrift(profile, WideDriftAmplitude);
                 profile.FindProperty("_advanceShare").floatValue = 0.667f;
                 profile.FindProperty("_retreatShare").floatValue = 0.5f;
             });
@@ -97,9 +106,9 @@ namespace EnemyContent
             profile.FindProperty("_maxSpeed").floatValue = max;
         }
 
-        private static void SetDrift(SerializedObject profile)
+        private static void SetDrift(SerializedObject profile, float amplitude = DriftAmplitude)
         {
-            profile.FindProperty("_amplitude").floatValue = 1.5f;
+            profile.FindProperty("_amplitude").floatValue = amplitude;
             profile.FindProperty("_period").floatValue = 2f;
         }
 

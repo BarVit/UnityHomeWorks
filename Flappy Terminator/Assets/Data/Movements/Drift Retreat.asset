@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DriftRetreatProfile
   _minSpeed: 0.5
   _maxSpeed: 3
-  _amplitude: 1.5
+  _amplitude: 1.875
   _period: 2
   _advanceShare: 0.667
   _retreatShare: 0.5
