@@ -98,7 +98,7 @@ namespace TableImport
 
             Reward shield = row.ShieldReward;
 
-            if (row.Mode == WaveMode.Sequence)
+            if (row.Mode != WaveMode.Random)
             {
                 for (int i = 0; i < row.Count; i++)
                 {

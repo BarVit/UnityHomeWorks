@@ -98,9 +98,9 @@ namespace TableImport
             if (text.Length == 0)
                 return;
 
-            if (mode == WaveMode.Boss)
+            if (mode == WaveMode.Boss || mode == WaveMode.Solo)
             {
-                reader.Fail("batch: босс выходит один, оставьте пустым");
+                reader.Fail("batch: в режиме " + mode + " враги выходят по одному, оставьте пустым");
 
                 return;
             }

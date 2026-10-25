@@ -164,8 +164,8 @@ tr.err-row td { background: var(--error-soft); color: var(--error); font-size: 1
 
 const NAMES = ['waves', 'locations', 'enemies', 'bosses', 'enemy_shields', 'systems'];
 const EDITABLE = ['waves', 'locations'];
-const MODES = ['Sequence', 'Random', 'Boss'];
-const MODE_TITLES = { Sequence: 'По очереди', Random: 'Случайно', Boss: 'Босс' };
+const MODES = ['Sequence', 'Random', 'Boss', 'Solo'];
+const MODE_TITLES = { Sequence: 'По очереди', Random: 'Случайно', Boss: 'Босс', Solo: 'По одному на пустое поле' };
 const DB_NAME = 'wave-editor';
 
 const S = {
@@ -447,8 +447,8 @@ function checkRow(row, C, keys) {
     const min = match ? +match[1] : NaN;
     const max = match ? +(match[2] ?? match[1]) : NaN;
 
-    if (mode === 'Boss')
-      fail('batch', 'batch: босс выходит один, оставьте пустым');
+    if (mode === 'Boss' || mode === 'Solo')
+      fail('batch', 'batch: в режиме ' + mode + ' враги выходят по одному, оставьте пустым');
     else if (!match || min < 1 || max < min || max > 10)
       fail('batch', 'batch: «' + row.batch + '» — нужно число или диапазон вида 2-3, от 1 до 10');
   }
@@ -503,7 +503,7 @@ function groupSum(row, C) {
 
   sum.time = isNaN(pause) ? 0 : Math.ceil(count / batchAverage(row.batch)) * pause;
 
-  if (mode === 'Sequence') {
+  if (mode === 'Sequence' || mode === 'Solo') {
     for (let i = 0; i < count; i++) {
       const enemy = C.enemies[ids[i % ids.length]];
 
@@ -558,7 +558,7 @@ function tallyGroup(row, C, types) {
     return;
   }
 
-  if (mode === 'Sequence') {
+  if (mode === 'Sequence' || mode === 'Solo') {
     for (let i = 0; i < count; i++) {
       const enemy = C.enemies[ids[i % ids.length]];
 

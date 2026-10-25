@@ -5427,6 +5427,3862 @@ MonoBehaviour:
     _shieldRewardXp: 0
     _batchMin: 1
     _batchMax: 1
+  - _location: loc_04_01
+    _level: 1
+    _order: 1
+    _count: 10
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 1.5
+    _intervalMax: 2.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_01
+    _level: 1
+    _order: 2
+    _count: 7
+    _mode: 1
+    _enemies:
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_01
+    _level: 1
+    _order: 3
+    _count: 8
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 3
+    _shieldCapacity: 40
+    _shieldRewardMoney: 200
+    _shieldRewardXp: 40
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_01
+    _level: 1
+    _order: 4
+    _count: 19
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_01
+    _level: 1
+    _order: 5
+    _count: 7
+    _mode: 1
+    _enemies:
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_01
+    _level: 1
+    _order: 6
+    _count: 7
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_01
+    _level: 1
+    _order: 7
+    _count: 7
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_01
+    _level: 1
+    _order: 8
+    _count: 4
+    _mode: 1
+    _enemies:
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_01
+    _level: 1
+    _order: 9
+    _count: 7
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_01
+    _level: 1
+    _order: 10
+    _count: 6
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_01
+    _level: 1
+    _order: 11
+    _count: 7
+    _mode: 1
+    _enemies:
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_01
+    _level: 2
+    _order: 1
+    _count: 8
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 1.5
+    _intervalMax: 2.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_01
+    _level: 2
+    _order: 2
+    _count: 8
+    _mode: 1
+    _enemies:
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_01
+    _level: 2
+    _order: 3
+    _count: 7
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 3
+    _shieldCapacity: 40
+    _shieldRewardMoney: 200
+    _shieldRewardXp: 40
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_01
+    _level: 2
+    _order: 4
+    _count: 19
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_01
+    _level: 2
+    _order: 5
+    _count: 8
+    _mode: 1
+    _enemies:
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_01
+    _level: 2
+    _order: 6
+    _count: 6
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_01
+    _level: 2
+    _order: 7
+    _count: 7
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_01
+    _level: 2
+    _order: 8
+    _count: 5
+    _mode: 1
+    _enemies:
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_01
+    _level: 2
+    _order: 9
+    _count: 6
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_01
+    _level: 2
+    _order: 10
+    _count: 6
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_01
+    _level: 2
+    _order: 11
+    _count: 10
+    _mode: 1
+    _enemies:
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_01
+    _level: 3
+    _order: 1
+    _count: 6
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 1.5
+    _intervalMax: 2.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_01
+    _level: 3
+    _order: 2
+    _count: 10
+    _mode: 1
+    _enemies:
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_01
+    _level: 3
+    _order: 3
+    _count: 5
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 3
+    _shieldCapacity: 40
+    _shieldRewardMoney: 200
+    _shieldRewardXp: 40
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_01
+    _level: 3
+    _order: 4
+    _count: 19
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_01
+    _level: 3
+    _order: 5
+    _count: 10
+    _mode: 1
+    _enemies:
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_01
+    _level: 3
+    _order: 6
+    _count: 5
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_01
+    _level: 3
+    _order: 7
+    _count: 7
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_01
+    _level: 3
+    _order: 8
+    _count: 7
+    _mode: 1
+    _enemies:
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_01
+    _level: 3
+    _order: 9
+    _count: 5
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_01
+    _level: 3
+    _order: 10
+    _count: 6
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_01
+    _level: 3
+    _order: 11
+    _count: 11
+    _mode: 1
+    _enemies:
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_02
+    _level: 1
+    _order: 1
+    _count: 7
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 1.5
+    _intervalMax: 2.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_02
+    _level: 1
+    _order: 2
+    _count: 7
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_02
+    _level: 1
+    _order: 3
+    _count: 5
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 3
+    _shieldCapacity: 40
+    _shieldRewardMoney: 200
+    _shieldRewardXp: 40
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_02
+    _level: 1
+    _order: 4
+    _count: 12
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_02
+    _level: 1
+    _order: 5
+    _count: 7
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_02
+    _level: 1
+    _order: 6
+    _count: 5
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_02
+    _level: 1
+    _order: 7
+    _count: 4
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_02
+    _level: 1
+    _order: 8
+    _count: 5
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_02
+    _level: 1
+    _order: 9
+    _count: 5
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_02
+    _level: 1
+    _order: 10
+    _count: 4
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_02
+    _level: 1
+    _order: 11
+    _count: 7
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_02
+    _level: 2
+    _order: 1
+    _count: 6
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 1.5
+    _intervalMax: 2.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_02
+    _level: 2
+    _order: 2
+    _count: 8
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_02
+    _level: 2
+    _order: 3
+    _count: 5
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 3
+    _shieldCapacity: 40
+    _shieldRewardMoney: 200
+    _shieldRewardXp: 40
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_02
+    _level: 2
+    _order: 4
+    _count: 12
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_02
+    _level: 2
+    _order: 5
+    _count: 8
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_02
+    _level: 2
+    _order: 6
+    _count: 4
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_02
+    _level: 2
+    _order: 7
+    _count: 4
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_02
+    _level: 2
+    _order: 8
+    _count: 5
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_02
+    _level: 2
+    _order: 9
+    _count: 4
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_02
+    _level: 2
+    _order: 10
+    _count: 4
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_02
+    _level: 2
+    _order: 11
+    _count: 10
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_02
+    _level: 3
+    _order: 1
+    _count: 5
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 1.5
+    _intervalMax: 2.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_02
+    _level: 3
+    _order: 2
+    _count: 10
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_02
+    _level: 3
+    _order: 3
+    _count: 4
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 3
+    _shieldCapacity: 40
+    _shieldRewardMoney: 200
+    _shieldRewardXp: 40
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_02
+    _level: 3
+    _order: 4
+    _count: 12
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_02
+    _level: 3
+    _order: 5
+    _count: 10
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_02
+    _level: 3
+    _order: 6
+    _count: 4
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_02
+    _level: 3
+    _order: 7
+    _count: 4
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_02
+    _level: 3
+    _order: 8
+    _count: 6
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_02
+    _level: 3
+    _order: 9
+    _count: 3
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_02
+    _level: 3
+    _order: 10
+    _count: 4
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_02
+    _level: 3
+    _order: 11
+    _count: 10
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_02
+    _level: 4
+    _order: 1
+    _count: 4
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 1.5
+    _intervalMax: 2.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_02
+    _level: 4
+    _order: 2
+    _count: 11
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_02
+    _level: 4
+    _order: 3
+    _count: 3
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 3
+    _shieldCapacity: 40
+    _shieldRewardMoney: 200
+    _shieldRewardXp: 40
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_02
+    _level: 4
+    _order: 4
+    _count: 12
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_02
+    _level: 4
+    _order: 5
+    _count: 11
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_02
+    _level: 4
+    _order: 6
+    _count: 3
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_02
+    _level: 4
+    _order: 7
+    _count: 4
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_02
+    _level: 4
+    _order: 8
+    _count: 7
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_02
+    _level: 4
+    _order: 9
+    _count: 3
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_02
+    _level: 4
+    _order: 10
+    _count: 4
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_02
+    _level: 4
+    _order: 11
+    _count: 13
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_03
+    _level: 1
+    _order: 1
+    _count: 4
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 1.5
+    _intervalMax: 2.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_03
+    _level: 1
+    _order: 2
+    _count: 5
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_03
+    _level: 1
+    _order: 3
+    _count: 3
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 3
+    _shieldCapacity: 40
+    _shieldRewardMoney: 200
+    _shieldRewardXp: 40
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_03
+    _level: 1
+    _order: 4
+    _count: 12
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_03
+    _level: 1
+    _order: 5
+    _count: 5
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_03
+    _level: 1
+    _order: 6
+    _count: 3
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_03
+    _level: 1
+    _order: 7
+    _count: 4
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_03
+    _level: 1
+    _order: 8
+    _count: 4
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_03
+    _level: 1
+    _order: 9
+    _count: 3
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_03
+    _level: 1
+    _order: 10
+    _count: 4
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_03
+    _level: 1
+    _order: 11
+    _count: 6
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_03
+    _level: 2
+    _order: 1
+    _count: 3
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 1.5
+    _intervalMax: 2.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_03
+    _level: 2
+    _order: 2
+    _count: 6
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_03
+    _level: 2
+    _order: 3
+    _count: 3
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 3
+    _shieldCapacity: 40
+    _shieldRewardMoney: 200
+    _shieldRewardXp: 40
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_03
+    _level: 2
+    _order: 4
+    _count: 11
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_03
+    _level: 2
+    _order: 5
+    _count: 6
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_03
+    _level: 2
+    _order: 6
+    _count: 3
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_03
+    _level: 2
+    _order: 7
+    _count: 4
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_03
+    _level: 2
+    _order: 8
+    _count: 4
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_03
+    _level: 2
+    _order: 9
+    _count: 2
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_03
+    _level: 2
+    _order: 10
+    _count: 4
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_03
+    _level: 2
+    _order: 11
+    _count: 7
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_03
+    _level: 3
+    _order: 1
+    _count: 3
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 1.5
+    _intervalMax: 2.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_03
+    _level: 3
+    _order: 2
+    _count: 7
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_03
+    _level: 3
+    _order: 3
+    _count: 3
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 3
+    _shieldCapacity: 40
+    _shieldRewardMoney: 200
+    _shieldRewardXp: 40
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_03
+    _level: 3
+    _order: 4
+    _count: 11
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_03
+    _level: 3
+    _order: 5
+    _count: 7
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_03
+    _level: 3
+    _order: 6
+    _count: 2
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_03
+    _level: 3
+    _order: 7
+    _count: 4
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_03
+    _level: 3
+    _order: 8
+    _count: 5
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_03
+    _level: 3
+    _order: 9
+    _count: 2
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_03
+    _level: 3
+    _order: 10
+    _count: 4
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_03
+    _level: 3
+    _order: 11
+    _count: 7
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_03
+    _level: 4
+    _order: 1
+    _count: 3
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 1.5
+    _intervalMax: 2.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_03
+    _level: 4
+    _order: 2
+    _count: 8
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_03
+    _level: 4
+    _order: 3
+    _count: 2
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 3
+    _shieldCapacity: 40
+    _shieldRewardMoney: 200
+    _shieldRewardXp: 40
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_03
+    _level: 4
+    _order: 4
+    _count: 11
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_03
+    _level: 4
+    _order: 5
+    _count: 8
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_03
+    _level: 4
+    _order: 6
+    _count: 2
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_03
+    _level: 4
+    _order: 7
+    _count: 4
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_03
+    _level: 4
+    _order: 8
+    _count: 5
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_03
+    _level: 4
+    _order: 9
+    _count: 2
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_03
+    _level: 4
+    _order: 10
+    _count: 4
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_03
+    _level: 4
+    _order: 11
+    _count: 8
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_03
+    _level: 5
+    _order: 1
+    _count: 2
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 1.5
+    _intervalMax: 2.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_03
+    _level: 5
+    _order: 2
+    _count: 9
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_03
+    _level: 5
+    _order: 3
+    _count: 2
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 3
+    _shieldCapacity: 40
+    _shieldRewardMoney: 200
+    _shieldRewardXp: 40
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_03
+    _level: 5
+    _order: 4
+    _count: 11
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_03
+    _level: 5
+    _order: 5
+    _count: 9
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_03
+    _level: 5
+    _order: 6
+    _count: 2
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_03
+    _level: 5
+    _order: 7
+    _count: 4
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_03
+    _level: 5
+    _order: 8
+    _count: 6
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_03
+    _level: 5
+    _order: 9
+    _count: 1
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_03
+    _level: 5
+    _order: 10
+    _count: 4
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_03
+    _level: 5
+    _order: 11
+    _count: 9
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_03
+    _level: 5
+    _order: 12
+    _count: 1
+    _mode: 2
+    _enemies:
+    - ripper_1
+    _interval: 0
+    _intervalMax: 0
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 1
+    _order: 1
+    _count: 4
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 1.5
+    _intervalMax: 2.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_04
+    _level: 1
+    _order: 2
+    _count: 7
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 1
+    _order: 3
+    _count: 3
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 3
+    _shieldCapacity: 40
+    _shieldRewardMoney: 200
+    _shieldRewardXp: 40
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_04
+    _level: 1
+    _order: 4
+    _count: 8
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_04
+    _level: 1
+    _order: 5
+    _count: 2
+    _mode: 3
+    _enemies:
+    - executioner_1
+    _interval: 1
+    _intervalMax: 2
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 1
+    _order: 6
+    _count: 7
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 1
+    _order: 7
+    _count: 3
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_04
+    _level: 1
+    _order: 8
+    _count: 3
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_04
+    _level: 1
+    _order: 9
+    _count: 5
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 1
+    _order: 10
+    _count: 2
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_04
+    _level: 1
+    _order: 11
+    _count: 3
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_04
+    _level: 1
+    _order: 12
+    _count: 2
+    _mode: 3
+    _enemies:
+    - executioner_1
+    _interval: 1
+    _intervalMax: 2
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 1
+    _order: 13
+    _count: 9
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 2
+    _order: 1
+    _count: 3
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 1.5
+    _intervalMax: 2.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_04
+    _level: 2
+    _order: 2
+    _count: 9
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 2
+    _order: 3
+    _count: 3
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 3
+    _shieldCapacity: 40
+    _shieldRewardMoney: 200
+    _shieldRewardXp: 40
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_04
+    _level: 2
+    _order: 4
+    _count: 8
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_04
+    _level: 2
+    _order: 5
+    _count: 2
+    _mode: 3
+    _enemies:
+    - executioner_1
+    _interval: 1
+    _intervalMax: 2
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 2
+    _order: 6
+    _count: 9
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 2
+    _order: 7
+    _count: 3
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_04
+    _level: 2
+    _order: 8
+    _count: 3
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_04
+    _level: 2
+    _order: 9
+    _count: 6
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 2
+    _order: 10
+    _count: 2
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_04
+    _level: 2
+    _order: 11
+    _count: 3
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_04
+    _level: 2
+    _order: 12
+    _count: 2
+    _mode: 3
+    _enemies:
+    - executioner_1
+    _interval: 1
+    _intervalMax: 2
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 2
+    _order: 13
+    _count: 10
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 3
+    _order: 1
+    _count: 3
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 1.5
+    _intervalMax: 2.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_04
+    _level: 3
+    _order: 2
+    _count: 10
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 3
+    _order: 3
+    _count: 2
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 3
+    _shieldCapacity: 40
+    _shieldRewardMoney: 200
+    _shieldRewardXp: 40
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_04
+    _level: 3
+    _order: 4
+    _count: 8
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_04
+    _level: 3
+    _order: 5
+    _count: 2
+    _mode: 3
+    _enemies:
+    - executioner_1
+    _interval: 1
+    _intervalMax: 2
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 3
+    _order: 6
+    _count: 10
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 3
+    _order: 7
+    _count: 2
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_04
+    _level: 3
+    _order: 8
+    _count: 3
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_04
+    _level: 3
+    _order: 9
+    _count: 7
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 3
+    _order: 10
+    _count: 2
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_04
+    _level: 3
+    _order: 11
+    _count: 3
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_04
+    _level: 3
+    _order: 12
+    _count: 2
+    _mode: 3
+    _enemies:
+    - executioner_1
+    _interval: 1
+    _intervalMax: 2
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 3
+    _order: 13
+    _count: 12
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 4
+    _order: 1
+    _count: 2
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 1.5
+    _intervalMax: 2.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_04
+    _level: 4
+    _order: 2
+    _count: 12
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 4
+    _order: 3
+    _count: 2
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 3
+    _shieldCapacity: 40
+    _shieldRewardMoney: 200
+    _shieldRewardXp: 40
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_04
+    _level: 4
+    _order: 4
+    _count: 8
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_04
+    _level: 4
+    _order: 5
+    _count: 1
+    _mode: 3
+    _enemies:
+    - executioner_1
+    _interval: 1
+    _intervalMax: 2
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 4
+    _order: 6
+    _count: 12
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 4
+    _order: 7
+    _count: 2
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_04
+    _level: 4
+    _order: 8
+    _count: 3
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_04
+    _level: 4
+    _order: 9
+    _count: 8
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 4
+    _order: 10
+    _count: 2
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_04
+    _level: 4
+    _order: 11
+    _count: 3
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_04
+    _level: 4
+    _order: 12
+    _count: 2
+    _mode: 3
+    _enemies:
+    - executioner_1
+    _interval: 1
+    _intervalMax: 2
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_04
+    _level: 4
+    _order: 13
+    _count: 13
+    _mode: 1
+    _enemies:
+    - reaper_3
+    - phantom_2
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_05
+    _level: 1
+    _order: 1
+    _count: 22
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 1.5
+    _intervalMax: 2.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_05
+    _level: 1
+    _order: 2
+    _count: 17
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 3
+    _shieldCapacity: 40
+    _shieldRewardMoney: 200
+    _shieldRewardXp: 40
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_05
+    _level: 1
+    _order: 3
+    _count: 50
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_05
+    _level: 1
+    _order: 4
+    _count: 17
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_05
+    _level: 1
+    _order: 5
+    _count: 17
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_05
+    _level: 1
+    _order: 6
+    _count: 17
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_05
+    _level: 1
+    _order: 7
+    _count: 16
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_05
+    _level: 2
+    _order: 1
+    _count: 22
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 1.5
+    _intervalMax: 2.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_05
+    _level: 2
+    _order: 2
+    _count: 17
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 3
+    _shieldCapacity: 40
+    _shieldRewardMoney: 200
+    _shieldRewardXp: 40
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_05
+    _level: 2
+    _order: 3
+    _count: 50
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_05
+    _level: 2
+    _order: 4
+    _count: 17
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_05
+    _level: 2
+    _order: 5
+    _count: 17
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_05
+    _level: 2
+    _order: 6
+    _count: 17
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_05
+    _level: 2
+    _order: 7
+    _count: 16
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_05
+    _level: 3
+    _order: 1
+    _count: 22
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 1.5
+    _intervalMax: 2.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_05
+    _level: 3
+    _order: 2
+    _count: 17
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 3
+    _shieldCapacity: 40
+    _shieldRewardMoney: 200
+    _shieldRewardXp: 40
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_05
+    _level: 3
+    _order: 3
+    _count: 49
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_05
+    _level: 3
+    _order: 4
+    _count: 17
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_05
+    _level: 3
+    _order: 5
+    _count: 17
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_05
+    _level: 3
+    _order: 6
+    _count: 16
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_05
+    _level: 3
+    _order: 7
+    _count: 16
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_05
+    _level: 4
+    _order: 1
+    _count: 40
+    _mode: 1
+    _enemies:
+    - warden_2
+    - hunter_1
+    - warden_2
+    - hunter_1
+    - reaper_1
+    _interval: 1
+    _intervalMax: 2
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 4
+    _batchMax: 6
+  - _location: loc_04_05
+    _level: 4
+    _order: 2
+    _count: 45
+    _mode: 1
+    _enemies:
+    - warden_2
+    - hunter_1
+    - warden_2
+    - hunter_1
+    - reaper_1
+    _interval: 1
+    _intervalMax: 2
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 4
+    _batchMax: 6
+  - _location: loc_04_05
+    _level: 4
+    _order: 3
+    _count: 25
+    _mode: 1
+    _enemies:
+    - warden_2
+    - hunter_1
+    - warden_2
+    - hunter_1
+    - reaper_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 7
+    _batchMax: 8
+  - _location: loc_04_05
+    _level: 4
+    _order: 4
+    _count: 15
+    _mode: 1
+    _enemies:
+    - warden_2
+    - hunter_1
+    - warden_2
+    - hunter_1
+    - reaper_1
+    _interval: 0.5
+    _intervalMax: 1
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_05
+    _level: 4
+    _order: 5
+    _count: 40
+    _mode: 1
+    _enemies:
+    - warden_2
+    - hunter_1
+    - warden_2
+    - hunter_1
+    - reaper_1
+    _interval: 1
+    _intervalMax: 2
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 4
+    _batchMax: 6
+  - _location: loc_04_05
+    _level: 4
+    _order: 6
+    _count: 40
+    _mode: 1
+    _enemies:
+    - warden_2
+    - hunter_1
+    - warden_2
+    - hunter_1
+    - reaper_1
+    _interval: 1
+    _intervalMax: 2
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 4
+    _batchMax: 6
+  - _location: loc_04_05
+    _level: 4
+    _order: 7
+    _count: 20
+    _mode: 1
+    _enemies:
+    - warden_2
+    - hunter_1
+    - warden_2
+    - hunter_1
+    - reaper_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 7
+    _batchMax: 8
+  - _location: loc_04_05
+    _level: 4
+    _order: 8
+    _count: 20
+    _mode: 1
+    _enemies:
+    - warden_2
+    - hunter_1
+    - warden_2
+    - hunter_1
+    - reaper_1
+    _interval: 0.5
+    _intervalMax: 1
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_05
+    _level: 4
+    _order: 9
+    _count: 40
+    _mode: 1
+    _enemies:
+    - warden_2
+    - hunter_1
+    - warden_2
+    - hunter_1
+    - reaper_1
+    _interval: 1
+    _intervalMax: 2
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 4
+    _batchMax: 6
+  - _location: loc_04_05
+    _level: 4
+    _order: 10
+    _count: 15
+    _mode: 1
+    _enemies:
+    - warden_2
+    - hunter_1
+    - warden_2
+    - hunter_1
+    - reaper_1
+    _interval: 0.5
+    _intervalMax: 1
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_05
+    _level: 5
+    _order: 1
+    _count: 22
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 1.5
+    _intervalMax: 2.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_05
+    _level: 5
+    _order: 2
+    _count: 17
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 3
+    _shieldCapacity: 40
+    _shieldRewardMoney: 200
+    _shieldRewardXp: 40
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_05
+    _level: 5
+    _order: 3
+    _count: 49
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_05
+    _level: 5
+    _order: 4
+    _count: 17
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_05
+    _level: 5
+    _order: 5
+    _count: 17
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 4
+    _shieldCapacity: 60
+    _shieldRewardMoney: 350
+    _shieldRewardXp: 70
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_05
+    _level: 5
+    _order: 6
+    _count: 16
+    _mode: 1
+    _enemies:
+    - warden_3
+    - hunter_2
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 3
+  - _location: loc_04_05
+    _level: 5
+    _order: 7
+    _count: 16
+    _mode: 1
+    _enemies:
+    - hunter_3
+    - reaper_2
+    - phantom_1
+    _interval: 2
+    _intervalMax: 3
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 2
+    _batchMax: 2
+  - _location: loc_04_06
+    _level: 1
+    _order: 1
+    _count: 13
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    - executioner_1
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_06
+    _level: 1
+    _order: 2
+    _count: 13
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    - executioner_1
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_06
+    _level: 1
+    _order: 3
+    _count: 9
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    - executioner_1
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_06
+    _level: 1
+    _order: 4
+    _count: 14
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    - executioner_1
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_06
+    _level: 2
+    _order: 1
+    _count: 16
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    - executioner_1
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_06
+    _level: 2
+    _order: 2
+    _count: 16
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    - executioner_1
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_06
+    _level: 2
+    _order: 3
+    _count: 11
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    - executioner_1
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_06
+    _level: 2
+    _order: 4
+    _count: 18
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    - executioner_1
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_06
+    _level: 3
+    _order: 1
+    _count: 20
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    - executioner_1
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_06
+    _level: 3
+    _order: 2
+    _count: 20
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    - executioner_1
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_06
+    _level: 3
+    _order: 3
+    _count: 13
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    - executioner_1
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 5
+    _shieldCapacity: 80
+    _shieldRewardMoney: 600
+    _shieldRewardXp: 120
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_06
+    _level: 3
+    _order: 4
+    _count: 20
+    _mode: 1
+    _enemies:
+    - phantom_2
+    - reaper_3
+    - executioner_1
+    _interval: 2.5
+    _intervalMax: 3.5
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
+  - _location: loc_04_06
+    _level: 3
+    _order: 5
+    _count: 1
+    _mode: 2
+    _enemies:
+    - archon
+    _interval: 0
+    _intervalMax: 0
+    _shieldLevel: 0
+    _shieldCapacity: 0
+    _shieldRewardMoney: 0
+    _shieldRewardXp: 0
+    _batchMin: 1
+    _batchMax: 1
   - _location: void_ashen_2
     _level: 3
     _order: 1
@@ -5481,396 +9337,6 @@ MonoBehaviour:
     - warden_1
     _interval: 1
     _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_01
-    _level: 1
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_01
-    _level: 2
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_01
-    _level: 3
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_02
-    _level: 1
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_02
-    _level: 2
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_02
-    _level: 3
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_02
-    _level: 4
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_03
-    _level: 1
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_03
-    _level: 2
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_03
-    _level: 3
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_03
-    _level: 4
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_03
-    _level: 5
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_03
-    _level: 5
-    _order: 2
-    _count: 1
-    _mode: 2
-    _enemies:
-    - ripper_1
-    _interval: 0
-    _intervalMax: 0
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_04
-    _level: 1
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_04
-    _level: 2
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_04
-    _level: 3
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_04
-    _level: 4
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_05
-    _level: 1
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_05
-    _level: 2
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_05
-    _level: 3
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_05
-    _level: 4
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_05
-    _level: 5
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_06
-    _level: 1
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_06
-    _level: 2
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_06
-    _level: 3
-    _order: 1
-    _count: 1
-    _mode: 1
-    _enemies:
-    - warden_1
-    _interval: 1
-    _intervalMax: 1
-    _shieldLevel: 0
-    _shieldCapacity: 0
-    _shieldRewardMoney: 0
-    _shieldRewardXp: 0
-    _batchMin: 1
-    _batchMax: 1
-  - _location: loc_04_06
-    _level: 3
-    _order: 2
-    _count: 1
-    _mode: 2
-    _enemies:
-    - archon
-    _interval: 0
-    _intervalMax: 0
     _shieldLevel: 0
     _shieldCapacity: 0
     _shieldRewardMoney: 0

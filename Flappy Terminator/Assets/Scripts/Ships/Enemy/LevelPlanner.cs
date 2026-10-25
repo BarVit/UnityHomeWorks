@@ -20,20 +20,33 @@ public class LevelPlanner
     public List<PlannedSpawn> Plan(string locationId, int level)
     {
         List<PlannedSpawn> plan = new List<PlannedSpawn>();
+        bool isAfterSolo = false;
 
         foreach (WaveRow row in _waves.GetLevel(locationId, level))
-            AddGroup(plan, row);
+        {
+            AddGroup(plan, row, isAfterSolo);
+            isAfterSolo = row.Mode == WaveMode.Solo;
+        }
 
         return plan;
     }
 
-    private void AddGroup(List<PlannedSpawn> plan, WaveRow row)
+    private void AddGroup(List<PlannedSpawn> plan, WaveRow row, bool isAfterSolo)
     {
         if (row.Mode == WaveMode.Boss)
         {
             BossRow boss = _bosses.GetRow(row.Enemies[0]);
 
             plan.Add(new PlannedSpawn(EnemySetup.ForBoss(boss, _weapons), GetInterval(row), true, boss.Intro));
+
+            return;
+        }
+
+        if (row.Mode == WaveMode.Solo)
+        {
+            for (int i = 0; i < row.Count; i++)
+                plan.Add(new PlannedSpawn(CreateEnemy(row.Enemies[i % row.Enemies.Length], row), GetInterval(row), true,
+                    PlannedSpawn.NoAnnouncement));
 
             return;
         }
@@ -60,8 +73,8 @@ public class LevelPlanner
 
             float interval = batchLeft > 0 ? 0f : GetInterval(row);
 
-            plan.Add(new PlannedSpawn(CreateEnemy(enemyId, row), interval, false, PlannedSpawn.NoAnnouncement, slot,
-                batchSize));
+            plan.Add(new PlannedSpawn(CreateEnemy(enemyId, row), interval, isAfterSolo && i == 0,
+                PlannedSpawn.NoAnnouncement, slot, batchSize));
         }
     }
 
