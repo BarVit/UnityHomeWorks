@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 public class EnemySpawner : MonoBehaviour
 {
-    private const float EmptyFieldDelay = 0.5f;
+    private const float EmptyFieldDelay = 0.25f;
 
     [FormerlySerializedAs("_enemyTiers")]
     [SerializeField] private EnemyTable _enemies;
