@@ -330,7 +330,7 @@ MonoBehaviour:
     _owner: 0
     _delivery: 6
     _damage: 800
-    _rate: 2.4
+    _rate: 2.1
     _magazine: 0
     _reloadTime: 0
     _projectileSpeed: 4
