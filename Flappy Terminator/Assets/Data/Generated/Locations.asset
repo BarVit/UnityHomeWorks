@@ -287,7 +287,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
-    _rewardTarget: 300000
+    _rewardTarget: 270000
   - _id: loc_04_05
     _system: sys_04
     _order: 5
@@ -309,7 +309,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
-    _rewardTarget: 330000
+    _rewardTarget: 360000
   - _id: loc_05_01
     _system: sys_05
     _order: 1

@@ -23,9 +23,9 @@ loc_03_09	sys_03	9	3	overlord		Normal				101600
 loc_04_01	sys_04	1	3			Normal				220000
 loc_04_02	sys_04	2	4			Normal				260000
 loc_04_03	sys_04	3	5	ripper_1		Normal				320000
-loc_04_04	sys_04	4	4			Normal				300000
+loc_04_04	sys_04	4	4			Normal				270000
 loc_04_05	sys_04	5	5			Normal				570000
-loc_04_06	sys_04	6	3	archon		Normal				330000
+loc_04_06	sys_04	6	3	archon		Normal				360000
 loc_05_01	sys_05	1	1			Normal				
 loc_05_02	sys_05	2	2	tormentor_2		Normal				
 loc_05_03	sys_05	3	4			Normal				
