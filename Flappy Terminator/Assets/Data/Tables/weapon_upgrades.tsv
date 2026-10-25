@@ -85,11 +85,11 @@ beam_laser	Damage	4	50	21000
 beam_laser	Damage	5	50	25500
 beam_laser	CritChance	0	0	0
 beam_laser	TargetHold	0	0.25	0
-beam_laser	TargetHold	1	0.025	8250
-beam_laser	TargetHold	2	0.025	12000
-beam_laser	TargetHold	3	0.025	16500
-beam_laser	TargetHold	4	0.025	21000
-beam_laser	TargetHold	5	0.025	25500
+beam_laser	TargetHold	1	0.1	8250
+beam_laser	TargetHold	2	0.1	12000
+beam_laser	TargetHold	3	0.1	16500
+beam_laser	TargetHold	4	0.1	21000
+beam_laser	TargetHold	5	0.1	25500
 beam_laser	HeatReduction	0	0	0
 beam_laser	HeatReduction	1	10	8250
 beam_laser	HeatReduction	2	10	12000
