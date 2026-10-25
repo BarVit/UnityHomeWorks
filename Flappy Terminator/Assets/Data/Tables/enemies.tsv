@@ -13,4 +13,4 @@ phantom_2	enemy_phantom	Призрак II	2	Enemy 4	60	loc_03_07	720	phantom_2_g
 phantom_3	enemy_phantom	Призрак III	3	Enemy 4	70	loc_05_01	3200	phantom_3_gun	plasma	3	60	Ellipse		1600	320
 executioner_1	enemy_executioner	Палач I	1	Enemy 5	100	loc_04_04	2800	executioner_1_gun	beam_laser	1	150	Drift Retreat Wide		2000	400
 executioner_2	enemy_executioner	Палач II	2	Enemy 5	120	loc_05_04	4500	executioner_2_gun	rocket	3	100	Up And Down		3000	600
-executioner_3	enemy_executioner	Палач III	3	Enemy 5	150	loc_05_06	6000	executioner_3_gun	plasma	3	150	Ellipse		5000	1000
+executioner_3	enemy_executioner	Палач III	3	Enemy 5	150	loc_05_06	6000	executioner_3_gun	railgun	1	240	Ellipse		5000	1000

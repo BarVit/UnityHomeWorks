@@ -915,23 +915,23 @@ MonoBehaviour:
       _hitWorldSound: {fileID: 8300000, guid: 073af4467d10246c190d3a3a29c9d2f4, type: 3}
       _overheatSound: {fileID: 0}
   - _id: executioner_3_gun
-    _title: "\u041F\u0430\u043B\u0430\u0447 III \u2014 \u043F\u043B\u0430\u0437\u043C\u0430"
+    _title: "\u041F\u0430\u043B\u0430\u0447 III \u2014 \u0440\u0435\u043B\u044C\u0441\u043E\u0442\u0440\u043E\u043D"
     _owner: 1
-    _delivery: 0
-    _damage: 10
-    _rate: 0.75
+    _delivery: 2
+    _damage: 240
+    _rate: 1.6
     _magazine: 0
     _reloadTime: 0
-    _projectileSpeed: 12
-    _barrelsMax: 4
-    _firePattern: 2
-    _sideAngle: 12
+    _projectileSpeed: 0
+    _barrelsMax: 3
+    _firePattern: 0
+    _sideAngle: 0
     _heatPerShot: 0
     _cooldownRate: 0
     _unlockHeat: 0
     _tickInterval: 0
     _turnRate: 0
-    _aimTime: 0
+    _aimTime: 1
     _area: 0
     _blast:
       _fuseDelay: 0
@@ -940,18 +940,18 @@ MonoBehaviour:
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
-    _projectile: {fileID: 8728678904558988455, guid: 79b82508bda244037beb9d377f23f950, type: 3}
-    _beam: {fileID: 0}
+    _projectile: {fileID: 0}
+    _beam: {fileID: 8352859674081126688, guid: 515114a3f4dd148ce90a8b6800a6074c, type: 3}
     _assets:
       _icon: {fileID: 0}
-      _projectileSprite: {fileID: 21300000, guid: cf9760a2dafc94f97b705a62ec67e9ff, type: 3}
-      _projectileAnimation: {fileID: 7400000, guid: 69c06217529414af2abcb4f5023bc745, type: 2}
+      _projectileSprite: {fileID: 0}
+      _projectileAnimation: {fileID: 0}
       _shotEffect: {fileID: 0}
-      _hitTargetEffect: {fileID: -3751870904600509761, guid: 3a3ad20ac661444fca78e2501d44c8b8, type: 3}
-      _hitWorldEffect: {fileID: 0}
-      _shotSound: {fileID: 8300000, guid: eaa03aaca78b14fc99a1a99fbd45e15b, type: 3}
-      _hitTargetSound: {fileID: 8300000, guid: db5a0c5135622436d987441a5ed3fc85, type: 3}
-      _hitWorldSound: {fileID: 8300000, guid: db5a0c5135622436d987441a5ed3fc85, type: 3}
+      _hitTargetEffect: {fileID: 8280883661338603152, guid: b5827e33eedd24de5b1b54b4c178337d, type: 3}
+      _hitWorldEffect: {fileID: 1376920636703852353, guid: 8b62e791d05ef41d4a5ad03900cc6d6c, type: 3}
+      _shotSound: {fileID: 8300000, guid: 8e138d16e6cff4e068f7f8dd1e265e5a, type: 3}
+      _hitTargetSound: {fileID: 8300000, guid: ed40fe411e5ef4c16ae52731d55342c1, type: 3}
+      _hitWorldSound: {fileID: 8300000, guid: 5612d8a83bc45475484c2e62d10abf1f, type: 3}
       _overheatSound: {fileID: 0}
   - _id: marauder_1_gun
     _title: "\u041C\u0430\u0440\u043E\u0434\u0451\u0440 I \u2014 \u0440\u0430\u043A\u0435\u0442\u043D\u0438\u0446\u0430"
