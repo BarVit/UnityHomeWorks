@@ -9,6 +9,7 @@ namespace EnemyContent
         private const string Folder = "Assets/Prefabs/Enemies/";
         private const int ShipCount = 5;
         private const float ShieldSizeScale = 1.1f;
+        private const float BreakDuration = 0.4f;
 
         [MenuItem("Tools/Enemies/Build Shields")]
         public static void Build()
@@ -33,6 +34,10 @@ namespace EnemyContent
 
                 EnergyShield shield = ShieldRig.Attach(root, body, bodyHits, out AmmoHitHandler shieldHits,
                     ShieldSizeScale);
+                SerializedObject shieldSo = new SerializedObject(shield);
+
+                shieldSo.FindProperty("_breakDuration").floatValue = BreakDuration;
+                shieldSo.ApplyModifiedPropertiesWithoutUndo();
 
                 shipSo.FindProperty("_shield").objectReferenceValue = shield;
                 shipSo.FindProperty("_shieldHitHandler").objectReferenceValue = shieldHits;

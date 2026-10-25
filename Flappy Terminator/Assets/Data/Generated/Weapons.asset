@@ -193,7 +193,7 @@ MonoBehaviour:
       _radius: 0
       _time: 0
     _price: 200000
-    _unlockAfter: loc_03_06
+    _unlockAfter: void_ashen_2
     _grantedAfter: 
     _projectile: {fileID: 0}
     _beam: {fileID: 8352859674081126688, guid: 515114a3f4dd148ce90a8b6800a6074c, type: 3}
@@ -232,7 +232,7 @@ MonoBehaviour:
       _radius: 0
       _time: 0
     _price: 60000
-    _unlockAfter: ashen_void
+    _unlockAfter: void_ashen_1
     _grantedAfter: 
     _projectile: {fileID: 0}
     _beam: {fileID: 1931004981861364774, guid: 7c7f7cacf8c234cd7bf9b4a0d9d5581d, type: 3}

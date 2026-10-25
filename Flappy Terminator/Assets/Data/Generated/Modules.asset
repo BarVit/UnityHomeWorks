@@ -47,4 +47,4 @@ MonoBehaviour:
     _price: 150000
     _icon: {fileID: 21300000, guid: 8d283c170d4d4420bafb3c770d8c1f6a, type: 3}
     _description: FREEZES ENEMIES AND THEIR SHOTS
-    _unlockAfter: loc_04_04
+    _unlockAfter: void_ashen_3

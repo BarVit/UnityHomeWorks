@@ -292,7 +292,7 @@ MonoBehaviour:
   _bubble: {fileID: 2209738729686892367}
   _collider: {fileID: 7932993067506249925}
   _raiseDuration: 0.2
-  _breakDuration: 0.5
+  _breakDuration: 0.4
   _flashDuration: 0.15
   _pulseSpeed: 3
   _pulseAmount: 0.04
