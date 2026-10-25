@@ -206,27 +206,27 @@ MonoBehaviour:
   - _owner: repair_nanobots
     _stat: 5
     _level: 1
-    _bonus: 2
+    _bonus: 3
     _price: 20000
   - _owner: repair_nanobots
     _stat: 5
     _level: 2
-    _bonus: 5
+    _bonus: 3
     _price: 30000
   - _owner: repair_nanobots
     _stat: 5
     _level: 3
-    _bonus: 5
+    _bonus: 3
     _price: 40000
   - _owner: repair_nanobots
     _stat: 5
     _level: 4
-    _bonus: 5
+    _bonus: 4
     _price: 50000
   - _owner: repair_nanobots
     _stat: 5
     _level: 5
-    _bonus: 5
+    _bonus: 4
     _price: 75000
   - _owner: emp
     _stat: 6
@@ -261,7 +261,7 @@ MonoBehaviour:
   - _owner: emp
     _stat: 1
     _level: 0
-    _bonus: 18
+    _bonus: 20
     _price: 0
   - _owner: emp
     _stat: 1
