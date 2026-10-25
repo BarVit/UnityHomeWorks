@@ -75,6 +75,31 @@ namespace EnemyContent
             Debug.Log("Боссы: собрано префабов — " + BossCount);
         }
 
+        [MenuItem("Tools/Enemies/Fit Boss Colliders")]
+        public static void FitBossColliders()
+        {
+            for (int number = 1; number <= BossCount; number++)
+            {
+                string name = "Boss " + number;
+                string path = BossFolder + "/" + name + ".prefab";
+                GameObject root = PrefabUtility.LoadPrefabContents(path);
+                SpriteRenderer renderer = root.GetComponentInChildren<SpriteRenderer>(true);
+                Sprite sprite = LoadClipSprite(name);
+
+                if (renderer != null && sprite != null)
+                {
+                    renderer.sprite = sprite;
+                    FitCollider(renderer);
+                }
+
+                PrefabUtility.SaveAsPrefabAsset(root, path);
+                PrefabUtility.UnloadPrefabContents(root);
+            }
+
+            AssetDatabase.SaveAssets();
+            Debug.Log("Боссы: коллайдеры подогнаны под первый кадр анимации");
+        }
+
         private static void Shape(int number, string firstPath)
         {
             string path = GetPath(number);
@@ -170,7 +195,7 @@ namespace EnemyContent
         private static SpriteRenderer SetSprite(GameObject root, string name)
         {
             SpriteRenderer renderer = root.GetComponentInChildren<SpriteRenderer>(true);
-            Sprite sprite = LoadFirstSprite("Assets/Sprites/Ships/" + name + ".png");
+            Sprite sprite = LoadFirstSprite("Assets/Sprites/Ships/" + name + ".png") ?? LoadClipSprite(name);
 
             if (renderer == null || sprite == null)
             {
@@ -284,6 +309,25 @@ namespace EnemyContent
             created.SetParent(root, false);
 
             return created;
+        }
+
+        private static Sprite LoadClipSprite(string name)
+        {
+            AnimationClip clip = AssetDatabase.LoadAssetAtPath<AnimationClip>(
+                "Assets/Animations/" + name + " Idle.anim");
+
+            if (clip == null)
+                return null;
+
+            foreach (EditorCurveBinding binding in AnimationUtility.GetObjectReferenceCurveBindings(clip))
+            {
+                ObjectReferenceKeyframe[] frames = AnimationUtility.GetObjectReferenceCurve(clip, binding);
+
+                if (frames.Length > 0 && frames[0].value is Sprite sprite)
+                    return sprite;
+            }
+
+            return null;
         }
 
         private static Sprite LoadFirstSprite(string path)
