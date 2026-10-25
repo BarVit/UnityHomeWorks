@@ -195,6 +195,19 @@ public class SkillBook : MonoBehaviour
         return true;
     }
 
+    public void MaxAll()
+    {
+        foreach (LevelRow<SkillStat> row in _skills.Rows)
+        {
+            SkillKey skill = new SkillKey(row.Stat, row.Owner);
+
+            while (GetLevel(skill) < GetMaxLevel(skill))
+                _economy.Skills.Raise(skill.StorageKey);
+        }
+
+        Changed?.Invoke();
+    }
+
     public void Equip(PlayerShip ship)
     {
         ship.SetHealthBonus(Mathf.RoundToInt(GetValue(new SkillKey(SkillStat.Health, SkillTable.Everyone))));

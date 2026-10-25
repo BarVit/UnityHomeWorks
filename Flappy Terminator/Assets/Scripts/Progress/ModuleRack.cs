@@ -144,6 +144,25 @@ public class ModuleRack : MonoBehaviour
         Commit();
     }
 
+    public void MaxAll()
+    {
+        while (Ship.ModuleSlots < SlotCount && GetUnlockPrice(Ship.ModuleSlots + 1) != NoPrice)
+            Ship.AddModuleSlot();
+
+        foreach (ModuleRow row in _modules.Rows)
+        {
+            Ship.AddModule(row.Id);
+
+            foreach (ModuleStat stat in GetUpgradeStats(row.Id))
+            {
+                while (GetLevel(row.Id, stat) < GetMaxLevel(row.Id, stat))
+                    Ship.ModuleLevels.Raise(GetKey(row.Id, stat));
+            }
+        }
+
+        Commit();
+    }
+
     public List<ModuleStat> GetUpgradeStats(string moduleId)
     {
         List<ModuleStat> stats = _upgrades.GetUpgradableStats(moduleId);

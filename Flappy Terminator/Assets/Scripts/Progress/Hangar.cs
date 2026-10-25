@@ -20,15 +20,7 @@ public class Hangar : MonoBehaviour
 
     public string WeaponId => Ship.WeaponId;
 
-    public int SlotCount
-    {
-        get
-        {
-            WeaponRow row = _weapons.GetRow(WeaponId);
-
-            return row == null ? 0 : Mathf.Min(row.BarrelsMax, _slots.Count);
-        }
-    }
+    public int SlotCount => GetSlotCount(WeaponId);
 
     private ShipProgress Ship => _economy.Ship;
 
@@ -227,6 +219,14 @@ public class Hangar : MonoBehaviour
         return true;
     }
 
+    public void MaxAll()
+    {
+        foreach (WeaponRow row in GetShopWeapons())
+            MaxWeapon(row.Id);
+
+        Commit();
+    }
+
     public void Equip(PlayerShooter shooter, WeaponSkills skills)
     {
         WeaponBoost[] boosts = new WeaponBoost[Loadout.BarrelCount];
@@ -252,6 +252,34 @@ public class Hangar : MonoBehaviour
             GetValue(slot, UpgradeStat.AutoAim),
             GetValue(slot, UpgradeStat.Pierce) * PercentShare,
             GetValue(slot, UpgradeStat.TargetHold));
+    }
+
+    private int GetSlotCount(string weaponId)
+    {
+        WeaponRow row = _weapons.GetRow(weaponId);
+
+        return row == null ? 0 : Mathf.Min(row.BarrelsMax, _slots.Count);
+    }
+
+    private void MaxWeapon(string weaponId)
+    {
+        Ship.AddWeapon(weaponId);
+
+        WeaponLoadout loadout = Ship.GetLoadout(weaponId);
+
+        while (loadout.BarrelCount < GetSlotCount(weaponId) && _slots.GetRow(weaponId, loadout.BarrelCount + 1) != null)
+            loadout.AddBarrel();
+
+        foreach (UpgradeStat stat in _upgrades.GetUpgradableStats(weaponId))
+        {
+            int maxLevel = _upgrades.GetMaxLevel(weaponId, stat);
+
+            for (int barrel = 0; barrel < loadout.BarrelCount; barrel++)
+            {
+                while (loadout.GetBarrel(barrel).GetLevel(stat) < maxLevel)
+                    loadout.GetBarrel(barrel).Raise(stat);
+            }
+        }
     }
 
     private BarrelUpgrades GetBarrel(int slot)

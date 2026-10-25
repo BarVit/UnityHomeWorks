@@ -191,6 +191,8 @@ namespace UiContent
                 "LOCATION CLEARED", 22, TextAlignmentOptions.Left, Muted);
             Button reset = AddButton(root, "Reset Button", "RESET", new Vector2(0f, 1f), new Vector2(120f, -202f),
                 new Vector2(160f, 48f), 22);
+            Button allMax = AddButton(root, "All Max Button", "ALL MAX", new Vector2(0f, 1f), new Vector2(300f, -202f),
+                new Vector2(160f, 48f), 22);
             TMP_Text spent = AddText(Place("Spent", root, new Vector2(0f, 1f), new Vector2(360f, -272f), new Vector2(640f, 84f)),
                 "", 18, TextAlignmentOptions.TopLeft, Muted);
 
@@ -265,6 +267,7 @@ namespace UiContent
             so.FindProperty("_earnedMoney").objectReferenceValue = earnedMoney;
             so.FindProperty("_status").objectReferenceValue = status;
             so.FindProperty("_resetButton").objectReferenceValue = reset;
+            so.FindProperty("_allMaxButton").objectReferenceValue = allMax;
             so.FindProperty("_spent").objectReferenceValue = spent;
             SetArray(so.FindProperty("_tabs"), tabs);
             SetArray(so.FindProperty("_pages"), new Object[] { weaponPage.gameObject, modulePage.gameObject, skillPage.gameObject });

@@ -46,6 +46,7 @@ public class DockScreen : MonoBehaviour
     [SerializeField] private CompactNumber _earnedMoney;
     [SerializeField] private TMP_Text _status;
     [SerializeField] private Button _resetButton;
+    [SerializeField] private Button _allMaxButton;
     [SerializeField] private TMP_Text _spent;
     [SerializeField] private TabView[] _tabs;
     [SerializeField] private GameObject[] _pages;
@@ -115,6 +116,7 @@ public class DockScreen : MonoBehaviour
         _playButton.onClick.AddListener(OnPlayClicked);
         _shopButton.onClick.AddListener(OnShopClicked);
         _resetButton.onClick.AddListener(OnResetClicked);
+        _allMaxButton.onClick.AddListener(OnAllMaxClicked);
         _removeModuleButton.onClick.AddListener(OnRemoveModuleClicked);
         _hangar.Changed += Refresh;
         _modules.Changed += Refresh;
@@ -147,6 +149,7 @@ public class DockScreen : MonoBehaviour
         _playButton.onClick.RemoveListener(OnPlayClicked);
         _shopButton.onClick.RemoveListener(OnShopClicked);
         _resetButton.onClick.RemoveListener(OnResetClicked);
+        _allMaxButton.onClick.RemoveListener(OnAllMaxClicked);
         _removeModuleButton.onClick.RemoveListener(OnRemoveModuleClicked);
         _hangar.Changed -= Refresh;
         _modules.Changed -= Refresh;
@@ -209,6 +212,7 @@ public class DockScreen : MonoBehaviour
         _xp.Show(_economy.Xp);
         _money.Show(_economy.Money);
         _resetButton.gameObject.SetActive(_economy.IsTestSession);
+        _allMaxButton.gameObject.SetActive(_economy.IsTestSession);
         _spent.gameObject.SetActive(_economy.IsTestSession);
         _spent.text = SpentCaption + NumberFormat.Full(_economy.SpentMoney) + CoinsCaption
             + NumberFormat.Full(_economy.SpentXp) + XpCaption;
@@ -811,6 +815,16 @@ public class DockScreen : MonoBehaviour
     private void OnResetClicked()
     {
         ResetRequested?.Invoke();
+    }
+
+    private void OnAllMaxClicked()
+    {
+        if (_economy.IsTestSession == false)
+            return;
+
+        _hangar.MaxAll();
+        _modules.MaxAll();
+        _skills.MaxAll();
     }
 
     private void OnMenuClicked()
