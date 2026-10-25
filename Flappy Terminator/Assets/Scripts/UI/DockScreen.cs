@@ -767,15 +767,8 @@ public class DockScreen : MonoBehaviour
 
         _selectedModuleSlot = slot;
 
-        if (_modules.GetInstalled(slot) == null)
-        {
-            string installable = _modules.FindInstallable();
-
-            if (installable != null)
-                _modules.TryInstall(installable);
-            else if (wasLocked == false)
-                _shop.Open(ShopWindow.ModulesTab);
-        }
+        if (wasLocked == false && _modules.GetInstalled(slot) == null)
+            _shop.Open(ShopWindow.ModulesTab, slot);
 
         Refresh();
     }
@@ -812,7 +805,7 @@ public class DockScreen : MonoBehaviour
 
     private void OnShopClicked()
     {
-        _shop.Open(_tab == ModulesTab ? ShopWindow.ModulesTab : ShopWindow.WeaponsTab);
+        _shop.Open(_tab == ModulesTab ? ShopWindow.ModulesTab : ShopWindow.WeaponsTab, _selectedModuleSlot);
     }
 
     private void OnResetClicked()

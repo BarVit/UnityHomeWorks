@@ -25,6 +25,7 @@ public class ShopWindow : MonoBehaviour
     [SerializeField] private ShopCardView[] _cards;
 
     private int _tab = WeaponsTab;
+    private int _moduleSlot = ModuleRack.FirstSlot;
 
     public bool IsOpen => _panel.activeSelf;
 
@@ -56,9 +57,10 @@ public class ShopWindow : MonoBehaviour
             card.Clicked -= OnCardClicked;
     }
 
-    public void Open(int tab)
+    public void Open(int tab, int moduleSlot)
     {
         _tab = tab;
+        _moduleSlot = moduleSlot;
         _panel.transform.SetAsLastSibling();
         _panel.SetActive(true);
         Refresh();
@@ -212,7 +214,7 @@ public class ShopWindow : MonoBehaviour
 
         if (_modules.Owns(card.Id) == false)
             _modules.TryBuy(card.Id);
-        else if (_modules.TryInstall(card.Id))
+        else if (_modules.TryInstall(card.Id, _moduleSlot))
             Close();
     }
 }

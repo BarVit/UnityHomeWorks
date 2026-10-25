@@ -124,26 +124,15 @@ public class ModuleRack : MonoBehaviour
         return Owns(moduleId) && IsInstalled(moduleId) == false && FindFreeSlot() >= 0;
     }
 
-    public bool TryInstall(string moduleId)
+    public bool TryInstall(string moduleId, int preferredSlot)
     {
         if (CanInstall(moduleId) == false)
             return false;
 
-        Install(moduleId);
+        Install(moduleId, preferredSlot);
         Commit();
 
         return true;
-    }
-
-    public string FindInstallable()
-    {
-        foreach (ModuleRow row in _modules.Rows)
-        {
-            if (CanInstall(row.Id))
-                return row.Id;
-        }
-
-        return null;
     }
 
     public void Remove(int slot)
@@ -273,12 +262,17 @@ public class ModuleRack : MonoBehaviour
         return stat == ModuleStat.Capacity || stat == ModuleStat.Repair || stat == ModuleStat.Regen;
     }
 
-    private void Install(string moduleId)
+    private void Install(string moduleId, int preferredSlot)
     {
-        int slot = FindFreeSlot();
+        int slot = IsFree(preferredSlot) ? preferredSlot - FirstSlot : FindFreeSlot();
 
         if (slot >= 0)
             Ship.SetModule(slot, moduleId);
+    }
+
+    private bool IsFree(int slot)
+    {
+        return slot >= FirstSlot && IsUnlocked(slot) && GetInstalled(slot) == null;
     }
 
     private int FindFreeSlot()
