@@ -9,7 +9,7 @@ public class WeaponContext
         ShotLoop loop = null, ShotLoop hitLoop = null, int damage = 0,
         WeaponBoost[] boosts = null, CritMark critMark = null, ShotTally tally = null, float rateScale = 1f,
         ParticleSystem burnFlame = null, float reloadShift = 0f, int magazineBonus = 0,
-        float speedShift = 0f)
+        float speedShift = 0f, bool hasSight = true, float heatPoolScale = 1f, float coolingTimeScale = 1f)
     {
         Mounts = mounts;
         Barrels = barrels;
@@ -30,6 +30,9 @@ public class WeaponContext
         ReloadShift = reloadShift;
         MagazineBonus = magazineBonus;
         SpeedShift = speedShift;
+        HasSight = hasSight;
+        HeatPoolScale = heatPoolScale;
+        CoolingTimeScale = coolingTimeScale;
 
         ContactFilter2D filter = new ContactFilter2D();
 
@@ -90,4 +93,10 @@ public class WeaponContext
     public int MagazineBonus { get; private set; }
 
     public float SpeedShift { get; private set; }
+
+    public bool HasSight { get; private set; }
+
+    public float HeatPoolScale { get; private set; }
+
+    public float CoolingTimeScale { get; private set; }
 }

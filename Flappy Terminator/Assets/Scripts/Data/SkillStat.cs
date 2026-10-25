@@ -7,5 +7,8 @@ public enum SkillStat
     RepairMastery,
     MagazineSize,
     FlightSpeed,
-    SentryCooldown
+    SentryCooldown,
+    Sight,
+    HeatPool,
+    Cooling
 }

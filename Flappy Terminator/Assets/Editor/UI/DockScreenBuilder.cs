@@ -39,6 +39,7 @@ namespace UiContent
         private const float ScrollbarWidth = 6f;
         private const int PipCount = 5;
         private const float ShipScale = 6f;
+        private const float WheelRowsPerTick = 0.5f;
 
         private static readonly Vector2 HudPosition = new Vector2(-440f, 289f);
 
@@ -355,7 +356,7 @@ namespace UiContent
             scroll.viewport = viewport;
             scroll.horizontal = false;
             scroll.movementType = ScrollRect.MovementType.Clamped;
-            scroll.scrollSensitivity = RowStep / GetWheelDeltaPerTick();
+            scroll.scrollSensitivity = RowStep * WheelRowsPerTick / GetWheelDeltaPerTick();
             scroll.verticalScrollbar = AddScrollbar(viewport);
             scroll.verticalScrollbarVisibility = ScrollRect.ScrollbarVisibility.AutoHide;
 

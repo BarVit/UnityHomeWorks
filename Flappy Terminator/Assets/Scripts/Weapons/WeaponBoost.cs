@@ -4,8 +4,9 @@ public readonly struct WeaponBoost
 {
     public WeaponBoost(int damageBonus, float critChance, float critMultiplier, float heatReduction,
         float doubleShotChance, float speedBonus, float napalmShare, float turnBonus, float stasisSeconds = 0f,
-        float autoAimDegrees = 0f, float pierceShare = 0f)
+        float autoAimDegrees = 0f, float pierceShare = 0f, float targetHoldSeconds = 0f)
     {
+        TargetHoldSeconds = targetHoldSeconds;
         PierceShare = pierceShare;
         AutoAimDegrees = autoAimDegrees;
         StasisSeconds = stasisSeconds;
@@ -42,6 +43,8 @@ public readonly struct WeaponBoost
     public float AutoAimDegrees { get; }
 
     public float PierceShare { get; }
+
+    public float TargetHoldSeconds { get; }
 
     public float TurnScale => Mathf.Max(0f, 1f + TurnBonus);
 

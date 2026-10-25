@@ -16,6 +16,10 @@ public class DockScreen : MonoBehaviour
     private const string PerSecond = "/S";
     private const string Degrees = "\u00B0";
     private const string PlasmaId = "plasma";
+    private const string RailgunId = "railgun";
+    private const string BeamLaserId = "beam_laser";
+    private const string SightOn = "ON";
+    private const string SightOff = "OFF";
     private const string BarrelMark = "  #";
     private const string EmptyCaption = "EMPTY";
     private const string MaxLevelHint = "MAX LEVEL";
@@ -286,6 +290,8 @@ public class DockScreen : MonoBehaviour
     {
         switch (stat)
         {
+            case UpgradeStat.Damage when row.Id == BeamLaserId:
+                return (row.Damage + Mathf.RoundToInt(value)) + PerSecond;
             case UpgradeStat.Damage:
                 return (row.Damage + Mathf.RoundToInt(value)).ToString();
             case UpgradeStat.CritChance:
@@ -301,7 +307,8 @@ public class DockScreen : MonoBehaviour
             case UpgradeStat.TurnRate:
                 return Mathf.RoundToInt(100f + value) + PercentSign;
             case UpgradeStat.Stasis:
-                return value.ToString("0.##") + Seconds;
+            case UpgradeStat.TargetHold:
+                return value.ToString("0.###") + Seconds;
             case UpgradeStat.HeatReduction:
                 return Mathf.RoundToInt(100f - value) + PercentSign;
             default:
@@ -316,7 +323,7 @@ public class DockScreen : MonoBehaviour
             case UpgradeStat.Damage:
                 return "DAMAGE";
             case UpgradeStat.HeatReduction:
-                return "HEAT PER SHOT";
+                return _hangar.WeaponId == BeamLaserId ? "HEAT PER SECOND" : "HEAT PER SHOT";
             case UpgradeStat.DoubleShot:
                 return "DOUBLE SHOT";
             case UpgradeStat.ProjectileSpeed:
@@ -331,6 +338,8 @@ public class DockScreen : MonoBehaviour
                 return "AUTO AIM";
             case UpgradeStat.Pierce:
                 return "PIERCING";
+            case UpgradeStat.TargetHold:
+                return "TARGET HOLD";
             default:
                 return "CRIT CHANCE";
         }
@@ -360,6 +369,8 @@ public class DockScreen : MonoBehaviour
                 return "A NEAR MISS BENDS ONTO THE TARGET";
             case UpgradeStat.Pierce:
                 return "OF DAMAGE GOES ON TO THE NEXT TARGET";
+            case UpgradeStat.TargetHold:
+                return "THE SHIP HANGS AIMED AT A HIT TARGET";
             case UpgradeStat.TurnRate:
                 return "+" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
             default:
@@ -389,6 +400,8 @@ public class DockScreen : MonoBehaviour
                 return _autoAimIcon;
             case UpgradeStat.Pierce:
                 return _pierceIcon;
+            case UpgradeStat.TargetHold:
+                return _lifetimeIcon;
             default:
                 return _critIcon;
         }
@@ -584,8 +597,14 @@ public class DockScreen : MonoBehaviour
                 return "SHIELD MASTERY";
             case SkillStat.RepairMastery:
                 return "REPAIR MASTERY";
+            case SkillStat.Sight:
+                return UiText.Title(skill.Weapon) + " LASER SIGHT";
+            case SkillStat.HeatPool:
+                return UiText.Title(skill.Weapon) + " HEAT POOL";
+            case SkillStat.Cooling:
+                return UiText.Title(skill.Weapon) + " COOLING";
             default:
-                return UiText.Title(skill.Weapon) + (skill.Weapon == PlasmaId ? " MASTERY" : " COOLDOWN");
+                return UiText.Title(skill.Weapon) + (IsMastery(skill.Weapon) ? " MASTERY" : " COOLDOWN");
         }
     }
 
@@ -605,6 +624,8 @@ public class DockScreen : MonoBehaviour
                 return _shieldSkillIcon;
             case SkillStat.RepairMastery:
                 return _repairIcon;
+            case SkillStat.Sight:
+                return _autoAimIcon;
             default:
                 return _cooldownIcon;
         }
@@ -627,9 +648,20 @@ public class DockScreen : MonoBehaviour
                 return "+" + _skills.GetStep(skill) + " SHOTS PER LEVEL";
             case SkillStat.FlightSpeed:
                 return "+" + _skills.GetStep(skill).ToString("0.###") + " SPEED PER LEVEL";
+            case SkillStat.Sight:
+                return "A LASER LINE FROM EVERY BARREL";
+            case SkillStat.HeatPool:
+                return "+" + _skills.GetStep(skill).ToString("0.###") + PercentSign + " HEAT POOL PER LEVEL";
+            case SkillStat.Cooling:
+                return _skills.GetStep(skill).ToString("0.###") + PercentSign + " COOLING TIME PER LEVEL";
             default:
                 return GetCooldownHint(skill, price);
         }
+    }
+
+    private bool IsMastery(string weaponId)
+    {
+        return weaponId == PlasmaId || weaponId == RailgunId;
     }
 
     private string GetCooldownHint(SkillKey skill, int price)
@@ -664,6 +696,15 @@ public class DockScreen : MonoBehaviour
 
         if (skill.Stat == SkillStat.MagazineSize)
             return _skills.GetMagazineSize(skill.Weapon, levelShift).ToString();
+
+        if (skill.Stat == SkillStat.Sight)
+            return _skills.HasSight(skill.Weapon, levelShift) ? SightOn : SightOff;
+
+        if (skill.Stat == SkillStat.HeatPool)
+            return Mathf.RoundToInt(_skills.GetHeatPoolScale(skill.Weapon, levelShift) * 100f) + PercentSign;
+
+        if (skill.Stat == SkillStat.Cooling)
+            return Mathf.RoundToInt(_skills.GetCoolingTimeScale(skill.Weapon, levelShift) * 100f) + PercentSign;
 
         if (skill.Stat == SkillStat.MagazineReload)
             return _skills.GetReloadTime(skill.Weapon, levelShift).ToString("0.00") + Seconds;

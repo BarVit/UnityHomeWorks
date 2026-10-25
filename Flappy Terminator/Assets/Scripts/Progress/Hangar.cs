@@ -227,15 +227,14 @@ public class Hangar : MonoBehaviour
         return true;
     }
 
-    public void Equip(PlayerShooter shooter, float rateScale, float reloadShift, int magazineBonus,
-        float speedShift)
+    public void Equip(PlayerShooter shooter, WeaponSkills skills)
     {
         WeaponBoost[] boosts = new WeaponBoost[Loadout.BarrelCount];
 
         for (int i = 0; i < boosts.Length; i++)
             boosts[i] = GetBoost(i + FirstSlot);
 
-        shooter.Equip(WeaponId, boosts, rateScale, reloadShift, magazineBonus, speedShift);
+        shooter.Equip(WeaponId, boosts, skills);
     }
 
     private WeaponBoost GetBoost(int slot)
@@ -251,7 +250,8 @@ public class Hangar : MonoBehaviour
             GetValue(slot, UpgradeStat.TurnRate) * PercentShare,
             GetValue(slot, UpgradeStat.Stasis),
             GetValue(slot, UpgradeStat.AutoAim),
-            GetValue(slot, UpgradeStat.Pierce) * PercentShare);
+            GetValue(slot, UpgradeStat.Pierce) * PercentShare,
+            GetValue(slot, UpgradeStat.TargetHold));
     }
 
     private BarrelUpgrades GetBarrel(int slot)

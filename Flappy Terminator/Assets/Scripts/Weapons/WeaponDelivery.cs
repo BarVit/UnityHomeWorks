@@ -7,6 +7,7 @@ public abstract class WeaponDelivery
     private const float CritMarkInterval = 0.25f;
     private const float DoubleShotDelay = 0.085f;
     private const float MinReloadTime = 0.1f;
+    private const float MinCoolingTimeScale = 0.1f;
 
     private readonly WeaponRow _row;
     private readonly WeaponContext _context;
@@ -15,6 +16,8 @@ public abstract class WeaponDelivery
     private readonly float _reloadTime;
     private readonly int _magazine;
     private readonly float _projectileSpeed;
+    private readonly float _maxHeat;
+    private readonly float _coolingRate;
 
     private readonly SpawnPool<ExplosionAnimation> _shotPool;
     private readonly SpawnPool<CritMark> _critPool;
@@ -38,6 +41,8 @@ public abstract class WeaponDelivery
         _magazine = row.Magazine > 0 ? Mathf.Max(1, row.Magazine + context.MagazineBonus) : 0;
         _shotsLeft = _magazine;
         _projectileSpeed = row.ProjectileSpeed + context.SpeedShift;
+        _maxHeat = MaxHeat * context.HeatPoolScale;
+        _coolingRate = row.CooldownRate / Mathf.Max(MinCoolingTimeScale, context.CoolingTimeScale);
 
         if (row.Assets != null && row.Assets.ShotEffect != null)
             _shotPool = context.Pools.GetPool(row.Assets.ShotEffect);
@@ -67,7 +72,7 @@ public abstract class WeaponDelivery
     public virtual float Readiness => _reloadLeft > 0f
         ? 1f - Mathf.Clamp01(_reloadLeft / _reloadTime)
         : (HasHeat
-            ? 1f - Mathf.Clamp01(_heat / MaxHeat)
+            ? 1f - Mathf.Clamp01(_heat / _maxHeat)
             : (Cooldown <= 0f ? 1f : 1f - Mathf.Clamp01(_cooldownLeft / Cooldown)));
 
     protected WeaponRow Row => _row;
@@ -76,7 +81,7 @@ public abstract class WeaponDelivery
 
     protected int Barrels => _barrels;
 
-    protected float HeatShare => Mathf.Clamp01(_heat / MaxHeat);
+    protected float HeatShare => Mathf.Clamp01(_heat / _maxHeat);
 
     protected float ProjectileSpeed => _projectileSpeed;
 
@@ -308,10 +313,10 @@ public abstract class WeaponDelivery
         for (int barrel = 0; barrel < _barrels; barrel++)
             _heat += _row.HeatPerShot * _context.GetBoost(barrel).HeatScale;
 
-        if (_heat < MaxHeat)
+        if (_heat < _maxHeat)
             return;
 
-        _heat = MaxHeat;
+        _heat = _maxHeat;
         _isOverheated = true;
     }
 
@@ -320,9 +325,9 @@ public abstract class WeaponDelivery
         if (_heat <= 0f)
             return;
 
-        _heat = Mathf.Max(0f, _heat - _row.CooldownRate * deltaTime);
+        _heat = Mathf.Max(0f, _heat - _coolingRate * deltaTime);
 
-        if (_heat <= MaxHeat * _row.UnlockHeat)
+        if (_heat <= _maxHeat * _row.UnlockHeat)
             _isOverheated = false;
     }
 

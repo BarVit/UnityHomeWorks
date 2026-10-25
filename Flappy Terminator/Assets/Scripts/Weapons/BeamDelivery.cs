@@ -42,7 +42,7 @@ public class BeamDelivery : WeaponDelivery
 
         _sights = new AimLine[Barrels];
 
-        if (row.Beam != null && row.Beam.Sight != null)
+        if (row.Beam != null && row.Beam.Sight != null && context.HasSight)
             for (int barrel = 0; barrel < Barrels; barrel++)
                 _sights[barrel] = CreateSight(row.Beam.Sight, barrel);
     }

@@ -25,6 +25,7 @@ public class PlayerShooter : MonoBehaviour
     private Transform[] _mounts;
     private int _equippedBarrels = 1;
     private WeaponDelivery _delivery;
+    private float _targetHoldTime;
     private string _equippedId;
     private AudioClip _overheatClip;
     private float _shownReadiness = -1f;
@@ -47,6 +48,8 @@ public class PlayerShooter : MonoBehaviour
     public IReadOnlyList<Transform> Mounts => _mounts;
 
     public Transform LockTarget => _delivery == null ? null : _delivery.LockTarget;
+
+    public float TargetHoldTime => _targetHoldTime;
 
     public bool IsOverheated => _delivery != null && _delivery.IsOverheated;
 
@@ -87,8 +90,7 @@ public class PlayerShooter : MonoBehaviour
     }
 
 
-    public void Equip(string weaponId, WeaponBoost[] boosts, float rateScale = 1f, float reloadShift = 0f,
-        int magazineBonus = 0, float speedShift = 0f)
+    public void Equip(string weaponId, WeaponBoost[] boosts, WeaponSkills skills)
     {
         WeaponRow row = _weapons.GetRow(weaponId);
 
@@ -110,10 +112,12 @@ public class PlayerShooter : MonoBehaviour
             new ShotAudio(_shotAudioSource, camera), new ShotAudio(_hitAudioSource, camera),
             _targetLayers, LayerMask.NameToLayer(AmmoLayerName), camera, _worldLayers, new ShotLoop(_loopAudioSource),
             new ShotLoop(_hitLoopAudioSource), boosts: boosts, critMark: _critMark,
-            tally: _tally, rateScale: rateScale, burnFlame: _burnFlame, reloadShift: reloadShift,
-            magazineBonus: magazineBonus, speedShift: speedShift);
+            tally: _tally, rateScale: skills.RateScale, burnFlame: _burnFlame, reloadShift: skills.ReloadShift,
+            magazineBonus: skills.MagazineBonus, speedShift: skills.SpeedShift, hasSight: skills.HasSight,
+            heatPoolScale: skills.HeatPoolScale, coolingTimeScale: skills.CoolingTimeScale);
 
         _equippedId = weaponId;
+        _targetHoldTime = boosts.Length > 0 ? boosts[0].TargetHoldSeconds : 0f;
         _delivery = WeaponFactory.Create(row, context);
         _overheatClip = row.Assets == null ? null : row.Assets.OverheatSound;
         _shownReadiness = -1f;
@@ -123,7 +127,7 @@ public class PlayerShooter : MonoBehaviour
 
     private void EquipDefault()
     {
-        Equip(_weaponId, new WeaponBoost[Mathf.Max(1, _barrels)]);
+        Equip(_weaponId, new WeaponBoost[Mathf.Max(1, _barrels)], WeaponSkills.Default);
     }
 
     private Transform GetLayout(WeaponRow row)

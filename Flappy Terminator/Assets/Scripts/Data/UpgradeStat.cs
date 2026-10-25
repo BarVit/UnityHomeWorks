@@ -10,5 +10,6 @@ public enum UpgradeStat
     TurnRate,
     Stasis,
     AutoAim,
-    Pierce
+    Pierce,
+    TargetHold
 }

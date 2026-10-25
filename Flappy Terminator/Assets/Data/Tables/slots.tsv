@@ -14,6 +14,8 @@ rocket	4	40000
 homing	2	15000	
 homing	3	30000	
 homing	4	60000	
+railgun	2	150000	
+railgun	3	300000	
 plasma	2	45000	
 plasma	3	90000	
 plasma	4	180000	

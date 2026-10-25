@@ -783,6 +783,331 @@ MonoBehaviour:
     _level: 20
     _bonus: 0.1
     _price: 10000
+  - _owner: railgun
+    _stat: 1
+    _level: 0
+    _bonus: 0
+    _price: 0
+  - _owner: railgun
+    _stat: 1
+    _level: 1
+    _bonus: -0.02
+    _price: 38
+  - _owner: railgun
+    _stat: 1
+    _level: 2
+    _bonus: -0.02
+    _price: 53
+  - _owner: railgun
+    _stat: 1
+    _level: 3
+    _bonus: -0.02
+    _price: 72
+  - _owner: railgun
+    _stat: 1
+    _level: 4
+    _bonus: -0.02
+    _price: 100
+  - _owner: railgun
+    _stat: 1
+    _level: 5
+    _bonus: -0.02
+    _price: 139
+  - _owner: railgun
+    _stat: 1
+    _level: 6
+    _bonus: -0.02
+    _price: 188
+  - _owner: railgun
+    _stat: 1
+    _level: 7
+    _bonus: -0.02
+    _price: 263
+  - _owner: railgun
+    _stat: 1
+    _level: 8
+    _bonus: -0.02
+    _price: 375
+  - _owner: railgun
+    _stat: 1
+    _level: 9
+    _bonus: -0.02
+    _price: 507
+  - _owner: railgun
+    _stat: 1
+    _level: 10
+    _bonus: -0.02
+    _price: 713
+  - _owner: railgun
+    _stat: 1
+    _level: 11
+    _bonus: -0.02
+    _price: 994
+  - _owner: railgun
+    _stat: 1
+    _level: 12
+    _bonus: -0.02
+    _price: 1369
+  - _owner: railgun
+    _stat: 1
+    _level: 13
+    _bonus: -0.02
+    _price: 1875
+  - _owner: railgun
+    _stat: 1
+    _level: 14
+    _bonus: -0.02
+    _price: 2625
+  - _owner: railgun
+    _stat: 1
+    _level: 15
+    _bonus: -0.02
+    _price: 3563
+  - _owner: railgun
+    _stat: 1
+    _level: 16
+    _bonus: -0.02
+    _price: 5063
+  - _owner: railgun
+    _stat: 1
+    _level: 17
+    _bonus: -0.02
+    _price: 6938
+  - _owner: railgun
+    _stat: 1
+    _level: 18
+    _bonus: -0.02
+    _price: 9750
+  - _owner: railgun
+    _stat: 1
+    _level: 19
+    _bonus: -0.02
+    _price: 13500
+  - _owner: railgun
+    _stat: 1
+    _level: 20
+    _bonus: -0.02
+    _price: 18750
+  - _owner: railgun
+    _stat: 8
+    _level: 0
+    _bonus: 0
+    _price: 0
+  - _owner: railgun
+    _stat: 8
+    _level: 1
+    _bonus: 1
+    _price: 30000
+  - _owner: beam_laser
+    _stat: 9
+    _level: 0
+    _bonus: 0
+    _price: 0
+  - _owner: beam_laser
+    _stat: 9
+    _level: 1
+    _bonus: 2.5
+    _price: 38
+  - _owner: beam_laser
+    _stat: 9
+    _level: 2
+    _bonus: 2.5
+    _price: 53
+  - _owner: beam_laser
+    _stat: 9
+    _level: 3
+    _bonus: 2.5
+    _price: 72
+  - _owner: beam_laser
+    _stat: 9
+    _level: 4
+    _bonus: 2.5
+    _price: 100
+  - _owner: beam_laser
+    _stat: 9
+    _level: 5
+    _bonus: 2.5
+    _price: 139
+  - _owner: beam_laser
+    _stat: 9
+    _level: 6
+    _bonus: 2.5
+    _price: 188
+  - _owner: beam_laser
+    _stat: 9
+    _level: 7
+    _bonus: 2.5
+    _price: 263
+  - _owner: beam_laser
+    _stat: 9
+    _level: 8
+    _bonus: 2.5
+    _price: 375
+  - _owner: beam_laser
+    _stat: 9
+    _level: 9
+    _bonus: 2.5
+    _price: 507
+  - _owner: beam_laser
+    _stat: 9
+    _level: 10
+    _bonus: 2.5
+    _price: 713
+  - _owner: beam_laser
+    _stat: 9
+    _level: 11
+    _bonus: 2.5
+    _price: 994
+  - _owner: beam_laser
+    _stat: 9
+    _level: 12
+    _bonus: 2.5
+    _price: 1369
+  - _owner: beam_laser
+    _stat: 9
+    _level: 13
+    _bonus: 2.5
+    _price: 1875
+  - _owner: beam_laser
+    _stat: 9
+    _level: 14
+    _bonus: 2.5
+    _price: 2625
+  - _owner: beam_laser
+    _stat: 9
+    _level: 15
+    _bonus: 2.5
+    _price: 3563
+  - _owner: beam_laser
+    _stat: 9
+    _level: 16
+    _bonus: 2.5
+    _price: 5063
+  - _owner: beam_laser
+    _stat: 9
+    _level: 17
+    _bonus: 2.5
+    _price: 6938
+  - _owner: beam_laser
+    _stat: 9
+    _level: 18
+    _bonus: 2.5
+    _price: 9750
+  - _owner: beam_laser
+    _stat: 9
+    _level: 19
+    _bonus: 2.5
+    _price: 13500
+  - _owner: beam_laser
+    _stat: 9
+    _level: 20
+    _bonus: 2.5
+    _price: 18750
+  - _owner: beam_laser
+    _stat: 10
+    _level: 0
+    _bonus: 0
+    _price: 0
+  - _owner: beam_laser
+    _stat: 10
+    _level: 1
+    _bonus: -1.5
+    _price: 38
+  - _owner: beam_laser
+    _stat: 10
+    _level: 2
+    _bonus: -1.5
+    _price: 53
+  - _owner: beam_laser
+    _stat: 10
+    _level: 3
+    _bonus: -1.5
+    _price: 72
+  - _owner: beam_laser
+    _stat: 10
+    _level: 4
+    _bonus: -1.5
+    _price: 100
+  - _owner: beam_laser
+    _stat: 10
+    _level: 5
+    _bonus: -1.5
+    _price: 139
+  - _owner: beam_laser
+    _stat: 10
+    _level: 6
+    _bonus: -1.5
+    _price: 188
+  - _owner: beam_laser
+    _stat: 10
+    _level: 7
+    _bonus: -1.5
+    _price: 263
+  - _owner: beam_laser
+    _stat: 10
+    _level: 8
+    _bonus: -1.5
+    _price: 375
+  - _owner: beam_laser
+    _stat: 10
+    _level: 9
+    _bonus: -1.5
+    _price: 507
+  - _owner: beam_laser
+    _stat: 10
+    _level: 10
+    _bonus: -1.5
+    _price: 713
+  - _owner: beam_laser
+    _stat: 10
+    _level: 11
+    _bonus: -1.5
+    _price: 994
+  - _owner: beam_laser
+    _stat: 10
+    _level: 12
+    _bonus: -1.5
+    _price: 1369
+  - _owner: beam_laser
+    _stat: 10
+    _level: 13
+    _bonus: -1.5
+    _price: 1875
+  - _owner: beam_laser
+    _stat: 10
+    _level: 14
+    _bonus: -1.5
+    _price: 2625
+  - _owner: beam_laser
+    _stat: 10
+    _level: 15
+    _bonus: -1.5
+    _price: 3563
+  - _owner: beam_laser
+    _stat: 10
+    _level: 16
+    _bonus: -1.5
+    _price: 5063
+  - _owner: beam_laser
+    _stat: 10
+    _level: 17
+    _bonus: -1.5
+    _price: 6938
+  - _owner: beam_laser
+    _stat: 10
+    _level: 18
+    _bonus: -1.5
+    _price: 9750
+  - _owner: beam_laser
+    _stat: 10
+    _level: 19
+    _bonus: -1.5
+    _price: 13500
+  - _owner: beam_laser
+    _stat: 10
+    _level: 20
+    _bonus: -1.5
+    _price: 18750
   - _owner: plasma
     _stat: 1
     _level: 0

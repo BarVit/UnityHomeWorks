@@ -74,6 +74,14 @@ MonoBehaviour:
     _weapon: 
     _gun: homing
   - _slot: 2
+    _price: 150000
+    _weapon: 
+    _gun: railgun
+  - _slot: 3
+    _price: 300000
+    _weapon: 
+    _gun: railgun
+  - _slot: 2
     _price: 45000
     _weapon: 
     _gun: plasma

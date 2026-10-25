@@ -34,9 +34,14 @@ public class BeamAimLock : MonoBehaviour
         bool isOnTarget = _input.IsShooting && IsAlive(target);
 
         if (isOnTarget && _wasOnTarget == false && _mover.IsHolding == false)
-            _mover.Hold(_duration, target);
+            _mover.Hold(GetDuration(), target);
 
         _wasOnTarget = isOnTarget;
+    }
+
+    private float GetDuration()
+    {
+        return _shooter.TargetHoldTime > 0f ? _shooter.TargetHoldTime : _duration;
     }
 
     private bool IsAlive(Transform target)
