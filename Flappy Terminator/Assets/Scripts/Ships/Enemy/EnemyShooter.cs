@@ -135,7 +135,7 @@ public class EnemyShooter : MonoBehaviour
 
     private WeaponContext CreateContext(EnemyArmament armament, EnemyContext context)
     {
-        return new WeaponContext(GetMounts(armament.Barrels), armament.Barrels, context.Pools,
+        return new WeaponContext(GetMounts(armament), armament.Barrels, context.Pools,
             new ShotAudio(_shotAudioSource, context.Camera), context.HitAudio, context.TargetLayers,
             _ammoLayer, context.Camera, default, _loop, _hitLoop, armament.Damage,
             rateScale: armament.RateScale);
@@ -152,9 +152,12 @@ public class EnemyShooter : MonoBehaviour
         return source;
     }
 
-    private Transform[] GetMounts(int barrels)
+    private Transform[] GetMounts(EnemyArmament armament)
     {
-        Transform layout = _mountRoot.Find(LayoutPrefix + barrels);
+        Transform layout = _mountRoot.Find(LayoutPrefix + armament.Weapon.Id);
+
+        if (layout == null)
+            layout = _mountRoot.Find(LayoutPrefix + armament.Barrels);
 
         return layout == null ? _mounts : CollectMounts(layout);
     }

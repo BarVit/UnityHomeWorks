@@ -12,8 +12,8 @@ namespace EnemyContent
         private const string Folder = "Assets/Prefabs/Enemies";
         private const string BossFolder = "Assets/Prefabs/Bosses";
         private const int BossCount = 5;
-        private const float BaseHalfWidth = 0.39f;
-        private const float BaseHalfHeight = 0.405f;
+        private const float BaseHalfWidth = 0.405f;
+        private const float BaseHalfHeight = 0.39f;
         private const string MountRootName = "Mounts";
         private const int ShipCount = 5;
 
@@ -26,6 +26,13 @@ namespace EnemyContent
         };
 
         private const string FourBarrelLayout = "Layout 4";
+        private const string ExecutionerBeamLayout = "Layout executioner_1_gun";
+        private const int ExecutionerShip = 5;
+
+        private static readonly Vector3[] ExecutionerBeamPositions =
+        {
+            new Vector3(-0.2f, 0f, 0f)
+        };
 
         private static readonly Vector3[] FourBarrelPositions =
         {
@@ -75,6 +82,24 @@ namespace EnemyContent
             Debug.Log("Боссы: собрано префабов — " + BossCount);
         }
 
+        [MenuItem("Tools/Enemies/Add Weapon Layouts")]
+        public static void AddWeaponLayouts()
+        {
+            string path = GetPath(ExecutionerShip);
+            GameObject root = PrefabUtility.LoadPrefabContents(path);
+
+            AddWeaponLayouts(root, ExecutionerShip);
+            PrefabUtility.SaveAsPrefabAsset(root, path);
+            PrefabUtility.UnloadPrefabContents(root);
+            Debug.Log("Враги: раскладки стволов под оружие на месте");
+        }
+
+        private static void AddWeaponLayouts(GameObject root, int number)
+        {
+            if (number == ExecutionerShip)
+                SetLayout(GetMountRoot(root.transform), ExecutionerBeamLayout, ExecutionerBeamPositions, Vector2.one);
+        }
+
         [MenuItem("Tools/Enemies/Fit Boss Colliders")]
         public static void FitBossColliders()
         {
@@ -115,6 +140,7 @@ namespace EnemyContent
 
             SetController(root, GetName(number));
             SetMounts(root, Vector2.one);
+            AddWeaponLayouts(root, number);
             FitCollider(renderer);
 
             PrefabUtility.SaveAsPrefabAsset(root, path);
@@ -148,10 +174,10 @@ namespace EnemyContent
             if (renderer == null || renderer.sprite == null)
                 return Vector2.one;
 
-            Vector3 scale = renderer.transform.localScale;
-            Vector3 extents = renderer.sprite.bounds.extents;
+            Vector3 extents = Vector3.Scale(renderer.sprite.bounds.extents, renderer.transform.localScale);
+            Vector3 turned = renderer.transform.localRotation * extents;
 
-            return new Vector2(extents.x * scale.x / BaseHalfWidth, extents.y * scale.y / BaseHalfHeight);
+            return new Vector2(Mathf.Abs(turned.x) / BaseHalfWidth, Mathf.Abs(turned.y) / BaseHalfHeight);
         }
 
         private static void FitCollider(SpriteRenderer renderer)
