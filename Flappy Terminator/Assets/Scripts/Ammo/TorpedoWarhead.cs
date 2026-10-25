@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class TorpedoWarhead : MonoBehaviour
@@ -10,6 +11,15 @@ public class TorpedoWarhead : MonoBehaviour
     [SerializeField] private float _fuseNoseShare = 0.1f;
     [SerializeField] private float _fuseDelay = 0.3f;
 
+    private readonly Collider2D[] _near = new Collider2D[8];
+    private readonly RaycastHit2D[] _ahead = new RaycastHit2D[8];
+
+    private Ammo _ammo;
+    private Camera _camera;
+    private ContactFilter2D _targets;
+    private Action<Ammo, TorpedoWarhead> _detonate;
+    private float _area;
+    private float _armedFuseDelay;
     private float _fuseLeft;
 
     public BlastWave Blast => _blast;
@@ -37,24 +47,82 @@ public class TorpedoWarhead : MonoBehaviour
 
     public bool IsFuseBurning => _fuseLeft > 0f;
 
-    public void StartFuse(float delay)
+    private void Awake()
     {
-        _fuseLeft = delay > 0f ? delay : _fuseDelay;
+        _ammo = GetComponent<Ammo>();
     }
 
-    public void Cancel()
+    private void Update()
     {
+        if (_detonate == null || _ammo == null || _ammo.IsArmed == false)
+            return;
+
+        if (IsFuseBurning)
+        {
+            _fuseLeft -= Time.deltaTime;
+
+            if (_fuseLeft <= 0f)
+                Detonate();
+
+            return;
+        }
+
+        if (ScreenArea.Contains(_camera, Sensor) == false || IsOnCourse())
+            return;
+
+        int count = Physics2D.OverlapCircle(Sensor, _area, _targets, _near);
+
+        for (int i = 0; i < count; i++)
+        {
+            if (WeaponDelivery.IsOpenTarget(_near[i]))
+            {
+                _fuseLeft = _armedFuseDelay;
+
+                return;
+            }
+        }
+    }
+
+    public void Arm(float area, float fuseDelay, ContactFilter2D targets, Camera camera,
+        Action<Ammo, TorpedoWarhead> detonate)
+    {
+        _area = area;
+        _armedFuseDelay = fuseDelay > 0f ? fuseDelay : _fuseDelay;
+        _targets = targets;
+        _camera = camera;
+        _detonate = detonate;
         _fuseLeft = 0f;
     }
 
-    public bool Burn(float deltaTime)
+    private void Detonate()
     {
-        if (_fuseLeft <= 0f)
-            return false;
+        _fuseLeft = 0f;
 
-        _fuseLeft -= deltaTime;
+        Action<Ammo, TorpedoWarhead> detonate = _detonate;
 
-        return _fuseLeft <= 0f;
+        _detonate = null;
+        detonate?.Invoke(_ammo, this);
+    }
+
+    private bool IsOnCourse()
+    {
+        Vector2 course = transform.right;
+        Vector2 edge = new Vector2(-course.y, course.x) * (Width * 0.5f);
+
+        return SeesTarget(Sensor + edge, course) || SeesTarget(Sensor - edge, course);
+    }
+
+    private bool SeesTarget(Vector2 origin, Vector2 course)
+    {
+        int count = Physics2D.Raycast(origin, course, _targets, _ahead, _area);
+
+        for (int i = 0; i < count; i++)
+        {
+            if (WeaponDelivery.IsOpenTarget(_ahead[i].collider))
+                return true;
+        }
+
+        return false;
     }
 
     private Vector2 GetPoint(float noseShare)

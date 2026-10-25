@@ -2,11 +2,7 @@ using UnityEngine;
 
 public class TorpedoDelivery : ProjectileDelivery
 {
-    private readonly Collider2D[] _near = new Collider2D[8];
-    private readonly RaycastHit2D[] _ahead = new RaycastHit2D[8];
-
     private SpawnPool<BlastWave> _blastPool;
-    private float _deltaTime;
 
     public TorpedoDelivery(WeaponRow row, WeaponContext context) : base(row, context)
     {
@@ -26,86 +22,24 @@ public class TorpedoDelivery : ProjectileDelivery
         torpedo.Struck += OnStruck;
 
         if (torpedo.TryGetComponent(out TorpedoWarhead warhead))
-            warhead.Cancel();
+            warhead.Arm(Row.Area, Row.Blast.FuseDelay, Context.TargetFilter, Context.Camera, OnDetonated);
 
         return torpedo;
     }
 
-    protected override void OnTick(float deltaTime)
+    private void OnDetonated(Ammo torpedo, TorpedoWarhead warhead)
     {
-        _deltaTime = deltaTime;
-        AmmoPool.ForEachActive(Watch);
-    }
+        if (torpedo.TryScore())
+            CountHit();
 
-    private void Watch(Ammo torpedo)
-    {
-        if (torpedo.IsArmed == false)
-            return;
-
-        if (torpedo.TryGetComponent(out TorpedoWarhead warhead) == false)
-            return;
-
-        Vector2 sensor = warhead.Sensor;
-
-        if (warhead.IsFuseBurning)
-        {
-            if (warhead.Burn(_deltaTime))
-            {
-                if (torpedo.TryScore())
-                    CountHit();
-
-                Blast(warhead, torpedo.Barrel);
-                torpedo.Remove();
-            }
-
-            return;
-        }
-
-        if (ScreenArea.Contains(Context.Camera, sensor) == false)
-            return;
-
-        if (IsOnCourse(torpedo.transform, warhead))
-            return;
-
-        int count = Physics2D.OverlapCircle(sensor, Row.Area, Context.TargetFilter, _near);
-
-        for (int i = 0; i < count; i++)
-        {
-            if (IsOpenTarget(_near[i]))
-            {
-                warhead.StartFuse(Row.Blast.FuseDelay);
-
-                return;
-            }
-        }
+        Blast(warhead, torpedo.Barrel);
+        torpedo.Remove();
     }
 
     private void OnStruck(Ammo torpedo)
     {
         if (torpedo.TryGetComponent(out TorpedoWarhead warhead))
             Blast(warhead, torpedo.Barrel);
-    }
-
-    private bool IsOnCourse(Transform torpedo, TorpedoWarhead warhead)
-    {
-        Vector2 course = torpedo.right;
-        Vector2 edge = new Vector2(-course.y, course.x) * (warhead.Width * 0.5f);
-        Vector2 sensor = warhead.Sensor;
-
-        return SeesTarget(sensor + edge, course) || SeesTarget(sensor - edge, course);
-    }
-
-    private bool SeesTarget(Vector2 origin, Vector2 course)
-    {
-        int count = Physics2D.Raycast(origin, course, Context.TargetFilter, _ahead, Row.Area);
-
-        for (int i = 0; i < count; i++)
-        {
-            if (IsOpenTarget(_ahead[i].collider))
-                return true;
-        }
-
-        return false;
     }
 
     private void Blast(TorpedoWarhead warhead, int barrel)
@@ -124,7 +58,6 @@ public class TorpedoDelivery : ProjectileDelivery
         BlastWave wave = _blastPool.Get(centre);
 
         int damage = RollDamage(barrel, out bool isCrit);
-
         float far = warhead.GetFarDiameter(Row.Blast.Radius);
 
         wave.Play(Mathf.Min(warhead.NearDiameter, far), far, damage, Context.TargetFilter, Row.Blast.Time);
