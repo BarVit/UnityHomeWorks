@@ -247,27 +247,27 @@ MonoBehaviour:
     _stat: 0
     _level: 1
     _bonus: 10
-    _price: 5500
+    _price: 11000
   - _owner: homing
     _stat: 0
     _level: 2
     _bonus: 10
-    _price: 8000
+    _price: 16000
   - _owner: homing
     _stat: 0
     _level: 3
     _bonus: 15
-    _price: 11000
+    _price: 22000
   - _owner: homing
     _stat: 0
     _level: 4
     _bonus: 15
-    _price: 14000
+    _price: 28000
   - _owner: homing
     _stat: 0
     _level: 5
     _bonus: 15
-    _price: 17000
+    _price: 34000
   - _owner: homing
     _stat: 1
     _level: 0
@@ -282,27 +282,27 @@ MonoBehaviour:
     _stat: 7
     _level: 1
     _bonus: 10
-    _price: 4500
+    _price: 9000
   - _owner: homing
     _stat: 7
     _level: 2
     _bonus: 10
-    _price: 6750
+    _price: 13500
   - _owner: homing
     _stat: 7
     _level: 3
     _bonus: 10
-    _price: 9000
+    _price: 18000
   - _owner: homing
     _stat: 7
     _level: 4
     _bonus: 10
-    _price: 11250
+    _price: 22500
   - _owner: homing
     _stat: 7
     _level: 5
     _bonus: 10
-    _price: 13500
+    _price: 27000
   - _owner: homing
     _stat: 6
     _level: 0
@@ -312,27 +312,27 @@ MonoBehaviour:
     _stat: 6
     _level: 1
     _bonus: 20
-    _price: 3500
+    _price: 7000
   - _owner: homing
     _stat: 6
     _level: 2
     _bonus: 20
-    _price: 6750
+    _price: 13500
   - _owner: homing
     _stat: 6
     _level: 3
     _bonus: 20
-    _price: 10000
+    _price: 20000
   - _owner: homing
     _stat: 6
     _level: 4
     _bonus: 20
-    _price: 13500
+    _price: 27000
   - _owner: homing
     _stat: 6
     _level: 5
     _bonus: 20
-    _price: 17000
+    _price: 34000
   - _owner: railgun
     _stat: 0
     _level: 0
