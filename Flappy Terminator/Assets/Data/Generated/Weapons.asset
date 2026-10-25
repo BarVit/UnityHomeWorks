@@ -876,24 +876,24 @@ MonoBehaviour:
       _hitWorldSound: {fileID: 8300000, guid: db573893c60534256bca90dcd8ce844e, type: 3}
       _overheatSound: {fileID: 8300000, guid: 70a4056725600485cb17bdc195c495e7, type: 3}
   - _id: executioner_2_gun
-    _title: "\u041F\u0430\u043B\u0430\u0447 II \u2014 \u0442\u043E\u0440\u043F\u0435\u0434\u044B"
+    _title: "\u041F\u0430\u043B\u0430\u0447 II \u2014 \u0440\u0430\u043A\u0435\u0442\u043D\u0438\u0446\u0430"
     _owner: 1
-    _delivery: 6
-    _damage: 70
+    _delivery: 0
+    _damage: 100
     _rate: 3.6
     _magazine: 0
     _reloadTime: 0
-    _projectileSpeed: 5
-    _barrelsMax: 2
-    _firePattern: 0
-    _sideAngle: 0
+    _projectileSpeed: 6
+    _barrelsMax: 3
+    _firePattern: 2
+    _sideAngle: 8
     _heatPerShot: 0
     _cooldownRate: 0
     _unlockHeat: 0
     _tickInterval: 0
     _turnRate: 0
     _aimTime: 0
-    _area: 1.5
+    _area: 0
     _blast:
       _fuseDelay: 0
       _radius: 0
@@ -901,16 +901,16 @@ MonoBehaviour:
     _price: 0
     _unlockAfter: 
     _grantedAfter: 
-    _projectile: {fileID: 4581286917286831887, guid: 39b8feebdbe9d4a6d8c35e7db650cfcd, type: 3}
+    _projectile: {fileID: 4581286917286831887, guid: 3fffa4739d43f4c039a9ff680207e691, type: 3}
     _beam: {fileID: 0}
     _assets:
       _icon: {fileID: 0}
-      _projectileSprite: {fileID: 21300000, guid: da841e0ed6399bd4695ebcfa661935f8, type: 3}
+      _projectileSprite: {fileID: 21300004, guid: da841e0ed6399bd4695ebcfa661935f8, type: 3}
       _projectileAnimation: {fileID: 0}
       _shotEffect: {fileID: 0}
       _hitTargetEffect: {fileID: 1650114164288651137, guid: 8dca398b28a6e45e78bd7b04a3a726b2, type: 3}
       _hitWorldEffect: {fileID: 0}
-      _shotSound: {fileID: 8300000, guid: 5bdbc73155716462fbc71697793b10c7, type: 3}
+      _shotSound: {fileID: 8300000, guid: fdc735ea072a9410a98e635510b96568, type: 3}
       _hitTargetSound: {fileID: 8300000, guid: 073af4467d10246c190d3a3a29c9d2f4, type: 3}
       _hitWorldSound: {fileID: 8300000, guid: 073af4467d10246c190d3a3a29c9d2f4, type: 3}
       _overheatSound: {fileID: 0}

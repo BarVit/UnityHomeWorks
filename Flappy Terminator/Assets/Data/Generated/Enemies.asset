@@ -185,7 +185,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 18235c16a5303461787f966b277db17c, type: 3}
     _bodyDamage: 70
     _fromLocation: loc_05_01
-    _health: 1500
+    _health: 3200
     _weapon: phantom_3_gun
     _barrels: 3
     _damage: 60
@@ -215,10 +215,10 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 8971cd4b3ded249faa09c9c5dd064fbe, type: 3}
     _bodyDamage: 120
     _fromLocation: loc_05_04
-    _health: 2500
+    _health: 4500
     _weapon: executioner_2_gun
-    _barrels: 1
-    _damage: 300
+    _barrels: 3
+    _damage: 100
     _movement: {fileID: 11400000, guid: 272ca042f1216401da0ac9cec62c4ca8, type: 2}
     _skin: {fileID: 0}
     _rewardMoney: 3000
