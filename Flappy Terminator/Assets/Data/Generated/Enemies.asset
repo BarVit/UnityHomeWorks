@@ -140,7 +140,7 @@ MonoBehaviour:
     _prefab: {fileID: 748883696485598149, guid: 79fee06f008d942e7baa168b610dd793, type: 3}
     _bodyDamage: 60
     _fromLocation: loc_04_02
-    _health: 1600
+    _health: 1400
     _weapon: reaper_3_gun
     _barrels: 1
     _damage: 120
