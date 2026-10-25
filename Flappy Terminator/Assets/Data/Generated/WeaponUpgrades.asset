@@ -506,7 +506,7 @@ MonoBehaviour:
   - _owner: plasma
     _stat: 0
     _level: 1
-    _bonus: 50
+    _bonus: 40
     _price: 16500
   - _owner: plasma
     _stat: 0
@@ -521,12 +521,12 @@ MonoBehaviour:
   - _owner: plasma
     _stat: 0
     _level: 4
-    _bonus: 100
+    _bonus: 60
     _price: 42000
   - _owner: plasma
     _stat: 0
     _level: 5
-    _bonus: 100
+    _bonus: 60
     _price: 51000
   - _owner: plasma
     _stat: 1

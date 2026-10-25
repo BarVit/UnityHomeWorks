@@ -97,11 +97,11 @@ beam_laser	HeatReduction	3	10	16500
 beam_laser	HeatReduction	4	10	21000
 beam_laser	HeatReduction	5	10	25500
 plasma	Damage	0	0	0
-plasma	Damage	1	50	16500
+plasma	Damage	1	40	16500
 plasma	Damage	2	50	24000
 plasma	Damage	3	50	33000
-plasma	Damage	4	100	42000
-plasma	Damage	5	100	51000
+plasma	Damage	4	60	42000
+plasma	Damage	5	60	51000
 plasma	CritChance	0	0	0
 plasma	Stasis	0	0.2	0
 plasma	Stasis	1	0.05	13500
