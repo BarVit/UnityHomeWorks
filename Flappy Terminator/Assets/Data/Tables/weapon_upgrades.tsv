@@ -78,11 +78,11 @@ railgun	Pierce	3	10	33000
 railgun	Pierce	4	15	42000
 railgun	Pierce	5	15	51000
 beam_laser	Damage	0	0	0
-beam_laser	Damage	1	50	8250
-beam_laser	Damage	2	50	12000
-beam_laser	Damage	3	50	16500
-beam_laser	Damage	4	50	21000
-beam_laser	Damage	5	50	25500
+beam_laser	Damage	1	150	8250
+beam_laser	Damage	2	150	12000
+beam_laser	Damage	3	150	16500
+beam_laser	Damage	4	150	21000
+beam_laser	Damage	5	150	25500
 beam_laser	CritChance	0	0	0
 beam_laser	TargetHold	0	0.25	0
 beam_laser	TargetHold	1	0.1	8250
