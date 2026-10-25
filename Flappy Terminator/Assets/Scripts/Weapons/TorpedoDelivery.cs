@@ -58,7 +58,7 @@ public class TorpedoDelivery : ProjectileDelivery
         BlastWave wave = _blastPool.Get(centre);
 
         int damage = RollDamage(barrel, out bool isCrit);
-        float far = warhead.GetFarDiameter(Row.Blast.Radius);
+        float far = warhead.GetFarDiameter(Row.Blast.Radius + Context.GetBoost(barrel).BlastRadiusBonus);
 
         wave.Play(Mathf.Min(warhead.NearDiameter, far), far, damage, Context.TargetFilter, Row.Blast.Time);
 

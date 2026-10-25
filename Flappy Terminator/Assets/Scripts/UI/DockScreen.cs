@@ -18,6 +18,7 @@ public class DockScreen : MonoBehaviour
     private const string PlasmaId = "plasma";
     private const string RailgunId = "railgun";
     private const string BeamLaserId = "beam_laser";
+    private const string TorpedoId = "torpedo";
     private const string SightOn = "ON";
     private const string SightOff = "OFF";
     private const string BarrelMark = "  #";
@@ -82,6 +83,7 @@ public class DockScreen : MonoBehaviour
     [SerializeField] private Sprite _stasisIcon;
     [SerializeField] private Sprite _autoAimIcon;
     [SerializeField] private Sprite _pierceIcon;
+    [SerializeField] private Sprite _blastIcon;
     [SerializeField] private ShopWindow _shop;
     [SerializeField] private Button _shopButton;
     [SerializeField] private Button _menuButton;
@@ -305,7 +307,7 @@ public class DockScreen : MonoBehaviour
                 return Mathf.RoundToInt(value) + PercentSign;
             case UpgradeStat.AutoAim:
                 return value.ToString("0.#") + Degrees;
-            case UpgradeStat.ProjectileSpeed when row.Id == PlasmaId:
+            case UpgradeStat.ProjectileSpeed when row.Id == PlasmaId || row.Id == TorpedoId:
                 return (row.ProjectileSpeed * (1f + value * 0.01f)).ToString("0.#");
             case UpgradeStat.ProjectileSpeed:
             case UpgradeStat.TurnRate:
@@ -315,6 +317,8 @@ public class DockScreen : MonoBehaviour
                 return value.ToString("0.###") + Seconds;
             case UpgradeStat.HeatReduction:
                 return Mathf.RoundToInt(100f - value) + PercentSign;
+            case UpgradeStat.BlastRadius:
+                return (row.Blast.Radius + value).ToString("0.#");
             default:
                 return "x" + value;
         }
@@ -344,6 +348,8 @@ public class DockScreen : MonoBehaviour
                 return "PIERCING";
             case UpgradeStat.TargetHold:
                 return "TARGET HOLD";
+            case UpgradeStat.BlastRadius:
+                return "BLAST RADIUS";
             default:
                 return "CRIT CHANCE";
         }
@@ -361,7 +367,7 @@ public class DockScreen : MonoBehaviour
                 return "-" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
             case UpgradeStat.DoubleShot:
                 return "CHANCE OF A SECOND BULLET";
-            case UpgradeStat.ProjectileSpeed when _hangar.WeaponId == PlasmaId:
+            case UpgradeStat.ProjectileSpeed when _hangar.WeaponId == PlasmaId || _hangar.WeaponId == TorpedoId:
                 return price < 0 ? MaxLevelHint : "FASTER SHOTS";
             case UpgradeStat.ProjectileSpeed:
                 return "+" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
@@ -375,6 +381,8 @@ public class DockScreen : MonoBehaviour
                 return "OF DAMAGE GOES ON TO THE NEXT TARGET";
             case UpgradeStat.TargetHold:
                 return "THE SHIP HANGS AIMED AT A HIT TARGET";
+            case UpgradeStat.BlastRadius:
+                return price < 0 ? MaxLevelHint : "+" + _hangar.GetStep(stat) + " PER LEVEL";
             case UpgradeStat.TurnRate:
                 return "+" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
             default:
@@ -406,6 +414,8 @@ public class DockScreen : MonoBehaviour
                 return _pierceIcon;
             case UpgradeStat.TargetHold:
                 return _lifetimeIcon;
+            case UpgradeStat.BlastRadius:
+                return _blastIcon;
             default:
                 return _critIcon;
         }
@@ -665,7 +675,7 @@ public class DockScreen : MonoBehaviour
 
     private bool IsMastery(string weaponId)
     {
-        return weaponId == PlasmaId || weaponId == RailgunId;
+        return weaponId == PlasmaId || weaponId == RailgunId || weaponId == TorpedoId;
     }
 
     private string GetCooldownHint(SkillKey skill, int price)

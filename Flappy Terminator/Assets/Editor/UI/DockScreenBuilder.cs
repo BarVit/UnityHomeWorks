@@ -303,6 +303,7 @@ namespace UiContent
             so.FindProperty("_stasisIcon").objectReferenceValue = Art("Stasis Icon");
             so.FindProperty("_autoAimIcon").objectReferenceValue = Art("Auto Aim Icon");
             so.FindProperty("_pierceIcon").objectReferenceValue = Art("Pierce Icon");
+            so.FindProperty("_blastIcon").objectReferenceValue = Art("EMP Icon");
             so.FindProperty("_shop").objectReferenceValue = shop;
             so.FindProperty("_shopButton").objectReferenceValue = shopButton;
             so.FindProperty("_menuButton").objectReferenceValue = menu;

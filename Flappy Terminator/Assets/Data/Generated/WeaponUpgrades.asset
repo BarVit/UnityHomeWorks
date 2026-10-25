@@ -593,6 +593,101 @@ MonoBehaviour:
     _level: 5
     _bonus: 14.2857
     _price: 51000
+  - _owner: torpedo
+    _stat: 0
+    _level: 0
+    _bonus: 0
+    _price: 0
+  - _owner: torpedo
+    _stat: 0
+    _level: 1
+    _bonus: 200
+    _price: 33000
+  - _owner: torpedo
+    _stat: 0
+    _level: 2
+    _bonus: 200
+    _price: 48000
+  - _owner: torpedo
+    _stat: 0
+    _level: 3
+    _bonus: 200
+    _price: 66000
+  - _owner: torpedo
+    _stat: 0
+    _level: 4
+    _bonus: 200
+    _price: 84000
+  - _owner: torpedo
+    _stat: 0
+    _level: 5
+    _bonus: 200
+    _price: 102000
+  - _owner: torpedo
+    _stat: 1
+    _level: 0
+    _bonus: 0
+    _price: 0
+  - _owner: torpedo
+    _stat: 12
+    _level: 0
+    _bonus: 0
+    _price: 0
+  - _owner: torpedo
+    _stat: 12
+    _level: 1
+    _bonus: 0.2
+    _price: 27000
+  - _owner: torpedo
+    _stat: 12
+    _level: 2
+    _bonus: 0.2
+    _price: 40500
+  - _owner: torpedo
+    _stat: 12
+    _level: 3
+    _bonus: 0.2
+    _price: 54000
+  - _owner: torpedo
+    _stat: 12
+    _level: 4
+    _bonus: 0.2
+    _price: 67500
+  - _owner: torpedo
+    _stat: 12
+    _level: 5
+    _bonus: 0.2
+    _price: 81000
+  - _owner: torpedo
+    _stat: 5
+    _level: 0
+    _bonus: 0
+    _price: 0
+  - _owner: torpedo
+    _stat: 5
+    _level: 1
+    _bonus: 10
+    _price: 21000
+  - _owner: torpedo
+    _stat: 5
+    _level: 2
+    _bonus: 10
+    _price: 40500
+  - _owner: torpedo
+    _stat: 5
+    _level: 3
+    _bonus: 10
+    _price: 60000
+  - _owner: torpedo
+    _stat: 5
+    _level: 4
+    _bonus: 10
+    _price: 81000
+  - _owner: torpedo
+    _stat: 5
+    _level: 5
+    _bonus: 10
+    _price: 102000
   - _owner: cannon
     _stat: 0
     _level: 0

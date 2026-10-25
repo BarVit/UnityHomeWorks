@@ -239,6 +239,27 @@ plasma	Cooldown	17	-0.02	20814
 plasma	Cooldown	18	-0.02	29250
 plasma	Cooldown	19	-0.02	40500
 plasma	Cooldown	20	-0.02	56250
+torpedo	Cooldown	0	0	0
+torpedo	Cooldown	1	-0.06	228
+torpedo	Cooldown	2	-0.06	318
+torpedo	Cooldown	3	-0.06	432
+torpedo	Cooldown	4	-0.06	600
+torpedo	Cooldown	5	-0.06	834
+torpedo	Cooldown	6	-0.06	1128
+torpedo	Cooldown	7	-0.06	1578
+torpedo	Cooldown	8	-0.06	2250
+torpedo	Cooldown	9	-0.06	3042
+torpedo	Cooldown	10	-0.06	4278
+torpedo	Cooldown	11	-0.06	5964
+torpedo	Cooldown	12	-0.06	8214
+torpedo	Cooldown	13	-0.06	11250
+torpedo	Cooldown	14	-0.06	15750
+torpedo	Cooldown	15	-0.06	21378
+torpedo	Cooldown	16	-0.06	30378
+torpedo	Cooldown	17	-0.06	41628
+torpedo	Cooldown	18	-0.06	58500
+torpedo	Cooldown	19	-0.06	81000
+torpedo	Cooldown	20	-0.06	112500
 	RepairMastery	0	0	0
 	RepairMastery	1	5	40
 	RepairMastery	2	5	56

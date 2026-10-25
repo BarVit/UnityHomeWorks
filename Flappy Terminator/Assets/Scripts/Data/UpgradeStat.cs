@@ -11,5 +11,6 @@ public enum UpgradeStat
     Stasis,
     AutoAim,
     Pierce,
-    TargetHold
+    TargetHold,
+    BlastRadius
 }

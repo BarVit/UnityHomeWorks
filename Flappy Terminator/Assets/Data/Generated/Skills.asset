@@ -1213,6 +1213,111 @@ MonoBehaviour:
     _level: 20
     _bonus: -0.02
     _price: 56250
+  - _owner: torpedo
+    _stat: 1
+    _level: 0
+    _bonus: 0
+    _price: 0
+  - _owner: torpedo
+    _stat: 1
+    _level: 1
+    _bonus: -0.06
+    _price: 228
+  - _owner: torpedo
+    _stat: 1
+    _level: 2
+    _bonus: -0.06
+    _price: 318
+  - _owner: torpedo
+    _stat: 1
+    _level: 3
+    _bonus: -0.06
+    _price: 432
+  - _owner: torpedo
+    _stat: 1
+    _level: 4
+    _bonus: -0.06
+    _price: 600
+  - _owner: torpedo
+    _stat: 1
+    _level: 5
+    _bonus: -0.06
+    _price: 834
+  - _owner: torpedo
+    _stat: 1
+    _level: 6
+    _bonus: -0.06
+    _price: 1128
+  - _owner: torpedo
+    _stat: 1
+    _level: 7
+    _bonus: -0.06
+    _price: 1578
+  - _owner: torpedo
+    _stat: 1
+    _level: 8
+    _bonus: -0.06
+    _price: 2250
+  - _owner: torpedo
+    _stat: 1
+    _level: 9
+    _bonus: -0.06
+    _price: 3042
+  - _owner: torpedo
+    _stat: 1
+    _level: 10
+    _bonus: -0.06
+    _price: 4278
+  - _owner: torpedo
+    _stat: 1
+    _level: 11
+    _bonus: -0.06
+    _price: 5964
+  - _owner: torpedo
+    _stat: 1
+    _level: 12
+    _bonus: -0.06
+    _price: 8214
+  - _owner: torpedo
+    _stat: 1
+    _level: 13
+    _bonus: -0.06
+    _price: 11250
+  - _owner: torpedo
+    _stat: 1
+    _level: 14
+    _bonus: -0.06
+    _price: 15750
+  - _owner: torpedo
+    _stat: 1
+    _level: 15
+    _bonus: -0.06
+    _price: 21378
+  - _owner: torpedo
+    _stat: 1
+    _level: 16
+    _bonus: -0.06
+    _price: 30378
+  - _owner: torpedo
+    _stat: 1
+    _level: 17
+    _bonus: -0.06
+    _price: 41628
+  - _owner: torpedo
+    _stat: 1
+    _level: 18
+    _bonus: -0.06
+    _price: 58500
+  - _owner: torpedo
+    _stat: 1
+    _level: 19
+    _bonus: -0.06
+    _price: 81000
+  - _owner: torpedo
+    _stat: 1
+    _level: 20
+    _bonus: -0.06
+    _price: 112500
   - _owner: 
     _stat: 4
     _level: 0

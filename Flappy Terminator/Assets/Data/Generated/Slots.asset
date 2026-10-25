@@ -93,3 +93,7 @@ MonoBehaviour:
     _price: 180000
     _weapon: 
     _gun: plasma
+  - _slot: 2
+    _price: 2000000
+    _weapon: 
+    _gun: torpedo
