@@ -965,7 +965,7 @@ MonoBehaviour:
     _projectileSpeed: 20
     _barrelsMax: 4
     _firePattern: 3
-    _sideAngle: 5
+    _sideAngle: 8
     _heatPerShot: 16.67
     _cooldownRate: 50
     _unlockHeat: 0
