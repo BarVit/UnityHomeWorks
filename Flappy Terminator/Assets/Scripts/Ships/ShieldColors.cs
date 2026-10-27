@@ -4,6 +4,8 @@ public static class ShieldColors
 {
     public const int MaxLevel = 5;
 
+    public static readonly Color Aegis = new Color(1f, 0.78f, 0.22f);
+
     private static readonly Color[] Colors =
     {
         new Color(0.96f, 0.98f, 1f),

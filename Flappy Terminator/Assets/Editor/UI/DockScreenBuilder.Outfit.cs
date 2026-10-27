@@ -287,6 +287,32 @@ namespace UiContent
             return sceneShip.transform.Find(EmpRig.EmpName).GetComponent<EmpField>();
         }
 
+        private static EnergyShield BuildAegis(PlayerShip sceneShip)
+        {
+            GameObject prefab = PrefabUtility.LoadPrefabContents(PlayerPrefab);
+
+            try
+            {
+                PlayerShip ship = prefab.GetComponent<PlayerShip>();
+                SpriteRenderer body = (SpriteRenderer)new SerializedObject(ship).FindProperty("_shipSprite").objectReferenceValue;
+                EnergyShield aegis = ShieldRig.Attach(prefab, body, body.GetComponent<AmmoHitHandler>(),
+                    out AmmoHitHandler aegisHits, name: ShieldRig.AegisName);
+
+                SerializedObject shipSo = new SerializedObject(ship);
+                shipSo.FindProperty("_aegis").objectReferenceValue = aegis;
+                shipSo.FindProperty("_aegisHitHandler").objectReferenceValue = aegisHits;
+                shipSo.ApplyModifiedPropertiesWithoutUndo();
+
+                PrefabUtility.SaveAsPrefabAsset(prefab, PlayerPrefab);
+            }
+            finally
+            {
+                PrefabUtility.UnloadPrefabContents(prefab);
+            }
+
+            return sceneShip.transform.Find(ShieldRig.AegisName).GetComponent<EnergyShield>();
+        }
+
         private static EnergyShield BuildShield(PlayerShip sceneShip)
         {
             GameObject prefab = PrefabUtility.LoadPrefabContents(PlayerPrefab);

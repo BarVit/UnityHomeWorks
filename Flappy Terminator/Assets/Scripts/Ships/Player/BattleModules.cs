@@ -12,6 +12,7 @@ public class BattleModules : MonoBehaviour
     [SerializeField] private ShipRepair _repair;
     [SerializeField] private SentrySquad _sentries;
     [SerializeField] private EmpField _emp;
+    [SerializeField] private EnergyShield _aegis;
     [SerializeField] private EnemySpawner _spawner;
 
     private ModuleSpec?[] _specs = new ModuleSpec?[0];
@@ -20,6 +21,7 @@ public class BattleModules : MonoBehaviour
     private int _repairSlot = NoSlot;
     private int _sentrySlot = NoSlot;
     private int _empSlot = NoSlot;
+    private int _aegisSlot = NoSlot;
 
     public int Count => _specs.Length;
 
@@ -29,6 +31,7 @@ public class BattleModules : MonoBehaviour
     {
         _input.ModuleActivated += Activate;
         _shield.Broken += OnShieldBroken;
+        _aegis.Broken += OnAegisBroken;
         _repair.Finished += OnRepairFinished;
         _sentries.Finished += OnSentriesFinished;
         _emp.Finished += OnEmpFinished;
@@ -38,6 +41,7 @@ public class BattleModules : MonoBehaviour
     {
         _input.ModuleActivated -= Activate;
         _shield.Broken -= OnShieldBroken;
+        _aegis.Broken -= OnAegisBroken;
         _repair.Finished -= OnRepairFinished;
         _sentries.Finished -= OnSentriesFinished;
         _emp.Finished -= OnEmpFinished;
@@ -57,6 +61,7 @@ public class BattleModules : MonoBehaviour
         _specs = specs;
         _cooldownLeft = new float[specs.Length];
         _repair.SetPassiveRate(GetRegen(specs));
+        _ship.SetDamageReduction(GetReduction(specs));
         ResetForLevel();
         Changed?.Invoke();
     }
@@ -65,6 +70,8 @@ public class BattleModules : MonoBehaviour
     {
         _shield.Drop();
         _shieldSlot = NoSlot;
+        _aegis.Drop();
+        _aegisSlot = NoSlot;
         _repair.Stop();
         _repairSlot = NoSlot;
         _sentries.Stop();
@@ -95,6 +102,9 @@ public class BattleModules : MonoBehaviour
 
         if (GetSpec(slot)?.Kind == ModuleKind.RepairNanobots)
             return _repair.IsRegenerating;
+
+        if (slot == _aegisSlot)
+            return _aegis.IsUp;
 
         return slot == _shieldSlot && _shield.IsUp;
     }
@@ -130,6 +140,10 @@ public class BattleModules : MonoBehaviour
             case ModuleKind.Shield:
                 _shieldSlot = slot;
                 _shield.Raise(spec.Value.Capacity, spec.Value.Level);
+                break;
+            case ModuleKind.Aegis:
+                _aegisSlot = slot;
+                _aegis.Raise(spec.Value.Capacity, ShieldColors.Aegis);
                 break;
             case ModuleKind.RepairDrone:
                 if (_repair.CanRepair == false)
@@ -179,6 +193,19 @@ public class BattleModules : MonoBehaviour
         return regen;
     }
 
+    private static int GetReduction(ModuleSpec?[] specs)
+    {
+        int reduction = 0;
+
+        foreach (ModuleSpec? spec in specs)
+        {
+            if (spec != null && spec.Value.Kind == ModuleKind.Aegis)
+                reduction += spec.Value.Reduction;
+        }
+
+        return reduction;
+    }
+
     private void OnEmpFinished()
     {
         _spawner.Pause(false);
@@ -220,6 +247,20 @@ public class BattleModules : MonoBehaviour
             _cooldownLeft[_shieldSlot] = spec.Value.Cooldown;
 
         _shieldSlot = NoSlot;
+        Changed?.Invoke();
+    }
+
+    private void OnAegisBroken()
+    {
+        if (_aegisSlot == NoSlot)
+            return;
+
+        ModuleSpec? spec = GetSpec(_aegisSlot);
+
+        if (spec != null)
+            _cooldownLeft[_aegisSlot] = spec.Value.Cooldown;
+
+        _aegisSlot = NoSlot;
         Changed?.Invoke();
     }
 }

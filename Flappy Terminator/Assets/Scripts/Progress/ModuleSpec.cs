@@ -3,8 +3,9 @@ using UnityEngine;
 public readonly struct ModuleSpec
 {
     public ModuleSpec(ModuleKind kind, Sprite icon, int capacity, float cooldown, int level, int repair,
-        SentrySpec sentry = default, int regen = 0, float duration = 0f)
+        SentrySpec sentry = default, int regen = 0, float duration = 0f, int reduction = 0)
     {
+        Reduction = reduction;
         Duration = duration;
         Regen = regen;
         Sentry = sentry;
@@ -33,4 +34,6 @@ public readonly struct ModuleSpec
     public int Regen { get; }
 
     public float Duration { get; }
+
+    public int Reduction { get; }
 }

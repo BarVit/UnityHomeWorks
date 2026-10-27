@@ -4,3 +4,4 @@ repair_drone	Ремонтный дрон	RepairDrone	10000	Repair Drone Icon	REP
 sentry_drones	Охранные дроны	SentryDrones	20000	Sentry Drones Icon	TWO DRONES SHOOT THE TOUGHEST TARGET	loc_03_02
 repair_nanobots	Ремонтные наноботы	RepairNanobots	120000	Repair Nanobots Icon	REPAIR THE HULL ALL THE TIME	loc_04_01
 emp	ЭМИ	Emp	150000	EMP Icon	FREEZES ENEMIES AND THEIR SHOTS	void_ashen_3
+aegis	Эгида	Aegis	1000000	Aegis Icon	LESS DAMAGE, GOLD SHIELD ON DEMAND	loc_05_03

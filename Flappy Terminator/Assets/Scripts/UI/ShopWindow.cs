@@ -185,6 +185,8 @@ public class ShopWindow : MonoBehaviour
                 return "REPAIRS " + GetFinalValue(row, ModuleStat.Repair) + " HP";
             case ModuleKind.Emp:
                 return "FREEZES ENEMIES FOR " + GetFinalValue(row, ModuleStat.Duration) + " S";
+            case ModuleKind.Aegis:
+                return "-" + GetFinalValue(row, ModuleStat.Reduction) + "% DAMAGE, ABSORBS " + GetFinalValue(row, ModuleStat.Capacity);
             case ModuleKind.RepairNanobots:
                 return "REPAIRS " + GetFinalValue(row, ModuleStat.Regen) + " HP/S";
             case ModuleKind.SentryDrones:

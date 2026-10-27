@@ -45,7 +45,12 @@ public class EnergyShield : MonoBehaviour
 
     public void Raise(int capacity, int level)
     {
-        _color = ShieldColors.Get(level);
+        Raise(capacity, ShieldColors.Get(level));
+    }
+
+    public void Raise(int capacity, Color color)
+    {
+        _color = color;
         _capacity = Mathf.Max(1, capacity);
         _left = _capacity;
         _shownFor = 0f;

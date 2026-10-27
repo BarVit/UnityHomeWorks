@@ -487,7 +487,7 @@ public class DockScreen : MonoBehaviour
         float step = next - current;
         string title = GetModuleStatTitle(stat);
         string hint = price < 0 ? MaxLevelHint
-            : (step > 0f ? "+" : "") + step.ToString("0.##") + (IsSeconds(stat) ? Seconds : "") + " NEXT LEVEL";
+            : (step > 0f ? "+" : "") + step.ToString("0.##") + GetModuleUnit(stat) + " NEXT LEVEL";
         Sprite icon = GetModuleStatIcon(module, stat);
 
         return new UpgradeRowData(icon, title, hint, value, _modules.GetLevel(module.Id, stat),
@@ -510,6 +510,8 @@ public class DockScreen : MonoBehaviour
                 return "NANOBOT REPAIR";
             case ModuleStat.Duration:
                 return "EMP DURATION";
+            case ModuleStat.Reduction:
+                return "DAMAGE REDUCTION";
             default:
                 return "COOLDOWN";
         }
@@ -520,6 +522,7 @@ public class DockScreen : MonoBehaviour
         switch (stat)
         {
             case ModuleStat.Capacity:
+            case ModuleStat.Reduction:
                 return _modules.GetIcon(module);
             case ModuleStat.Repair:
                 return _repairIcon;
@@ -541,9 +544,20 @@ public class DockScreen : MonoBehaviour
         if (IsSeconds(stat))
             return value.ToString("0.#") + Seconds;
 
+        if (stat == ModuleStat.Reduction)
+            return Mathf.RoundToInt(value) + PercentSign;
+
         return stat == ModuleStat.Damage || stat == ModuleStat.Regen
             ? value.ToString("0.#") + PerSecond
             : Mathf.RoundToInt(value).ToString();
+    }
+
+    private static string GetModuleUnit(ModuleStat stat)
+    {
+        if (IsSeconds(stat))
+            return Seconds;
+
+        return stat == ModuleStat.Reduction ? PercentSign : "";
     }
 
     private static bool IsSeconds(ModuleStat stat)

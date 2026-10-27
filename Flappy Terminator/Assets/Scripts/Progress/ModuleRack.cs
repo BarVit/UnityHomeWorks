@@ -264,7 +264,8 @@ public class ModuleRack : MonoBehaviour
                     cooldown = Mathf.Max(MinCooldown, cooldown + sentryCooldownShift);
 
                 specs[slot - FirstSlot] = new ModuleSpec(row.Kind, GetIcon(row), capacity, cooldown,
-                    GetShieldLevel(row.Id), repair, GetSentry(row.Id), regen, GetValue(row.Id, ModuleStat.Duration));
+                    GetShieldLevel(row.Id), repair, GetSentry(row.Id), regen, GetValue(row.Id, ModuleStat.Duration),
+                    Mathf.RoundToInt(GetValue(row.Id, ModuleStat.Reduction)));
             }
         }
 

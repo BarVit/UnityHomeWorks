@@ -288,3 +288,93 @@ MonoBehaviour:
     _level: 5
     _bonus: -1
     _price: 150000
+  - _owner: aegis
+    _stat: 7
+    _level: 0
+    _bonus: 25
+    _price: 0
+  - _owner: aegis
+    _stat: 7
+    _level: 1
+    _bonus: 10
+    _price: 200000
+  - _owner: aegis
+    _stat: 7
+    _level: 2
+    _bonus: 10
+    _price: 300000
+  - _owner: aegis
+    _stat: 7
+    _level: 3
+    _bonus: 10
+    _price: 400000
+  - _owner: aegis
+    _stat: 7
+    _level: 4
+    _bonus: 10
+    _price: 500000
+  - _owner: aegis
+    _stat: 7
+    _level: 5
+    _bonus: 10
+    _price: 750000
+  - _owner: aegis
+    _stat: 0
+    _level: 0
+    _bonus: 50
+    _price: 0
+  - _owner: aegis
+    _stat: 0
+    _level: 1
+    _bonus: 10
+    _price: 100000
+  - _owner: aegis
+    _stat: 0
+    _level: 2
+    _bonus: 10
+    _price: 150000
+  - _owner: aegis
+    _stat: 0
+    _level: 3
+    _bonus: 10
+    _price: 200000
+  - _owner: aegis
+    _stat: 0
+    _level: 4
+    _bonus: 10
+    _price: 250000
+  - _owner: aegis
+    _stat: 0
+    _level: 5
+    _bonus: 10
+    _price: 375000
+  - _owner: aegis
+    _stat: 1
+    _level: 0
+    _bonus: 12
+    _price: 0
+  - _owner: aegis
+    _stat: 1
+    _level: 1
+    _bonus: -1
+    _price: 100000
+  - _owner: aegis
+    _stat: 1
+    _level: 2
+    _bonus: -1
+    _price: 150000
+  - _owner: aegis
+    _stat: 1
+    _level: 3
+    _bonus: -1
+    _price: 200000
+  - _owner: aegis
+    _stat: 1
+    _level: 4
+    _bonus: -1
+    _price: 250000
+  - _owner: aegis
+    _stat: 1
+    _level: 5
+    _bonus: -1
+    _price: 375000

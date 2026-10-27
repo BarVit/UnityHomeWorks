@@ -4,5 +4,6 @@ public enum ModuleKind
     RepairDrone,
     SentryDrones,
     RepairNanobots,
-    Emp
+    Emp,
+    Aegis
 }

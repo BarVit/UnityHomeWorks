@@ -6,22 +6,23 @@ namespace ShipContent
     public static class ShieldRig
     {
         public const string ShieldName = "Energy Shield";
+        public const string AegisName = "Aegis Shield";
 
         private const string BubbleSprite = "Assets/Sprites/VFX/Energy Shield Bubble.png";
         private const float ShieldSizeShare = 1.16f;
         private const float BubbleRingShare = 116f / 128f;
 
         public static EnergyShield Attach(GameObject root, SpriteRenderer body, AmmoHitHandler bodyHits,
-            out AmmoHitHandler shieldHits, float sizeScale = 1f)
+            out AmmoHitHandler shieldHits, float sizeScale = 1f, string name = ShieldName)
         {
-            Transform old = root.transform.Find(ShieldName);
+            Transform old = root.transform.Find(name);
 
             if (old != null)
                 Object.DestroyImmediate(old.gameObject);
 
             Sprite bubbleSprite = AssetDatabase.LoadAssetAtPath<Sprite>(BubbleSprite);
 
-            GameObject holder = new GameObject(ShieldName);
+            GameObject holder = new GameObject(name);
             holder.transform.SetParent(root.transform, false);
             holder.transform.localPosition = root.transform.InverseTransformPoint(body.bounds.center);
 

@@ -5,6 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMover), typeof(PlayerInputRouter))]
 public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
 {
+    private const int MaxDamageReduction = 75;
+    private const float PercentShare = 0.01f;
+
     [SerializeField] private AmmoHitHandler _ammoHitHandler;
     [SerializeField] private AmmoHitHandler _shieldHitHandler;
     [SerializeField] private PlayerCollisionHandler _playerCollisionHandler;
@@ -13,6 +16,8 @@ public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
     [SerializeField] private ShipExplosion _explosion;
     [SerializeField] private float _deathCutsceneDuration = 7.5f;
     [SerializeField] private EnergyShield _shield;
+    [SerializeField] private EnergyShield _aegis;
+    [SerializeField] private AmmoHitHandler _aegisHitHandler;
 
     private PlayerInputRouter _inputRouter;
     private PlayerShooter _playerShooter;
@@ -21,6 +26,7 @@ public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
     private Vector3 _startScale;
     private int _baseMaxHealth;
     private int _healthBonus;
+    private int _damageReduction;
     private bool _isDead;
 
     private void Awake()
@@ -37,6 +43,7 @@ public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
     {
         _ammoHitHandler.HitDetected += OnAmmoHit;
         _shieldHitHandler.HitDetected += OnAmmoHit;
+        _aegisHitHandler.HitDetected += OnAmmoHit;
         _playerCollisionHandler.AsteroidBumped += OnAsteroidBumped;
         _playerCollisionHandler.EnemyBumped += OnEnemyBumped;
         _health.Died += Die;
@@ -46,6 +53,7 @@ public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
     {
         _ammoHitHandler.HitDetected -= OnAmmoHit;
         _shieldHitHandler.HitDetected -= OnAmmoHit;
+        _aegisHitHandler.HitDetected -= OnAmmoHit;
         _playerCollisionHandler.AsteroidBumped -= OnAsteroidBumped;
         _playerCollisionHandler.EnemyBumped -= OnEnemyBumped;
         _health.Died -= Die;
@@ -112,11 +120,21 @@ public class PlayerShip : MonoBehaviour, IRemoveable, IDamageable
         _healthBonus = Mathf.Max(0, bonus);
     }
 
+    public void SetDamageReduction(int percent)
+    {
+        _damageReduction = Mathf.Clamp(percent, 0, MaxDamageReduction);
+    }
+
+    private int Reduce(int damage)
+    {
+        return damage <= 0 ? damage : Mathf.RoundToInt(damage * (1f - _damageReduction * PercentShare));
+    }
+
     private void ApplyDamage(int damage, bool isEnvironment)
     {
         string source = DamageLog.TakeSource();
         int before = _health.Value;
-        int dealt = _shield.Absorb(damage);
+        int dealt = _aegis.Absorb(Reduce(_shield.Absorb(damage)));
 
         if (dealt > 0)
             _health.TakeDamage(dealt);

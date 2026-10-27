@@ -6,5 +6,6 @@ public enum ModuleStat
     Damage,
     Lifetime,
     Regen,
-    Duration
+    Duration,
+    Reduction
 }
