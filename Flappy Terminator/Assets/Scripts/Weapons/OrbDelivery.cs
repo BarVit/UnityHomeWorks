@@ -4,7 +4,7 @@ using UnityEngine;
 public class OrbDelivery : ProjectileDelivery
 {
     private const float ChargeDuration = 0.3f;
-    private const float ArcReach = 6f;
+    private const float ArcReach = 4.5f;
     private const float ArcFalloff = 0.5f;
     private const float GoneShare = 0.9f;
 
