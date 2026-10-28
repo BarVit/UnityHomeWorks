@@ -72,7 +72,7 @@ public class Hangar : MonoBehaviour
                 weapons.Add(row);
         }
 
-        weapons.Sort((left, right) => left.Price.CompareTo(right.Price));
+        weapons.Sort(CompareInShop);
 
         return weapons;
     }
@@ -317,5 +317,17 @@ public class Hangar : MonoBehaviour
     private void Commit()
     {
         Changed?.Invoke();
+    }
+
+    private static int CompareInShop(WeaponRow left, WeaponRow right)
+    {
+        int granted = IsGranted(left).CompareTo(IsGranted(right));
+
+        return granted != 0 ? granted : left.Price.CompareTo(right.Price);
+    }
+
+    private static bool IsGranted(WeaponRow row)
+    {
+        return string.IsNullOrEmpty(row.GrantedAfter) == false;
     }
 }

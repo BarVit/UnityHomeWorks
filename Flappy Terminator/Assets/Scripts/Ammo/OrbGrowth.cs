@@ -4,8 +4,8 @@ public class OrbGrowth : MonoBehaviour
 {
     [SerializeField] private float _startScale = 0.594f;
     [SerializeField] private float _endScale = 1.875f;
-    [SerializeField] private float _damageGrowth = 3f;
-    [SerializeField] private float _maxDamage = 24f;
+    [SerializeField] private float _damageGrowthShare = 0.25f;
+    [SerializeField] private float _maxDamageScale = 2f;
 
     private Camera _camera;
     private float _startPositionX;
@@ -54,7 +54,7 @@ public class OrbGrowth : MonoBehaviour
 
     public float GetDamageRate(float startRate)
     {
-        return Mathf.Min(startRate + _damageGrowth * _flightTime, _maxDamage);
+        return Mathf.Min(startRate * (1f + _damageGrowthShare * _flightTime), startRate * _maxDamageScale);
     }
 
     private float GetProgress()
