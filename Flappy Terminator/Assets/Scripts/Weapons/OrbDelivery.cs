@@ -94,13 +94,6 @@ public class OrbDelivery : ProjectileDelivery
         return centre.x - radius * (GoneShare * 2f - 1f) >= ScreenArea.GetRightEdge(Context.Camera);
     }
 
-    private float GetDamageRate(Ammo orb)
-    {
-        int damage = GetDamage(orb.Barrel);
-
-        return orb.TryGetComponent(out OrbGrowth growth) ? growth.GetDamageRate(damage) : damage;
-    }
-
     private void Deal(IDamageable damageable, float damage, int barrel)
     {
         _owed.TryGetValue(damageable, out float owed);
@@ -131,7 +124,7 @@ public class OrbDelivery : ProjectileDelivery
     {
         float radius = GetRadius(orb);
         float reach = radius * ArcReach * Context.GetBoost(orb.Barrel).ArcLengthScale;
-        float tickDamage = GetDamageRate(orb) * Row.TickInterval;
+        float tickDamage = GetDamage(orb.Barrel) * Row.TickInterval;
         Vector2 centre = orb.transform.position;
         int count = IsGone(centre, radius)
             ? 0

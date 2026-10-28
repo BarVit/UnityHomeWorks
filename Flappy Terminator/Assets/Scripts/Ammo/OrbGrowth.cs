@@ -4,8 +4,6 @@ public class OrbGrowth : MonoBehaviour
 {
     [SerializeField] private float _startScale = 0.594f;
     [SerializeField] private float _endScale = 1.875f;
-    [SerializeField] private float _damageGrowthShare = 0.25f;
-    [SerializeField] private float _maxDamageScale = 2f;
 
     private Camera _camera;
     private float _sizeScale = 1f;
@@ -13,7 +11,6 @@ public class OrbGrowth : MonoBehaviour
     private float _endPositionX;
     private float _chargeDuration;
     private float _chargeLeft;
-    private float _flightTime;
 
     private void Awake()
     {
@@ -23,7 +20,6 @@ public class OrbGrowth : MonoBehaviour
     private void OnEnable()
     {
         _chargeLeft = 0f;
-        _flightTime = 0f;
         _startPositionX = transform.position.x;
         _endPositionX = ScreenArea.GetRightEdge(_camera);
         Show(0f);
@@ -42,7 +38,6 @@ public class OrbGrowth : MonoBehaviour
             return;
         }
 
-        _flightTime += Time.deltaTime;
         Show(GetProgress());
     }
 
@@ -56,11 +51,6 @@ public class OrbGrowth : MonoBehaviour
         _chargeDuration = duration;
         _chargeLeft = duration;
         ShowCharge();
-    }
-
-    public float GetDamageRate(float startRate)
-    {
-        return Mathf.Min(startRate * (1f + _damageGrowthShare * _flightTime), startRate * _maxDamageScale);
     }
 
     private float GetProgress()
