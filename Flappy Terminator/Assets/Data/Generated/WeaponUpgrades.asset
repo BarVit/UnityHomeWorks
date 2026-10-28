@@ -446,27 +446,27 @@ MonoBehaviour:
   - _owner: beam_laser
     _stat: 11
     _level: 1
-    _bonus: 0.25
+    _bonus: 0.15
     _price: 8250
   - _owner: beam_laser
     _stat: 11
     _level: 2
-    _bonus: 0.25
+    _bonus: 0.15
     _price: 12000
   - _owner: beam_laser
     _stat: 11
     _level: 3
-    _bonus: 0.25
+    _bonus: 0.15
     _price: 16500
   - _owner: beam_laser
     _stat: 11
     _level: 4
-    _bonus: 0.25
+    _bonus: 0.15
     _price: 21000
   - _owner: beam_laser
     _stat: 11
     _level: 5
-    _bonus: 0.25
+    _bonus: 0.15
     _price: 25500
   - _owner: beam_laser
     _stat: 3
@@ -786,92 +786,92 @@ MonoBehaviour:
   - _owner: plasma_orb
     _stat: 13
     _level: 0
-    _bonus: 50
+    _bonus: 65
     _price: 0
   - _owner: plasma_orb
     _stat: 13
     _level: 1
-    _bonus: 10
+    _bonus: 7
     _price: 100000
   - _owner: plasma_orb
     _stat: 13
     _level: 2
-    _bonus: 10
+    _bonus: 7
     _price: 200000
   - _owner: plasma_orb
     _stat: 13
     _level: 3
-    _bonus: 10
+    _bonus: 7
     _price: 300000
   - _owner: plasma_orb
     _stat: 13
     _level: 4
-    _bonus: 10
+    _bonus: 7
     _price: 400000
   - _owner: plasma_orb
     _stat: 13
     _level: 5
-    _bonus: 10
+    _bonus: 7
     _price: 500000
   - _owner: plasma_orb
     _stat: 14
     _level: 0
-    _bonus: 50
+    _bonus: 65
     _price: 0
   - _owner: plasma_orb
     _stat: 14
     _level: 1
-    _bonus: 10
+    _bonus: 7
     _price: 100000
   - _owner: plasma_orb
     _stat: 14
     _level: 2
-    _bonus: 10
+    _bonus: 7
     _price: 200000
   - _owner: plasma_orb
     _stat: 14
     _level: 3
-    _bonus: 10
+    _bonus: 7
     _price: 300000
   - _owner: plasma_orb
     _stat: 14
     _level: 4
-    _bonus: 10
+    _bonus: 7
     _price: 400000
   - _owner: plasma_orb
     _stat: 14
     _level: 5
-    _bonus: 10
+    _bonus: 7
     _price: 500000
   - _owner: plasma_orb
     _stat: 15
     _level: 0
-    _bonus: 50
+    _bonus: 65
     _price: 0
   - _owner: plasma_orb
     _stat: 15
     _level: 1
-    _bonus: 10
+    _bonus: 7
     _price: 100000
   - _owner: plasma_orb
     _stat: 15
     _level: 2
-    _bonus: 10
+    _bonus: 7
     _price: 200000
   - _owner: plasma_orb
     _stat: 15
     _level: 3
-    _bonus: 10
+    _bonus: 7
     _price: 300000
   - _owner: plasma_orb
     _stat: 15
     _level: 4
-    _bonus: 10
+    _bonus: 7
     _price: 400000
   - _owner: plasma_orb
     _stat: 15
     _level: 5
-    _bonus: 10
+    _bonus: 7
     _price: 500000
   - _owner: plasma_orb
     _stat: 0

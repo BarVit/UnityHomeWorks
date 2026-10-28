@@ -1537,102 +1537,102 @@ MonoBehaviour:
     _stat: 1
     _level: 1
     _bonus: -0.1
-    _price: 684
+    _price: 22800
   - _owner: plasma_orb
     _stat: 1
     _level: 2
     _bonus: -0.1
-    _price: 954
+    _price: 25800
   - _owner: plasma_orb
     _stat: 1
     _level: 3
     _bonus: -0.1
-    _price: 1296
+    _price: 29000
   - _owner: plasma_orb
     _stat: 1
     _level: 4
     _bonus: -0.1
-    _price: 1800
+    _price: 32800
   - _owner: plasma_orb
     _stat: 1
     _level: 5
     _bonus: -0.1
-    _price: 2502
+    _price: 37000
   - _owner: plasma_orb
     _stat: 1
     _level: 6
     _bonus: -0.1
-    _price: 3384
+    _price: 41800
   - _owner: plasma_orb
     _stat: 1
     _level: 7
     _bonus: -0.1
-    _price: 4734
+    _price: 47000
   - _owner: plasma_orb
     _stat: 1
     _level: 8
     _bonus: -0.1
-    _price: 6750
+    _price: 53000
   - _owner: plasma_orb
     _stat: 1
     _level: 9
     _bonus: -0.1
-    _price: 9126
+    _price: 59800
   - _owner: plasma_orb
     _stat: 1
     _level: 10
     _bonus: -0.1
-    _price: 12834
+    _price: 67600
   - _owner: plasma_orb
     _stat: 1
     _level: 11
     _bonus: -0.1
-    _price: 17892
+    _price: 76200
   - _owner: plasma_orb
     _stat: 1
     _level: 12
     _bonus: -0.1
-    _price: 24642
+    _price: 85800
   - _owner: plasma_orb
     _stat: 1
     _level: 13
     _bonus: -0.1
-    _price: 33750
+    _price: 96900
   - _owner: plasma_orb
     _stat: 1
     _level: 14
     _bonus: -0.1
-    _price: 47250
+    _price: 109000
   - _owner: plasma_orb
     _stat: 1
     _level: 15
     _bonus: -0.1
-    _price: 64134
+    _price: 123000
   - _owner: plasma_orb
     _stat: 1
     _level: 16
     _bonus: -0.1
-    _price: 91134
+    _price: 139000
   - _owner: plasma_orb
     _stat: 1
     _level: 17
     _bonus: -0.1
-    _price: 124884
+    _price: 157000
   - _owner: plasma_orb
     _stat: 1
     _level: 18
     _bonus: -0.1
-    _price: 175500
+    _price: 177000
   - _owner: plasma_orb
     _stat: 1
     _level: 19
     _bonus: -0.1
-    _price: 243000
+    _price: 200000
   - _owner: plasma_orb
     _stat: 1
     _level: 20
     _bonus: -0.1
-    _price: 337500
+    _price: 225404
   - _owner: plasma_orb
     _stat: 11
     _level: 0
@@ -1642,499 +1642,499 @@ MonoBehaviour:
     _stat: 11
     _level: 1
     _bonus: 3
-    _price: 684
+    _price: 8700
   - _owner: plasma_orb
     _stat: 11
     _level: 2
     _bonus: 3
-    _price: 724
+    _price: 8920
   - _owner: plasma_orb
     _stat: 11
     _level: 3
     _bonus: 3
-    _price: 767
+    _price: 9130
   - _owner: plasma_orb
     _stat: 11
     _level: 4
     _bonus: 3
-    _price: 813
+    _price: 9360
   - _owner: plasma_orb
     _stat: 11
     _level: 5
     _bonus: 3
-    _price: 861
+    _price: 9580
   - _owner: plasma_orb
     _stat: 11
     _level: 6
     _bonus: 3
-    _price: 912
+    _price: 9820
   - _owner: plasma_orb
     _stat: 11
     _level: 7
     _bonus: 3
-    _price: 966
+    _price: 10100
   - _owner: plasma_orb
     _stat: 11
     _level: 8
     _bonus: 3
-    _price: 1020
+    _price: 10300
   - _owner: plasma_orb
     _stat: 11
     _level: 9
     _bonus: 3
-    _price: 1080
+    _price: 10600
   - _owner: plasma_orb
     _stat: 11
     _level: 10
     _bonus: 3
-    _price: 1150
+    _price: 10800
   - _owner: plasma_orb
     _stat: 11
     _level: 11
     _bonus: 3
-    _price: 1220
+    _price: 11100
   - _owner: plasma_orb
     _stat: 11
     _level: 12
     _bonus: 3
-    _price: 1290
+    _price: 11300
   - _owner: plasma_orb
     _stat: 11
     _level: 13
     _bonus: 3
-    _price: 1360
+    _price: 11600
   - _owner: plasma_orb
     _stat: 11
     _level: 14
     _bonus: 3
-    _price: 1440
+    _price: 11900
   - _owner: plasma_orb
     _stat: 11
     _level: 15
     _bonus: 3
-    _price: 1530
+    _price: 12200
   - _owner: plasma_orb
     _stat: 11
     _level: 16
     _bonus: 3
-    _price: 1620
+    _price: 12500
   - _owner: plasma_orb
     _stat: 11
     _level: 17
     _bonus: 3
-    _price: 1720
+    _price: 12800
   - _owner: plasma_orb
     _stat: 11
     _level: 18
     _bonus: 3
-    _price: 1820
+    _price: 13100
   - _owner: plasma_orb
     _stat: 11
     _level: 19
     _bonus: 3
-    _price: 1920
+    _price: 13400
   - _owner: plasma_orb
     _stat: 11
     _level: 20
     _bonus: 3
-    _price: 2040
+    _price: 13800
   - _owner: plasma_orb
     _stat: 11
     _level: 21
     _bonus: 3
-    _price: 2160
+    _price: 14100
   - _owner: plasma_orb
     _stat: 11
     _level: 22
     _bonus: 3
-    _price: 2290
+    _price: 14400
   - _owner: plasma_orb
     _stat: 11
     _level: 23
     _bonus: 3
-    _price: 2420
+    _price: 14800
   - _owner: plasma_orb
     _stat: 11
     _level: 24
     _bonus: 3
-    _price: 2570
+    _price: 15100
   - _owner: plasma_orb
     _stat: 11
     _level: 25
     _bonus: 3
-    _price: 2720
+    _price: 15500
   - _owner: plasma_orb
     _stat: 11
     _level: 26
     _bonus: 3
-    _price: 2880
+    _price: 15900
   - _owner: plasma_orb
     _stat: 11
     _level: 27
     _bonus: 3
-    _price: 3050
+    _price: 16300
   - _owner: plasma_orb
     _stat: 11
     _level: 28
     _bonus: 3
-    _price: 3230
+    _price: 16700
   - _owner: plasma_orb
     _stat: 11
     _level: 29
     _bonus: 3
-    _price: 3420
+    _price: 17100
   - _owner: plasma_orb
     _stat: 11
     _level: 30
     _bonus: 3
-    _price: 3620
+    _price: 17500
   - _owner: plasma_orb
     _stat: 11
     _level: 31
     _bonus: 3
-    _price: 3840
+    _price: 17900
   - _owner: plasma_orb
     _stat: 11
     _level: 32
     _bonus: 3
-    _price: 4060
+    _price: 18400
   - _owner: plasma_orb
     _stat: 11
     _level: 33
     _bonus: 3
-    _price: 4300
+    _price: 18800
   - _owner: plasma_orb
     _stat: 11
     _level: 34
     _bonus: 3
-    _price: 4560
+    _price: 19300
   - _owner: plasma_orb
     _stat: 11
     _level: 35
     _bonus: 3
-    _price: 4830
+    _price: 19700
   - _owner: plasma_orb
     _stat: 11
     _level: 36
     _bonus: 3
-    _price: 5110
+    _price: 20200
   - _owner: plasma_orb
     _stat: 11
     _level: 37
     _bonus: 3
-    _price: 5420
+    _price: 20700
   - _owner: plasma_orb
     _stat: 11
     _level: 38
     _bonus: 3
-    _price: 5740
+    _price: 21200
   - _owner: plasma_orb
     _stat: 11
     _level: 39
     _bonus: 3
-    _price: 6070
+    _price: 21700
   - _owner: plasma_orb
     _stat: 11
     _level: 40
     _bonus: 3
-    _price: 6430
+    _price: 22300
   - _owner: plasma_orb
     _stat: 11
     _level: 41
     _bonus: 3
-    _price: 6810
+    _price: 22800
   - _owner: plasma_orb
     _stat: 11
     _level: 42
     _bonus: 3
-    _price: 7220
+    _price: 23400
   - _owner: plasma_orb
     _stat: 11
     _level: 43
     _bonus: 3
-    _price: 7640
+    _price: 23900
   - _owner: plasma_orb
     _stat: 11
     _level: 44
     _bonus: 3
-    _price: 8100
+    _price: 24500
   - _owner: plasma_orb
     _stat: 11
     _level: 45
     _bonus: 3
-    _price: 8580
+    _price: 25100
   - _owner: plasma_orb
     _stat: 11
     _level: 46
     _bonus: 3
-    _price: 9080
+    _price: 25700
   - _owner: plasma_orb
     _stat: 11
     _level: 47
     _bonus: 3
-    _price: 9620
+    _price: 26400
   - _owner: plasma_orb
     _stat: 11
     _level: 48
     _bonus: 3
-    _price: 10200
+    _price: 27000
   - _owner: plasma_orb
     _stat: 11
     _level: 49
     _bonus: 3
-    _price: 10800
+    _price: 27700
   - _owner: plasma_orb
     _stat: 11
     _level: 50
     _bonus: 3
-    _price: 11400
+    _price: 28300
   - _owner: plasma_orb
     _stat: 11
     _level: 51
     _bonus: 3
-    _price: 12100
+    _price: 29000
   - _owner: plasma_orb
     _stat: 11
     _level: 52
     _bonus: 3
-    _price: 12800
+    _price: 29700
   - _owner: plasma_orb
     _stat: 11
     _level: 53
     _bonus: 3
-    _price: 13600
+    _price: 30400
   - _owner: plasma_orb
     _stat: 11
     _level: 54
     _bonus: 3
-    _price: 14400
+    _price: 31200
   - _owner: plasma_orb
     _stat: 11
     _level: 55
     _bonus: 3
-    _price: 15200
+    _price: 32000
   - _owner: plasma_orb
     _stat: 11
     _level: 56
     _bonus: 3
-    _price: 16100
+    _price: 32700
   - _owner: plasma_orb
     _stat: 11
     _level: 57
     _bonus: 3
-    _price: 17100
+    _price: 33500
   - _owner: plasma_orb
     _stat: 11
     _level: 58
     _bonus: 3
-    _price: 18100
+    _price: 34300
   - _owner: plasma_orb
     _stat: 11
     _level: 59
     _bonus: 3
-    _price: 19200
+    _price: 35200
   - _owner: plasma_orb
     _stat: 11
     _level: 60
     _bonus: 3
-    _price: 20300
+    _price: 36000
   - _owner: plasma_orb
     _stat: 11
     _level: 61
     _bonus: 3
-    _price: 21500
+    _price: 36900
   - _owner: plasma_orb
     _stat: 11
     _level: 62
     _bonus: 3
-    _price: 22800
+    _price: 37800
   - _owner: plasma_orb
     _stat: 11
     _level: 63
     _bonus: 3
-    _price: 24100
+    _price: 38700
   - _owner: plasma_orb
     _stat: 11
     _level: 64
     _bonus: 3
-    _price: 25600
+    _price: 39700
   - _owner: plasma_orb
     _stat: 11
     _level: 65
     _bonus: 3
-    _price: 27100
+    _price: 40700
   - _owner: plasma_orb
     _stat: 11
     _level: 66
     _bonus: 3
-    _price: 28700
+    _price: 41600
   - _owner: plasma_orb
     _stat: 11
     _level: 67
     _bonus: 3
-    _price: 30400
+    _price: 42700
   - _owner: plasma_orb
     _stat: 11
     _level: 68
     _bonus: 3
-    _price: 32200
+    _price: 43700
   - _owner: plasma_orb
     _stat: 11
     _level: 69
     _bonus: 3
-    _price: 34100
+    _price: 44800
   - _owner: plasma_orb
     _stat: 11
     _level: 70
     _bonus: 3
-    _price: 36100
+    _price: 45900
   - _owner: plasma_orb
     _stat: 11
     _level: 71
     _bonus: 3
-    _price: 38200
+    _price: 47000
   - _owner: plasma_orb
     _stat: 11
     _level: 72
     _bonus: 3
-    _price: 40500
+    _price: 48100
   - _owner: plasma_orb
     _stat: 11
     _level: 73
     _bonus: 3
-    _price: 42900
+    _price: 49300
   - _owner: plasma_orb
     _stat: 11
     _level: 74
     _bonus: 3
-    _price: 45400
+    _price: 50500
   - _owner: plasma_orb
     _stat: 11
     _level: 75
     _bonus: 3
-    _price: 48100
+    _price: 51700
   - _owner: plasma_orb
     _stat: 11
     _level: 76
     _bonus: 3
-    _price: 50900
+    _price: 53000
   - _owner: plasma_orb
     _stat: 11
     _level: 77
     _bonus: 3
-    _price: 54000
+    _price: 54300
   - _owner: plasma_orb
     _stat: 11
     _level: 78
     _bonus: 3
-    _price: 57100
+    _price: 55600
   - _owner: plasma_orb
     _stat: 11
     _level: 79
     _bonus: 3
-    _price: 60500
+    _price: 57000
   - _owner: plasma_orb
     _stat: 11
     _level: 80
     _bonus: 3
-    _price: 64100
+    _price: 58300
   - _owner: plasma_orb
     _stat: 11
     _level: 81
     _bonus: 3
-    _price: 67900
+    _price: 59800
   - _owner: plasma_orb
     _stat: 11
     _level: 82
     _bonus: 3
-    _price: 71900
+    _price: 61200
   - _owner: plasma_orb
     _stat: 11
     _level: 83
     _bonus: 3
-    _price: 76200
+    _price: 62700
   - _owner: plasma_orb
     _stat: 11
     _level: 84
     _bonus: 3
-    _price: 80700
+    _price: 64200
   - _owner: plasma_orb
     _stat: 11
     _level: 85
     _bonus: 3
-    _price: 85400
+    _price: 65800
   - _owner: plasma_orb
     _stat: 11
     _level: 86
     _bonus: 3
-    _price: 90500
+    _price: 67400
   - _owner: plasma_orb
     _stat: 11
     _level: 87
     _bonus: 3
-    _price: 95900
+    _price: 69100
   - _owner: plasma_orb
     _stat: 11
     _level: 88
     _bonus: 3
-    _price: 102000
+    _price: 70700
   - _owner: plasma_orb
     _stat: 11
     _level: 89
     _bonus: 3
-    _price: 108000
+    _price: 72500
   - _owner: plasma_orb
     _stat: 11
     _level: 90
     _bonus: 3
-    _price: 114000
+    _price: 74200
   - _owner: plasma_orb
     _stat: 11
     _level: 91
     _bonus: 3
-    _price: 121000
+    _price: 76000
   - _owner: plasma_orb
     _stat: 11
     _level: 92
     _bonus: 3
-    _price: 128000
+    _price: 77900
   - _owner: plasma_orb
     _stat: 11
     _level: 93
     _bonus: 3
-    _price: 135000
+    _price: 79800
   - _owner: plasma_orb
     _stat: 11
     _level: 94
     _bonus: 3
-    _price: 143000
+    _price: 81700
   - _owner: plasma_orb
     _stat: 11
     _level: 95
     _bonus: 3
-    _price: 152000
+    _price: 83700
   - _owner: plasma_orb
     _stat: 11
     _level: 96
     _bonus: 3
-    _price: 161000
+    _price: 85800
   - _owner: plasma_orb
     _stat: 11
     _level: 97
     _bonus: 3
-    _price: 170000
+    _price: 87900
   - _owner: plasma_orb
     _stat: 11
     _level: 98
     _bonus: 3
-    _price: 180000
+    _price: 90000
   - _owner: plasma_orb
     _stat: 11
     _level: 99
     _bonus: 3
-    _price: 191000
+    _price: 92200
   - _owner: plasma_orb
     _stat: 11
     _level: 100
     _bonus: 3
-    _price: 202000
+    _price: 94497
