@@ -212,7 +212,7 @@ MonoBehaviour:
     _title: "\u041B\u0443\u0447\u0435\u0432\u043E\u0439 \u043B\u0430\u0437\u0435\u0440"
     _owner: 0
     _delivery: 3
-    _damage: 750
+    _damage: 1050
     _rate: 0.05
     _magazine: 0
     _reloadTime: 0

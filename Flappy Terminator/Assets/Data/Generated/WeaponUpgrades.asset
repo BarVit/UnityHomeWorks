@@ -411,27 +411,27 @@ MonoBehaviour:
   - _owner: beam_laser
     _stat: 0
     _level: 1
-    _bonus: 150
+    _bonus: 210
     _price: 8250
   - _owner: beam_laser
     _stat: 0
     _level: 2
-    _bonus: 150
+    _bonus: 210
     _price: 12000
   - _owner: beam_laser
     _stat: 0
     _level: 3
-    _bonus: 150
+    _bonus: 210
     _price: 16500
   - _owner: beam_laser
     _stat: 0
     _level: 4
-    _bonus: 150
+    _bonus: 210
     _price: 21000
   - _owner: beam_laser
     _stat: 0
     _level: 5
-    _bonus: 150
+    _bonus: 210
     _price: 25500
   - _owner: beam_laser
     _stat: 1
@@ -446,27 +446,27 @@ MonoBehaviour:
   - _owner: beam_laser
     _stat: 11
     _level: 1
-    _bonus: 0.1
+    _bonus: 0.25
     _price: 8250
   - _owner: beam_laser
     _stat: 11
     _level: 2
-    _bonus: 0.1
+    _bonus: 0.25
     _price: 12000
   - _owner: beam_laser
     _stat: 11
     _level: 3
-    _bonus: 0.1
+    _bonus: 0.25
     _price: 16500
   - _owner: beam_laser
     _stat: 11
     _level: 4
-    _bonus: 0.1
+    _bonus: 0.25
     _price: 21000
   - _owner: beam_laser
     _stat: 11
     _level: 5
-    _bonus: 0.1
+    _bonus: 0.25
     _price: 25500
   - _owner: beam_laser
     _stat: 3
