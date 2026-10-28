@@ -32,7 +32,10 @@ public class OrbDelivery : ProjectileDelivery
         orb.Stop();
 
         if (orb.TryGetComponent(out OrbGrowth growth))
+        {
+            growth.SetSize(Context.GetBoost(barrel).OrbSizeScale);
             growth.Charge(ChargeDuration);
+        }
 
         _charging = orb;
         _chargeLeft = ChargeDuration;
@@ -127,11 +130,12 @@ public class OrbDelivery : ProjectileDelivery
     private void Burn(Ammo orb)
     {
         float radius = GetRadius(orb);
+        float reach = radius * ArcReach * Context.GetBoost(orb.Barrel).ArcLengthScale;
         float tickDamage = GetDamageRate(orb) * Row.TickInterval;
         Vector2 centre = orb.transform.position;
         int count = IsGone(centre, radius)
             ? 0
-            : Physics2D.OverlapCircle(centre, radius * ArcReach, Context.TargetFilter, _touched);
+            : Physics2D.OverlapCircle(centre, reach, Context.TargetFilter, _touched);
         int ringed = 0;
         bool isTouching = false;
 
@@ -144,11 +148,11 @@ public class OrbDelivery : ProjectileDelivery
 
             float distance = Vector2.Distance(centre, _touched[i].transform.position);
 
-            if (distance > radius * ArcReach)
+            if (distance > reach)
                 continue;
 
             bool isInside = distance <= radius;
-            float share = Mathf.Lerp(1f, FarShare, Mathf.InverseLerp(radius, radius * ArcReach, distance));
+            float share = Mathf.Lerp(1f, FarShare, Mathf.InverseLerp(radius, reach, distance));
 
             Deal(damageable, tickDamage * share, orb.Barrel);
             Spark(_touched[i].transform.position);

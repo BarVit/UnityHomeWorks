@@ -302,3 +302,24 @@ torpedo	Cooldown	20	-0.06	112500
 	SentryCooldown	18	-0.2	13000
 	SentryCooldown	19	-0.2	18000
 	SentryCooldown	20	-0.2	25000
+plasma_orb	Cooldown	0	0	0
+plasma_orb	Cooldown	1	-0.1	684
+plasma_orb	Cooldown	2	-0.1	954
+plasma_orb	Cooldown	3	-0.1	1296
+plasma_orb	Cooldown	4	-0.1	1800
+plasma_orb	Cooldown	5	-0.1	2502
+plasma_orb	Cooldown	6	-0.1	3384
+plasma_orb	Cooldown	7	-0.1	4734
+plasma_orb	Cooldown	8	-0.1	6750
+plasma_orb	Cooldown	9	-0.1	9126
+plasma_orb	Cooldown	10	-0.1	12834
+plasma_orb	Cooldown	11	-0.1	17892
+plasma_orb	Cooldown	12	-0.1	24642
+plasma_orb	Cooldown	13	-0.1	33750
+plasma_orb	Cooldown	14	-0.1	47250
+plasma_orb	Cooldown	15	-0.1	64134
+plasma_orb	Cooldown	16	-0.1	91134
+plasma_orb	Cooldown	17	-0.1	124884
+plasma_orb	Cooldown	18	-0.1	175500
+plasma_orb	Cooldown	19	-0.1	243000
+plasma_orb	Cooldown	20	-0.1	337500

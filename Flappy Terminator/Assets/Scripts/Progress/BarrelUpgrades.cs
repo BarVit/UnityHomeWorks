@@ -17,6 +17,8 @@ public class BarrelUpgrades
     [SerializeField] private int _pierce;
     [SerializeField] private int _targetHold;
     [SerializeField] private int _blastRadius;
+    [SerializeField] private int _orbSize;
+    [SerializeField] private int _arcLength;
 
     public int GetLevel(UpgradeStat stat)
     {
@@ -48,6 +50,10 @@ public class BarrelUpgrades
                 return _targetHold;
             case UpgradeStat.BlastRadius:
                 return _blastRadius;
+            case UpgradeStat.OrbSize:
+                return _orbSize;
+            case UpgradeStat.ArcLength:
+                return _arcLength;
             default:
                 throw new ArgumentOutOfRangeException(nameof(stat), stat, null);
         }
@@ -95,6 +101,12 @@ public class BarrelUpgrades
                 break;
             case UpgradeStat.BlastRadius:
                 _blastRadius++;
+                break;
+            case UpgradeStat.OrbSize:
+                _orbSize++;
+                break;
+            case UpgradeStat.ArcLength:
+                _arcLength++;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(stat), stat, null);

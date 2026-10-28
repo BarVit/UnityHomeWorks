@@ -153,3 +153,15 @@ cannon	DoubleShot	2	10	450
 cannon	DoubleShot	3	10	750
 cannon	DoubleShot	4	10	1200
 cannon	DoubleShot	5	10	1800
+plasma_orb	OrbSize	0	50	0
+plasma_orb	OrbSize	1	10	99000
+plasma_orb	OrbSize	2	10	144000
+plasma_orb	OrbSize	3	10	198000
+plasma_orb	OrbSize	4	10	252000
+plasma_orb	OrbSize	5	10	306000
+plasma_orb	ArcLength	0	50	0
+plasma_orb	ArcLength	1	10	81000
+plasma_orb	ArcLength	2	10	121500
+plasma_orb	ArcLength	3	10	162000
+plasma_orb	ArcLength	4	10	202500
+plasma_orb	ArcLength	5	10	243000

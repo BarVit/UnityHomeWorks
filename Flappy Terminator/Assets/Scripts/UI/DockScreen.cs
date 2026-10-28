@@ -19,6 +19,7 @@ public class DockScreen : MonoBehaviour
     private const string RailgunId = "railgun";
     private const string BeamLaserId = "beam_laser";
     private const string TorpedoId = "torpedo";
+    private const string PlasmaOrbId = "plasma_orb";
     private const string SightOn = "ON";
     private const string SightOff = "OFF";
     private const string BarrelMark = "  #";
@@ -319,6 +320,9 @@ public class DockScreen : MonoBehaviour
                 return Mathf.RoundToInt(100f - value) + PercentSign;
             case UpgradeStat.BlastRadius:
                 return (row.Blast.Radius + value).ToString("0.#");
+            case UpgradeStat.OrbSize:
+            case UpgradeStat.ArcLength:
+                return Mathf.RoundToInt(value) + PercentSign;
             default:
                 return "x" + value;
         }
@@ -350,6 +354,10 @@ public class DockScreen : MonoBehaviour
                 return "TARGET HOLD";
             case UpgradeStat.BlastRadius:
                 return "BLAST RADIUS";
+            case UpgradeStat.OrbSize:
+                return "ORB SIZE";
+            case UpgradeStat.ArcLength:
+                return "ARC LENGTH";
             default:
                 return "CRIT CHANCE";
         }
@@ -383,6 +391,9 @@ public class DockScreen : MonoBehaviour
                 return "THE SHIP HANGS AIMED AT A HIT TARGET";
             case UpgradeStat.BlastRadius:
                 return price < 0 ? MaxLevelHint : "+" + _hangar.GetStep(stat) + " PER LEVEL";
+            case UpgradeStat.OrbSize:
+            case UpgradeStat.ArcLength:
+                return price < 0 ? MaxLevelHint : "+" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
             case UpgradeStat.TurnRate:
                 return "+" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
             default:
@@ -415,7 +426,10 @@ public class DockScreen : MonoBehaviour
             case UpgradeStat.TargetHold:
                 return _lifetimeIcon;
             case UpgradeStat.BlastRadius:
+            case UpgradeStat.OrbSize:
                 return _blastIcon;
+            case UpgradeStat.ArcLength:
+                return _autoAimIcon;
             default:
                 return _critIcon;
         }
@@ -689,7 +703,7 @@ public class DockScreen : MonoBehaviour
 
     private bool IsMastery(string weaponId)
     {
-        return weaponId == PlasmaId || weaponId == RailgunId || weaponId == TorpedoId;
+        return weaponId == PlasmaId || weaponId == RailgunId || weaponId == TorpedoId || weaponId == PlasmaOrbId;
     }
 
     private string GetCooldownHint(SkillKey skill, int price)

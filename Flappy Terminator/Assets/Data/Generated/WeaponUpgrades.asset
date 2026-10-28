@@ -783,3 +783,63 @@ MonoBehaviour:
     _level: 5
     _bonus: 10
     _price: 1800
+  - _owner: plasma_orb
+    _stat: 13
+    _level: 0
+    _bonus: 50
+    _price: 0
+  - _owner: plasma_orb
+    _stat: 13
+    _level: 1
+    _bonus: 10
+    _price: 99000
+  - _owner: plasma_orb
+    _stat: 13
+    _level: 2
+    _bonus: 10
+    _price: 144000
+  - _owner: plasma_orb
+    _stat: 13
+    _level: 3
+    _bonus: 10
+    _price: 198000
+  - _owner: plasma_orb
+    _stat: 13
+    _level: 4
+    _bonus: 10
+    _price: 252000
+  - _owner: plasma_orb
+    _stat: 13
+    _level: 5
+    _bonus: 10
+    _price: 306000
+  - _owner: plasma_orb
+    _stat: 14
+    _level: 0
+    _bonus: 50
+    _price: 0
+  - _owner: plasma_orb
+    _stat: 14
+    _level: 1
+    _bonus: 10
+    _price: 81000
+  - _owner: plasma_orb
+    _stat: 14
+    _level: 2
+    _bonus: 10
+    _price: 121500
+  - _owner: plasma_orb
+    _stat: 14
+    _level: 3
+    _bonus: 10
+    _price: 162000
+  - _owner: plasma_orb
+    _stat: 14
+    _level: 4
+    _bonus: 10
+    _price: 202500
+  - _owner: plasma_orb
+    _stat: 14
+    _level: 5
+    _bonus: 10
+    _price: 243000

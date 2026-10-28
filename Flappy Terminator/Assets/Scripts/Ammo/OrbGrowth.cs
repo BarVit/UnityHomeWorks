@@ -8,6 +8,7 @@ public class OrbGrowth : MonoBehaviour
     [SerializeField] private float _maxDamageScale = 2f;
 
     private Camera _camera;
+    private float _sizeScale = 1f;
     private float _startPositionX;
     private float _endPositionX;
     private float _chargeDuration;
@@ -45,6 +46,11 @@ public class OrbGrowth : MonoBehaviour
         Show(GetProgress());
     }
 
+    public void SetSize(float scale)
+    {
+        _sizeScale = Mathf.Max(0f, scale);
+    }
+
     public void Charge(float duration)
     {
         _chargeDuration = duration;
@@ -71,12 +77,12 @@ public class OrbGrowth : MonoBehaviour
     {
         float share = _chargeDuration <= 0f ? 1f : 1f - Mathf.Clamp01(_chargeLeft / _chargeDuration);
 
-        SetScale(_startScale * share);
+        SetScale(_startScale * _sizeScale * share);
     }
 
     private void Show(float progress)
     {
-        SetScale(Mathf.Lerp(_startScale, _endScale, progress));
+        SetScale(Mathf.Lerp(_startScale, _endScale, progress) * _sizeScale);
     }
 
     private void SetScale(float scale)

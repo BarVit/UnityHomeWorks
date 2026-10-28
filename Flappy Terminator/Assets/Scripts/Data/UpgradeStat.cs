@@ -12,5 +12,7 @@ public enum UpgradeStat
     AutoAim,
     Pierce,
     TargetHold,
-    BlastRadius
+    BlastRadius,
+    OrbSize,
+    ArcLength
 }
