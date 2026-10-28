@@ -616,7 +616,8 @@ TORPEDO MASTERY 2.40 S, второй ствол 2 000 000; после ALL MAX �
   `SkillBook.GetDamageScale` → `WeaponSkills.DamageScale` → `WeaponContext.DamageScale`, а
   `WeaponDelivery.GetDamage` умножает на него урон с улучшением, поэтому навык усиливает и шар, и молнии.
   Цены — геометрическая прогрессия от цены 1-го уровня PLASMA ORB MASTERY; сумма за 100 уровней — втрое больше
-  суммы PLASMA MASTERY (пользователь), цены округлены до трёх значащих цифр. В доке — урон в секунду.
+  суммы PLASMA ORB MASTERY (пользователь, 28.10.2026; сначала было от PLASMA MASTERY), цены округлены до трёх
+  значащих цифр. В доке — урон в секунду.
 - **PLASMA ORB MASTERY** — навык `Cooldown` с `weapon` = `plasma_orb` в
   [skills.tsv](../Assets/Data/Tables/skills.tsv): кулдаун на 0-м уровне равен `rate`, на 20-м — вдвое меньше
   (пользователь), цены втрое дороже TORPEDO MASTERY. Название MASTERY — `DockScreen.IsMastery`.
