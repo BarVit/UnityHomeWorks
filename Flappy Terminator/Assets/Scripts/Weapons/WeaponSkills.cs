@@ -1,10 +1,11 @@
 public readonly struct WeaponSkills
 {
-    public static readonly WeaponSkills Default = new WeaponSkills(1f, 0f, 0, 0f, true, 1f, 1f);
+    public static readonly WeaponSkills Default = new WeaponSkills(1f, 0f, 0, 0f, true, 1f, 1f, 1f);
 
     public WeaponSkills(float rateScale, float reloadShift, int magazineBonus, float speedShift, bool hasSight,
-        float heatPoolScale, float coolingTimeScale)
+        float heatPoolScale, float coolingTimeScale, float damageScale)
     {
+        DamageScale = damageScale;
         RateScale = rateScale;
         ReloadShift = reloadShift;
         MagazineBonus = magazineBonus;
@@ -27,4 +28,6 @@ public readonly struct WeaponSkills
     public float HeatPoolScale { get; }
 
     public float CoolingTimeScale { get; }
+
+    public float DamageScale { get; }
 }

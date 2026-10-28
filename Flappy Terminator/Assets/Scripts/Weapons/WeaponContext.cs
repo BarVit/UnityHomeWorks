@@ -9,8 +9,10 @@ public class WeaponContext
         ShotLoop loop = null, ShotLoop hitLoop = null, int damage = 0,
         WeaponBoost[] boosts = null, CritMark critMark = null, ShotTally tally = null, float rateScale = 1f,
         ParticleSystem burnFlame = null, float reloadShift = 0f, int magazineBonus = 0,
-        float speedShift = 0f, bool hasSight = true, float heatPoolScale = 1f, float coolingTimeScale = 1f)
+        float speedShift = 0f, bool hasSight = true, float heatPoolScale = 1f, float coolingTimeScale = 1f,
+        float damageScale = 1f)
     {
+        DamageScale = damageScale;
         Mounts = mounts;
         Barrels = barrels;
         Pools = pools;
@@ -74,6 +76,8 @@ public class WeaponContext
     public Camera Camera { get; private set; }
 
     public int Damage { get; private set; }
+
+    public float DamageScale { get; private set; }
 
     public WeaponBoost GetBoost(int barrel)
     {

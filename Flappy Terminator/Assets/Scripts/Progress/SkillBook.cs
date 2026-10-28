@@ -120,6 +120,18 @@ public class SkillBook : MonoBehaviour
         return 1f + GetValue(new SkillKey(SkillStat.HeatPool, weaponId), levelShift) * PercentShare;
     }
 
+    public float GetDamageScale(string weaponId, int levelShift = 0)
+    {
+        return 1f + GetValue(new SkillKey(SkillStat.Damage, weaponId), levelShift) * PercentShare;
+    }
+
+    public int GetDamage(string weaponId, int levelShift = 0)
+    {
+        WeaponRow weapon = _weapons.GetRow(weaponId);
+
+        return weapon == null ? 0 : Mathf.RoundToInt(weapon.Damage * GetDamageScale(weaponId, levelShift));
+    }
+
     public float GetCoolingTimeScale(string weaponId, int levelShift = 0)
     {
         return 1f + GetValue(new SkillKey(SkillStat.Cooling, weaponId), levelShift) * PercentShare;
@@ -128,7 +140,8 @@ public class SkillBook : MonoBehaviour
     public WeaponSkills GetWeaponSkills(string weaponId)
     {
         return new WeaponSkills(GetRateScale(weaponId), GetReloadShift(weaponId), GetMagazineBonus(weaponId),
-            GetSpeedShift(weaponId), HasSight(weaponId), GetHeatPoolScale(weaponId), GetCoolingTimeScale(weaponId));
+            GetSpeedShift(weaponId), HasSight(weaponId), GetHeatPoolScale(weaponId), GetCoolingTimeScale(weaponId),
+            GetDamageScale(weaponId));
     }
 
     public float GetSentryCooldownShift(int levelShift = 0)

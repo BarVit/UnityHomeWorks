@@ -114,7 +114,8 @@ public class PlayerShooter : MonoBehaviour
             new ShotLoop(_hitLoopAudioSource), boosts: boosts, critMark: _critMark,
             tally: _tally, rateScale: skills.RateScale, burnFlame: _burnFlame, reloadShift: skills.ReloadShift,
             magazineBonus: skills.MagazineBonus, speedShift: skills.SpeedShift, hasSight: skills.HasSight,
-            heatPoolScale: skills.HeatPoolScale, coolingTimeScale: skills.CoolingTimeScale);
+            heatPoolScale: skills.HeatPoolScale, coolingTimeScale: skills.CoolingTimeScale,
+            damageScale: skills.DamageScale);
 
         _equippedId = weaponId;
         _targetHoldTime = boosts.Length > 0 ? boosts[0].TargetHoldSeconds : 0f;

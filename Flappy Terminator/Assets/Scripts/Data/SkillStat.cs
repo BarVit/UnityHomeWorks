@@ -10,5 +10,6 @@ public enum SkillStat
     SentryCooldown,
     Sight,
     HeatPool,
-    Cooling
+    Cooling,
+    Damage
 }

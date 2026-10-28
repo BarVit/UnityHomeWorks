@@ -254,7 +254,8 @@ public class Hangar : MonoBehaviour
             GetValue(slot, UpgradeStat.TargetHold),
             GetValue(slot, UpgradeStat.BlastRadius),
             GetValue(slot, UpgradeStat.OrbSize) * PercentShare,
-            GetValue(slot, UpgradeStat.ArcLength) * PercentShare);
+            GetValue(slot, UpgradeStat.ArcLength) * PercentShare,
+            GetValue(slot, UpgradeStat.ArcDamage) * PercentShare);
     }
 
     private int GetSlotCount(string weaponId)

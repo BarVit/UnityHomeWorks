@@ -5,7 +5,7 @@ public class OrbDelivery : ProjectileDelivery
 {
     private const float ChargeDuration = 0.3f;
     private const float ArcReach = 6f;
-    private const float FarShare = 0.5f;
+    private const float ArcFalloff = 0.5f;
     private const float GoneShare = 0.9f;
 
     private readonly Collider2D[] _touched = new Collider2D[16];
@@ -123,7 +123,9 @@ public class OrbDelivery : ProjectileDelivery
     private void Burn(Ammo orb)
     {
         float radius = GetRadius(orb);
-        float reach = radius * ArcReach * Context.GetBoost(orb.Barrel).ArcLengthScale;
+        WeaponBoost boost = Context.GetBoost(orb.Barrel);
+        float reach = radius * ArcReach * boost.ArcLengthScale;
+        float surfaceShare = boost.ArcSurfaceShare;
         float tickDamage = GetDamage(orb.Barrel) * Row.TickInterval;
         Vector2 centre = orb.transform.position;
         int count = IsGone(centre, radius)
@@ -145,7 +147,8 @@ public class OrbDelivery : ProjectileDelivery
                 continue;
 
             bool isInside = distance <= radius;
-            float share = Mathf.Lerp(1f, FarShare, Mathf.InverseLerp(radius, reach, distance));
+            float share = isInside ? 1f
+                : Mathf.Lerp(surfaceShare, surfaceShare - ArcFalloff, Mathf.InverseLerp(radius, reach, distance));
 
             Deal(damageable, tickDamage * share, orb.Barrel);
             Spark(_touched[i].transform.position);

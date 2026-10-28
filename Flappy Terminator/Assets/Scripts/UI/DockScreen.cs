@@ -20,6 +20,7 @@ public class DockScreen : MonoBehaviour
     private const string BeamLaserId = "beam_laser";
     private const string TorpedoId = "torpedo";
     private const string PlasmaOrbId = "plasma_orb";
+    private const int ArcFalloffPercent = 50;
     private const string SightOn = "ON";
     private const string SightOff = "OFF";
     private const string BarrelMark = "  #";
@@ -323,6 +324,8 @@ public class DockScreen : MonoBehaviour
             case UpgradeStat.OrbSize:
             case UpgradeStat.ArcLength:
                 return Mathf.RoundToInt(value) + PercentSign;
+            case UpgradeStat.ArcDamage:
+                return Mathf.RoundToInt(value) + "/" + Mathf.RoundToInt(value - ArcFalloffPercent) + PercentSign;
             default:
                 return "x" + value;
         }
@@ -358,6 +361,8 @@ public class DockScreen : MonoBehaviour
                 return "ORB SIZE";
             case UpgradeStat.ArcLength:
                 return "ARC LENGTH";
+            case UpgradeStat.ArcDamage:
+                return "ARC DAMAGE";
             default:
                 return "CRIT CHANCE";
         }
@@ -394,6 +399,8 @@ public class DockScreen : MonoBehaviour
             case UpgradeStat.OrbSize:
             case UpgradeStat.ArcLength:
                 return price < 0 ? MaxLevelHint : "+" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
+            case UpgradeStat.ArcDamage:
+                return "AT THE ORB SURFACE / AT THE ARC END";
             case UpgradeStat.TurnRate:
                 return "+" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
             default:
@@ -430,6 +437,8 @@ public class DockScreen : MonoBehaviour
                 return _blastIcon;
             case UpgradeStat.ArcLength:
                 return _autoAimIcon;
+            case UpgradeStat.ArcDamage:
+                return _damageIcon;
             default:
                 return _critIcon;
         }
@@ -645,6 +654,8 @@ public class DockScreen : MonoBehaviour
                 return UiText.Title(skill.Weapon) + " HEAT POOL";
             case SkillStat.Cooling:
                 return UiText.Title(skill.Weapon) + " COOLING";
+            case SkillStat.Damage:
+                return UiText.Title(skill.Weapon) + " DAMAGE";
             default:
                 return UiText.Title(skill.Weapon) + (IsMastery(skill.Weapon) ? " MASTERY" : " COOLDOWN");
         }
@@ -668,6 +679,8 @@ public class DockScreen : MonoBehaviour
                 return _repairIcon;
             case SkillStat.Sight:
                 return _autoAimIcon;
+            case SkillStat.Damage:
+                return _damageIcon;
             default:
                 return _cooldownIcon;
         }
@@ -696,6 +709,8 @@ public class DockScreen : MonoBehaviour
                 return "+" + _skills.GetStep(skill).ToString("0.###") + PercentSign + " HEAT POOL PER LEVEL";
             case SkillStat.Cooling:
                 return _skills.GetStep(skill).ToString("0.###") + PercentSign + " COOLING TIME PER LEVEL";
+            case SkillStat.Damage:
+                return "+" + _skills.GetStep(skill).ToString("0.###") + PercentSign + " DAMAGE PER LEVEL";
             default:
                 return GetCooldownHint(skill, price);
         }
@@ -729,6 +744,9 @@ public class DockScreen : MonoBehaviour
 
         if (skill.Stat == SkillStat.ShieldMastery || skill.Stat == SkillStat.RepairMastery)
             return "+" + Mathf.RoundToInt(_skills.GetValue(skill, levelShift)) + PercentSign;
+
+        if (skill.Stat == SkillStat.Damage)
+            return _skills.GetDamage(skill.Weapon, levelShift) + PerSecond;
 
         if (skill.Stat == SkillStat.SentryCooldown)
             return _skills.GetSentryCooldown(levelShift).ToString("0.0") + Seconds;

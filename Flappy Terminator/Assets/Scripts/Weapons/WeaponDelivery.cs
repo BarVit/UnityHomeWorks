@@ -108,7 +108,7 @@ public abstract class WeaponDelivery
 
     protected int GetDamage(int barrel)
     {
-        return BaseDamage + _context.GetBoost(barrel).DamageBonus;
+        return Mathf.RoundToInt((BaseDamage + _context.GetBoost(barrel).DamageBonus) * _context.DamageScale);
     }
 
     protected int RollDamage(int barrel, out bool isCrit)
