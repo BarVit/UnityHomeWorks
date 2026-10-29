@@ -165,11 +165,11 @@ plasma_orb	ArcLength	2	7	200000
 plasma_orb	ArcLength	3	7	300000
 plasma_orb	ArcLength	4	7	400000
 plasma_orb	ArcLength	5	7	500000
-plasma_orb	ArcDamage	0	65	0
-plasma_orb	ArcDamage	1	7	100000
-plasma_orb	ArcDamage	2	7	200000
-plasma_orb	ArcDamage	3	7	300000
-plasma_orb	ArcDamage	4	7	400000
-plasma_orb	ArcDamage	5	7	500000
+plasma_orb	TargetCount	0	2	0
+plasma_orb	TargetCount	1	1	100000
+plasma_orb	TargetCount	2	1	200000
+plasma_orb	TargetCount	3	1	300000
+plasma_orb	TargetCount	4	1	400000
+plasma_orb	TargetCount	5	1	500000
 plasma_orb	Damage	0	0	0
 plasma_orb	CritChance	0	0	0

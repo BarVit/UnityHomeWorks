@@ -5,9 +5,9 @@ public readonly struct WeaponBoost
     public WeaponBoost(int damageBonus, float critChance, float critMultiplier, float heatReduction,
         float doubleShotChance, float speedBonus, float napalmShare, float turnBonus, float stasisSeconds = 0f,
         float autoAimDegrees = 0f, float pierceShare = 0f, float targetHoldSeconds = 0f, float blastRadiusBonus = 0f,
-        float orbSizeShare = 0f, float arcLengthShare = 0f, float arcDamageShare = 0f)
+        float orbSizeShare = 0f, float arcLengthShare = 0f, int targetCount = 0)
     {
-        ArcDamageShare = arcDamageShare;
+        TargetCount = targetCount;
         OrbSizeShare = orbSizeShare;
         ArcLengthShare = arcLengthShare;
         BlastRadiusBonus = blastRadiusBonus;
@@ -57,13 +57,11 @@ public readonly struct WeaponBoost
 
     public float ArcLengthShare { get; }
 
-    public float ArcDamageShare { get; }
+    public int TargetCount { get; }
 
     public float OrbSizeScale => OrbSizeShare > 0f ? OrbSizeShare : 1f;
 
     public float ArcLengthScale => ArcLengthShare > 0f ? ArcLengthShare : 1f;
-
-    public float ArcSurfaceShare => ArcDamageShare > 0f ? ArcDamageShare : 1f;
 
     public float TurnScale => Mathf.Max(0f, 1f + TurnBonus);
 

@@ -5,12 +5,15 @@ public class OrbDelivery : ProjectileDelivery
 {
     private const float ChargeDuration = 0.3f;
     private const float ArcReach = 4.5f;
-    private const float ArcFalloff = 0.5f;
+    private const float FarShare = 0.5f;
+    private const int MaxTargets = 7;
     private const float GoneShare = 0.9f;
     private const float ArcGrabTime = 0.1f;
 
     private readonly Collider2D[] _touched = new Collider2D[16];
     private readonly Transform[] _ringed = new Transform[16];
+    private readonly int[] _order = new int[16];
+    private readonly float[] _distances = new float[16];
     private readonly Dictionary<IDamageable, float> _owed = new Dictionary<IDamageable, float>();
     private readonly Dictionary<IDamageable, ArcGrab> _grabs = new Dictionary<IDamageable, ArcGrab>();
     private readonly List<IDamageable> _released = new List<IDamageable>();
@@ -182,26 +185,9 @@ public class OrbDelivery : ProjectileDelivery
             _grabs.Remove(damageable);
     }
 
-    private float GetRadius(Ammo orb)
+    private int SortByDistance(Vector2 centre, float reach, int count)
     {
-        SpriteRenderer renderer = orb.GetComponentInChildren<SpriteRenderer>();
-
-        return renderer == null ? Row.Area : renderer.bounds.extents.x;
-    }
-
-    private void Burn(Ammo orb)
-    {
-        float radius = GetRadius(orb);
-        WeaponBoost boost = Context.GetBoost(orb.Barrel);
-        float reach = radius * ArcReach * boost.ArcLengthScale;
-        float surfaceShare = boost.ArcSurfaceShare;
-        float tickDamage = GetDamage(orb.Barrel) * Row.TickInterval;
-        Vector2 centre = orb.transform.position;
-        int count = IsGone(centre, radius)
-            ? 0
-            : Physics2D.OverlapCircle(centre, reach, Context.TargetFilter, _touched);
-        int ringed = 0;
-        bool isTouching = false;
+        int targets = 0;
 
         for (int i = 0; i < count; i++)
         {
@@ -215,25 +201,98 @@ public class OrbDelivery : ProjectileDelivery
             if (distance > reach)
                 continue;
 
-            bool isInside = distance <= radius;
-            float share = isInside ? 1f
-                : Mathf.Lerp(surfaceShare, surfaceShare - ArcFalloff, Mathf.InverseLerp(radius, reach, distance));
+            int duplicate = FindListed(damageable, targets);
 
-            isTouching = true;
-
-            if (isInside)
+            if (duplicate >= 0)
             {
-                Deal(damageable, tickDamage * share, orb.Barrel);
-                Spark(_touched[i].transform.position);
+                if (_distances[duplicate] <= distance)
+                    continue;
+
+                Unlist(duplicate, targets);
+                targets--;
+            }
+
+            int place = targets;
+
+            while (place > 0 && _distances[place - 1] > distance)
+            {
+                _distances[place] = _distances[place - 1];
+                _order[place] = _order[place - 1];
+                place--;
+            }
+
+            _distances[place] = distance;
+            _order[place] = i;
+            targets++;
+        }
+
+        return targets;
+    }
+
+    private int FindListed(IDamageable damageable, int targets)
+    {
+        for (int i = 0; i < targets; i++)
+        {
+            if (FindDamageable(_touched[_order[i]]) == damageable)
+                return i;
+        }
+
+        return -1;
+    }
+
+    private void Unlist(int index, int targets)
+    {
+        for (int i = index; i < targets - 1; i++)
+        {
+            _distances[i] = _distances[i + 1];
+            _order[i] = _order[i + 1];
+        }
+    }
+
+    private float GetRadius(Ammo orb)
+    {
+        SpriteRenderer renderer = orb.GetComponentInChildren<SpriteRenderer>();
+
+        return renderer == null ? Row.Area : renderer.bounds.extents.x;
+    }
+
+    private void Burn(Ammo orb)
+    {
+        float radius = GetRadius(orb);
+        WeaponBoost boost = Context.GetBoost(orb.Barrel);
+        float reach = radius * ArcReach * boost.ArcLengthScale;
+        float tickDamage = GetDamage(orb.Barrel) * Row.TickInterval;
+        Vector2 centre = orb.transform.position;
+        int count = IsGone(centre, radius)
+            ? 0
+            : Physics2D.OverlapCircle(centre, reach, Context.TargetFilter, _touched);
+        int targets = SortByDistance(centre, reach, count);
+        int limit = boost.TargetCount > 0 ? Mathf.Min(boost.TargetCount, MaxTargets) : MaxTargets;
+        int ringed = 0;
+
+        for (int i = 0; i < Mathf.Min(targets, limit); i++)
+        {
+            Collider2D touched = _touched[_order[i]];
+            IDamageable damageable = FindDamageable(touched);
+            float distance = _distances[i];
+
+            if (distance <= radius)
+            {
+                Deal(damageable, tickDamage, orb.Barrel);
+                Spark(touched.transform.position);
 
                 continue;
             }
 
-            Arc(damageable, _touched[i].transform.position, tickDamage * share, orb.Barrel);
+            float share = Mathf.Lerp(1f, FarShare, Mathf.InverseLerp(radius, reach, distance));
 
-            _ringed[ringed] = _touched[i].transform;
+            Arc(damageable, touched.transform.position, tickDamage * share, orb.Barrel);
+
+            _ringed[ringed] = touched.transform;
             ringed++;
         }
+
+        bool isTouching = targets > 0;
 
         PlasmaTether tether = orb.GetComponentInChildren<PlasmaTether>();
 

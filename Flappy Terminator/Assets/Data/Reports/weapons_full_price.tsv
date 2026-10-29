@@ -1,4 +1,4 @@
-weapon	title	unlock	barrels	weapon_price	slot_2	slot_3	slot_4	damage	crit_chance	heat_reduction	double_shot	projectile_speed	napalm	turn_rate	stasis	auto_aim	pierce	target_hold	blast_radius	orb_size	arc_length	arc_damage	per_barrel	all_barrels	barrels3_lvl3	all_barrels_lvl4	total	note
+weapon	title	unlock	barrels	weapon_price	slot_2	slot_3	slot_4	damage	crit_chance	heat_reduction	double_shot	projectile_speed	napalm	turn_rate	stasis	auto_aim	pierce	target_hold	blast_radius	orb_size	arc_length	target_count	per_barrel	all_barrels	barrels3_lvl3	all_barrels_lvl4	total	note
 cannon	Пушка	start	4	0	1200	7500	15000	5200	4350		4350												13900	55600	22200	56900	79300	
 impulse_laser	Импульсный лазер	loc_01_04	4	6000	6000	12000	24000	15750		13000													28750	115000	57750	119000	163000	
 rocket	Ракетница	loc_02_04	4	15000	10000	20000	40000	37500				30000	33750										101250	405000	176625	364000	490000	

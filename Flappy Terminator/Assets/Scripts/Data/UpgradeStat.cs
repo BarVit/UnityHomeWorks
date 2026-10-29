@@ -15,5 +15,5 @@ public enum UpgradeStat
     BlastRadius,
     OrbSize,
     ArcLength,
-    ArcDamage
+    TargetCount
 }

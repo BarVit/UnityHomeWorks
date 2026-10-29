@@ -20,7 +20,6 @@ public class DockScreen : MonoBehaviour
     private const string BeamLaserId = "beam_laser";
     private const string TorpedoId = "torpedo";
     private const string PlasmaOrbId = "plasma_orb";
-    private const int ArcFalloffPercent = 50;
     private const string SightOn = "ON";
     private const string SightOff = "OFF";
     private const string BarrelMark = "  #";
@@ -324,8 +323,8 @@ public class DockScreen : MonoBehaviour
             case UpgradeStat.OrbSize:
             case UpgradeStat.ArcLength:
                 return Mathf.RoundToInt(value) + PercentSign;
-            case UpgradeStat.ArcDamage:
-                return Mathf.RoundToInt(value) + "/" + Mathf.RoundToInt(value - ArcFalloffPercent) + PercentSign;
+            case UpgradeStat.TargetCount:
+                return Mathf.RoundToInt(value).ToString();
             default:
                 return "x" + value;
         }
@@ -361,8 +360,8 @@ public class DockScreen : MonoBehaviour
                 return "ORB SIZE";
             case UpgradeStat.ArcLength:
                 return "ARC LENGTH";
-            case UpgradeStat.ArcDamage:
-                return "ARC DAMAGE";
+            case UpgradeStat.TargetCount:
+                return "TARGETS";
             default:
                 return "CRIT CHANCE";
         }
@@ -399,8 +398,8 @@ public class DockScreen : MonoBehaviour
             case UpgradeStat.OrbSize:
             case UpgradeStat.ArcLength:
                 return price < 0 ? MaxLevelHint : "+" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
-            case UpgradeStat.ArcDamage:
-                return "AT THE ORB SURFACE / AT THE ARC END";
+            case UpgradeStat.TargetCount:
+                return price < 0 ? MaxLevelHint : "ENEMIES HIT AT ONCE";
             case UpgradeStat.TurnRate:
                 return "+" + _hangar.GetStep(stat) + PercentSign + " PER LEVEL";
             default:
@@ -437,8 +436,8 @@ public class DockScreen : MonoBehaviour
                 return _blastIcon;
             case UpgradeStat.ArcLength:
                 return _autoAimIcon;
-            case UpgradeStat.ArcDamage:
-                return _damageIcon;
+            case UpgradeStat.TargetCount:
+                return _pierceIcon;
             default:
                 return _critIcon;
         }
