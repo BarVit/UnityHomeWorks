@@ -26,16 +26,16 @@ loc_04_03	sys_04	3	5	ripper_1		Normal				320000
 loc_04_04	sys_04	4	4			Normal				270000
 loc_04_05	sys_04	5	5			Normal				570000
 loc_04_06	sys_04	6	3	archon		Normal				360000
-loc_05_01	sys_05	1	1			Normal				
-loc_05_02	sys_05	2	2	tormentor_2		Normal				
-loc_05_03	sys_05	3	4			Normal				
-loc_05_04	sys_05	4	3	ripper_2		Normal				
-loc_05_05	sys_05	5	5			Normal				
-loc_05_06	sys_05	6	2			Normal				
-loc_05_07	sys_05	7	5	emperor		Normal				
-loc_05_08	sys_05	8	3			Normal				
-loc_05_09	sys_05	9	5			Normal				
-loc_05_10	sys_05	10	5	titan		Normal				
+loc_05_01	sys_05	1	4			Normal				335000
+loc_05_02	sys_05	2	2	tormentor_2		Normal				225000
+loc_05_03	sys_05	3	4			Normal				381000
+loc_05_04	sys_05	4	3	ripper_2		Normal				363000
+loc_05_05	sys_05	5	5			Normal				841000
+loc_05_06	sys_05	6	2			Normal				221000
+loc_05_07	sys_05	7	5	emperor		Normal				733000
+loc_05_08	sys_05	8	3			Normal				408000
+loc_05_09	sys_05	9	5			Normal				712000
+loc_05_10	sys_05	10	5	titan		Normal				1045000
 void_ashen_1	sys_03	1	1			Normal	ASHFALL	loc_03_07	ashen_void	
 void_ashen_2	sys_03	2	3			Normal	IRON CINDERS	loc_03_07	ashen_void	
 void_ashen_3	sys_03	3	5			Normal	SMOLDER DRIFT	loc_03_07	ashen_void	

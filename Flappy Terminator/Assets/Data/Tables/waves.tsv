@@ -550,45 +550,945 @@ void_ashen_2	3	1	1	Sequence	warden_1	1	1
 void_ashen_3	3	1	1	Sequence	warden_1	1	1		
 void_ashen_3	4	1	1	Sequence	warden_1	1	1		
 void_ashen_3	5	1	1	Sequence	warden_1	1	1		
-loc_05_01	1	1	5	Sequence	predator_1	3	3		
-loc_05_01	1	2	5	Sequence	executioner_2	3	3		
-loc_05_01	1	3	5	Sequence	executioner_3	3	3		
-loc_05_01	1	4	5	Sequence	predator_2	3	3		
-loc_05_02	1	1	1	Sequence	warden_1	1	1		
-loc_05_02	2	1	1	Sequence	warden_1	1	1		
-loc_05_02	2	2	1	Boss	tormentor_2	0	0		
-loc_05_03	1	1	1	Sequence	warden_1	1	1		
-loc_05_03	2	1	1	Sequence	warden_1	1	1		
-loc_05_03	3	1	1	Sequence	warden_1	1	1		
-loc_05_03	4	1	1	Sequence	warden_1	1	1		
-loc_05_04	1	1	1	Sequence	warden_1	1	1		
-loc_05_04	2	1	1	Sequence	warden_1	1	1		
-loc_05_04	3	1	1	Sequence	warden_1	1	1		
-loc_05_04	3	2	1	Boss	ripper_2	0	0		
-loc_05_05	1	1	1	Sequence	warden_1	1	1		
-loc_05_05	2	1	1	Sequence	warden_1	1	1		
-loc_05_05	3	1	1	Sequence	warden_1	1	1		
-loc_05_05	4	1	1	Sequence	warden_1	1	1		
-loc_05_05	5	1	1	Sequence	warden_1	1	1		
-loc_05_06	1	1	1	Sequence	warden_1	1	1		
-loc_05_06	2	1	1	Sequence	warden_1	1	1		
-loc_05_07	1	1	1	Sequence	warden_1	1	1		
-loc_05_07	2	1	1	Sequence	warden_1	1	1		
-loc_05_07	3	1	1	Sequence	warden_1	1	1		
-loc_05_07	4	1	1	Sequence	warden_1	1	1		
-loc_05_07	5	1	1	Sequence	warden_1	1	1		
-loc_05_07	5	2	1	Boss	emperor	0	0		
-loc_05_08	1	1	1	Sequence	warden_1	1	1		
-loc_05_08	2	1	1	Sequence	warden_1	1	1		
-loc_05_08	3	1	1	Sequence	warden_1	1	1		
-loc_05_09	1	1	1	Sequence	warden_1	1	1		
-loc_05_09	2	1	1	Sequence	warden_1	1	1		
-loc_05_09	3	1	1	Sequence	warden_1	1	1		
-loc_05_09	4	1	1	Sequence	warden_1	1	1		
-loc_05_09	5	1	1	Sequence	warden_1	1	1		
-loc_05_10	1	1	1	Sequence	warden_1	1	1		
-loc_05_10	2	1	1	Sequence	warden_1	1	1		
-loc_05_10	3	1	1	Sequence	warden_1	1	1		
-loc_05_10	4	1	1	Sequence	warden_1	1	1		
-loc_05_10	5	1	1	Sequence	warden_1	1	1		
-loc_05_10	5	2	1	Boss	titan	0	0		
+loc_05_01	1	1	5	Sequence	reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5	5	
+loc_05_01	1	2	9	Sequence	phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3	2	3		2
+loc_05_01	1	3	7	Sequence	reaper_3,phantom_2,phantom_2,reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5		
+loc_05_01	1	4	7	Sequence	phantom_2,executioner_1,reaper_3,phantom_2,executioner_1,phantom_2,reaper_3	2.5	3.5		
+loc_05_01	1	5	3	Sequence	phantom_3,phantom_3,phantom_3	3	4.5		
+loc_05_01	1	6	6	Sequence	hunter_3,reaper_2,phantom_1,hunter_3,phantom_1,reaper_2	2	3	3	2
+loc_05_01	1	7	8	Sequence	executioner_1,reaper_3,phantom_2,phantom_2,reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5		
+loc_05_01	1	8	7	Sequence	executioner_1,phantom_2,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_01	1	9	7	Sequence	phantom_2,reaper_3,executioner_1,phantom_2,reaper_3,phantom_2,executioner_1	2.5	3.5		
+loc_05_01	1	10	7	Sequence	hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3	2	3	4	2
+loc_05_01	1	11	4	Sequence	phantom_3,phantom_3,phantom_3,phantom_3	3	4.5		
+loc_05_01	1	12	4	Sequence	phantom_2,reaper_3,executioner_1,phantom_2	2.5	3.5	4	
+loc_05_01	2	1	7	Sequence	phantom_2,executioner_1,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_01	2	2	6	Sequence	reaper_2,hunter_3,phantom_1,reaper_2,phantom_1,hunter_3	2	3	3	2
+loc_05_01	2	3	7	Sequence	executioner_1,reaper_3,phantom_2,reaper_3,phantom_2,executioner_1,phantom_2	2.5	3.5		
+loc_05_01	2	4	5	Sequence	reaper_3,executioner_1,phantom_2,reaper_3,phantom_2	2.5	3.5	5	
+loc_05_01	2	5	3	Sequence	phantom_3,phantom_3,phantom_3	3	4.5		
+loc_05_01	2	6	7	Sequence	reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2	2	3	4	2
+loc_05_01	2	7	4	Sequence	phantom_2,reaper_3,executioner_1,phantom_2	2.5	3.5	4	
+loc_05_01	2	8	7	Sequence	reaper_3,executioner_1,phantom_2,reaper_3,phantom_2,executioner_1,reaper_3	2.5	3.5		
+loc_05_01	2	9	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5		
+loc_05_01	2	10	9	Sequence	phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2	2	3		2
+loc_05_01	2	11	4	Sequence	phantom_3,phantom_3,phantom_3,phantom_3	3	4.5		
+loc_05_01	2	12	7	Sequence	phantom_2,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2,executioner_1	2.5	3.5		
+loc_05_01	3	1	7	Sequence	phantom_2,executioner_1,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_01	3	2	6	Sequence	phantom_1,hunter_3,reaper_2,phantom_1,reaper_2,hunter_3	2	3	3	2
+loc_05_01	3	3	4	Sequence	phantom_2,reaper_3,executioner_1,phantom_2	2.5	3.5	4	
+loc_05_01	3	4	2	Sequence	phantom_3,phantom_3	3	4.5		
+loc_05_01	3	5	7	Sequence	executioner_1,reaper_3,phantom_2,reaper_3,phantom_2,executioner_1,phantom_2	2.5	3.5		
+loc_05_01	3	6	7	Sequence	phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1	2	3	4	2
+loc_05_01	3	7	5	Sequence	reaper_3,executioner_1,phantom_2,reaper_3,phantom_2	2.5	3.5	5	
+loc_05_01	3	8	3	Sequence	phantom_3,phantom_3,phantom_3	3	4.5		
+loc_05_01	3	9	7	Sequence	reaper_3,executioner_1,phantom_2,reaper_3,phantom_2,executioner_1,reaper_3	2.5	3.5		
+loc_05_01	3	10	7	Sequence	phantom_2,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2,executioner_1	2.5	3.5		
+loc_05_01	3	11	9	Sequence	reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1	2	3		2
+loc_05_01	3	12	3	Sequence	phantom_3,phantom_3,phantom_3	3	4.5		
+loc_05_01	3	13	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5		
+loc_05_01	4	1	7	Sequence	executioner_1,phantom_2,reaper_3,phantom_2,executioner_1,phantom_2,reaper_3	2.5	3.5		
+loc_05_01	4	2	6	Sequence	hunter_3,reaper_2,phantom_1,phantom_1,hunter_3,reaper_2	2	3	3	2
+loc_05_01	4	3	7	Sequence	reaper_3,phantom_2,executioner_1,phantom_2,reaper_3,phantom_2,reaper_3	2.5	3.5		
+loc_05_01	4	4	4	Sequence	phantom_2,reaper_3,executioner_1,phantom_2	2.5	3.5	4	
+loc_05_01	4	5	4	Sequence	phantom_3,phantom_3,phantom_3,phantom_3	3	4.5		
+loc_05_01	4	6	7	Sequence	phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1	2	3	4	2
+loc_05_01	4	7	7	Sequence	executioner_1,phantom_2,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_01	4	8	7	Sequence	reaper_3,phantom_2,executioner_1,phantom_2,reaper_3,phantom_2,executioner_1	2.5	3.5		
+loc_05_01	4	9	5	Sequence	reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5	5	
+loc_05_01	4	10	8	Sequence	hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2	2	3		2
+loc_05_01	4	11	3	Sequence	phantom_3,phantom_3,phantom_3	3	4.5		
+loc_05_01	4	12	7	Sequence	executioner_1,phantom_2,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_02	1	1	7	Sequence	executioner_1,phantom_2,reaper_3,phantom_2,executioner_1,phantom_2,reaper_3	2.5	3.5		
+loc_05_02	1	2	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_02	1	3	5	Sequence	reaper_2,phantom_1,reaper_2,phantom_1,reaper_2	2	3	4	2
+loc_05_02	1	4	7	Sequence	executioner_1,phantom_2,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_02	1	5	3	Sequence	phantom_3,phantom_3,predator_1	3	4.5		
+loc_05_02	1	6	7	Sequence	reaper_3,phantom_2,executioner_1,phantom_2,reaper_3,phantom_2,reaper_3	2.5	3.5		
+loc_05_02	1	7	6	Sequence	phantom_1,reaper_2,phantom_1,reaper_2,phantom_1,reaper_2	2	3		2
+loc_05_02	1	8	5	Sequence	reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5	5	
+loc_05_02	1	9	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_02	1	10	7	Sequence	reaper_3,phantom_2,executioner_1,phantom_2,reaper_3,phantom_2,executioner_1	2.5	3.5		
+loc_05_02	1	11	3	Sequence	phantom_3,phantom_3,phantom_3	3	4.5		
+loc_05_02	1	12	4	Sequence	phantom_2,reaper_3,executioner_1,phantom_2	2.5	3.5	4	
+loc_05_02	1	13	4	Sequence	reaper_2,phantom_1,reaper_2,phantom_1	2	3	3	2
+loc_05_02	1	14	7	Sequence	executioner_1,phantom_2,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_02	1	15	3	Sequence	predator_1,phantom_3,phantom_3	3	4.5		
+loc_05_02	2	1	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5		
+loc_05_02	2	2	3	Sequence	phantom_3,phantom_3,predator_1	3	4.5		
+loc_05_02	2	3	5	Sequence	phantom_1,reaper_2,phantom_1,reaper_2,phantom_1	2	3	4	2
+loc_05_02	2	4	7	Sequence	phantom_2,executioner_1,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_02	2	5	3	Sequence	phantom_3,phantom_3,phantom_3	3	4.5		
+loc_05_02	2	6	5	Sequence	reaper_3,executioner_1,phantom_2,reaper_3,phantom_2	2.5	3.5	5	
+loc_05_02	2	7	6	Sequence	reaper_2,phantom_1,reaper_2,phantom_1,reaper_2,phantom_1	2	3		2
+loc_05_02	2	8	4	Sequence	phantom_2,reaper_3,executioner_1,phantom_2	2.5	3.5	4	
+loc_05_02	2	9	3	Sequence	phantom_3,phantom_3,predator_1	3	4.5		
+loc_05_02	2	10	7	Sequence	executioner_1,reaper_3,phantom_2,reaper_3,phantom_2,executioner_1,phantom_2	2.5	3.5		
+loc_05_02	2	11	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_02	2	12	7	Sequence	phantom_2,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2,executioner_1	2.5	3.5		
+loc_05_02	2	13	4	Sequence	phantom_1,reaper_2,phantom_1,reaper_2	2	3	3	2
+loc_05_02	2	14	7	Sequence	reaper_3,executioner_1,phantom_2,reaper_3,phantom_2,executioner_1,reaper_3	2.5	3.5		
+loc_05_02	2	15	2	Sequence	phantom_3,phantom_3	3	4.5		
+loc_05_02	2	16	1	Boss	tormentor_2	0	0		
+loc_05_03	1	1	7	Sequence	executioner_1,phantom_2,reaper_3,reaper_3,phantom_2,executioner_1,reaper_3	2.5	3.5		
+loc_05_03	1	2	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_03	1	3	4	Sequence	phantom_1,phantom_1,reaper_2,phantom_1	2	3		2
+loc_05_03	1	4	6	Sequence	executioner_1,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_03	1	5	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_03	1	6	4	Sequence	reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5	5	
+loc_05_03	1	7	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_03	1	8	4	Sequence	phantom_1,reaper_2,phantom_1,reaper_2	2	3	4	2
+loc_05_03	1	9	7	Sequence	phantom_2,executioner_1,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_03	1	10	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_03	1	11	7	Sequence	reaper_3,phantom_2,executioner_1,reaper_3,phantom_2,executioner_1,reaper_3	2.5	3.5		
+loc_05_03	1	12	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_03	1	13	4	Sequence	phantom_2,reaper_3,executioner_1,phantom_2	2.5	3.5	4	
+loc_05_03	1	14	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_03	1	15	3	Sequence	phantom_1,reaper_2,phantom_1	2	3	3	2
+loc_05_03	1	16	6	Sequence	phantom_2,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_03	1	17	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_03	2	1	7	Sequence	phantom_2,executioner_1,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_03	2	2	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_03	2	3	4	Sequence	phantom_1,reaper_2,phantom_1,phantom_1	2	3	4	2
+loc_05_03	2	4	7	Sequence	executioner_1,reaper_3,phantom_2,reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5		
+loc_05_03	2	5	3	Sequence	predator_1,phantom_3,phantom_3	3	4.5		
+loc_05_03	2	6	4	Sequence	phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5	5	
+loc_05_03	2	7	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_03	2	8	5	Sequence	reaper_2,phantom_1,phantom_1,reaper_2,phantom_1	2	3		2
+loc_05_03	2	9	4	Sequence	reaper_3,phantom_2,executioner_1,reaper_3	2.5	3.5	4	
+loc_05_03	2	10	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_03	2	11	6	Sequence	reaper_3,executioner_1,phantom_2,reaper_3,phantom_2,executioner_1	2.5	3.5		
+loc_05_03	2	12	3	Sequence	predator_1,phantom_3,phantom_3	3	4.5		
+loc_05_03	2	13	6	Sequence	reaper_3,phantom_2,reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5		
+loc_05_03	2	14	4	Sequence	phantom_3,predator_1,phantom_3,phantom_3	3	4.5		
+loc_05_03	2	15	3	Sequence	phantom_1,reaper_2,phantom_1	2	3	3	2
+loc_05_03	2	16	6	Sequence	executioner_1,phantom_2,reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5		
+loc_05_03	2	17	3	Sequence	predator_1,phantom_3,phantom_3	3	4.5		
+loc_05_03	3	1	6	Sequence	phantom_2,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_03	3	2	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_03	3	3	5	Sequence	reaper_2,phantom_1,phantom_1,reaper_2,phantom_1	2	3		2
+loc_05_03	3	4	2	Sequence	predator_1,phantom_3	3	4.5		
+loc_05_03	3	5	7	Sequence	executioner_1,phantom_2,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_03	3	6	3	Sequence	predator_1,phantom_3,phantom_3	3	4.5		
+loc_05_03	3	7	7	Sequence	reaper_3,executioner_1,phantom_2,reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5		
+loc_05_03	3	8	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_03	3	9	4	Sequence	phantom_1,reaper_2,phantom_1,phantom_1	2	3	4	2
+loc_05_03	3	10	4	Sequence	phantom_2,reaper_3,executioner_1,phantom_2	2.5	3.5	4	
+loc_05_03	3	11	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_03	3	12	4	Sequence	reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5	5	
+loc_05_03	3	13	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_03	3	14	6	Sequence	phantom_2,executioner_1,reaper_3,phantom_2,reaper_3,executioner_1	2.5	3.5		
+loc_05_03	3	15	3	Sequence	phantom_1,reaper_2,phantom_1	2	3	3	2
+loc_05_03	3	16	3	Sequence	predator_1,phantom_3,phantom_3	3	4.5		
+loc_05_03	3	17	6	Sequence	executioner_1,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_03	3	18	3	Sequence	predator_1,phantom_3,phantom_3	3	4.5		
+loc_05_03	4	1	6	Sequence	phantom_2,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_03	4	2	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_03	4	3	4	Sequence	phantom_1,phantom_1,reaper_2,phantom_1	2	3		2
+loc_05_03	4	4	3	Sequence	predator_1,phantom_3,phantom_3	3	4.5		
+loc_05_03	4	5	6	Sequence	executioner_1,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_03	4	6	2	Sequence	predator_1,phantom_3	3	4.5		
+loc_05_03	4	7	4	Sequence	reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5	5	
+loc_05_03	4	8	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_03	4	9	3	Sequence	phantom_1,reaper_2,phantom_1	2	3	4	2
+loc_05_03	4	10	7	Sequence	executioner_1,phantom_2,reaper_3,reaper_3,phantom_2,executioner_1,reaper_3	2.5	3.5		
+loc_05_03	4	11	3	Sequence	predator_1,phantom_3,phantom_3	3	4.5		
+loc_05_03	4	12	4	Sequence	phantom_2,reaper_3,executioner_1,phantom_2	2.5	3.5	4	
+loc_05_03	4	13	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_03	4	14	7	Sequence	reaper_3,phantom_2,executioner_1,reaper_3,phantom_2,executioner_1,reaper_3	2.5	3.5		
+loc_05_03	4	15	3	Sequence	phantom_1,reaper_2,phantom_1	2	3	3	2
+loc_05_03	4	16	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_03	4	17	7	Sequence	phantom_2,executioner_1,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_03	4	18	3	Sequence	predator_1,phantom_3,phantom_3	3	4.5		
+loc_05_04	1	1	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_04	1	2	7	Sequence	phantom_2,executioner_1,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_04	1	3	1	Sequence	phantom_1	2	3	3	2
+loc_05_04	1	4	3	Sequence	predator_1,phantom_3,predator_1	3	4.5		
+loc_05_04	1	5	6	Sequence	reaper_3,executioner_1,phantom_2,reaper_3,phantom_2,executioner_1	2.5	3.5		
+loc_05_04	1	6	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_04	1	7	4	Sequence	phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5	5	
+loc_05_04	1	8	3	Sequence	executioner_2,predator_1,phantom_3	3	4.5		
+loc_05_04	1	9	3	Sequence	executioner_2,phantom_3,predator_1	3	4.5		
+loc_05_04	1	10	2	Sequence	phantom_1,phantom_1	2	3		2
+loc_05_04	1	11	6	Sequence	reaper_3,phantom_2,reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5		
+loc_05_04	1	12	3	Sequence	predator_1,executioner_2,phantom_3	3	4.5		
+loc_05_04	1	13	4	Sequence	reaper_3,phantom_2,executioner_1,reaper_3	2.5	3.5	4	
+loc_05_04	1	14	3	Sequence	phantom_3,executioner_2,phantom_3	3	4.5		
+loc_05_04	1	15	3	Sequence	predator_1,phantom_3,predator_1	3	4.5		
+loc_05_04	1	16	6	Sequence	executioner_1,phantom_2,reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5		
+loc_05_04	1	17	1	Sequence	phantom_1	2	3	4	2
+loc_05_04	1	18	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_04	1	19	7	Sequence	executioner_1,reaper_3,phantom_2,reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5		
+loc_05_04	1	20	2	Sequence	predator_1,phantom_3	3	4.5		
+loc_05_04	2	1	3	Sequence	phantom_3,phantom_3,predator_1	3	4.5		
+loc_05_04	2	2	7	Sequence	executioner_1,phantom_2,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_04	2	3	2	Sequence	phantom_1,phantom_1	2	3		2
+loc_05_04	2	4	3	Sequence	predator_1,phantom_3,phantom_3	3	4.5		
+loc_05_04	2	5	6	Sequence	phantom_2,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_04	2	6	3	Sequence	predator_1,phantom_3,predator_1	3	4.5		
+loc_05_04	2	7	6	Sequence	phantom_2,executioner_1,reaper_3,phantom_2,reaper_3,executioner_1	2.5	3.5		
+loc_05_04	2	8	3	Sequence	predator_1,phantom_3,executioner_2	3	4.5		
+loc_05_04	2	9	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_04	2	10	1	Sequence	phantom_1	2	3	4	2
+loc_05_04	2	11	6	Sequence	executioner_1,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_04	2	12	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_04	2	13	4	Sequence	phantom_2,reaper_3,executioner_1,phantom_2	2.5	3.5	4	
+loc_05_04	2	14	3	Sequence	phantom_3,predator_1,executioner_2	3	4.5		
+loc_05_04	2	15	3	Sequence	executioner_2,phantom_3,predator_1	3	4.5		
+loc_05_04	2	16	7	Sequence	reaper_3,executioner_1,phantom_2,reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5		
+loc_05_04	2	17	1	Sequence	phantom_1	2	3	3	2
+loc_05_04	2	18	3	Sequence	predator_1,phantom_3,phantom_3	3	4.5		
+loc_05_04	2	19	4	Sequence	reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5	5	
+loc_05_04	2	20	3	Sequence	executioner_2,predator_1,phantom_3	3	4.5		
+loc_05_04	3	1	3	Sequence	predator_1,phantom_3,predator_1	3	4.5		
+loc_05_04	3	2	7	Sequence	executioner_1,phantom_2,reaper_3,reaper_3,phantom_2,executioner_1,reaper_3	2.5	3.5		
+loc_05_04	3	3	1	Sequence	phantom_1	2	3	4	2
+loc_05_04	3	4	2	Sequence	predator_1,phantom_3	3	4.5		
+loc_05_04	3	5	4	Sequence	reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5	5	
+loc_05_04	3	6	3	Sequence	predator_1,phantom_3,phantom_3	3	4.5		
+loc_05_04	3	7	7	Sequence	phantom_2,executioner_1,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_04	3	8	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_04	3	9	3	Sequence	predator_1,phantom_3,predator_1	3	4.5		
+loc_05_04	3	10	1	Sequence	phantom_1	2	3		2
+loc_05_04	3	11	7	Sequence	reaper_3,phantom_2,executioner_1,reaper_3,phantom_2,executioner_1,reaper_3	2.5	3.5		
+loc_05_04	3	12	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_04	3	13	4	Sequence	phantom_2,reaper_3,executioner_1,phantom_2	2.5	3.5	4	
+loc_05_04	3	14	3	Sequence	predator_1,phantom_3,executioner_2	3	4.5		
+loc_05_04	3	15	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_04	3	16	6	Sequence	phantom_2,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_04	3	17	1	Sequence	phantom_1	2	3	3	2
+loc_05_04	3	18	3	Sequence	phantom_3,predator_1,executioner_2	3	4.5		
+loc_05_04	3	19	6	Sequence	executioner_1,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_04	3	20	3	Sequence	phantom_3,executioner_2,phantom_3	3	4.5		
+loc_05_04	3	21	1	Boss	ripper_2	0	0		
+loc_05_05	1	1	8	Sequence	hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2	2	3		2
+loc_05_05	1	2	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,reaper_3,phantom_2	2.5	3.5		
+loc_05_05	1	3	8	Sequence	phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3	2	3	3	2
+loc_05_05	1	4	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,reaper_3,phantom_2	2.5	3.5		
+loc_05_05	1	5	9	Sequence	reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3	2	3	4	2
+loc_05_05	1	6	9	Sequence	hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,phantom_1,hunter_3,reaper_2	2	3	3	2
+loc_05_05	1	7	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,phantom_2,reaper_3	2.5	3.5		
+loc_05_05	1	8	9	Sequence	phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2	2	3	3	2
+loc_05_05	1	9	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,reaper_3,phantom_2	2.5	3.5	5	
+loc_05_05	1	10	9	Sequence	reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3	2	3	4	2
+loc_05_05	1	11	8	Sequence	hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2	2	3		2
+loc_05_05	1	12	6	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,phantom_2	2.5	3.5		
+loc_05_05	1	13	9	Sequence	reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3	2	3	4	2
+loc_05_05	1	14	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,phantom_2,reaper_3	2.5	3.5		
+loc_05_05	1	15	7	Sequence	phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1	2	3		2
+loc_05_05	1	16	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,reaper_3,phantom_2	2.5	3.5		
+loc_05_05	1	17	9	Sequence	phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2	2	3	3	2
+loc_05_05	1	18	8	Sequence	phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3	2	3		2
+loc_05_05	1	19	6	Sequence	reaper_3,phantom_2,reaper_3,phantom_2,reaper_3,phantom_2	2.5	3.5		
+loc_05_05	1	20	8	Sequence	reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1	2	3		2
+loc_05_05	1	21	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,phantom_2,reaper_3	2.5	3.5		
+loc_05_05	1	22	7	Sequence	hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3	2	3		2
+loc_05_05	1	23	8	Sequence	reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1	2	3	4	2
+loc_05_05	1	24	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,reaper_3,phantom_2	2.5	3.5	4	
+loc_05_05	2	1	9	Sequence	phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3	2	3	4	2
+loc_05_05	2	2	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,phantom_2,reaper_3	2.5	3.5		
+loc_05_05	2	3	9	Sequence	hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,reaper_2,hunter_3,phantom_1	2	3	3	2
+loc_05_05	2	4	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,reaper_3,phantom_2	2.5	3.5		
+loc_05_05	2	5	8	Sequence	reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3	2	3		2
+loc_05_05	2	6	9	Sequence	phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3	2	3	4	2
+loc_05_05	2	7	6	Sequence	reaper_3,phantom_2,reaper_3,phantom_2,reaper_3,phantom_2	2.5	3.5		
+loc_05_05	2	8	9	Sequence	phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3	2	3	4	2
+loc_05_05	2	9	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,reaper_3,phantom_2	2.5	3.5		
+loc_05_05	2	10	8	Sequence	phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2	2	3		2
+loc_05_05	2	11	8	Sequence	hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1	2	3		2
+loc_05_05	2	12	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,phantom_2,reaper_3	2.5	3.5		
+loc_05_05	2	13	8	Sequence	phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2	2	3	4	2
+loc_05_05	2	14	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,reaper_3,phantom_2	2.5	3.5		
+loc_05_05	2	15	7	Sequence	hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3	2	3		2
+loc_05_05	2	16	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,reaper_3,phantom_2	2.5	3.5	4	
+loc_05_05	2	17	7	Sequence	reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2	2	3		2
+loc_05_05	2	18	9	Sequence	reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1	2	3	3	2
+loc_05_05	2	19	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,reaper_3,phantom_2	2.5	3.5	5	
+loc_05_05	2	20	9	Sequence	reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1	2	3	3	2
+loc_05_05	2	21	6	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,phantom_2	2.5	3.5		
+loc_05_05	2	22	8	Sequence	hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1	2	3		2
+loc_05_05	2	23	8	Sequence	reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3	2	3	3	2
+loc_05_05	2	24	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,phantom_2,reaper_3	2.5	3.5		
+loc_05_05	3	1	8	Sequence	hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2	2	3		2
+loc_05_05	3	2	6	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,phantom_2	2.5	3.5		
+loc_05_05	3	3	8	Sequence	reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1	2	3	4	2
+loc_05_05	3	4	7	Sequence	phantom_2,reaper_3,phantom_2,phantom_2,reaper_3,phantom_2,reaper_3	2.5	3.5		
+loc_05_05	3	5	9	Sequence	reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3	2	3	4	2
+loc_05_05	3	6	8	Sequence	phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3	2	3	3	2
+loc_05_05	3	7	7	Sequence	phantom_2,reaper_3,phantom_2,phantom_2,reaper_3,phantom_2,reaper_3	2.5	3.5		
+loc_05_05	3	8	9	Sequence	reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3	2	3	4	2
+loc_05_05	3	9	6	Sequence	reaper_3,phantom_2,reaper_3,phantom_2,reaper_3,phantom_2	2.5	3.5		
+loc_05_05	3	10	9	Sequence	hunter_3,reaper_2,phantom_1,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2	2	3	3	2
+loc_05_05	3	11	9	Sequence	reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3	2	3	4	2
+loc_05_05	3	12	7	Sequence	phantom_2,reaper_3,phantom_2,phantom_2,reaper_3,phantom_2,reaper_3	2.5	3.5		
+loc_05_05	3	13	8	Sequence	phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3	2	3		2
+loc_05_05	3	14	7	Sequence	phantom_2,phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,reaper_3	2.5	3.5		
+loc_05_05	3	15	8	Sequence	phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3	2	3		2
+loc_05_05	3	16	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,phantom_2,reaper_3	2.5	3.5		
+loc_05_05	3	17	9	Sequence	phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2	2	3	3	2
+loc_05_05	3	18	7	Sequence	reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2	2	3		2
+loc_05_05	3	19	7	Sequence	phantom_2,phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,reaper_3	2.5	3.5	5	
+loc_05_05	3	20	8	Sequence	hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2	2	3		2
+loc_05_05	3	21	6	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,reaper_3	2.5	3.5	4	
+loc_05_05	3	22	8	Sequence	reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1	2	3		2
+loc_05_05	3	23	9	Sequence	phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,reaper_2	2	3	3	2
+loc_05_05	3	24	7	Sequence	phantom_2,reaper_3,phantom_2,phantom_2,reaper_3,phantom_2,reaper_3	2.5	3.5		
+loc_05_05	4	1	47	Sequence	warden_3,hunter_2,warden_3,hunter_2,reaper_1	1	2		4-6
+loc_05_05	4	2	52	Sequence	warden_3,hunter_2,warden_3,hunter_2,reaper_1	1	2	3	4-6
+loc_05_05	4	3	29	Sequence	warden_3,hunter_2,warden_3,hunter_2,reaper_1	2	3	4	7-8
+loc_05_05	4	4	18	Sequence	warden_3,hunter_2,warden_3,hunter_2,reaper_1	0.5	1		2-3
+loc_05_05	4	5	47	Sequence	warden_3,hunter_2,warden_3,hunter_2,reaper_1	1	2	3	4-6
+loc_05_05	4	6	47	Sequence	warden_3,hunter_2,warden_3,hunter_2,reaper_1	1	2	4	4-6
+loc_05_05	4	7	23	Sequence	warden_3,hunter_2,warden_3,hunter_2,reaper_1	2	3		7-8
+loc_05_05	4	8	23	Sequence	warden_3,hunter_2,warden_3,hunter_2,reaper_1	0.5	1	3	2-3
+loc_05_05	4	9	47	Sequence	warden_3,hunter_2,warden_3,hunter_2,reaper_1	1	2	4	4-6
+loc_05_05	4	10	17	Sequence	warden_3,hunter_2,warden_3,hunter_2,reaper_1	0.5	1		2-3
+loc_05_05	5	1	8	Sequence	hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1	2	3	4	2
+loc_05_05	5	2	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,phantom_2,reaper_3	2.5	3.5		
+loc_05_05	5	3	9	Sequence	hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2	2	3	4	2
+loc_05_05	5	4	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,reaper_3,phantom_2	2.5	3.5	5	
+loc_05_05	5	5	7	Sequence	phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1	2	3		2
+loc_05_05	5	6	7	Sequence	reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2	2	3		2
+loc_05_05	5	7	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,reaper_3,phantom_2	2.5	3.5		
+loc_05_05	5	8	9	Sequence	phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3	2	3	3	2
+loc_05_05	5	9	6	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,phantom_2	2.5	3.5		
+loc_05_05	5	10	9	Sequence	reaper_2,phantom_1,hunter_3,reaper_2,phantom_1,hunter_3,phantom_1,reaper_2,hunter_3	2	3	3	2
+loc_05_05	5	11	8	Sequence	phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2	2	3		2
+loc_05_05	5	12	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,reaper_3,phantom_2	2.5	3.5	4	
+loc_05_05	5	13	9	Sequence	phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3	2	3	3	2
+loc_05_05	5	14	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,reaper_3,phantom_2	2.5	3.5		
+loc_05_05	5	15	8	Sequence	reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3	2	3		2
+loc_05_05	5	16	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,phantom_2,reaper_3	2.5	3.5		
+loc_05_05	5	17	9	Sequence	hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2	2	3	4	2
+loc_05_05	5	18	8	Sequence	reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3	2	3		2
+loc_05_05	5	19	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,phantom_2,reaper_3	2.5	3.5		
+loc_05_05	5	20	8	Sequence	hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1	2	3		2
+loc_05_05	5	21	6	Sequence	reaper_3,phantom_2,reaper_3,phantom_2,reaper_3,phantom_2	2.5	3.5		
+loc_05_05	5	22	9	Sequence	hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2	2	3	4	2
+loc_05_05	5	23	8	Sequence	phantom_1,reaper_2,hunter_3,phantom_1,reaper_2,hunter_3,phantom_1,reaper_2	2	3	3	2
+loc_05_05	5	24	7	Sequence	phantom_2,reaper_3,phantom_2,reaper_3,phantom_2,reaper_3,phantom_2	2.5	3.5		
+loc_05_06	1	1	3	Sequence	predator_1,executioner_2,phantom_3	3	4.5		
+loc_05_06	1	2	7	Sequence	reaper_3,executioner_1,phantom_2,reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5		
+loc_05_06	1	3	3	Sequence	phantom_3,executioner_3,predator_1	3	4.5		
+loc_05_06	1	4	3	Sequence	executioner_2,predator_1,executioner_3	3	4.5		
+loc_05_06	1	5	6	Sequence	executioner_1,phantom_2,reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5		
+loc_05_06	1	6	3	Sequence	predator_1,executioner_3,phantom_3	3	4.5		
+loc_05_06	1	7	3	Sequence	predator_1,phantom_3,predator_1	3	4.5		
+loc_05_06	1	8	6	Sequence	executioner_1,phantom_2,reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5		
+loc_05_06	1	9	3	Sequence	executioner_2,phantom_3,predator_1	3	4.5		
+loc_05_06	1	10	3	Sequence	phantom_3,executioner_2,predator_1	3	4.5		
+loc_05_06	1	11	3	Sequence	predator_1,executioner_2,phantom_3	3	4.5		
+loc_05_06	1	12	7	Sequence	phantom_2,reaper_3,executioner_1,phantom_2,reaper_3,executioner_1,phantom_2	2.5	3.5		
+loc_05_06	1	13	3	Sequence	executioner_2,phantom_3,predator_1	3	4.5		
+loc_05_06	1	14	4	Sequence	predator_1,phantom_3,executioner_2,predator_1	3	4.5		
+loc_05_06	1	15	3	Sequence	phantom_2,reaper_3,executioner_1	2.5	3.5	4	
+loc_05_06	1	16	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_06	1	17	3	Sequence	executioner_3,phantom_3,predator_1	3	4.5		
+loc_05_06	1	18	4	Sequence	executioner_1,phantom_2,reaper_3,executioner_1	2.5	3.5	5	
+loc_05_06	1	19	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_06	2	1	4	Sequence	phantom_3,predator_1,executioner_2,phantom_3	3	4.5		
+loc_05_06	2	2	4	Sequence	executioner_1,phantom_2,reaper_3,executioner_1	2.5	3.5	5	
+loc_05_06	2	3	3	Sequence	predator_1,phantom_3,predator_1	3	4.5		
+loc_05_06	2	4	3	Sequence	executioner_3,predator_1,phantom_3	3	4.5		
+loc_05_06	2	5	7	Sequence	reaper_3,executioner_1,phantom_2,reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5		
+loc_05_06	2	6	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_06	2	7	3	Sequence	phantom_3,executioner_2,predator_1	3	4.5		
+loc_05_06	2	8	6	Sequence	executioner_1,phantom_2,reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5		
+loc_05_06	2	9	3	Sequence	predator_1,executioner_3,phantom_3	3	4.5		
+loc_05_06	2	10	3	Sequence	predator_1,phantom_3,executioner_2	3	4.5		
+loc_05_06	2	11	3	Sequence	executioner_2,predator_1,phantom_3	3	4.5		
+loc_05_06	2	12	3	Sequence	phantom_2,reaper_3,executioner_1	2.5	3.5	4	
+loc_05_06	2	13	3	Sequence	phantom_3,predator_1,executioner_2	3	4.5		
+loc_05_06	2	14	3	Sequence	executioner_2,predator_1,phantom_3	3	4.5		
+loc_05_06	2	15	6	Sequence	executioner_1,phantom_2,reaper_3,executioner_1,phantom_2,reaper_3	2.5	3.5		
+loc_05_06	2	16	3	Sequence	phantom_3,executioner_3,predator_1	3	4.5		
+loc_05_06	2	17	3	Sequence	predator_1,executioner_2,phantom_3	3	4.5		
+loc_05_06	2	18	7	Sequence	phantom_2,reaper_3,executioner_1,phantom_2,reaper_3,executioner_1,phantom_2	2.5	3.5		
+loc_05_06	2	19	3	Sequence	executioner_2,phantom_3,predator_1	3	4.5		
+loc_05_07	1	1	3	Sequence	phantom_3,predator_1,executioner_3	3	4.5		
+loc_05_07	1	2	3	Sequence	executioner_2,phantom_3,predator_1	3	4.5		
+loc_05_07	1	3	3	Sequence	reaper_3,executioner_1,phantom_2	2.5	3.5	4	
+loc_05_07	1	4	3	Sequence	executioner_3,phantom_3,predator_1	3	4.5		
+loc_05_07	1	5	3	Sequence	executioner_3,phantom_3,predator_1	3	4.5		
+loc_05_07	1	6	3	Sequence	phantom_3,predator_1,executioner_2	3	4.5		
+loc_05_07	1	7	8	Sequence	executioner_1,reaper_3,phantom_2,executioner_1,reaper_3,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_07	1	8	3	Sequence	executioner_2,phantom_3,predator_1	3	4.5		
+loc_05_07	1	9	3	Sequence	executioner_3,phantom_3,predator_1	3	4.5		
+loc_05_07	1	10	3	Sequence	phantom_3,predator_1,executioner_2	3	4.5		
+loc_05_07	1	11	8	Sequence	executioner_1,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2,executioner_1,reaper_3	2.5	3.5		
+loc_05_07	1	12	3	Sequence	executioner_2,phantom_3,predator_1	3	4.5		
+loc_05_07	1	13	3	Sequence	executioner_3,phantom_3,predator_1	3	4.5		
+loc_05_07	1	14	3	Sequence	executioner_2,phantom_3,predator_1	3	4.5		
+loc_05_07	1	15	3	Sequence	reaper_3,executioner_1,phantom_2	2.5	3.5	5	
+loc_05_07	1	16	3	Sequence	phantom_3,predator_1,executioner_2	3	4.5		
+loc_05_07	1	17	3	Sequence	executioner_2,phantom_3,predator_1	3	4.5		
+loc_05_07	1	18	3	Sequence	phantom_3,predator_1,executioner_3	3	4.5		
+loc_05_07	1	19	8	Sequence	executioner_1,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2,executioner_1,reaper_3	2.5	3.5		
+loc_05_07	1	20	3	Sequence	executioner_3,phantom_3,predator_1	3	4.5		
+loc_05_07	2	1	3	Sequence	phantom_3,predator_1,executioner_2	3	4.5		
+loc_05_07	2	2	3	Sequence	phantom_3,predator_1,executioner_2	3	4.5		
+loc_05_07	2	3	8	Sequence	executioner_1,reaper_3,phantom_2,executioner_1,reaper_3,executioner_1,reaper_3,phantom_2	2.5	3.5		
+loc_05_07	2	4	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_07	2	5	4	Sequence	phantom_3,predator_1,executioner_2,executioner_3	3	4.5		
+loc_05_07	2	6	3	Sequence	executioner_3,phantom_3,predator_1	3	4.5		
+loc_05_07	2	7	8	Sequence	executioner_1,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2,executioner_1,reaper_3	2.5	3.5		
+loc_05_07	2	8	3	Sequence	executioner_3,phantom_3,predator_1	3	4.5		
+loc_05_07	2	9	3	Sequence	phantom_3,predator_1,executioner_2	3	4.5		
+loc_05_07	2	10	3	Sequence	executioner_3,phantom_3,predator_1	3	4.5		
+loc_05_07	2	11	3	Sequence	reaper_3,executioner_1,phantom_2	2.5	3.5	5	
+loc_05_07	2	12	3	Sequence	phantom_3,predator_1,executioner_3	3	4.5		
+loc_05_07	2	13	3	Sequence	executioner_3,phantom_3,predator_1	3	4.5		
+loc_05_07	2	14	3	Sequence	phantom_3,predator_1,executioner_2	3	4.5		
+loc_05_07	2	15	3	Sequence	reaper_3,executioner_1,phantom_2	2.5	3.5	4	
+loc_05_07	2	16	3	Sequence	predator_1,executioner_2,executioner_3	3	4.5		
+loc_05_07	2	17	3	Sequence	phantom_3,predator_1,executioner_2	3	4.5		
+loc_05_07	2	18	3	Sequence	phantom_3,predator_1,executioner_3	3	4.5		
+loc_05_07	2	19	8	Sequence	executioner_1,reaper_3,phantom_2,executioner_1,reaper_3,phantom_2,executioner_1,reaper_3	2.5	3.5		
+loc_05_07	2	20	3	Sequence	phantom_3,predator_1,executioner_2	3	4.5		
+loc_05_07	3	1	3	Sequence	executioner_3,predator_1,phantom_3	3	4.5		
+loc_05_07	3	2	3	Sequence	predator_1,phantom_3,executioner_3	3	4.5		
+loc_05_07	3	3	3	Sequence	reaper_3,executioner_1,phantom_2	2.5	3.5	5	
+loc_05_07	3	4	3	Sequence	executioner_2,predator_1,phantom_3	3	4.5		
+loc_05_07	3	5	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_07	3	6	3	Sequence	predator_1,executioner_2,executioner_3	3	4.5		
+loc_05_07	3	7	8	Sequence	reaper_3,executioner_1,reaper_3,executioner_1,phantom_2,reaper_3,executioner_1,reaper_3	2.5	3.5		
+loc_05_07	3	8	3	Sequence	predator_1,executioner_2,executioner_3	3	4.5		
+loc_05_07	3	9	3	Sequence	predator_1,executioner_3,phantom_3	3	4.5		
+loc_05_07	3	10	2	Sequence	phantom_3,predator_1	3	4.5		
+loc_05_07	3	11	8	Sequence	reaper_3,executioner_1,reaper_3,executioner_1,phantom_2,reaper_3,executioner_1,phantom_2	2.5	3.5		
+loc_05_07	3	12	3	Sequence	predator_1,executioner_3,phantom_3	3	4.5		
+loc_05_07	3	13	3	Sequence	executioner_2,predator_1,phantom_3	3	4.5		
+loc_05_07	3	14	3	Sequence	executioner_2,predator_1,phantom_3	3	4.5		
+loc_05_07	3	15	7	Sequence	executioner_1,phantom_2,reaper_3,executioner_1,phantom_2,reaper_3,executioner_1	2.5	3.5		
+loc_05_07	3	16	3	Sequence	predator_1,executioner_2,phantom_3	3	4.5		
+loc_05_07	3	17	3	Sequence	executioner_3,predator_1,phantom_3	3	4.5		
+loc_05_07	3	18	3	Sequence	executioner_2,predator_1,phantom_3	3	4.5		
+loc_05_07	3	19	3	Sequence	reaper_3,executioner_1,phantom_2	2.5	3.5	4	
+loc_05_07	3	20	3	Sequence	predator_1,phantom_3,executioner_3	3	4.5		
+loc_05_07	4	1	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_07	4	2	3	Sequence	executioner_2,predator_1,phantom_3	3	4.5		
+loc_05_07	4	3	3	Sequence	reaper_3,executioner_1,phantom_2	2.5	3.5	5	
+loc_05_07	4	4	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_07	4	5	4	Sequence	phantom_3,predator_1,executioner_2,executioner_3	3	4.5		
+loc_05_07	4	6	7	Sequence	executioner_1,phantom_2,reaper_3,executioner_1,phantom_2,reaper_3,executioner_1	2.5	3.5		
+loc_05_07	4	7	3	Sequence	predator_1,executioner_3,phantom_3	3	4.5		
+loc_05_07	4	8	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_07	4	9	3	Sequence	executioner_3,predator_1,phantom_3	3	4.5		
+loc_05_07	4	10	8	Sequence	reaper_3,executioner_1,reaper_3,executioner_1,phantom_2,reaper_3,executioner_1,phantom_2	2.5	3.5		
+loc_05_07	4	11	3	Sequence	predator_1,phantom_3,executioner_2	3	4.5		
+loc_05_07	4	12	3	Sequence	executioner_2,predator_1,phantom_3	3	4.5		
+loc_05_07	4	13	3	Sequence	predator_1,phantom_3,executioner_3	3	4.5		
+loc_05_07	4	14	3	Sequence	reaper_3,executioner_1,phantom_2	2.5	3.5	4	
+loc_05_07	4	15	3	Sequence	predator_1,phantom_3,executioner_3	3	4.5		
+loc_05_07	4	16	3	Sequence	predator_1,executioner_3,executioner_2	3	4.5		
+loc_05_07	4	17	3	Sequence	predator_1,executioner_3,executioner_2	3	4.5		
+loc_05_07	4	18	8	Sequence	reaper_3,executioner_1,reaper_3,executioner_1,phantom_2,reaper_3,executioner_1,reaper_3	2.5	3.5		
+loc_05_07	4	19	3	Sequence	executioner_2,predator_1,phantom_3	3	4.5		
+loc_05_07	5	1	3	Sequence	executioner_3,phantom_3,predator_1	3	4.5		
+loc_05_07	5	2	3	Sequence	phantom_3,predator_1,executioner_2	3	4.5		
+loc_05_07	5	3	8	Sequence	reaper_3,executioner_1,reaper_3,executioner_1,phantom_2,reaper_3,executioner_1,phantom_2	2.5	3.5		
+loc_05_07	5	4	3	Sequence	phantom_3,predator_1,executioner_2	3	4.5		
+loc_05_07	5	5	3	Sequence	executioner_3,phantom_3,predator_1	3	4.5		
+loc_05_07	5	6	3	Sequence	predator_1,executioner_2,executioner_3	3	4.5		
+loc_05_07	5	7	8	Sequence	reaper_3,executioner_1,reaper_3,executioner_1,phantom_2,reaper_3,executioner_1,reaper_3	2.5	3.5		
+loc_05_07	5	8	3	Sequence	phantom_3,predator_1,executioner_2	3	4.5		
+loc_05_07	5	9	2	Sequence	phantom_3,predator_1	3	4.5		
+loc_05_07	5	10	3	Sequence	phantom_3,predator_1,phantom_3	3	4.5		
+loc_05_07	5	11	3	Sequence	reaper_3,executioner_1,phantom_2	2.5	3.5	4	
+loc_05_07	5	12	3	Sequence	executioner_3,phantom_3,predator_1	3	4.5		
+loc_05_07	5	13	3	Sequence	executioner_3,phantom_3,predator_1	3	4.5		
+loc_05_07	5	14	3	Sequence	phantom_3,predator_1,executioner_2	3	4.5		
+loc_05_07	5	15	3	Sequence	reaper_3,executioner_1,phantom_2	2.5	3.5	5	
+loc_05_07	5	16	3	Sequence	phantom_3,predator_1,executioner_2	3	4.5		
+loc_05_07	5	17	3	Sequence	phantom_3,predator_1,executioner_3	3	4.5		
+loc_05_07	5	18	3	Sequence	phantom_3,predator_1,executioner_2	3	4.5		
+loc_05_07	5	19	7	Sequence	executioner_1,phantom_2,reaper_3,executioner_1,phantom_2,reaper_3,executioner_1	2.5	3.5		
+loc_05_07	5	20	3	Sequence	phantom_3,predator_1,executioner_3	3	4.5		
+loc_05_07	5	21	1	Boss	emperor	0	0		
+loc_05_08	1	1	3	Sequence	warden_3,hunter_3,hunter_3	2.5	3.5		3
+loc_05_08	1	2	2	Sequence	phantom_3,phantom_2	3.5	4.5		2
+loc_05_08	1	3	4	Sequence	hunter_3,reaper_2,hunter_3,phantom_1	2.5	3.5		4
+loc_05_08	1	4	3	Sequence	executioner_1,predator_1,phantom_2	3.5	4.5		3
+loc_05_08	1	5	3	Sequence	hunter_3,reaper_3,hunter_2	2.5	3.5		3
+loc_05_08	1	6	3	Sequence	phantom_3,predator_1,executioner_3	3.5	4.5		3
+loc_05_08	1	7	4	Sequence	phantom_1,warden_3,hunter_3,hunter_2	2.5	3.5		4
+loc_05_08	1	8	3	Sequence	executioner_3,predator_1,phantom_3	3.5	4.5		3
+loc_05_08	1	9	3	Sequence	hunter_3,reaper_2,hunter_3	2.5	3.5	3	3
+loc_05_08	1	10	2	Sequence	predator_2,executioner_1	3.5	4.5		2
+loc_05_08	1	11	4	Sequence	warden_3,hunter_2,reaper_2,hunter_2	2.5	3.5	4	4
+loc_05_08	1	12	2	Sequence	executioner_1,executioner_1	3.5	4.5		2
+loc_05_08	1	13	3	Sequence	hunter_2,hunter_3,hunter_2	2.5	3.5	3	3
+loc_05_08	1	14	2	Sequence	phantom_3,phantom_2	3.5	4.5		2
+loc_05_08	1	15	4	Sequence	reaper_2,phantom_1,hunter_3,warden_3	2.5	3.5		4
+loc_05_08	1	16	3	Sequence	phantom_2,phantom_3,phantom_3	3.5	4.5	5	3
+loc_05_08	1	17	3	Sequence	hunter_3,hunter_2,reaper_2	2.5	3.5		3
+loc_05_08	1	18	3	Sequence	phantom_3,executioner_2,predator_1	3.5	4.5		3
+loc_05_08	1	19	3	Sequence	hunter_2,reaper_3,reaper_3	2.5	3.5		3
+loc_05_08	1	20	3	Sequence	executioner_1,phantom_3,executioner_3	3.5	4.5	5	3
+loc_05_08	1	21	4	Sequence	hunter_2,reaper_3,hunter_2,warden_3	2.5	3.5	3	4
+loc_05_08	1	22	3	Sequence	predator_2,executioner_1,phantom_2	3.5	4.5		3
+loc_05_08	1	23	3	Sequence	hunter_3,warden_3,warden_3	2.5	3.5	4	3
+loc_05_08	1	24	2	Sequence	executioner_2,predator_1	3.5	4.5	5	2
+loc_05_08	1	25	4	Sequence	reaper_2,warden_3,warden_3,hunter_2	2.5	3.5	3	4
+loc_05_08	1	26	3	Sequence	predator_2,phantom_3,executioner_3	3.5	4.5		3
+loc_05_08	1	27	3	Sequence	reaper_2,phantom_1,warden_3	2.5	3.5	3	3
+loc_05_08	1	28	3	Sequence	predator_1,executioner_2,phantom_3	3.5	4.5		3
+loc_05_08	1	29	4	Sequence	warden_3,hunter_3,phantom_1,hunter_2	2.5	3.5		4
+loc_05_08	1	30	2	Sequence	predator_1,predator_1	3.5	4.5		2
+loc_05_08	1	31	4	Sequence	reaper_3,reaper_2,phantom_1,phantom_1	2.5	3.5	4	4
+loc_05_08	1	32	2	Sequence	executioner_2,executioner_2	3.5	4.5		2
+loc_05_08	1	33	4	Sequence	reaper_2,hunter_3,hunter_2,phantom_1	2.5	3.5	4	4
+loc_05_08	1	34	2	Sequence	predator_1,phantom_2	3.5	4.5		2
+loc_05_08	1	35	3	Sequence	phantom_1,warden_3,reaper_3	2.5	3.5	4	3
+loc_05_08	1	36	3	Sequence	executioner_1,predator_1,executioner_3	3.5	4.5		3
+loc_05_08	1	37	3	Sequence	reaper_3,reaper_2,warden_3	2.5	3.5	4	3
+loc_05_08	1	38	3	Sequence	executioner_1,executioner_3,predator_1	3.5	4.5		3
+loc_05_08	1	39	3	Sequence	phantom_1,reaper_2,warden_3	2.5	3.5	3	3
+loc_05_08	1	40	2	Sequence	predator_1,phantom_3	3.5	4.5		2
+loc_05_08	2	1	4	Sequence	phantom_1,reaper_2,warden_3,hunter_2	2.5	3.5		4
+loc_05_08	2	2	3	Sequence	predator_1,predator_1,phantom_3	3.5	4.5		3
+loc_05_08	2	3	4	Sequence	hunter_2,warden_3,hunter_3,phantom_1	2.5	3.5	4	4
+loc_05_08	2	4	3	Sequence	predator_1,phantom_3,executioner_1	3.5	4.5		3
+loc_05_08	2	5	3	Sequence	hunter_3,phantom_1,reaper_3	2.5	3.5	3	3
+loc_05_08	2	6	2	Sequence	predator_1,predator_2	3.5	4.5		2
+loc_05_08	2	7	4	Sequence	warden_3,hunter_3,hunter_3,hunter_2	2.5	3.5	4	4
+loc_05_08	2	8	2	Sequence	executioner_3,phantom_3	3.5	4.5		2
+loc_05_08	2	9	3	Sequence	hunter_3,hunter_2,hunter_2	2.5	3.5	3	3
+loc_05_08	2	10	2	Sequence	phantom_3,phantom_2	3.5	4.5	5	2
+loc_05_08	2	11	3	Sequence	phantom_1,hunter_2,hunter_2	2.5	3.5		3
+loc_05_08	2	12	2	Sequence	phantom_3,executioner_1	3.5	4.5		2
+loc_05_08	2	13	3	Sequence	hunter_3,reaper_2,warden_3	2.5	3.5	4	3
+loc_05_08	2	14	3	Sequence	phantom_3,predator_1,predator_2	3.5	4.5		3
+loc_05_08	2	15	3	Sequence	warden_3,hunter_3,hunter_3	2.5	3.5	3	3
+loc_05_08	2	16	2	Sequence	executioner_2,executioner_3	3.5	4.5		2
+loc_05_08	2	17	3	Sequence	reaper_2,phantom_1,reaper_2	2.5	3.5	4	3
+loc_05_08	2	18	3	Sequence	phantom_2,executioner_3,executioner_2	3.5	4.5		3
+loc_05_08	2	19	3	Sequence	hunter_3,warden_3,hunter_3	2.5	3.5		3
+loc_05_08	2	20	2	Sequence	phantom_2,phantom_3	3.5	4.5	5	2
+loc_05_08	2	21	3	Sequence	phantom_1,phantom_1,reaper_2	2.5	3.5	4	3
+loc_05_08	2	22	3	Sequence	executioner_1,executioner_1,executioner_3	3.5	4.5		3
+loc_05_08	2	23	3	Sequence	warden_3,reaper_3,phantom_1	2.5	3.5		3
+loc_05_08	2	24	3	Sequence	phantom_3,predator_1,executioner_1	3.5	4.5		3
+loc_05_08	2	25	3	Sequence	phantom_1,warden_3,reaper_3	2.5	3.5	3	3
+loc_05_08	2	26	2	Sequence	phantom_3,predator_1	3.5	4.5		2
+loc_05_08	2	27	3	Sequence	hunter_2,hunter_2,hunter_3	2.5	3.5		3
+loc_05_08	2	28	3	Sequence	phantom_2,phantom_3,predator_1	3.5	4.5		3
+loc_05_08	2	29	4	Sequence	warden_3,reaper_3,hunter_2,hunter_3	2.5	3.5		4
+loc_05_08	2	30	3	Sequence	predator_1,executioner_2,executioner_2	3.5	4.5		3
+loc_05_08	2	31	4	Sequence	warden_3,reaper_2,warden_3,reaper_3	2.5	3.5		4
+loc_05_08	2	32	3	Sequence	executioner_1,executioner_3,executioner_2	3.5	4.5	5	3
+loc_05_08	2	33	4	Sequence	warden_3,reaper_2,hunter_2,reaper_2	2.5	3.5		4
+loc_05_08	2	34	2	Sequence	predator_2,executioner_1	3.5	4.5		2
+loc_05_08	2	35	4	Sequence	hunter_3,hunter_2,hunter_2,reaper_2	2.5	3.5	3	4
+loc_05_08	2	36	2	Sequence	phantom_2,phantom_3	3.5	4.5		2
+loc_05_08	2	37	4	Sequence	reaper_2,reaper_3,hunter_2,phantom_1	2.5	3.5	3	4
+loc_05_08	2	38	3	Sequence	executioner_1,executioner_1,predator_1	3.5	4.5		3
+loc_05_08	2	39	3	Sequence	phantom_1,warden_3,warden_3	2.5	3.5	4	3
+loc_05_08	2	40	3	Sequence	executioner_2,phantom_2,predator_1	3.5	4.5		3
+loc_05_08	3	1	4	Sequence	hunter_2,reaper_3,hunter_2,reaper_3	2.5	3.5	3	4
+loc_05_08	3	2	3	Sequence	predator_1,executioner_1,phantom_3	3.5	4.5	5	3
+loc_05_08	3	3	3	Sequence	reaper_3,warden_3,phantom_1	2.5	3.5		3
+loc_05_08	3	4	2	Sequence	predator_1,executioner_1	3.5	4.5		2
+loc_05_08	3	5	3	Sequence	hunter_3,phantom_1,reaper_2	2.5	3.5		3
+loc_05_08	3	6	3	Sequence	executioner_2,predator_1,executioner_3	3.5	4.5		3
+loc_05_08	3	7	4	Sequence	warden_3,hunter_3,phantom_1,hunter_2	2.5	3.5		4
+loc_05_08	3	8	3	Sequence	executioner_1,executioner_1,phantom_3	3.5	4.5	5	3
+loc_05_08	3	9	3	Sequence	reaper_2,hunter_3,warden_3	2.5	3.5	4	3
+loc_05_08	3	10	2	Sequence	predator_1,phantom_2	3.5	4.5		2
+loc_05_08	3	11	3	Sequence	warden_3,reaper_2,reaper_2	2.5	3.5	3	3
+loc_05_08	3	12	2	Sequence	phantom_3,predator_1	3.5	4.5		2
+loc_05_08	3	13	3	Sequence	hunter_2,reaper_2,hunter_3	2.5	3.5	4	3
+loc_05_08	3	14	3	Sequence	executioner_1,predator_1,executioner_3	3.5	4.5		3
+loc_05_08	3	15	3	Sequence	hunter_3,hunter_2,phantom_1	2.5	3.5		3
+loc_05_08	3	16	3	Sequence	predator_2,executioner_3,predator_1	3.5	4.5		3
+loc_05_08	3	17	3	Sequence	hunter_3,warden_3,hunter_2	2.5	3.5	3	3
+loc_05_08	3	18	2	Sequence	executioner_1,executioner_3	3.5	4.5		2
+loc_05_08	3	19	3	Sequence	hunter_2,hunter_3,phantom_1	2.5	3.5	3	3
+loc_05_08	3	20	2	Sequence	executioner_2,predator_1	3.5	4.5		2
+loc_05_08	3	21	4	Sequence	reaper_2,hunter_2,phantom_1,warden_3	2.5	3.5	4	4
+loc_05_08	3	22	3	Sequence	phantom_3,predator_2,phantom_3	3.5	4.5		3
+loc_05_08	3	23	3	Sequence	reaper_2,phantom_1,hunter_3	2.5	3.5		3
+loc_05_08	3	24	3	Sequence	executioner_2,executioner_2,phantom_3	3.5	4.5		3
+loc_05_08	3	25	3	Sequence	warden_3,hunter_3,reaper_2	2.5	3.5	4	3
+loc_05_08	3	26	2	Sequence	phantom_2,executioner_1	3.5	4.5		2
+loc_05_08	3	27	3	Sequence	hunter_3,phantom_1,hunter_2	2.5	3.5		3
+loc_05_08	3	28	2	Sequence	executioner_2,phantom_2	3.5	4.5		2
+loc_05_08	3	29	3	Sequence	reaper_3,reaper_2,reaper_3	2.5	3.5	3	3
+loc_05_08	3	30	2	Sequence	phantom_3,phantom_3	3.5	4.5		2
+loc_05_08	3	31	3	Sequence	hunter_3,warden_3,warden_3	2.5	3.5	3	3
+loc_05_08	3	32	2	Sequence	predator_1,phantom_2	3.5	4.5		2
+loc_05_08	3	33	4	Sequence	hunter_2,hunter_2,warden_3,hunter_2	2.5	3.5	4	4
+loc_05_08	3	34	2	Sequence	executioner_1,phantom_3	3.5	4.5	5	2
+loc_05_08	3	35	4	Sequence	warden_3,hunter_3,reaper_3,hunter_2	2.5	3.5		4
+loc_05_08	3	36	2	Sequence	phantom_3,executioner_1	3.5	4.5		2
+loc_05_08	3	37	3	Sequence	warden_3,hunter_3,reaper_3	2.5	3.5	4	3
+loc_05_08	3	38	3	Sequence	executioner_3,predator_2,executioner_3	3.5	4.5		3
+loc_05_08	3	39	3	Sequence	phantom_1,hunter_3,phantom_1	2.5	3.5	3	3
+loc_05_08	3	40	3	Sequence	predator_1,phantom_2,phantom_3	3.5	4.5		3
+loc_05_08	3	41	3	Sequence	reaper_2,hunter_2,warden_3	2.5	3.5		3
+loc_05_08	3	42	3	Sequence	phantom_3,executioner_2,predator_1	3.5	4.5		3
+loc_05_09	1	1	4	Sequence	reaper_3,warden_3,reaper_3,hunter_3	2.5	3.5	3	4
+loc_05_09	1	2	2	Sequence	phantom_3,predator_1	3.5	4.5		2
+loc_05_09	1	3	4	Sequence	hunter_2,reaper_3,reaper_3,reaper_3	2.5	3.5	4	4
+loc_05_09	1	4	2	Sequence	executioner_1,phantom_3	3.5	4.5		2
+loc_05_09	1	5	3	Sequence	hunter_3,phantom_1,reaper_3	2.5	3.5	3	3
+loc_05_09	1	6	2	Sequence	executioner_3,predator_2	3.5	4.5	5	2
+loc_05_09	1	7	3	Sequence	hunter_2,hunter_3,hunter_3	2.5	3.5		3
+loc_05_09	1	8	2	Sequence	phantom_3,executioner_3	3.5	4.5		2
+loc_05_09	1	9	4	Sequence	phantom_1,reaper_2,warden_3,reaper_2	2.5	3.5		4
+loc_05_09	1	10	3	Sequence	executioner_3,predator_1,executioner_1	3.5	4.5		3
+loc_05_09	1	11	4	Sequence	reaper_3,hunter_3,warden_3,phantom_1	2.5	3.5	4	4
+loc_05_09	1	12	3	Sequence	executioner_1,phantom_3,phantom_3	3.5	4.5	5	3
+loc_05_09	1	13	4	Sequence	hunter_3,warden_3,warden_3,phantom_1	2.5	3.5		4
+loc_05_09	1	14	3	Sequence	phantom_3,executioner_3,predator_1	3.5	4.5		3
+loc_05_09	1	15	4	Sequence	warden_3,warden_3,hunter_3,reaper_3	2.5	3.5	3	4
+loc_05_09	1	16	3	Sequence	executioner_1,phantom_3,predator_2	3.5	4.5		3
+loc_05_09	1	17	4	Sequence	hunter_2,hunter_3,hunter_3,reaper_2	2.5	3.5		4
+loc_05_09	1	18	2	Sequence	predator_2,executioner_2	3.5	4.5		2
+loc_05_09	1	19	4	Sequence	phantom_1,reaper_2,hunter_3,reaper_2	2.5	3.5	3	4
+loc_05_09	1	20	2	Sequence	predator_1,executioner_2	3.5	4.5		2
+loc_05_09	1	21	4	Sequence	reaper_2,phantom_1,hunter_2,hunter_2	2.5	3.5		4
+loc_05_09	1	22	3	Sequence	predator_1,phantom_3,predator_1	3.5	4.5		3
+loc_05_09	1	23	4	Sequence	reaper_3,reaper_2,reaper_2,warden_3	2.5	3.5		4
+loc_05_09	1	24	2	Sequence	executioner_2,executioner_1	3.5	4.5		2
+loc_05_09	1	25	4	Sequence	warden_3,reaper_2,hunter_2,hunter_2	2.5	3.5	4	4
+loc_05_09	1	26	3	Sequence	executioner_1,predator_2,predator_1	3.5	4.5		3
+loc_05_09	1	27	4	Sequence	hunter_2,hunter_2,phantom_1,hunter_2	2.5	3.5		4
+loc_05_09	1	28	2	Sequence	phantom_3,executioner_2	3.5	4.5		2
+loc_05_09	1	29	3	Sequence	hunter_3,reaper_2,phantom_1	2.5	3.5	3	3
+loc_05_09	1	30	3	Sequence	executioner_1,predator_1,predator_1	3.5	4.5	5	3
+loc_05_09	1	31	4	Sequence	hunter_3,phantom_1,reaper_2,phantom_1	2.5	3.5		4
+loc_05_09	1	32	2	Sequence	phantom_3,predator_2	3.5	4.5		2
+loc_05_09	1	33	4	Sequence	warden_3,hunter_2,reaper_3,reaper_2	2.5	3.5	4	4
+loc_05_09	1	34	3	Sequence	executioner_1,executioner_2,executioner_3	3.5	4.5		3
+loc_05_09	1	35	4	Sequence	hunter_3,hunter_3,reaper_2,reaper_2	2.5	3.5	4	4
+loc_05_09	1	36	2	Sequence	executioner_2,predator_1	3.5	4.5		2
+loc_05_09	1	37	4	Sequence	warden_3,reaper_2,phantom_1,reaper_3	2.5	3.5	3	4
+loc_05_09	1	38	3	Sequence	predator_2,executioner_2,executioner_2	3.5	4.5		3
+loc_05_09	2	1	4	Sequence	hunter_2,hunter_2,reaper_2,reaper_3	2.5	3.5	4	4
+loc_05_09	2	2	2	Sequence	executioner_2,executioner_2	3.5	4.5		2
+loc_05_09	2	3	3	Sequence	reaper_2,hunter_2,phantom_1	2.5	3.5		3
+loc_05_09	2	4	3	Sequence	predator_1,phantom_3,predator_1	3.5	4.5		3
+loc_05_09	2	5	4	Sequence	phantom_1,hunter_2,reaper_2,hunter_3	2.5	3.5	3	4
+loc_05_09	2	6	3	Sequence	executioner_3,executioner_1,executioner_2	3.5	4.5		3
+loc_05_09	2	7	4	Sequence	phantom_1,reaper_3,warden_3,hunter_2	2.5	3.5	4	4
+loc_05_09	2	8	2	Sequence	phantom_3,predator_1	3.5	4.5		2
+loc_05_09	2	9	4	Sequence	warden_3,hunter_2,hunter_3,phantom_1	2.5	3.5	4	4
+loc_05_09	2	10	2	Sequence	phantom_3,executioner_1	3.5	4.5		2
+loc_05_09	2	11	4	Sequence	hunter_3,hunter_2,phantom_1,reaper_2	2.5	3.5		4
+loc_05_09	2	12	2	Sequence	predator_1,phantom_3	3.5	4.5		2
+loc_05_09	2	13	4	Sequence	reaper_3,hunter_3,warden_3,warden_3	2.5	3.5	4	4
+loc_05_09	2	14	2	Sequence	executioner_3,executioner_3	3.5	4.5		2
+loc_05_09	2	15	4	Sequence	reaper_3,phantom_1,reaper_2,hunter_3	2.5	3.5	3	4
+loc_05_09	2	16	2	Sequence	predator_2,predator_1	3.5	4.5	5	2
+loc_05_09	2	17	3	Sequence	phantom_1,hunter_3,phantom_1	2.5	3.5	3	3
+loc_05_09	2	18	3	Sequence	phantom_3,executioner_2,predator_1	3.5	4.5		3
+loc_05_09	2	19	4	Sequence	hunter_3,hunter_3,reaper_2,reaper_3	2.5	3.5		4
+loc_05_09	2	20	3	Sequence	executioner_3,executioner_3,predator_1	3.5	4.5		3
+loc_05_09	2	21	4	Sequence	reaper_3,reaper_2,reaper_2,reaper_2	2.5	3.5		4
+loc_05_09	2	22	3	Sequence	phantom_3,executioner_1,phantom_3	3.5	4.5		3
+loc_05_09	2	23	4	Sequence	reaper_2,hunter_3,reaper_3,hunter_3	2.5	3.5	3	4
+loc_05_09	2	24	2	Sequence	phantom_3,executioner_2	3.5	4.5		2
+loc_05_09	2	25	3	Sequence	reaper_3,warden_3,warden_3	2.5	3.5		3
+loc_05_09	2	26	3	Sequence	executioner_1,executioner_2,executioner_1	3.5	4.5		3
+loc_05_09	2	27	4	Sequence	reaper_3,phantom_1,reaper_2,reaper_2	2.5	3.5		4
+loc_05_09	2	28	3	Sequence	predator_2,predator_2,phantom_3	3.5	4.5		3
+loc_05_09	2	29	3	Sequence	hunter_2,warden_3,hunter_3	2.5	3.5		3
+loc_05_09	2	30	2	Sequence	predator_2,predator_2	3.5	4.5	5	2
+loc_05_09	2	31	4	Sequence	hunter_3,warden_3,hunter_3,phantom_1	2.5	3.5	4	4
+loc_05_09	2	32	2	Sequence	phantom_3,predator_1	3.5	4.5		2
+loc_05_09	2	33	4	Sequence	hunter_2,hunter_2,reaper_3,warden_3	2.5	3.5	3	4
+loc_05_09	2	34	2	Sequence	executioner_2,executioner_1	3.5	4.5		2
+loc_05_09	2	35	4	Sequence	warden_3,reaper_2,phantom_1,hunter_3	2.5	3.5		4
+loc_05_09	2	36	3	Sequence	executioner_1,phantom_3,executioner_2	3.5	4.5	5	3
+loc_05_09	2	37	4	Sequence	reaper_3,warden_3,reaper_2,hunter_2	2.5	3.5	3	4
+loc_05_09	2	38	3	Sequence	executioner_1,predator_1,predator_1	3.5	4.5		3
+loc_05_09	3	1	3	Sequence	hunter_3,warden_3,warden_3	2.5	3.5		3
+loc_05_09	3	2	2	Sequence	executioner_2,predator_1	3.5	4.5	5	2
+loc_05_09	3	3	4	Sequence	phantom_1,hunter_2,phantom_1,hunter_3	2.5	3.5		4
+loc_05_09	3	4	3	Sequence	executioner_3,predator_1,executioner_3	3.5	4.5		3
+loc_05_09	3	5	4	Sequence	hunter_3,reaper_2,reaper_2,phantom_1	2.5	3.5	4	4
+loc_05_09	3	6	2	Sequence	executioner_2,executioner_1	3.5	4.5		2
+loc_05_09	3	7	4	Sequence	hunter_3,reaper_2,reaper_2,reaper_2	2.5	3.5	3	4
+loc_05_09	3	8	2	Sequence	predator_1,executioner_1	3.5	4.5		2
+loc_05_09	3	9	3	Sequence	phantom_1,hunter_3,hunter_3	2.5	3.5	3	3
+loc_05_09	3	10	3	Sequence	executioner_1,phantom_3,predator_1	3.5	4.5		3
+loc_05_09	3	11	4	Sequence	hunter_2,hunter_2,reaper_2,reaper_3	2.5	3.5		4
+loc_05_09	3	12	3	Sequence	executioner_2,executioner_1,executioner_1	3.5	4.5		3
+loc_05_09	3	13	4	Sequence	hunter_2,reaper_3,reaper_2,hunter_2	2.5	3.5	3	4
+loc_05_09	3	14	2	Sequence	phantom_3,phantom_3	3.5	4.5		2
+loc_05_09	3	15	4	Sequence	reaper_3,hunter_3,reaper_2,hunter_2	2.5	3.5		4
+loc_05_09	3	16	2	Sequence	phantom_3,phantom_3	3.5	4.5		2
+loc_05_09	3	17	4	Sequence	reaper_3,reaper_2,hunter_3,phantom_1	2.5	3.5	3	4
+loc_05_09	3	18	2	Sequence	predator_1,predator_1	3.5	4.5		2
+loc_05_09	3	19	4	Sequence	reaper_3,hunter_2,hunter_3,reaper_2	2.5	3.5		4
+loc_05_09	3	20	3	Sequence	predator_1,executioner_2,executioner_2	3.5	4.5		3
+loc_05_09	3	21	4	Sequence	hunter_2,warden_3,hunter_3,reaper_3	2.5	3.5		4
+loc_05_09	3	22	3	Sequence	executioner_3,phantom_3,phantom_3	3.5	4.5		3
+loc_05_09	3	23	3	Sequence	reaper_2,warden_3,reaper_2	2.5	3.5		3
+loc_05_09	3	24	2	Sequence	predator_2,executioner_2	3.5	4.5	5	2
+loc_05_09	3	25	4	Sequence	phantom_1,phantom_1,reaper_3,phantom_1	2.5	3.5	3	4
+loc_05_09	3	26	2	Sequence	phantom_3,predator_1	3.5	4.5		2
+loc_05_09	3	27	4	Sequence	hunter_3,reaper_3,hunter_2,phantom_1	2.5	3.5	4	4
+loc_05_09	3	28	3	Sequence	predator_1,executioner_1,executioner_3	3.5	4.5		3
+loc_05_09	3	29	4	Sequence	hunter_3,warden_3,hunter_2,warden_3	2.5	3.5	4	4
+loc_05_09	3	30	3	Sequence	executioner_3,predator_2,predator_1	3.5	4.5		3
+loc_05_09	3	31	4	Sequence	warden_3,reaper_3,warden_3,warden_3	2.5	3.5	4	4
+loc_05_09	3	32	2	Sequence	phantom_3,executioner_2	3.5	4.5		2
+loc_05_09	3	33	4	Sequence	hunter_3,hunter_3,hunter_3,warden_3	2.5	3.5	3	4
+loc_05_09	3	34	2	Sequence	phantom_3,predator_1	3.5	4.5		2
+loc_05_09	3	35	4	Sequence	reaper_3,warden_3,reaper_2,phantom_1	2.5	3.5	4	4
+loc_05_09	3	36	3	Sequence	phantom_3,predator_2,executioner_1	3.5	4.5		3
+loc_05_09	3	37	4	Sequence	hunter_2,phantom_1,reaper_2,reaper_3	2.5	3.5		4
+loc_05_09	3	38	3	Sequence	executioner_1,predator_2,predator_2	3.5	4.5	5	3
+loc_05_09	4	1	4	Sequence	warden_3,hunter_3,reaper_3,warden_3	2.5	3.5	3	4
+loc_05_09	4	2	2	Sequence	executioner_1,executioner_2	3.5	4.5		2
+loc_05_09	4	3	4	Sequence	hunter_3,reaper_2,phantom_1,hunter_2	2.5	3.5	3	4
+loc_05_09	4	4	3	Sequence	predator_1,predator_2,executioner_1	3.5	4.5		3
+loc_05_09	4	5	4	Sequence	hunter_3,hunter_3,hunter_3,reaper_2	2.5	3.5	4	4
+loc_05_09	4	6	2	Sequence	phantom_3,phantom_3	3.5	4.5		2
+loc_05_09	4	7	4	Sequence	hunter_3,warden_3,reaper_2,phantom_1	2.5	3.5	4	4
+loc_05_09	4	8	2	Sequence	predator_1,predator_1	3.5	4.5		2
+loc_05_09	4	9	4	Sequence	hunter_2,phantom_1,reaper_3,hunter_3	2.5	3.5	3	4
+loc_05_09	4	10	3	Sequence	phantom_3,executioner_1,predator_1	3.5	4.5		3
+loc_05_09	4	11	4	Sequence	phantom_1,reaper_2,reaper_2,reaper_2	2.5	3.5	3	4
+loc_05_09	4	12	3	Sequence	predator_1,phantom_3,executioner_3	3.5	4.5		3
+loc_05_09	4	13	4	Sequence	phantom_1,reaper_3,hunter_2,reaper_3	2.5	3.5	4	4
+loc_05_09	4	14	2	Sequence	predator_1,phantom_3	3.5	4.5		2
+loc_05_09	4	15	4	Sequence	reaper_2,hunter_2,reaper_3,reaper_3	2.5	3.5		4
+loc_05_09	4	16	2	Sequence	executioner_2,executioner_3	3.5	4.5		2
+loc_05_09	4	17	4	Sequence	warden_3,reaper_2,reaper_2,hunter_2	2.5	3.5		4
+loc_05_09	4	18	3	Sequence	executioner_3,phantom_3,executioner_1	3.5	4.5		3
+loc_05_09	4	19	4	Sequence	hunter_2,reaper_2,hunter_3,reaper_2	2.5	3.5	4	4
+loc_05_09	4	20	2	Sequence	executioner_2,predator_2	3.5	4.5	5	2
+loc_05_09	4	21	4	Sequence	phantom_1,reaper_3,reaper_2,reaper_3	2.5	3.5		4
+loc_05_09	4	22	3	Sequence	predator_1,phantom_3,predator_2	3.5	4.5	5	3
+loc_05_09	4	23	3	Sequence	reaper_2,warden_3,hunter_2	2.5	3.5		3
+loc_05_09	4	24	3	Sequence	executioner_3,executioner_2,executioner_1	3.5	4.5		3
+loc_05_09	4	25	4	Sequence	warden_3,phantom_1,hunter_3,hunter_3	2.5	3.5		4
+loc_05_09	4	26	2	Sequence	phantom_3,executioner_2	3.5	4.5		2
+loc_05_09	4	27	4	Sequence	warden_3,reaper_3,hunter_2,hunter_3	2.5	3.5	4	4
+loc_05_09	4	28	2	Sequence	executioner_1,executioner_1	3.5	4.5		2
+loc_05_09	4	29	3	Sequence	reaper_2,warden_3,reaper_2	2.5	3.5	3	3
+loc_05_09	4	30	2	Sequence	executioner_2,predator_2	3.5	4.5		2
+loc_05_09	4	31	4	Sequence	hunter_2,hunter_3,hunter_3,phantom_1	2.5	3.5		4
+loc_05_09	4	32	2	Sequence	executioner_2,predator_1	3.5	4.5		2
+loc_05_09	4	33	4	Sequence	warden_3,reaper_3,hunter_3,warden_3	2.5	3.5	3	4
+loc_05_09	4	34	3	Sequence	predator_1,predator_2,phantom_3	3.5	4.5	5	3
+loc_05_09	4	35	4	Sequence	phantom_1,phantom_1,hunter_2,phantom_1	2.5	3.5		4
+loc_05_09	4	36	3	Sequence	executioner_1,executioner_3,predator_1	3.5	4.5		3
+loc_05_09	4	37	4	Sequence	reaper_3,hunter_2,warden_3,hunter_3	2.5	3.5		4
+loc_05_09	4	38	3	Sequence	predator_1,phantom_3,executioner_2	3.5	4.5		3
+loc_05_09	5	1	4	Sequence	hunter_3,reaper_3,hunter_3,hunter_3	2.5	3.5	4	4
+loc_05_09	5	2	2	Sequence	executioner_1,executioner_2	3.5	4.5	5	2
+loc_05_09	5	3	4	Sequence	hunter_3,hunter_2,reaper_2,reaper_3	2.5	3.5		4
+loc_05_09	5	4	3	Sequence	executioner_2,phantom_3,phantom_3	3.5	4.5		3
+loc_05_09	5	5	4	Sequence	hunter_2,warden_3,reaper_2,hunter_3	2.5	3.5	4	4
+loc_05_09	5	6	3	Sequence	executioner_1,predator_1,phantom_3	3.5	4.5		3
+loc_05_09	5	7	4	Sequence	hunter_2,hunter_2,hunter_3,phantom_1	2.5	3.5		4
+loc_05_09	5	8	3	Sequence	executioner_3,predator_2,predator_2	3.5	4.5	5	3
+loc_05_09	5	9	4	Sequence	hunter_3,reaper_2,phantom_1,hunter_3	2.5	3.5	3	4
+loc_05_09	5	10	3	Sequence	phantom_3,phantom_3,predator_1	3.5	4.5		3
+loc_05_09	5	11	5	Sequence	reaper_2,hunter_3,phantom_1,reaper_2,reaper_3	2.5	3.5	3	5
+loc_05_09	5	12	3	Sequence	executioner_1,executioner_1,executioner_1	3.5	4.5		3
+loc_05_09	5	13	4	Sequence	warden_3,warden_3,reaper_2,hunter_2	2.5	3.5		4
+loc_05_09	5	14	2	Sequence	predator_1,executioner_2	3.5	4.5		2
+loc_05_09	5	15	4	Sequence	reaper_3,reaper_2,hunter_2,reaper_2	2.5	3.5	4	4
+loc_05_09	5	16	2	Sequence	executioner_3,phantom_3	3.5	4.5		2
+loc_05_09	5	17	4	Sequence	reaper_2,hunter_3,reaper_2,reaper_2	2.5	3.5		4
+loc_05_09	5	18	3	Sequence	executioner_1,phantom_3,phantom_3	3.5	4.5		3
+loc_05_09	5	19	4	Sequence	hunter_2,reaper_3,reaper_3,warden_3	2.5	3.5	4	4
+loc_05_09	5	20	2	Sequence	executioner_3,predator_1	3.5	4.5		2
+loc_05_09	5	21	4	Sequence	warden_3,phantom_1,hunter_2,reaper_2	2.5	3.5	3	4
+loc_05_09	5	22	2	Sequence	predator_1,executioner_2	3.5	4.5		2
+loc_05_09	5	23	4	Sequence	reaper_3,reaper_3,phantom_1,hunter_2	2.5	3.5		4
+loc_05_09	5	24	2	Sequence	executioner_3,phantom_3	3.5	4.5		2
+loc_05_09	5	25	4	Sequence	warden_3,phantom_1,reaper_2,reaper_3	2.5	3.5	3	4
+loc_05_09	5	26	3	Sequence	executioner_3,predator_2,predator_2	3.5	4.5		3
+loc_05_09	5	27	5	Sequence	phantom_1,hunter_3,warden_3,hunter_3,warden_3	2.5	3.5	3	5
+loc_05_09	5	28	3	Sequence	predator_1,executioner_2,executioner_2	3.5	4.5		3
+loc_05_09	5	29	4	Sequence	warden_3,phantom_1,hunter_3,hunter_2	2.5	3.5		4
+loc_05_09	5	30	2	Sequence	predator_1,executioner_2	3.5	4.5	5	2
+loc_05_09	5	31	4	Sequence	phantom_1,warden_3,phantom_1,reaper_3	2.5	3.5	3	4
+loc_05_09	5	32	3	Sequence	executioner_3,predator_2,predator_1	3.5	4.5		3
+loc_05_09	5	33	4	Sequence	hunter_2,hunter_3,reaper_2,phantom_1	2.5	3.5	4	4
+loc_05_09	5	34	3	Sequence	predator_1,predator_1,phantom_3	3.5	4.5		3
+loc_05_09	5	35	4	Sequence	reaper_2,reaper_3,warden_3,hunter_3	2.5	3.5		4
+loc_05_09	5	36	2	Sequence	executioner_2,executioner_1	3.5	4.5		2
+loc_05_10	1	1	5	Sequence	reaper_3,reaper_3,reaper_3,reaper_3,hunter_2	2.5	3.5	4	5
+loc_05_10	1	2	3	Sequence	executioner_3,predator_1,executioner_2	3.5	4.5		3
+loc_05_10	1	3	4	Sequence	hunter_3,reaper_2,hunter_3,warden_3	2.5	3.5		4
+loc_05_10	1	4	2	Sequence	executioner_3,executioner_2	3.5	4.5		2
+loc_05_10	1	5	4	Sequence	phantom_1,hunter_3,phantom_1,warden_3	2.5	3.5	3	4
+loc_05_10	1	6	3	Sequence	phantom_3,executioner_3,phantom_3	3.5	4.5		3
+loc_05_10	1	7	5	Sequence	phantom_1,warden_3,reaper_3,reaper_3,reaper_2	2.5	3.5		5
+loc_05_10	1	8	3	Sequence	executioner_3,executioner_1,executioner_1	3.5	4.5		3
+loc_05_10	1	9	4	Sequence	hunter_3,hunter_2,reaper_3,reaper_2	2.5	3.5	3	4
+loc_05_10	1	10	2	Sequence	phantom_3,phantom_3	3.5	4.5	5	2
+loc_05_10	1	11	4	Sequence	phantom_1,phantom_1,reaper_3,reaper_2	2.5	3.5	4	4
+loc_05_10	1	12	2	Sequence	predator_2,phantom_3	3.5	4.5		2
+loc_05_10	1	13	4	Sequence	reaper_2,phantom_1,reaper_2,reaper_2	2.5	3.5	3	4
+loc_05_10	1	14	2	Sequence	predator_1,predator_2	3.5	4.5		2
+loc_05_10	1	15	4	Sequence	reaper_2,phantom_1,reaper_2,phantom_1	2.5	3.5		4
+loc_05_10	1	16	2	Sequence	executioner_2,predator_2	3.5	4.5		2
+loc_05_10	1	17	4	Sequence	hunter_3,reaper_3,reaper_3,hunter_2	2.5	3.5		4
+loc_05_10	1	18	3	Sequence	predator_1,predator_1,predator_2	3.5	4.5	5	3
+loc_05_10	1	19	4	Sequence	reaper_3,warden_3,hunter_3,warden_3	2.5	3.5		4
+loc_05_10	1	20	3	Sequence	phantom_3,predator_1,predator_1	3.5	4.5		3
+loc_05_10	1	21	4	Sequence	phantom_1,reaper_3,phantom_1,hunter_3	2.5	3.5		4
+loc_05_10	1	22	3	Sequence	executioner_2,executioner_1,predator_1	3.5	4.5		3
+loc_05_10	1	23	4	Sequence	hunter_3,reaper_3,reaper_2,phantom_1	2.5	3.5	3	4
+loc_05_10	1	24	2	Sequence	predator_2,executioner_1	3.5	4.5		2
+loc_05_10	1	25	4	Sequence	hunter_2,hunter_3,warden_3,reaper_3	2.5	3.5		4
+loc_05_10	1	26	2	Sequence	phantom_3,executioner_2	3.5	4.5		2
+loc_05_10	1	27	4	Sequence	reaper_2,hunter_3,hunter_2,warden_3	2.5	3.5	4	4
+loc_05_10	1	28	2	Sequence	predator_1,executioner_1	3.5	4.5		2
+loc_05_10	1	29	5	Sequence	hunter_3,hunter_3,hunter_3,phantom_1,warden_3	2.5	3.5	4	5
+loc_05_10	1	30	3	Sequence	predator_2,executioner_3,executioner_2	3.5	4.5	5	3
+loc_05_10	1	31	5	Sequence	reaper_3,hunter_2,reaper_2,reaper_2,reaper_3	2.5	3.5	3	5
+loc_05_10	1	32	2	Sequence	executioner_2,phantom_3	3.5	4.5		2
+loc_05_10	1	33	4	Sequence	hunter_2,phantom_1,reaper_2,phantom_1	2.5	3.5	3	4
+loc_05_10	1	34	3	Sequence	executioner_2,executioner_3,predator_2	3.5	4.5		3
+loc_05_10	1	35	4	Sequence	hunter_3,reaper_2,phantom_1,hunter_3	2.5	3.5	4	4
+loc_05_10	1	36	3	Sequence	predator_1,executioner_2,executioner_3	3.5	4.5		3
+loc_05_10	2	1	4	Sequence	reaper_3,reaper_3,hunter_3,reaper_2	2.5	3.5	3	4
+loc_05_10	2	2	2	Sequence	executioner_2,executioner_3	3.5	4.5		2
+loc_05_10	2	3	5	Sequence	warden_3,reaper_2,reaper_3,hunter_3,reaper_2	2.5	3.5	4	5
+loc_05_10	2	4	3	Sequence	phantom_3,predator_2,executioner_3	3.5	4.5		3
+loc_05_10	2	5	4	Sequence	reaper_3,phantom_1,reaper_2,reaper_2	2.5	3.5	4	4
+loc_05_10	2	6	3	Sequence	executioner_1,predator_2,phantom_3	3.5	4.5		3
+loc_05_10	2	7	4	Sequence	reaper_2,phantom_1,phantom_1,hunter_3	2.5	3.5	3	4
+loc_05_10	2	8	2	Sequence	phantom_3,executioner_3	3.5	4.5		2
+loc_05_10	2	9	4	Sequence	hunter_2,reaper_2,hunter_3,reaper_3	2.5	3.5		4
+loc_05_10	2	10	3	Sequence	executioner_1,predator_1,executioner_2	3.5	4.5		3
+loc_05_10	2	11	5	Sequence	hunter_3,hunter_3,reaper_3,phantom_1,phantom_1	2.5	3.5		5
+loc_05_10	2	12	2	Sequence	predator_1,executioner_2	3.5	4.5	5	2
+loc_05_10	2	13	4	Sequence	phantom_1,phantom_1,phantom_1,reaper_2	2.5	3.5		4
+loc_05_10	2	14	3	Sequence	executioner_3,phantom_3,phantom_3	3.5	4.5		3
+loc_05_10	2	15	4	Sequence	reaper_2,warden_3,warden_3,hunter_2	2.5	3.5	4	4
+loc_05_10	2	16	2	Sequence	predator_1,phantom_3	3.5	4.5		2
+loc_05_10	2	17	4	Sequence	hunter_3,phantom_1,reaper_3,reaper_3	2.5	3.5	3	4
+loc_05_10	2	18	3	Sequence	executioner_2,predator_2,predator_1	3.5	4.5		3
+loc_05_10	2	19	5	Sequence	phantom_1,hunter_3,warden_3,reaper_2,reaper_3	2.5	3.5		5
+loc_05_10	2	20	2	Sequence	executioner_1,executioner_1	3.5	4.5	5	2
+loc_05_10	2	21	4	Sequence	reaper_3,reaper_2,warden_3,reaper_3	2.5	3.5	3	4
+loc_05_10	2	22	2	Sequence	predator_1,predator_1	3.5	4.5		2
+loc_05_10	2	23	4	Sequence	hunter_3,phantom_1,phantom_1,warden_3	2.5	3.5	4	4
+loc_05_10	2	24	2	Sequence	executioner_3,predator_1	3.5	4.5		2
+loc_05_10	2	25	4	Sequence	reaper_3,phantom_1,reaper_3,hunter_2	2.5	3.5		4
+loc_05_10	2	26	2	Sequence	executioner_2,executioner_3	3.5	4.5	5	2
+loc_05_10	2	27	4	Sequence	hunter_3,reaper_3,hunter_3,hunter_3	2.5	3.5	3	4
+loc_05_10	2	28	3	Sequence	executioner_2,predator_2,predator_2	3.5	4.5		3
+loc_05_10	2	29	4	Sequence	phantom_1,hunter_2,hunter_3,hunter_3	2.5	3.5		4
+loc_05_10	2	30	3	Sequence	executioner_1,executioner_2,predator_1	3.5	4.5		3
+loc_05_10	2	31	5	Sequence	reaper_2,reaper_2,hunter_2,hunter_2,reaper_2	2.5	3.5	4	5
+loc_05_10	2	32	2	Sequence	phantom_3,executioner_2	3.5	4.5		2
+loc_05_10	2	33	4	Sequence	reaper_3,reaper_2,hunter_2,hunter_3	2.5	3.5		4
+loc_05_10	2	34	3	Sequence	executioner_3,predator_2,executioner_2	3.5	4.5		3
+loc_05_10	2	35	4	Sequence	hunter_2,warden_3,warden_3,phantom_1	2.5	3.5	3	4
+loc_05_10	2	36	3	Sequence	phantom_3,predator_2,phantom_3	3.5	4.5		3
+loc_05_10	3	1	5	Sequence	hunter_2,warden_3,reaper_2,reaper_2,warden_3	2.5	3.5	3	5
+loc_05_10	3	2	3	Sequence	executioner_2,predator_2,predator_2	3.5	4.5		3
+loc_05_10	3	3	4	Sequence	hunter_3,reaper_3,reaper_2,phantom_1	2.5	3.5	4	4
+loc_05_10	3	4	3	Sequence	executioner_2,phantom_3,executioner_2	3.5	4.5		3
+loc_05_10	3	5	5	Sequence	reaper_2,hunter_3,hunter_3,reaper_2,hunter_3	2.5	3.5	4	5
+loc_05_10	3	6	3	Sequence	executioner_2,executioner_2,executioner_3	3.5	4.5		3
+loc_05_10	3	7	4	Sequence	reaper_3,phantom_1,reaper_3,hunter_3	2.5	3.5		4
+loc_05_10	3	8	3	Sequence	predator_1,executioner_3,predator_2	3.5	4.5	5	3
+loc_05_10	3	9	5	Sequence	reaper_3,hunter_3,hunter_3,hunter_3,phantom_1	2.5	3.5	3	5
+loc_05_10	3	10	2	Sequence	predator_1,predator_1	3.5	4.5		2
+loc_05_10	3	11	4	Sequence	hunter_2,phantom_1,hunter_3,warden_3	2.5	3.5		4
+loc_05_10	3	12	3	Sequence	phantom_3,predator_1,executioner_1	3.5	4.5		3
+loc_05_10	3	13	4	Sequence	reaper_2,phantom_1,hunter_2,hunter_3	2.5	3.5		4
+loc_05_10	3	14	2	Sequence	executioner_3,predator_1	3.5	4.5		2
+loc_05_10	3	15	4	Sequence	warden_3,warden_3,reaper_3,hunter_2	2.5	3.5	4	4
+loc_05_10	3	16	2	Sequence	predator_2,phantom_3	3.5	4.5		2
+loc_05_10	3	17	5	Sequence	reaper_3,reaper_2,reaper_2,warden_3,reaper_2	2.5	3.5	4	5
+loc_05_10	3	18	2	Sequence	executioner_2,executioner_3	3.5	4.5	5	2
+loc_05_10	3	19	4	Sequence	phantom_1,reaper_3,reaper_3,warden_3	2.5	3.5		4
+loc_05_10	3	20	3	Sequence	executioner_1,phantom_3,predator_1	3.5	4.5		3
+loc_05_10	3	21	5	Sequence	hunter_2,hunter_2,reaper_3,reaper_2,reaper_3	2.5	3.5	3	5
+loc_05_10	3	22	3	Sequence	executioner_1,executioner_2,phantom_3	3.5	4.5		3
+loc_05_10	3	23	5	Sequence	phantom_1,hunter_2,reaper_3,reaper_2,hunter_3	2.5	3.5	3	5
+loc_05_10	3	24	2	Sequence	predator_2,predator_1	3.5	4.5		2
+loc_05_10	3	25	4	Sequence	hunter_3,hunter_3,reaper_3,phantom_1	2.5	3.5		4
+loc_05_10	3	26	2	Sequence	phantom_3,predator_2	3.5	4.5		2
+loc_05_10	3	27	5	Sequence	phantom_1,hunter_2,reaper_2,phantom_1,reaper_2	2.5	3.5	4	5
+loc_05_10	3	28	2	Sequence	executioner_2,predator_2	3.5	4.5		2
+loc_05_10	3	29	5	Sequence	phantom_1,reaper_3,phantom_1,reaper_3,reaper_2	2.5	3.5		5
+loc_05_10	3	30	3	Sequence	phantom_3,predator_1,phantom_3	3.5	4.5		3
+loc_05_10	3	31	5	Sequence	warden_3,hunter_3,phantom_1,hunter_3,phantom_1	2.5	3.5		5
+loc_05_10	3	32	2	Sequence	executioner_1,executioner_3	3.5	4.5		2
+loc_05_10	3	33	4	Sequence	phantom_1,hunter_3,reaper_3,reaper_2	2.5	3.5	3	4
+loc_05_10	3	34	3	Sequence	predator_1,phantom_3,executioner_3	3.5	4.5	5	3
+loc_05_10	4	1	4	Sequence	reaper_3,reaper_3,hunter_3,hunter_2	2.5	3.5		4
+loc_05_10	4	2	2	Sequence	executioner_2,predator_1	3.5	4.5		2
+loc_05_10	4	3	5	Sequence	hunter_3,phantom_1,reaper_2,reaper_2,phantom_1	2.5	3.5	4	5
+loc_05_10	4	4	2	Sequence	predator_1,predator_1	3.5	4.5	5	2
+loc_05_10	4	5	4	Sequence	hunter_2,reaper_3,hunter_2,hunter_3	2.5	3.5		4
+loc_05_10	4	6	3	Sequence	predator_2,phantom_3,executioner_2	3.5	4.5		3
+loc_05_10	4	7	5	Sequence	hunter_2,hunter_3,reaper_3,phantom_1,phantom_1	2.5	3.5	4	5
+loc_05_10	4	8	3	Sequence	executioner_2,executioner_3,executioner_2	3.5	4.5		3
+loc_05_10	4	9	5	Sequence	hunter_3,reaper_2,reaper_2,reaper_2,reaper_2	2.5	3.5		5
+loc_05_10	4	10	2	Sequence	phantom_3,executioner_3	3.5	4.5		2
+loc_05_10	4	11	4	Sequence	warden_3,reaper_2,reaper_2,phantom_1	2.5	3.5		4
+loc_05_10	4	12	3	Sequence	phantom_3,executioner_1,predator_2	3.5	4.5		3
+loc_05_10	4	13	4	Sequence	reaper_2,reaper_3,phantom_1,reaper_3	2.5	3.5	3	4
+loc_05_10	4	14	3	Sequence	predator_1,predator_2,predator_1	3.5	4.5		3
+loc_05_10	4	15	5	Sequence	hunter_2,warden_3,phantom_1,warden_3,hunter_3	2.5	3.5	4	5
+loc_05_10	4	16	3	Sequence	phantom_3,predator_2,predator_1	3.5	4.5		3
+loc_05_10	4	17	5	Sequence	reaper_3,phantom_1,reaper_2,warden_3,hunter_3	2.5	3.5	4	5
+loc_05_10	4	18	3	Sequence	phantom_3,phantom_3,executioner_3	3.5	4.5		3
+loc_05_10	4	19	4	Sequence	warden_3,phantom_1,reaper_3,phantom_1	2.5	3.5	3	4
+loc_05_10	4	20	3	Sequence	executioner_1,predator_2,executioner_2	3.5	4.5		3
+loc_05_10	4	21	4	Sequence	phantom_1,reaper_3,hunter_3,reaper_3	2.5	3.5	3	4
+loc_05_10	4	22	3	Sequence	phantom_3,executioner_2,executioner_3	3.5	4.5	5	3
+loc_05_10	4	23	5	Sequence	hunter_3,reaper_3,reaper_2,hunter_3,hunter_3	2.5	3.5		5
+loc_05_10	4	24	3	Sequence	executioner_2,predator_1,phantom_3	3.5	4.5		3
+loc_05_10	4	25	5	Sequence	reaper_2,warden_3,hunter_3,reaper_3,reaper_2	2.5	3.5	3	5
+loc_05_10	4	26	2	Sequence	executioner_1,executioner_2	3.5	4.5		2
+loc_05_10	4	27	5	Sequence	hunter_2,reaper_3,warden_3,reaper_2,hunter_3	2.5	3.5	4	5
+loc_05_10	4	28	2	Sequence	executioner_3,executioner_2	3.5	4.5		2
+loc_05_10	4	29	4	Sequence	hunter_3,phantom_1,phantom_1,hunter_3	2.5	3.5		4
+loc_05_10	4	30	2	Sequence	executioner_1,phantom_3	3.5	4.5		2
+loc_05_10	4	31	4	Sequence	reaper_3,phantom_1,reaper_3,reaper_2	2.5	3.5		4
+loc_05_10	4	32	2	Sequence	predator_2,predator_1	3.5	4.5	5	2
+loc_05_10	4	33	4	Sequence	hunter_2,hunter_2,phantom_1,reaper_2	2.5	3.5	3	4
+loc_05_10	4	34	2	Sequence	predator_1,executioner_3	3.5	4.5		2
+loc_05_10	5	1	4	Sequence	warden_3,hunter_3,phantom_1,phantom_1	2.5	3.5	4	4
+loc_05_10	5	2	2	Sequence	predator_1,executioner_1	3.5	4.5		2
+loc_05_10	5	3	4	Sequence	warden_3,reaper_2,hunter_3,reaper_3	2.5	3.5		4
+loc_05_10	5	4	2	Sequence	predator_2,predator_1	3.5	4.5		2
+loc_05_10	5	5	4	Sequence	phantom_1,warden_3,warden_3,hunter_3	2.5	3.5	3	4
+loc_05_10	5	6	2	Sequence	phantom_3,executioner_3	3.5	4.5		2
+loc_05_10	5	7	4	Sequence	reaper_2,warden_3,reaper_2,phantom_1	2.5	3.5		4
+loc_05_10	5	8	3	Sequence	executioner_1,phantom_3,predator_1	3.5	4.5		3
+loc_05_10	5	9	4	Sequence	reaper_3,hunter_3,hunter_3,reaper_3	2.5	3.5	3	4
+loc_05_10	5	10	2	Sequence	executioner_2,executioner_3	3.5	4.5	5	2
+loc_05_10	5	11	4	Sequence	reaper_2,phantom_1,phantom_1,reaper_3	2.5	3.5		4
+loc_05_10	5	12	3	Sequence	predator_1,predator_1,phantom_3	3.5	4.5		3
+loc_05_10	5	13	4	Sequence	reaper_3,hunter_3,hunter_3,hunter_3	2.5	3.5	4	4
+loc_05_10	5	14	2	Sequence	executioner_3,executioner_2	3.5	4.5		2
+loc_05_10	5	15	4	Sequence	hunter_2,reaper_3,hunter_2,reaper_3	2.5	3.5		4
+loc_05_10	5	16	3	Sequence	phantom_3,executioner_2,predator_2	3.5	4.5		3
+loc_05_10	5	17	4	Sequence	hunter_3,reaper_2,hunter_3,reaper_3	2.5	3.5		4
+loc_05_10	5	18	2	Sequence	predator_2,executioner_2	3.5	4.5		2
+loc_05_10	5	19	4	Sequence	reaper_2,reaper_3,phantom_1,reaper_2	2.5	3.5		4
+loc_05_10	5	20	3	Sequence	executioner_3,executioner_1,predator_2	3.5	4.5		3
+loc_05_10	5	21	4	Sequence	reaper_2,hunter_2,hunter_2,hunter_3	2.5	3.5	4	4
+loc_05_10	5	22	2	Sequence	phantom_3,executioner_3	3.5	4.5		2
+loc_05_10	5	23	4	Sequence	reaper_2,reaper_3,phantom_1,hunter_3	2.5	3.5		4
+loc_05_10	5	24	3	Sequence	predator_1,phantom_3,predator_2	3.5	4.5	5	3
+loc_05_10	5	25	5	Sequence	reaper_3,reaper_2,reaper_2,phantom_1,hunter_2	2.5	3.5	3	5
+loc_05_10	5	26	3	Sequence	executioner_3,phantom_3,predator_1	3.5	4.5		3
+loc_05_10	5	27	5	Sequence	phantom_1,reaper_3,hunter_3,reaper_2,phantom_1	2.5	3.5	3	5
+loc_05_10	5	28	2	Sequence	executioner_2,phantom_3	3.5	4.5		2
+loc_05_10	5	29	4	Sequence	hunter_2,phantom_1,phantom_1,reaper_3	2.5	3.5	3	4
+loc_05_10	5	30	2	Sequence	executioner_2,predator_2	3.5	4.5		2
+loc_05_10	5	31	4	Sequence	reaper_2,phantom_1,phantom_1,reaper_3	2.5	3.5	3	4
+loc_05_10	5	32	3	Sequence	predator_1,executioner_2,executioner_1	3.5	4.5	5	3
+loc_05_10	5	33	5	Sequence	warden_3,reaper_2,reaper_2,warden_3,reaper_3	2.5	3.5	4	5
+loc_05_10	5	34	2	Sequence	executioner_3,phantom_3	3.5	4.5		2
+loc_05_10	5	35	4	Sequence	hunter_3,phantom_1,hunter_2,hunter_3	2.5	3.5	4	4
+loc_05_10	5	36	3	Sequence	executioner_2,predator_1,executioner_2	3.5	4.5		3
+loc_05_10	5	37	1	Boss	titan	0	0		

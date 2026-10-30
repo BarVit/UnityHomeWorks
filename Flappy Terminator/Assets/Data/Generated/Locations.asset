@@ -313,14 +313,14 @@ MonoBehaviour:
   - _id: loc_05_01
     _system: sys_05
     _order: 1
-    _levels: 1
+    _levels: 4
     _boss: 
     _borderTheme: 
     _flightMode: 0
     _title: 
     _branchOf: 
     _void: 
-    _rewardTarget: 0
+    _rewardTarget: 335000
   - _id: loc_05_02
     _system: sys_05
     _order: 2
@@ -331,7 +331,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
-    _rewardTarget: 0
+    _rewardTarget: 225000
   - _id: loc_05_03
     _system: sys_05
     _order: 3
@@ -342,7 +342,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
-    _rewardTarget: 0
+    _rewardTarget: 381000
   - _id: loc_05_04
     _system: sys_05
     _order: 4
@@ -353,7 +353,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
-    _rewardTarget: 0
+    _rewardTarget: 363000
   - _id: loc_05_05
     _system: sys_05
     _order: 5
@@ -364,7 +364,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
-    _rewardTarget: 0
+    _rewardTarget: 841000
   - _id: loc_05_06
     _system: sys_05
     _order: 6
@@ -375,7 +375,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
-    _rewardTarget: 0
+    _rewardTarget: 221000
   - _id: loc_05_07
     _system: sys_05
     _order: 7
@@ -386,7 +386,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
-    _rewardTarget: 0
+    _rewardTarget: 733000
   - _id: loc_05_08
     _system: sys_05
     _order: 8
@@ -397,7 +397,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
-    _rewardTarget: 0
+    _rewardTarget: 408000
   - _id: loc_05_09
     _system: sys_05
     _order: 9
@@ -408,7 +408,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
-    _rewardTarget: 0
+    _rewardTarget: 712000
   - _id: loc_05_10
     _system: sys_05
     _order: 10
@@ -419,7 +419,7 @@ MonoBehaviour:
     _title: 
     _branchOf: 
     _void: 
-    _rewardTarget: 0
+    _rewardTarget: 1045000
   - _id: void_ashen_1
     _system: sys_03
     _order: 1
