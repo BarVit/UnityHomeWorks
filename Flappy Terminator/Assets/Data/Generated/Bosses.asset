@@ -229,7 +229,7 @@ MonoBehaviour:
     _location: loc_05_04
     _prefab: {fileID: 748883696485598149, guid: 8971cd4b3ded249faa09c9c5dd064fbe, type: 3}
     _prototype: executioner_2
-    _health: 50000
+    _health: 30000
     _weapon: ripper_2_gun
     _barrels: 1
     _bodyDamage: 30
@@ -385,7 +385,7 @@ MonoBehaviour:
     _location: loc_04_06
     _prefab: {fileID: 748883696485598149, guid: 1b9af5ded130841f9a7c90f392e9b9dc, type: 3}
     _prototype: tormentor_2
-    _health: 50000
+    _health: 35000
     _weapon: archon_gun
     _barrels: 2
     _bodyDamage: 25
@@ -407,7 +407,7 @@ MonoBehaviour:
     _location: loc_05_10
     _prefab: {fileID: 748883696485598149, guid: 3b9c6531747c24b728628a6a4989b1f8, type: 3}
     _prototype: ripper_2
-    _health: 500000
+    _health: 150000
     _weapon: titan_gun
     _barrels: 1
     _bodyDamage: 30
@@ -429,7 +429,7 @@ MonoBehaviour:
     _location: loc_05_07
     _prefab: {fileID: 748883696485598149, guid: 3b9c6531747c24b728628a6a4989b1f8, type: 3}
     _prototype: ripper_2
-    _health: 1000000
+    _health: 80000
     _weapon: emperor_gun
     _barrels: 1
     _bodyDamage: 30
