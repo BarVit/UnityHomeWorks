@@ -206,8 +206,8 @@ MonoBehaviour:
     _damage: 150
     _movement: {fileID: 11400000, guid: fbf8bfbe5f81c42f5acb33f6466cf6ee, type: 2}
     _skin: {fileID: 0}
-    _rewardMoney: 2000
-    _rewardXp: 400
+    _rewardMoney: 1400
+    _rewardXp: 280
   - _id: executioner_2
     _type: enemy_executioner
     _title: "\u041F\u0430\u043B\u0430\u0447 II"
@@ -221,8 +221,8 @@ MonoBehaviour:
     _damage: 100
     _movement: {fileID: 11400000, guid: 272ca042f1216401da0ac9cec62c4ca8, type: 2}
     _skin: {fileID: 0}
-    _rewardMoney: 3000
-    _rewardXp: 600
+    _rewardMoney: 1900
+    _rewardXp: 380
   - _id: executioner_3
     _type: enemy_executioner
     _title: "\u041F\u0430\u043B\u0430\u0447 III"
@@ -236,8 +236,8 @@ MonoBehaviour:
     _damage: 240
     _movement: {fileID: 11400000, guid: 34cf25f610b76417aa1d0bdfc23682c0, type: 2}
     _skin: {fileID: 0}
-    _rewardMoney: 5000
-    _rewardXp: 1000
+    _rewardMoney: 2400
+    _rewardXp: 480
   - _id: predator_1
     _type: enemy_predator
     _title: "\u0425\u0438\u0449\u043D\u0438\u043A I"
@@ -251,8 +251,8 @@ MonoBehaviour:
     _damage: 25
     _movement: {fileID: 11400000, guid: 90d8dd41b80474e9aa9bb1f27035f75b, type: 2}
     _skin: {fileID: 0}
-    _rewardMoney: 2200
-    _rewardXp: 440
+    _rewardMoney: 1500
+    _rewardXp: 300
   - _id: predator_2
     _type: enemy_predator
     _title: "\u0425\u0438\u0449\u043D\u0438\u043A II"
@@ -266,5 +266,5 @@ MonoBehaviour:
     _damage: 120
     _movement: {fileID: 11400000, guid: da73c4fdab4c54894b366a2a1f80dbc9, type: 2}
     _skin: {fileID: 0}
-    _rewardMoney: 6000
-    _rewardXp: 1200
+    _rewardMoney: 2600
+    _rewardXp: 520
